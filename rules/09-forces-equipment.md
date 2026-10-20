@@ -58,8 +58,8 @@ Gear marked **Proposed** adds a rule that is new in this version; it is in play 
 | Low-light optics | The carrier has the Low-light keyword: it ignores the darkness penalty. | — |
 | Extinguisher | May Interact with a fire cell in contact: test 8+ to put it out (chapter 8). | — |
 | Silencer | The carrier's ranged weapon gains the Silenced keyword: its shots are not noise for the alert track. | — |
-| Jump pack | Move ignores the extra cost of obstacles and may cross gaps up to half the model's Move. In zero-g, the model may change direction freely during a Move and stop anywhere, even away from a surface (it still counts as unbraced). | **Proposed** |
-| Jammer | Enemy Automated models within 6" take -2 to hit, and enemy Hack tests within 6" take -2. | **Proposed** |
+| Jump pack | Move ignores the extra cost of obstacles and may cross gaps up to half the model's Move. In zero-g, the model may change direction freely during a Move and stop anywhere, even away from a surface (it still counts as unbraced). | — |
+| Jammer | Enemy Automated models within 6" take -2 to hit, and enemy Hack tests within 6" take -2. | — |
 <!-- /table -->
 
 ## Model keywords

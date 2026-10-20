@@ -1,6 +1,6 @@
 # Gear for Imperator Black, rules v0.3.
 # grants_keywords: model keywords the gear gives its carrier.
-# status: settled (rules already cover it) or proposed (new rule, awaiting playtest/approval).
+# status: settled (approved; rules cover it) or proposed (new rule awaiting approval).
 version: 0.3.0
 
 gear:
@@ -52,10 +52,10 @@ gear:
     name: Jump pack
     text: "Move ignores the extra cost of obstacles and may cross gaps up to half the model's Move. In zero-g, the model may change direction freely during a Move and stop anywhere, even away from a surface (it still counts as unbraced)."
     grants_keywords: []
-    status: proposed
+    status: settled
 
   - id: jammer
     name: Jammer
     text: "Enemy Automated models within 6\" take -2 to hit, and enemy Hack tests within 6\" take -2."
     grants_keywords: []
-    status: proposed
+    status: settled
