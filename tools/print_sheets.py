@@ -283,6 +283,10 @@ def quick_reference():
         return t
 
     # Page 1 -----------------------------------------------------------
+    kw_rows = [["Keyword", "Effect"]] + [[f'<b>{k["name"]}</b>', k["text"]] for group in ("weapon", "armour") for k in C["keywords"][group]]
+    kw_rows.append(["<b>Suppressive Fire</b> (action)", "Auto weapons only. Hit roll, no damage: +1 Suppression, or +2 if the roll beats 8 by 3+."])
+    keywords = qtable(kw_rows, [1.0 * inch, half - 1.0 * inch])
+
     left = [Paragraph("The round", Q_H)] + bullets([
         "<b>Initiative:</b> each side 2d6 + the Nerve of its Leader with the highest Nerve. Winner chooses who activates first. Reroll ties.",
         "<b>Activations:</b> alternate one model at a time; two actions each. When one side runs out, the other finishes.",
@@ -318,7 +322,8 @@ def quick_reference():
           Spacer(1, 5), Paragraph("Wound table", Q_H),
           qtable([["Row", "Total", "Result"]] + [[w["row"], f"{w['min']}–{w['max']}" if w["max"] < 99 else f"{w['min']}+", w["text"]] for w in core["wound_table"]],
                  [0.35 * inch, 0.5 * inch, half - 0.85 * inch]),
-          Paragraph("Rows above 10 count as 10. Wounded = −1 to all rolls.", Q_SMALL)]
+          Paragraph("Rows above 10 count as 10. Wounded = −1 to all rolls.", Q_SMALL),
+          Spacer(1, 5), Paragraph("Weapon and armour keywords", Q_H), keywords]
 
     story = [Paragraph(f"Imperator Black — Quick Reference  <font size=8 color='#5b6670'>rules v{'.'.join(VERSION.split('.')[:2])}</font>", Q_TITLE),
              Spacer(1, 6), two_col(left, right)]
@@ -336,6 +341,7 @@ def quick_reference():
                                                         for a in C["armour"]["armour"]],
                     [1.2 * inch, 0.45 * inch, half - 1.65 * inch])
     left2 = [Paragraph("Weapons", Q_H), weapons, Spacer(1, 4), melee, Spacer(1, 4), armour, Spacer(1, 5),
+
              Paragraph("Close combat", Q_H)] + bullets([
         "Starts when a model Moves into contact (a Move: it can trigger reactions). Resolves at once, in exchanges.",
         "Each exchange: both roll 2d6 + <b>Fight</b>. Charge +1 (first exchange); +1 per friend also touching the enemy (max +2); −1 per Suppression; −1 if Wounded.",
