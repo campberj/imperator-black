@@ -1,0 +1,64 @@
+# Core resolution values for Imperator Black.
+# Single source of truth: the rulebook tables and the app both read this file.
+version: 0.2.0
+
+dice:
+  hit: 2d6
+  test: 2d6
+
+hit_target: 8          # 2d6 + Q + modifiers must reach this
+test_target: 8         # default target for tests unless a rule says otherwise
+natural_miss: 2        # a natural 2 always misses / fails
+critical_hit: [6, 6]   # natural double 6: +1 wound row
+
+quality:
+  - { value: 0, name: Green }
+  - { value: 1, name: Regular }
+  - { value: 2, name: Veteran }
+  - { value: 3, name: Elite }
+
+suppression:
+  modifier_per_marker: -1
+  max: 5
+  pinned_at: 3
+  cancels_overwatch_at: 2
+
+hit_modifiers:
+  - { id: aim,              value: 1,  text: "Aim" }
+  - { id: light_cover,      value: -1, text: "Target in Light cover" }
+  - { id: heavy_cover,      value: -2, text: "Target in Heavy cover" }
+  - { id: suppression,      value: -1, text: "Each Suppression on shooter", per_marker: true }
+  - { id: wounded,          value: -1, text: "Shooter Wounded" }
+  - { id: moved,            value: -1, text: "Moved earlier this activation (not Handy)" }
+  - { id: reaction,         value: -1, text: "Reaction or Overwatch shot" }
+  - { id: unbraced_zero_g,  value: -1, text: "Unbraced in zero-g (not Void-trained)" }
+  - { id: darkness,         value: -2, text: "Target in darkness beyond 6\" (no low-light gear)" }
+
+# Rows are looked up by damage total, then stepped down by (Armour - AP), minimum 0.
+# Rows above 10 count as 10. Row 0 or lower: no effect.
+wound_table:
+  - { row: 1,  min: 2,  max: 3,  id: shaken,   text: "Shaken: +1 Suppression" }
+  - { row: 2,  min: 4,  max: 5,  id: rattled,  text: "Rattled: +2 Suppression" }
+  - { row: 3,  min: 6,  max: 7,  id: grazed,   text: "Grazed: +1 Suppression" }
+  - { row: 4,  min: 8,  max: 9,  id: wounded,  text: "Wounded: -1 to all rolls. Already Wounded: Down" }
+  - { row: 5,  min: 10, max: 11, id: wounded_s, text: "Wounded and +1 Suppression. Already Wounded: Down" }
+  - { row: 6,  min: 12, max: 13, id: down,     text: "Down: may recover (end-of-round test 8+, or Medic)" }
+  - { row: 7,  min: 14, max: 15, id: bleeding, text: "Down and bleeding: dies at end of third round unless Medic 8+" }
+  - { row: 8,  min: 16, max: 17, id: critical, text: "Critical: dies at end of next round unless Medic 10+" }
+  - { row: 9,  min: 18, max: 20, id: dead,     text: "Dead" }
+  - { row: 10, min: 21, max: 99, id: dead_x,   text: "Dead; friends within 1\" gain 1 Suppression" }
+
+movement:
+  move: 6
+  move_heavy_armour: 5
+  obstacle_cost: 2
+  reaction_move: half
+
+casualty_shock:
+  range: 6
+  suppression: 1
+  suppression_leader: 2
+
+down_recovery:
+  test_target: 8
+  on_pass: [wounded, suppression_3]

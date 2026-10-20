@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Content JSON is current
+        run: python3 tools/build_content.py --check
+
+      - name: Rulebook tables are current
+        run: python3 tools/render_tables.py --check
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Build
+        run: dotnet build app/Imperator.slnx -c Release
+
+      - name: Tests
+        run: dotnet run -c Release --project app/tests/Imperator.Core.Tests

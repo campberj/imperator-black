@@ -7,6 +7,10 @@ Imperator Black is a 28mm science fiction narrative campaign wargame spanning th
 
 Proof of concept in progress: solo ship and station boarding actions with a full campaign loop. See the [roadmap](docs/roadmap.md).
 
+## Rules
+
+- [Rules v0.2 (playtest draft)](rules/README.md)
+
 ## Documents
 
 - [Initial design document](docs/design/initial-design-document.md)
@@ -17,6 +21,7 @@ Proof of concept in progress: solo ship and station boarding actions with a full
 - [PoC opposition force: the corsairs](docs/design/opposition-force.md)
 - A War of Worlds (predecessor design): [design statement and roadmap](docs/design/a-war-of-worlds/design-statement-and-roadmap.md), [prototype rules v0.1](docs/design/a-war-of-worlds/prototype-rules-v0.1.md)
 - [Proof of concept roadmap](docs/roadmap.md)
+- [Simulator findings, rules v0.2](docs/analysis/sim-v0.2-findings.md)
 - [ADR-001: System architecture](docs/architecture/adr-001-architecture.md)
 
 ## Repository layout
@@ -28,3 +33,14 @@ Proof of concept in progress: solo ship and station boarding actions with a full
 | `content/` | Game data (YAML) shared by the rulebook and the app |
 | `tools/` | Dice simulator, content validator, table renderer |
 | `app/` | Application code (C# game logic and API, React front end) |
+
+## Working with the repo
+
+Requires Python 3 with PyYAML, and the .NET 10 SDK.
+
+```sh
+python3 tools/build_content.py      # compile content/*.yaml to content/dist/content.json
+python3 tools/render_tables.py      # regenerate rulebook tables from content/
+dotnet run --project app/tests/Imperator.Core.Tests                                   # tests
+dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.2-results.md   # simulator report
+```

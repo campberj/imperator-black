@@ -103,6 +103,21 @@ Cowed crew who surrender become **prisoners**. They are a campaign resource (int
 
 ## Open
 
-- Faction name and the patron state's identity
+- Faction name and the patron state's identity. Shortlist:
+
+  | Corsair faction | Flavour |
+  |---|---|
+  | **The Free Marque** | Privateers sailing under sealed letters of marque; the name itself points at the patron |
+  | **Black Ledger Combine** | A syndicate that runs on debts, contracts and salvage rights; everyone aboard owes someone |
+  | **The Tollhouse** | Extortionists who "collect tolls" on shipping lanes, and seize ships that don't pay |
+  | **Sable Wake Syndicate** | Smugglers and ship-takers known by the wakes of the ships they leave adrift |
+  | **The Brokerage** | Deniable middlemen who broker ships, crews and violence for whoever pays |
+
+  | Patron state | Flavour |
+  |---|---|
+  | **The Meridian Directorate** | A technocratic state run through its intelligence ministries |
+  | **The Ostrava Concordat** | A hardline industrial power that treats the frontier as a resource |
+  | **The Hesper Compact** | An outer-system federation, weaker on paper and dangerous in the shadows |
+  | **The Kestrel Hegemony** | A militarised state that projects power without ever declaring war |
 - Exact contact tables per tier (Phase 3)
 - Signature actions for hired guns and handlers (Phase 2)

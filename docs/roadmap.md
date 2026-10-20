@@ -52,6 +52,13 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
    - Suppression, casualty shock, breaking; fix the row-6 Down recovery gap
 4. **The gym:** 2v2 then 4v4 on a few 6×6 tiles, focused on reactions, Overwatch and doorways.
 
+**Progress (2026-10-20):**
+- [x] Rules v0.2 chapters 1–8 in [`rules/`](../rules/), with tables generated from `content/`
+- [x] Simulator rebuilt in C# (`app/src/Imperator.Sim`), sharing the game-logic library with the app
+- [x] First simulator pass: [findings](analysis/sim-v0.2-findings.md) (lethality retune proposed)
+- [ ] Decide the lethality retune and publish rules v0.3
+- [ ] Gym playtests at the table
+
 **Exit:** Gym fights play cleanly; the simulator output matches the lethality targets.
 
 ## Phase 2 — Forces, equipment, and content schema

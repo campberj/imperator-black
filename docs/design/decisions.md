@@ -4,7 +4,7 @@ Living record of design decisions. Each entry is **Settled** (build on it), **Le
 
 Imperator Black continues the earlier *A War of Worlds* design. Its documents are kept in [a-war-of-worlds/](a-war-of-worlds/): the [design statement and roadmap](a-war-of-worlds/design-statement-and-roadmap.md) and [prototype rules v0.1](a-war-of-worlds/prototype-rules-v0.1.md). Entries marked *(AWoW)* come from there. Where this log and those documents disagree, this log wins.
 
-Last updated: 2026-10-20 (opposition accepted)
+Last updated: 2026-10-20 (rules v0.2)
 
 ---
 
@@ -40,13 +40,14 @@ Last updated: 2026-10-20 (opposition accepted)
 | 3.3 | **Quality (Q)** 0–3: Green 0, Regular 1, Veteran 2, Elite 3. Added to hit rolls and tests. Simulator: each +1 Q ≈ +20 points of win rate. *(AWoW prototype)* | Leaning |
 | 3.4 | Damage total is read against a **ten-row wound table**; **armour steps the row down by whole rows (0–3), less weapon AP**. *(AWoW)* | Settled |
 | 3.5 | Wound table bands and results per prototype v0.1 (suppression in rows 1–3, Wounded 4–5, Down/bleeding/critical 6–8, Dead 9–10). Rows 1–3 are the first tuning target. *(AWoW prototype)* | Leaning — playtest |
-| 3.6 | Recovery rule for a row-6 Down model. Interim: out of the game. | Open — Phase 1 |
+| 3.6 | **Down recovery:** end of each round, a Down model tests 2d6 + Q at 8+; on a pass it gets up Wounded with 3 Suppression. A *Medic* recovers a Down model automatically. | Leaning — playtest |
 | 3.7 | **No fixed weapon ranges.** Each weapon has a **short range**; beyond it -1, beyond double -2 (shotgun -2/-3). *(AWoW)* | Settled |
 | 3.8 | Quality may extend how far fire stays effective (Stargrunt-style). *(AWoW teardown)* | Proposed — Phase 1 |
 | 3.9 | Using micro-terrain in the open is a **troop-quality test** (Find Cover: 2d6 + Q − Suppression; 7+ Light, 10+ Heavy). *(AWoW)* | Settled |
 | 3.10 | Cover: Light (≥⅓ hidden, −1 to hit) and Heavy (≥½ hidden behind solid material, −2). True line of sight. *(AWoW prototype)* | Leaning |
-| 3.11 | Close combat resolution. | Open — Phase 1 |
-| 3.12 | Grenades and blast (confined spaces matter on ships). | Open — Phase 1 |
+| 3.11 | **Close combat:** started by moving into contact; resolves at once in exchanges of opposed 2d6 + Q (charge +1 first exchange, support +1 each up to +2). The winner rolls melee damage on the wound table; a no-effect result still adds 1 Suppression. Continues until one side is incapacitated or **both** break away. A model at 5 Suppression that loses is overpowered (Down or captured). | Settled |
+| 3.12 | **Grenades and demolitions:** Throw action (test 8+, misses land short, natural 2 slips); frag (one damage roll, +1 row in confined compartments), flashbang (+2 Suppression, strips Overwatch, no reactions this round), smoke; breaching charges (place with Interact, detonate as a later action). | Leaning — playtest |
+| 3.13 | **Lethality retune:** re-banded wound table (A) plus larger close-quarters weapon dice (B), per [sim findings](../analysis/sim-v0.2-findings.md). Current v0.2 bands fail Pillar 1 and stall room clearing. | Proposed |
 
 ## 4. Turn structure, reactions and morale
 
@@ -57,7 +58,7 @@ Last updated: 2026-10-20 (opposition accepted)
 | 4.3 | **Two actions** per activation: Move, Shoot, Aim, Suppressive Fire, Overwatch, Find Cover, Rally, Medic, Interact. *(AWoW prototype)* | Settled (action list Leaning) |
 | 4.4 | **Reaction:** a model that has not yet activated may react when an enemy model's action allows a reaction. Reacting marks it as activated. | Settled |
 | 4.5 | **Overwatch:** a model that activates may go on Overwatch. It may then react **up to two times** until its activation comes again next round. Supersedes the prototype's single Overwatch shot. | Settled |
-| 4.6 | Which enemy actions trigger reactions, which actions a reaction may take, and its modifier (prototype: −1). | Open — Phase 1 |
+| 4.6 | **Reaction triggers:** an enemy Moving into or within line of sight (interrupts the move), Shooting/Throwing/Suppressive Fire, or Interacting (including doors). **Reaction choices:** one action: Shoot the triggering model at −1, Move up to half to cover or out of sight, or Find Cover. Reactions can't trigger reactions. | Settled |
 | 4.7 | **Suppression:** each marker −1 to all rolls (max 5); **Pinned at 3+** (only Rally, Find Cover, Move to cover, Shoot from cover). Two or more Suppression cancels Overwatch. *(AWoW prototype)* | Leaning |
 | 4.8 | **Casualty shock** (+1 Suppression when a friend within 6" goes Down/Dead; +2 for the leader) and **breaking** at half a fireteam Down or Dead. *(AWoW prototype)* | Leaning |
 | 4.9 | Leaders can pass actions to subordinates, as the scaling mechanism to squad and platoon (Stargrunt-style). *(AWoW teardown)* | Proposed — post-PoC |
@@ -71,6 +72,8 @@ Last updated: 2026-10-20 (opposition accepted)
 | 5.2 | Boards vary from **18" × 18"** (boarding actions) to **9' × 5'**. *(AWoW)* | Settled |
 | 5.3 | Move **6"** (5" in Armour 3); climbing or vaulting a low obstacle costs +2". Tuned so models can bound between cover. *(AWoW prototype)* | Leaning |
 | 5.4 | Terrain density guideline per board size so a move can always reach cover. *(AWoW)* | Open — Phase 4 |
+| 5.5 | **Ship interiors:** doors open/closed/locked; opening is an Interact (or 2" of a Move) and triggers reactions; locked doors yield to breaching charge, breaching tool (test 8+) or a *Tech* hack (test 9+). Compartments ≤ 6"×6" are confined. | Leaning — playtest |
+| 5.6 | **Ship hazards are in the PoC:** zero-g (push-off movement, unbraced −1), decompression and vacuum, fire, darkness. | Settled |
 
 ## 6. Equipment and force building
 
@@ -111,7 +114,7 @@ Last updated: 2026-10-20 (opposition accepted)
 | 9.3 | Terrain inventory: **12 each** of 6"×6", 6"×3" and 3"×3" tiles; walls and doors/hatches from Kill Team and 40k Boarding Actions; a 3' × 5' dry-erase map. Enemy placement via tokens / poker chips. | Settled |
 | 9.4 | Player faction: **Task Force Boone** (BLKOUT miniatures). Opposition from BLKOUT and BPRE miniatures. | Settled |
 | 9.5 | Opposition: **the corsairs**, a grey faction in three layers (state patron, criminal core, contractors), with element profiles, a miniature mapping across all BLKOUT/BPRE kits, and four threat tiers ([opposition-force.md](opposition-force.md)). | Settled |
-| 9.6 | Corsair faction name and patron state identity. | Open |
+| 9.6 | Corsair faction name and patron state identity. | Proposed — shortlist pending |
 | 9.7 | Campaign thread: intelligence from corsair missions builds toward **attributing** the corsairs to their patron, which can escalate into a deniable war with a state (peer naval-infantry foe). | Leaning |
 
 ## 10. Software
@@ -121,4 +124,6 @@ Last updated: 2026-10-20 (opposition accepted)
 | 10.1 | The repo stores everything: rules (Markdown), game content data, tools and application code. | Settled |
 | 10.2 | Architecture per [ADR-001](../architecture/adr-001-architecture.md). | Settled |
 | 10.3 | The app must eventually serve many players over the internet with shared campaign state. The PoC is single-user but modeled for multiplayer from day one. | Settled |
-| 10.4 | The original A War of Worlds Monte Carlo simulator is not in the repo; rebuild it in `tools/` against the content files. | Settled |
+| 10.4 | The combat simulator is C# (`app/src/Imperator.Sim`) and uses the same game-logic library as the app, so the rules math exists once. | Settled |
+| 10.5 | Content YAML is compiled to `content/dist/content.json` (`tools/build_content.py`); .NET reads JSON with the built-in serializer, so the app has no YAML dependency. Rulebook tables are generated from the same YAML (`tools/render_tables.py`). | Settled |
+| 10.6 | Target .NET 10 (current LTS). Tests are a dependency-free console runner; CI checks content, tables and tests on every push. | Settled |

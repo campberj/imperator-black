@@ -1,0 +1,49 @@
+# Weapons for Imperator Black, rules v0.2.
+# damage: dice pair thrown with the hit dice (ranged) or by the winner (melee).
+# short_range: inches; beyond it range_penalty[0], beyond double range_penalty[1].
+version: 0.2.0
+
+ranged:
+  - { id: sidearm,     name: Sidearm,     damage: 2d4,  short_range: 8,  ap: 0, keywords: [handy] }
+  - { id: smg,         name: SMG,         damage: 2d6,  short_range: 12, ap: 0, keywords: [handy, auto] }
+  - { id: carbine,     name: Carbine,     damage: 2d6,  short_range: 18, ap: 0, keywords: [handy] }
+  - { id: shotgun,     name: Shotgun,     damage: 2d10, short_range: 10, ap: 0, keywords: [handy], range_penalty: [-2, -3] }
+  - { id: rifle,       name: Rifle,       damage: 2d8,  short_range: 30, ap: 0, keywords: [] }
+  - { id: lmg,         name: LMG,         damage: 2d8,  short_range: 30, ap: 0, keywords: [auto, suppressing] }
+  - { id: dmr,         name: DMR,         damage: 2d10, short_range: 48, ap: 0, keywords: [] }
+  - { id: at_launcher, name: AT launcher, damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome] }
+
+melee:
+  - { id: unarmed,       name: "Unarmed / weapon butt",      damage: 2d4, ap: 0 }
+  - { id: knife,         name: "Knife or bayonet",           damage: 2d6, ap: 0 }
+  - { id: breaching_tool, name: "Breaching tool or heavy blade", damage: 2d8, ap: 0 }
+
+# Thrown weapons use the Throw action. throw_range: short range in inches.
+thrown:
+  - id: frag
+    name: Frag grenade
+    throw_range: 8
+    blast_radius: 2
+    damage: 2d6
+    ap: 0
+    keywords: [blast, confined_bonus]
+  - id: flashbang
+    name: Flashbang
+    throw_range: 8
+    blast_radius: 3
+    effect: "+2 Suppression; removes Overwatch; cannot react until end of round"
+    keywords: [blast]
+  - id: smoke
+    name: Smoke grenade
+    throw_range: 8
+    blast_radius: 2
+    effect: "Blocks line of sight through the area until end of next round"
+    keywords: []
+
+demolitions:
+  - id: breaching_charge
+    name: Breaching charge
+    effect: "Destroys a door, hatch or thin bulkhead; models within 2\" on the far side gain 2 Suppression; models within 1\" take 2d6 damage"
+    damage: 2d6
+    ap: 0
+    keywords: [breach]

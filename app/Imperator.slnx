@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Imperator.Core/Imperator.Core.csproj" />
+    <Project Path="src/Imperator.Sim/Imperator.Sim.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Imperator.Core.Tests/Imperator.Core.Tests.csproj" />
+  </Folder>
+</Solution>

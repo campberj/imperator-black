@@ -1,0 +1,11 @@
+# Armour for Imperator Black, rules v0.2.
+# value: wound rows stepped down (less weapon AP).
+version: 0.2.0
+
+armour:
+  - { id: none,       name: None,            value: 0, keywords: [] }
+  - { id: flak,       name: Flak,            value: 1, keywords: [] }
+  - { id: void_suit,  name: Void suit,       value: 1, keywords: [sealed] }
+  - { id: composite,  name: Composite plate, value: 2, keywords: [] }
+  - { id: void_plate, name: Void plate,      value: 2, keywords: [sealed] }
+  - { id: heavy,      name: Heavy plate,     value: 3, keywords: [sealed, heavy] }

@@ -58,11 +58,11 @@ The generator produces a **printable mission briefing** and an **SVG map**. The 
 
 | Layer | Choice | Why |
 |-------|--------|-----|
-| Game logic | C# (.NET current LTS), class library | Strong typing suits rules logic; testable in isolation; matches existing C#/SQL experience |
+| Game logic | C# (.NET 10, current LTS), class library | Strong typing suits rules logic; testable in isolation; matches existing C#/SQL experience |
 | API | ASP.NET Core Web API + EF Core | Mature, fast, first-class auth story for later |
 | Database | PostgreSQL | Free, cheap to host anywhere; EF Core makes it interchangeable with SQL Server if needed |
 | Front end | React + TypeScript (Vite) | Ubiquitous, good SVG/print support |
-| Content | YAML + JSON Schema | Human-editable, diff-friendly, validated in CI |
+| Content | YAML, compiled to JSON | Human-editable, diff-friendly; the compiled JSON is what .NET and the web app read, so neither needs a YAML library |
 | Rulebook build | Markdown → PDF (Pandoc) and static site | Reuses the same Markdown; tables injected from content |
 | Local dev | Docker Compose (Postgres) | One command to run |
 | CI | GitHub Actions | Validate content, run tests, build rulebook |
@@ -74,3 +74,7 @@ Hosting is deferred to the multiplayer phase. Everything is containerizable, so 
 - Two languages (C# and TypeScript). Accepted for the clean split between rules logic and UI.
 - Content schema design is an early, important task (roadmap Phase 2).
 - The PoC app is small: a generator and a campaign tracker. Most PoC effort goes into the rules, as it should.
+
+## Amendments
+
+**2026-10-20.** Content is compiled from YAML to `content/dist/content.json` by `tools/build_content.py`; `Imperator.Core` reads it with `System.Text.Json`. The combat simulator lives in `app/src/Imperator.Sim` and uses `Imperator.Core`, so the rules math exists once. Tests are a dependency-free console runner (`app/tests/Imperator.Core.Tests`) so they run without package downloads. CI (`.github/workflows/ci.yml`) checks that content JSON and rulebook tables are current and runs the tests.

@@ -1,0 +1,100 @@
+# 4. Shooting
+
+## The shot
+
+1. **Choose a target** the shooter can see. A model cannot shoot at a model in close combat.
+2. **Throw together** the 2d6 hit dice and the weapon's damage dice. If the shot misses, ignore the damage dice.
+3. **Hit roll:** 2d6 + Q + modifiers must reach **8**.
+   - A natural 2 always misses.
+   - A natural double 6 is a **critical hit**: add 1 row to the wound result.
+4. **Wound:** add the damage dice and find the row on the wound table. If the hit was critical, add 1 row. Then step the row down by the target's Armour, less the weapon's AP (the step can't go below 0). A final row above 10 counts as 10; at row 0 or below there is no effect.
+
+<!-- table:core.hit_modifiers -->
+| Hit modifier | Value |
+|---|---|
+| Aim | +1 |
+| Target in Light cover | -1 |
+| Target in Heavy cover | -2 |
+| Each Suppression on shooter | -1 |
+| Shooter Wounded | -1 |
+| Moved earlier this activation (not Handy) | -1 |
+| Reaction or Overwatch shot | -1 |
+| Unbraced in zero-g (not Void-trained) | -1 |
+| Target in darkness beyond 6" (no low-light gear) | -2 |
+<!-- /table -->
+
+## Range
+
+Weapons have **no maximum range**. Each has a **short range**: beyond it the shot takes −1, and beyond double it −2. Some weapons have harsher penalties, listed in the table.
+
+<!-- table:weapons.ranged -->
+| Weapon | Damage | Short range | Beyond / double | AP | Keywords |
+|---|---|---|---|---|---|
+| Sidearm | 2d4 | 8" | -1 / -2 | 0 | Handy |
+| SMG | 2d6 | 12" | -1 / -2 | 0 | Handy, Auto |
+| Carbine | 2d6 | 18" | -1 / -2 | 0 | Handy |
+| Shotgun | 2d10 | 10" | -2 / -3 | 0 | Handy |
+| Rifle | 2d8 | 30" | -1 / -2 | 0 | — |
+| LMG | 2d8 | 30" | -1 / -2 | 0 | Auto, Suppressing |
+| DMR | 2d10 | 48" | -1 / -2 | 0 | — |
+| AT launcher | 2d12 | 36" | -1 / -2 | 1 | One per round, Cumbersome |
+<!-- /table -->
+
+<!-- table:keywords.weapon -->
+| Keyword | Effect |
+|---|---|
+| *Handy* | Ignores the moved-this-activation penalty. |
+| *Auto* | May use Suppressive Fire. |
+| *Suppressing* | A hit also adds 1 Suppression. |
+| *One per round* | May fire once per round, including reactions. |
+| *Cumbersome* | An extra -1 when firing after a Move; cannot fire as a reaction. |
+| *Blast* | Affects every model within the blast radius with line of sight to the point of impact. |
+| *Confined* | +1 wound row to models in an enclosed compartment of 6" x 6" or smaller. |
+| *Breach* | Can destroy doors, hatches and thin bulkheads. |
+<!-- /table -->
+
+## Cover
+
+A target has **Light cover** if at least a third of its body is hidden behind an obstacle within 1" of it, or if another model is between it and the shooter. It has **Heavy cover** if at least half its body is hidden behind solid material such as a bulkhead, column or heavy machinery.
+
+**Find Cover:** a model in the open within 1" of micro-terrain (debris, a fallen crate, a body) may take the Find Cover action: test 2d6 + Q, minus Suppression. On 7+ it gains Light cover, on 10+ Heavy cover, until it moves.
+
+## Aim
+
+Aim gives +1 to the next Shoot in the same activation.
+
+## Suppressive Fire
+
+*Auto* weapons only. Pick a visible target and make a hit roll, without damage dice. On a hit the target gains 1 Suppression, or 2 if the roll beats 8 by 3 or more.
+
+## Wound table
+
+<!-- table:core.wound_table -->
+| Row | Damage total | Result |
+|---|---|---|
+| 1 | 2–3 | Shaken: +1 Suppression |
+| 2 | 4–5 | Rattled: +2 Suppression |
+| 3 | 6–7 | Grazed: +1 Suppression |
+| 4 | 8–9 | Wounded: -1 to all rolls. Already Wounded: Down |
+| 5 | 10–11 | Wounded and +1 Suppression. Already Wounded: Down |
+| 6 | 12–13 | Down: may recover (end-of-round test 8+, or Medic) |
+| 7 | 14–15 | Down and bleeding: dies at end of third round unless Medic 8+ |
+| 8 | 16–17 | Critical: dies at end of next round unless Medic 10+ |
+| 9 | 18–20 | Dead |
+| 10 | 21+ | Dead; friends within 1" gain 1 Suppression |
+<!-- /table -->
+
+## Armour
+
+<!-- table:armour.armour -->
+| Armour | Value | Keywords |
+|---|---|---|
+| None | 0 | — |
+| Flak | 1 | — |
+| Void suit | 1 | Sealed |
+| Composite plate | 2 | — |
+| Void plate | 2 | Sealed |
+| Heavy plate | 3 | Sealed, Heavy |
+<!-- /table -->
+
+Armour steps the row down by its value, less AP. Armour 3 shrugs off most small-arms fire. A rifle (2d8) can roll up to row 8 before armour, but it usually lands on rows 3–5, which Armour 3 reduces to nothing. Heavy targets need AP, criticals, close combat, or explosives.
