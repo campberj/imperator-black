@@ -39,7 +39,7 @@ Proof of concept in progress: solo ship and station boarding actions with a full
 
 ## Working with the repo
 
-Requires Python 3 with PyYAML, and the .NET 10 SDK.
+Requires Python 3 with PyYAML, and the .NET 10 SDK. A local virtualenv keeps the Python tools self-contained: `python3 -m venv .venv && .venv/bin/pip install pyyaml reportlab`, then run the tools with `.venv/bin/python` (`.venv/` is gitignored).
 
 ```sh
 python3 tools/validate_content.py   # check content cross-references

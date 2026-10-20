@@ -2,6 +2,7 @@
 """Check that every id referenced in content/*.yaml exists, and that ids are unique.
 
 Run from the repo root: python3 tools/validate_content.py   (exits non-zero on any error)
+Mirrored in app/src/Imperator.Core/ContentValidator.cs (same checks, same messages); keep the two in step.
 """
 import sys
 from pathlib import Path
