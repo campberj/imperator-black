@@ -27,21 +27,24 @@ foreach (var spec in new[] { "2d4", "2d6", "2d8", "2d10", "2d12" })
 }
 
 // --- Content ---
-Check("content version", core.Version == "0.2.0", core.Version);
+Check("content version", core.Version == "0.3.0", core.Version);
 Check("hit target 8", core.HitTarget == 8);
 Check("ten wound rows", core.WoundTable.Count == 10);
+Check("wound bands contiguous from 2", core.WoundTable[0].Min == 2 && core.WoundTable.Zip(core.WoundTable.Skip(1)).All(p => p.Second.Min == p.First.Max + 1));
 Check("rifle is 2d8", content.Ranged("rifle").DamageDice == new DiceSpec(2, 8));
 Check("shotgun penalties -2/-3", content.Ranged("shotgun").PenaltyBeyondShort == -2 && content.Ranged("shotgun").PenaltyBeyondDouble == -3);
 Check("rifle default penalties", content.Ranged("rifle").RangeModifier(31) == -1 && content.Ranged("rifle").RangeModifier(61) == -2 && content.Ranged("rifle").RangeModifier(30) == 0);
 
 // --- Wound table ---
 Check("total 2 is row 1", Wounds.RowFor(core, 2) == 1);
-Check("total 13 is row 6", Wounds.RowFor(core, 13) == 6);
+Check("total 11 is row 6", Wounds.RowFor(core, 11) == 6);
+Check("total 4 is row 2", Wounds.RowFor(core, 4) == 2);
+Check("total 16 is row 9", Wounds.RowFor(core, 16) == 9);
 Check("total 24 is row 10", Wounds.RowFor(core, 24) == 10);
-Check("armour steps down", Wounds.FinalRow(core, 12, false, 2, 0) == 4);
-Check("AP reduces armour", Wounds.FinalRow(core, 12, false, 2, 1) == 5);
-Check("AP cannot raise row", Wounds.FinalRow(core, 12, false, 0, 1) == 6);
-Check("critical adds a row", Wounds.FinalRow(core, 12, true, 0, 0) == 7);
+Check("armour steps down", Wounds.FinalRow(core, 12, false, 2, 0) == 5);
+Check("AP reduces armour", Wounds.FinalRow(core, 12, false, 2, 1) == 6);
+Check("AP cannot raise row", Wounds.FinalRow(core, 12, false, 0, 1) == 7);
+Check("critical adds a row", Wounds.FinalRow(core, 12, true, 0, 0) == 8);
 Check("row capped at 10 after armour", Wounds.FinalRow(core, 24, true, 0, 0) == 10);
 Check("crit at top vs armour 1 still row 10", Wounds.FinalRow(core, 24, true, 1, 0) == 10);
 

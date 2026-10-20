@@ -30,7 +30,7 @@ Set up the repo and record what is already decided.
 - [x] Design pillars and non-goals ([pillars.md](design/pillars.md))
 - [x] Architecture decision ([ADR-001](architecture/adr-001-architecture.md))
 - [x] Terrain inventory (12 each of 6×6, 6×3, 3×3 tiles; Kill Team / Boarding Actions walls and doors; 3'×5' dry-erase map)
-- [x] Opposition force: the corsairs ([opposition-force.md](design/opposition-force.md))
+- [x] Opposition force: Freespace Solutions ([opposition-force.md](design/opposition-force.md))
 - [x] Glossary of terms ([glossary.md](design/glossary.md))
 - [x] Playtest log template ([TEMPLATE.md](playtests/TEMPLATE.md))
 
@@ -56,7 +56,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 - [x] Rules v0.2 chapters 1–8 in [`rules/`](../rules/), with tables generated from `content/`
 - [x] Simulator rebuilt in C# (`app/src/Imperator.Sim`), sharing the game-logic library with the app
 - [x] First simulator pass: [findings](analysis/sim-v0.2-findings.md) (lethality retune proposed)
-- [ ] Decide the lethality retune and publish rules v0.3
+- [x] Lethality retune adopted; rules v0.3 published ([results](analysis/sim-v0.3-results.md))
 - [ ] Gym playtests at the table
 
 **Exit:** Gym fights play cleanly; the simulator output matches the lethality targets.

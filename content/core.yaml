@@ -1,6 +1,6 @@
 # Core resolution values for Imperator Black.
 # Single source of truth: the rulebook tables and the app both read this file.
-version: 0.2.0
+version: 0.3.0
 
 dice:
   hit: 2d6
@@ -38,15 +38,15 @@ hit_modifiers:
 # Rows above 10 count as 10. Row 0 or lower: no effect.
 wound_table:
   - { row: 1,  min: 2,  max: 3,  id: shaken,   text: "Shaken: +1 Suppression" }
-  - { row: 2,  min: 4,  max: 5,  id: rattled,  text: "Rattled: +2 Suppression" }
-  - { row: 3,  min: 6,  max: 7,  id: grazed,   text: "Grazed: +1 Suppression" }
-  - { row: 4,  min: 8,  max: 9,  id: wounded,  text: "Wounded: -1 to all rolls. Already Wounded: Down" }
-  - { row: 5,  min: 10, max: 11, id: wounded_s, text: "Wounded and +1 Suppression. Already Wounded: Down" }
-  - { row: 6,  min: 12, max: 13, id: down,     text: "Down: may recover (end-of-round test 8+, or Medic)" }
-  - { row: 7,  min: 14, max: 15, id: bleeding, text: "Down and bleeding: dies at end of third round unless Medic 8+" }
-  - { row: 8,  min: 16, max: 17, id: critical, text: "Critical: dies at end of next round unless Medic 10+" }
-  - { row: 9,  min: 18, max: 20, id: dead,     text: "Dead" }
-  - { row: 10, min: 21, max: 99, id: dead_x,   text: "Dead; friends within 1\" gain 1 Suppression" }
+  - { row: 2,  min: 4,  max: 4,  id: rattled,  text: "Rattled: +2 Suppression" }
+  - { row: 3,  min: 5,  max: 5,  id: grazed,   text: "Grazed: +1 Suppression" }
+  - { row: 4,  min: 6,  max: 7,  id: wounded,  text: "Wounded: -1 to all rolls. Already Wounded: Down" }
+  - { row: 5,  min: 8,  max: 9,  id: wounded_s, text: "Wounded and +1 Suppression. Already Wounded: Down" }
+  - { row: 6,  min: 10, max: 11, id: down,     text: "Down: may recover (end-of-round test 8+, or Medic)" }
+  - { row: 7,  min: 12, max: 13, id: bleeding, text: "Down and bleeding: dies at end of third round unless Medic 8+" }
+  - { row: 8,  min: 14, max: 15, id: critical, text: "Critical: dies at end of next round unless Medic 10+" }
+  - { row: 9,  min: 16, max: 18, id: dead,     text: "Dead" }
+  - { row: 10, min: 19, max: 99, id: dead_x,   text: "Dead; friends within 1\" gain 1 Suppression" }
 
 movement:
   move: 6

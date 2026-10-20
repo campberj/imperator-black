@@ -21,7 +21,7 @@ A *Blast* grenade affects every model within its radius of the landing point tha
 <!-- table:weapons.thrown -->
 | Grenade | Throw range | Radius | Damage / effect |
 |---|---|---|---|
-| Frag grenade | 8" | 2" | 2d6 (AP 0) |
+| Frag grenade | 8" | 2" | 2d8 (AP 0) |
 | Flashbang | 8" | 3" | +2 Suppression; removes Overwatch; cannot react until end of round |
 | Smoke grenade | 8" | 2" | Blocks line of sight through the area until end of next round |
 <!-- /table -->

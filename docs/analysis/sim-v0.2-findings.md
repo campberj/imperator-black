@@ -6,7 +6,7 @@
 
 Rules v0.2 works for open-ground firefights, but **boarding actions stall**. The close-quarters weapons that dominate ship fights can barely take anyone out of the fight, and close combat never kills. The simulator also shows that the current wound table **fails the Pillar 1 test**: veterans in cover lose to a larger green squad in the open.
 
-Two content changes, tested together, fix the boarding problem and pass Pillar 1. Neither changes a single rule; both are edits to `content/`. They are **proposed, not adopted**, pending RJ's call.
+Two content changes, tested together, fix the boarding problem and pass Pillar 1. Neither changes a single rule; both are edits to `content/`. **Adopted** as rules v0.3, with two further changes (see Outcome).
 
 ## What works
 
@@ -89,3 +89,27 @@ Rooms are still hard: four elite troopers clear three guards in three rounds 37â
 - Firefights are abstract: no board, cover as a state, range sampled per shot, both sides use the same simple policy. Reactions are modelled only in the room-clearing simulation.
 - Room clearing has no positions inside the room; every defender sees every attacker who has entered; attackers do not react or aim.
 - The Patrol Contact scenario comes out at about 29% / 47% (fireteam / patrol) under the current rules, lower than the prototype's estimate of 43â€“52%. The policies differ, so treat table playtests as the authority.
+
+## Outcome (2026-10-20)
+
+RJ adopted **A + B**, plus:
+
+- **Melee slightly deadlier:** knife or bayonet 2d8, breaching tool or heavy blade 2d10; unarmed stays 2d4. Tested against stepping up unarmed too; the result was identical for armed fights, and fists stay non-lethal. Rejected: a growing bonus from the third exchange (too much to track).
+- **Frag grenades** 2d8.
+
+Rules v0.3 results ([sim-v0.3-results.md](sim-v0.3-results.md)):
+
+| Metric | v0.2 | v0.3 |
+|---|---|---|
+| Pillar 1: 4 Q2 in cover vs 6 Q0 in the open, Q2 wins | 40% | 75% |
+| 4 Q1 vs 4 Q1: draws | 20% | 2% |
+| Patrol Contact (fireteam / patrol) | 29% / 47% | 42% / 51% |
+| Close combat Q1 vs Q1: average exchanges | 5.6 | 2.8 |
+| Room clear vs Overwatch, flashbang first: cleared by R3 | 0% | 42% |
+| Room clear vs Overwatch, frag first: cleared in R1 / by R3 | 2% / 5% | 34% / 58% |
+| Room clear vs Overwatch, frag first: attackers out | 0.20 | 0.91 |
+
+**Watch at the table:**
+
+- **Frag-first entry is now the strongest option.** That's doctrinally right, but missions with hostages, prisoners or intel should make the player pay for it: frags kill what you came for. Flashbang and breach entries cost fewer attacker casualties per room than walking in, and keep prisoners alive.
+- **Close combat still rarely kills outright** (3% against unarmoured crew, near 0% otherwise). Losers are Down or captured, feeding the injury table and the prisoner mechanic. Revisit if playtests want more blood.

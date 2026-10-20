@@ -4,7 +4,7 @@ Living record of design decisions. Each entry is **Settled** (build on it), **Le
 
 Imperator Black continues the earlier *A War of Worlds* design. Its documents are kept in [a-war-of-worlds/](a-war-of-worlds/): the [design statement and roadmap](a-war-of-worlds/design-statement-and-roadmap.md) and [prototype rules v0.1](a-war-of-worlds/prototype-rules-v0.1.md). Entries marked *(AWoW)* come from there. Where this log and those documents disagree, this log wins.
 
-Last updated: 2026-10-20 (rules v0.2)
+Last updated: 2026-10-20 (rules v0.3)
 
 ---
 
@@ -47,7 +47,7 @@ Last updated: 2026-10-20 (rules v0.2)
 | 3.10 | Cover: Light (≥⅓ hidden, −1 to hit) and Heavy (≥½ hidden behind solid material, −2). True line of sight. *(AWoW prototype)* | Leaning |
 | 3.11 | **Close combat:** started by moving into contact; resolves at once in exchanges of opposed 2d6 + Q (charge +1 first exchange, support +1 each up to +2). The winner rolls melee damage on the wound table; a no-effect result still adds 1 Suppression. Continues until one side is incapacitated or **both** break away. A model at 5 Suppression that loses is overpowered (Down or captured). | Settled |
 | 3.12 | **Grenades and demolitions:** Throw action (test 8+, misses land short, natural 2 slips); frag (one damage roll, +1 row in confined compartments), flashbang (+2 Suppression, strips Overwatch, no reactions this round), smoke; breaching charges (place with Interact, detonate as a later action). | Leaning — playtest |
-| 3.13 | **Lethality retune:** re-banded wound table (A) plus larger close-quarters weapon dice (B), per [sim findings](../analysis/sim-v0.2-findings.md). Current v0.2 bands fail Pillar 1 and stall room clearing. | Proposed |
+| 3.13 | **Lethality retune (rules v0.3):** re-banded wound table (suppression 2–5, Wounded 6–9, Down 10–11, Bleeding 12–13, Critical 14–15, Dead 16+); sidearm 2d6, SMG and carbine 2d8, shotgun 2d12; knife 2d8, breaching tool 2d10 (unarmed 2d4); frag 2d8. Per [sim findings](../analysis/sim-v0.2-findings.md); passes Pillar 1 at 75%. | Settled — playtest |
 
 ## 4. Turn structure, reactions and morale
 
@@ -113,9 +113,9 @@ Last updated: 2026-10-20 (rules v0.2)
 | 9.2 | First environment: **ship / station boarding actions**. | Settled |
 | 9.3 | Terrain inventory: **12 each** of 6"×6", 6"×3" and 3"×3" tiles; walls and doors/hatches from Kill Team and 40k Boarding Actions; a 3' × 5' dry-erase map. Enemy placement via tokens / poker chips. | Settled |
 | 9.4 | Player faction: **Task Force Boone** (BLKOUT miniatures). Opposition from BLKOUT and BPRE miniatures. | Settled |
-| 9.5 | Opposition: **the corsairs**, a grey faction in three layers (state patron, criminal core, contractors), with element profiles, a miniature mapping across all BLKOUT/BPRE kits, and four threat tiers ([opposition-force.md](opposition-force.md)). | Settled |
-| 9.6 | Corsair faction name and patron state identity. | Proposed — shortlist pending |
-| 9.7 | Campaign thread: intelligence from corsair missions builds toward **attributing** the corsairs to their patron, which can escalate into a deniable war with a state (peer naval-infantry foe). | Leaning |
+| 9.5 | Opposition: **Freespace Solutions**, a privatized debt and salvage corporation that unofficially conducts grey-zone operations for paying patrons. Three layers (patron, corporate core, contractors), element profiles, a miniature mapping across all BLKOUT/BPRE kits, and four threat tiers ([opposition-force.md](opposition-force.md)). | Settled |
+| 9.6 | Freespace's current patron is the **Meridian Directorate**, a technocratic state run through its intelligence ministries. | Settled |
+| 9.7 | Campaign thread: intelligence from Freespace operations builds toward **attributing** Freespace to the Meridian Directorate, which can escalate into a deniable war with the Directorate (peer naval-infantry foe). | Leaning |
 
 ## 10. Software
 

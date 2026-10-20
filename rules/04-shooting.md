@@ -30,10 +30,10 @@ Weapons have **no maximum range**. Each has a **short range**: beyond it the sho
 <!-- table:weapons.ranged -->
 | Weapon | Damage | Short range | Beyond / double | AP | Keywords |
 |---|---|---|---|---|---|
-| Sidearm | 2d4 | 8" | -1 / -2 | 0 | Handy |
-| SMG | 2d6 | 12" | -1 / -2 | 0 | Handy, Auto |
-| Carbine | 2d6 | 18" | -1 / -2 | 0 | Handy |
-| Shotgun | 2d10 | 10" | -2 / -3 | 0 | Handy |
+| Sidearm | 2d6 | 8" | -1 / -2 | 0 | Handy |
+| SMG | 2d8 | 12" | -1 / -2 | 0 | Handy, Auto |
+| Carbine | 2d8 | 18" | -1 / -2 | 0 | Handy |
+| Shotgun | 2d12 | 10" | -2 / -3 | 0 | Handy |
 | Rifle | 2d8 | 30" | -1 / -2 | 0 | — |
 | LMG | 2d8 | 30" | -1 / -2 | 0 | Auto, Suppressing |
 | DMR | 2d10 | 48" | -1 / -2 | 0 | — |
@@ -73,15 +73,15 @@ Aim gives +1 to the next Shoot in the same activation.
 | Row | Damage total | Result |
 |---|---|---|
 | 1 | 2–3 | Shaken: +1 Suppression |
-| 2 | 4–5 | Rattled: +2 Suppression |
-| 3 | 6–7 | Grazed: +1 Suppression |
-| 4 | 8–9 | Wounded: -1 to all rolls. Already Wounded: Down |
-| 5 | 10–11 | Wounded and +1 Suppression. Already Wounded: Down |
-| 6 | 12–13 | Down: may recover (end-of-round test 8+, or Medic) |
-| 7 | 14–15 | Down and bleeding: dies at end of third round unless Medic 8+ |
-| 8 | 16–17 | Critical: dies at end of next round unless Medic 10+ |
-| 9 | 18–20 | Dead |
-| 10 | 21+ | Dead; friends within 1" gain 1 Suppression |
+| 2 | 4–4 | Rattled: +2 Suppression |
+| 3 | 5–5 | Grazed: +1 Suppression |
+| 4 | 6–7 | Wounded: -1 to all rolls. Already Wounded: Down |
+| 5 | 8–9 | Wounded and +1 Suppression. Already Wounded: Down |
+| 6 | 10–11 | Down: may recover (end-of-round test 8+, or Medic) |
+| 7 | 12–13 | Down and bleeding: dies at end of third round unless Medic 8+ |
+| 8 | 14–15 | Critical: dies at end of next round unless Medic 10+ |
+| 9 | 16–18 | Dead |
+| 10 | 19+ | Dead; friends within 1" gain 1 Suppression |
 <!-- /table -->
 
 ## Armour
@@ -97,4 +97,4 @@ Aim gives +1 to the next Shoot in the same activation.
 | Heavy plate | 3 | Sealed, Heavy |
 <!-- /table -->
 
-Armour steps the row down by its value, less AP. Armour 3 shrugs off most small-arms fire. A rifle (2d8) can roll up to row 8 before armour, but it usually lands on rows 3–5, which Armour 3 reduces to nothing. Heavy targets need AP, criticals, close combat, or explosives.
+Armour steps the row down by its value, less AP. A rifle or carbine (2d8) can reach row 9 before armour, but it usually lands on rows 4–6; against Armour 3 that becomes suppression. Heavy targets need AP, criticals, shotguns at close range, close combat, or explosives.

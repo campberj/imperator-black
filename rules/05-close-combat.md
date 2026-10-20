@@ -31,8 +31,8 @@ Close combat resolves **immediately**, in a series of **exchanges**, without spe
 | Melee weapon | Damage | AP |
 |---|---|---|
 | Unarmed / weapon butt | 2d4 | 0 |
-| Knife or bayonet | 2d6 | 0 |
-| Breaching tool or heavy blade | 2d8 | 0 |
+| Knife or bayonet | 2d8 | 0 |
+| Breaching tool or heavy blade | 2d10 | 0 |
 <!-- /table -->
 
 ### Overpowered
