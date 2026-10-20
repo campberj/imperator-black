@@ -1,0 +1,98 @@
+:root {
+  --text: #1d1f23;
+  --muted: #5d636e;
+  --bg: #f6f6f4;
+  --surface: #ffffff;
+  --border: #d9dad6;
+  --accent: #8a1c1c;
+  --error-bg: #fbeaea;
+
+  font: 16px/1.5 system-ui, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #e7e7e4;
+    --muted: #a0a5ad;
+    --bg: #15171a;
+    --surface: #1d2024;
+    --border: #33373d;
+    --accent: #e07a6a;
+    --error-bg: #3a1f1f;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h2 {
+  margin: 32px 0 8px;
+  font-size: 1.125rem;
+}
+
+.meta {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.error {
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: var(--error-bg);
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+thead th {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+tbody th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+}
