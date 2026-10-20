@@ -17,8 +17,8 @@ Last updated: 2026-10-20, rules v0.4 (granular profiles).
 | `app/Imperator.slnx` | Solution (.NET 10, new `.slnx` format) | Builds clean, 0 warnings |
 | `app/src/Imperator.Core` | Game logic: dice and seeded `Rng`, content loading (`ContentSet`), wound table, shooting (exact odds and sampled), close combat, grenades, `Soldier` state | Covers rules v0.4 chapters 4–7 math with attribute-based `Soldier` (`FromTroop` builds one from a troop profile; `Generic` makes abstract test soldiers). No movement, board, or mission logic yet |
 | `app/src/Imperator.Sim` | Combat simulator: shot odds, duels, frag, open-ground firefights, room clearing, `--compare` for content variants | Working. Output in `docs/analysis/` |
-| `app/tests/Imperator.Core.Tests` | xUnit v3 tests (87 cases, covering the former runner's 72 checks); run with `dotnet test app/Imperator.slnx` | Passing |
-| `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
+| `app/tests/Imperator.Core.Tests` | xUnit v3 tests (198 cases: the former runner's 72 checks plus content loading and validation); run with `dotnet test app/Imperator.slnx` | Passing |
+| `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON into typed records (every file, including the chapter 10 solo opponent and its terms, chapter 11 `layouts`, chapter 12 `terrain`, `core.security` and `core.shoot_scale`) and validates it at load (`ContentValidator`, mirroring `tools/validate_content.py`) | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
 | `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests | Green |
 
 **NuGet:** the cloud workspace where this started blocks `api.nuget.org`, which is why content is compiled YAML → JSON (System.Text.Json is built in) and why the tests began as a console runner. Locally, NuGet works. Keep the YAML → JSON step regardless; the web front end will read the same JSON.
@@ -36,7 +36,7 @@ These are foundations that don't depend on unfinished rules. Each should leave C
 - Update CI to `dotnet test app/Imperator.slnx`.
 - **Done when:** `dotnet test` passes with the same coverage, and CI runs it.
 
-### 2. Finish content loading
+### 2. Finish content loading ✅ done (2026-10-20)
 
 `ContentSet` already loads `core`, `weapons`, `armour`, `gear`, `skills` and `troops` (`TroopDef`, `TroopStats`), and `Soldier.FromTroop` builds a model from a profile. Still to do: load `factions` (factions, elements, threat tiers), `rosters` (teams, starting forces), `behaviors` (the chapter 10 solo opponent: general procedures plus per-profile priority lists, all text for now) and `keywords` into typed records, plus `core.security` (hacking security levels), and validate every referenced id at load time (mirror `tools/validate_content.py`).
 

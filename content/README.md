@@ -11,6 +11,8 @@ python3 tools/print_sheets.py       # refresh docs/print/*.pdf
 
 CI fails if `dist/content.json` or the rulebook tables are stale, or if validation fails.
 
+The .NET loader (`ContentSet.Parse` in `app/src/Imperator.Core`) runs the same cross-reference checks (`ContentValidator`, same messages) and is also strict about shape: a missing required field, a `null` where one isn't allowed, or an unknown key in `stats` fails the load. Content that fails one fails the other; where the Python check is about a missing or mistyped value (a behavior's `summary`, `investigate`, `close_combat`, `surrenders` or `close_quarters`), the .NET error comes from the deserializer and names the field instead of repeating the Python wording. The one Python check not mirrored yet is the layout generator run (200 decks per vessel, connected and within the tile inventory); it needs `tools/generate_layout.py` ported to Core first. When you add a check to `tools/validate_content.py`, add it to `ContentValidator` too.
+
 ## Files
 
 | File | Top-level keys | What it holds |
