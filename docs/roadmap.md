@@ -70,7 +70,8 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 - [x] Printable [unit cards and quick reference](print/)
 - [x] RJ review: force size 3–8, gear approved, Automated settled, Razorback deferred
 - [x] Granular profiles (rules v0.4): attributes, ranks, Wounds, Size, levelled skills ([findings](analysis/sim-v0.4-findings.md))
-- [ ] Gym game with the cards
+- [x] Gym scenario: [Gym 1: First Breach](scenarios/README.md), with sheet, map and curated cards
+- [ ] RJ plays Gym 1 and logs it (then Phase 3)
 
 1. Define the YAML schemas: weapon, armor, gear, troop type, unit, keyword.
 2. **Task Force Boone** roster: fireteam of 4–6 plus a leader, with roles (rifleman, gunner, breacher, medic, marksman, leader).

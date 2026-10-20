@@ -11,6 +11,7 @@ Proof of concept in progress: solo ship and station boarding actions with a full
 
 - [Rules v0.4 (playtest draft)](rules/README.md)
 - [Printable unit cards and quick reference](docs/print/) (PDF)
+- [Scenarios](docs/scenarios/README.md): Gym 1: First Breach
 
 ## Documents
 

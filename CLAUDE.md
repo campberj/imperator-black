@@ -20,6 +20,7 @@ python3 tools/validate_content.py     # after any content/*.yaml edit
 python3 tools/build_content.py        # after any content/*.yaml edit
 python3 tools/render_tables.py        # after any content/*.yaml edit
 python3 tools/print_sheets.py         # after content changes that affect cards (needs reportlab)
+python3 tools/print_scenario.py docs/scenarios/<file>.yaml   # scenario sheet + curated cards
 dotnet build app/Imperator.slnx
 dotnet run --project app/tests/Imperator.Core.Tests                     # must print "All N checks passed."
 dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.4-results.md

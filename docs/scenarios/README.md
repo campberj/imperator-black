@@ -1,0 +1,15 @@
+# Scenarios
+
+Fixed scenarios for playtesting. Each is a YAML file holding the layout, forces with their loadouts, special rules, victory conditions and, until Phase 3, stopgap enemy orders. The mission generator (Phase 5) will grow out of this format.
+
+Print a scenario's sheet and cards with:
+
+```sh
+python3 tools/print_scenario.py docs/scenarios/<scenario>.yaml
+```
+
+This writes `docs/print/<id>-sheet.pdf` (scenario sheet with a to-scale map) and `docs/print/<id>-cards.pdf` (one card per model, with its chosen loadout, plus an enemy orders card). Profiles come from `content/`, so reprinting picks up any rules changes.
+
+| Scenario | Purpose | Print |
+|---|---|---|
+| [Gym 1: First Breach](gym-01-first-breach.yaml) | Phase 2 exit playtest: Boarding element vs four Freespace asset security on five tiles; doors, a locked door, Overwatch, close quarters, an extraction | [sheet](../print/gym-01-first-breach-sheet.pdf), [cards](../print/gym-01-first-breach-cards.pdf) |
