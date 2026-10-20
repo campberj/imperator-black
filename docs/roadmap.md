@@ -30,9 +30,9 @@ Set up the repo and record what is already decided.
 - [x] Design pillars and non-goals ([pillars.md](design/pillars.md))
 - [x] Architecture decision ([ADR-001](architecture/adr-001-architecture.md))
 - [x] Terrain inventory (12 each of 6×6, 6×3, 3×3 tiles; Kill Team / Boarding Actions walls and doors; 3'×5' dry-erase map)
-- [ ] Opposition force decision ([proposal](design/proposals/opposition-force.md))
-- [ ] Glossary of terms (activation, reaction, overwatch, troop quality, keyword…)
-- [ ] Playtest log template
+- [x] Opposition force: the corsairs ([opposition-force.md](design/opposition-force.md))
+- [x] Glossary of terms ([glossary.md](design/glossary.md))
+- [x] Playtest log template ([TEMPLATE.md](playtests/TEMPLATE.md))
 
 **Exit:** Repo structure exists, the decision log is agreed, and the opposition is chosen.
 
@@ -58,7 +58,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 
 1. Define the YAML schemas: weapon, armor, gear, troop type, unit, keyword.
 2. **Task Force Boone** roster: fireteam of 4–6 plus a leader, with roles (rifleman, gunner, breacher, medic, marksman, leader).
-3. **Opposing force:** build out the chosen opposition's elements, mapped to the BLKOUT / BPRE miniatures you own ([proposal](design/proposals/opposition-force.md)).
+3. **Opposing force:** build out the chosen opposition's elements, mapped to the BLKOUT / BPRE miniatures you own ([opposition-force.md](design/opposition-force.md)).
 4. Boarding gear: breaching charges, door controls, grenades in confined spaces, drones (if in scope).
 5. Printable unit cards and a quick reference sheet.
 
@@ -68,7 +68,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 
 1. Extend the prototype's activation-priority list and role priorities into one profile per enemy element (proposed: *Cowed*, *Sentry*, *Aggressive*, *Tactical*, *Saboteur*, *Automated*).
 2. For each: a short decision table read on activation, target priority, and when it reacts or overwatches.
-3. Contact tokens and the alert track, if adopted (see the opposition proposal).
+3. Contact tables per threat tier, contact movement, and the alert track (see [opposition-force.md](design/opposition-force.md)).
 4. Tie-breakers for choices the tables don't cover (the prototype's "nearest the objective, then lowest-numbered model").
 
 **Exit:** The player makes no more than one judgment call per turn on the enemy's behalf.

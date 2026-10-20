@@ -4,7 +4,7 @@ Living record of design decisions. Each entry is **Settled** (build on it), **Le
 
 Imperator Black continues the earlier *A War of Worlds* design. Its documents are kept in [a-war-of-worlds/](a-war-of-worlds/): the [design statement and roadmap](a-war-of-worlds/design-statement-and-roadmap.md) and [prototype rules v0.1](a-war-of-worlds/prototype-rules-v0.1.md). Entries marked *(AWoW)* come from there. Where this log and those documents disagree, this log wins.
 
-Last updated: 2026-10-20
+Last updated: 2026-10-20 (opposition accepted)
 
 ---
 
@@ -97,8 +97,9 @@ Last updated: 2026-10-20
 |---|----------|--------|
 | 8.1 | PoC solo AI = **table-driven behavior profiles** per enemy type, building on the prototype's activation-priority list and role priorities. | Settled |
 | 8.2 | The app generates enemies and gives **general play guidance** per enemy type; it does not run enemies turn by turn. | Settled |
-| 8.3 | **Hidden contacts:** enemy tokens start as unknown contacts, revealed on discovery (Zone Raiders–style). *(AWoW teardown)* | Proposed — see [opposition proposal](proposals/opposition-force.md) |
-| 8.4 | A mission clock / alert track drives escalation (adapted from Zero Dark's deck clock). *(AWoW teardown)* | Proposed — see [opposition proposal](proposals/opposition-force.md) |
+| 8.3 | **Hidden contacts:** enemy tokens start as unknown contacts, revealed on line of sight or noise, rolled on a contact table per threat tier. *(AWoW teardown)* | Leaning — playtest ([opposition](opposition-force.md)) |
+| 8.4 | **Alert track (0–6)** driven by noise; contacts converge at 2, contractor reaction force at 4, lockdown at 6. Adapted from Zero Dark's deck clock. *(AWoW teardown)* | Leaning — playtest ([opposition](opposition-force.md)) |
+| 8.6 | Cowed enemies may **surrender**; prisoners are a campaign resource and a tactical burden. | Leaning — playtest |
 | 8.5 | Longer term: a more organic, situation-reactive AI. | Leaning |
 
 ## 9. Proof of concept
@@ -109,7 +110,9 @@ Last updated: 2026-10-20
 | 9.2 | First environment: **ship / station boarding actions**. | Settled |
 | 9.3 | Terrain inventory: **12 each** of 6"×6", 6"×3" and 3"×3" tiles; walls and doors/hatches from Kill Team and 40k Boarding Actions; a 3' × 5' dry-erase map. Enemy placement via tokens / poker chips. | Settled |
 | 9.4 | Player faction: **Task Force Boone** (BLKOUT miniatures). Opposition from BLKOUT and BPRE miniatures. | Settled |
-| 9.5 | Opposition force identity and enemy types. | Proposed — see [opposition proposal](proposals/opposition-force.md) |
+| 9.5 | Opposition: **the corsairs**, a grey faction in three layers (state patron, criminal core, contractors), with element profiles, a miniature mapping across all BLKOUT/BPRE kits, and four threat tiers ([opposition-force.md](opposition-force.md)). | Settled |
+| 9.6 | Corsair faction name and patron state identity. | Open |
+| 9.7 | Campaign thread: intelligence from corsair missions builds toward **attributing** the corsairs to their patron, which can escalate into a deniable war with a state (peer naval-infantry foe). | Leaning |
 
 ## 10. Software
 
