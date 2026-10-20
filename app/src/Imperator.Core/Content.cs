@@ -270,14 +270,17 @@ public sealed class ContentSet
         return set;
     }
 
+    /// <summary>Loads content/dist/content.json, found by walking up from a start directory.</summary>
+    public static ContentSet LoadDefault(string? startDir = null) => LoadFile(FindDefaultPath(startDir));
+
     /// <summary>Finds content/dist/content.json by walking up from a start directory.</summary>
-    public static ContentSet LoadDefault(string? startDir = null)
+    public static string FindDefaultPath(string? startDir = null)
     {
         var dir = new DirectoryInfo(startDir ?? AppContext.BaseDirectory);
         while (dir is not null)
         {
             var candidate = Path.Combine(dir.FullName, "content", "dist", "content.json");
-            if (File.Exists(candidate)) return LoadFile(candidate);
+            if (File.Exists(candidate)) return candidate;
             dir = dir.Parent;
         }
         throw new FileNotFoundException("content/dist/content.json not found; run tools/build_content.py");
