@@ -78,3 +78,5 @@ Hosting is deferred to the multiplayer phase. Everything is containerizable, so 
 ## Amendments
 
 **2026-10-20.** Content is compiled from YAML to `content/dist/content.json` by `tools/build_content.py`; `Imperator.Core` reads it with `System.Text.Json`. The combat simulator lives in `app/src/Imperator.Sim` and uses `Imperator.Core`, so the rules math exists once. Tests are a dependency-free console runner (`app/tests/Imperator.Core.Tests`) so they run without package downloads. CI (`.github/workflows/ci.yml`) checks that content JSON and rulebook tables are current and runs the tests.
+
+**2026-10-20.** The console test runner is replaced by an xUnit v3 project at the same path, run with `dotnet test app/Imperator.slnx`. The statistical checks keep their fixed seeds and tolerances.

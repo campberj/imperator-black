@@ -34,4 +34,4 @@ jobs:
         run: dotnet build app/Imperator.slnx -c Release
 
       - name: Tests
-        run: dotnet run -c Release --project app/tests/Imperator.Core.Tests
+        run: dotnet test app/Imperator.slnx -c Release --no-build

@@ -46,6 +46,6 @@ python3 tools/validate_content.py   # check content cross-references
 python3 tools/build_content.py      # compile content/*.yaml to content/dist/content.json
 python3 tools/render_tables.py      # regenerate rulebook tables from content/
 python3 tools/print_sheets.py       # regenerate unit cards and quick reference (needs reportlab)
-dotnet run --project app/tests/Imperator.Core.Tests                                   # tests
+dotnet test app/Imperator.slnx                                                        # tests
 dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.4-results.md   # simulator report
 ```
