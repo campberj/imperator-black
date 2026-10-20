@@ -64,6 +64,8 @@ Last updated: 2026-10-20 (rules v0.4 profiles)
 | 4.4 | **Reaction:** a model that has not yet activated may react when an enemy model's action allows a reaction. Reacting marks it as activated. | Settled |
 | 4.5 | **Overwatch:** a model that activates may go on Overwatch. It may then react **up to two times** until its activation comes again next round. Supersedes the prototype's single Overwatch shot. | Settled |
 | 4.6 | **Reaction triggers:** an enemy Moving into or within line of sight (interrupts the move), Shooting/Throwing/Suppressive Fire, or Interacting (including doors). **Reaction choices:** one action: Shoot the triggering model at −1, Move up to half to cover or out of sight, or Find Cover. Reactions can't trigger reactions. | Settled |
+| 4.11 | **Exposure trigger (from Gym 1):** an enemy model that comes into an Overwatch model's line of sight for any reason (door opened, smoke clears, wall breached) also triggers a reaction. Covers a gunner overwatching a friendly breach. | Proposed — playtest |
+| 4.12 | **Auto weapons engaging multiple targets (from Gym 1).** Options under study: beaten-zone Suppressive Fire, split Suppressive Fire, per-weapon Burst rating. | Open — in discussion |
 | 4.7 | **Suppression:** each marker −1 to all rolls (max 5); **Pinned at 3+** (only Rally, Find Cover, Move to cover, Shoot from cover). Two or more Suppression cancels Overwatch. *(AWoW prototype)* | Leaning |
 | 4.8 | **Casualty shock** (+1 Suppression when a friend within 6" goes Down/Dead; +2 for the leader) and **breaking** at half a fireteam Down or Dead. *(AWoW prototype)* | Leaning |
 | 4.9 | Leaders can pass actions to subordinates, as the scaling mechanism to squad and platoon (Stargrunt-style). *(AWoW teardown)* | Proposed — post-PoC |
