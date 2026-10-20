@@ -41,10 +41,8 @@ public static class Compare
 
     private static string P(double p) => p < 0.0005 ? "—" : $"{p * 100:0}%";
 
-    private static Soldier Make(ContentSet c, int q, string armour, string weapon, string melee = "knife", bool leader = false, bool vt = false) => new()
-    {
-        Name = weapon, Q = q, Armour = c.ArmourById(armour).Value, Weapon = c.Ranged(weapon), Melee = c.Melee(melee), IsLeader = leader, VoidTrained = vt,
-    };
+    private static Soldier Make(ContentSet c, int q, string armour, string weapon, string melee = "knife", bool leader = false, bool vt = false) =>
+        Soldier.Generic(weapon, q, c.ArmourById(armour).Value, c.Ranged(weapon), c.Melee(melee), leader, voidTrained: vt);
 
     private static string OutOnHit(ContentSet c, string weapon, int armour)
     {

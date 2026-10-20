@@ -10,11 +10,11 @@ public static class Shooting
     public static int CoverModifier(Cover cover) => cover switch { Cover.Light => -1, Cover.Heavy => -2, _ => 0 };
 
     /// <summary>
-    /// Total modifier for a shot: shooter Q and penalties, target cover, and situational modifiers
+    /// Total modifier for a shot: shooter's Shoot and penalties, target cover, and situational modifiers
     /// (aim, moved, reaction, range...) passed in as <paramref name="situational"/>.
     /// </summary>
     public static int Modifier(Soldier shooter, Cover targetCover, int situational) =>
-        shooter.Q + shooter.RollPenalty + CoverModifier(targetCover) + situational;
+        shooter.Shoot + shooter.RollPenalty + CoverModifier(targetCover) + situational;
 
     public static bool IsHit(CoreContent core, int a, int b, int modifier) =>
         a + b != core.NaturalMiss && (a == 6 && b == 6 || a + b + modifier >= core.HitTarget);

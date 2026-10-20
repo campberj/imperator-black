@@ -2,14 +2,14 @@
 
 ## Moving
 
-A **Move** action lets a model move up to its Move (6", or 5" in Heavy armour), in any direction, changing direction freely.
+A **Move** action lets a model move up to its **Move** attribute in inches (usually 5–7"), in any direction, changing direction freely. Move reflects training and kit: exoskeletons raise it, heavy armour and heavy weapons lower it.
 
 - Climbing or vaulting a low obstacle costs **2"** extra.
 - Models cannot move through other models or through walls and closed doors.
 - Moving into base contact with an enemy starts **close combat** (chapter 5).
 - Moving into or within an enemy's line of sight can trigger **reactions** (chapter 2).
 
-Two Moves cover 12", which is two compartments. A model can bound from one piece of cover to the next and still shoot, or cross a compartment and stack on the far door.
+At Move 6, two Moves cover 12", which is two compartments. A model can bound from one piece of cover to the next and still shoot, or cross a compartment and stack on the far door.
 
 ## Ship interiors
 
@@ -22,6 +22,8 @@ Walls block movement and line of sight. Most interior walls are **thin bulkheads
 ### Compartments
 
 A **compartment** is an area fully enclosed by walls and doors. A compartment 6"×6" or smaller counts as **confined** for blast weapons.
+
+**Crawlways and small hatches**, where a mission marks them, admit only models of **Size 2 or less**.
 
 ### Doors and hatches
 
@@ -39,8 +41,8 @@ A door or hatch is either **open** or **closed**, and a closed door may be **loc
 | Method | How | Noise |
 |---|---|---|
 | **Breaching charge** | Place it with Interact, detonate it later (chapter 6). Destroys the door. | Breach |
-| **Breaching tool** | Interact with the tool: test 8+. On a pass, the door is forced open; on a fail, it holds. | Breach |
-| **Hack** | A *Tech* model uses Interact at a console or the door: test 9+. On a pass, the door unlocks and opens; on a fail, it stays locked. | None |
+| **Breaching tool** | Interact with the tool: test 2d6 + Physique, 8+. On a pass, the door is forced open; on a fail, it holds. | Breach |
+| **Hack** | A model with a hacking rig uses Interact at a console or the door: test 2d6 + Tech, 9+. On a pass, the door unlocks and opens; on a fail, it stays locked. | None |
 
 Noise matters for the alert track (missions).
 

@@ -59,7 +59,7 @@ public sealed class Firefight
     private int Initiative(List<Soldier> side)
     {
         var (x, y) = _rng.TwoD6();
-        return x + y + side.Where(s => s.IsActive && s.IsLeader).Select(s => s.Q).DefaultIfEmpty(0).Max();
+        return x + y + side.Where(s => s.IsActive && s.IsLeader).Select(s => s.Nerve).DefaultIfEmpty(0).Max();
     }
 
     private bool Done(out FightWinner w)
@@ -109,7 +109,7 @@ public sealed class Firefight
         {
             var (x, y) = _rng.TwoD6();
             int bonus = side.Any(f => f.IsActive && f.IsLeader && f != s) ? 1 : 0;
-            if (x + y == 2 || x + y + s.Q - s.Suppression + bonus < _core.TestTarget) { s.Flee(); return; }
+            if (x + y == 2 || x + y + s.Nerve + s.RollPenalty + bonus < _core.TestTarget) { s.Flee(); return; }
         }
 
         bool leaderNear = side.Any(f => f.IsActive && f.IsLeader);
@@ -126,7 +126,7 @@ public sealed class Firefight
         if (patient is not null)
         {
             s.Cover = RandomCover(0.4);
-            patient.Treat(_rng, s.Q, s.IsMedic);
+            patient.Treat(_rng, s.Tech, s.IsMedic);
             return;
         }
 
@@ -161,7 +161,7 @@ public sealed class Firefight
         }
         else
         {
-            Shoot(s, side, foe, +1); // Aim, then Shoot
+            Shoot(s, side, foe, s.AimBonus); // Aim, then Shoot
         }
     }
 

@@ -1,7 +1,7 @@
-# Weapons for Imperator Black, rules v0.3.
+# Weapons for Imperator Black, rules v0.4.
 # damage: dice pair thrown with the hit dice (ranged) or by the winner (melee).
 # short_range: inches; beyond it range_penalty[0], beyond double range_penalty[1].
-version: 0.3.0
+version: 0.4.0
 
 ranged:
   - { id: sidearm,     name: Sidearm,     damage: 2d6,  short_range: 8,  ap: 0, keywords: [handy] }

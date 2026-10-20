@@ -9,7 +9,7 @@ Proof of concept in progress: solo ship and station boarding actions with a full
 
 ## Rules
 
-- [Rules v0.3 (playtest draft)](rules/README.md)
+- [Rules v0.4 (playtest draft)](rules/README.md)
 - [Printable unit cards and quick reference](docs/print/) (PDF)
 
 ## Documents
@@ -23,6 +23,7 @@ Proof of concept in progress: solo ship and station boarding actions with a full
 - A War of Worlds (predecessor design): [design statement and roadmap](docs/design/a-war-of-worlds/design-statement-and-roadmap.md), [prototype rules v0.1](docs/design/a-war-of-worlds/prototype-rules-v0.1.md)
 - [Proof of concept roadmap](docs/roadmap.md)
 - [Simulator findings, rules v0.2 → v0.3](docs/analysis/sim-v0.2-findings.md)
+- [Simulator findings, rules v0.4 profiles](docs/analysis/sim-v0.4-findings.md)
 - [ADR-001: System architecture](docs/architecture/adr-001-architecture.md)
 
 ## Repository layout
@@ -45,5 +46,5 @@ python3 tools/build_content.py      # compile content/*.yaml to content/dist/con
 python3 tools/render_tables.py      # regenerate rulebook tables from content/
 python3 tools/print_sheets.py       # regenerate unit cards and quick reference (needs reportlab)
 dotnet run --project app/tests/Imperator.Core.Tests                                   # tests
-dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.3-results.md   # simulator report
+dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.4-results.md   # simulator report
 ```

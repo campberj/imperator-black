@@ -2,7 +2,7 @@
 
 Handoff for Claude Code (or anyone) working on the application. Read this, then [`../CLAUDE.md`](../CLAUDE.md), then [ADR-001](../docs/architecture/adr-001-architecture.md).
 
-Last updated: 2026-10-20, during roadmap Phase 2.
+Last updated: 2026-10-20, rules v0.4 (granular profiles).
 
 ## How the work is split
 
@@ -15,9 +15,9 @@ Last updated: 2026-10-20, during roadmap Phase 2.
 | Path | What it is | State |
 |---|---|---|
 | `app/Imperator.slnx` | Solution (.NET 10, new `.slnx` format) | Builds clean, 0 warnings |
-| `app/src/Imperator.Core` | Game logic: dice and seeded `Rng`, content loading (`ContentSet`), wound table, shooting (exact odds and sampled), close combat, grenades, `Soldier` state | Covers rules v0.3 chapters 4–7 math. No movement, board, or mission logic yet |
+| `app/src/Imperator.Core` | Game logic: dice and seeded `Rng`, content loading (`ContentSet`), wound table, shooting (exact odds and sampled), close combat, grenades, `Soldier` state | Covers rules v0.4 chapters 4–7 math with attribute-based `Soldier` (`FromTroop` builds one from a troop profile; `Generic` makes abstract test soldiers). No movement, board, or mission logic yet |
 | `app/src/Imperator.Sim` | Combat simulator: shot odds, duels, frag, open-ground firefights, room clearing, `--compare` for content variants | Working. Output in `docs/analysis/` |
-| `app/tests/Imperator.Core.Tests` | **Console** test runner (no packages), 51 checks; exits non-zero on failure | Passing |
+| `app/tests/Imperator.Core.Tests` | **Console** test runner (no packages), 64 checks; exits non-zero on failure | Passing |
 | `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
 | `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests | Green |
 
@@ -29,16 +29,16 @@ These are foundations that don't depend on unfinished rules. Each should leave C
 
 ### 1. Move tests to xUnit
 
-- Replace the console runner with an xUnit project at the same path; port all 51 checks.
+- Replace the console runner with an xUnit project at the same path; port all 64 checks.
 - Keep the statistical checks (exact vs sampled odds, Down recovery rate) with their tolerances and fixed seeds.
 - Update CI to `dotnet test app/Imperator.slnx`.
 - **Done when:** `dotnet test` passes with the same coverage, and CI runs it.
 
-### 2. Content loading for Phase 2 data
+### 2. Finish content loading
 
-Phase 2 force data has landed in `content/`: `gear`, `troops`, `factions` (factions, elements, threat tiers), `rosters` (teams, starting forces) and `behaviors`. The schema is in [content/README.md](../content/README.md); `tools/validate_content.py` is the reference for which ids must resolve. Extend `ContentSet` to load these into typed records and fail loudly on unknown ids. Note: `troops[].melee` can be `null` (Automated models), and `Soldier` currently requires a melee weapon.
+`ContentSet` already loads `core`, `weapons`, `armour`, `gear`, `skills` and `troops` (`TroopDef`, `TroopStats`), and `Soldier.FromTroop` builds a model from a profile. Still to do: load `factions` (factions, elements, threat tiers), `rosters` (teams, starting forces), `behaviors` and `keywords` into typed records, and validate every referenced id at load time (mirror `tools/validate_content.py`).
 
-- **Done when:** a test loads every roster and element, and resolves every referenced id.
+- **Done when:** a test loads every element and team and resolves every id; loading fails loudly on a bad id.
 
 ### 3. API skeleton
 

@@ -1,6 +1,6 @@
-# Enemy behavior profiles, rules v0.3.
+# Enemy behavior profiles, rules v0.4.
 # Only ids and one-line intent for now; Phase 3 writes the decision tables.
-version: 0.3.0
+version: 0.4.0
 
 behaviors:
   - { id: cowed,      name: Cowed,      summary: "Holds its compartment, falls back under Suppression, may surrender." }

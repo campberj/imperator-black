@@ -22,7 +22,7 @@ python3 tools/render_tables.py        # after any content/*.yaml edit
 python3 tools/print_sheets.py         # after content changes that affect cards (needs reportlab)
 dotnet build app/Imperator.slnx
 dotnet run --project app/tests/Imperator.Core.Tests                     # must print "All N checks passed."
-dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.3-results.md
+dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.4-results.md
 dotnet run -c Release --project app/src/Imperator.Sim -- --compare Label=a.json Label2=b.json   # compare content variants
 ```
 

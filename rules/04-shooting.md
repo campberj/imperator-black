@@ -4,7 +4,7 @@
 
 1. **Choose a target** the shooter can see. A model cannot shoot at a model in close combat.
 2. **Throw together** the 2d6 hit dice and the weapon's damage dice. If the shot misses, ignore the damage dice.
-3. **Hit roll:** 2d6 + Q + modifiers must reach **8**.
+3. **Hit roll:** 2d6 + **Shoot** + modifiers must reach **8**.
    - A natural 2 always misses.
    - A natural double 6 is a **critical hit**: add 1 row to the wound result.
 4. **Wound:** add the damage dice and find the row on the wound table. If the hit was critical, add 1 row. Then step the row down by the target's Armour, less the weapon's AP (the step can't go below 0). A final row above 10 counts as 10; at row 0 or below there is no effect.
@@ -16,7 +16,7 @@
 | Target in Light cover | -1 |
 | Target in Heavy cover | -2 |
 | Each Suppression on shooter | -1 |
-| Shooter Wounded | -1 |
+| Shooter has any Wounded markers | -1 |
 | Moved earlier this activation (not Handy) | -1 |
 | Reaction or Overwatch shot | -1 |
 | Unbraced in zero-g (not Void-trained) | -1 |
@@ -60,7 +60,7 @@ Weapons have **no maximum range**. Each has a **short range**: beyond it the sho
 
 A target has **Light cover** if at least a third of its body is hidden behind an obstacle within 1" of it, or if another model is between it and the shooter. It has **Heavy cover** if at least half its body is hidden behind solid material such as a bulkhead, column or heavy machinery.
 
-**Find Cover:** a model in the open within 1" of micro-terrain (debris, a fallen crate, a body) may take the Find Cover action: test 2d6 + Q, minus Suppression. On 7+ it gains Light cover, on 10+ Heavy cover, until it moves.
+**Find Cover:** a model in the open within 1" of micro-terrain (debris, a fallen crate, a body) may take the Find Cover action: test 2d6 + Nerve. On 7+ it gains Light cover, on 10+ Heavy cover, until it moves.
 
 ## Aim
 
@@ -78,8 +78,8 @@ Aim gives +1 to the next Shoot in the same activation.
 | 1 | 2–3 | Shaken: +1 Suppression |
 | 2 | 4–4 | Rattled: +2 Suppression |
 | 3 | 5–5 | Grazed: +1 Suppression |
-| 4 | 6–7 | Wounded: -1 to all rolls. Already Wounded: Down |
-| 5 | 8–9 | Wounded and +1 Suppression. Already Wounded: Down |
+| 4 | 6–7 | Wounded: add a Wounded marker. More markers than Wounds: Down |
+| 5 | 8–9 | Wounded and +1 Suppression. More markers than Wounds: Down |
 | 6 | 10–11 | Down: may recover (end-of-round test 8+, or Medic) |
 | 7 | 12–13 | Down and bleeding: dies at end of third round unless Medic 8+ |
 | 8 | 14–15 | Critical: dies at end of next round unless Medic 10+ |

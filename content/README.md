@@ -15,11 +15,12 @@ CI fails if `dist/content.json` or the rulebook tables are stale, or if validati
 
 | File | Top-level keys | What it holds |
 |---|---|---|
-| `core.yaml` | `hit_target`, `quality`, `hit_modifiers`, `wound_table`, `suppression`, `movement`, … | Core resolution numbers |
+| `core.yaml` | `hit_target`, `ranks`, `attributes`, `hit_modifiers`, `wound_table`, `suppression`, `movement`, … | Core resolution numbers, ranks and attribute definitions |
 | `weapons.yaml` | `ranged`, `melee`, `thrown`, `demolitions` | Weapon profiles: damage dice, short range, AP, keywords |
 | `armour.yaml` | `armour` | Armour types: value and keywords |
-| `keywords.yaml` | `weapon`, `armour`, `model` | Keyword names and rules text |
-| `gear.yaml` | `gear` | Equipment: rules text, keywords granted, status (`settled` or `proposed`) |
+| `keywords.yaml` | `weapon`, `armour` | Weapon and armour keyword names and rules text |
+| `skills.yaml` | `skills` | Model skills, with per-level rules text and status |
+| `gear.yaml` | `gear` | Equipment: rules text, skills granted, status (`settled` or `proposed`) |
 | `troops.yaml` | `troops` | Troop types: one profile per kind of soldier, for every faction |
 | `factions.yaml` | `factions`, `elements`, `threat_tiers` | Factions; enemy elements (troop compositions, tier, behavior); threat tiers |
 | `rosters.yaml` | `teams`, `starting_forces` | Player tables of organisation and the PoC starting force |
@@ -31,18 +32,18 @@ CI fails if `dist/content.json` or the rulebook tables are stale, or if validati
 |---|---|---|
 | `id`, `name`, `role` | yes | Identity. `role` is descriptive (Leader, Gunner, …). |
 | `faction` | yes | Id from `factions.yaml`. |
-| `q` | yes | Quality 0–3. |
+| `rank` | yes | `green`, `regular`, `veteran` or `elite`. A label; never used in rolls. |
+| `stats` | yes | `move`, `shoot`, `fight`, `physique`, `nerve`, `tech`, `wounds`, `size`. Rolled attributes usually 0–3 (−1 to 4 allowed); `null` only on Automated models. |
 | `armour`, `armour_options` | yes / no | Armour id, and alternatives. |
 | `weapon`, `weapon_options` | yes / no | Ranged weapon id, and alternatives. |
 | `melee` | yes | Melee weapon id, or `null` (Automated models only). |
 | `grenades` | yes | Up to two thrown ids. |
 | `gear`, `gear_options` | yes / no | Gear ids carried, and per-model choices. |
-| `keywords` | yes | Model keyword ids. |
-| `move` | no | Overrides the default (6", or 5" in Heavy armour). `0` cannot move. |
+| `skills` | yes | Map of skill id to level, e.g. `{ leader: 1, marksman: 2 }`. |
 | `miniatures` | no | Suggested models from the collection. |
 
 ## Conventions
 
 - Ids are `snake_case` and never change once used; rename the `name`, not the `id`.
 - Rules text in YAML uses straight quotes and `\"` for inches.
-- New rules introduced through content (gear effects, keywords) start as `status: proposed` (gear) and are logged as **Proposed** in `docs/design/decisions.md` until playtested.
+- New rules introduced through content (gear effects, skills) start as `status: proposed` and are logged as **Proposed** in `docs/design/decisions.md` until playtested.

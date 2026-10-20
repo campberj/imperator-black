@@ -54,8 +54,10 @@ ARMOUR = by_id(C["armour"]["armour"])
 GEAR = by_id(C["gear"]["gear"])
 FACTIONS = by_id(C["factions"]["factions"])
 BEHAVIORS = by_id(C["behaviors"]["behaviors"])
-KEYWORDS = {k["id"]: k for group in ("weapon", "armour", "model") for k in C["keywords"][group]}
-QUALITY = {q["value"]: q["name"] for q in C["core"]["quality"]}
+KEYWORDS = {k["id"]: k for group in ("weapon", "armour") for k in C["keywords"][group]}
+SKILLS = by_id(C["skills"]["skills"])
+RANKS = {r["id"]: r["name"] for r in C["core"]["ranks"]}
+ATTRS = C["core"]["attributes"]
 
 
 def style(size, font="Body", leading=None, colour=INK, align=None, space_after=0):
@@ -72,7 +74,7 @@ S_HEAD = style(7.6, "Body-Bold", space_after=1)
 S_CELL = style(7.2)
 S_CELL_B = style(7.2, "Body-Bold")
 S_STAT_LABEL = style(5.8, "Body-Bold", colour=MUTED, align=TA_CENTER)
-S_STAT = style(13, "Body-Bold", leading=14, align=TA_CENTER)
+S_STAT = style(11.5, "Body-Bold", leading=13, align=TA_CENTER)
 S_STAT_SUB = style(6.2, colour=MUTED, align=TA_CENTER)
 
 
@@ -92,10 +94,13 @@ def elements_for(troop_id):
     return out
 
 
-def move_text(t):
-    if "move" in t:
-        return f'{t["move"]}"' if t["move"] else "—"
-    return '5"' if "heavy" in ARMOUR[t["armour"]]["keywords"] else '6"'
+def stat_text(t, attr):
+    v = t["stats"][attr]
+    if v is None:
+        return "—"
+    if attr == "move":
+        return f'{v}"' if v else "—"
+    return str(v)
 
 
 def weapon_rows(t):
@@ -122,17 +127,17 @@ def card_flowables(t):
     fac = FACTIONS[t["faction"]]
     flow = []
 
-    stats = Table([[Paragraph("QUALITY", S_STAT_LABEL), Paragraph("ARMOUR", S_STAT_LABEL), Paragraph("MOVE", S_STAT_LABEL)],
-                   [Paragraph(str(t["q"]), S_STAT), Paragraph(str(ARMOUR[t["armour"]]["value"]), S_STAT), Paragraph(move_text(t), S_STAT)],
-                   [Paragraph(QUALITY[t["q"]], S_STAT_SUB),
-                    Paragraph(ARMOUR[t["armour"]]["name"] + ("".join(f" / {ARMOUR[a]['name']} ({ARMOUR[a]['value']})" for a in t.get("armour_options", []))), S_STAT_SUB),
-                    Paragraph("", S_STAT_SUB)]],
-                  colWidths=[(CARD_W - 0.36 * inch) / 3] * 3)
+    cols = [(a["short"], stat_text(t, a["id"])) for a in ATTRS] + [("ARM", str(ARMOUR[t["armour"]]["value"]))]
+    stats = Table([[Paragraph(c[0], S_STAT_LABEL) for c in cols], [Paragraph(c[1], S_STAT) for c in cols]],
+                  colWidths=[(CARD_W - 0.28 * inch) / len(cols)] * len(cols))
     stats.setStyle(TableStyle([
-        ("BOX", (0, 0), (0, -1), 0.6, RULE), ("BOX", (1, 0), (1, -1), 0.6, RULE), ("BOX", (2, 0), (2, -1), 0.6, RULE),
-        ("TOPPADDING", (0, 0), (-1, -1), 1), ("BOTTOMPADDING", (0, 0), (-1, -1), 1),
+        ("BOX", (0, 0), (-1, -1), 0.6, RULE), ("INNERGRID", (0, 0), (-1, -1), 0.4, RULE),
+        ("BACKGROUND", (-1, 0), (-1, -1), colors.HexColor("#eef1f4")),
+        ("TOPPADDING", (0, 0), (-1, -1), 1), ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
     ]))
-    flow += [stats, Spacer(1, 5)]
+    arm_text = ARMOUR[t["armour"]]["name"] + "".join(f" or {ARMOUR[a]['name']} ({ARMOUR[a]['value']})" for a in t.get("armour_options", []))
+    flow += [stats, Paragraph(f"Armour: {arm_text}", S_SMALL), Spacer(1, 3)]
 
     wt = Table(weapon_rows(t), colWidths=[1.95 * inch, 0.42 * inch, 0.42 * inch, 0.35 * inch])
     ts = [("FONT", (0, 0), (-1, 0), "Body-Bold", 6.4), ("TEXTCOLOR", (0, 0), (-1, 0), MUTED),
@@ -160,11 +165,14 @@ def card_flowables(t):
             flow.append(Paragraph("<b>Choose one:</b> " + " / ".join(GEAR[g]["name"] for g in t["gear_options"]) + " □ □ □", S_BODY))
         flow.append(Spacer(1, 2))
 
-    kws = list(t["keywords"])  # keywords granted by gear are already explained in the gear text
-    if kws:
-        flow.append(Paragraph("Keywords", S_HEAD))
-        for k in kws:
-            flow.append(Paragraph(f"<b>{KEYWORDS[k]['name']}</b>: {KEYWORDS[k]['text']}", S_BODY))
+    # Skills granted by gear are already explained in the gear text.
+    if t["skills"]:
+        flow.append(Paragraph("Skills", S_HEAD))
+        for sid, lvl in t["skills"].items():
+            sk = SKILLS[sid]
+            name = sk["name"] + (f" {lvl}" if len(sk["levels"]) > 1 else "")
+            tag = " <font color='#8a5a12'>[proposed]</font>" if sk["status"] == "proposed" else ""
+            flow.append(Paragraph(f"<b>{name}</b>{tag}: " + " ".join(sk["levels"][:lvl]), S_BODY))
         flow.append(Spacer(1, 2))
 
     if fac["side"] == "enemy":
@@ -188,7 +196,7 @@ def draw_card(c, x, y, t):
     c.setFont("Body-Bold", 12)
     c.drawString(x + 0.14 * inch, y + CARD_H - 0.27 * inch, t["name"])
     c.setFont("Body", 7)
-    c.drawString(x + 0.14 * inch, y + CARD_H - 0.43 * inch, f"{t['role']}  ·  {fac['name']}")
+    c.drawString(x + 0.14 * inch, y + CARD_H - 0.43 * inch, f"{RANKS[t['rank']]} {t['role']}  ·  {fac['name']}")
 
     footer = 0.32 * inch
     c.setFillColor(MUTED)
@@ -276,18 +284,21 @@ def quick_reference():
 
     # Page 1 -----------------------------------------------------------
     left = [Paragraph("The round", Q_H)] + bullets([
-        "<b>Initiative:</b> each side 2d6 + its highest-Q Leader's Q. Winner chooses who activates first. Reroll ties.",
+        "<b>Initiative:</b> each side 2d6 + the Nerve of its Leader with the highest Nerve. Winner chooses who activates first. Reroll ties.",
         "<b>Activations:</b> alternate one model at a time; two actions each. When one side runs out, the other finishes.",
         "<b>End of round:</b> (1) Bleeding/Critical clocks; (2) Down models test 8+ to recover; (3) unhit models in cover lose 1 Suppression; (4) hazards; (5) mission effects; (6) clear Activated (Overwatch stays).",
-    ]) + [Spacer(1, 4), Paragraph("Actions", Q_H), qtable([
+    ]) + [Spacer(1, 4), Paragraph("Attributes", Q_H),
+          qtable([["Attr.", "Used for"]] + [[a["short"], a["text"]] for a in ATTRS], [0.5 * inch, half - 0.5 * inch]),
+          Paragraph("A test is 2d6 + the named attribute, −1 per Suppression, −1 if Wounded; 8+ unless stated. Rank is a label only.", Q_SMALL),
+          Spacer(1, 4), Paragraph("Actions", Q_H), qtable([
         ["Action", "Effect"],
         ["Move", "Up to Move. Obstacle +2\". Contact with an enemy starts close combat."],
         ["Shoot", "Hit roll vs a visible target."],
         ["Aim", "+1 to the next Shoot this activation."],
         ["Suppressive Fire", "Auto only. Hit: +1 Suppression (+2 if beating 8 by 3+). No damage."],
-        ["Throw", "Grenade; test 8+ to land on the point. Handy."],
+        ["Throw", "Grenade; 2d6 + Physique, 8+ to land on the point. Handy."],
         ["Overwatch", "Last action. Up to two reactions before this model next activates."],
-        ["Find Cover", "In the open within 1\" of micro-terrain: test, 7+ Light, 10+ Heavy."],
+        ["Find Cover", "In the open within 1\" of micro-terrain: 2d6 + Nerve, 7+ Light, 10+ Heavy."],
         ["Rally", "Remove 1 Suppression from self or a friend within 6\" (2 with a Leader)."],
         ["Medic", "Treat a Down/Bleeding/Critical friend in contact."],
         ["Interact", "Objective, door, console or charge within 1\"."],
@@ -298,7 +309,7 @@ def quick_reference():
         "No reactions to reactions. Pinned: Find Cover only. 2+ Suppression removes Overwatch. Cumbersome can't react.",
     ])
     right = [Paragraph("Shooting", Q_H)] + bullets([
-        f"Throw 2d6 hit dice <b>with</b> the damage dice. Hit: 2d6 + Q + modifiers ≥ <b>{core['hit_target']}</b>. Natural 2 misses; double 6 is a critical (+1 row).",
+        f"Throw 2d6 hit dice <b>with</b> the damage dice. Hit: 2d6 + <b>Shoot</b> + modifiers ≥ <b>{core['hit_target']}</b>. Natural 2 misses; double 6 is a critical (+1 row).",
         "Damage total → wound row, +1 if critical, then step down by Armour − AP. Row ≤ 0: no effect.",
         "Range: beyond short −1, beyond double −2 (shotgun −2/−3). No maximum range.",
         "Cover: Light ≥⅓ hidden or a model in the way; Heavy ≥½ hidden behind solid material.",
@@ -327,7 +338,7 @@ def quick_reference():
     left2 = [Paragraph("Weapons", Q_H), weapons, Spacer(1, 4), melee, Spacer(1, 4), armour, Spacer(1, 5),
              Paragraph("Close combat", Q_H)] + bullets([
         "Starts when a model Moves into contact (a Move: it can trigger reactions). Resolves at once, in exchanges.",
-        "Each exchange: both roll 2d6 + Q. Charge +1 (first exchange); +1 per friend also touching the enemy (max +2); −1 per Suppression; −1 Wounded.",
+        "Each exchange: both roll 2d6 + <b>Fight</b>. Charge +1 (first exchange); +1 per friend also touching the enemy (max +2); −1 per Suppression; −1 if Wounded.",
         "Higher wins and rolls its melee damage on the wound table. Tie: both +1 Suppression. No effect: loser still +1 Suppression.",
         "A model at 5 Suppression that loses is overpowered: Down, or captured if allowed.",
         "After each exchange the loser, then the winner, declares Continue or Break. It ends only when both break (each moves 1\" apart).",
@@ -337,20 +348,20 @@ def quick_reference():
                        for g in C["weapons"]["thrown"]],
                       [0.85 * inch, 0.52 * inch, 0.58 * inch, half - 1.95 * inch])
     right2 = [Paragraph("Grenades and breaching", Q_H)] + bullets([
-        "Throw up to double range: 2d6 + Q − Suppression (−1 beyond range) ≥ 8 lands on target. Miss: lands short by the miss (min 1\"). Natural 2: lands 2\" in front of the thrower. Zero-g: bounces past instead.",
+        "Throw up to double range: test 2d6 + <b>Physique</b> (−1 beyond range), 8+ lands on target. Miss: lands short by the miss (min 1\"). Natural 2: lands 2\" in front of the thrower. Zero-g: bounces past instead.",
         "Frag: one damage roll for all; step down per model's Armour; Heavy cover −1 row; same compartment ≤ 6\"×6\": +1 row.",
         "Breaching charge: place (Interact), detonate later (action). Door destroyed; within 1\": 2d6; far side within 2\": +2 Suppression, no reactions this round.",
         "Locked door: charge; breaching tool (Interact, test 8+); Tech hack (Interact, test 9+, quiet).",
     ]) + [Spacer(1, 3), grenades, Spacer(1, 5), Paragraph("Suppression, morale, casualties", Q_H)] + bullets([
         "Suppression: −1 to all rolls each (max 5). <b>Pinned at 3+</b>: only Rally, Find Cover, Move to cover/out of sight, Shoot from cover.",
         "Casualty shock: friend within 6\" goes Down or Dead: +1 Suppression (+2 if the Leader).",
-        "Breaking: half a fireteam out → each tests 2d6 + Q − Suppression (+1 Leader within 6\") at activation; fail = both actions moving away.",
-        "Down: tests 8+ (2d6 + Q) at end of round to rise Wounded with 3 Suppression. Medic action: Down 8+ (auto with Medic), Bleeding 8+ (becomes Down), Critical 10+ (stabilised).",
+        "Breaking: half a fireteam out → each tests 2d6 + <b>Nerve</b> (+1 Leader within 6\") at activation; fail = both actions moving away.",
+        "Wounded markers from rows 4–5; any marker −1 to all rolls; more markers than Wounds → Down. Down: end of round 2d6 + <b>Physique</b> 8+ to rise (3 Suppression, markers = Wounds). Medic action, 2d6 + <b>Tech</b>: Down 8+ (auto with Medic), Bleeding 8+ (becomes Down), Critical 10+ (stabilised).",
     ]) + [Spacer(1, 5), Paragraph("Ship hazards", Q_H)] + bullets([
         "<b>Zero-g:</b> push off in a straight line; end on a surface or keep drifting. Unbraced −1 to shoot, throw and fight (not Void-trained).",
-        "<b>Decompression:</b> each model tests 8+ (+2 Sealed) or is dragged d6\" to the breach; doors seal at end of round; vacuum follows.",
+        "<b>Decompression:</b> each model tests 2d6 + Physique, 8+ (+2 Sealed), or is dragged d6\" to the breach; doors seal at end of round; vacuum follows.",
         "<b>Vacuum:</b> unsealed models ending an activation there go Critical. Shooting is silent. No fire or smoke.",
-        "<b>Fire:</b> 2d6 damage on entering or ending there (Sealed +1 armour); spreads on 10+, out on 2–3; extinguish 8+.",
+        "<b>Fire:</b> 2d6 damage on entering or ending there (Sealed +1 armour); spreads on 10+, out on 2–3; extinguish 2d6 + Tech, 8+.",
         "<b>Darkness:</b> seen only within 12\"; −2 beyond 6\" unless Low-light; a model that shot this round is seen at −1.",
     ])
     story += [Paragraph("Imperator Black — Quick Reference (2)", Q_TITLE), Spacer(1, 6), two_col(left2, right2)]

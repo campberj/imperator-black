@@ -38,6 +38,7 @@ CloseCombatTable();
 FragTable();
 FirefightTable();
 RoomClearTable();
+RealProfiles();
 Experiments();
 
 if (outPath is null) Console.Write(md.ToString());
@@ -55,12 +56,8 @@ int ArgInt(string name, int def)
 static string P(double p) => p < 0.0005 ? "—" : $"{p * 100:0}%";
 
 Soldier Make(string name, int q, string armour, string weapon, string melee = "knife",
-    bool leader = false, bool medic = false, bool voidTrained = false) => new()
-{
-    Name = name, Q = q, Armour = content.ArmourById(armour).Value,
-    Weapon = content.Ranged(weapon), Melee = content.Melee(melee),
-    IsLeader = leader, IsMedic = medic, VoidTrained = voidTrained,
-};
+    bool leader = false, bool medic = false, bool voidTrained = false) =>
+    Soldier.Generic(name, q, content.ArmourById(armour).Value, content.Ranged(weapon), content.Melee(melee), leader, medic, voidTrained);
 
 void ShotTables()
 {
@@ -151,7 +148,7 @@ void FragTable()
         int sup = 0, wnd = 0, outC = 0;
         for (int i = 0; i < n; i++)
         {
-            var s = new Soldier { Name = "t", Q = 1, Armour = armour, Weapon = content.Ranged("carbine"), Melee = content.Melee("knife"), Cover = cover };
+            var s = Soldier.Generic("t", 1, armour, content.Ranged("carbine"), content.Melee("knife")); s.Cover = cover;
             Grenades.Frag(rng, core, frag, new[] { s }, confined);
             if (!s.IsActive) outC++; else if (s.Wounded) wnd++; else sup++;
         }
@@ -334,6 +331,95 @@ void Experiments()
             else bb++;
         }
         md.AppendLine($"| {(margin == 0 ? "none" : margin + "+")} | {c.L} | {P(aw / (double)n)} | {P(dw / (double)n)} | {P(bb / (double)n)} | {ex / (double)n:0.0} | {P(dead / (double)Math.Max(1, aw + dw))} |");
+    }
+    md.AppendLine();
+}
+
+void RealProfiles()
+{
+    md.AppendLine("## 8. Real troop profiles (rules v0.4)");
+    md.AppendLine();
+    md.AppendLine("Uses the troop profiles in `content/troops.yaml`. The attackers are the VAT fireteam from the Boarding element (leader, two assaulters with carbines, compact-LMG gunner, data specialist). Defenders sit in Light cover in a 6\"×6\" compartment, on Overwatch. Up to 3 rounds.");
+    md.AppendLine();
+    md.AppendLine("| Defenders | Entry | Cleared R1 | Cleared by R3 | Repulsed | VAT out (avg) | VAT dead (avg) | Defenders out (avg) |");
+    md.AppendLine("|---|---|---|---|---|---|---|---|");
+    var rng = new Rng(seed + 6);
+    List<Soldier> Vat() => new()
+    {
+        Soldier.FromTroop(content, "tfb_vat_assaulter", name: "A1"), Soldier.FromTroop(content, "tfb_vat_assaulter", name: "A2"),
+        Soldier.FromTroop(content, "tfb_vat_leader"), Soldier.FromTroop(content, "tfb_vat_gunner"), Soldier.FromTroop(content, "tfb_data_specialist"),
+    };
+    var defenders = new (string Label, Func<List<Soldier>> Make)[]
+    {
+        ("Asset security (tier 1)", () => new() { Soldier.FromTroop(content, "fs_security"), Soldier.FromTroop(content, "fs_security", "shotgun"), Soldier.FromTroop(content, "fs_security_gunner") }),
+        ("Asset security + recovery captain", () => new() { Soldier.FromTroop(content, "fs_security"), Soldier.FromTroop(content, "fs_security", "shotgun"), Soldier.FromTroop(content, "fs_security_gunner"), Soldier.FromTroop(content, "fs_recovery_captain") }),
+        ("Repossession team (tier 3, Wounds 2)", () => new() { Soldier.FromTroop(content, "fs_repo_breacher"), Soldier.FromTroop(content, "fs_repo_breacher"), Soldier.FromTroop(content, "fs_repo_breacher") }),
+        ("Contract boarding team (tier 3)", () => new() { Soldier.FromTroop(content, "ct_borz_boarder"), Soldier.FromTroop(content, "ct_borz_boarder"), Soldier.FromTroop(content, "ct_borz_boarder", "shotgun"), Soldier.FromTroop(content, "ct_borz_heavy") }),
+    };
+    foreach (var (label, makeDef) in defenders)
+    foreach (var method in new[] { EntryMethod.Dynamic, EntryMethod.FlashFirst, EntryMethod.FragFirst, EntryMethod.BreachAndFlash })
+    {
+        int r1 = 0, cleared = 0, repulsed = 0; double attOut = 0, attDead = 0, defOut = 0;
+        for (int i = 0; i < n; i++)
+        {
+            var att = Vat(); var def = makeDef();
+            var sim = new RoomClear(rng, content, att, def, method, true);
+            var o = sim.Run();
+            if (o == RoomOutcome.Cleared) { cleared++; if (sim.RoundCleared == 1) r1++; }
+            if (o == RoomOutcome.Repulsed) repulsed++;
+            attOut += att.Count(s => !s.IsActive);
+            attDead += att.Count(s => s.Status == Status.Dead);
+            defOut += def.Count(s => !s.IsActive);
+        }
+        md.AppendLine($"| {label} | {method} | {P(r1 / (double)n)} | {P(cleared / (double)n)} | {P(repulsed / (double)n)} | {attOut / n:0.00} | {attDead / n:0.00} | {defOut / n:0.00} |");
+    }
+    md.AppendLine();
+
+    md.AppendLine("Same VAT fireteam against defenders who are **not** on Overwatch (unready: surprised, or the alert is still low):");
+    md.AppendLine();
+    md.AppendLine("| Defenders (unready) | Entry | Cleared R1 | Cleared by R3 | Repulsed | VAT out (avg) | VAT dead (avg) | Defenders out (avg) |");
+    md.AppendLine("|---|---|---|---|---|---|---|---|");
+    foreach (var (label, makeDef) in defenders)
+    foreach (var method in new[] { EntryMethod.Dynamic, EntryMethod.FlashFirst })
+    {
+        int r1 = 0, cleared = 0, repulsed = 0; double attOut = 0, attDead = 0, defOut = 0;
+        for (int i = 0; i < n; i++)
+        {
+            var att = Vat(); var def = makeDef();
+            var sim = new RoomClear(rng, content, att, def, method, false);
+            var o = sim.Run();
+            if (o == RoomOutcome.Cleared) { cleared++; if (sim.RoundCleared == 1) r1++; }
+            if (o == RoomOutcome.Repulsed) repulsed++;
+            attOut += att.Count(s => !s.IsActive);
+            attDead += att.Count(s => s.Status == Status.Dead);
+            defOut += def.Count(s => !s.IsActive);
+        }
+        md.AppendLine($"| {label} | {method} | {P(r1 / (double)n)} | {P(cleared / (double)n)} | {P(repulsed / (double)n)} | {attOut / n:0.00} | {attDead / n:0.00} | {defOut / n:0.00} |");
+    }
+    md.AppendLine();
+
+    md.AppendLine("### Close combat with real profiles");
+    md.AppendLine();
+    md.AppendLine("| Attacker (charging) | Defender | Attacker wins | Defender wins | Both broke | Avg exchanges |");
+    md.AppendLine("|---|---|---|---|---|---|");
+    var duels = new (string A, string D)[]
+    {
+        ("tfb_vat_assaulter", "fs_salvage_hand"), ("tfb_vat_assaulter", "fs_security"), ("tfb_vat_assaulter", "fs_repo_breacher"),
+        ("fs_repo_breacher", "tfb_vat_assaulter"), ("ct_borz_boarder", "tfb_vat_assaulter"), ("md_operator", "tfb_vat_leader"),
+        ("tfb_marksman", "fs_enforcer"),
+    };
+    var crng = new Rng(seed + 7);
+    foreach (var (a, d) in duels)
+    {
+        int aw = 0, dw = 0, bb = 0, ex = 0;
+        for (int i = 0; i < n; i++)
+        {
+            var sa = Soldier.FromTroop(content, a); var sd = Soldier.FromTroop(content, d);
+            var r = CloseCombat.Fight(crng, core, sa, sd, true);
+            ex += r.Exchanges;
+            if (r.End == CombatEnd.AttackerWon) aw++; else if (r.End == CombatEnd.DefenderWon) dw++; else bb++;
+        }
+        md.AppendLine($"| {content.Troop(a).Name} | {content.Troop(d).Name} | {P(aw / (double)n)} | {P(dw / (double)n)} | {P(bb / (double)n)} | {ex / (double)n:0.0} |");
     }
     md.AppendLine();
 }

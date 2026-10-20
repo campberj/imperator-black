@@ -1,0 +1,43 @@
+# Model skills for Imperator Black, rules v0.4.
+# Skills can have levels. levels[0] is level 1; a higher level includes everything below it.
+# Written on profiles as "Name" (one level) or "Name 2".
+# status: settled (approved) or proposed (new rule awaiting approval).
+version: 0.4.0
+
+skills:
+  - id: leader
+    name: Leader
+    status: settled
+    levels:
+      - "A Rally made by a Leader, or on a model within 6\" and in line of sight of a Leader, removes 2 Suppression instead of 1. At initiative, each side adds the Nerve of its Leader with the highest Nerve."
+
+  - id: void_trained
+    name: Void-trained
+    status: settled
+    levels:
+      - "Ignores the unbraced zero-g penalty; may push off and stop at any surface."
+
+  - id: low_light
+    name: Low-light
+    status: settled
+    levels:
+      - "Ignores the darkness penalty."
+
+  - id: medic
+    name: Medic
+    status: settled
+    levels:
+      - "+2 to Medic actions; automatically gets a Down model back up."
+
+  - id: automated
+    name: Automated
+    status: settled
+    levels:
+      - "Never gains Suppression, never tests for breaking, and is not affected by casualty shock or Rally. A wound row of 6 or more destroys it. Attributes shown as a dash are never used."
+
+  - id: marksman
+    name: Marksman
+    status: proposed
+    levels:
+      - "Aim gives +2 instead of +1."
+      - "An Aimed shot also ignores the Light cover penalty."

@@ -2,7 +2,7 @@
 
 ## The round
 
-1. **Initiative.** Each side rolls 2d6 and adds the Q of its highest-Q Leader. The winner chooses who activates first. Reroll ties.
+1. **Initiative.** Each side rolls 2d6 and adds the Nerve of its *Leader* with the highest Nerve. The winner chooses who activates first. Reroll ties.
 2. **Activations.** Sides alternate, activating one model at a time. Mark each model Activated when it finishes. When one side has no models left to activate, the other side activates its remaining models in turn.
 3. **End of round.** Resolve in this order:
    1. Bleeding and Critical models that have run out of time die (chapter 7).
@@ -18,13 +18,13 @@ An activating model takes **two actions**, in any order. It may repeat an action
 
 | Action | Effect | Chapter |
 |---|---|---|
-| **Move** | Up to Move inches. Moving into base contact with an enemy starts close combat. | 3, 5 |
+| **Move** | Up to the model's Move in inches. Moving into base contact with an enemy starts close combat. | 3, 5 |
 | **Shoot** | Fire a ranged weapon at a visible target. | 4 |
 | **Aim** | +1 to the next Shoot this activation. | 4 |
 | **Suppressive Fire** | *Auto* weapons only. Pin a target without damage. | 4 |
 | **Throw** | Throw a grenade. | 6 |
 | **Overwatch** | Must be the last action. Place an Overwatch marker (see Reactions). | 2 |
-| **Find Cover** | Use micro-terrain in the open: test, 7+ Light cover, 10+ Heavy cover, until the model moves. | 4 |
+| **Find Cover** | Use micro-terrain in the open: test 2d6 + Nerve, 7+ Light cover, 10+ Heavy cover, until the model moves. | 4 |
 | **Rally** | Remove 1 Suppression from this model or a friend within 6" in line of sight (2 near a Leader). | 7 |
 | **Medic** | Treat a Down model in base contact. | 7 |
 | **Interact** | Use an objective, door, console or charge within 1". | 3, 6 |

@@ -4,7 +4,7 @@ Living record of design decisions. Each entry is **Settled** (build on it), **Le
 
 Imperator Black continues the earlier *A War of Worlds* design. Its documents are kept in [a-war-of-worlds/](a-war-of-worlds/): the [design statement and roadmap](a-war-of-worlds/design-statement-and-roadmap.md) and [prototype rules v0.1](a-war-of-worlds/prototype-rules-v0.1.md). Entries marked *(AWoW)* come from there. Where this log and those documents disagree, this log wins.
 
-Last updated: 2026-10-20 (Phase 2 review)
+Last updated: 2026-10-20 (rules v0.4 profiles)
 
 ---
 
@@ -37,7 +37,7 @@ Last updated: 2026-10-20 (Phase 2 review)
 |---|----------|--------|
 | 3.1 | **2d6** hit roll, thrown together with the weapon's **damage dice pair** (2d4 → 2d12). Damage counts only on a hit. *(AWoW)* | Settled |
 | 3.2 | Hit target **8+** on 2d6 + Q + modifiers. Natural 2 always misses; natural double 6 is a critical (+1 wound row). *(AWoW prototype)* | Leaning — playtest |
-| 3.3 | **Quality (Q)** 0–3: Green 0, Regular 1, Veteran 2, Elite 3. Added to hit rolls and tests. Simulator: each +1 Q ≈ +20 points of win rate. *(AWoW prototype)* | Leaning — to be replaced by a granular attribute profile (see 3.14) |
+| 3.3 | **Rank** (Green, Regular, Veteran, Elite) is kept as a label only; it never enters a roll. Replaces numeric Quality (v0.4). | Settled |
 | 3.4 | Damage total is read against a **ten-row wound table**; **armour steps the row down by whole rows (0–3), less weapon AP**. *(AWoW)* | Settled |
 | 3.5 | Wound table bands and results per prototype v0.1 (suppression in rows 1–3, Wounded 4–5, Down/bleeding/critical 6–8, Dead 9–10). Rows 1–3 are the first tuning target. *(AWoW prototype)* | Leaning — playtest |
 | 3.6 | **Down recovery:** end of each round, a Down model tests 2d6 + Q at 8+; on a pass it gets up Wounded with 3 Suppression. A *Medic* recovers a Down model automatically. | Leaning — playtest |
@@ -48,7 +48,11 @@ Last updated: 2026-10-20 (Phase 2 review)
 | 3.11 | **Close combat:** started by moving into contact; resolves at once in exchanges of opposed 2d6 + Q (charge +1 first exchange, support +1 each up to +2). The winner rolls melee damage on the wound table; a no-effect result still adds 1 Suppression. Continues until one side is incapacitated or **both** break away. A model at 5 Suppression that loses is overpowered (Down or captured). | Settled |
 | 3.12 | **Grenades and demolitions:** Throw action (test 8+, misses land short, natural 2 slips); frag (one damage roll, +1 row in confined compartments), flashbang (+2 Suppression, strips Overwatch, no reactions this round), smoke; breaching charges (place with Interact, detonate as a later action). | Leaning — playtest |
 | 3.13 | **Lethality retune (rules v0.3):** re-banded wound table (suppression 2–5, Wounded 6–9, Down 10–11, Bleeding 12–13, Critical 14–15, Dead 16+); sidearm 2d6, SMG and carbine 2d8, shotgun 2d12; knife 2d8, breaching tool 2d10 (unarmed 2d4); frag 2d8. Per [sim findings](../analysis/sim-v0.2-findings.md); passes Pillar 1 at 75%. | Settled — playtest |
-| 3.14 | **Granular troop profiles**, in the spirit of Infinity: replace the single Quality value with separate attributes, so a model's training shows in what it is good at, not just how good it is. Attribute set and scale to be agreed. | Open — in discussion |
+| 3.14 | **Granular troop profiles (rules v0.4):** attributes **Move, Shoot, Fight, Physique, Nerve, Tech, Wounds, Size** on the 2d6 engine; each test names its attribute (Shoot: hit rolls; Fight: close combat; Physique: throwing, breaching tool, decompression, Down recovery; Nerve: breaking, Find Cover, Leader initiative; Tech: Medic, hacking, fires). Values usually 0–3, 4 exceptional. | Settled |
+| 3.15 | **Move varies by troop** (usually 5–7"), reflecting training, exoskeletons and burden of gear. | Settled |
+| 3.16 | **Wounds:** wound rows 4–5 add Wounded markers; any marker −1 to all rolls; more markers than Wounds → Down. Rows 6+ unchanged. A model getting up keeps markers equal to its Wounds. | Leaning — playtest |
+| 3.17 | **Size:** 1 small drone, 2 human, 3 large; walkers and vehicles larger. First use: crawlways and small hatches admit Size 2 or less. Stealth, resistances and similar come as special rules, not attributes. | Settled |
+| 3.18 | **Skills with levels** replace model keywords (written *Marksman 2*; higher levels include lower). First levelled skill: *Marksman* 1–2. | Settled; Marksman Proposed |
 
 ## 4. Turn structure, reactions and morale
 
@@ -86,7 +90,7 @@ Last updated: 2026-10-20 (Phase 2 review)
 | 6.4 | Forces built with a campaign **requisition budget**; points optional. *(AWoW)* | Settled |
 | 6.5 | Player forces are built from **teams** (tables of organisation) with fixed role slots and per-model weapon and gear options: VAT fireteam (5), Pathfinder recon team (4), Control team (2). | Proposed |
 | 6.6 | PoC player forces run **3 to 8 models**; the default start is the **Boarding element** (one VAT fireteam plus one attached Pathfinder or Marksman, 6 models). Expect wider ranges as the game develops. | Settled |
-| 6.7 | Task Force Boone quality: leaders and marksmen Q2, everyone else Q1, leaving room to grow through veterancy. VATs wear Void plate (2); Pathfinders and marksmen wear Void suits (1). | Open — superseded by the profile rework (3.14) |
+| 6.7 | Task Force Boone profiles per [troops.yaml](../../content/troops.yaml): VAT and Pathfinder troopers Regular, leaders and marksmen Veteran; VATs Void plate (2), Pathfinders and marksmen Void suits (1); Pathfinders Move 7. | Proposed |
 | 6.8 | New weapons: **heavy rifle** (2d8, AP 1; Pathfinders) and **compact LMG** (2d8, short 18", Handy, Auto, Suppressing; VAT gunner). | Leaning — playtest |
 | 6.9 | Gear list ([gear.yaml](../../content/gear.yaml)): breaching charge, breaching tool, trauma kit (Medic), hacking rig (Tech), low-light optics, extinguisher, silencer (Silenced). Plus **jump pack** and **jammer**. The list will grow; the app will hold full explanations of gear and special rules. | Settled — playtest |
 | 6.10 | **Automated** keyword: no Suppression, breaking, casualty shock or Rally; a wound row of 6+ destroys it. A model with no melee weapon can't start close combat and loses any exchange it's forced into. | Settled |

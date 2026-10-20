@@ -1,21 +1,34 @@
 # Core resolution values for Imperator Black.
 # Single source of truth: the rulebook tables and the app both read this file.
-version: 0.3.0
+version: 0.4.0
 
 dice:
   hit: 2d6
   test: 2d6
 
-hit_target: 8          # 2d6 + Q + modifiers must reach this
+hit_target: 8          # 2d6 + Shoot + modifiers must reach this
 test_target: 8         # default target for tests unless a rule says otherwise
 natural_miss: 2        # a natural 2 always misses / fails
 critical_hit: [6, 6]   # natural double 6: +1 wound row
 
-quality:
-  - { value: 0, name: Green }
-  - { value: 1, name: Regular }
-  - { value: 2, name: Veteran }
-  - { value: 3, name: Elite }
+# Rank is a label for experience and standing. It does not enter any roll;
+# the attributes do. typical: the usual value of a troop's main attributes at that rank.
+ranks:
+  - { id: green,   name: Green,   typical: "0-1", text: "New to the job: crew, conscripts, fresh hires." }
+  - { id: regular, name: Regular, typical: "1",   text: "Trained and steady: most soldiers and professional security." }
+  - { id: veteran, name: Veteran, typical: "2",   text: "Experienced: team leaders, specialists, seasoned contractors." }
+  - { id: elite,   name: Elite,   typical: "3",   text: "The best there is: special operators, intelligence handlers." }
+
+# Model attributes. Tests and attacks roll 2d6 + the attribute named in the rule.
+attributes:
+  - { id: move,     name: Move,     short: MOV, text: "Inches per Move action (usually 5-7). Training, exoskeletons and heavy kit all show here." }
+  - { id: shoot,    name: Shoot,    short: SHT, text: "Hit rolls, Suppressive Fire and reaction shots." }
+  - { id: fight,    name: Fight,    short: FGT, text: "Close combat exchanges." }
+  - { id: physique, name: Physique, short: PHY, text: "Throwing, forcing doors with a breaching tool, holding on in decompression, getting up when Down." }
+  - { id: nerve,    name: Nerve,    short: NRV, text: "Breaking tests, Find Cover, and initiative for Leaders." }
+  - { id: tech,     name: Tech,     short: TEC, text: "Medic actions, hacking, putting out fires and other technical work." }
+  - { id: wounds,   name: Wounds,   short: W,   text: "Wounded markers a model can carry; one more puts it Down." }
+  - { id: size,     name: Size,     short: SZ,  text: "Physical bulk: 1 small drone, 2 human, 3 large (walkers and vehicles are larger). Used by rules for hatches, cover and vehicles." }
 
 suppression:
   modifier_per_marker: -1
@@ -28,7 +41,7 @@ hit_modifiers:
   - { id: light_cover,      value: -1, text: "Target in Light cover" }
   - { id: heavy_cover,      value: -2, text: "Target in Heavy cover" }
   - { id: suppression,      value: -1, text: "Each Suppression on shooter", per_marker: true }
-  - { id: wounded,          value: -1, text: "Shooter Wounded" }
+  - { id: wounded,          value: -1, text: "Shooter has any Wounded markers" }
   - { id: moved,            value: -1, text: "Moved earlier this activation (not Handy)" }
   - { id: reaction,         value: -1, text: "Reaction or Overwatch shot" }
   - { id: unbraced_zero_g,  value: -1, text: "Unbraced in zero-g (not Void-trained)" }
@@ -40,8 +53,8 @@ wound_table:
   - { row: 1,  min: 2,  max: 3,  id: shaken,   text: "Shaken: +1 Suppression" }
   - { row: 2,  min: 4,  max: 4,  id: rattled,  text: "Rattled: +2 Suppression" }
   - { row: 3,  min: 5,  max: 5,  id: grazed,   text: "Grazed: +1 Suppression" }
-  - { row: 4,  min: 6,  max: 7,  id: wounded,  text: "Wounded: -1 to all rolls. Already Wounded: Down" }
-  - { row: 5,  min: 8,  max: 9,  id: wounded_s, text: "Wounded and +1 Suppression. Already Wounded: Down" }
+  - { row: 4,  min: 6,  max: 7,  id: wounded,  text: "Wounded: add a Wounded marker. More markers than Wounds: Down" }
+  - { row: 5,  min: 8,  max: 9,  id: wounded_s, text: "Wounded and +1 Suppression. More markers than Wounds: Down" }
   - { row: 6,  min: 10, max: 11, id: down,     text: "Down: may recover (end-of-round test 8+, or Medic)" }
   - { row: 7,  min: 12, max: 13, id: bleeding, text: "Down and bleeding: dies at end of third round unless Medic 8+" }
   - { row: 8,  min: 14, max: 15, id: critical, text: "Critical: dies at end of next round unless Medic 10+" }
@@ -49,8 +62,6 @@ wound_table:
   - { row: 10, min: 19, max: 99, id: dead_x,   text: "Dead; friends within 1\" gain 1 Suppression" }
 
 movement:
-  move: 6
-  move_heavy_armour: 5
   obstacle_cost: 2
   reaction_move: half
 

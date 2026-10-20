@@ -5,7 +5,7 @@
 **Throw** is an action. It is *Handy*: there is no penalty for throwing after a Move.
 
 1. Choose a point the thrower can see, up to double the grenade's throw range. A point beyond an open door is allowed if the thrower can see through the doorway.
-2. Roll 2d6 + Q, with −1 per Suppression, −1 if Wounded, and −1 beyond the throw range.
+2. Test 2d6 + **Physique**, with −1 beyond the throw range.
 3. On **8+** the grenade lands on the point.
 4. On a miss, it lands **short**: move the point straight back toward the thrower by the amount the roll missed by (minimum 1"). If that path crosses a wall or a doorway edge, it stops there and drops.
 5. On a **natural 2**, it slips: it lands 2" in front of the thrower.

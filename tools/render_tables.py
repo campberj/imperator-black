@@ -46,11 +46,13 @@ def names(file, section, field="name"):
     return {x["id"]: x[field] for x in load(file)[section]}
 
 
-def move_of(t):
-    if "move" in t:
-        return f'{t["move"]}"' if t["move"] else "—"
-    heavy = "heavy" in next(a for a in load("armour")["armour"] if a["id"] == t["armour"])["keywords"]
-    return '5"' if heavy else '6"'
+def skill_list(skills):
+    names_ = {s["id"]: (s["name"], len(s["levels"])) for s in load("skills")["skills"]}
+    out = []
+    for sid, lvl in skills.items():
+        name, levels = names_[sid]
+        out.append(f"{name} {lvl}" if levels > 1 else name)
+    return ", ".join(out) or "—"
 
 
 def render_forces(key):
@@ -61,10 +63,13 @@ def render_forces(key):
         thrown = names("weapons", "thrown")
         armour = {a["id"]: f'{a["name"]} ({a["value"]})' for a in load("armour")["armour"]}
         gear = names("gear", "gear")
+        ranks = names("core", "ranks")
         rows = []
         for t in load("troops")["troops"]:
             if t["faction"] != section:
                 continue
+            s = t["stats"]
+            dash = lambda v: "—" if v is None else v
             weapon = weapons[t["weapon"]] + "".join(f" / {weapons[o]}" for o in t.get("weapon_options", []))
             arm = armour[t["armour"]] + "".join(f" / {armour[o]}" for o in t.get("armour_options", []))
             kit = [melee[t["melee"]]] if t["melee"] else []
@@ -73,8 +78,21 @@ def render_forces(key):
             kit_text = ", ".join(kit) or "—"
             if opts:
                 kit_text += "; option: " + " or ".join(gear[g] for g in opts)
-            rows.append((f'**{t["name"]}**', t["role"], t["q"], arm, move_of(t), weapon, kit_text, kw(t["keywords"])))
-        return table(["Troop", "Role", "Q", "Armour", "Move", "Weapon", "Kit", "Keywords"], rows)
+            mov = f'{s["move"]}"' if s["move"] else "—"
+            rows.append((f'**{t["name"]}**', ranks[t["rank"]], mov, dash(s["shoot"]), dash(s["fight"]), dash(s["physique"]),
+                         dash(s["nerve"]), dash(s["tech"]), s["wounds"], s["size"], arm, weapon, kit_text, skill_list(t["skills"])))
+        return table(["Troop", "Rank", "MOV", "SHT", "FGT", "PHY", "NRV", "TEC", "W", "SZ", "Armour", "Weapon", "Kit", "Skills"], rows)
+    if key == "skills.skills":
+        rows = []
+        for sk in load("skills")["skills"]:
+            text = sk["levels"][0] if len(sk["levels"]) == 1 else " ".join(f"**{i}:** {x}" for i, x in enumerate(sk["levels"], 1))
+            rows.append((f'*{sk["name"]}*' + (f' 1–{len(sk["levels"])}' if len(sk["levels"]) > 1 else ""), text,
+                         "**Proposed**" if sk["status"] == "proposed" else "—"))
+        return table(["Skill", "Effect", "Status"], rows)
+    if key == "core.ranks":
+        return table(["Rank", "Typical attributes", "Who"], [(r["name"], r["typical"], r["text"]) for r in load("core")["ranks"]])
+    if key == "core.attributes":
+        return table(["Attribute", "Short", "Used for"], [(f'**{a["name"]}**', a["short"], a["text"]) for a in load("core")["attributes"]])
     if key == "gear.gear":
         return table(["Gear", "Effect", "Status"],
                      [(g["name"], g["text"], "**Proposed**" if g["status"] == "proposed" else "—") for g in load("gear")["gear"]])
@@ -106,8 +124,6 @@ def render(key):
         return forces
     f, section = key.split(".", 1)
     data = load(f)[section]
-    if key == "core.quality":
-        return table(["Q", "Rating"], [(q["value"], q["name"]) for q in data])
     if key == "core.hit_modifiers":
         return table(["Hit modifier", "Value"], [(m["text"], signed(m["value"])) for m in data])
     if key == "core.wound_table":

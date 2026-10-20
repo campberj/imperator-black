@@ -14,7 +14,7 @@ Close combat resolves **immediately**, in a series of **exchanges**, without spe
 
 ### An exchange
 
-1. Both models roll **2d6 + Q** and apply modifiers.
+1. Both models roll **2d6 + Fight** and apply modifiers.
 2. The **higher total wins**. On a tie, both models gain 1 Suppression and nothing else happens.
 3. The winner throws its **melee weapon's damage dice** and reads the wound table, stepping down by the loser's Armour less AP, exactly as for shooting. A natural double 6 on the exchange roll is a critical hit (+1 row).
 4. If the wound result has no effect, the loser still gains **1 Suppression**.
@@ -24,7 +24,7 @@ Close combat resolves **immediately**, in a series of **exchanges**, without spe
 | Charging (first exchange only) | +1 |
 | Each friendly model also in base contact with the enemy (maximum +2) | +1 |
 | Each Suppression marker | −1 |
-| Wounded | −1 |
+| Any Wounded markers | −1 |
 | Unbraced in zero-g (not *Void-trained*) | −1 |
 
 <!-- table:weapons.melee -->
@@ -58,4 +58,4 @@ When a model moves into contact with an enemy that is touching other models, or 
 
 ## Solo opponent
 
-Until behavior profiles are written: an enemy model declares Break if it lost the last exchange and is Wounded or has 3 or more Suppression; otherwise it Continues.
+Until behavior profiles are written: an enemy model declares Break if it lost the last exchange and has any Wounded markers or 3 or more Suppression; otherwise it Continues.

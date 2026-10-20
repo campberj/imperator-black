@@ -15,7 +15,7 @@ In a zero-g area, nothing holds a model to the deck.
 
 A **hull breach** happens when a breaching charge or explosion opens a hull wall, or when a mission event says so.
 
-1. The compartment **vents** at once. Every model in it tests 2d6 + Q (+2 if *Sealed*).
+1. The compartment **vents** at once. Every model in it tests 2d6 + Physique (+2 if *Sealed*).
    - **8+:** it holds on.
    - **Fail:** it is dragged d6" straight toward the breach. A model that reaches the breach is **blown into space**: remove it. In the campaign it is missing in action.
 2. Smoke and fire in the compartment are removed.
@@ -35,7 +35,7 @@ Place a fire marker on a 3"×3" cell.
 - A model that enters a fire cell, or ends its activation in one, takes **2d6** damage. *Sealed* armour counts as 1 point higher against fire.
 - Fire and its smoke give **Light cover** to models in or behind the cell.
 - **Spread:** at the end of each round, roll 2d6 for each fire cell. On 10+, fire spreads to one adjacent cell (not into vacuum). On 2–3, the fire burns out.
-- **Extinguish:** a model with an extinguisher (or at an extinguisher point) in contact with the cell may Interact: test 8+ to remove the marker.
+- **Extinguish:** a model with an extinguisher (or at an extinguisher point) in contact with the cell may Interact: test 2d6 + Tech, 8+, to remove the marker.
 
 ## Darkness
 

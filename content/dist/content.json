@@ -1,6 +1,6 @@
 {
   "armour": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "armour": [
       {
         "id": "none",
@@ -48,7 +48,7 @@
     ]
   },
   "behaviors": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "behaviors": [
       {
         "id": "cowed",
@@ -98,7 +98,7 @@
     ]
   },
   "core": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "dice": {
       "hit": "2d6",
       "test": "2d6"
@@ -110,22 +110,80 @@
       6,
       6
     ],
-    "quality": [
+    "ranks": [
       {
-        "value": 0,
-        "name": "Green"
+        "id": "green",
+        "name": "Green",
+        "typical": "0-1",
+        "text": "New to the job: crew, conscripts, fresh hires."
       },
       {
-        "value": 1,
-        "name": "Regular"
+        "id": "regular",
+        "name": "Regular",
+        "typical": "1",
+        "text": "Trained and steady: most soldiers and professional security."
       },
       {
-        "value": 2,
-        "name": "Veteran"
+        "id": "veteran",
+        "name": "Veteran",
+        "typical": "2",
+        "text": "Experienced: team leaders, specialists, seasoned contractors."
       },
       {
-        "value": 3,
-        "name": "Elite"
+        "id": "elite",
+        "name": "Elite",
+        "typical": "3",
+        "text": "The best there is: special operators, intelligence handlers."
+      }
+    ],
+    "attributes": [
+      {
+        "id": "move",
+        "name": "Move",
+        "short": "MOV",
+        "text": "Inches per Move action (usually 5-7). Training, exoskeletons and heavy kit all show here."
+      },
+      {
+        "id": "shoot",
+        "name": "Shoot",
+        "short": "SHT",
+        "text": "Hit rolls, Suppressive Fire and reaction shots."
+      },
+      {
+        "id": "fight",
+        "name": "Fight",
+        "short": "FGT",
+        "text": "Close combat exchanges."
+      },
+      {
+        "id": "physique",
+        "name": "Physique",
+        "short": "PHY",
+        "text": "Throwing, forcing doors with a breaching tool, holding on in decompression, getting up when Down."
+      },
+      {
+        "id": "nerve",
+        "name": "Nerve",
+        "short": "NRV",
+        "text": "Breaking tests, Find Cover, and initiative for Leaders."
+      },
+      {
+        "id": "tech",
+        "name": "Tech",
+        "short": "TEC",
+        "text": "Medic actions, hacking, putting out fires and other technical work."
+      },
+      {
+        "id": "wounds",
+        "name": "Wounds",
+        "short": "W",
+        "text": "Wounded markers a model can carry; one more puts it Down."
+      },
+      {
+        "id": "size",
+        "name": "Size",
+        "short": "SZ",
+        "text": "Physical bulk: 1 small drone, 2 human, 3 large (walkers and vehicles are larger). Used by rules for hatches, cover and vehicles."
       }
     ],
     "suppression": {
@@ -159,7 +217,7 @@
       {
         "id": "wounded",
         "value": -1,
-        "text": "Shooter Wounded"
+        "text": "Shooter has any Wounded markers"
       },
       {
         "id": "moved",
@@ -209,14 +267,14 @@
         "min": 6,
         "max": 7,
         "id": "wounded",
-        "text": "Wounded: -1 to all rolls. Already Wounded: Down"
+        "text": "Wounded: add a Wounded marker. More markers than Wounds: Down"
       },
       {
         "row": 5,
         "min": 8,
         "max": 9,
         "id": "wounded_s",
-        "text": "Wounded and +1 Suppression. Already Wounded: Down"
+        "text": "Wounded and +1 Suppression. More markers than Wounds: Down"
       },
       {
         "row": 6,
@@ -255,8 +313,6 @@
       }
     ],
     "movement": {
-      "move": 6,
-      "move_heavy_armour": 5,
       "obstacle_cost": 2,
       "reaction_move": "half"
     },
@@ -274,7 +330,7 @@
     }
   },
   "factions": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "factions": [
       {
         "id": "tfb",
@@ -516,62 +572,60 @@
     ]
   },
   "gear": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "gear": [
       {
         "id": "breaching_charge",
         "name": "Breaching charge",
         "text": "One charge. Place with Interact on a door, hatch or thin bulkhead within 1\"; detonate later as an action (chapter 6).",
-        "grants_keywords": [],
+        "grants_skills": {},
         "status": "settled"
       },
       {
         "id": "breaching_tool",
         "name": "Breaching tool",
-        "text": "Force a locked door: Interact, test 8+ (chapter 3). Also counts as a breaching tool or heavy blade in close combat.",
-        "grants_keywords": [],
+        "text": "Force a locked door: Interact, 2d6 + Physique, 8+ (chapter 3). Also counts as a breaching tool or heavy blade in close combat.",
+        "grants_skills": {},
         "melee": "breaching_tool",
         "status": "settled"
       },
       {
         "id": "trauma_kit",
         "name": "Trauma kit",
-        "text": "The carrier has the Medic keyword.",
-        "grants_keywords": [
-          "medic"
-        ],
+        "text": "The carrier has the Medic skill.",
+        "grants_skills": {
+          "medic": 1
+        },
         "status": "settled"
       },
       {
         "id": "hacking_rig",
         "name": "Hacking rig",
-        "text": "The carrier has the Tech keyword and may Hack locked doors and consoles (Interact, test 9+).",
-        "grants_keywords": [
-          "tech"
-        ],
+        "text": "The carrier may Hack locked doors and consoles: Interact, 2d6 + Tech, 9+.",
+        "grants_skills": {},
         "status": "settled"
       },
       {
         "id": "low_light_optics",
         "name": "Low-light optics",
-        "text": "The carrier has the Low-light keyword: it ignores the darkness penalty.",
-        "grants_keywords": [
-          "low_light"
-        ],
+        "text": "The carrier has the Low-light skill: it ignores the darkness penalty.",
+        "grants_skills": {
+          "low_light": 1
+        },
         "status": "settled"
       },
       {
         "id": "extinguisher",
         "name": "Extinguisher",
-        "text": "May Interact with a fire cell in contact: test 8+ to put it out (chapter 8).",
-        "grants_keywords": [],
+        "text": "May Interact with a fire cell in contact: 2d6 + Tech, 8+ to put it out (chapter 8).",
+        "grants_skills": {},
         "status": "settled"
       },
       {
         "id": "silencer",
         "name": "Silencer",
         "text": "The carrier's ranged weapon gains the Silenced keyword: its shots are not noise for the alert track.",
-        "grants_keywords": [],
+        "grants_skills": {},
         "weapon_keywords": [
           "silenced"
         ],
@@ -581,20 +635,20 @@
         "id": "jump_pack",
         "name": "Jump pack",
         "text": "Move ignores the extra cost of obstacles and may cross gaps up to half the model's Move. In zero-g, the model may change direction freely during a Move and stop anywhere, even away from a surface (it still counts as unbraced).",
-        "grants_keywords": [],
+        "grants_skills": {},
         "status": "settled"
       },
       {
         "id": "jammer",
         "name": "Jammer",
         "text": "Enemy Automated models within 6\" take -2 to hit, and enemy Hack tests within 6\" take -2.",
-        "grants_keywords": [],
+        "grants_skills": {},
         "status": "settled"
       }
     ]
   },
   "keywords": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "weapon": [
       {
         "id": "handy",
@@ -651,44 +705,12 @@
       {
         "id": "heavy",
         "name": "Heavy",
-        "text": "Move 5\"."
-      }
-    ],
-    "model": [
-      {
-        "id": "void_trained",
-        "name": "Void-trained",
-        "text": "Ignores the unbraced zero-g penalty; may push off and stop at any surface."
-      },
-      {
-        "id": "low_light",
-        "name": "Low-light",
-        "text": "Ignores the darkness penalty."
-      },
-      {
-        "id": "tech",
-        "name": "Tech",
-        "text": "May Hack locked doors and consoles (Interact test 9+)."
-      },
-      {
-        "id": "medic",
-        "name": "Medic",
-        "text": "+2 to Medic actions; automatically recovers a row-6 Down model."
-      },
-      {
-        "id": "automated",
-        "name": "Automated",
-        "text": "Never gains Suppression, never tests for breaking, and is not affected by casualty shock or Rally. A wound row of 6 or more destroys it."
-      },
-      {
-        "id": "leader",
-        "name": "Leader",
-        "text": "A Rally made by a Leader, or on a model within 6\" and in line of sight of a Leader, removes 2 Suppression instead of 1. The side's highest-Q Leader adds its Q to initiative."
+        "text": "Bulky armour. Its weight is already reflected in the wearer's Move."
       }
     ]
   },
   "rosters": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "teams": [
       {
         "id": "vat_fireteam",
@@ -772,15 +794,79 @@
       }
     ]
   },
+  "skills": {
+    "version": "0.4.0",
+    "skills": [
+      {
+        "id": "leader",
+        "name": "Leader",
+        "status": "settled",
+        "levels": [
+          "A Rally made by a Leader, or on a model within 6\" and in line of sight of a Leader, removes 2 Suppression instead of 1. At initiative, each side adds the Nerve of its Leader with the highest Nerve."
+        ]
+      },
+      {
+        "id": "void_trained",
+        "name": "Void-trained",
+        "status": "settled",
+        "levels": [
+          "Ignores the unbraced zero-g penalty; may push off and stop at any surface."
+        ]
+      },
+      {
+        "id": "low_light",
+        "name": "Low-light",
+        "status": "settled",
+        "levels": [
+          "Ignores the darkness penalty."
+        ]
+      },
+      {
+        "id": "medic",
+        "name": "Medic",
+        "status": "settled",
+        "levels": [
+          "+2 to Medic actions; automatically gets a Down model back up."
+        ]
+      },
+      {
+        "id": "automated",
+        "name": "Automated",
+        "status": "settled",
+        "levels": [
+          "Never gains Suppression, never tests for breaking, and is not affected by casualty shock or Rally. A wound row of 6 or more destroys it. Attributes shown as a dash are never used."
+        ]
+      },
+      {
+        "id": "marksman",
+        "name": "Marksman",
+        "status": "proposed",
+        "levels": [
+          "Aim gives +2 instead of +1.",
+          "An Aimed shot also ignores the Light cover penalty."
+        ]
+      }
+    ]
+  },
   "troops": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "troops": [
       {
         "id": "tfb_vat_leader",
         "faction": "tfb",
         "name": "VAT Team Leader",
         "role": "Leader",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "void_plate",
         "weapon": "carbine",
         "weapon_options": [
@@ -795,10 +881,10 @@
           "jump_pack",
           "low_light_optics"
         ],
-        "keywords": [
-          "leader",
-          "void_trained"
-        ],
+        "skills": {
+          "leader": 1,
+          "void_trained": 1
+        },
         "miniatures": "BLKOUT Task Force Boone: VAT Elements"
       },
       {
@@ -806,7 +892,17 @@
         "faction": "tfb",
         "name": "VAT Assaulter",
         "role": "Assaulter",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 1,
+          "fight": 2,
+          "physique": 1,
+          "nerve": 1,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "void_plate",
         "weapon": "carbine",
         "weapon_options": [
@@ -826,9 +922,9 @@
           "breaching_tool",
           "trauma_kit"
         ],
-        "keywords": [
-          "void_trained"
-        ],
+        "skills": {
+          "void_trained": 1
+        },
         "miniatures": "BLKOUT Task Force Boone: VAT Elements"
       },
       {
@@ -836,7 +932,17 @@
         "faction": "tfb",
         "name": "VAT Gunner",
         "role": "Gunner",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 1,
+          "fight": 1,
+          "physique": 2,
+          "nerve": 1,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "void_plate",
         "weapon": "compact_lmg",
         "melee": "knife",
@@ -848,9 +954,9 @@
           "jump_pack",
           "low_light_optics"
         ],
-        "keywords": [
-          "void_trained"
-        ],
+        "skills": {
+          "void_trained": 1
+        },
         "miniatures": "BLKOUT Task Force Boone: VAT Elements (compact LMG)"
       },
       {
@@ -858,7 +964,17 @@
         "faction": "tfb",
         "name": "Data Specialist",
         "role": "Specialist",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 1,
+          "fight": 1,
+          "physique": 0,
+          "nerve": 1,
+          "tech": 2,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "void_plate",
         "weapon": "carbine",
         "melee": "knife",
@@ -872,9 +988,9 @@
           "jammer",
           "hacking_rig"
         ],
-        "keywords": [
-          "void_trained"
-        ],
+        "skills": {
+          "void_trained": 1
+        },
         "miniatures": "BLKOUT Task Force Boone: VAT Elements (data specialist)"
       },
       {
@@ -882,7 +998,17 @@
         "faction": "tfb",
         "name": "Pathfinder Team Leader",
         "role": "Leader",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 7,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "void_suit",
         "weapon": "heavy_rifle",
         "melee": "knife",
@@ -893,10 +1019,10 @@
         "gear": [
           "low_light_optics"
         ],
-        "keywords": [
-          "leader",
-          "void_trained"
-        ],
+        "skills": {
+          "leader": 1,
+          "void_trained": 1
+        },
         "miniatures": "BLKOUT Task Force Boone: Recon Team Pathfinders"
       },
       {
@@ -904,7 +1030,17 @@
         "faction": "tfb",
         "name": "Pathfinder",
         "role": "Rifleman",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 7,
+          "shoot": 1,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 1,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "void_suit",
         "weapon": "heavy_rifle",
         "melee": "knife",
@@ -919,9 +1055,9 @@
           "trauma_kit",
           "breaching_charge"
         ],
-        "keywords": [
-          "void_trained"
-        ],
+        "skills": {
+          "void_trained": 1
+        },
         "miniatures": "BLKOUT Task Force Boone: Recon Team Pathfinders"
       },
       {
@@ -929,7 +1065,17 @@
         "faction": "tfb",
         "name": "Pathfinder SAW Gunner",
         "role": "Gunner",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 1,
+          "fight": 1,
+          "physique": 2,
+          "nerve": 1,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "void_suit",
         "weapon": "lmg",
         "melee": "knife",
@@ -940,9 +1086,9 @@
         "gear": [
           "low_light_optics"
         ],
-        "keywords": [
-          "void_trained"
-        ],
+        "skills": {
+          "void_trained": 1
+        },
         "miniatures": "BLKOUT Task Force Boone: Recon Team Pathfinders (SAW)"
       },
       {
@@ -950,7 +1096,17 @@
         "faction": "tfb",
         "name": "Control Team Marksman",
         "role": "Marksman",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 0,
+          "physique": 0,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "void_suit",
         "weapon": "dmr",
         "melee": "knife",
@@ -961,9 +1117,10 @@
         "gear": [
           "low_light_optics"
         ],
-        "keywords": [
-          "void_trained"
-        ],
+        "skills": {
+          "void_trained": 1,
+          "marksman": 1
+        },
         "miniatures": "BLKOUT Task Force Boone: Strikeforce (Control Team)"
       },
       {
@@ -971,7 +1128,17 @@
         "faction": "freespace",
         "name": "Salvage Hand",
         "role": "Crew",
-        "q": 0,
+        "rank": "green",
+        "stats": {
+          "move": 6,
+          "shoot": 0,
+          "fight": 0,
+          "physique": 1,
+          "nerve": 0,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "none",
         "weapon": "sidearm",
         "weapon_options": [
@@ -982,7 +1149,7 @@
         "gear": [
           "extinguisher"
         ],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BPRE Aayari Guard (Shurta)"
       },
       {
@@ -990,7 +1157,17 @@
         "faction": "freespace",
         "name": "Asset Security Officer",
         "role": "Guard",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 1,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 1,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "flak",
         "weapon": "carbine",
         "weapon_options": [
@@ -1001,7 +1178,7 @@
           "flashbang"
         ],
         "gear": [],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BPRE Aayari Guard (Shurta)"
       },
       {
@@ -1009,13 +1186,23 @@
         "faction": "freespace",
         "name": "Asset Security Gunner",
         "role": "Gunner",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 5,
+          "shoot": 1,
+          "fight": 0,
+          "physique": 2,
+          "nerve": 1,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "flak",
         "weapon": "lmg",
         "melee": "knife",
         "grenades": [],
         "gear": [],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BPRE Shurta PKM gun team"
       },
       {
@@ -1023,7 +1210,17 @@
         "faction": "freespace",
         "name": "Collections Enforcer",
         "role": "Enforcer",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 1,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 1,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "flak",
         "armour_options": [
           "composite"
@@ -1038,7 +1235,7 @@
           "frag"
         ],
         "gear": [],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BPRE Hongbin Mercenaries"
       },
       {
@@ -1046,7 +1243,17 @@
         "faction": "freespace",
         "name": "Repossession Breacher",
         "role": "Breacher",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 1,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 1,
+          "tech": 0,
+          "wounds": 2,
+          "size": 2
+        },
         "armour": "composite",
         "weapon": "shotgun",
         "weapon_options": [
@@ -1060,7 +1267,7 @@
         "gear": [
           "breaching_charge"
         ],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BPRE Hongbin / SPEAR Brigade Close Combat Kill Teams"
       },
       {
@@ -1068,7 +1275,17 @@
         "faction": "freespace",
         "name": "Liquidator",
         "role": "Hitter",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "composite",
         "weapon": "smg",
         "weapon_options": [
@@ -1083,7 +1300,7 @@
           "silencer",
           "low_light_optics"
         ],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BLKOUT Black Pact (Clean Up Force)"
       },
       {
@@ -1091,7 +1308,17 @@
         "faction": "freespace",
         "name": "Salvage Tech",
         "role": "Specialist",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 0,
+          "fight": 0,
+          "physique": 0,
+          "nerve": 0,
+          "tech": 2,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "flak",
         "weapon": "sidearm",
         "melee": "knife",
@@ -1102,7 +1329,7 @@
           "hacking_rig",
           "breaching_charge"
         ],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BPRE Muhtasib sappers"
       },
       {
@@ -1110,7 +1337,17 @@
         "faction": "freespace",
         "name": "Recovery Captain",
         "role": "Leader",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "composite",
         "weapon": "smg",
         "weapon_options": [
@@ -1123,9 +1360,9 @@
         "gear": [
           "low_light_optics"
         ],
-        "keywords": [
-          "leader"
-        ],
+        "skills": {
+          "leader": 1
+        },
         "miniatures": "BPRE Hongbin Enabler"
       },
       {
@@ -1133,16 +1370,25 @@
         "faction": "freespace",
         "name": "Sentry Turret",
         "role": "Automated",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 0,
+          "shoot": 1,
+          "fight": null,
+          "physique": null,
+          "nerve": null,
+          "tech": null,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "composite",
         "weapon": "lmg",
         "melee": null,
         "grenades": [],
         "gear": [],
-        "keywords": [
-          "automated"
-        ],
-        "move": 0,
+        "skills": {
+          "automated": 1
+        },
         "miniatures": "Any turret model, or a marked token"
       },
       {
@@ -1150,7 +1396,17 @@
         "faction": "freespace",
         "name": "Security Drone",
         "role": "Automated",
-        "q": 1,
+        "rank": "regular",
+        "stats": {
+          "move": 7,
+          "shoot": 1,
+          "fight": null,
+          "physique": null,
+          "nerve": null,
+          "tech": null,
+          "wounds": 1,
+          "size": 1
+        },
         "armour": "flak",
         "weapon": "smg",
         "melee": null,
@@ -1158,10 +1414,10 @@
         "gear": [
           "low_light_optics"
         ],
-        "keywords": [
-          "automated",
-          "void_trained"
-        ],
+        "skills": {
+          "automated": 1,
+          "void_trained": 1
+        },
         "miniatures": "Any small drone model"
       },
       {
@@ -1169,7 +1425,17 @@
         "faction": "contractor",
         "name": "Contract Boarder",
         "role": "Assaulter",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "void_plate",
         "weapon": "carbine",
         "weapon_options": [
@@ -1183,9 +1449,9 @@
         "gear": [
           "breaching_charge"
         ],
-        "keywords": [
-          "void_trained"
-        ],
+        "skills": {
+          "void_trained": 1
+        },
         "miniatures": "BLKOUT Manticor Borz"
       },
       {
@@ -1193,7 +1459,17 @@
         "faction": "contractor",
         "name": "Contract Heavy",
         "role": "Gunner",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 5,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 3,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 2,
+          "size": 2
+        },
         "armour": "heavy",
         "weapon": "lmg",
         "melee": "knife",
@@ -1201,9 +1477,9 @@
           "frag"
         ],
         "gear": [],
-        "keywords": [
-          "void_trained"
-        ],
+        "skills": {
+          "void_trained": 1
+        },
         "miniatures": "BLKOUT Manticor Borz"
       },
       {
@@ -1211,7 +1487,17 @@
         "faction": "contractor",
         "name": "Reaction Force Operator",
         "role": "Rifleman",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 7,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "composite",
         "weapon": "rifle",
         "weapon_options": [
@@ -1223,7 +1509,7 @@
           "smoke"
         ],
         "gear": [],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BLKOUT Harlow Kinetic Solutions"
       },
       {
@@ -1231,7 +1517,17 @@
         "faction": "contractor",
         "name": "Reaction Force Gunner",
         "role": "Gunner",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 2,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "composite",
         "weapon": "lmg",
         "melee": "knife",
@@ -1239,7 +1535,7 @@
           "frag"
         ],
         "gear": [],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BLKOUT Harlow Kinetic Solutions"
       },
       {
@@ -1247,7 +1543,17 @@
         "faction": "contractor",
         "name": "Hired Marksman",
         "role": "Marksman",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 0,
+          "physique": 0,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "composite",
         "weapon": "dmr",
         "melee": "knife",
@@ -1257,7 +1563,9 @@
         "gear": [
           "low_light_optics"
         ],
-        "keywords": [],
+        "skills": {
+          "marksman": 1
+        },
         "miniatures": "BLKOUT Banak Strategic"
       },
       {
@@ -1265,7 +1573,17 @@
         "faction": "contractor",
         "name": "Hired Heavy Gunner",
         "role": "Gunner",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 5,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 3,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 2,
+          "size": 2
+        },
         "armour": "composite",
         "weapon": "lmg",
         "melee": "knife",
@@ -1273,7 +1591,7 @@
           "frag"
         ],
         "gear": [],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BLKOUT P3 (Szabla Group)"
       },
       {
@@ -1281,7 +1599,17 @@
         "faction": "directorate",
         "name": "Directorate Handler",
         "role": "Leader",
-        "q": 3,
+        "rank": "elite",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 3,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 2,
+          "wounds": 2,
+          "size": 2
+        },
         "armour": "void_plate",
         "weapon": "carbine",
         "melee": "knife",
@@ -1294,10 +1622,11 @@
           "low_light_optics",
           "hacking_rig"
         ],
-        "keywords": [
-          "leader",
-          "void_trained"
-        ],
+        "skills": {
+          "leader": 1,
+          "void_trained": 1,
+          "marksman": 1
+        },
         "miniatures": "BLKOUT Handler Team Alpha"
       },
       {
@@ -1305,7 +1634,17 @@
         "faction": "directorate",
         "name": "Directorate Deniable Operator",
         "role": "Assaulter",
-        "q": 2,
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 3,
+          "physique": 2,
+          "nerve": 2,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
         "armour": "composite",
         "weapon": "smg",
         "melee": "breaching_tool",
@@ -1317,13 +1656,13 @@
           "silencer",
           "low_light_optics"
         ],
-        "keywords": [],
+        "skills": {},
         "miniatures": "BPRE 00 Unit Nitto Close Combat Kill Team"
       }
     ]
   },
   "weapons": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "ranged": [
       {
         "id": "sidearm",

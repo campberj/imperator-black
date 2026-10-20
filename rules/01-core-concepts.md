@@ -12,26 +12,40 @@
 
 ## Model profile
 
-| Stat | Meaning |
-|---|---|
-| **Quality (Q)** | Training and experience, 0–3. Added to hit rolls and tests. |
-| **Armour** | 0–3. Steps wound results down (chapter 4). |
-| **Move** | 6", or 5" in Heavy armour. |
-| **Weapons** | One ranged weapon, a melee weapon, and grenades or gear as the roster lists. |
-| **Keywords** | Traits such as *Leader*, *Medic*, *Void-trained*. |
+Every model has a **rank**, a set of **attributes**, **Armour**, its weapons and gear, and **skills**.
 
-<!-- table:core.quality -->
-| Q | Rating |
-|---|---|
-| 0 | Green |
-| 1 | Regular |
-| 2 | Veteran |
-| 3 | Elite |
+- **Rank** (Green, Regular, Veteran, Elite) is a label for experience and standing. It never enters a roll; the attributes do. Campaign veterancy raises individual attributes and skills, and promotes the rank.
+- **Attributes** say what the model is good at. Each rule names the attribute it uses.
+- **Armour** (0–3) steps wound results down (chapter 4).
+- **Skills** are traits such as *Leader*, *Medic* or *Void-trained*. Some have levels, written *Marksman 2*; a higher level includes everything below it.
+
+<!-- table:core.attributes -->
+| Attribute | Short | Used for |
+|---|---|---|
+| **Move** | MOV | Inches per Move action (usually 5-7). Training, exoskeletons and heavy kit all show here. |
+| **Shoot** | SHT | Hit rolls, Suppressive Fire and reaction shots. |
+| **Fight** | FGT | Close combat exchanges. |
+| **Physique** | PHY | Throwing, forcing doors with a breaching tool, holding on in decompression, getting up when Down. |
+| **Nerve** | NRV | Breaking tests, Find Cover, and initiative for Leaders. |
+| **Tech** | TEC | Medic actions, hacking, putting out fires and other technical work. |
+| **Wounds** | W | Wounded markers a model can carry; one more puts it Down. |
+| **Size** | SZ | Physical bulk: 1 small drone, 2 human, 3 large (walkers and vehicles are larger). Used by rules for hatches, cover and vehicles. |
+<!-- /table -->
+
+Attributes usually run 0–3, and 4 is exceptional; −1 is possible for the truly untrained. On 2d6, each point is worth roughly 14 percentage points at the usual target of 8. A dash means the attribute is never used (*Automated* models).
+
+<!-- table:core.ranks -->
+| Rank | Typical attributes | Who |
+|---|---|---|
+| Green | 0-1 | New to the job: crew, conscripts, fresh hires. |
+| Regular | 1 | Trained and steady: most soldiers and professional security. |
+| Veteran | 2 | Experienced: team leaders, specialists, seasoned contractors. |
+| Elite | 3 | The best there is: special operators, intelligence handlers. |
 <!-- /table -->
 
 ## Tests
 
-A **test** is 2d6 + Q, minus 1 per Suppression marker and 1 if Wounded, against a target number. The target is **8** unless a rule says otherwise. A natural 2 always fails.
+A **test** is 2d6 plus the attribute the rule names, minus 1 per Suppression marker and minus 1 if the model has any Wounded markers, against a target number. The target is **8** unless a rule says otherwise. A natural 2 always fails. Rules write this as, for example, "test 2d6 + Nerve, 8+".
 
 ## Measuring
 

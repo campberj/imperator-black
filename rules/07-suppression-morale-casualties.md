@@ -25,7 +25,7 @@ When a friendly model within 6" goes Down or Dead, a model gains **1 Suppression
 
 ## Breaking
 
-When half of a fireteam (rounded up) is Down, Dead, captured or fled, each remaining model of that fireteam takes a test at the start of its activation: 2d6 + Q − Suppression, +1 if its Leader is within 6".
+When half of a fireteam (rounded up) is Down, Dead, captured or fled, each remaining model of that fireteam takes a test at the start of its activation: 2d6 + Nerve, +1 if its Leader is within 6".
 
 - **8+:** it fights on.
 - **Fail:** it spends both actions Moving away from the enemy, toward its entry point or the nearest cover out of sight.
@@ -34,7 +34,7 @@ When half of a fireteam (rounded up) is Down, Dead, captured or fled, each remai
 
 | State | Effect |
 |---|---|
-| **Wounded** | −1 to all rolls. A second Wounded result makes the model Down. |
+| **Wounded** | Rows 4–5 add a **Wounded marker**. A model with any Wounded markers has −1 to all rolls. When it has more Wounded markers than its **Wounds** attribute, it goes Down. Most models have Wounds 1, so a second Wounded result puts them Down. |
 | **Down** (row 6) | Lies prone, takes no actions, counts as out of the fight. It may recover. |
 | **Bleeding** (row 7) | Down, and dies at the end of the third round after it fell unless a Medic action gets 8+. |
 | **Critical** (row 8) | Down, and dies at the end of the next round unless a Medic action gets 10+. |
@@ -44,18 +44,18 @@ When a model goes Down, Bleeding or Critical, remove its Suppression markers and
 
 ### Down recovery
 
-At the end of each round, each **Down** model (not Bleeding or Critical) tests: 2d6 + Q.
+At the end of each round, each **Down** model (not Bleeding or Critical) tests 2d6 + Physique.
 
-- **8+:** it gets up, **Wounded** and with **3 Suppression** (Pinned).
+- **8+:** it gets up with **3 Suppression** (Pinned) and as many Wounded markers as its Wounds attribute, so one more Wounded result puts it Down again.
 - **Fail:** it stays Down.
 
 ### Medic action
 
-A model in base contact with a Down, Bleeding or Critical friend may use the **Medic** action: test 2d6 + Q (+2 if it has the *Medic* keyword).
+A model in base contact with a Down, Bleeding or Critical friend may use the **Medic** action: test 2d6 + Tech (+2 if it has the *Medic* skill).
 
 | Patient | Result |
 |---|---|
-| **Down** | 8+: the patient gets up, Wounded with 3 Suppression. A *Medic* succeeds automatically. |
+| **Down** | 8+: the patient gets up as for Down recovery. A model with the *Medic* skill succeeds automatically. |
 | **Bleeding** | 8+: the bleeding stops; the patient becomes Down and may recover normally. |
 | **Critical** | 10+: the patient is stabilised. It stays Down for the rest of the mission but will not die. |
 

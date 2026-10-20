@@ -34,7 +34,10 @@ ids(C["weapons"].get("demolitions", []), "weapons.demolitions")
 armour = ids(C["armour"]["armour"], "armour")
 kw_weapon = ids(C["keywords"]["weapon"], "keywords.weapon")
 kw_armour = ids(C["keywords"]["armour"], "keywords.armour")
-kw_model = ids(C["keywords"]["model"], "keywords.model")
+skills = {s["id"]: s for s in C["skills"]["skills"]}
+ids(C["skills"]["skills"], "skills")
+ranks = ids(C["core"]["ranks"], "core.ranks")
+ATTRS = [a["id"] for a in C["core"]["attributes"]]
 gear = ids(C["gear"]["gear"], "gear")
 behaviors = ids(C["behaviors"]["behaviors"], "behaviors")
 factions = ids(C["factions"]["factions"], "factions")
@@ -50,8 +53,10 @@ for a in C["armour"]["armour"]:
     for k in a["keywords"]:
         need(k, kw_armour, f"armour {a['id']} keyword")
 for g in C["gear"]["gear"]:
-    for k in g.get("grants_keywords", []):
-        need(k, kw_model, f"gear {g['id']} grants")
+    for k, lvl in (g.get("grants_skills") or {}).items():
+        need(k, skills, f"gear {g['id']} grants")
+        if k in skills and not 1 <= lvl <= len(skills[k]["levels"]):
+            errors.append(f"gear {g['id']}: {k} level {lvl} out of range")
     for k in g.get("weapon_keywords", []):
         need(k, kw_weapon, f"gear {g['id']} weapon keyword")
     if "melee" in g:
@@ -62,8 +67,21 @@ for g in C["gear"]["gear"]:
 for t in C["troops"]["troops"]:
     w = f"troop {t['id']}"
     need(t["faction"], factions, f"{w} faction")
-    if not 0 <= t["q"] <= 3:
-        errors.append(f"{w}: q out of range")
+    need(t["rank"], ranks, f"{w} rank")
+    st = t["stats"]
+    if sorted(st) != sorted(ATTRS):
+        errors.append(f"{w}: stats must be exactly {ATTRS}")
+    automated = "automated" in t["skills"]
+    for a, val in st.items():
+        if val is None:
+            if not automated or a in ("move", "shoot", "wounds", "size"):
+                errors.append(f"{w}: {a} may be null only on Automated models (and never move/shoot/wounds/size)")
+        elif a == "move" and not 0 <= val <= 10:
+            errors.append(f"{w}: move out of range")
+        elif a in ("wounds", "size") and not 1 <= val <= 6:
+            errors.append(f"{w}: {a} out of range")
+        elif a not in ("move", "wounds", "size") and not -1 <= val <= 4:
+            errors.append(f"{w}: {a} out of range (-1 to 4)")
     need(t["armour"], armour, f"{w} armour")
     for a in t.get("armour_options", []):
         need(a, armour, f"{w} armour option")
@@ -72,7 +90,7 @@ for t in C["troops"]["troops"]:
         need(o, ranged, f"{w} weapon option")
     if t["melee"] is not None:
         need(t["melee"], melee, f"{w} melee")
-    elif "automated" not in t["keywords"]:
+    elif "automated" not in t["skills"]:
         errors.append(f"{w}: only Automated models may have no melee weapon")
     for g in t["grenades"]:
         need(g, thrown, f"{w} grenade")
@@ -80,8 +98,10 @@ for t in C["troops"]["troops"]:
         errors.append(f"{w}: carries more than two grenades")
     for g in t["gear"] + t.get("gear_options", []):
         need(g, gear, f"{w} gear")
-    for k in t["keywords"]:
-        need(k, kw_model, f"{w} keyword")
+    for k, lvl in t["skills"].items():
+        need(k, skills, f"{w} skill")
+        if k in skills and not 1 <= lvl <= len(skills[k]["levels"]):
+            errors.append(f"{w}: {k} level {lvl} out of range")
 
 for e in C["factions"]["elements"]:
     w = f"element {e['id']}"
@@ -102,6 +122,13 @@ for sf in C["rosters"]["starting_forces"]:
         need(tm, teams, f"starting force {sf['id']} team")
     for tr in sf.get("attachments", {}).get("from", []):
         need(tr, troops, f"starting force {sf['id']} attachment")
+
+if errors:
+    print("\n".join(errors))
+    sys.exit(1)
+for s in C["skills"]["skills"]:
+    if s.get("status") not in ("settled", "proposed"):
+        errors.append(f"skill {s['id']}: status must be settled or proposed")
 
 if errors:
     print("\n".join(errors))

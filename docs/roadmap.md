@@ -68,7 +68,9 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 - [x] Task Force Boone teams and starting force; Freespace, contractor and Directorate troops and elements (proposed, awaiting RJ's review)
 - [x] Rules chapter 9: [forces and equipment](../rules/09-forces-equipment.md)
 - [x] Printable [unit cards and quick reference](print/)
-- [ ] RJ review of profiles, then a gym game with the cards
+- [x] RJ review: force size 3–8, gear approved, Automated settled, Razorback deferred
+- [x] Granular profiles (rules v0.4): attributes, ranks, Wounds, Size, levelled skills ([findings](analysis/sim-v0.4-findings.md))
+- [ ] Gym game with the cards
 
 1. Define the YAML schemas: weapon, armor, gear, troop type, unit, keyword.
 2. **Task Force Boone** roster: fireteam of 4–6 plus a leader, with roles (rifleman, gunner, breacher, medic, marksman, leader).

@@ -1,61 +1,61 @@
-# Gear for Imperator Black, rules v0.3.
-# grants_keywords: model keywords the gear gives its carrier.
+# Gear for Imperator Black, rules v0.4.
+# grants_skills: skills (and levels) the gear gives its carrier.
 # status: settled (approved; rules cover it) or proposed (new rule awaiting approval).
-version: 0.3.0
+version: 0.4.0
 
 gear:
   - id: breaching_charge
     name: Breaching charge
     text: "One charge. Place with Interact on a door, hatch or thin bulkhead within 1\"; detonate later as an action (chapter 6)."
-    grants_keywords: []
+    grants_skills: {}
     status: settled
 
   - id: breaching_tool
     name: Breaching tool
-    text: "Force a locked door: Interact, test 8+ (chapter 3). Also counts as a breaching tool or heavy blade in close combat."
-    grants_keywords: []
+    text: "Force a locked door: Interact, 2d6 + Physique, 8+ (chapter 3). Also counts as a breaching tool or heavy blade in close combat."
+    grants_skills: {}
     melee: breaching_tool
     status: settled
 
   - id: trauma_kit
     name: Trauma kit
-    text: "The carrier has the Medic keyword."
-    grants_keywords: [medic]
+    text: "The carrier has the Medic skill."
+    grants_skills: { medic: 1 }
     status: settled
 
   - id: hacking_rig
     name: Hacking rig
-    text: "The carrier has the Tech keyword and may Hack locked doors and consoles (Interact, test 9+)."
-    grants_keywords: [tech]
+    text: "The carrier may Hack locked doors and consoles: Interact, 2d6 + Tech, 9+."
+    grants_skills: {}
     status: settled
 
   - id: low_light_optics
     name: Low-light optics
-    text: "The carrier has the Low-light keyword: it ignores the darkness penalty."
-    grants_keywords: [low_light]
+    text: "The carrier has the Low-light skill: it ignores the darkness penalty."
+    grants_skills: { low_light: 1 }
     status: settled
 
   - id: extinguisher
     name: Extinguisher
-    text: "May Interact with a fire cell in contact: test 8+ to put it out (chapter 8)."
-    grants_keywords: []
+    text: "May Interact with a fire cell in contact: 2d6 + Tech, 8+ to put it out (chapter 8)."
+    grants_skills: {}
     status: settled
 
   - id: silencer
     name: Silencer
     text: "The carrier's ranged weapon gains the Silenced keyword: its shots are not noise for the alert track."
-    grants_keywords: []
+    grants_skills: {}
     weapon_keywords: [silenced]
     status: settled
 
   - id: jump_pack
     name: Jump pack
     text: "Move ignores the extra cost of obstacles and may cross gaps up to half the model's Move. In zero-g, the model may change direction freely during a Move and stop anywhere, even away from a surface (it still counts as unbraced)."
-    grants_keywords: []
+    grants_skills: {}
     status: settled
 
   - id: jammer
     name: Jammer
     text: "Enemy Automated models within 6\" take -2 to hit, and enemy Hack tests within 6\" take -2."
-    grants_keywords: []
+    grants_skills: {}
     status: settled

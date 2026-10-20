@@ -75,7 +75,7 @@ public sealed class RoomClear
         if (!Broken(side)) return true;
         var (a, b) = _rng.TwoD6();
         int bonus = side.Any(f => f.IsActive && f.IsLeader && f != s) ? 1 : 0;
-        if (a + b == 2 || a + b + s.Q - s.Suppression + bonus < _core.TestTarget) { s.Flee(); return false; }
+        if (a + b == 2 || a + b + s.Nerve + s.RollPenalty + bonus < _core.TestTarget) { s.Flee(); return false; }
         return true;
     }
 

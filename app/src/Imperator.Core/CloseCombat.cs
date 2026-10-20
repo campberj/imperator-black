@@ -15,7 +15,7 @@ public static class CloseCombat
     public static readonly BreakPolicy NeverBreak = (_, _) => false;
 
     public static int Modifier(Soldier s, bool charging, int supporters, bool zeroG) =>
-        s.Q + s.RollPenalty + (charging ? 1 : 0) + Math.Min(2, supporters) + (zeroG && !s.VoidTrained ? -1 : 0);
+        s.Fight + s.RollPenalty + (charging ? 1 : 0) + Math.Min(2, supporters) + (zeroG && !s.VoidTrained ? -1 : 0);
 
     /// <summary>
     /// Fights close combat to its end: one side incapacitated, or both break away.
@@ -35,6 +35,10 @@ public static class CloseCombat
             var (d1, d2) = rng.TwoD6();
             int at = a1 + a2 + Modifier(attacker, charging && n == 1, attackerSupport, zeroG);
             int dt = d1 + d2 + Modifier(defender, false, defenderSupport, zeroG);
+
+            // A model with no melee weapon (Automated) always loses the exchange.
+            if (attacker.Melee is null && defender.Melee is not null) at = -1000;
+            else if (defender.Melee is null && attacker.Melee is not null) dt = -1000;
 
             bool attackerLost, defenderLost;
             if (at == dt)
@@ -59,7 +63,8 @@ public static class CloseCombat
                 {
                     int margin = Math.Abs(at - dt);
                     int bonus = decisiveMargin > 0 && margin >= decisiveMargin ? 1 : 0; // experimental: decisive win
-                    int row = Math.Min(10, Wounds.FinalRow(core, rng.Roll(winner.Melee.DamageDice), crit, loser.Armour, winner.Melee.Ap) + bonus);
+                    var weapon = winner.Melee!;
+                    int row = Math.Min(10, Wounds.FinalRow(core, rng.Roll(weapon.DamageDice), crit, loser.Armour, weapon.Ap) + bonus);
                     if (row <= 0) loser.AddSuppression(1);
                     else loser.ApplyRow(row);
                 }
@@ -83,7 +88,7 @@ public static class Grenades
     {
         var (a, b) = rng.TwoD6();
         if (a + b == 2) return (false, true);
-        return (a + b + thrower.Q + thrower.RollPenalty + situational >= core.HitTarget, false);
+        return (a + b + thrower.Physique + thrower.RollPenalty + situational >= core.HitTarget, false);
     }
 
     /// <summary>Frag blast on a set of models: one damage roll, read per model.</summary>

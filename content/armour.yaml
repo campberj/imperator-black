@@ -1,6 +1,6 @@
-# Armour for Imperator Black, rules v0.3.
+# Armour for Imperator Black, rules v0.4.
 # value: wound rows stepped down (less weapon AP).
-version: 0.3.0
+version: 0.4.0
 
 armour:
   - { id: none,       name: None,            value: 0, keywords: [] }
