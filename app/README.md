@@ -17,17 +17,19 @@ Last updated: 2026-10-20, rules v0.4 (granular profiles).
 | `app/Imperator.slnx` | Solution (.NET 10, new `.slnx` format) | Builds clean, 0 warnings |
 | `app/src/Imperator.Core` | Game logic: dice and seeded `Rng`, content loading (`ContentSet`), wound table, shooting (exact odds and sampled), close combat, grenades, `Soldier` state | Covers rules v0.4 chapters 4–7 math with attribute-based `Soldier` (`FromTroop` builds one from a troop profile; `Generic` makes abstract test soldiers). No movement, board, or mission logic yet |
 | `app/src/Imperator.Sim` | Combat simulator: shot odds, duels, frag, open-ground firefights, room clearing, `--compare` for content variants | Working. Output in `docs/analysis/` |
-| `app/tests/Imperator.Core.Tests` | **Console** test runner (no packages), 72 checks; exits non-zero on failure | Passing |
+| `app/tests/Imperator.Core.Tests` | xUnit v3 tests (87 cases, covering the former runner's 72 checks); run with `dotnet test app/Imperator.slnx` | Passing |
 | `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
 | `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests | Green |
 
-**Why no NuGet packages yet:** the cloud workspace where this was built blocks `api.nuget.org`. That's why the tests are a console runner and why content is compiled YAML → JSON (System.Text.Json is built in). Locally, NuGet works, so these were constraints, not decisions. Keep the YAML → JSON step regardless; the web front end will read the same JSON.
+**NuGet:** the cloud workspace where this started blocks `api.nuget.org`, which is why content is compiled YAML → JSON (System.Text.Json is built in) and why the tests began as a console runner. Locally, NuGet works. Keep the YAML → JSON step regardless; the web front end will read the same JSON.
+
+**`global.json`** (repo root) pins SDK 10 and opts `dotnet test` into Microsoft.Testing.Platform, which xUnit v3 needs on the .NET 10 SDK.
 
 ## Next tasks, in order
 
 These are foundations that don't depend on unfinished rules. Each should leave CI green.
 
-### 1. Move tests to xUnit
+### 1. Move tests to xUnit ✅ done (2026-10-20)
 
 - Replace the console runner with an xUnit project at the same path; port all 72 checks.
 - Keep the statistical checks (exact vs sampled odds, Down recovery rate) with their tolerances and fixed seeds.

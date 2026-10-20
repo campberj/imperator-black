@@ -24,7 +24,7 @@ python3 tools/print_scenario.py docs/scenarios/<file>.yaml   # scenario sheet + 
 python3 tools/generate_layout.py <vessel> --seed N --out docs/scenarios/decks/x.yaml   # chapter 11 deck
 python3 tools/generate_layout.py --check     # layout statistics over many seeds
 dotnet build app/Imperator.slnx
-dotnet run --project app/tests/Imperator.Core.Tests                     # must print "All N checks passed."
+dotnet test app/Imperator.slnx                                         # xUnit; must pass
 dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.4-results.md
 dotnet run -c Release --project app/src/Imperator.Sim -- --compare Label=a.json Label2=b.json   # compare content variants
 ```
@@ -33,4 +33,4 @@ CI (`.github/workflows/ci.yml`) fails if content JSON or rulebook tables are sta
 
 ## Stack
 
-.NET 10 (C#) for game logic, simulator and (later) ASP.NET Core API with EF Core + PostgreSQL; React + TypeScript (Vite) front end. See `docs/architecture/adr-001-architecture.md`. The test project is currently a dependency-free console runner; it can move to xUnit once NuGet is available in the working environment.
+.NET 10 (C#) for game logic, simulator and (later) ASP.NET Core API with EF Core + PostgreSQL; React + TypeScript (Vite) front end. See `docs/architecture/adr-001-architecture.md`. Tests are xUnit v3 (`app/tests/Imperator.Core.Tests`).
