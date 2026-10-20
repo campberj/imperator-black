@@ -7,6 +7,18 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_DB: imperator
+          POSTGRES_USER: imperator
+          POSTGRES_PASSWORD: imperator
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U imperator -d imperator"
+          --health-interval 5s --health-timeout 3s --health-retries 10
     steps:
       - uses: actions/checkout@v4
 
@@ -35,3 +47,16 @@ jobs:
 
       - name: Tests
         run: dotnet test app/Imperator.slnx -c Release --no-build
+
+      - name: Restore .NET tools
+        run: dotnet tool restore
+
+      - name: EF migrations match the model
+        run: dotnet ef migrations has-pending-model-changes --project app/src/Imperator.Api
+        env:
+          ASPNETCORE_ENVIRONMENT: Development
+
+      - name: EF migrations apply to PostgreSQL
+        run: dotnet ef database update --project app/src/Imperator.Api
+        env:
+          ASPNETCORE_ENVIRONMENT: Development

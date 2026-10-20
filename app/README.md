@@ -16,10 +16,13 @@ Last updated: 2026-10-20, rules v0.4 (granular profiles).
 |---|---|---|
 | `app/Imperator.slnx` | Solution (.NET 10, new `.slnx` format) | Builds clean, 0 warnings |
 | `app/src/Imperator.Core` | Game logic: dice and seeded `Rng`, content loading (`ContentSet`), wound table, shooting (exact odds and sampled), close combat, grenades, `Soldier` state | Covers rules v0.4 chapters 4–7 math with attribute-based `Soldier` (`FromTroop` builds one from a troop profile; `Generic` makes abstract test soldiers). No movement, board, or mission logic yet |
+| `app/src/Imperator.Api` | ASP.NET Core minimal API, EF Core + Npgsql (snake_case tables). Schema: `Player`, `Campaign`, `CampaignMembership`, append-only `CampaignEvent`. Endpoints: `GET /health` (database check + content version), `GET /content` (validated `content.json`, `Imperator-Content-Version` header, ETag) | Schema only, no auth. Migration `InitialSchema` |
 | `app/src/Imperator.Sim` | Combat simulator: shot odds, duels, frag, open-ground firefights, room clearing, `--compare` for content variants | Working. Output in `docs/analysis/` |
 | `app/tests/Imperator.Core.Tests` | xUnit v3 tests (198 cases: the former runner's 72 checks plus content loading and validation); run with `dotnet test app/Imperator.slnx` | Passing |
+| `app/tests/Imperator.Api.Tests` | xUnit v3 + `WebApplicationFactory`: endpoints and schema, no database needed | Passing |
 | `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON into typed records (every file, including the chapter 10 solo opponent and its terms, chapter 11 `layouts`, chapter 12 `terrain`, `core.security` and `core.shoot_scale`) and validates it at load (`ContentValidator`, mirroring `tools/validate_content.py`) | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
-| `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests | Green |
+| `docker-compose.yml` (repo root) | PostgreSQL 18 for local development | |
+| `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests, checks EF migrations match the model and apply to PostgreSQL | Green |
 
 **NuGet:** the cloud workspace where this started blocks `api.nuget.org`, which is why content is compiled YAML → JSON (System.Text.Json is built in) and why the tests began as a console runner. Locally, NuGet works. Keep the YAML → JSON step regardless; the web front end will read the same JSON.
 
@@ -42,13 +45,24 @@ These are foundations that don't depend on unfinished rules. Each should leave C
 
 - **Done when:** a test loads every element and team and resolves every id; loading fails loudly on a bad id.
 
-### 3. API skeleton
+### 3. API skeleton ✅ done (2026-10-20)
 
 - Add `app/src/Imperator.Api`: ASP.NET Core minimal API, EF Core with Npgsql.
 - Add a `docker-compose.yml` at the repo root with PostgreSQL for local development.
 - Data model per ADR-001 §4–5, **schema only**: `Player`, `Campaign`, `CampaignMembership` (role: Commander / Operator), and `CampaignEvent` (append-only: id, campaign id, sequence, type, JSON payload, created at, created by). No auth yet.
 - Endpoints: `GET /health`, `GET /content` (serves `content.json` with its version).
 - **Done when:** `docker compose up` plus `dotnet run` serves both endpoints, and an EF migration creates the schema.
+
+Running it locally (Docker via Docker Desktop, OrbStack or Colima):
+
+```sh
+docker compose up -d --wait                                    # PostgreSQL on localhost:5432 (dev credentials in docker-compose.yml)
+dotnet tool restore                                            # dotnet-ef, pinned in dotnet-tools.json
+dotnet ef database update --project app/src/Imperator.Api      # apply migrations
+dotnet run --project app/src/Imperator.Api                     # http://localhost:5080/health and /content
+```
+
+After changing an entity: `dotnet ef migrations add <Name> --project app/src/Imperator.Api --output-dir Data/Migrations`. CI fails if the model and migrations disagree.
 
 ### 4. Web skeleton
 

@@ -25,11 +25,14 @@ python3 tools/generate_layout.py <vessel> --seed N --out docs/scenarios/decks/x.
 python3 tools/generate_layout.py --check     # layout statistics over many seeds
 dotnet build app/Imperator.slnx
 dotnet test app/Imperator.slnx                                         # xUnit; must pass
+docker compose up -d --wait && dotnet tool restore                    # local PostgreSQL + dotnet-ef
+dotnet ef database update --project app/src/Imperator.Api             # apply migrations
+dotnet run --project app/src/Imperator.Api                            # API on http://localhost:5080
 dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.4-results.md
 dotnet run -c Release --project app/src/Imperator.Sim -- --compare Label=a.json Label2=b.json   # compare content variants
 ```
 
-CI (`.github/workflows/ci.yml`) fails if content JSON or rulebook tables are stale, or if tests fail.
+CI (`.github/workflows/ci.yml`) fails if content JSON or rulebook tables are stale, if tests fail, or if EF migrations don't match the model.
 
 ## Stack
 
