@@ -21,8 +21,9 @@ Last updated: 2026-10-20, rules v0.4 (granular profiles).
 | `app/tests/Imperator.Core.Tests` | xUnit v3 tests (198 cases: the former runner's 72 checks plus content loading and validation); run with `dotnet test app/Imperator.slnx` | Passing |
 | `app/tests/Imperator.Api.Tests` | xUnit v3 + `WebApplicationFactory`: endpoints and schema, no database needed | Passing |
 | `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON into typed records (every file, including the chapter 10 solo opponent and its terms, chapter 11 `layouts`, chapter 12 `terrain`, `core.security` and `core.shoot_scale`) and validates it at load (`ContentValidator`, mirroring `tools/validate_content.py`) | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
+| `app/web` | Vite + React + TypeScript. One page: fetches `/content` (dev server proxies to the API) and renders the ranged, melee, grenade and armour tables with the rulebook's columns. Vitest + Testing Library, oxlint. See [web/README.md](web/README.md) | Smoke test only |
 | `docker-compose.yml` (repo root) | PostgreSQL 18 for local development | |
-| `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests, checks EF migrations match the model and apply to PostgreSQL | Green |
+| `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests, checks EF migrations match the model and apply to PostgreSQL; a `web` job lints, tests and builds `app/web` | Green |
 
 **NuGet:** the cloud workspace where this started blocks `api.nuget.org`, which is why content is compiled YAML → JSON (System.Text.Json is built in) and why the tests began as a console runner. Locally, NuGet works. Keep the YAML → JSON step regardless; the web front end will read the same JSON.
 
@@ -64,11 +65,13 @@ dotnet run --project app/src/Imperator.Api                     # http://localhos
 
 After changing an entity: `dotnet ef migrations add <Name> --project app/src/Imperator.Api --output-dir Data/Migrations`. CI fails if the model and migrations disagree.
 
-### 4. Web skeleton
+### 4. Web skeleton ✅ done (2026-10-20)
 
 - Add `app/web`: Vite + React + TypeScript.
 - One page that fetches `/content` and renders the weapon and armour tables, as a smoke test of the whole pipeline.
 - **Done when:** `npm run dev` shows the tables from live content.
+
+With the API running: `npm --prefix app/web install && npm --prefix app/web run dev`, then open http://localhost:5173.
 
 ### 5. Stop and check the roadmap
 

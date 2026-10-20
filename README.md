@@ -39,7 +39,7 @@ Proof of concept in progress: solo ship and station boarding actions with a full
 
 ## Working with the repo
 
-Requires Python 3 with PyYAML, the .NET 10 SDK, and Docker (for the API's PostgreSQL). A local virtualenv keeps the Python tools self-contained: `python3 -m venv .venv && .venv/bin/pip install pyyaml reportlab`, then run the tools with `.venv/bin/python` (`.venv/` is gitignored).
+Requires Python 3 with PyYAML, the .NET 10 SDK, Docker (for the API's PostgreSQL), and Node.js 24+ (for the web app). A local virtualenv keeps the Python tools self-contained: `python3 -m venv .venv && .venv/bin/pip install pyyaml reportlab`, then run the tools with `.venv/bin/python` (`.venv/` is gitignored).
 
 ```sh
 python3 tools/validate_content.py   # check content cross-references
@@ -50,4 +50,4 @@ dotnet test app/Imperator.slnx                                                  
 dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.4-results.md   # simulator report
 ```
 
-Running the API locally is described in [app/README.md](app/README.md).
+Running the API and web app locally is described in [app/README.md](app/README.md).
