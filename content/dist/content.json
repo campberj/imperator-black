@@ -47,6 +47,56 @@
       }
     ]
   },
+  "behaviors": {
+    "version": "0.3.0",
+    "behaviors": [
+      {
+        "id": "cowed",
+        "name": "Cowed",
+        "summary": "Holds its compartment, falls back under Suppression, may surrender."
+      },
+      {
+        "id": "sentry",
+        "name": "Sentry",
+        "summary": "Holds chokepoints, overwatches doors, raises the alarm."
+      },
+      {
+        "id": "aggressive",
+        "name": "Aggressive",
+        "summary": "Closes distance, flanks through side passages, seeks close combat."
+      },
+      {
+        "id": "tactical",
+        "name": "Tactical",
+        "summary": "Fire and manoeuvre: one element fixes while another moves; uses Overwatch and grenades."
+      },
+      {
+        "id": "saboteur",
+        "name": "Saboteur",
+        "summary": "Avoids fights; works consoles, rigs charges, seals doors, destroys evidence."
+      },
+      {
+        "id": "automated",
+        "name": "Automated",
+        "summary": "Permanent Overwatch on its field of fire, or triggers on proximity."
+      },
+      {
+        "id": "leader",
+        "name": "Leader",
+        "summary": "Rallies the most suppressed friend nearby, then acts with its element."
+      },
+      {
+        "id": "handler",
+        "name": "Handler",
+        "summary": "Independent elite; protects the patron's interests first, the mission second."
+      },
+      {
+        "id": "attached",
+        "name": "Attached",
+        "summary": "Uses the profile of the element it is attached to."
+      }
+    ]
+  },
   "core": {
     "version": "0.3.0",
     "dice": {
@@ -223,6 +273,326 @@
       ]
     }
   },
+  "factions": {
+    "version": "0.3.0",
+    "factions": [
+      {
+        "id": "tfb",
+        "name": "Task Force Boone",
+        "side": "player",
+        "summary": "Expeditionary task force whose Void Assault Teams board and clear ships and stations."
+      },
+      {
+        "id": "freespace",
+        "name": "Freespace Solutions",
+        "side": "enemy",
+        "summary": "Privatized debt and salvage corporation that unofficially conducts grey-zone operations for paying patrons."
+      },
+      {
+        "id": "contractor",
+        "name": "Contractors",
+        "side": "enemy",
+        "summary": "Mercenary companies and hired guns Freespace pays by the job."
+      },
+      {
+        "id": "directorate",
+        "name": "Meridian Directorate",
+        "side": "enemy",
+        "summary": "Technocratic state run through its intelligence ministries; Freespace's current patron."
+      }
+    ],
+    "elements": [
+      {
+        "id": "salvage_crew",
+        "name": "Salvage crew",
+        "faction": "freespace",
+        "tier": 1,
+        "behavior": "cowed",
+        "composition": [
+          {
+            "troop": "fs_salvage_hand",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "id": "asset_security",
+        "name": "Asset security",
+        "faction": "freespace",
+        "tier": 1,
+        "behavior": "sentry",
+        "composition": [
+          {
+            "troop": "fs_security",
+            "count": 2
+          },
+          {
+            "troop": "fs_security_gunner",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "recovery_captain",
+        "name": "Recovery captain",
+        "faction": "freespace",
+        "tier": 1,
+        "behavior": "leader",
+        "composition": [
+          {
+            "troop": "fs_recovery_captain",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "collections_enforcers",
+        "name": "Collections enforcers",
+        "faction": "freespace",
+        "tier": 2,
+        "behavior": "aggressive",
+        "composition": [
+          {
+            "troop": "fs_enforcer",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "id": "salvage_techs",
+        "name": "Salvage techs",
+        "faction": "freespace",
+        "tier": 2,
+        "behavior": "saboteur",
+        "composition": [
+          {
+            "troop": "fs_tech",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "automated_defences",
+        "name": "Automated defences",
+        "faction": "freespace",
+        "tier": 2,
+        "behavior": "automated",
+        "composition": [
+          {
+            "troop": "fs_turret",
+            "count": 1
+          }
+        ],
+        "alternatives": [
+          "fs_drone"
+        ]
+      },
+      {
+        "id": "repossession_team",
+        "name": "Repossession team",
+        "faction": "freespace",
+        "tier": 3,
+        "behavior": "aggressive",
+        "composition": [
+          {
+            "troop": "fs_repo_breacher",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "id": "liquidators",
+        "name": "Liquidators",
+        "faction": "freespace",
+        "tier": 3,
+        "behavior": "tactical",
+        "composition": [
+          {
+            "troop": "fs_liquidator",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "hired_gun",
+        "name": "Hired gun",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "attached",
+        "composition": [
+          {
+            "troop": "ct_hired_marksman",
+            "count": 1
+          }
+        ],
+        "alternatives": [
+          "ct_hired_heavy"
+        ]
+      },
+      {
+        "id": "contract_boarding_team",
+        "name": "Contract boarding team",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "tactical",
+        "reaction_force": true,
+        "composition": [
+          {
+            "troop": "ct_borz_boarder",
+            "count": 3
+          },
+          {
+            "troop": "ct_borz_heavy",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "contract_reaction_force",
+        "name": "Contract reaction force",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "aggressive",
+        "reaction_force": true,
+        "composition": [
+          {
+            "troop": "ct_harlow_operator",
+            "count": 3
+          },
+          {
+            "troop": "ct_harlow_gunner",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "directorate_handler",
+        "name": "Directorate handler",
+        "faction": "directorate",
+        "tier": 4,
+        "behavior": "handler",
+        "composition": [
+          {
+            "troop": "md_handler",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "directorate_operators",
+        "name": "Directorate deniable operators",
+        "faction": "directorate",
+        "tier": 4,
+        "behavior": "tactical",
+        "composition": [
+          {
+            "troop": "md_operator",
+            "count": 3
+          }
+        ]
+      }
+    ],
+    "threat_tiers": [
+      {
+        "tier": 1,
+        "name": "Low",
+        "summary": "Crew and asset security under a recovery captain."
+      },
+      {
+        "tier": 2,
+        "name": "Medium",
+        "summary": "Adds collections enforcers, salvage techs and automated defences."
+      },
+      {
+        "tier": 3,
+        "name": "High",
+        "summary": "Adds repossession teams, liquidators and hired guns; a contractor reaction force answers high alert."
+      },
+      {
+        "tier": 4,
+        "name": "Story",
+        "summary": "Adds Meridian Directorate handlers or deniable operators."
+      }
+    ]
+  },
+  "gear": {
+    "version": "0.3.0",
+    "gear": [
+      {
+        "id": "breaching_charge",
+        "name": "Breaching charge",
+        "text": "One charge. Place with Interact on a door, hatch or thin bulkhead within 1\"; detonate later as an action (chapter 6).",
+        "grants_keywords": [],
+        "status": "settled"
+      },
+      {
+        "id": "breaching_tool",
+        "name": "Breaching tool",
+        "text": "Force a locked door: Interact, test 8+ (chapter 3). Also counts as a breaching tool or heavy blade in close combat.",
+        "grants_keywords": [],
+        "melee": "breaching_tool",
+        "status": "settled"
+      },
+      {
+        "id": "trauma_kit",
+        "name": "Trauma kit",
+        "text": "The carrier has the Medic keyword.",
+        "grants_keywords": [
+          "medic"
+        ],
+        "status": "settled"
+      },
+      {
+        "id": "hacking_rig",
+        "name": "Hacking rig",
+        "text": "The carrier has the Tech keyword and may Hack locked doors and consoles (Interact, test 9+).",
+        "grants_keywords": [
+          "tech"
+        ],
+        "status": "settled"
+      },
+      {
+        "id": "low_light_optics",
+        "name": "Low-light optics",
+        "text": "The carrier has the Low-light keyword: it ignores the darkness penalty.",
+        "grants_keywords": [
+          "low_light"
+        ],
+        "status": "settled"
+      },
+      {
+        "id": "extinguisher",
+        "name": "Extinguisher",
+        "text": "May Interact with a fire cell in contact: test 8+ to put it out (chapter 8).",
+        "grants_keywords": [],
+        "status": "settled"
+      },
+      {
+        "id": "silencer",
+        "name": "Silencer",
+        "text": "The carrier's ranged weapon gains the Silenced keyword: its shots are not noise for the alert track.",
+        "grants_keywords": [],
+        "weapon_keywords": [
+          "silenced"
+        ],
+        "status": "settled"
+      },
+      {
+        "id": "jump_pack",
+        "name": "Jump pack",
+        "text": "Move ignores the extra cost of obstacles and may cross gaps up to half the model's Move. In zero-g, the model may change direction freely during a Move and stop anywhere, even away from a surface (it still counts as unbraced).",
+        "grants_keywords": [],
+        "status": "proposed"
+      },
+      {
+        "id": "jammer",
+        "name": "Jammer",
+        "text": "Enemy Automated models within 6\" take -2 to hit, and enemy Hack tests within 6\" take -2.",
+        "grants_keywords": [],
+        "status": "proposed"
+      }
+    ]
+  },
   "keywords": {
     "version": "0.3.0",
     "weapon": [
@@ -265,6 +635,11 @@
         "id": "breach",
         "name": "Breach",
         "text": "Can destroy doors, hatches and thin bulkheads."
+      },
+      {
+        "id": "silenced",
+        "name": "Silenced",
+        "text": "Shots do not count as noise for the alert track."
       }
     ],
     "armour": [
@@ -301,9 +676,649 @@
         "text": "+2 to Medic actions; automatically recovers a row-6 Down model."
       },
       {
+        "id": "automated",
+        "name": "Automated",
+        "text": "Never gains Suppression, never tests for breaking, and is not affected by casualty shock or Rally. A wound row of 6 or more destroys it."
+      },
+      {
         "id": "leader",
         "name": "Leader",
         "text": "A Rally made by a Leader, or on a model within 6\" and in line of sight of a Leader, removes 2 Suppression instead of 1. The side's highest-Q Leader adds its Q to initiative."
+      }
+    ]
+  },
+  "rosters": {
+    "version": "0.3.0",
+    "teams": [
+      {
+        "id": "vat_fireteam",
+        "name": "Void Assault Team (VAT) fireteam",
+        "faction": "tfb",
+        "summary": "The boarding fireteam: assault, a close-quarters gunner, and a data specialist.",
+        "slots": [
+          {
+            "troop": "tfb_vat_leader",
+            "count": 1
+          },
+          {
+            "troop": "tfb_vat_assaulter",
+            "count": 2,
+            "gear_choice": 1
+          },
+          {
+            "troop": "tfb_vat_gunner",
+            "count": 1
+          },
+          {
+            "troop": "tfb_data_specialist",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "pathfinder_team",
+        "name": "Pathfinder recon team",
+        "faction": "tfb",
+        "summary": "Recon and fire support with armour-piercing heavy rifles and a SAW.",
+        "slots": [
+          {
+            "troop": "tfb_pathfinder_leader",
+            "count": 1
+          },
+          {
+            "troop": "tfb_pathfinder",
+            "count": 2,
+            "gear_choice": 1
+          },
+          {
+            "troop": "tfb_pathfinder_gunner",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "control_team",
+        "name": "Control team",
+        "faction": "tfb",
+        "summary": "Two marksmen who hold overwatch over long passages, hangars and open decks.",
+        "slots": [
+          {
+            "troop": "tfb_marksman",
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "starting_forces": [
+      {
+        "id": "poc_boarding_element",
+        "name": "Boarding element",
+        "faction": "tfb",
+        "summary": "One VAT fireteam plus one attached specialist: 6 models.",
+        "teams": [
+          "vat_fireteam"
+        ],
+        "attachments": {
+          "choose": 1,
+          "from": [
+            "tfb_pathfinder",
+            "tfb_marksman"
+          ]
+        },
+        "recommended_gear": [
+          "One VAT Assaulter carries a breaching charge, the other a trauma kit.",
+          "Attach a Pathfinder with a trauma kit if you expect long fights; a Marksman for ships with hangars or long passages."
+        ]
+      }
+    ]
+  },
+  "troops": {
+    "version": "0.3.0",
+    "troops": [
+      {
+        "id": "tfb_vat_leader",
+        "faction": "tfb",
+        "name": "VAT Team Leader",
+        "role": "Leader",
+        "q": 2,
+        "armour": "void_plate",
+        "weapon": "carbine",
+        "weapon_options": [
+          "shotgun"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "flashbang",
+          "frag"
+        ],
+        "gear": [
+          "jump_pack",
+          "low_light_optics"
+        ],
+        "keywords": [
+          "leader",
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Task Force Boone: VAT Elements"
+      },
+      {
+        "id": "tfb_vat_assaulter",
+        "faction": "tfb",
+        "name": "VAT Assaulter",
+        "role": "Assaulter",
+        "q": 1,
+        "armour": "void_plate",
+        "weapon": "carbine",
+        "weapon_options": [
+          "shotgun"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "flashbang",
+          "frag"
+        ],
+        "gear": [
+          "jump_pack",
+          "low_light_optics"
+        ],
+        "gear_options": [
+          "breaching_charge",
+          "breaching_tool",
+          "trauma_kit"
+        ],
+        "keywords": [
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Task Force Boone: VAT Elements"
+      },
+      {
+        "id": "tfb_vat_gunner",
+        "faction": "tfb",
+        "name": "VAT Gunner",
+        "role": "Gunner",
+        "q": 1,
+        "armour": "void_plate",
+        "weapon": "compact_lmg",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "jump_pack",
+          "low_light_optics"
+        ],
+        "keywords": [
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Task Force Boone: VAT Elements (compact LMG)"
+      },
+      {
+        "id": "tfb_data_specialist",
+        "faction": "tfb",
+        "name": "Data Specialist",
+        "role": "Specialist",
+        "q": 1,
+        "armour": "void_plate",
+        "weapon": "carbine",
+        "melee": "knife",
+        "grenades": [
+          "flashbang",
+          "smoke"
+        ],
+        "gear": [
+          "jump_pack",
+          "low_light_optics",
+          "jammer",
+          "hacking_rig"
+        ],
+        "keywords": [
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Task Force Boone: VAT Elements (data specialist)"
+      },
+      {
+        "id": "tfb_pathfinder_leader",
+        "faction": "tfb",
+        "name": "Pathfinder Team Leader",
+        "role": "Leader",
+        "q": 2,
+        "armour": "void_suit",
+        "weapon": "heavy_rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "low_light_optics"
+        ],
+        "keywords": [
+          "leader",
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Task Force Boone: Recon Team Pathfinders"
+      },
+      {
+        "id": "tfb_pathfinder",
+        "faction": "tfb",
+        "name": "Pathfinder",
+        "role": "Rifleman",
+        "q": 1,
+        "armour": "void_suit",
+        "weapon": "heavy_rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "low_light_optics"
+        ],
+        "gear_options": [
+          "trauma_kit",
+          "breaching_charge"
+        ],
+        "keywords": [
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Task Force Boone: Recon Team Pathfinders"
+      },
+      {
+        "id": "tfb_pathfinder_gunner",
+        "faction": "tfb",
+        "name": "Pathfinder SAW Gunner",
+        "role": "Gunner",
+        "q": 1,
+        "armour": "void_suit",
+        "weapon": "lmg",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "low_light_optics"
+        ],
+        "keywords": [
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Task Force Boone: Recon Team Pathfinders (SAW)"
+      },
+      {
+        "id": "tfb_marksman",
+        "faction": "tfb",
+        "name": "Control Team Marksman",
+        "role": "Marksman",
+        "q": 2,
+        "armour": "void_suit",
+        "weapon": "dmr",
+        "melee": "knife",
+        "grenades": [
+          "smoke",
+          "frag"
+        ],
+        "gear": [
+          "low_light_optics"
+        ],
+        "keywords": [
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Task Force Boone: Strikeforce (Control Team)"
+      },
+      {
+        "id": "fs_salvage_hand",
+        "faction": "freespace",
+        "name": "Salvage Hand",
+        "role": "Crew",
+        "q": 0,
+        "armour": "none",
+        "weapon": "sidearm",
+        "weapon_options": [
+          "smg"
+        ],
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [
+          "extinguisher"
+        ],
+        "keywords": [],
+        "miniatures": "BPRE Aayari Guard (Shurta)"
+      },
+      {
+        "id": "fs_security",
+        "faction": "freespace",
+        "name": "Asset Security Officer",
+        "role": "Guard",
+        "q": 1,
+        "armour": "flak",
+        "weapon": "carbine",
+        "weapon_options": [
+          "shotgun"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "flashbang"
+        ],
+        "gear": [],
+        "keywords": [],
+        "miniatures": "BPRE Aayari Guard (Shurta)"
+      },
+      {
+        "id": "fs_security_gunner",
+        "faction": "freespace",
+        "name": "Asset Security Gunner",
+        "role": "Gunner",
+        "q": 1,
+        "armour": "flak",
+        "weapon": "lmg",
+        "melee": "knife",
+        "grenades": [],
+        "gear": [],
+        "keywords": [],
+        "miniatures": "BPRE Shurta PKM gun team"
+      },
+      {
+        "id": "fs_enforcer",
+        "faction": "freespace",
+        "name": "Collections Enforcer",
+        "role": "Enforcer",
+        "q": 1,
+        "armour": "flak",
+        "armour_options": [
+          "composite"
+        ],
+        "weapon": "rifle",
+        "weapon_options": [
+          "smg",
+          "shotgun"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [],
+        "keywords": [],
+        "miniatures": "BPRE Hongbin Mercenaries"
+      },
+      {
+        "id": "fs_repo_breacher",
+        "faction": "freespace",
+        "name": "Repossession Breacher",
+        "role": "Breacher",
+        "q": 1,
+        "armour": "composite",
+        "weapon": "shotgun",
+        "weapon_options": [
+          "smg"
+        ],
+        "melee": "breaching_tool",
+        "grenades": [
+          "flashbang",
+          "frag"
+        ],
+        "gear": [
+          "breaching_charge"
+        ],
+        "keywords": [],
+        "miniatures": "BPRE Hongbin / SPEAR Brigade Close Combat Kill Teams"
+      },
+      {
+        "id": "fs_liquidator",
+        "faction": "freespace",
+        "name": "Liquidator",
+        "role": "Hitter",
+        "q": 2,
+        "armour": "composite",
+        "weapon": "smg",
+        "weapon_options": [
+          "rifle"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "flashbang"
+        ],
+        "gear": [
+          "silencer",
+          "low_light_optics"
+        ],
+        "keywords": [],
+        "miniatures": "BLKOUT Black Pact (Clean Up Force)"
+      },
+      {
+        "id": "fs_tech",
+        "faction": "freespace",
+        "name": "Salvage Tech",
+        "role": "Specialist",
+        "q": 1,
+        "armour": "flak",
+        "weapon": "sidearm",
+        "melee": "knife",
+        "grenades": [
+          "smoke"
+        ],
+        "gear": [
+          "hacking_rig",
+          "breaching_charge"
+        ],
+        "keywords": [],
+        "miniatures": "BPRE Muhtasib sappers"
+      },
+      {
+        "id": "fs_recovery_captain",
+        "faction": "freespace",
+        "name": "Recovery Captain",
+        "role": "Leader",
+        "q": 2,
+        "armour": "composite",
+        "weapon": "smg",
+        "weapon_options": [
+          "rifle"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [
+          "low_light_optics"
+        ],
+        "keywords": [
+          "leader"
+        ],
+        "miniatures": "BPRE Hongbin Enabler"
+      },
+      {
+        "id": "fs_turret",
+        "faction": "freespace",
+        "name": "Sentry Turret",
+        "role": "Automated",
+        "q": 1,
+        "armour": "composite",
+        "weapon": "lmg",
+        "melee": null,
+        "grenades": [],
+        "gear": [],
+        "keywords": [
+          "automated"
+        ],
+        "move": 0,
+        "miniatures": "Any turret model, or a marked token"
+      },
+      {
+        "id": "fs_drone",
+        "faction": "freespace",
+        "name": "Security Drone",
+        "role": "Automated",
+        "q": 1,
+        "armour": "flak",
+        "weapon": "smg",
+        "melee": null,
+        "grenades": [],
+        "gear": [
+          "low_light_optics"
+        ],
+        "keywords": [
+          "automated",
+          "void_trained"
+        ],
+        "miniatures": "Any small drone model"
+      },
+      {
+        "id": "ct_borz_boarder",
+        "faction": "contractor",
+        "name": "Contract Boarder",
+        "role": "Assaulter",
+        "q": 2,
+        "armour": "void_plate",
+        "weapon": "carbine",
+        "weapon_options": [
+          "shotgun"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "flashbang",
+          "frag"
+        ],
+        "gear": [
+          "breaching_charge"
+        ],
+        "keywords": [
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Manticor Borz"
+      },
+      {
+        "id": "ct_borz_heavy",
+        "faction": "contractor",
+        "name": "Contract Heavy",
+        "role": "Gunner",
+        "q": 2,
+        "armour": "heavy",
+        "weapon": "lmg",
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [],
+        "keywords": [
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Manticor Borz"
+      },
+      {
+        "id": "ct_harlow_operator",
+        "faction": "contractor",
+        "name": "Reaction Force Operator",
+        "role": "Rifleman",
+        "q": 2,
+        "armour": "composite",
+        "weapon": "rifle",
+        "weapon_options": [
+          "carbine"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [],
+        "keywords": [],
+        "miniatures": "BLKOUT Harlow Kinetic Solutions"
+      },
+      {
+        "id": "ct_harlow_gunner",
+        "faction": "contractor",
+        "name": "Reaction Force Gunner",
+        "role": "Gunner",
+        "q": 2,
+        "armour": "composite",
+        "weapon": "lmg",
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [],
+        "keywords": [],
+        "miniatures": "BLKOUT Harlow Kinetic Solutions"
+      },
+      {
+        "id": "ct_hired_marksman",
+        "faction": "contractor",
+        "name": "Hired Marksman",
+        "role": "Marksman",
+        "q": 2,
+        "armour": "composite",
+        "weapon": "dmr",
+        "melee": "knife",
+        "grenades": [
+          "smoke"
+        ],
+        "gear": [
+          "low_light_optics"
+        ],
+        "keywords": [],
+        "miniatures": "BLKOUT Banak Strategic"
+      },
+      {
+        "id": "ct_hired_heavy",
+        "faction": "contractor",
+        "name": "Hired Heavy Gunner",
+        "role": "Gunner",
+        "q": 2,
+        "armour": "composite",
+        "weapon": "lmg",
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [],
+        "keywords": [],
+        "miniatures": "BLKOUT P3 (Szabla Group)"
+      },
+      {
+        "id": "md_handler",
+        "faction": "directorate",
+        "name": "Directorate Handler",
+        "role": "Leader",
+        "q": 3,
+        "armour": "void_plate",
+        "weapon": "carbine",
+        "melee": "knife",
+        "grenades": [
+          "flashbang",
+          "frag"
+        ],
+        "gear": [
+          "silencer",
+          "low_light_optics",
+          "hacking_rig"
+        ],
+        "keywords": [
+          "leader",
+          "void_trained"
+        ],
+        "miniatures": "BLKOUT Handler Team Alpha"
+      },
+      {
+        "id": "md_operator",
+        "faction": "directorate",
+        "name": "Directorate Deniable Operator",
+        "role": "Assaulter",
+        "q": 2,
+        "armour": "composite",
+        "weapon": "smg",
+        "melee": "breaching_tool",
+        "grenades": [
+          "flashbang",
+          "frag"
+        ],
+        "gear": [
+          "silencer",
+          "low_light_optics"
+        ],
+        "keywords": [],
+        "miniatures": "BPRE 00 Unit Nitto Close Combat Kill Team"
       }
     ]
   },
@@ -364,12 +1379,32 @@
         "keywords": []
       },
       {
+        "id": "heavy_rifle",
+        "name": "Heavy rifle",
+        "damage": "2d8",
+        "short_range": 30,
+        "ap": 1,
+        "keywords": []
+      },
+      {
         "id": "lmg",
         "name": "LMG",
         "damage": "2d8",
         "short_range": 30,
         "ap": 0,
         "keywords": [
+          "auto",
+          "suppressing"
+        ]
+      },
+      {
+        "id": "compact_lmg",
+        "name": "Compact LMG",
+        "damage": "2d8",
+        "short_range": 18,
+        "ap": 0,
+        "keywords": [
+          "handy",
           "auto",
           "suppressing"
         ]

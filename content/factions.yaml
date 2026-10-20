@@ -1,0 +1,124 @@
+# Factions and enemy elements for Imperator Black, rules v0.3.
+# Elements are the building blocks the mission generator draws enemy forces from.
+version: 0.3.0
+
+factions:
+  - id: tfb
+    name: Task Force Boone
+    side: player
+    summary: "Expeditionary task force whose Void Assault Teams board and clear ships and stations."
+  - id: freespace
+    name: Freespace Solutions
+    side: enemy
+    summary: "Privatized debt and salvage corporation that unofficially conducts grey-zone operations for paying patrons."
+  - id: contractor
+    name: Contractors
+    side: enemy
+    summary: "Mercenary companies and hired guns Freespace pays by the job."
+  - id: directorate
+    name: Meridian Directorate
+    side: enemy
+    summary: "Technocratic state run through its intelligence ministries; Freespace's current patron."
+
+# composition: troop id and count. alternatives: other troop ids the generator may swap in.
+elements:
+  - id: salvage_crew
+    name: Salvage crew
+    faction: freespace
+    tier: 1
+    behavior: cowed
+    composition: [{ troop: fs_salvage_hand, count: 3 }]
+
+  - id: asset_security
+    name: Asset security
+    faction: freespace
+    tier: 1
+    behavior: sentry
+    composition: [{ troop: fs_security, count: 2 }, { troop: fs_security_gunner, count: 1 }]
+
+  - id: recovery_captain
+    name: Recovery captain
+    faction: freespace
+    tier: 1
+    behavior: leader
+    composition: [{ troop: fs_recovery_captain, count: 1 }]
+
+  - id: collections_enforcers
+    name: Collections enforcers
+    faction: freespace
+    tier: 2
+    behavior: aggressive
+    composition: [{ troop: fs_enforcer, count: 3 }]
+
+  - id: salvage_techs
+    name: Salvage techs
+    faction: freespace
+    tier: 2
+    behavior: saboteur
+    composition: [{ troop: fs_tech, count: 2 }]
+
+  - id: automated_defences
+    name: Automated defences
+    faction: freespace
+    tier: 2
+    behavior: automated
+    composition: [{ troop: fs_turret, count: 1 }]
+    alternatives: [fs_drone]
+
+  - id: repossession_team
+    name: Repossession team
+    faction: freespace
+    tier: 3
+    behavior: aggressive
+    composition: [{ troop: fs_repo_breacher, count: 3 }]
+
+  - id: liquidators
+    name: Liquidators
+    faction: freespace
+    tier: 3
+    behavior: tactical
+    composition: [{ troop: fs_liquidator, count: 2 }]
+
+  - id: hired_gun
+    name: Hired gun
+    faction: contractor
+    tier: 3
+    behavior: attached
+    composition: [{ troop: ct_hired_marksman, count: 1 }]
+    alternatives: [ct_hired_heavy]
+
+  - id: contract_boarding_team
+    name: Contract boarding team
+    faction: contractor
+    tier: 3
+    behavior: tactical
+    reaction_force: true
+    composition: [{ troop: ct_borz_boarder, count: 3 }, { troop: ct_borz_heavy, count: 1 }]
+
+  - id: contract_reaction_force
+    name: Contract reaction force
+    faction: contractor
+    tier: 3
+    behavior: aggressive
+    reaction_force: true
+    composition: [{ troop: ct_harlow_operator, count: 3 }, { troop: ct_harlow_gunner, count: 1 }]
+
+  - id: directorate_handler
+    name: Directorate handler
+    faction: directorate
+    tier: 4
+    behavior: handler
+    composition: [{ troop: md_handler, count: 1 }]
+
+  - id: directorate_operators
+    name: Directorate deniable operators
+    faction: directorate
+    tier: 4
+    behavior: tactical
+    composition: [{ troop: md_operator, count: 3 }]
+
+threat_tiers:
+  - { tier: 1, name: Low,    summary: "Crew and asset security under a recovery captain." }
+  - { tier: 2, name: Medium, summary: "Adds collections enforcers, salvage techs and automated defences." }
+  - { tier: 3, name: High,   summary: "Adds repossession teams, liquidators and hired guns; a contractor reaction force answers high alert." }
+  - { tier: 4, name: Story,  summary: "Adds Meridian Directorate handlers or deniable operators." }

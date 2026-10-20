@@ -63,6 +63,13 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 
 ## Phase 2 — Forces, equipment, and content schema
 
+**Progress (2026-10-20):**
+- [x] Content schema for gear, troops, factions and elements, rosters, behaviors ([content/README.md](../content/README.md)), with a cross-reference validator in CI
+- [x] Task Force Boone teams and starting force; Freespace, contractor and Directorate troops and elements (proposed, awaiting RJ's review)
+- [x] Rules chapter 9: [forces and equipment](../rules/09-forces-equipment.md)
+- [x] Printable [unit cards and quick reference](print/)
+- [ ] RJ review of profiles, then a gym game with the cards
+
 1. Define the YAML schemas: weapon, armor, gear, troop type, unit, keyword.
 2. **Task Force Boone** roster: fireteam of 4–6 plus a leader, with roles (rifleman, gunner, breacher, medic, marksman, leader).
 3. **Opposing force:** build out the chosen opposition's elements, mapped to the BLKOUT / BPRE miniatures you own ([opposition-force.md](design/opposition-force.md)).

@@ -1,0 +1,14 @@
+# Enemy behavior profiles, rules v0.3.
+# Only ids and one-line intent for now; Phase 3 writes the decision tables.
+version: 0.3.0
+
+behaviors:
+  - { id: cowed,      name: Cowed,      summary: "Holds its compartment, falls back under Suppression, may surrender." }
+  - { id: sentry,     name: Sentry,     summary: "Holds chokepoints, overwatches doors, raises the alarm." }
+  - { id: aggressive, name: Aggressive, summary: "Closes distance, flanks through side passages, seeks close combat." }
+  - { id: tactical,   name: Tactical,   summary: "Fire and manoeuvre: one element fixes while another moves; uses Overwatch and grenades." }
+  - { id: saboteur,   name: Saboteur,   summary: "Avoids fights; works consoles, rigs charges, seals doors, destroys evidence." }
+  - { id: automated,  name: Automated,  summary: "Permanent Overwatch on its field of fire, or triggers on proximity." }
+  - { id: leader,     name: Leader,     summary: "Rallies the most suppressed friend nearby, then acts with its element." }
+  - { id: handler,    name: Handler,    summary: "Independent elite; protects the patron's interests first, the mission second." }
+  - { id: attached,   name: Attached,   summary: "Uses the profile of the element it is attached to." }

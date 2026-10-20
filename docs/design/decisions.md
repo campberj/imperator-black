@@ -4,7 +4,7 @@ Living record of design decisions. Each entry is **Settled** (build on it), **Le
 
 Imperator Black continues the earlier *A War of Worlds* design. Its documents are kept in [a-war-of-worlds/](a-war-of-worlds/): the [design statement and roadmap](a-war-of-worlds/design-statement-and-roadmap.md) and [prototype rules v0.1](a-war-of-worlds/prototype-rules-v0.1.md). Entries marked *(AWoW)* come from there. Where this log and those documents disagree, this log wins.
 
-Last updated: 2026-10-20 (rules v0.3)
+Last updated: 2026-10-20 (Phase 2 forces)
 
 ---
 
@@ -83,6 +83,13 @@ Last updated: 2026-10-20 (rules v0.3)
 | 6.2 | Armour 0–3: None, Flak, Composite plate, Heavy plate. *(AWoW prototype)* | Leaning |
 | 6.3 | Tiered equipment so mixed collections share a table. *(AWoW)* | Settled |
 | 6.4 | Forces built with a campaign **requisition budget**; points optional. *(AWoW)* | Settled |
+| 6.5 | Player forces are built from **teams** (tables of organisation) with fixed role slots and per-model weapon and gear options: VAT fireteam (5), Pathfinder recon team (4), Control team (2). | Proposed |
+| 6.6 | PoC starting force: the **Boarding element**, one VAT fireteam plus one attached Pathfinder or Marksman (6 models). | Proposed |
+| 6.7 | Task Force Boone quality: leaders and marksmen Q2, everyone else Q1, leaving room to grow through veterancy. VATs wear Void plate (2); Pathfinders and marksmen wear Void suits (1). | Proposed |
+| 6.8 | New weapons: **heavy rifle** (2d8, AP 1; Pathfinders) and **compact LMG** (2d8, short 18", Handy, Auto, Suppressing; VAT gunner). | Leaning — playtest |
+| 6.9 | Gear list ([gear.yaml](../../content/gear.yaml)): breaching charge, breaching tool, trauma kit (Medic), hacking rig (Tech), low-light optics, extinguisher, silencer (Silenced). New rules: **jump pack** and **jammer**. | Settled; jump pack and jammer Proposed |
+| 6.10 | **Automated** keyword: no Suppression, breaking, casualty shock or Rally; a wound row of 6+ destroys it. A model with no melee weapon can't start close combat and loses any exchange it's forced into. | Leaning — playtest |
+| 6.11 | Razorback drone (BLKOUT) deferred to the vehicles phase, after the PoC. | Proposed |
 
 ## 7. Campaign and progression
 
@@ -115,6 +122,7 @@ Last updated: 2026-10-20 (rules v0.3)
 | 9.4 | Player faction: **Task Force Boone** (BLKOUT miniatures). Opposition from BLKOUT and BPRE miniatures. | Settled |
 | 9.5 | Opposition: **Freespace Solutions**, a privatized debt and salvage corporation that unofficially conducts grey-zone operations for paying patrons. Three layers (patron, corporate core, contractors), element profiles, a miniature mapping across all BLKOUT/BPRE kits, and four threat tiers ([opposition-force.md](opposition-force.md)). | Settled |
 | 9.6 | Freespace's current patron is the **Meridian Directorate**, a technocratic state run through its intelligence ministries. | Settled |
+| 9.8 | Freespace, contractor and Directorate troop profiles and element compositions per [troops.yaml](../../content/troops.yaml) and [factions.yaml](../../content/factions.yaml). | Proposed |
 | 9.7 | Campaign thread: intelligence from Freespace operations builds toward **attributing** Freespace to the Meridian Directorate, which can escalate into a deniable war with the Directorate (peer naval-infantry foe). | Leaning |
 
 ## 10. Software

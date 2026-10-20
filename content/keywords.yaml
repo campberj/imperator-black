@@ -10,6 +10,7 @@ weapon:
   - { id: blast,          name: Blast,          text: "Affects every model within the blast radius with line of sight to the point of impact." }
   - { id: confined_bonus, name: Confined,       text: "+1 wound row to models in an enclosed compartment of 6\" x 6\" or smaller." }
   - { id: breach,         name: Breach,         text: "Can destroy doors, hatches and thin bulkheads." }
+  - { id: silenced,       name: Silenced,       text: "Shots do not count as noise for the alert track." }
 
 armour:
   - { id: sealed, name: Sealed, text: "Protected from vacuum and smoke; resists decompression tests (+2)." }
@@ -20,4 +21,5 @@ model:
   - { id: low_light,    name: Low-light,    text: "Ignores the darkness penalty." }
   - { id: tech,         name: Tech,         text: "May Hack locked doors and consoles (Interact test 9+)." }
   - { id: medic,       name: Medic,        text: "+2 to Medic actions; automatically recovers a row-6 Down model." }
+  - { id: automated,    name: Automated,    text: "Never gains Suppression, never tests for breaking, and is not affected by casualty shock or Rally. A wound row of 6 or more destroys it." }
   - { id: leader,       name: Leader,       text: "A Rally made by a Leader, or on a model within 6\" and in line of sight of a Leader, removes 2 Suppression instead of 1. The side's highest-Q Leader adds its Q to initiative." }

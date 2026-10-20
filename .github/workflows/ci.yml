@@ -17,6 +17,9 @@ jobs:
       - name: Install PyYAML
         run: pip install pyyaml
 
+      - name: Content cross-references resolve
+        run: python3 tools/validate_content.py
+
       - name: Content JSON is current
         run: python3 tools/build_content.py --check
 

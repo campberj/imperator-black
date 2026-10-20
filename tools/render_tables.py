@@ -42,7 +42,68 @@ def signed(v):
     return f"+{v}" if v > 0 else str(v)
 
 
+def names(file, section, field="name"):
+    return {x["id"]: x[field] for x in load(file)[section]}
+
+
+def move_of(t):
+    if "move" in t:
+        return f'{t["move"]}"' if t["move"] else "—"
+    heavy = "heavy" in next(a for a in load("armour")["armour"] if a["id"] == t["armour"])["keywords"]
+    return '5"' if heavy else '6"'
+
+
+def render_forces(key):
+    f, section = key.split(".", 1)
+    if f == "troops":
+        weapons = names("weapons", "ranged")
+        melee = names("weapons", "melee")
+        thrown = names("weapons", "thrown")
+        armour = {a["id"]: f'{a["name"]} ({a["value"]})' for a in load("armour")["armour"]}
+        gear = names("gear", "gear")
+        rows = []
+        for t in load("troops")["troops"]:
+            if t["faction"] != section:
+                continue
+            weapon = weapons[t["weapon"]] + "".join(f" / {weapons[o]}" for o in t.get("weapon_options", []))
+            arm = armour[t["armour"]] + "".join(f" / {armour[o]}" for o in t.get("armour_options", []))
+            kit = [melee[t["melee"]]] if t["melee"] else []
+            kit += [thrown[g] for g in t["grenades"]] + [gear[g] for g in t["gear"]]
+            opts = t.get("gear_options", [])
+            kit_text = ", ".join(kit) or "—"
+            if opts:
+                kit_text += "; option: " + " or ".join(gear[g] for g in opts)
+            rows.append((f'**{t["name"]}**', t["role"], t["q"], arm, move_of(t), weapon, kit_text, kw(t["keywords"])))
+        return table(["Troop", "Role", "Q", "Armour", "Move", "Weapon", "Kit", "Keywords"], rows)
+    if key == "gear.gear":
+        return table(["Gear", "Effect", "Status"],
+                     [(g["name"], g["text"], "**Proposed**" if g["status"] == "proposed" else "—") for g in load("gear")["gear"]])
+    if key == "rosters.teams":
+        troops = names("troops", "troops")
+        return table(["Team", "Models", "Role"],
+                     [(tm["name"], ", ".join(f'{s["count"]}× {troops[s["troop"]]}' for s in tm["slots"]), tm["summary"])
+                      for tm in load("rosters")["teams"]])
+    if key == "factions.elements":
+        troops = names("troops", "troops")
+        behaviors = names("behaviors", "behaviors")
+        fac = names("factions", "factions")
+        rows = []
+        for e in load("factions")["elements"]:
+            comp = ", ".join(f'{p["count"]}× {troops[p["troop"]]}' for p in e["composition"])
+            if e.get("alternatives"):
+                comp += " (or " + ", ".join(troops[a] for a in e["alternatives"]) + ")"
+            rows.append((e["name"], fac[e["faction"]], e["tier"], comp, behaviors[e["behavior"]]
+                         + (" — reaction force" if e.get("reaction_force") else "")))
+        return table(["Element", "Faction", "Tier", "Models", "Behavior"], rows)
+    if key == "factions.threat_tiers":
+        return table(["Tier", "Name", "Draws on"], [(t["tier"], t["name"], t["summary"]) for t in load("factions")["threat_tiers"]])
+    return None
+
+
 def render(key):
+    forces = render_forces(key)
+    if forces is not None:
+        return forces
     f, section = key.split(".", 1)
     data = load(f)[section]
     if key == "core.quality":

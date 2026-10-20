@@ -10,6 +10,7 @@ Proof of concept in progress: solo ship and station boarding actions with a full
 ## Rules
 
 - [Rules v0.3 (playtest draft)](rules/README.md)
+- [Printable unit cards and quick reference](docs/print/) (PDF)
 
 ## Documents
 
@@ -39,8 +40,10 @@ Proof of concept in progress: solo ship and station boarding actions with a full
 Requires Python 3 with PyYAML, and the .NET 10 SDK.
 
 ```sh
+python3 tools/validate_content.py   # check content cross-references
 python3 tools/build_content.py      # compile content/*.yaml to content/dist/content.json
 python3 tools/render_tables.py      # regenerate rulebook tables from content/
+python3 tools/print_sheets.py       # regenerate unit cards and quick reference (needs reportlab)
 dotnet run --project app/tests/Imperator.Core.Tests                                   # tests
 dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.3-results.md   # simulator report
 ```

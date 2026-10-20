@@ -1,0 +1,366 @@
+# Troop types for Imperator Black, rules v0.3.
+# One profile per kind of soldier. Rosters and enemy elements are built from these.
+#
+# q: Quality 0-3. armour, weapon, melee: ids from armour.yaml / weapons.yaml.
+# weapon_options: alternative ranged weapons the roster may swap in.
+# grenades: thrown ids carried (default two grenades per model).
+# gear: ids from gear.yaml. keywords: model keywords from keywords.yaml.
+# miniatures: suggested models from RJ's collection.
+version: 0.3.0
+
+troops:
+  # ---------------- Task Force Boone (player) ----------------
+  - id: tfb_vat_leader
+    faction: tfb
+    name: VAT Team Leader
+    role: Leader
+    q: 2
+    armour: void_plate
+    weapon: carbine
+    weapon_options: [shotgun]
+    melee: knife
+    grenades: [flashbang, frag]
+    gear: [jump_pack, low_light_optics]
+    keywords: [leader, void_trained]
+    miniatures: "BLKOUT Task Force Boone: VAT Elements"
+
+  - id: tfb_vat_assaulter
+    faction: tfb
+    name: VAT Assaulter
+    role: Assaulter
+    q: 1
+    armour: void_plate
+    weapon: carbine
+    weapon_options: [shotgun]
+    melee: knife
+    grenades: [flashbang, frag]
+    gear: [jump_pack, low_light_optics]
+    gear_options: [breaching_charge, breaching_tool, trauma_kit]
+    keywords: [void_trained]
+    miniatures: "BLKOUT Task Force Boone: VAT Elements"
+
+  - id: tfb_vat_gunner
+    faction: tfb
+    name: VAT Gunner
+    role: Gunner
+    q: 1
+    armour: void_plate
+    weapon: compact_lmg
+    melee: knife
+    grenades: [frag, smoke]
+    gear: [jump_pack, low_light_optics]
+    keywords: [void_trained]
+    miniatures: "BLKOUT Task Force Boone: VAT Elements (compact LMG)"
+
+  - id: tfb_data_specialist
+    faction: tfb
+    name: Data Specialist
+    role: Specialist
+    q: 1
+    armour: void_plate
+    weapon: carbine
+    melee: knife
+    grenades: [flashbang, smoke]
+    gear: [jump_pack, low_light_optics, jammer, hacking_rig]
+    keywords: [void_trained]
+    miniatures: "BLKOUT Task Force Boone: VAT Elements (data specialist)"
+
+  - id: tfb_pathfinder_leader
+    faction: tfb
+    name: Pathfinder Team Leader
+    role: Leader
+    q: 2
+    armour: void_suit
+    weapon: heavy_rifle
+    melee: knife
+    grenades: [frag, smoke]
+    gear: [low_light_optics]
+    keywords: [leader, void_trained]
+    miniatures: "BLKOUT Task Force Boone: Recon Team Pathfinders"
+
+  - id: tfb_pathfinder
+    faction: tfb
+    name: Pathfinder
+    role: Rifleman
+    q: 1
+    armour: void_suit
+    weapon: heavy_rifle
+    melee: knife
+    grenades: [frag, smoke]
+    gear: [low_light_optics]
+    gear_options: [trauma_kit, breaching_charge]
+    keywords: [void_trained]
+    miniatures: "BLKOUT Task Force Boone: Recon Team Pathfinders"
+
+  - id: tfb_pathfinder_gunner
+    faction: tfb
+    name: Pathfinder SAW Gunner
+    role: Gunner
+    q: 1
+    armour: void_suit
+    weapon: lmg
+    melee: knife
+    grenades: [frag, smoke]
+    gear: [low_light_optics]
+    keywords: [void_trained]
+    miniatures: "BLKOUT Task Force Boone: Recon Team Pathfinders (SAW)"
+
+  - id: tfb_marksman
+    faction: tfb
+    name: Control Team Marksman
+    role: Marksman
+    q: 2
+    armour: void_suit
+    weapon: dmr
+    melee: knife
+    grenades: [smoke, frag]
+    gear: [low_light_optics]
+    keywords: [void_trained]
+    miniatures: "BLKOUT Task Force Boone: Strikeforce (Control Team)"
+
+  # ---------------- Freespace Solutions: corporate core ----------------
+  - id: fs_salvage_hand
+    faction: freespace
+    name: Salvage Hand
+    role: Crew
+    q: 0
+    armour: none
+    weapon: sidearm
+    weapon_options: [smg]
+    melee: unarmed
+    grenades: []
+    gear: [extinguisher]
+    keywords: []
+    miniatures: "BPRE Aayari Guard (Shurta)"
+
+  - id: fs_security
+    faction: freespace
+    name: Asset Security Officer
+    role: Guard
+    q: 1
+    armour: flak
+    weapon: carbine
+    weapon_options: [shotgun]
+    melee: knife
+    grenades: [flashbang]
+    gear: []
+    keywords: []
+    miniatures: "BPRE Aayari Guard (Shurta)"
+
+  - id: fs_security_gunner
+    faction: freespace
+    name: Asset Security Gunner
+    role: Gunner
+    q: 1
+    armour: flak
+    weapon: lmg
+    melee: knife
+    grenades: []
+    gear: []
+    keywords: []
+    miniatures: "BPRE Shurta PKM gun team"
+
+  - id: fs_enforcer
+    faction: freespace
+    name: Collections Enforcer
+    role: Enforcer
+    q: 1
+    armour: flak
+    armour_options: [composite]
+    weapon: rifle
+    weapon_options: [smg, shotgun]
+    melee: knife
+    grenades: [frag]
+    gear: []
+    keywords: []
+    miniatures: "BPRE Hongbin Mercenaries"
+
+  - id: fs_repo_breacher
+    faction: freespace
+    name: Repossession Breacher
+    role: Breacher
+    q: 1
+    armour: composite
+    weapon: shotgun
+    weapon_options: [smg]
+    melee: breaching_tool
+    grenades: [flashbang, frag]
+    gear: [breaching_charge]
+    keywords: []
+    miniatures: "BPRE Hongbin / SPEAR Brigade Close Combat Kill Teams"
+
+  - id: fs_liquidator
+    faction: freespace
+    name: Liquidator
+    role: Hitter
+    q: 2
+    armour: composite
+    weapon: smg
+    weapon_options: [rifle]
+    melee: knife
+    grenades: [frag, flashbang]
+    gear: [silencer, low_light_optics]
+    keywords: []
+    miniatures: "BLKOUT Black Pact (Clean Up Force)"
+
+  - id: fs_tech
+    faction: freespace
+    name: Salvage Tech
+    role: Specialist
+    q: 1
+    armour: flak
+    weapon: sidearm
+    melee: knife
+    grenades: [smoke]
+    gear: [hacking_rig, breaching_charge]
+    keywords: []
+    miniatures: "BPRE Muhtasib sappers"
+
+  - id: fs_recovery_captain
+    faction: freespace
+    name: Recovery Captain
+    role: Leader
+    q: 2
+    armour: composite
+    weapon: smg
+    weapon_options: [rifle]
+    melee: knife
+    grenades: [frag]
+    gear: [low_light_optics]
+    keywords: [leader]
+    miniatures: "BPRE Hongbin Enabler"
+
+  - id: fs_turret
+    faction: freespace
+    name: Sentry Turret
+    role: Automated
+    q: 1
+    armour: composite
+    weapon: lmg
+    melee: null
+    grenades: []
+    gear: []
+    keywords: [automated]
+    move: 0
+    miniatures: "Any turret model, or a marked token"
+
+  - id: fs_drone
+    faction: freespace
+    name: Security Drone
+    role: Automated
+    q: 1
+    armour: flak
+    weapon: smg
+    melee: null
+    grenades: []
+    gear: [low_light_optics]
+    keywords: [automated, void_trained]
+    miniatures: "Any small drone model"
+
+  # ---------------- Contractors ----------------
+  - id: ct_borz_boarder
+    faction: contractor
+    name: Contract Boarder
+    role: Assaulter
+    q: 2
+    armour: void_plate
+    weapon: carbine
+    weapon_options: [shotgun]
+    melee: knife
+    grenades: [flashbang, frag]
+    gear: [breaching_charge]
+    keywords: [void_trained]
+    miniatures: "BLKOUT Manticor Borz"
+
+  - id: ct_borz_heavy
+    faction: contractor
+    name: Contract Heavy
+    role: Gunner
+    q: 2
+    armour: heavy
+    weapon: lmg
+    melee: knife
+    grenades: [frag]
+    gear: []
+    keywords: [void_trained]
+    miniatures: "BLKOUT Manticor Borz"
+
+  - id: ct_harlow_operator
+    faction: contractor
+    name: Reaction Force Operator
+    role: Rifleman
+    q: 2
+    armour: composite
+    weapon: rifle
+    weapon_options: [carbine]
+    melee: knife
+    grenades: [frag, smoke]
+    gear: []
+    keywords: []
+    miniatures: "BLKOUT Harlow Kinetic Solutions"
+
+  - id: ct_harlow_gunner
+    faction: contractor
+    name: Reaction Force Gunner
+    role: Gunner
+    q: 2
+    armour: composite
+    weapon: lmg
+    melee: knife
+    grenades: [frag]
+    gear: []
+    keywords: []
+    miniatures: "BLKOUT Harlow Kinetic Solutions"
+
+  - id: ct_hired_marksman
+    faction: contractor
+    name: Hired Marksman
+    role: Marksman
+    q: 2
+    armour: composite
+    weapon: dmr
+    melee: knife
+    grenades: [smoke]
+    gear: [low_light_optics]
+    keywords: []
+    miniatures: "BLKOUT Banak Strategic"
+
+  - id: ct_hired_heavy
+    faction: contractor
+    name: Hired Heavy Gunner
+    role: Gunner
+    q: 2
+    armour: composite
+    weapon: lmg
+    melee: knife
+    grenades: [frag]
+    gear: []
+    keywords: []
+    miniatures: "BLKOUT P3 (Szabla Group)"
+
+  # ---------------- Meridian Directorate (patron) ----------------
+  - id: md_handler
+    faction: directorate
+    name: Directorate Handler
+    role: Leader
+    q: 3
+    armour: void_plate
+    weapon: carbine
+    melee: knife
+    grenades: [flashbang, frag]
+    gear: [silencer, low_light_optics, hacking_rig]
+    keywords: [leader, void_trained]
+    miniatures: "BLKOUT Handler Team Alpha"
+
+  - id: md_operator
+    faction: directorate
+    name: Directorate Deniable Operator
+    role: Assaulter
+    q: 2
+    armour: composite
+    weapon: smg
+    melee: breaching_tool
+    grenades: [flashbang, frag]
+    gear: [silencer, low_light_optics]
+    keywords: []
+    miniatures: "BPRE 00 Unit Nitto Close Combat Kill Team"

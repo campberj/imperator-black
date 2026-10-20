@@ -35,7 +35,9 @@ Weapons have **no maximum range**. Each has a **short range**: beyond it the sho
 | Carbine | 2d8 | 18" | -1 / -2 | 0 | Handy |
 | Shotgun | 2d12 | 10" | -2 / -3 | 0 | Handy |
 | Rifle | 2d8 | 30" | -1 / -2 | 0 | — |
+| Heavy rifle | 2d8 | 30" | -1 / -2 | 1 | — |
 | LMG | 2d8 | 30" | -1 / -2 | 0 | Auto, Suppressing |
+| Compact LMG | 2d8 | 18" | -1 / -2 | 0 | Handy, Auto, Suppressing |
 | DMR | 2d10 | 48" | -1 / -2 | 0 | — |
 | AT launcher | 2d12 | 36" | -1 / -2 | 1 | One per round, Cumbersome |
 <!-- /table -->
@@ -51,6 +53,7 @@ Weapons have **no maximum range**. Each has a **short range**: beyond it the sho
 | *Blast* | Affects every model within the blast radius with line of sight to the point of impact. |
 | *Confined* | +1 wound row to models in an enclosed compartment of 6" x 6" or smaller. |
 | *Breach* | Can destroy doors, hatches and thin bulkheads. |
+| *Silenced* | Shots do not count as noise for the alert track. |
 <!-- /table -->
 
 ## Cover
