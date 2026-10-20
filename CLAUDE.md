@@ -2,6 +2,8 @@
 
 A 28mm sci-fi narrative campaign wargame (printed rules first) plus a companion app. Read `docs/design/decisions.md` before changing rules or architecture; it is the authority, and `docs/roadmap.md` says what phase we're in.
 
+**Working on the app? Start with [`app/README.md`](app/README.md)**: current state and the next tasks in order.
+
 ## Ground rules
 
 - **Content is the single source of truth.** Game numbers live in `content/*.yaml`. Never hand-edit tables in `rules/*.md` between `<!-- table:… -->` markers, or `content/dist/content.json`.
