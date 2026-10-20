@@ -30,6 +30,11 @@ attributes:
   - { id: wounds,   name: Wounds,   short: W,   text: "Wounded markers a model can carry; one more puts it Down." }
   - { id: size,     name: Size,     short: SZ,  text: "Physical bulk: 1 small drone, 2 human, 3 large (walkers and vehicles are larger). Used by rules for hatches, cover and vehicles." }
 
+# Automatic fire (Auto N): extra targets must be within zone inches of the first target.
+auto_fire:
+  zone: 3
+  extra_target_modifier: -1
+
 suppression:
   modifier_per_marker: -1
   max: 5

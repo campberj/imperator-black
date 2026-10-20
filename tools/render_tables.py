@@ -133,7 +133,8 @@ def render(key):
         rows = []
         for w in data:
             pen = w.get("range_penalty", [-1, -2])
-            rows.append((w["name"], w["damage"], f'{w["short_range"]}"', f"{pen[0]} / {pen[1]}", w["ap"], kw(w["keywords"])))
+            kws = ", ".join(f'Auto {w["auto"]}' if k == "auto" and w.get("auto") else KEYWORD_NAMES.get(k, k) for k in w["keywords"]) or "—"
+            rows.append((w["name"], w["damage"], f'{w["short_range"]}"', f"{pen[0]} / {pen[1]}", w["ap"], kws))
         return table(["Weapon", "Damage", "Short range", "Beyond / double", "AP", "Keywords"], rows)
     if key == "weapons.melee":
         return table(["Melee weapon", "Damage", "AP"], [(w["name"], w["damage"], w["ap"]) for w in data])

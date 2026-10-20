@@ -23,6 +23,8 @@ public sealed class RoomClear
     private readonly bool _defendersOnOverwatch;
     private bool _preEntryDone;
     public int MaxRounds { get; init; } = 3;
+    /// <summary>Chance that another model in the compartment is within the 3" beaten zone of the first target.</summary>
+    public double ZoneChance { get; init; } = 0.6;
     /// <summary>Experimental: extra wound rows for shots inside the compartment (close quarters).</summary>
     public int CloseQuartersRows { get; init; }
     public int RoundCleared { get; private set; }
@@ -183,11 +185,12 @@ public sealed class RoomClear
 
     private void AttackerShoot(Soldier s, bool moved)
     {
-        var t = _def.Where(d => d.IsActive).OrderBy(d => d.Cover).ThenBy(_ => _rng.NextDouble()).FirstOrDefault();
-        if (t is null) return;
+        var order = _def.Where(d => d.IsActive).OrderBy(d => d.Cover).ThenBy(_ => _rng.NextDouble()).ToList();
+        if (order.Count == 0) return;
         int sit = moved && !s.Weapon.Has("handy") ? -1 : 0;
-        Shooting.Fire(_rng, _core, s, t, sit, CloseQuartersRows);
-        if (!t.IsActive) CasualtyShock(t, _def);
+        var targets = Zone(order[0], order.Skip(1));
+        Shooting.FireBurst(_rng, _core, s, targets, sit, CloseQuartersRows);
+        foreach (var t in targets.Where(t => !t.IsActive)) CasualtyShock(t, _def);
         if (s.IsActive) DefenderReactions(s); // Shoot trigger
     }
 
@@ -208,8 +211,10 @@ public sealed class RoomClear
                 d.Activated = true; // unactivated reaction: gives up its activation
             }
             else continue;
-            Shooting.Fire(_rng, _core, d, trigger, -1, CloseQuartersRows);
-            if (!trigger.IsActive) CasualtyShock(trigger, _att.Where(_inside.Contains).ToList());
+            var others = _att.Where(a => a.IsActive && a != trigger && _inside.Contains(a)).OrderBy(a => a.Cover);
+            var targets = Zone(trigger, others);
+            Shooting.FireBurst(_rng, _core, d, targets, -1, CloseQuartersRows);
+            foreach (var t in targets.Where(t => !t.IsActive)) CasualtyShock(t, _att.Where(_inside.Contains).ToList());
         }
     }
 
@@ -238,9 +243,19 @@ public sealed class RoomClear
 
     private void DefenderShoot(Soldier d, List<Soldier> visible)
     {
-        var t = visible.OrderBy(a => a.Cover).ThenBy(_ => _rng.NextDouble()).First();
-        Shooting.Fire(_rng, _core, d, t, 0, CloseQuartersRows);
-        if (!t.IsActive) CasualtyShock(t, _att.Where(_inside.Contains).ToList());
+        var order = visible.Where(a => a.IsActive).OrderBy(a => a.Cover).ThenBy(_ => _rng.NextDouble()).ToList();
+        if (order.Count == 0) return;
+        var targets = Zone(order[0], order.Skip(1));
+        Shooting.FireBurst(_rng, _core, d, targets, 0, CloseQuartersRows);
+        foreach (var t in targets.Where(t => !t.IsActive)) CasualtyShock(t, _att.Where(_inside.Contains).ToList());
+    }
+
+    /// <summary>The first target, then each other candidate that happens to be inside its beaten zone.</summary>
+    private List<Soldier> Zone(Soldier first, IEnumerable<Soldier> candidates)
+    {
+        var list = new List<Soldier> { first };
+        list.AddRange(candidates.Where(_ => _rng.NextDouble() < ZoneChance));
+        return list;
     }
 
     // ---------- Shared ----------

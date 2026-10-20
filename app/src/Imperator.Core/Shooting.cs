@@ -42,6 +42,30 @@ public static class Shooting
         return r;
     }
 
+    /// <summary>
+    /// Shoot with automatic fire: one hit roll (with damage) per target, up to the weapon's rate,
+    /// against different models in the beaten zone. Targets after the first take the extra-target modifier.
+    /// <paramref name="targets"/> lists the first target, then other models in the zone in the shooter's order of preference.
+    /// </summary>
+    public static List<ShotResult> FireBurst(Rng rng, CoreContent core, Soldier shooter, IReadOnlyList<Soldier> targets, int situational, int rowBonus = 0)
+    {
+        int extra = core.AutoFire?.ExtraTargetModifier ?? -1;
+        var results = new List<ShotResult>();
+        foreach (var (t, i) in targets.Where(t => t.IsActive).Take(shooter.Weapon.Rate).Select((t, i) => (t, i)))
+            results.Add(Fire(rng, core, shooter, t, situational + (i > 0 ? extra : 0), rowBonus));
+        return results;
+    }
+
+    /// <summary>Suppressive Fire with automatic fire: one hit roll per target, no damage.</summary>
+    public static int SuppressBurst(Rng rng, CoreContent core, Soldier shooter, IReadOnlyList<Soldier> targets, int situational)
+    {
+        int extra = core.AutoFire?.ExtraTargetModifier ?? -1;
+        int hits = 0;
+        foreach (var (t, i) in targets.Where(t => t.IsActive).Take(shooter.Weapon.Rate).Select((t, i) => (t, i)))
+            if (Suppress(rng, core, shooter, t, situational + (i > 0 ? extra : 0))) hits++;
+        return hits;
+    }
+
     /// <summary>Suppressive Fire: hit roll only; 1 Suppression on a hit, 2 if it beats the target by 3+.</summary>
     public static bool Suppress(Rng rng, CoreContent core, Soldier shooter, Soldier target, int situational)
     {

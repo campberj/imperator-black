@@ -112,7 +112,7 @@ def weapon_rows(t):
         rows.append([Paragraph(label, S_CELL), w["damage"], f'{w["short_range"]}"', str(w["ap"])])
         kws = w["keywords"] + (extra_kw if i == 0 else [])
         pen = w.get("range_penalty")
-        notes = [KEYWORDS[k]["name"] for k in kws]
+        notes = [f'Auto {w["auto"]}' if k == "auto" and w.get("auto") else KEYWORDS[k]["name"] for k in kws]
         if pen:
             notes.append(f"beyond short {pen[0]}, beyond double {pen[1]}")
         if notes:
@@ -251,7 +251,7 @@ Q_SMALL = style(6.6, leading=8, colour=MUTED)
 
 
 def qtable(rows, widths, header=True):
-    data = [[Paragraph(str(c), style(8, "Body-Bold" if header and r == 0 else "Body", leading=9.6)) for c in row]
+    data = [[Paragraph(str(c), style(7.6, "Body-Bold" if header and r == 0 else "Body", leading=9)) for c in row]
             for r, row in enumerate(rows)]
     t = Table(data, colWidths=widths, repeatRows=1 if header else 0)
     st = [("GRID", (0, 0), (-1, -1), 0.4, RULE), ("VALIGN", (0, 0), (-1, -1), "TOP"),
@@ -332,7 +332,7 @@ def quick_reference():
     from reportlab.platypus import PageBreak
     story.append(PageBreak())
     weapons = qtable([["Weapon", "Dmg", "Short", "AP", "Keywords"]] +
-                     [[w["name"], w["damage"], f'{w["short_range"]}"', w["ap"], ", ".join(KEYWORDS[k]["name"] for k in w["keywords"]) or "—"]
+                     [[w["name"], w["damage"], f'{w["short_range"]}"', w["ap"], ", ".join(f'Auto {w["auto"]}' if k == "auto" and w.get("auto") else KEYWORDS[k]["name"] for k in w["keywords"]) or "—"]
                       for w in C["weapons"]["ranged"]],
                      [0.95 * inch, 0.4 * inch, 0.42 * inch, 0.3 * inch, half - 2.07 * inch])
     melee = qtable([["Melee", "Dmg", "AP"]] + [[m["name"], m["damage"], m["ap"]] for m in C["weapons"]["melee"]],

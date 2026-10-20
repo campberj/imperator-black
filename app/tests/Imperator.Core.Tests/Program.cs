@@ -166,6 +166,31 @@ Soldier Fresh(int armour = 0, int wounds = 1) => Soldier.Generic("t", 1, armour,
     Check("a model with no melee weapon never wins close combat", turretWins == 0, $"({turretWins})");
 }
 
+// --- Automatic fire (Auto N) ---
+{
+    Check("LMG is Auto 3", content.Ranged("lmg").Rate == 3);
+    Check("SMG is Auto 2", content.Ranged("smg").Rate == 2);
+    Check("rifle fires at one target", content.Ranged("rifle").Rate == 1);
+    var gunner = Soldier.Generic("g", 1, 1, content.Ranged("lmg"), content.Melee("knife"));
+    var many = Enumerable.Range(0, 5).Select(_ => Fresh(1)).ToList();
+    var res = Shooting.FireBurst(new Rng(9), core, gunner, many, 0);
+    Check("burst engages at most N targets", res.Count == 3, $"({res.Count})");
+    var rifleman = Soldier.Generic("r", 1, 1, content.Ranged("rifle"), content.Melee("knife"));
+    Check("non-Auto burst engages one target", Shooting.FireBurst(new Rng(9), core, rifleman, many, 0).Count == 1);
+    Check("extra-target modifier is -1", core.AutoFire?.ExtraTargetModifier == -1 && core.AutoFire?.Zone == 3);
+    // Extra targets are hit less often than the first (the -1).
+    var rng = new Rng(21); int firstHits = 0, thirdHits = 0, trials = 40_000;
+    for (int i = 0; i < trials; i++)
+    {
+        var ts = Enumerable.Range(0, 3).Select(_ => Fresh(3)).ToList();
+        var r = Shooting.FireBurst(rng, core, gunner, ts, 0);
+        if (r[0].Hit) firstHits++;
+        if (r[2].Hit) thirdHits++;
+    }
+    Near("first target hit rate (net +1) = 21/36", firstHits / (double)trials, 21.0 / 36, 0.01);
+    Near("extra target hit rate (net 0) = 15/36", thirdHits / (double)trials, 15.0 / 36, 0.01);
+}
+
 // --- Close combat ---
 {
     var rng = new Rng(3);

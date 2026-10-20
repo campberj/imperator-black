@@ -31,13 +31,13 @@ Weapons have **no maximum range**. Each has a **short range**: beyond it the sho
 | Weapon | Damage | Short range | Beyond / double | AP | Keywords |
 |---|---|---|---|---|---|
 | Sidearm | 2d6 | 8" | -1 / -2 | 0 | Handy |
-| SMG | 2d8 | 12" | -1 / -2 | 0 | Handy, Auto |
+| SMG | 2d8 | 12" | -1 / -2 | 0 | Handy, Auto 2 |
 | Carbine | 2d8 | 18" | -1 / -2 | 0 | Handy |
 | Shotgun | 2d12 | 10" | -2 / -3 | 0 | Handy |
 | Rifle | 2d8 | 30" | -1 / -2 | 0 | — |
 | Heavy rifle | 2d8 | 30" | -1 / -2 | 1 | — |
-| LMG | 2d8 | 30" | -1 / -2 | 0 | Auto, Suppressing |
-| Compact LMG | 2d8 | 18" | -1 / -2 | 0 | Handy, Auto, Suppressing |
+| LMG | 2d8 | 30" | -1 / -2 | 0 | Auto 3, Suppressing |
+| Compact LMG | 2d8 | 18" | -1 / -2 | 0 | Handy, Auto 3, Suppressing |
 | DMR | 2d10 | 48" | -1 / -2 | 0 | — |
 | AT launcher | 2d12 | 36" | -1 / -2 | 1 | One per round, Cumbersome |
 <!-- /table -->
@@ -46,7 +46,7 @@ Weapons have **no maximum range**. Each has a **short range**: beyond it the sho
 | Keyword | Effect |
 |---|---|
 | *Handy* | Ignores the moved-this-activation penalty. |
-| *Auto* | May use Suppressive Fire. |
+| *Auto* | Auto N: may use Suppressive Fire. Shoot or Suppressive Fire may engage up to N models within 3" of the first target, one roll each, -1 after the first. |
 | *Suppressing* | A hit also adds 1 Suppression. |
 | *One per round* | May fire once per round, including reactions. |
 | *Cumbersome* | An extra -1 when firing after a Move; cannot fire as a reaction. |
@@ -66,9 +66,18 @@ A target has **Light cover** if at least a third of its body is hidden behind an
 
 Aim gives +1 to the next Shoot in the same activation.
 
+## Automatic fire
+
+A weapon with **Auto N** (for example *Auto 3*) can engage several models with one action.
+
+- **Shoot:** choose the first target as normal. Then choose up to N − 1 more **different** models that are within **3"** of the first target and visible to the shooter. Roll a separate hit roll, with damage dice, for each. Every target after the first takes **−1** to hit.
+- **Suppressive Fire** spreads in the same way (see below).
+- **Reactions:** a reaction Shoot with an *Auto* weapon may spread too; the triggering model is the first target, and the usual −1 for a reaction applies to every roll.
+- A model can be engaged only once by the same burst.
+
 ## Suppressive Fire
 
-*Auto* weapons only. Pick a visible target and make a hit roll, without damage dice. On a hit the target gains 1 Suppression, or 2 if the roll beats 8 by 3 or more.
+*Auto* weapons only. Pick a visible target and make a hit roll, without damage dice. On a hit the target gains 1 Suppression, or 2 if the roll beats 8 by 3 or more. An *Auto N* weapon may spread Suppressive Fire across up to N models within 3" of the first target, rolling for each, with −1 for every target after the first.
 
 ## Wound table
 

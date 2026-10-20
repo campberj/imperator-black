@@ -18,6 +18,8 @@ public sealed class Firefight
     public double MinRange { get; init; } = 6;
     public double MaxRange { get; init; } = 24;
     public double AdvanceChance { get; init; } = 0.2;
+    /// <summary>Chance that another enemy model is within the 3" beaten zone of the first target.</summary>
+    public double ZoneChance { get; init; } = 0.35;
 
     public Firefight(Rng rng, CoreContent core, List<Soldier> a, List<Soldier> b)
     {
@@ -89,8 +91,16 @@ public sealed class Firefight
     {
         var t = Target(foe);
         if (t is null) return;
-        Shooting.Fire(_rng, _core, s, t, situational + RangeMod(s));
-        if (!t.IsActive) CasualtyShock(t, foe);
+        var targets = Zone(t, foe);
+        Shooting.FireBurst(_rng, _core, s, targets, situational + RangeMod(s));
+        foreach (var x in targets.Where(x => !x.IsActive)) CasualtyShock(x, foe);
+    }
+
+    private List<Soldier> Zone(Soldier first, List<Soldier> foe)
+    {
+        var list = new List<Soldier> { first };
+        list.AddRange(foe.Where(f => f.IsActive && f != first && _rng.NextDouble() < ZoneChance).OrderBy(f => f.Cover));
+        return list;
     }
 
     private void CasualtyShock(Soldier casualty, List<Soldier> side)
@@ -156,7 +166,7 @@ public sealed class Firefight
         else if (s.Weapon.Has("auto") && foe.Count(f => f.IsActive) >= 2)
         {
             var t = Target(foe);
-            if (t is not null) Shooting.Suppress(_rng, _core, s, t, RangeMod(s));
+            if (t is not null) Shooting.SuppressBurst(_rng, _core, s, Zone(t, foe), RangeMod(s));
             Shoot(s, side, foe, 0);
         }
         else

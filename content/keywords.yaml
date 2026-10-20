@@ -3,7 +3,7 @@ version: 0.4.0
 
 weapon:
   - { id: handy,          name: Handy,          text: "Ignores the moved-this-activation penalty." }
-  - { id: auto,           name: Auto,           text: "May use Suppressive Fire." }
+  - { id: auto,           name: Auto,           text: "Auto N: may use Suppressive Fire. Shoot or Suppressive Fire may engage up to N models within 3\" of the first target, one roll each, -1 after the first." }
   - { id: suppressing,    name: Suppressing,    text: "A hit also adds 1 Suppression." }
   - { id: one_per_round,  name: One per round,  text: "May fire once per round, including reactions." }
   - { id: cumbersome,     name: Cumbersome,     text: "An extra -1 when firing after a Move; cannot fire as a reaction." }

@@ -186,6 +186,10 @@
         "text": "Physical bulk: 1 small drone, 2 human, 3 large (walkers and vehicles are larger). Used by rules for hatches, cover and vehicles."
       }
     ],
+    "auto_fire": {
+      "zone": 3,
+      "extra_target_modifier": -1
+    },
     "suppression": {
       "modifier_per_marker": -1,
       "max": 5,
@@ -658,7 +662,7 @@
       {
         "id": "auto",
         "name": "Auto",
-        "text": "May use Suppressive Fire."
+        "text": "Auto N: may use Suppressive Fire. Shoot or Suppressive Fire may engage up to N models within 3\" of the first target, one roll each, -1 after the first."
       },
       {
         "id": "suppressing",
@@ -1680,6 +1684,7 @@
         "damage": "2d8",
         "short_range": 12,
         "ap": 0,
+        "auto": 2,
         "keywords": [
           "handy",
           "auto"
@@ -1731,6 +1736,7 @@
         "damage": "2d8",
         "short_range": 30,
         "ap": 0,
+        "auto": 3,
         "keywords": [
           "auto",
           "suppressing"
@@ -1742,6 +1748,7 @@
         "damage": "2d8",
         "short_range": 18,
         "ap": 0,
+        "auto": 3,
         "keywords": [
           "handy",
           "auto",

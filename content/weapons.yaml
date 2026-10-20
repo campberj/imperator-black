@@ -1,17 +1,18 @@
 # Weapons for Imperator Black, rules v0.4.
 # damage: dice pair thrown with the hit dice (ranged) or by the winner (melee).
 # short_range: inches; beyond it range_penalty[0], beyond double range_penalty[1].
+# auto: rate of fire for Auto weapons (the N in Auto N): how many different models one Shoot or Suppressive Fire may engage.
 version: 0.4.0
 
 ranged:
   - { id: sidearm,     name: Sidearm,     damage: 2d6,  short_range: 8,  ap: 0, keywords: [handy] }
-  - { id: smg,         name: SMG,         damage: 2d8,  short_range: 12, ap: 0, keywords: [handy, auto] }
+  - { id: smg,         name: SMG,         damage: 2d8,  short_range: 12, ap: 0, auto: 2, keywords: [handy, auto] }
   - { id: carbine,     name: Carbine,     damage: 2d8,  short_range: 18, ap: 0, keywords: [handy] }
   - { id: shotgun,     name: Shotgun,     damage: 2d12, short_range: 10, ap: 0, keywords: [handy], range_penalty: [-2, -3] }
   - { id: rifle,       name: Rifle,       damage: 2d8,  short_range: 30, ap: 0, keywords: [] }
   - { id: heavy_rifle, name: Heavy rifle, damage: 2d8,  short_range: 30, ap: 1, keywords: [] }
-  - { id: lmg,         name: LMG,         damage: 2d8,  short_range: 30, ap: 0, keywords: [auto, suppressing] }
-  - { id: compact_lmg, name: Compact LMG, damage: 2d8,  short_range: 18, ap: 0, keywords: [handy, auto, suppressing] }
+  - { id: lmg,         name: LMG,         damage: 2d8,  short_range: 30, ap: 0, auto: 3, keywords: [auto, suppressing] }
+  - { id: compact_lmg, name: Compact LMG, damage: 2d8,  short_range: 18, ap: 0, auto: 3, keywords: [handy, auto, suppressing] }
   - { id: dmr,         name: DMR,         damage: 2d10, short_range: 48, ap: 0, keywords: [] }
   - { id: at_launcher, name: AT launcher, damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome] }
 

@@ -13,6 +13,8 @@ public sealed record WoundRowDef(int Row, int Min, int Max, string Id, string Te
 
 public sealed record HitModifierDef(string Id, int Value, string Text);
 
+public sealed record AutoFireDef(int Zone, int ExtraTargetModifier);
+
 public sealed record CoreContent(
     string Version,
     int HitTarget,
@@ -21,10 +23,13 @@ public sealed record CoreContent(
     List<RankDef> Ranks,
     List<AttributeDef> Attributes,
     List<HitModifierDef> HitModifiers,
-    List<WoundRowDef> WoundTable);
+    List<WoundRowDef> WoundTable,
+    AutoFireDef? AutoFire = null);
 
-public sealed record RangedWeapon(string Id, string Name, string Damage, int ShortRange, int Ap, List<string> Keywords, List<int>? RangePenalty)
+public sealed record RangedWeapon(string Id, string Name, string Damage, int ShortRange, int Ap, List<string> Keywords, List<int>? RangePenalty, int? Auto = null)
 {
+    /// <summary>Rate of fire: how many different models one Shoot or Suppressive Fire may engage (Auto N).</summary>
+    public int Rate => Has("auto") ? Math.Max(1, Auto ?? 1) : 1;
     public DiceSpec DamageDice => DiceSpec.Parse(Damage);
     public bool Has(string keyword) => Keywords.Contains(keyword);
     public int PenaltyBeyondShort => RangePenalty is { Count: > 0 } p ? p[0] : -1;
