@@ -73,15 +73,41 @@ After changing an entity: `dotnet ef migrations add <Name> --project app/src/Imp
 
 With the API running: `npm --prefix app/web install && npm --prefix app/web run dev`, then open http://localhost:5173.
 
-### 5. Stop and check the roadmap
+### 6. Unit database and reference (web, read-only)
+
+The content already holds the unit database: every faction, troop profile, weapon, armour, gear item, skill, keyword, team, enemy element and behavior profile (`content/*.yaml`, served by `GET /content`). Build the screens to browse it. No new rules; every word comes from the `text` and `name` fields.
+
+- **Units:** pick a faction, see its troop profiles as cards (the same layout as `docs/print/unit-cards.pdf`: attributes, armour, weapons and options, kit, skills with their text), its teams (player factions) or elements (enemy factions, with threat tier and behavior).
+- **Reference:** gear, skills (with levels and Proposed status), weapon and armour keywords, searchable.
+- **Behavior cards:** the chapter 10 reference cards and one card per behavior profile.
+- Filters: faction, rank, role, keyword; a search box across names and text.
+- **Done when:** every troop in `content/troops.yaml` renders, a Vitest test checks one profile per faction against the content, and lint, tests and build pass.
+
+### 7. Deck layout generator in Core
+
+`tools/generate_layout.py` is the reference implementation of rules chapter 11 (`content/layouts.yaml`).
+
+- Port it to `Imperator.Core` (`Layouts/DeckGenerator.cs`), seeded through `Rng`, producing the same deck model (tiles, doors with state and security, cover, entry, objective, hazard, roll count).
+- Match the reference statistics: run `python3 tools/generate_layout.py --check --n 2000` and assert the C# generator's compartments, loops and tile use per vessel are within a small tolerance; every deck connected and within 12 of each tile.
+- `GET /decks/{vessel}?seed=N` returns the deck as JSON, recording seed and content version.
+- **Done when:** tests pass and the endpoint returns a deck for each vessel.
+
+### 8. Deck map in the web app
+
+- Render a deck from task 7 as SVG: the 3" grid, tiles with ids and names, doors coloured by state with security, cover pieces with ids, entry and objective; the same conventions as the printed deck sheets (`docs/print/decks/`).
+- Rooms, doors and terrain tables beside the map; a seed box and a vessel picker; print styles.
+
+### 9. Stop and check the roadmap
 
 Beyond this, the app's real features wait on rules:
 
 | App feature | Waits on |
 |---|---|
-| Layout generator (SVG ship maps from tiles) | Ready: Phase 4 tables in `content/layouts.yaml`, rules chapter 11. `tools/generate_layout.py` is the reference implementation: port it to `Imperator.Core` and check the same seed statistics (`--check`). |
+| Layout generator (SVG ship maps from tiles) | Tasks 7 and 8. |
+| Land table generator (chapter 12 sector tables) | Ready after task 8, same pattern; RJ to confirm priority. |
+| Custom troop and unit builder | Phase 7 point values, then Phase 9 (decision 6.12) |
 | Mission generator (briefing, enemy force, contact tables) | Phase 5: missions |
-| Enemy guidance cards | Ready: Phase 3 is done (`content/behaviors.yaml`, rules chapter 10). Can follow task 4 as an in-app behavior-card view. |
+| Enemy guidance cards | Task 6. |
 | Campaign tracker | Phase 7: campaign loop |
 
 Planned app feature (RJ, 2026-10-20): an in-app reference that explains every gear item, keyword and special rule, read from `content/` (the list will grow). Build it from the same `text` fields the rulebook tables use.
