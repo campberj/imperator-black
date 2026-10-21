@@ -1,0 +1,194 @@
+# Land terrain and table setup, rules v0.5 (chapter 12).
+# Terrain types say what a piece does; environments say what to put on a land table.
+# status: proposed until playtested.
+version: 0.5.0
+
+# kind: area (a footprint models stand in), linear (a wall-like line), solid (blocks sight),
+#       structure (a building), feature (dug in or raised ground).
+# cover: what it gives a model in or behind it. move: normal, difficult (each inch costs 2"),
+#       obstacle (+2" to cross), blocked. sight: how it affects line of sight.
+types:
+  - id: open
+    name: Open ground
+    kind: area
+    cover: "None. Find Cover works here (chapter 4)."
+    move: normal
+    sight: "Clear."
+  - id: scrub
+    name: Scrub, crops, light woods
+    kind: area
+    cover: "Light, for a model inside it."
+    move: normal
+    sight: "Models see into and out of it, but not through more than 3\" of it."
+  - id: woods
+    name: Dense woods, jungle
+    kind: area
+    cover: "Light, for a model inside it; Heavy if it is also behind a trunk or rock (true line of sight)."
+    move: difficult
+    sight: "Models see into and out of it, but not through more than 1\" of it."
+  - id: rubble
+    name: Rubble, scrap, ruins
+    kind: area
+    cover: "Light, for a model inside it; Heavy behind standing walls."
+    move: difficult
+    sight: "Use true line of sight; standing walls block it."
+  - id: low_wall
+    name: Low wall, sandbags, barricade, fallen tree
+    kind: linear
+    cover: "Heavy, for a model within 1\" behind it."
+    move: obstacle
+    sight: "Does not block line of sight."
+  - id: hedge
+    name: Hedge, fence, crop row
+    kind: linear
+    cover: "Light, for a model within 1\" behind it."
+    move: obstacle
+    sight: "A hedge blocks line of sight, except to and from models within 1\" of it. A fence does not."
+  - id: wire
+    name: Wire
+    kind: linear
+    cover: "None."
+    move: difficult
+    sight: "Does not block line of sight."
+  - id: solid
+    name: Container, vehicle, wreck, rock, tank
+    kind: solid
+    cover: "Heavy, for a model behind it."
+    move: blocked
+    sight: "Blocks line of sight."
+  - id: building
+    name: Building
+    kind: structure
+    cover: "Walls block sight. A model at a window or doorway, or behind a roof parapet, has Heavy cover."
+    move: "Through doors (chapter 3); climbing through a window is an obstacle."
+    sight: "Through doors, windows and holes only."
+  - id: bunker
+    name: Bunker, reinforced building
+    kind: structure
+    cover: "As a building; its walls cannot be breached."
+    move: "Through doors only."
+    sight: "Through firing slits and doors only."
+  - id: crater
+    name: Crater, ditch, trench
+    kind: feature
+    cover: "Heavy, for a model inside it against shooters outside it."
+    move: "Getting in or out is an obstacle."
+    sight: "A model moving along a trench is out of sight of models at ground level outside it, unless they are within 3\" of its edge."
+  - id: hill
+    name: Hill, ridge, dune, raised platform
+    kind: feature
+    cover: "Light, for a model within 1\" behind the crest, against shooters below it."
+    move: "Normal; climbing a sheer face is an obstacle per 3\" of height."
+    sight: "The crest blocks line of sight between models on opposite sides below it."
+  - id: water
+    name: Water
+    kind: area
+    cover: "None."
+    move: "Shallow: difficult. Deep: impassable."
+    sight: "Clear."
+
+# Height and falling.
+height:
+  level: 3
+  rules:
+    - "Each storey, platform or level is 3\" high. Climbing stairs or a ramp costs the vertical distance as well as the horizontal; a ladder costs double the vertical distance."
+    - "Height advantage: a shooter a full level or more above its target ignores Light cover from linear terrain, and treats Heavy cover from linear terrain as Light."
+    - "Jumping down up to 3\" is free. A model that jumps or falls further tests 2d6 + Physique, 8+; on a fail, roll 2d6 on the wound table (2d8 if the drop was more than 6\"), stepped down by armour as normal."
+
+# Noise on land (chapter 10): sound carries further in the open.
+noise:
+  loud_range: 24
+  text: "On land, Loud noise is heard by elements with a model within 24\"; Very loud noise by every element on the board."
+
+# Visibility conditions, rolled once for a land battle (d6).
+conditions:
+  - { roll: "1-3", id: clear, name: Clear, text: "No effect." }
+  - { roll: "4", id: rain, name: Rain or wind, text: "−1 to hit beyond 18\". −1 to Throw tests." }
+  - { roll: "5", id: haze, name: Fog, haze or dust, text: "Models are seen only within 18\" (12\" in a dust storm in the desert)." }
+  - { roll: "6", id: night, name: Night, text: "Darkness (chapter 8): models are seen only within 12\"." }
+
+# Environments. table: d6 per 12" sector. fill: what a sector becomes in the density check.
+environments:
+  - id: urban
+    name: Urban
+    fill: "Rubble, 6\" × 6\"."
+    table:
+      - { roll: "1", text: "Street: one wreck or vehicle (solid)." }
+      - { roll: "2", text: "Rubble, 6\" × 6\", with a standing wall." }
+      - { roll: "3", text: "Small building, 6\" × 6\", one storey with a flat roof." }
+      - { roll: "4", text: "Large building, about 6\" × 9\", two storeys." }
+      - { roll: "5", text: "Ruined building: walls without a roof, rubble inside." }
+      - { roll: "6", text: "Barricade (low wall) across the sector, and a wreck." }
+  - id: industrial
+    name: Industrial
+    fill: "Two containers (solid)."
+    table:
+      - { roll: "1", text: "Yard: two containers (solid)." }
+      - { roll: "2", text: "Tanks or pipework (solid), about 6\" across." }
+      - { roll: "3", text: "Warehouse, about 6\" × 9\", one tall storey with a gantry inside." }
+      - { roll: "4", text: "Scrap heap (rubble), 6\" × 6\"." }
+      - { roll: "5", text: "Crates and low walls (low wall), two pieces." }
+      - { roll: "6", text: "Raised platform or gantry (hill, one level) with ladders." }
+  - id: woodland
+    name: Woodland
+    fill: "Scrub, 6\" × 6\"."
+    table:
+      - { roll: "1", text: "Open ground." }
+      - { roll: "2", text: "Scrub, 6\" × 6\"." }
+      - { roll: "3", text: "Woods, 6\" × 9\"." }
+      - { roll: "4", text: "Woods, 6\" × 6\", and a fallen tree (low wall)." }
+      - { roll: "5", text: "Hedge or fence line across the sector." }
+      - { roll: "6", text: "Rocky outcrop: a hill with two rocks (solid) on it." }
+  - id: jungle
+    name: Jungle
+    fill: "Scrub, 6\" × 6\"."
+    table:
+      - { roll: "1", text: "Scrub, 6\" × 6\"." }
+      - { roll: "2", text: "Dense jungle (woods), 9\" × 9\"." }
+      - { roll: "3", text: "Dense jungle (woods), 6\" × 6\", and a fallen tree (low wall)." }
+      - { roll: "4", text: "Stream across the sector (shallow water), with scrub on its banks." }
+      - { roll: "5", text: "Overgrown ruins: rubble with a standing wall." }
+      - { roll: "6", text: "Rocky rise: a hill with a rock (solid)." }
+  - id: desert
+    name: Desert, badlands
+    fill: "Two rocks (solid)."
+    table:
+      - { roll: "1", text: "Open ground." }
+      - { roll: "2", text: "Open ground with a crater." }
+      - { roll: "3", text: "Rocks: two pieces (solid)." }
+      - { roll: "4", text: "Dune or ridge (hill) across the sector." }
+      - { roll: "5", text: "Scrub, 6\" × 6\"." }
+      - { roll: "6", text: "Outpost: a small building and a low wall." }
+  - id: farmland
+    name: Farmland
+    fill: "Hedge line across the sector."
+    table:
+      - { roll: "1", text: "Open field." }
+      - { roll: "2", text: "Crops (scrub), 9\" × 9\"." }
+      - { roll: "3", text: "Hedge or stone wall (low wall) across the sector." }
+      - { roll: "4", text: "Farm building, 6\" × 6\", two storeys." }
+      - { roll: "5", text: "Copse (woods), 6\" × 6\"." }
+      - { roll: "6", text: "Vehicles or machinery: two pieces (solid)." }
+  - id: fortified
+    name: Fortified position
+    fill: "Crater."
+    table:
+      - { roll: "1", text: "Trench across the sector, with a firing step." }
+      - { roll: "2", text: "Sandbag line (low wall)." }
+      - { roll: "3", text: "Bunker, about 6\" × 6\", with firing slits." }
+      - { roll: "4", text: "Crater field: two craters." }
+      - { roll: "5", text: "Wire across the sector." }
+      - { roll: "6", text: "Rubble, 6\" × 6\"." }
+
+environment_roll:
+  - { roll: "1", environment: urban }
+  - { roll: "2", environment: industrial }
+  - { roll: "3", environment: woodland }
+  - { roll: "4", environment: jungle }
+  - { roll: "5", environment: desert }
+  - { roll: "6", environment: farmland }
+
+boards:
+  - { models: "Up to 8 a side", size: "36\" × 36\"", sectors: "3 × 3" }
+  - { models: "9 to 16 a side", size: "48\" × 48\"", sectors: "4 × 4" }
+  - { models: "Larger, or long advances", size: "60\" × 36\" (the dry-erase map)", sectors: "5 × 3" }

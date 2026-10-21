@@ -114,6 +114,18 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 
 **Exit:** The paper procedure produces a sensible, playable layout in under 10 minutes using only owned tiles.
 
+## Phase 4b — Land battles (pulled forward)
+
+RJ intends to move the 78th campaign onto these rules, so land play came forward from after the PoC.
+
+- [x] Rules chapter 12: [land battles](../rules/12-land-terrain.md): terrain types, height, conditions, noise in the open, land table setup with seven environments (`content/terrain.yaml`)
+- [x] Solo opponent lists reworded for land (area, approach, exit)
+- [x] Printable [land battles reference](print/land-battles.pdf)
+- [ ] A land gym game (a woodland or urban board, a fireteam against a tier 1–2 element)
+- [ ] Land missions (with Phase 5) and vehicles (after the PoC)
+
+**Exit:** A land gym plays without terrain or enemy-behavior questions that the rules don't answer.
+
 ## Phase 5 — Missions
 
 1. Four mission types for the PoC, e.g. *Breach and Clear*, *Recover Personnel*, *Seize Data / Cargo*, *Sabotage*.
@@ -185,7 +197,7 @@ Phase 4 can begin alongside Phase 2. Phase 8 starts once layout and mission tabl
 
 - Multiplayer: accounts, shared campaigns, Commander/Operator roles, asynchronous campaign turns
 - Full ship/outpost and sector layers; additional campaign types with tighter command guidance
-- Planetside battles and larger boards: a land terrain chapter (area terrain, buildings and elevation, difficult ground), land wording for the solo opponent, and a land table-setup procedure (decision 5.9)
+- Larger planetside battles: platoon scale, vehicles and indirect fire (land terrain and setup came forward as Phase 4b)
 - Vehicles, squad- and platoon-scale play
 - PvP rules
 - More organic solo AI

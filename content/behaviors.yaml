@@ -23,7 +23,7 @@ awareness:
 marker:
   - "Place or move the marker to the source of the latest noise, or to where an enemy model last saw a player model."
   - "An Alerted model that ends a Move within 3\" of the marker, seeing no player model, removes it. Its element then holds where it is."
-  - "With no marker on the board, Alerted models hold: stay in cover facing the nearest door and go on Overwatch."
+  - "With no marker on the board, Alerted models hold: stay in cover facing the nearest approach and go on Overwatch."
 
 alarm:
   - "When an element first sees a player model or is hit, it raises the alarm at the end of its next activation: every element on the board becomes Alerted, and the alert track rises by 1."
@@ -38,7 +38,7 @@ noise:
   - id: loud
     name: Loud
     sources: "Unsilenced shooting, forcing a door with a breaching tool"
-    heard: "Elements with a model within 12\", measured through walls"
+    heard: "Elements with a model within 12\" aboard ship, measured through walls; within 24\" on land"
     alert: 1
   - id: very_loud
     name: Very loud
@@ -60,7 +60,7 @@ drills:
   - id: veteran
     rank: veteran
     name: Bounding and grenades
-    text: "As Regular, and: throws a frag at 2 or more player models within its blast radius, with no friend in it; at a closed door with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target."
+    text: "As Regular, and: throws a frag at 2 or more player models within its blast radius, with no friend in it; at a closed door (aboard ship or into a building) with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target."
   - id: elite
     rank: elite
     name: Assault drill
@@ -81,7 +81,7 @@ targets:
 
 moving:
   - "To cover: the nearest position in cover within the Move, Heavy before Light. If the line says \"with a target\", it must still see one; otherwise it ends out of sight of every player model if it can."
-  - "Toward the marker or a target: by the shortest route through doors, ending in cover if it can. Enemy models open locked doors on their own vessel with an Interact."
+  - "Toward the marker or a target: by the shortest route (through doors aboard ship or in buildings; on land, from cover to cover where the route allows), ending in cover if it can. Enemy models open locked doors on their own vessel or ground with an Interact."
   - "Away: by the shortest route out of sight of every player model, ending in cover."
 
 close_quarters:
@@ -100,13 +100,19 @@ tie_breakers:
   - "The lowest-numbered enemy model, or the player model nearest the enemy's objective."
   - "Roll a die."
 
+# Terms the lists use, aboard ship and on land.
+terms:
+  - { term: "Area", text: "Where a model is: a compartment, passage or junction aboard ship; on land, a building, a terrain piece, or the open ground between them." }
+  - { term: "Approach", text: "A way an enemy can come into a model's area: a door aboard ship; a door or window of a building; on land, the side of the model's cover that faces the marker." }
+  - { term: "Exit", text: "The entry point the mission gives the enemy, a secondary airlock or escape pod aboard ship, or the enemy's board edge on land." }
+
 # Behavior profiles. Lists are read top-down; take the first line that applies.
 # engaged: a target in sight. alerted: no target. reactions: when it reacts.
 # close_combat: when it breaks. investigate: which models move toward the marker.
 behaviors:
   - id: cowed
     name: Cowed
-    summary: "Holds its compartment, falls back under Suppression, may surrender."
+    summary: "Holds its ground, falls back under Suppression, may surrender."
     status: proposed
     surrenders: true
     close_quarters: false
@@ -116,7 +122,7 @@ behaviors:
       - "In the open: Move to cover, then Move away."
       - "Otherwise: Shoot, Shoot."
     alerted:
-      - "If it can see a door toward the marker: Move away, out of sight of that door."
+      - "If it can see an approach toward the marker: Move away, out of sight of that approach."
       - "Otherwise: stay put."
     reactions:
       - "Unactivated: when shot at in the open, Move to cover."
@@ -125,7 +131,7 @@ behaviors:
 
   - id: sentry
     name: Sentry
-    summary: "Holds chokepoints, overwatches doors, raises the alarm."
+    summary: "Holds chokepoints, overwatches approaches, raises the alarm."
     status: proposed
     surrenders: false
     close_quarters: true
@@ -137,8 +143,8 @@ behaviors:
       - "Otherwise: Shoot, then Overwatch."
     alerted:
       - "The investigator: Move toward the marker, twice."
-      - "Already in cover covering the door of its compartment nearest the marker: Overwatch."
-      - "Others: Move to cover covering that door, then Overwatch."
+      - "Already in cover covering the approach to its area nearest the marker: Overwatch."
+      - "Others: Move to cover covering that approach, then Overwatch."
     reactions:
       - "Overwatch: Shoot at the first trigger it can."
       - "Unactivated: when shot at in the open, Move to cover."
@@ -156,7 +162,7 @@ behaviors:
       - "A target within short range: Shoot, Shoot."
       - "Otherwise: Move toward the nearest target, then Shoot."
     alerted:
-      - "Move toward the marker, twice. Prefer a route that does not pass through a door a player model can see."
+      - "Move toward the marker, twice. Prefer a route that does not pass through a door or open ground a player model can see (flanking)."
     reactions:
       - "Overwatch: Shoot at the first trigger it can."
       - "Unactivated: when a player model comes within short range in its sight, Shoot."
@@ -195,7 +201,7 @@ behaviors:
       - "In the open: Move away, then Throw smoke between itself and the target if it has one."
       - "Otherwise: Shoot, then Move away."
     alerted:
-      - "An open door between it and the marker within its Move: Move to it, close it and lock it (Interact)."
+      - "An open door between it and the marker within its Move: Move to it, close it and lock it (Interact). No such door (in the open): skip this line."
       - "Otherwise: Move to its task and Interact."
     reactions:
       - "Unactivated: when shot at, Move away."
@@ -246,7 +252,7 @@ behaviors:
     investigate: "Moves to the patron's asset, never toward the marker."
     engaged:
       - "A player model within 6\" of the patron's asset: Shoot it, Shoot it (or charge it, if within its Move)."
-      - "Wounded or with 2 or more Suppression, and the asset safe or lost: Move away, toward the nearest exit. It escapes if it leaves the board."
+      - "Wounded or with 2 or more Suppression, and the asset safe or lost: Move away, toward the nearest exit or board edge. It escapes if it leaves the board."
       - "Otherwise: Aim, then Shoot, picking Leaders first."
     alerted:
       - "Move toward the patron's asset; within 3\" of it, Overwatch."

@@ -305,7 +305,8 @@ def solo_reference_cards():
             [Spacer(1, 3), Paragraph("Targets", S_HEAD)] + _numbered(SOLO["targets"]) + \
             [Spacer(1, 3), Paragraph("Moving", S_HEAD)] + _bulleted(SOLO["moving"]) + \
             [Spacer(1, 3), Paragraph("Surrender", S_HEAD)] + _bulleted(SOLO["surrender"]) + \
-            [Spacer(1, 3), Paragraph("Tie-breakers", S_HEAD)] + _numbered(SOLO["tie_breakers"])
+            [Spacer(1, 3), Paragraph("Tie-breakers", S_HEAD)] + _numbered(SOLO["tie_breakers"]) + \
+            [Spacer(1, 3), Paragraph("Terms", S_HEAD)] + [Paragraph(f"<b>{x['term']}:</b> {x['text']}", S_BODY) for x in SOLO.get("terms", [])]
     card3 = [Paragraph("Drill: set by the element's lowest rank; a friendly Leader within 6\" raises it one step.", S_BODY), Spacer(1, 2)]
     card3 += [Paragraph(f"<b>{RANKS[d['rank']]}, {d['name']}:</b> {d['text']}", S_BODY) for d in SOLO["drills"]]
     card3 += [Spacer(1, 4), Paragraph("Close quarters", S_HEAD), Paragraph(SOLO["close_quarters"][0], S_BODY)] + _numbered(SOLO["close_quarters"][1:])
@@ -565,6 +566,47 @@ def deck_builder():
     return path
 
 
+# ---------------------------------------------------------------- land battles (chapter 12)
+
+def land_reference():
+    from reportlab.platypus import PageBreak
+    T = C["terrain"]
+    path = OUT / "land-battles.pdf"
+    doc = SimpleDocTemplate(str(path), pagesize=letter, leftMargin=0.45 * inch, rightMargin=0.45 * inch,
+                            topMargin=0.4 * inch, bottomMargin=0.4 * inch, title="Imperator Black — Land Battles")
+    W = letter[0] - 0.9 * inch
+    moves = {"normal": "Normal", "difficult": "Difficult (each inch costs 2\")", "obstacle": "Obstacle (+2\")", "blocked": "Blocked"}
+    types = qtable([["Terrain", "Cover", "Movement", "Line of sight"]] +
+                   [[x["name"], x["cover"], moves.get(x["move"], x["move"]), x["sight"]] for x in T["types"]],
+                   [1.35 * inch, 2.2 * inch, 1.45 * inch, W - 5.0 * inch])
+    envs = T["environments"]
+    env_tbl = qtable([["d6"] + [e["name"] for e in envs[:4]]] +
+                     [[str(n)] + [next(r["text"] for r in e["table"] if r["roll"] == str(n)) for e in envs[:4]] for n in range(1, 7)] +
+                     [["Fill"] + [e["fill"] for e in envs[:4]]], [0.35 * inch] + [(W - 0.35 * inch) / 4] * 4)
+    env_tbl2 = qtable([["d6"] + [e["name"] for e in envs[4:]]] +
+                      [[str(n)] + [next(r["text"] for r in e["table"] if r["roll"] == str(n)) for e in envs[4:]] for n in range(1, 7)] +
+                      [["Fill"] + [e["fill"] for e in envs[4:]]], [0.35 * inch] + [(W - 0.35 * inch) / 3] * 3)
+    eroll = " · ".join(f'{r["roll"]} {next(e["name"] for e in envs if e["id"] == r["environment"])}' for r in T["environment_roll"])
+    story = [Paragraph("Imperator Black — Land Battles", Q_TITLE),
+             Paragraph(f"Rules chapter 12 · content v{VERSION}", Q_SMALL), Spacer(1, 5),
+             Paragraph("Terrain", Q_H), types, Spacer(1, 5),
+             Paragraph("Height", Q_H)] + bullets(T["height"]["rules"]) + [Spacer(1, 4),
+             Paragraph("Conditions (d6)", Q_H),
+             qtable([["d6", "Conditions", "Effect"]] + [[c["roll"].replace("-", "–"), c["name"], c["text"]] for c in T["conditions"]],
+                    [0.4 * inch, 1.3 * inch, W - 1.7 * inch]), Spacer(1, 4),
+             Paragraph("Noise in the open", Q_H), Paragraph(T["noise"]["text"] + " Inside a closed building, 12\".", Q_B),
+             PageBreak(), Paragraph("Setting up a land table", Q_H)] + bullets([
+        "<b>1. Environment:</b> from the mission, or roll: " + eroll + ". Fortified positions by mission only.",
+        "<b>2. Board:</b> " + "; ".join(f'{b["models"]}: {b["size"]} ({b["sectors"]} sectors)' for b in T["boards"]) + ".",
+        "<b>3. Sectors:</b> divide the board into 12\" squares; roll once per sector and place the result near its middle, facing your choice.",
+        "<b>4. Density check:</b> three sectors in a line, edge to edge, with no cover? Change the middle one to the environment's Fill.",
+        "<b>5. Conditions:</b> roll once. <b>6. Deployment:</b> player within 6\" of a rolled edge; enemy in the farthest sectors; its exit is its own edge.",
+    ]) + [Spacer(1, 5), env_tbl, Spacer(1, 5), env_tbl2, Spacer(1, 5),
+          Paragraph("Solo opponent terms", Q_H)] + bullets([f"<b>{x['term']}:</b> {x['text']}" for x in SOLO.get("terms", [])])
+    doc.build(story)
+    return path
+
+
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     p, n = unit_cards()
@@ -573,3 +615,4 @@ if __name__ == "__main__":
     p, n = behavior_cards()
     print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
     print(f"Wrote {deck_builder().relative_to(ROOT)}")
+    print(f"Wrote {land_reference().relative_to(ROOT)}")

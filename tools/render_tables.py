@@ -73,6 +73,8 @@ def render_behaviors(section):
     if section == "drills":
         ranks = names("core", "ranks")
         return table(["Lowest rank", "Drill", "Effect"], [(ranks[d["rank"]], f'**{d["name"]}**', d["text"]) for d in B["drills"]])
+    if section == "terms":
+        return table(["Term", "Meaning"], [(f'**{x["term"]}**', x["text"]) for x in B["terms"]])
     if section in ("activation_order", "targets", "tie_breakers"):
         return numbered(B[section])
     if section == "close_quarters":
@@ -97,6 +99,29 @@ def render_behaviors(section):
             ]))
         return "\n\n".join(blocks)
     return bulleted(B[section])
+
+
+def render_terrain(section):
+    T = load("terrain")
+    moves = {"normal": "Normal", "difficult": "Difficult (each inch costs 2\")", "obstacle": "Obstacle (+2\" to cross)", "blocked": "Blocked"}
+    if section == "types":
+        return table(["Terrain", "Cover", "Movement", "Line of sight"],
+                     [(f'**{x["name"]}**', x["cover"], moves.get(x["move"], x["move"]), x["sight"]) for x in T["types"]])
+    if section == "height":
+        return "\n".join(f"- {r}" for r in T["height"]["rules"])
+    if section == "conditions":
+        return table(["d6", "Conditions", "Effect"], [(c["roll"].replace("-", "–"), f'**{c["name"]}**', c["text"]) for c in T["conditions"]])
+    if section == "environment_roll":
+        envs = {e["id"]: e["name"] for e in T["environments"]}
+        return table(["d6", "Environment"], [(r["roll"], envs[r["environment"]]) for r in T["environment_roll"]])
+    if section == "boards":
+        return table(["Force size", "Board", "12\" sectors"], [(b["models"], b["size"], b["sectors"]) for b in T["boards"]])
+    if section == "environments":
+        heads = ["d6"] + [e["name"] for e in T["environments"]]
+        rows = [[str(n)] + [next(r["text"] for r in e["table"] if r["roll"] == str(n)) for e in T["environments"]] for n in range(1, 7)]
+        rows.append(["Fill"] + [e["fill"] for e in T["environments"]])
+        return table(heads, rows)
+    return None
 
 
 def render_layouts(section):
@@ -186,6 +211,8 @@ def render_forces(key):
         return render_behaviors(section)
     if f == "layouts":
         return render_layouts(section)
+    if f == "terrain":
+        return render_terrain(section)
     if key == "core.security":
         sec = load("core")["security"]
         return table(["Security level", "Hack test", "Successes needed", "Typical"],

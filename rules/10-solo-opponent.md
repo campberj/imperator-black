@@ -4,6 +4,16 @@ In solo play the enemy is run by fixed priority lists. Each enemy element has a 
 
 Every profile is printed on a behavior card. Lay the cards beside the board with the enemy unit cards.
 
+The lists work aboard ship and on land. They use three terms:
+
+<!-- table:behaviors.terms -->
+| Term | Meaning |
+|---|---|
+| **Area** | Where a model is: a compartment, passage or junction aboard ship; on land, a building, a terrain piece, or the open ground between them. |
+| **Approach** | A way an enemy can come into a model's area: a door aboard ship; a door or window of a building; on land, the side of the model's cover that faces the marker. |
+| **Exit** | The entry point the mission gives the enemy, a secondary airlock or escape pod aboard ship, or the enemy's board edge on land. |
+<!-- /table -->
+
 ## Awareness
 
 Each enemy element is in one awareness state at a time. Engaged applies model by model.
@@ -25,7 +35,7 @@ Noise alerts the enemy. It also raises the alert track, when the mission uses on
 | Noise | Sources | Heard by | Alert track |
 |---|---|---|---|
 | **Quiet** | Moving, opening and closing doors, hacking, close combat, Silenced shots, smoke grenades | Not heard | — |
-| **Loud** | Unsilenced shooting, forcing a door with a breaching tool | Elements with a model within 12", measured through walls | +1 |
+| **Loud** | Unsilenced shooting, forcing a door with a breaching tool | Elements with a model within 12" aboard ship, measured through walls; within 24" on land | +1 |
 | **Very loud** | Frag grenades, flashbangs, breaching charges, any explosion | Every element on the board | +2 |
 <!-- /table -->
 
@@ -34,7 +44,7 @@ Noise alerts the enemy. It also raises the alert track, when the mission uses on
 <!-- table:behaviors.marker -->
 - Place or move the marker to the source of the latest noise, or to where an enemy model last saw a player model.
 - An Alerted model that ends a Move within 3" of the marker, seeing no player model, removes it. Its element then holds where it is.
-- With no marker on the board, Alerted models hold: stay in cover facing the nearest door and go on Overwatch.
+- With no marker on the board, Alerted models hold: stay in cover facing the nearest approach and go on Overwatch.
 <!-- /table -->
 
 ### The alarm
@@ -44,7 +54,7 @@ Noise alerts the enemy. It also raises the alert track, when the mission uses on
 - If every model of the element is Down, Dead or has surrendered before then, the alarm is not raised.
 <!-- /table -->
 
-Putting down a sentry before the end of its next activation, quietly, keeps the rest of the ship unaware.
+Putting down a sentry before the end of its next activation, quietly, keeps the rest of the ship, or the position, unaware.
 
 ## Drill
 
@@ -55,7 +65,7 @@ Drill is how well an element works together. It depends on the training of its m
 |---|---|---|
 | Green | **No drill** | Each model follows its lists alone. Shoots instead of Aiming, never cracks doors, and throws grenades only where its list says. |
 | Regular | **Fire and manoeuvre** | A model ends a Move in the open, in sight of a player model, only while a friend of its element covers it: on Overwatch, or Engaged with the same target. Otherwise it stops in the last cover on its route, or goes on Overwatch instead of moving. Charges are exempt. |
-| Veteran | **Bounding and grenades** | As Regular, and: throws a frag at 2 or more player models within its blast radius, with no friend in it; at a closed door with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target. |
+| Veteran | **Bounding and grenades** | As Regular, and: throws a frag at 2 or more player models within its blast radius, with no friend in it; at a closed door (aboard ship or into a building) with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target. |
 | Elite | **Assault drill** | As Veteran, and: focus fire, shooting the player model its element has already hit this round if it can see it; picks Leaders and Auto gunners first at each step of the target list. |
 <!-- /table -->
 
@@ -90,7 +100,7 @@ When it is the enemy's turn to activate a model, take the first model that fits:
 
 <!-- table:behaviors.moving -->
 - To cover: the nearest position in cover within the Move, Heavy before Light. If the line says "with a target", it must still see one; otherwise it ends out of sight of every player model if it can.
-- Toward the marker or a target: by the shortest route through doors, ending in cover if it can. Enemy models open locked doors on their own vessel with an Interact.
+- Toward the marker or a target: by the shortest route (through doors aboard ship or in buildings; on land, from cover to cover where the route allows), ending in cover if it can. Enemy models open locked doors on their own vessel or ground with an Interact.
 - Away: by the shortest route out of sight of every player model, ending in cover.
 <!-- /table -->
 
@@ -137,7 +147,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 <!-- table:behaviors.behaviors -->
 ### Cowed
 
-*Holds its compartment, falls back under Suppression, may surrender.* Used by: Salvage crew. **Proposed.**
+*Holds its ground, falls back under Suppression, may surrender.* Used by: Salvage crew. **Proposed.**
 
 **Target in sight**
 
@@ -147,7 +157,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 **No target**
 
-1. If it can see a door toward the marker: Move away, out of sight of that door.
+1. If it can see an approach toward the marker: Move away, out of sight of that approach.
 2. Otherwise: stay put.
 
 **Investigates:** None. Cowed models never move toward the marker.
@@ -161,7 +171,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 ### Sentry
 
-*Holds chokepoints, overwatches doors, raises the alarm.* Used by: Asset security. **Proposed.**
+*Holds chokepoints, overwatches approaches, raises the alarm.* Used by: Asset security. **Proposed.**
 
 **Target in sight**
 
@@ -173,8 +183,8 @@ Read each list top-down and take the first line that applies. **Target in sight*
 **No target**
 
 1. The investigator: Move toward the marker, twice.
-2. Already in cover covering the door of its compartment nearest the marker: Overwatch.
-3. Others: Move to cover covering that door, then Overwatch.
+2. Already in cover covering the approach to its area nearest the marker: Overwatch.
+3. Others: Move to cover covering that approach, then Overwatch.
 
 **Investigates:** One model: the lowest-numbered model without an Auto weapon. The rest hold.
 
@@ -197,7 +207,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 **No target**
 
-1. Move toward the marker, twice. Prefer a route that does not pass through a door a player model can see.
+1. Move toward the marker, twice. Prefer a route that does not pass through a door or open ground a player model can see (flanking).
 
 **Investigates:** Every model.
 
@@ -246,7 +256,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 **No target**
 
-1. An open door between it and the marker within its Move: Move to it, close it and lock it (Interact).
+1. An open door between it and the marker within its Move: Move to it, close it and lock it (Interact). No such door (in the open): skip this line.
 2. Otherwise: Move to its task and Interact.
 
 **Investigates:** None. Saboteurs work their task and seal doors.
@@ -310,7 +320,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 **Target in sight**
 
 1. A player model within 6" of the patron's asset: Shoot it, Shoot it (or charge it, if within its Move).
-2. Wounded or with 2 or more Suppression, and the asset safe or lost: Move away, toward the nearest exit. It escapes if it leaves the board.
+2. Wounded or with 2 or more Suppression, and the asset safe or lost: Move away, toward the nearest exit or board edge. It escapes if it leaves the board.
 3. Otherwise: Aim, then Shoot, picking Leaders first.
 
 **No target**

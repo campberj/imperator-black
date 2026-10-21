@@ -202,6 +202,24 @@ for v in Ly["vessels"]:
         need(h, haz_ids, f"{w} hazard")
     if any(x % 3 for x in v["board"]):
         errors.append(f"{w}: board must be in multiples of 3 inches")
+# Land terrain (chapter 12).
+Tr = C["terrain"]
+ids(Tr["types"], "terrain.types")
+env_ids = ids(Tr["environments"], "terrain.environments")
+for e in Tr["environments"]:
+    covers_d6(e["table"], f"terrain environment {e['id']}")
+covers_d6(Tr["environment_roll"], "terrain.environment_roll")
+covers_d6(Tr["conditions"], "terrain.conditions")
+for r in Tr["environment_roll"]:
+    need(r["environment"], env_ids, "terrain.environment_roll environment")
+for x in Tr["types"]:
+    for k in ("cover", "move", "sight"):
+        if not x.get(k):
+            errors.append(f"terrain type {x['id']}: needs '{k}'")
+for x in C["behaviors"].get("terms", []):
+    if not x.get("term") or not x.get("text"):
+        errors.append("behaviors.terms: each needs term and text")
+
 if not errors:
     sys.path.insert(0, str(ROOT / "tools"))
     import generate_layout as gl
