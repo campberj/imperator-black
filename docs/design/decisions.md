@@ -54,6 +54,7 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 3.17 | **Size:** 1 small drone, 2 human, 3 large; walkers and vehicles larger. First use: crawlways and small hatches admit Size 2 or less. Stealth, resistances and similar come as special rules, not attributes. | Settled |
 | 3.18 | **Skills with levels** replace model keywords (written *Marksman 2*; higher levels include lower). First levelled skill: *Marksman* 1–2. | Settled; Marksman Proposed |
 | 3.19 | **Range bands (RJ, Gym 1 replay):** short range +1, up to double short range 0 (optimum), beyond that −1 (effective, table-wide), instead of today's 0 / −1 / −2. Note: this keeps the three bands but shifts every shot +1, the same as lowering the hit target from 8 to 7, so it raises lethality across the board (shotgun penalties would shift too). If the aim is the point-blank feel without more lethality, the alternative is +1 / 0 / −1 with the hit target at 9. Simulate both before deciding. **Held until it recurs in more playtests** (RJ: rules change on repetition, not after every game). | Open — watching |
+| 3.20 | **Hit target 8+ may be one too high (RJ, Gym 1 replay):** shots miss a lot once cover, Wounded or Suppression apply; RJ also sees the realism argument. Simulated 7+: fights resolve faster (flash-and-clear vs Overwatch 38% → 57% by round 3; stalemates gone) with balance between sides almost unchanged. Options: keep 8+, go to 7+, or keep 8+ and cap stacked penalties. [Comparison](../analysis/hit-target-comparison.md). Check together with 3.19. | Open — watching |
 
 ## 4. Turn structure, reactions and morale
 
@@ -72,6 +73,7 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 4.14 | **Hacking security levels:** each lock or system has a level set by the mission: Basic 7+, Secured 9+ (default), Hardened 9+ ×2 successes, Military 10+ ×2. Successes accumulate across models and rounds; each failed attempt on a target gives +1 to later attempts (max +3). Hacking is quiet. Option held back: a fail by 4 or more is noise. | Proposed — playtest |
 | 4.7 | **Suppression:** each marker −1 to all rolls (max 5); **Pinned at 3+** (only Rally, Find Cover, Move to cover, Shoot from cover). Two or more Suppression cancels Overwatch. *(AWoW prototype)* | Leaning |
 | 4.8 | **Casualty shock** (+1 Suppression when a friend within 6" goes Down/Dead; +2 for the leader) and **breaking** at half a fireteam Down or Dead. *(AWoW prototype)* | Leaning |
+| 4.16 | **Breaking clarified (Gym 1 replay):** test at every activation while at half strength; normal test modifiers; attached models count with their team; enemy elements count as fireteams; Automated never test; recovered models count again; leaving by the entry point = fled. | Settled (RJ) |
 | 4.9 | Leaders can pass actions to subordinates, as the scaling mechanism to squad and platoon (Stargrunt-style). *(AWoW teardown)* | Proposed — post-PoC |
 | 4.10 | No forced unit-cohesion abstractions. *(AWoW)* | Settled |
 
@@ -127,6 +129,7 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 8.9 | **Drill by training:** an element's coordination comes from its lowest rank (Green none; Regular fire and manoeuvre; Veteran bounding, grenades and crack and throw; Elite assault drill and focus fire), raised one step by a friendly Leader within 6". | Settled (approach, RJ); details Proposed — playtest |
 | 8.10 | **Close quarters:** an Engaged model with a player model within 6" checks outnumbered (Move away), charge (Fight 2+, Aggressive or Tactical), frag on two or more, then its profile. From Gym 1: judgment calls in the cargo hold. | Proposed — playtest |
 | 8.11 | **Surrender:** Cowed and Saboteur models test 2d6 + Nerve, 8+ when Pinned or Wounded with a player model within 6"; on a fail they surrender (prisoners if the mission allows). Implements 8.6. | Proposed — playtest |
+| 8.12 | **Recovery under guard and capture (Gym 1 replay):** a Down model in base contact with a standing enemy does not test to recover; if the mission allows prisoners, that enemy may Interact to capture a Down, Bleeding or Critical model. | Settled (RJ) |
 
 ## 9. Proof of concept
 

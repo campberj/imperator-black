@@ -478,8 +478,8 @@ def quick_reference():
     ]) + [Spacer(1, 3), grenades, Spacer(1, 5), Paragraph("Suppression, morale, casualties", Q_H)] + bullets([
         "Suppression: −1 to all rolls each (max 5). <b>Pinned at 3+</b>: only Rally, Find Cover, Move to cover/out of sight, Shoot from cover.",
         "Casualty shock: friend within 6\" goes Down or Dead: +1 Suppression (+2 if the Leader).",
-        "Breaking: half a fireteam out → each tests 2d6 + <b>Nerve</b> (+1 Leader within 6\") at activation; fail = both actions moving away.",
-        "Wounded markers from rows 4–5; any marker −1 to all rolls; more markers than Wounds → Down. Wounded is a flat −1, not per marker. Down: end of round 2d6 + <b>Physique</b> 8+ to rise, no Wounded penalty (gets up with 3 Suppression, markers set to Wounds). Medic action, 2d6 + <b>Tech</b>: Down 8+ (auto with Medic), Bleeding 8+ (becomes Down), Critical 10+ (stabilised).",
+        "Breaking: half a fireteam out → each tests 2d6 + <b>Nerve</b> (+1 Leader within 6\") at <b>every</b> activation; fail = both actions moving away (normal Moves). Enemy elements count as fireteams; Automated never test. Off the board via entry point = fled.",
+        "Wounded markers from rows 4–5; any marker −1 to all rolls; more markers than Wounds → Down. Wounded is a flat −1, not per marker. Down: end of round 2d6 + <b>Physique</b> 8+ to rise, no Wounded penalty (gets up with 3 Suppression, markers set to Wounds); no test while a standing enemy is in base contact. Capture (if allowed): Interact in contact with a Down enemy. Medic action, 2d6 + <b>Tech</b>: Down 8+ (auto with Medic), Bleeding 8+ (becomes Down), Critical 10+ (stabilised).",
     ]) + [Spacer(1, 5), Paragraph("Ship hazards", Q_H)] + bullets([
         "<b>Zero-g:</b> push off in a straight line; end on a surface or keep drifting. Unbraced −1 to shoot, throw and fight (not Void-trained).",
         "<b>Decompression:</b> each model tests 2d6 + Physique, 8+ (+2 Sealed), or is dragged d6\" to the breach; doors seal at end of round; vacuum follows.",

@@ -25,10 +25,17 @@ When a friendly model within 6" goes Down or Dead, a model gains **1 Suppression
 
 ## Breaking
 
-When half of a fireteam (rounded up) is Down, Dead, captured or fled, each remaining model of that fireteam takes a test at the start of its activation: 2d6 + Nerve, +1 if its Leader is within 6".
+When half of a fireteam (rounded up) is Down, Dead, captured or fled, each remaining model of that fireteam takes a **breaking test** at the start of its activation: 2d6 + Nerve, +1 if its Leader is within 6". The usual test modifiers apply (−1 per Suppression, −1 if Wounded).
 
-- **8+:** it fights on.
-- **Fail:** it spends both actions Moving away from the enemy, toward its entry point or the nearest cover out of sight.
+- **8+:** it fights on this activation.
+- **Fail:** it spends both actions Moving away from the enemy, toward its entry point or the nearest cover out of sight. These are ordinary Moves: they trigger reactions, and a Pinned model must still end in cover or out of sight.
+
+Clarifications:
+
+- **Every activation.** A model tests at the start of every activation while its fireteam is at half strength or worse. Passing once does not make it immune.
+- **Who counts.** A model attached to a fireteam counts as part of it. Each enemy element counts as a fireteam. *Automated* models never test.
+- **Recovered models count again.** A model that gets back up is no longer a casualty, so the fireteam may climb back above half strength and stop testing.
+- **Fleeing.** A breaking model that leaves the board through its side's entry point has **fled**. It takes no further part in the mission, but it is not a casualty.
 
 ## Wounds
 
@@ -48,6 +55,11 @@ At the end of each round, each **Down** model (not Bleeding or Critical) tests 2
 
 - **8+:** it gets up with **3 Suppression** (Pinned) and its Wounded markers set to its Wounds attribute (any extra are removed), so it has −1 to all rolls and one more Wounded result puts it Down again.
 - **Fail:** it stays Down.
+- **Under guard:** a Down model in base contact with a standing enemy model does not test.
+
+### Capture
+
+If the mission allows prisoners, a model in base contact with an enemy that is Down, Bleeding or Critical may **Interact** to capture it. A captured model is out of the mission; mark it and leave it in place until it is moved (missions say how prisoners are moved). Bleeding and Critical clocks keep running on captured models.
 
 ### Medic action
 
