@@ -29,7 +29,7 @@ These are foundations that don't depend on unfinished rules. Each should leave C
 
 ### 1. Move tests to xUnit
 
-- Replace the console runner with an xUnit project at the same path; port all 64 checks.
+- Replace the console runner with an xUnit project at the same path; port all 72 checks.
 - Keep the statistical checks (exact vs sampled odds, Down recovery rate) with their tolerances and fixed seeds.
 - Update CI to `dotnet test app/Imperator.slnx`.
 - **Done when:** `dotnet test` passes with the same coverage, and CI runs it.
@@ -62,7 +62,7 @@ Beyond this, the app's real features wait on rules:
 |---|---|
 | Layout generator (SVG ship maps from tiles) | Phase 4: ship layout procedure |
 | Mission generator (briefing, enemy force, contact tables) | Phase 5: missions |
-| Enemy guidance cards | Phase 3: behavior profiles |
+| Enemy guidance cards | Ready: Phase 3 is done (`content/behaviors.yaml`, rules chapter 10). Can follow task 4 as an in-app behavior-card view. |
 | Campaign tracker | Phase 7: campaign loop |
 
 Planned app feature (RJ, 2026-10-20): an in-app reference that explains every gear item, keyword and special rule, read from `content/` (the list will grow). Build it from the same `text` fields the rulebook tables use.
