@@ -1,6 +1,6 @@
 # Scenarios
 
-Fixed scenarios for playtesting. Each is a YAML file holding the layout, forces with their loadouts, special rules and victory conditions. Each enemy model names its element, which sets its behavior profile (rules chapter 10). The mission generator (Phase 5) will grow out of this format.
+Fixed scenarios for playtesting. Each is a YAML file holding the layout, forces with their loadouts, special rules and victory conditions. Cover pieces carry a map id and a suggested terrain piece, printed in the sheet's Terrain table, and `walls_and_doors` says what to build walls and doors from. Each enemy model names its element, which sets its behavior profile (rules chapter 10). The mission generator (Phase 5) will grow out of this format.
 
 Print a scenario's sheet and cards with:
 

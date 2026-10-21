@@ -34,13 +34,19 @@ doors:
 # Airlock hatch on the west end of P1: the boarding element's way in and out.
 entry: { x: 0, y: 4.5, orientation: v, label: "Airlock (entry and exit)" }
 
-# Cover pieces: crates, consoles and machinery (any suitable scenery).
+# Walls and doors: what to build them from.
+walls_and_doors: >
+  Walls: Kill Team / Boarding Actions bulkhead sections along the tile edges (the heavy outlines).
+  Doors: hatchways from the same sets. Closed: hatch shut. Open: hatch open or removed. Locked: shut,
+  with a red token on it. The space around the tiles is outside the hull.
+
+# Cover pieces. id is printed on the map; piece suggests what to use from a typical collection.
 cover:
-  - { x: 8,    y: 1.5, w: 1.5, h: 1,   type: light, label: "Crates" }
-  - { x: 9.3,  y: 3.6, w: 1,   h: 1,   type: light, label: "Crates" }
-  - { x: 10.6, y: 0.6, w: 1,   h: 1.6, type: heavy, label: "Loader" }
-  - { x: 14.6, y: 9.4, w: 0.8, h: 0.8, type: heavy, label: "Column" }
-  - { x: 15.6, y: 11,  w: 2,   h: 0.7, type: light, label: "Console bank" }
+  - { id: T1, x: 8,    y: 1.5, w: 1.5, h: 1,   type: light, label: "Crates",       piece: "Two or three cargo crates, waist-high (about 1\" to 1.5\" tall). Any sci-fi crate scatter." }
+  - { id: T2, x: 9.3,  y: 3.6, w: 1,   h: 1,   type: light, label: "Crates",       piece: "One crate or a cluster of barrels, waist-high." }
+  - { id: T3, x: 10.6, y: 0.6, w: 1,   h: 1.6, type: heavy, label: "Cargo loader", piece: "A solid machine taller than a model (2\" or more): a power loader, small vehicle or large crate stack." }
+  - { id: T4, x: 14.6, y: 9.4, w: 0.8, h: 0.8, type: heavy, label: "Column",       piece: "A floor-to-ceiling pillar from a Kill Team / Boarding Actions set. Blocks line of sight completely." }
+  - { id: T5, x: 15.6, y: 11,  w: 2,   h: 0.7, type: light, label: "Console bank", piece: "A low run of consoles or terminals against the wall, waist-high." }
 
 deploy:
   - { x: 0.3, y: 3.3, w: 5.4, h: 2.4, side: player, label: "Boarding element" }

@@ -90,6 +90,10 @@ class MapFlowable(Flowable):
             c.setStrokeColor(TILE_EDGE)
             c.setLineWidth(0.5)
             c.rect(x, y, cv["w"] * k, cv["h"] * k, fill=1, stroke=1)
+            if cv.get("id"):
+                c.setFillColor(colors.white if cv["type"] == "heavy" else ps.INK)
+                c.setFont("Body-Bold", 6.5)
+                c.drawCentredString(x + cv["w"] * k / 2, y + cv["h"] * k / 2 - 2.3, cv["id"])
         # tile labels
         for t in s["tiles"]:
             x, y = self.p(t["x"] + 0.2, t["y"] + t["h"] - 0.5)
@@ -207,7 +211,20 @@ def sheet(s, out):
     story += [two, Spacer(1, 4), Paragraph("Setup", H2)] + bullets(s["setup"])
 
     story.append(PageBreak())
-    story += [Paragraph("Special rules", H2)]
+    story += [Paragraph("Terrain", H2)]
+    if s.get("walls_and_doors"):
+        story += [Paragraph(" ".join(s["walls_and_doors"].split()), B), Spacer(1, 3)]
+    rows = [[Paragraph(f"<b>{h}</b>", B) for h in ("Map", "Piece", "Cover", "Footprint", "Suggested terrain")]]
+    for cv in s.get("cover", []):
+        rows.append([Paragraph(cv.get("id", ""), B), Paragraph(cv["label"], B), Paragraph(cv["type"].capitalize(), B),
+                     Paragraph(f'{cv["w"]:g}" × {cv["h"]:g}"', B), Paragraph(cv.get("piece", "Any suitable scenery."), B)])
+    tt = Table(rows, colWidths=[0.45 * inch, 0.95 * inch, 0.55 * inch, 0.8 * inch, W - 2.75 * inch])
+    tt.setStyle(TableStyle([("GRID", (0, 0), (-1, -1), 0.4, ps.RULE), ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#e8ecef"))]))
+    story += [tt, Paragraph("Light cover: at least a third of the model hidden. Heavy cover: at least half hidden behind solid material. "
+                            "Exact pieces don't matter; keep the footprint and height close.", SMALL)]
+
+    story += [Spacer(1, 6), Paragraph("Special rules", H2)]
     for r in s["special_rules"]:
         story.append(Paragraph(f'<b>{r["title"]}.</b> {" ".join(r["text"].split())}', B))
         story.append(Spacer(1, 2))
