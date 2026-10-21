@@ -20,6 +20,15 @@ ranks:
   - { id: elite,   name: Elite,   typical: "3",   text: "The best there is: special operators, intelligence handlers." }
 
 # Model attributes. Tests and attacks roll 2d6 + the attribute named in the rule.
+# What Shoot values mean (RJ, 2026-10-21). A unit's class sets its baseline Shoot; a specialist
+# (marksman, gunner) may sit one above it in its speciality. Rank is experience within the class.
+shoot_scale:
+  - { value: "0",  text: "Irregulars, conscripts, armed civilians." }
+  - { value: "1",  text: "Trained military and professional security." }
+  - { value: "2",  text: "Professionals: rangers, Task Force Boone, top-tier contractors." }
+  - { value: "3",  text: "Elite units: Raid Force Alpha, Delta Force." }
+  - { value: "4 or more", text: "Legendary heroes." }
+
 attributes:
   - { id: move,     name: Move,     short: MOV, text: "Inches per Move action (usually 5-7). Training, exoskeletons and heavy kit all show here." }
   - { id: shoot,    name: Shoot,    short: SHT, text: "Hit rolls, Suppressive Fire and reaction shots." }

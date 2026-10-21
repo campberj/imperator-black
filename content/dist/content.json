@@ -407,6 +407,28 @@
         "text": "The best there is: special operators, intelligence handlers."
       }
     ],
+    "shoot_scale": [
+      {
+        "value": "0",
+        "text": "Irregulars, conscripts, armed civilians."
+      },
+      {
+        "value": "1",
+        "text": "Trained military and professional security."
+      },
+      {
+        "value": "2",
+        "text": "Professionals: rangers, Task Force Boone, top-tier contractors."
+      },
+      {
+        "value": "3",
+        "text": "Elite units: Raid Force Alpha, Delta Force."
+      },
+      {
+        "value": "4 or more",
+        "text": "Legendary heroes."
+      }
+    ],
     "attributes": [
       {
         "id": "move",
@@ -2004,7 +2026,7 @@
         "rank": "regular",
         "stats": {
           "move": 6,
-          "shoot": 1,
+          "shoot": 2,
           "fight": 2,
           "physique": 1,
           "nerve": 1,
@@ -2044,7 +2066,7 @@
         "rank": "regular",
         "stats": {
           "move": 6,
-          "shoot": 1,
+          "shoot": 2,
           "fight": 1,
           "physique": 2,
           "nerve": 1,
@@ -2076,7 +2098,7 @@
         "rank": "regular",
         "stats": {
           "move": 6,
-          "shoot": 1,
+          "shoot": 2,
           "fight": 1,
           "physique": 0,
           "nerve": 1,
@@ -2142,7 +2164,7 @@
         "rank": "regular",
         "stats": {
           "move": 7,
-          "shoot": 1,
+          "shoot": 2,
           "fight": 1,
           "physique": 1,
           "nerve": 1,
@@ -2177,7 +2199,7 @@
         "rank": "regular",
         "stats": {
           "move": 6,
-          "shoot": 1,
+          "shoot": 2,
           "fight": 1,
           "physique": 2,
           "nerve": 1,

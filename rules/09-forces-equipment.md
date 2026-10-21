@@ -50,12 +50,12 @@ Forces are built from **teams**, like a table of organisation, not from a points
 | Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | **VAT Team Leader** | Veteran | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Jump pack, Low-light optics | Leader, Void-trained |
-| **VAT Assaulter** | Regular | 6" | 1 | 2 | 1 | 1 | 0 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Jump pack, Low-light optics; option: Breaching charge or Breaching tool or Trauma kit | Void-trained |
-| **VAT Gunner** | Regular | 6" | 1 | 1 | 2 | 1 | 0 | 1 | 2 | Void plate (2) | Compact LMG | Knife or bayonet, Frag grenade, Smoke grenade, Jump pack, Low-light optics | Void-trained |
-| **Data Specialist** | Regular | 6" | 1 | 1 | 0 | 1 | 2 | 1 | 2 | Void plate (2) | Carbine | Knife or bayonet, Flashbang, Smoke grenade, Jump pack, Low-light optics, Jammer, Hacking rig | Void-trained |
+| **VAT Assaulter** | Regular | 6" | 2 | 2 | 1 | 1 | 0 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Jump pack, Low-light optics; option: Breaching charge or Breaching tool or Trauma kit | Void-trained |
+| **VAT Gunner** | Regular | 6" | 2 | 1 | 2 | 1 | 0 | 1 | 2 | Void plate (2) | Compact LMG | Knife or bayonet, Frag grenade, Smoke grenade, Jump pack, Low-light optics | Void-trained |
+| **Data Specialist** | Regular | 6" | 2 | 1 | 0 | 1 | 2 | 1 | 2 | Void plate (2) | Carbine | Knife or bayonet, Flashbang, Smoke grenade, Jump pack, Low-light optics, Jammer, Hacking rig | Void-trained |
 | **Pathfinder Team Leader** | Veteran | 7" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Void suit (1) | Heavy rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Leader, Void-trained |
-| **Pathfinder** | Regular | 7" | 1 | 1 | 1 | 1 | 1 | 1 | 2 | Void suit (1) | Heavy rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics; option: Trauma kit or Breaching charge | Void-trained |
-| **Pathfinder SAW Gunner** | Regular | 6" | 1 | 1 | 2 | 1 | 0 | 1 | 2 | Void suit (1) | LMG | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Void-trained |
+| **Pathfinder** | Regular | 7" | 2 | 1 | 1 | 1 | 1 | 1 | 2 | Void suit (1) | Heavy rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics; option: Trauma kit or Breaching charge | Void-trained |
+| **Pathfinder SAW Gunner** | Regular | 6" | 2 | 1 | 2 | 1 | 0 | 1 | 2 | Void suit (1) | LMG | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Void-trained |
 | **Control Team Marksman** | Veteran | 6" | 3 | 0 | 0 | 2 | 0 | 1 | 2 | Void suit (1) | DMR | Knife or bayonet, Smoke grenade, Frag grenade, Low-light optics | Void-trained, Marksman 1 |
 <!-- /table -->
 

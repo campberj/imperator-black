@@ -137,6 +137,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 3. **Ship / outpost layer (lite):** the player's ship with 2–3 upgrade tracks (e.g. medical bay, armory, intelligence), requisition points, recovery times.
 4. **Sector layer (lite):** a small node map (6–8 nodes) for one campaign arc, using the **Black Ops** campaign type (high-level orders, wide latitude).
 5. Campaign events and narrative tables.
+6. **Troop value and custom troop builder (paper):** a points value for attributes, skills, weapons, armour and gear, calibrated with the simulator; rules for building custom troop types and units within the Shoot scale. Recruiting and requisition use the same values (decision 6.12).
 
 **Exit:** A 3-mission paper campaign plays through without rule gaps.
 
@@ -157,6 +158,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 1. Data model: Campaign, Player, CampaignMembership, Roster, Soldier, Ship, SectorNode, and the event log.
 2. Screens: roster, after-action report entry, post-battle resolution (using the same tables), ship upgrades, sector map, next tasking.
 3. Campaign history feed from the event log.
+4. **Custom troop and unit builder:** build and cost custom troop types and units with the Phase 7 values; print their cards.
 
 **Exit:** The whole campaign loop runs in the app for one player.
 
@@ -183,7 +185,7 @@ Phase 4 can begin alongside Phase 2. Phase 8 starts once layout and mission tabl
 
 - Multiplayer: accounts, shared campaigns, Commander/Operator roles, asynchronous campaign turns
 - Full ship/outpost and sector layers; additional campaign types with tighter command guidance
-- Planetside battles and larger boards
+- Planetside battles and larger boards: a land terrain chapter (area terrain, buildings and elevation, difficult ground), land wording for the solo opponent, and a land table-setup procedure (decision 5.9)
 - Vehicles, squad- and platoon-scale play
 - PvP rules
 - More organic solo AI

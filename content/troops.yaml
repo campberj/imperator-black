@@ -32,7 +32,7 @@ troops:
     name: VAT Assaulter
     role: Assaulter
     rank: regular
-    stats: { move: 6, shoot: 1, fight: 2, physique: 1, nerve: 1, tech: 0, wounds: 1, size: 2 }
+    stats: { move: 6, shoot: 2, fight: 2, physique: 1, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: void_plate
     weapon: carbine
     weapon_options: [shotgun]
@@ -48,7 +48,7 @@ troops:
     name: VAT Gunner
     role: Gunner
     rank: regular
-    stats: { move: 6, shoot: 1, fight: 1, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
+    stats: { move: 6, shoot: 2, fight: 1, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: void_plate
     weapon: compact_lmg
     melee: knife
@@ -62,7 +62,7 @@ troops:
     name: Data Specialist
     role: Specialist
     rank: regular
-    stats: { move: 6, shoot: 1, fight: 1, physique: 0, nerve: 1, tech: 2, wounds: 1, size: 2 }
+    stats: { move: 6, shoot: 2, fight: 1, physique: 0, nerve: 1, tech: 2, wounds: 1, size: 2 }
     armour: void_plate
     weapon: carbine
     melee: knife
@@ -90,7 +90,7 @@ troops:
     name: Pathfinder
     role: Rifleman
     rank: regular
-    stats: { move: 7, shoot: 1, fight: 1, physique: 1, nerve: 1, tech: 1, wounds: 1, size: 2 }
+    stats: { move: 7, shoot: 2, fight: 1, physique: 1, nerve: 1, tech: 1, wounds: 1, size: 2 }
     armour: void_suit
     weapon: heavy_rifle
     melee: knife
@@ -105,7 +105,7 @@ troops:
     name: Pathfinder SAW Gunner
     role: Gunner
     rank: regular
-    stats: { move: 6, shoot: 1, fight: 1, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
+    stats: { move: 6, shoot: 2, fight: 1, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: void_suit
     weapon: lmg
     melee: knife

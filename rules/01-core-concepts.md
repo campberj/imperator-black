@@ -58,6 +58,20 @@ Every model has a **rank**, a set of **attributes**, **Armour**, its weapons and
 
 Attributes usually run 0–3, and 4 is exceptional; −1 is possible for the truly untrained. On 2d6, each point is worth roughly 14 percentage points at the usual target of 8. A dash means the attribute is never used (*Automated* models).
 
+**What Shoot means.** A unit's class sets its baseline Shoot. A specialist, such as a marksman, may sit one above it in its speciality.
+
+<!-- table:core.shoot_scale -->
+| Shoot | Who |
+|---|---|
+| **+0** | Irregulars, conscripts, armed civilians. |
+| **+1** | Trained military and professional security. |
+| **+2** | Professionals: rangers, Task Force Boone, top-tier contractors. |
+| **+3** | Elite units: Raid Force Alpha, Delta Force. |
+| **+4 or more** | Legendary heroes. |
+<!-- /table -->
+
+Rank is experience *within* a class: a Regular trooper of Task Force Boone is a professional (Shoot 2) who has not yet seen much action.
+
 <!-- table:core.ranks -->
 | Rank | Typical attributes | Who |
 |---|---|---|

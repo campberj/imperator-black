@@ -190,6 +190,8 @@ def render_forces(key):
         sec = load("core")["security"]
         return table(["Security level", "Hack test", "Successes needed", "Typical"],
                      [(l["name"], f'2d6 + Tech, {l["target"]}+', l["successes"], l["examples"]) for l in sec["levels"]])
+    if key == "core.shoot_scale":
+        return table(["Shoot", "Who"], [(f'**+{s["value"]}**', s["text"]) for s in load("core")["shoot_scale"]])
     if key == "core.attributes":
         return table(["Attribute", "Short", "Used for"], [(f'**{a["name"]}**', a["short"], a["text"]) for a in load("core")["attributes"]])
     if key == "gear.gear":
