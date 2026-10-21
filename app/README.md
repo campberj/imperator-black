@@ -17,7 +17,7 @@ Last updated: 2026-10-20, rules v0.4 (granular profiles).
 | `app/Imperator.slnx` | Solution (.NET 10, new `.slnx` format) | Builds clean, 0 warnings |
 | `app/src/Imperator.Core` | Game logic: dice and seeded `Rng`, content loading (`ContentSet`), wound table, shooting (exact odds and sampled), close combat, grenades, `Soldier` state | Covers rules v0.4 chapters 4–7 math with attribute-based `Soldier` (`FromTroop` builds one from a troop profile; `Generic` makes abstract test soldiers). No movement, board, or mission logic yet |
 | `app/src/Imperator.Sim` | Combat simulator: shot odds, duels, frag, open-ground firefights, room clearing, `--compare` for content variants | Working. Output in `docs/analysis/` |
-| `app/tests/Imperator.Core.Tests` | **Console** test runner (no packages), 64 checks; exits non-zero on failure | Passing |
+| `app/tests/Imperator.Core.Tests` | **Console** test runner (no packages), 72 checks; exits non-zero on failure | Passing |
 | `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
 | `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests | Green |
 
