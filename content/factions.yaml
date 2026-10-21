@@ -7,6 +7,10 @@ factions:
     name: Task Force Boone
     side: player
     summary: "Expeditionary task force whose Void Assault Teams board and clear ships and stations."
+  - id: republic
+    name: Galactic Republic
+    side: player
+    summary: "The Grand Army of the Republic: clone troopers, specialists and commandos led by clone officers and Jedi."
   - id: freespace
     name: Freespace Solutions
     side: enemy

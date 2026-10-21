@@ -15,10 +15,10 @@ public class ContentLoadingTests
     [Fact]
     public void CountsMatchPythonValidator()
     {
-        // tools/validate_content.py: "26 troop types, 13 elements, 3 teams, 9 gear items, 9 behavior profiles, 4 vessels."
-        Assert.Equal(26, Set.Troops.Troops.Count);
+        // tools/validate_content.py: "39 troop types, 13 elements, 8 teams, 9 gear items, 9 behavior profiles, 4 vessels."
+        Assert.Equal(39, Set.Troops.Troops.Count);
         Assert.Equal(13, Set.Factions.Elements.Count);
-        Assert.Equal(3, Set.Rosters.Teams.Count);
+        Assert.Equal(8, Set.Rosters.Teams.Count);
         Assert.Equal(9, Set.Gear.Gear.Count);
         Assert.Equal(9, Set.Behaviors.Behaviors.Count);
         Assert.Equal(4, Set.Layouts.Vessels.Count);

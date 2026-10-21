@@ -86,7 +86,10 @@ for t in C["troops"]["troops"]:
     need(t["armour"], armour, f"{w} armour")
     for a in t.get("armour_options", []):
         need(a, armour, f"{w} armour option")
-    need(t["weapon"], ranged, f"{w} weapon")
+    if t["weapon"] is not None:
+        need(t["weapon"], ranged, f"{w} weapon")
+    elif t["melee"] is None:
+        errors.append(f"{w}: a model with no ranged weapon needs a melee weapon")
     for o in t.get("weapon_options", []):
         need(o, ranged, f"{w} weapon option")
     if t["melee"] is not None:

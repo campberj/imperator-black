@@ -44,6 +44,7 @@ FACTION_COLOUR = {
     "freespace": colors.HexColor("#8a5a12"),
     "contractor": colors.HexColor("#4d5560"),
     "directorate": colors.HexColor("#7a1f2b"),
+    "republic": colors.HexColor("#a34a1a"),
 }
 
 by_id = lambda section: {x["id"]: x for x in section}
@@ -106,7 +107,7 @@ def stat_text(t, attr):
 def weapon_rows(t):
     rows = [["Weapon", "Dmg", "Short", "AP"]]
     extra_kw = [k for g in t["gear"] for k in GEAR[g].get("weapon_keywords", [])]
-    for i, wid in enumerate([t["weapon"]] + t.get("weapon_options", [])):
+    for i, wid in enumerate(([t["weapon"]] if t["weapon"] else []) + t.get("weapon_options", [])):
         w = RANGED[wid]
         label = f"<b>{w['name']}</b>" if i == 0 else f"<i>or {w['name']}</i>"
         rows.append([Paragraph(label, S_CELL), w["damage"], f'{w["short_range"]}"', str(w["ap"])])
@@ -117,6 +118,8 @@ def weapon_rows(t):
             notes.append(f"beyond short {pen[0]}, beyond double {pen[1]}")
         if notes:
             rows.append([Paragraph(", ".join(notes), S_SMALL), "", "", ""])
+    if not t["weapon"] and not t.get("weapon_options"):
+        rows.append([Paragraph("<i>No ranged weapon: cannot Shoot</i>", S_SMALL), "", "", ""])
     if t["melee"]:
         m = MELEE[t["melee"]]
         rows.append([Paragraph(f"<b>{m['name']}</b> (close combat)", S_CELL), m["damage"], "—", str(m["ap"])])
@@ -223,10 +226,10 @@ def cut_marks(c):
         c.line(letter[0] - 0.1 * inch, y, letter[0] - MARGIN_X + 0.08 * inch, y)
 
 
-def unit_cards():
-    order = ["tfb", "freespace", "contractor", "directorate"]
-    troops = sorted(C["troops"]["troops"], key=lambda t: order.index(t["faction"]))
-    path = OUT / "unit-cards.pdf"
+def unit_cards(factions=("tfb", "freespace", "contractor", "directorate"), name="unit-cards.pdf"):
+    order = list(factions)
+    troops = sorted([t for t in C["troops"]["troops"] if t["faction"] in order], key=lambda t: order.index(t["faction"]))
+    path = OUT / name
     c = canvas.Canvas(str(path), pagesize=letter)
     c.setTitle("Imperator Black — Unit Cards")
     c.setAuthor("Imperator Black")
@@ -437,12 +440,12 @@ def quick_reference():
     story.append(PageBreak())
     weapons = qtable([["Weapon", "Dmg", "Short", "AP", "Keywords"]] +
                      [[w["name"], w["damage"], f'{w["short_range"]}"', w["ap"], ", ".join(f'Auto {w["auto"]}' if k == "auto" and w.get("auto") else KEYWORDS[k]["name"] for k in w["keywords"]) or "—"]
-                      for w in C["weapons"]["ranged"]],
+                      for w in C["weapons"]["ranged"] if not w.get("faction")],
                      [0.95 * inch, 0.4 * inch, 0.42 * inch, 0.3 * inch, half - 2.07 * inch])
-    melee = qtable([["Melee", "Dmg", "AP"]] + [[m["name"], m["damage"], m["ap"]] for m in C["weapons"]["melee"]],
+    melee = qtable([["Melee", "Dmg", "AP"]] + [[m["name"], m["damage"], m["ap"]] for m in C["weapons"]["melee"] if not m.get("faction")],
                    [half - 0.7 * inch, 0.4 * inch, 0.3 * inch])
     armour = qtable([["Armour", "Value", "Keywords"]] + [[a["name"], a["value"], ", ".join(KEYWORDS[k]["name"] for k in a["keywords"]) or "—"]
-                                                        for a in C["armour"]["armour"]],
+                                                        for a in C["armour"]["armour"] if not a.get("faction")],
                     [1.2 * inch, 0.45 * inch, half - 1.65 * inch])
     left2 = [Paragraph("Weapons", Q_H), weapons, Spacer(1, 4), melee, Spacer(1, 4), armour, Spacer(1, 5),
 
@@ -468,7 +471,7 @@ def quick_reference():
         Paragraph("Alerted enemy element: turn its unit cards sideways.", Q_SMALL)]
     grenades = qtable([["Grenade", "Range", "Radius", "Effect"]] +
                       [[g["name"], f'{g["throw_range"]}"', f'{g["blast_radius"]}"', (g.get("damage") and f'{g["damage"]} damage') or g.get("effect", "")]
-                       for g in C["weapons"]["thrown"]],
+                       for g in C["weapons"]["thrown"] if not g.get("faction")],
                       [0.85 * inch, 0.52 * inch, 0.58 * inch, half - 1.95 * inch])
     right2 = [Paragraph("Grenades and breaching", Q_H)] + bullets([
         "Throw up to double range: test 2d6 + <b>Physique</b> (−1 beyond range), 8+ lands on target. Miss: lands short by the miss (min 1\"). Natural 2: lands 2\" in front of the thrower. Zero-g: bounces past instead.",
@@ -610,6 +613,8 @@ def land_reference():
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     p, n = unit_cards()
+    print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
+    p, n = unit_cards(("republic",), "republic-cards.pdf")
     print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
     print(f"Wrote {quick_reference().relative_to(ROOT)}")
     p, n = behavior_cards()

@@ -171,8 +171,36 @@ def render_layouts(section):
     return None
 
 
+def faction_kit(faction):
+    """Weapons, armour and grenades that belong to one faction (marked faction: in content)."""
+    W, A = load("weapons"), load("armour")["armour"]
+    out = []
+    ranged = [w for w in W["ranged"] if w.get("faction") == faction]
+    if ranged:
+        rows = []
+        for w in ranged:
+            pen = w.get("range_penalty", [-1, -2])
+            kws = ", ".join(f'Auto {w["auto"]}' if k == "auto" and w.get("auto") else KEYWORD_NAMES.get(k, k) for k in w["keywords"]) or "—"
+            rows.append((w["name"], w["damage"], f'{w["short_range"]}"', f"{pen[0]} / {pen[1]}", w["ap"], kws))
+        out.append(table(["Weapon", "Damage", "Short range", "Beyond / double", "AP", "Keywords"], rows))
+    melee = [m for m in W["melee"] if m.get("faction") == faction]
+    if melee:
+        out.append(table(["Melee weapon", "Damage", "AP"], [(m["name"], m["damage"], m["ap"]) for m in melee]))
+    thrown = [g for g in W["thrown"] if g.get("faction") == faction]
+    if thrown:
+        out.append(table(["Grenade", "Throw range", "Radius", "Damage / effect"],
+                         [(g["name"], f'{g["throw_range"]}"', f'{g["blast_radius"]}"',
+                           g.get("damage", "") + (f' (AP {g["ap"]})' if "damage" in g else "") or g.get("effect", "")) for g in thrown]))
+    armour = [a for a in A if a.get("faction") == faction]
+    if armour:
+        out.append(table(["Armour", "Value", "Keywords"], [(a["name"], a["value"], kw(a["keywords"])) for a in armour]))
+    return "\n\n".join(out)
+
+
 def render_forces(key):
     f, section = key.split(".", 1)
+    if f == "kit":
+        return faction_kit(section)
     if f == "troops":
         weapons = names("weapons", "ranged")
         melee = names("weapons", "melee")
@@ -186,7 +214,7 @@ def render_forces(key):
                 continue
             s = t["stats"]
             dash = lambda v: "—" if v is None else v
-            weapon = weapons[t["weapon"]] + "".join(f" / {weapons[o]}" for o in t.get("weapon_options", []))
+            weapon = (weapons[t["weapon"]] if t["weapon"] else "—") + "".join(f" / {weapons[o]}" for o in t.get("weapon_options", []))
             arm = armour[t["armour"]] + "".join(f" / {armour[o]}" for o in t.get("armour_options", []))
             kit = [melee[t["melee"]]] if t["melee"] else []
             kit += [thrown[g] for g in t["grenades"]] + [gear[g] for g in t["gear"]]
@@ -252,6 +280,8 @@ def render(key):
         return forces
     f, section = key.split(".", 1)
     data = load(f)[section]
+    if isinstance(data, list):
+        data = [x for x in data if not (isinstance(x, dict) and x.get("faction"))]   # faction kit is listed with its faction
     if key == "core.hit_modifiers":
         return table(["Hit modifier", "Value"], [(m["text"], signed(m["value"])) for m in data])
     if key == "core.wound_table":

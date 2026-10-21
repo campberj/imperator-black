@@ -93,7 +93,8 @@ public static class ContentValidator
             }
             Need(t.Armour, armour, $"{w} armour");
             foreach (var a in t.ArmourOptions ?? []) Need(a, armour, $"{w} armour option");
-            Need(t.Weapon, ranged, $"{w} weapon");
+            if (t.Weapon is not null) Need(t.Weapon, ranged, $"{w} weapon");
+            else if (t.Melee is null) errors.Add($"{w}: a model with no ranged weapon needs a melee weapon");
             foreach (var o in t.WeaponOptions ?? []) Need(o, ranged, $"{w} weapon option");
             if (t.Melee is not null) Need(t.Melee, melee, $"{w} melee");
             else if (!automated) errors.Add($"{w}: only Automated models may have no melee weapon");

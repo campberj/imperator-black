@@ -83,7 +83,7 @@ public sealed class Soldier
             Wounds = t.Stats.Wounds,
             Size = t.Stats.Size,
             Armour = content.ArmourById(t.Armour).Value,
-            Weapon = content.Ranged(weaponId ?? t.Weapon),
+            Weapon = (weaponId ?? t.Weapon) is { } wid ? content.Ranged(wid) : RangedWeapon.None,
             Melee = melee is null ? null : content.Melee(melee),
             Skills = skills,
             WeaponKeywords = weaponKeywords,

@@ -108,6 +108,7 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 6.10 | **Automated** keyword: no Suppression, breaking, casualty shock or Rally; a wound row of 6+ destroys it. A model with no melee weapon can't start close combat and loses any exchange it's forced into. | Settled |
 | 6.11 | Razorback drone (BLKOUT) deferred to the vehicles phase, after the PoC. | Settled |
 | 6.12 | **Troop and unit builder (RJ):** players can build custom troop types and units. Needs a troop value (points) per attribute, skill, weapon, armour and gear, calibrated with the simulator, and checks against the Shoot scale (3.21) and content schema. Paper rules in Phase 7 (recruiting and requisition use the same values); app builder screen in Phase 9. | Proposed |
+| 6.13 | **Galactic Republic (RJ's Star Wars: Legion collection):** in the core content as faction `republic` (player side), with its own weapon list (DC-15A/S/x, DC-17, twin DC-17s, DC-17m modes, DP-23, Z-6, RPS-6, lightsaber AP 2, thermal detonator), clone and Katarn armour, five teams and 13 profiles. Shoot scale: clone troopers 2; ARC, commandos and Cody 3; Jedi Shoot 1, Fight 3–4. Jedi use trained abilities only (Deflect 1–2, Leap, Jedi discipline, Twin blades), no Force powers; they carry no ranged weapon (content allows `weapon: null` with a melee weapon). Vehicles (AT-RT, infantry support platform) wait for vehicle rules. | Proposed — playtest |
 
 ## 7. Campaign and progression
 

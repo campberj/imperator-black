@@ -16,10 +16,24 @@ ranged:
   - { id: dmr,         name: DMR,         damage: 2d10, short_range: 48, ap: 0, keywords: [] }
   - { id: at_launcher, name: AT launcher, damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome] }
 
+  # Galactic Republic (faction: republic). Listed with the Republic forces in chapter 9.
+  - { id: dc17,        faction: republic, name: DC-17 hand blaster,        damage: 2d6,  short_range: 8,  ap: 0, keywords: [handy] }
+  - { id: dc17_pair,   faction: republic, name: Twin DC-17s,               damage: 2d6,  short_range: 8,  ap: 0, auto: 2, keywords: [handy, auto] }
+  - { id: dc15s,       faction: republic, name: DC-15S blaster carbine,    damage: 2d8,  short_range: 18, ap: 0, keywords: [handy] }
+  - { id: dc15a,       faction: republic, name: DC-15A blaster rifle,      damage: 2d8,  short_range: 30, ap: 0, keywords: [] }
+  - { id: dc15x,       faction: republic, name: DC-15x sniper rifle,       damage: 2d10, short_range: 48, ap: 0, keywords: [] }
+  - { id: dc17m,       faction: republic, name: DC-17m (blaster),          damage: 2d8,  short_range: 24, ap: 0, keywords: [handy] }
+  - { id: dc17m_sniper, faction: republic, name: DC-17m (sniper),          damage: 2d10, short_range: 40, ap: 0, keywords: [] }
+  - { id: dc17m_at,    faction: republic, name: DC-17m (anti-armour),      damage: 2d12, short_range: 24, ap: 1, keywords: [one_per_round] }
+  - { id: dp23,        faction: republic, name: DP-23 phase-pulse blaster, damage: 2d12, short_range: 10, ap: 0, keywords: [handy], range_penalty: [-2, -3] }
+  - { id: z6,          faction: republic, name: Z-6 rotary blaster,        damage: 2d8,  short_range: 18, ap: 0, auto: 3, keywords: [auto, suppressing] }
+  - { id: rps6,        faction: republic, name: RPS-6 rocket launcher,     damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome] }
+
 melee:
   - { id: unarmed,       name: "Unarmed / weapon butt",      damage: 2d4, ap: 0 }
   - { id: knife,         name: "Knife or bayonet",           damage: 2d8, ap: 0 }
   - { id: breaching_tool, name: "Breaching tool or heavy blade", damage: 2d10, ap: 0 }
+  - { id: lightsaber,    faction: republic, name: Lightsaber, damage: 2d12, ap: 2 }
 
 # Thrown weapons use the Throw action. throw_range: short range in inches.
 thrown:
@@ -42,6 +56,14 @@ thrown:
     blast_radius: 2
     effect: "Blocks line of sight through the area until end of next round"
     keywords: []
+  - id: thermal_detonator
+    faction: republic
+    name: Thermal detonator
+    throw_range: 8
+    blast_radius: 2
+    damage: 2d10
+    ap: 0
+    keywords: [blast, confined_bonus]
 
 demolitions:
   - id: breaching_charge

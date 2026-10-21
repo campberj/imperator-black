@@ -31,6 +31,46 @@ teams:
       - { troop: tfb_marksman, count: 2 }
 
 # The force the player starts the proof-of-concept campaign with.
+  # ---------------- Galactic Republic ----------------
+  - id: clone_squad
+    name: Clone trooper squad
+    faction: republic
+    summary: "A sergeant, three riflemen and a Z-6 or RPS-6 heavy trooper."
+    slots:
+      - { troop: rep_clone_sergeant, count: 1 }
+      - { troop: rep_clone_trooper,  count: 3 }
+      - { troop: rep_clone_heavy,    count: 1 }
+
+  - id: clone_marksman_team
+    name: Clone marksman team
+    faction: republic
+    summary: "Two marksmen with DC-15x rifles for overwatch and long shots."
+    slots:
+      - { troop: rep_clone_marksman, count: 2 }
+
+  - id: arc_team
+    name: ARC trooper team
+    faction: republic
+    summary: "Elite assault troopers with twin pistols and specialist weapons."
+    slots:
+      - { troop: rep_arc_leader,  count: 1 }
+      - { troop: rep_arc_trooper, count: 3 }
+
+  - id: arf_team
+    name: ARF trooper team
+    faction: republic
+    summary: "Scouts who deploy forward and spot for the squads behind them."
+    slots:
+      - { troop: rep_arf_trooper, count: 3 }
+
+  - id: commando_squad
+    name: Clone commando squad
+    faction: republic
+    summary: "Four commandos in Katarn armour: breaching, slicing, sniping and demolitions."
+    slots:
+      - { troop: rep_commando_leader, count: 1 }
+      - { troop: rep_clone_commando,  count: 3 }
+
 starting_forces:
   - id: poc_boarding_element
     name: Boarding element

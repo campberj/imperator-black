@@ -42,6 +42,11 @@ Forces are built from **teams**, like a table of organisation, not from a points
 | Void Assault Team (VAT) fireteam | 1× VAT Team Leader, 2× VAT Assaulter, 1× VAT Gunner, 1× Data Specialist | The boarding fireteam: assault, a close-quarters gunner, and a data specialist. |
 | Pathfinder recon team | 1× Pathfinder Team Leader, 2× Pathfinder, 1× Pathfinder SAW Gunner | Recon and fire support with armour-piercing heavy rifles and a SAW. |
 | Control team | 2× Control Team Marksman | Two marksmen who hold overwatch over long passages, hangars and open decks. |
+| Clone trooper squad | 1× Clone Sergeant, 3× Clone Trooper, 1× Clone Heavy Trooper | A sergeant, three riflemen and a Z-6 or RPS-6 heavy trooper. |
+| Clone marksman team | 2× Clone Trooper Marksman | Two marksmen with DC-15x rifles for overwatch and long shots. |
+| ARC trooper team | 1× ARC Trooper Leader, 3× ARC Trooper | Elite assault troopers with twin pistols and specialist weapons. |
+| ARF trooper team | 3× ARF Trooper | Scouts who deploy forward and spot for the squads behind them. |
+| Clone commando squad | 1× Clone Commando Leader, 3× Clone Commando | Four commandos in Katarn armour: breaching, slicing, sniping and demolitions. |
 <!-- /table -->
 
 ## Task Force Boone
@@ -90,6 +95,11 @@ Skills marked **Proposed** add a rule that is new in this version; they are in p
 | *Medic* | +2 to Medic actions; automatically gets a Down model back up. | — |
 | *Automated* | Never gains Suppression, never tests for breaking, and is not affected by casualty shock or Rally. A wound row of 6 or more destroys it. Attributes shown as a dash are never used. | — |
 | *Marksman* 1–2 | **1:** Aim gives +2 instead of +1. **2:** An Aimed shot also ignores the Light cover penalty. | **Proposed** |
+| *Deflect* 1–2 | **1:** Holding a lightsaber and not Pinned: when hit by a ranged attack it can see, test 2d6 + Fight, 8+, to deflect it (no effect). −1 for each earlier deflection this round. Test each hit of a burst separately. **2:** A deflection on 12 or more sends the bolt back: the shooter takes the hit, rolling the weapon's damage dice on the wound table. | **Proposed** |
+| *Leap* | A Move may include one leap, up or down one level (3") or across a gap up to 3", at no extra cost. Drops up to 6" need no falling test. | **Proposed** |
+| *Jedi discipline* | Never takes breaking tests and ignores casualty shock. Pinned only at 4 or more Suppression. | **Proposed** |
+| *Twin blades* | Fights with two blades: +1 to close combat exchange rolls. | **Proposed** |
+| *Scout* | Deploys up to 6" beyond its side's deployment zone, out of enemy line of sight. Scrub and woods are not difficult ground for it. | **Proposed** |
 <!-- /table -->
 
 ## Opposition: Freespace Solutions
@@ -165,3 +175,62 @@ Missions build the enemy force from **elements**, chosen by threat tier. Behavio
 <!-- /table -->
 
 Directorate handlers' independent action, and the hired guns' signature actions, are still to be written.
+
+## Galactic Republic
+
+Profiles for Star Wars: Legion Galactic Republic miniatures: clone troopers, specialists and commandos, led by clone officers and Jedi. They use the Shoot scale in chapter 1: clone troopers are professionals (2); ARC troopers, clone commandos and Commander Cody are elite (3).
+
+**Jedi** fight with trained abilities, not Force powers: *Deflect*, *Leap*, *Jedi discipline* and *Twin blades* (see Skills). They carry no ranged weapon, so they cannot Shoot; a lightsaber is a melee weapon with AP 2. A Jedi's danger is close combat, and Deflect lets it close the distance under fire.
+
+Vehicles (the AT-RT and the infantry support platform) wait for the vehicle rules, after the proof of concept.
+
+<!-- table:troops.republic -->
+| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **Clone Sergeant** | Veteran | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Clone armour (1) | DC-15A blaster rifle / DC-15S blaster carbine | Knife or bayonet, Thermal detonator | Leader |
+| **Clone Trooper** | Regular | 6" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Clone armour (1) | DC-15A blaster rifle / DC-15S blaster carbine | Knife or bayonet, Thermal detonator | — |
+| **Clone Heavy Trooper** | Regular | 5" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Clone armour (1) | Z-6 rotary blaster / RPS-6 rocket launcher | Knife or bayonet | — |
+| **Clone Trooper Marksman** | Veteran | 6" | 3 | 1 | 1 | 2 | 0 | 1 | 2 | Clone armour (1) | DC-15x sniper rifle | Knife or bayonet, Low-light optics | Marksman 1 |
+| **ARC Trooper Leader** | Elite | 6" | 3 | 2 | 2 | 3 | 1 | 2 | 2 | Clone armour (1) | Twin DC-17s / DC-15S blaster carbine | Knife or bayonet, Thermal detonator, Flashbang | Leader |
+| **ARC Trooper** | Veteran | 6" | 3 | 2 | 2 | 3 | 1 | 1 | 2 | Clone armour (1) | Twin DC-17s / DC-15S blaster carbine / DP-23 phase-pulse blaster / Z-6 rotary blaster / DC-15x sniper rifle | Knife or bayonet, Thermal detonator, Flashbang | — |
+| **ARF Trooper** | Veteran | 7" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Clone armour (1) | DC-15S blaster carbine / DC-15x sniper rifle | Knife or bayonet, Smoke grenade, Low-light optics | Scout |
+| **Clone Commando Leader** | Elite | 6" | 3 | 2 | 2 | 3 | 2 | 2 | 2 | Katarn armour (2) | DC-17m (blaster) / DC-17m (sniper) / DC-17m (anti-armour) | Knife or bayonet, Thermal detonator, Flashbang; option: Hacking rig or Breaching charge | Leader, Void-trained |
+| **Clone Commando** | Elite | 6" | 3 | 2 | 2 | 3 | 2 | 2 | 2 | Katarn armour (2) | DC-17m (blaster) / DC-17m (sniper) / DC-17m (anti-armour) | Knife or bayonet, Thermal detonator, Flashbang; option: Hacking rig or Breaching charge | Void-trained |
+| **Commander Cody** | Elite | 6" | 3 | 2 | 2 | 3 | 1 | 2 | 2 | Clone armour (1) | DC-15S blaster carbine / DC-15A blaster rifle | Knife or bayonet, Thermal detonator | Leader |
+| **Obi-Wan Kenobi** | Elite | 7" | 1 | 4 | 2 | 4 | 1 | 3 | 2 | None (0) | — | Lightsaber | Leader, Deflect 2, Leap, Jedi discipline |
+| **Ahsoka Tano** | Elite | 8" | 1 | 3 | 2 | 3 | 1 | 2 | 2 | None (0) | — | Lightsaber | Leader, Deflect 1, Leap, Jedi discipline, Twin blades |
+| **Jedi Guardian** | Veteran | 7" | 1 | 3 | 2 | 3 | 1 | 2 | 2 | None (0) | — | Lightsaber | Deflect 1, Leap, Jedi discipline |
+<!-- /table -->
+
+### Republic weapons and armour
+
+<!-- table:kit.republic -->
+| Weapon | Damage | Short range | Beyond / double | AP | Keywords |
+|---|---|---|---|---|---|
+| DC-17 hand blaster | 2d6 | 8" | -1 / -2 | 0 | Handy |
+| Twin DC-17s | 2d6 | 8" | -1 / -2 | 0 | Handy, Auto 2 |
+| DC-15S blaster carbine | 2d8 | 18" | -1 / -2 | 0 | Handy |
+| DC-15A blaster rifle | 2d8 | 30" | -1 / -2 | 0 | — |
+| DC-15x sniper rifle | 2d10 | 48" | -1 / -2 | 0 | — |
+| DC-17m (blaster) | 2d8 | 24" | -1 / -2 | 0 | Handy |
+| DC-17m (sniper) | 2d10 | 40" | -1 / -2 | 0 | — |
+| DC-17m (anti-armour) | 2d12 | 24" | -1 / -2 | 1 | One per round |
+| DP-23 phase-pulse blaster | 2d12 | 10" | -2 / -3 | 0 | Handy |
+| Z-6 rotary blaster | 2d8 | 18" | -1 / -2 | 0 | Auto 3, Suppressing |
+| RPS-6 rocket launcher | 2d12 | 36" | -1 / -2 | 1 | One per round, Cumbersome |
+
+| Melee weapon | Damage | AP |
+|---|---|---|
+| Lightsaber | 2d12 | 2 |
+
+| Grenade | Throw range | Radius | Damage / effect |
+|---|---|---|---|
+| Thermal detonator | 8" | 2" | 2d10 (AP 0) |
+
+| Armour | Value | Keywords |
+|---|---|---|
+| Clone armour | 1 | Sealed |
+| Katarn armour | 2 | Sealed |
+<!-- /table -->
+
+Teams for the Republic are in the tables of organisation above. Cards are printed in `docs/print/republic-cards.pdf`.

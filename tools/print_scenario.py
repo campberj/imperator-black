@@ -190,7 +190,8 @@ def model_name(m):
 
 def enemy_name(e):
     t = TROOPS[e["troop"]]
-    w = ps.RANGED[e.get("weapon", t["weapon"])]["name"]
+    wid = e.get("weapon", t["weapon"])
+    w = ps.RANGED[wid]["name"] if wid else "melee only"
     return f'{e["n"]}. {t["name"]} ({w})'
 
 

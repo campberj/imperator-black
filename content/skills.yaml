@@ -41,3 +41,31 @@ skills:
     levels:
       - "Aim gives +2 instead of +1."
       - "An Aimed shot also ignores the Light cover penalty."
+
+  # Galactic Republic (Jedi abilities are trained skills: no Force powers).
+  - id: deflect
+    name: Deflect
+    status: proposed
+    levels:
+      - "Holding a lightsaber and not Pinned: when hit by a ranged attack it can see, test 2d6 + Fight, 8+, to deflect it (no effect). −1 for each earlier deflection this round. Test each hit of a burst separately."
+      - "A deflection on 12 or more sends the bolt back: the shooter takes the hit, rolling the weapon's damage dice on the wound table."
+  - id: leap
+    name: Leap
+    status: proposed
+    levels:
+      - "A Move may include one leap, up or down one level (3\") or across a gap up to 3\", at no extra cost. Drops up to 6\" need no falling test."
+  - id: jedi_discipline
+    name: Jedi discipline
+    status: proposed
+    levels:
+      - "Never takes breaking tests and ignores casualty shock. Pinned only at 4 or more Suppression."
+  - id: twin_blades
+    name: Twin blades
+    status: proposed
+    levels:
+      - "Fights with two blades: +1 to close combat exchange rolls."
+  - id: scout
+    name: Scout
+    status: proposed
+    levels:
+      - "Deploys up to 6\" beyond its side's deployment zone, out of enemy line of sight. Scrub and woods are not difficult ground for it."

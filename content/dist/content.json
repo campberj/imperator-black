@@ -44,6 +44,24 @@
           "sealed",
           "heavy"
         ]
+      },
+      {
+        "id": "clone_armour",
+        "faction": "republic",
+        "name": "Clone armour",
+        "value": 1,
+        "keywords": [
+          "sealed"
+        ]
+      },
+      {
+        "id": "katarn_armour",
+        "faction": "republic",
+        "name": "Katarn armour",
+        "value": 2,
+        "keywords": [
+          "sealed"
+        ]
       }
     ]
   },
@@ -682,6 +700,12 @@
         "name": "Task Force Boone",
         "side": "player",
         "summary": "Expeditionary task force whose Void Assault Teams board and clear ships and stations."
+      },
+      {
+        "id": "republic",
+        "name": "Galactic Republic",
+        "side": "player",
+        "summary": "The Grand Army of the Republic: clone troopers, specialists and commandos led by clone officers and Jedi."
       },
       {
         "id": "freespace",
@@ -1914,6 +1938,82 @@
             "count": 2
           }
         ]
+      },
+      {
+        "id": "clone_squad",
+        "name": "Clone trooper squad",
+        "faction": "republic",
+        "summary": "A sergeant, three riflemen and a Z-6 or RPS-6 heavy trooper.",
+        "slots": [
+          {
+            "troop": "rep_clone_sergeant",
+            "count": 1
+          },
+          {
+            "troop": "rep_clone_trooper",
+            "count": 3
+          },
+          {
+            "troop": "rep_clone_heavy",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "clone_marksman_team",
+        "name": "Clone marksman team",
+        "faction": "republic",
+        "summary": "Two marksmen with DC-15x rifles for overwatch and long shots.",
+        "slots": [
+          {
+            "troop": "rep_clone_marksman",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "arc_team",
+        "name": "ARC trooper team",
+        "faction": "republic",
+        "summary": "Elite assault troopers with twin pistols and specialist weapons.",
+        "slots": [
+          {
+            "troop": "rep_arc_leader",
+            "count": 1
+          },
+          {
+            "troop": "rep_arc_trooper",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "id": "arf_team",
+        "name": "ARF trooper team",
+        "faction": "republic",
+        "summary": "Scouts who deploy forward and spot for the squads behind them.",
+        "slots": [
+          {
+            "troop": "rep_arf_trooper",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "id": "commando_squad",
+        "name": "Clone commando squad",
+        "faction": "republic",
+        "summary": "Four commandos in Katarn armour: breaching, slicing, sniping and demolitions.",
+        "slots": [
+          {
+            "troop": "rep_commando_leader",
+            "count": 1
+          },
+          {
+            "troop": "rep_clone_commando",
+            "count": 3
+          }
+        ]
       }
     ],
     "starting_forces": [
@@ -1989,6 +2089,47 @@
         "levels": [
           "Aim gives +2 instead of +1.",
           "An Aimed shot also ignores the Light cover penalty."
+        ]
+      },
+      {
+        "id": "deflect",
+        "name": "Deflect",
+        "status": "proposed",
+        "levels": [
+          "Holding a lightsaber and not Pinned: when hit by a ranged attack it can see, test 2d6 + Fight, 8+, to deflect it (no effect). −1 for each earlier deflection this round. Test each hit of a burst separately.",
+          "A deflection on 12 or more sends the bolt back: the shooter takes the hit, rolling the weapon's damage dice on the wound table."
+        ]
+      },
+      {
+        "id": "leap",
+        "name": "Leap",
+        "status": "proposed",
+        "levels": [
+          "A Move may include one leap, up or down one level (3\") or across a gap up to 3\", at no extra cost. Drops up to 6\" need no falling test."
+        ]
+      },
+      {
+        "id": "jedi_discipline",
+        "name": "Jedi discipline",
+        "status": "proposed",
+        "levels": [
+          "Never takes breaking tests and ignores casualty shock. Pinned only at 4 or more Suppression."
+        ]
+      },
+      {
+        "id": "twin_blades",
+        "name": "Twin blades",
+        "status": "proposed",
+        "levels": [
+          "Fights with two blades: +1 to close combat exchange rolls."
+        ]
+      },
+      {
+        "id": "scout",
+        "name": "Scout",
+        "status": "proposed",
+        "levels": [
+          "Deploys up to 6\" beyond its side's deployment zone, out of enemy line of sight. Scrub and woods are not difficult ground for it."
         ]
       }
     ]
@@ -3213,6 +3354,412 @@
         ],
         "skills": {},
         "miniatures": "BPRE 00 Unit Nitto Close Combat Kill Team"
+      },
+      {
+        "id": "rep_clone_sergeant",
+        "faction": "republic",
+        "name": "Clone Sergeant",
+        "role": "Leader",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "clone_armour",
+        "weapon": "dc15a",
+        "weapon_options": [
+          "dc15s"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "thermal_detonator"
+        ],
+        "gear": [],
+        "skills": {
+          "leader": 1
+        },
+        "miniatures": "Star Wars: Legion Clone Troopers"
+      },
+      {
+        "id": "rep_clone_trooper",
+        "faction": "republic",
+        "name": "Clone Trooper",
+        "role": "Rifleman",
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "clone_armour",
+        "weapon": "dc15a",
+        "weapon_options": [
+          "dc15s"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "thermal_detonator"
+        ],
+        "gear": [],
+        "skills": {},
+        "miniatures": "Star Wars: Legion Clone Troopers"
+      },
+      {
+        "id": "rep_clone_heavy",
+        "faction": "republic",
+        "name": "Clone Heavy Trooper",
+        "role": "Gunner",
+        "rank": "regular",
+        "stats": {
+          "move": 5,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 2,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "clone_armour",
+        "weapon": "z6",
+        "weapon_options": [
+          "rps6"
+        ],
+        "melee": "knife",
+        "grenades": [],
+        "gear": [],
+        "skills": {},
+        "miniatures": "Star Wars: Legion Clone Troopers (Z-6 or RPS-6 trooper)"
+      },
+      {
+        "id": "rep_clone_marksman",
+        "faction": "republic",
+        "name": "Clone Trooper Marksman",
+        "role": "Marksman",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "clone_armour",
+        "weapon": "dc15x",
+        "melee": "knife",
+        "grenades": [],
+        "gear": [
+          "low_light_optics"
+        ],
+        "skills": {
+          "marksman": 1
+        },
+        "miniatures": "Star Wars: Legion Clone Trooper Marksmen"
+      },
+      {
+        "id": "rep_arc_leader",
+        "faction": "republic",
+        "name": "ARC Trooper Leader",
+        "role": "Leader",
+        "rank": "elite",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "clone_armour",
+        "weapon": "dc17_pair",
+        "weapon_options": [
+          "dc15s"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "thermal_detonator",
+          "flashbang"
+        ],
+        "gear": [],
+        "skills": {
+          "leader": 1
+        },
+        "miniatures": "Star Wars: Legion ARC Troopers"
+      },
+      {
+        "id": "rep_arc_trooper",
+        "faction": "republic",
+        "name": "ARC Trooper",
+        "role": "Assaulter",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "clone_armour",
+        "weapon": "dc17_pair",
+        "weapon_options": [
+          "dc15s",
+          "dp23",
+          "z6",
+          "dc15x"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "thermal_detonator",
+          "flashbang"
+        ],
+        "gear": [],
+        "skills": {},
+        "miniatures": "Star Wars: Legion ARC Troopers"
+      },
+      {
+        "id": "rep_arf_trooper",
+        "faction": "republic",
+        "name": "ARF Trooper",
+        "role": "Scout",
+        "rank": "veteran",
+        "stats": {
+          "move": 7,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "clone_armour",
+        "weapon": "dc15s",
+        "weapon_options": [
+          "dc15x"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "smoke"
+        ],
+        "gear": [
+          "low_light_optics"
+        ],
+        "skills": {
+          "scout": 1
+        },
+        "miniatures": "Star Wars: Legion ARF Troopers"
+      },
+      {
+        "id": "rep_commando_leader",
+        "faction": "republic",
+        "name": "Clone Commando Leader",
+        "role": "Leader",
+        "rank": "elite",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 2,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "katarn_armour",
+        "weapon": "dc17m",
+        "weapon_options": [
+          "dc17m_sniper",
+          "dc17m_at"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "thermal_detonator",
+          "flashbang"
+        ],
+        "gear": [],
+        "gear_options": [
+          "hacking_rig",
+          "breaching_charge"
+        ],
+        "skills": {
+          "leader": 1,
+          "void_trained": 1
+        },
+        "miniatures": "Star Wars: Legion Clone Commandos"
+      },
+      {
+        "id": "rep_clone_commando",
+        "faction": "republic",
+        "name": "Clone Commando",
+        "role": "Commando",
+        "rank": "elite",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 2,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "katarn_armour",
+        "weapon": "dc17m",
+        "weapon_options": [
+          "dc17m_sniper",
+          "dc17m_at"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "thermal_detonator",
+          "flashbang"
+        ],
+        "gear": [],
+        "gear_options": [
+          "hacking_rig",
+          "breaching_charge"
+        ],
+        "skills": {
+          "void_trained": 1
+        },
+        "miniatures": "Star Wars: Legion Clone Commandos"
+      },
+      {
+        "id": "rep_cody",
+        "faction": "republic",
+        "name": "Commander Cody",
+        "role": "Leader",
+        "rank": "elite",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "clone_armour",
+        "weapon": "dc15s",
+        "weapon_options": [
+          "dc15a"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "thermal_detonator"
+        ],
+        "gear": [],
+        "skills": {
+          "leader": 1
+        },
+        "miniatures": "Star Wars: Legion Clone Commander Cody"
+      },
+      {
+        "id": "rep_obi_wan",
+        "faction": "republic",
+        "name": "Obi-Wan Kenobi",
+        "role": "Jedi General",
+        "rank": "elite",
+        "stats": {
+          "move": 7,
+          "shoot": 1,
+          "fight": 4,
+          "physique": 2,
+          "nerve": 4,
+          "tech": 1,
+          "wounds": 3,
+          "size": 2
+        },
+        "armour": "none",
+        "weapon": null,
+        "melee": "lightsaber",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "leader": 1,
+          "deflect": 2,
+          "leap": 1,
+          "jedi_discipline": 1
+        },
+        "miniatures": "Star Wars: Legion Galactic Republic starter (Obi-Wan Kenobi)"
+      },
+      {
+        "id": "rep_ahsoka",
+        "faction": "republic",
+        "name": "Ahsoka Tano",
+        "role": "Jedi Commander",
+        "rank": "elite",
+        "stats": {
+          "move": 8,
+          "shoot": 1,
+          "fight": 3,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "none",
+        "weapon": null,
+        "melee": "lightsaber",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "leader": 1,
+          "deflect": 1,
+          "leap": 1,
+          "jedi_discipline": 1,
+          "twin_blades": 1
+        },
+        "miniatures": "Star Wars: Legion Commander & Padawan Ahsoka Tano"
+      },
+      {
+        "id": "rep_jedi_guardian",
+        "faction": "republic",
+        "name": "Jedi Guardian",
+        "role": "Jedi Knight",
+        "rank": "veteran",
+        "stats": {
+          "move": 7,
+          "shoot": 1,
+          "fight": 3,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "none",
+        "weapon": null,
+        "melee": "lightsaber",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "deflect": 1,
+          "leap": 1,
+          "jedi_discipline": 1
+        },
+        "miniatures": "Star Wars: Legion Galactic Republic starter (Jedi Guardian)"
       }
     ]
   },
@@ -3324,6 +3871,130 @@
           "one_per_round",
           "cumbersome"
         ]
+      },
+      {
+        "id": "dc17",
+        "faction": "republic",
+        "name": "DC-17 hand blaster",
+        "damage": "2d6",
+        "short_range": 8,
+        "ap": 0,
+        "keywords": [
+          "handy"
+        ]
+      },
+      {
+        "id": "dc17_pair",
+        "faction": "republic",
+        "name": "Twin DC-17s",
+        "damage": "2d6",
+        "short_range": 8,
+        "ap": 0,
+        "auto": 2,
+        "keywords": [
+          "handy",
+          "auto"
+        ]
+      },
+      {
+        "id": "dc15s",
+        "faction": "republic",
+        "name": "DC-15S blaster carbine",
+        "damage": "2d8",
+        "short_range": 18,
+        "ap": 0,
+        "keywords": [
+          "handy"
+        ]
+      },
+      {
+        "id": "dc15a",
+        "faction": "republic",
+        "name": "DC-15A blaster rifle",
+        "damage": "2d8",
+        "short_range": 30,
+        "ap": 0,
+        "keywords": []
+      },
+      {
+        "id": "dc15x",
+        "faction": "republic",
+        "name": "DC-15x sniper rifle",
+        "damage": "2d10",
+        "short_range": 48,
+        "ap": 0,
+        "keywords": []
+      },
+      {
+        "id": "dc17m",
+        "faction": "republic",
+        "name": "DC-17m (blaster)",
+        "damage": "2d8",
+        "short_range": 24,
+        "ap": 0,
+        "keywords": [
+          "handy"
+        ]
+      },
+      {
+        "id": "dc17m_sniper",
+        "faction": "republic",
+        "name": "DC-17m (sniper)",
+        "damage": "2d10",
+        "short_range": 40,
+        "ap": 0,
+        "keywords": []
+      },
+      {
+        "id": "dc17m_at",
+        "faction": "republic",
+        "name": "DC-17m (anti-armour)",
+        "damage": "2d12",
+        "short_range": 24,
+        "ap": 1,
+        "keywords": [
+          "one_per_round"
+        ]
+      },
+      {
+        "id": "dp23",
+        "faction": "republic",
+        "name": "DP-23 phase-pulse blaster",
+        "damage": "2d12",
+        "short_range": 10,
+        "ap": 0,
+        "keywords": [
+          "handy"
+        ],
+        "range_penalty": [
+          -2,
+          -3
+        ]
+      },
+      {
+        "id": "z6",
+        "faction": "republic",
+        "name": "Z-6 rotary blaster",
+        "damage": "2d8",
+        "short_range": 18,
+        "ap": 0,
+        "auto": 3,
+        "keywords": [
+          "auto",
+          "suppressing"
+        ]
+      },
+      {
+        "id": "rps6",
+        "faction": "republic",
+        "name": "RPS-6 rocket launcher",
+        "damage": "2d12",
+        "short_range": 36,
+        "ap": 1,
+        "keywords": [
+          "one_per_round",
+          "cumbersome"
+        ]
       }
     ],
     "melee": [
@@ -3344,6 +4015,13 @@
         "name": "Breaching tool or heavy blade",
         "damage": "2d10",
         "ap": 0
+      },
+      {
+        "id": "lightsaber",
+        "faction": "republic",
+        "name": "Lightsaber",
+        "damage": "2d12",
+        "ap": 2
       }
     ],
     "thrown": [
@@ -3376,6 +4054,19 @@
         "blast_radius": 2,
         "effect": "Blocks line of sight through the area until end of next round",
         "keywords": []
+      },
+      {
+        "id": "thermal_detonator",
+        "faction": "republic",
+        "name": "Thermal detonator",
+        "throw_range": 8,
+        "blast_radius": 2,
+        "damage": "2d10",
+        "ap": 0,
+        "keywords": [
+          "blast",
+          "confined_bonus"
+        ]
       }
     ],
     "demolitions": [

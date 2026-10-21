@@ -30,6 +30,16 @@ public class TroopTests
     }
 
     [Fact]
+    public void JediHasNoRangedWeaponButALightsaber()
+    {
+        Assert.Null(Set.Troop("rep_ahsoka").Weapon);
+        var ahsoka = Soldier.FromTroop(Set, "rep_ahsoka");
+        Assert.Same(RangedWeapon.None, ahsoka.Weapon);
+        Assert.Equal("lightsaber", ahsoka.Melee!.Id);
+        Assert.Equal(2, ahsoka.Melee.Ap);
+    }
+
+    [Fact]
     public void TraumaKitIsAnOptionNotDefault() => Assert.False(Soldier.FromTroop(Set, "tfb_pathfinder").IsMedic);
 
     [Fact]

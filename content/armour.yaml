@@ -9,3 +9,5 @@ armour:
   - { id: composite,  name: Composite plate, value: 2, keywords: [] }
   - { id: void_plate, name: Void plate,      value: 2, keywords: [sealed] }
   - { id: heavy,      name: Heavy plate,     value: 3, keywords: [sealed, heavy] }
+  - { id: clone_armour,  faction: republic, name: Clone armour,  value: 1, keywords: [sealed] }
+  - { id: katarn_armour, faction: republic, name: Katarn armour, value: 2, keywords: [sealed] }

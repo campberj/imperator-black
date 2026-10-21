@@ -391,3 +391,199 @@ troops:
     gear: [silencer, low_light_optics]
     skills: {}
     miniatures: "BPRE 00 Unit Nitto Close Combat Kill Team"
+
+  # ---------------- Galactic Republic (Star Wars: Legion miniatures) ----------------
+  # Shoot scale: clone troopers are professionals (2); ARC troopers, commandos and Cody are elite (3);
+  # Jedi are legendary in close combat (Fight 3-4) and rarely shoot. Jedi abilities are trained skills only.
+  - id: rep_clone_sergeant
+    faction: republic
+    name: Clone Sergeant
+    role: Leader
+    rank: veteran
+    stats: { move: 6, shoot: 2, fight: 2, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
+    armour: clone_armour
+    weapon: dc15a
+    weapon_options: [dc15s]
+    melee: knife
+    grenades: [thermal_detonator]
+    gear: []
+    skills: { leader: 1 }
+    miniatures: "Star Wars: Legion Clone Troopers"
+
+  - id: rep_clone_trooper
+    faction: republic
+    name: Clone Trooper
+    role: Rifleman
+    rank: regular
+    stats: { move: 6, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
+    armour: clone_armour
+    weapon: dc15a
+    weapon_options: [dc15s]
+    melee: knife
+    grenades: [thermal_detonator]
+    gear: []
+    skills: {}
+    miniatures: "Star Wars: Legion Clone Troopers"
+
+  - id: rep_clone_heavy
+    faction: republic
+    name: Clone Heavy Trooper
+    role: Gunner
+    rank: regular
+    stats: { move: 5, shoot: 2, fight: 1, physique: 2, nerve: 2, tech: 0, wounds: 1, size: 2 }
+    armour: clone_armour
+    weapon: z6
+    weapon_options: [rps6]
+    melee: knife
+    grenades: []
+    gear: []
+    skills: {}
+    miniatures: "Star Wars: Legion Clone Troopers (Z-6 or RPS-6 trooper)"
+
+  - id: rep_clone_marksman
+    faction: republic
+    name: Clone Trooper Marksman
+    role: Marksman
+    rank: veteran
+    stats: { move: 6, shoot: 3, fight: 1, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
+    armour: clone_armour
+    weapon: dc15x
+    melee: knife
+    grenades: []
+    gear: [low_light_optics]
+    skills: { marksman: 1 }
+    miniatures: "Star Wars: Legion Clone Trooper Marksmen"
+
+  - id: rep_arc_leader
+    faction: republic
+    name: ARC Trooper Leader
+    role: Leader
+    rank: elite
+    stats: { move: 6, shoot: 3, fight: 2, physique: 2, nerve: 3, tech: 1, wounds: 2, size: 2 }
+    armour: clone_armour
+    weapon: dc17_pair
+    weapon_options: [dc15s]
+    melee: knife
+    grenades: [thermal_detonator, flashbang]
+    gear: []
+    skills: { leader: 1 }
+    miniatures: "Star Wars: Legion ARC Troopers"
+
+  - id: rep_arc_trooper
+    faction: republic
+    name: ARC Trooper
+    role: Assaulter
+    rank: veteran
+    stats: { move: 6, shoot: 3, fight: 2, physique: 2, nerve: 3, tech: 1, wounds: 1, size: 2 }
+    armour: clone_armour
+    weapon: dc17_pair
+    weapon_options: [dc15s, dp23, z6, dc15x]
+    melee: knife
+    grenades: [thermal_detonator, flashbang]
+    gear: []
+    skills: {}
+    miniatures: "Star Wars: Legion ARC Troopers"
+
+  - id: rep_arf_trooper
+    faction: republic
+    name: ARF Trooper
+    role: Scout
+    rank: veteran
+    stats: { move: 7, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
+    armour: clone_armour
+    weapon: dc15s
+    weapon_options: [dc15x]
+    melee: knife
+    grenades: [smoke]
+    gear: [low_light_optics]
+    skills: { scout: 1 }
+    miniatures: "Star Wars: Legion ARF Troopers"
+
+  - id: rep_commando_leader
+    faction: republic
+    name: Clone Commando Leader
+    role: Leader
+    rank: elite
+    stats: { move: 6, shoot: 3, fight: 2, physique: 2, nerve: 3, tech: 2, wounds: 2, size: 2 }
+    armour: katarn_armour
+    weapon: dc17m
+    weapon_options: [dc17m_sniper, dc17m_at]
+    melee: knife
+    grenades: [thermal_detonator, flashbang]
+    gear: []
+    gear_options: [hacking_rig, breaching_charge]
+    skills: { leader: 1, void_trained: 1 }
+    miniatures: "Star Wars: Legion Clone Commandos"
+
+  - id: rep_clone_commando
+    faction: republic
+    name: Clone Commando
+    role: Commando
+    rank: elite
+    stats: { move: 6, shoot: 3, fight: 2, physique: 2, nerve: 3, tech: 2, wounds: 2, size: 2 }
+    armour: katarn_armour
+    weapon: dc17m
+    weapon_options: [dc17m_sniper, dc17m_at]
+    melee: knife
+    grenades: [thermal_detonator, flashbang]
+    gear: []
+    gear_options: [hacking_rig, breaching_charge]
+    skills: { void_trained: 1 }
+    miniatures: "Star Wars: Legion Clone Commandos"
+
+  - id: rep_cody
+    faction: republic
+    name: Commander Cody
+    role: Leader
+    rank: elite
+    stats: { move: 6, shoot: 3, fight: 2, physique: 2, nerve: 3, tech: 1, wounds: 2, size: 2 }
+    armour: clone_armour
+    weapon: dc15s
+    weapon_options: [dc15a]
+    melee: knife
+    grenades: [thermal_detonator]
+    gear: []
+    skills: { leader: 1 }
+    miniatures: "Star Wars: Legion Clone Commander Cody"
+
+  - id: rep_obi_wan
+    faction: republic
+    name: Obi-Wan Kenobi
+    role: Jedi General
+    rank: elite
+    stats: { move: 7, shoot: 1, fight: 4, physique: 2, nerve: 4, tech: 1, wounds: 3, size: 2 }
+    armour: none
+    weapon: null
+    melee: lightsaber
+    grenades: []
+    gear: []
+    skills: { leader: 1, deflect: 2, leap: 1, jedi_discipline: 1 }
+    miniatures: "Star Wars: Legion Galactic Republic starter (Obi-Wan Kenobi)"
+
+  - id: rep_ahsoka
+    faction: republic
+    name: Ahsoka Tano
+    role: Jedi Commander
+    rank: elite
+    stats: { move: 8, shoot: 1, fight: 3, physique: 2, nerve: 3, tech: 1, wounds: 2, size: 2 }
+    armour: none
+    weapon: null
+    melee: lightsaber
+    grenades: []
+    gear: []
+    skills: { leader: 1, deflect: 1, leap: 1, jedi_discipline: 1, twin_blades: 1 }
+    miniatures: "Star Wars: Legion Commander & Padawan Ahsoka Tano"
+
+  - id: rep_jedi_guardian
+    faction: republic
+    name: Jedi Guardian
+    role: Jedi Knight
+    rank: veteran
+    stats: { move: 7, shoot: 1, fight: 3, physique: 2, nerve: 3, tech: 1, wounds: 2, size: 2 }
+    armour: none
+    weapon: null
+    melee: lightsaber
+    grenades: []
+    gear: []
+    skills: { deflect: 1, leap: 1, jedi_discipline: 1 }
+    miniatures: "Star Wars: Legion Galactic Republic starter (Jedi Guardian)"

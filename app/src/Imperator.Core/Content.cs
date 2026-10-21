@@ -48,6 +48,9 @@ public sealed record RangedWeapon(string Id, string Name, string Damage, int Sho
     public int PenaltyBeyondShort => RangePenalty is { Count: > 0 } p ? p[0] : -1;
     public int PenaltyBeyondDouble => RangePenalty is { Count: > 1 } p ? p[1] : -2;
 
+    /// <summary>Stand-in for a model with no ranged weapon (for example a Jedi with only a lightsaber): it cannot Shoot.</summary>
+    public static readonly RangedWeapon None = new("none", "No ranged weapon", "2d4", 0, 0, ["no_ranged"]);
+
     /// <summary>Range modifier at a given distance in inches.</summary>
     public int RangeModifier(double inches) =>
         inches > 2 * ShortRange ? PenaltyBeyondDouble : inches > ShortRange ? PenaltyBeyondShort : 0;
@@ -92,7 +95,7 @@ public sealed record TroopStats(int Move, int Shoot, int? Fight, int? Physique, 
 
 public sealed record TroopDef(
     string Id, string Faction, string Name, string Role, string Rank, TroopStats Stats,
-    string Armour, string Weapon, string? Melee, List<string> Grenades, List<string> Gear, Dictionary<string, int> Skills,
+    string Armour, string? Weapon, string? Melee, List<string> Grenades, List<string> Gear, Dictionary<string, int> Skills,
     List<string>? ArmourOptions = null, List<string>? WeaponOptions = null, List<string>? GearOptions = null,
     string? Miniatures = null);
 
