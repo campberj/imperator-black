@@ -34,7 +34,7 @@ When half of a fireteam (rounded up) is Down, Dead, captured or fled, each remai
 
 | State | Effect |
 |---|---|
-| **Wounded** | Rows 4–5 add a **Wounded marker**. A model with any Wounded markers has −1 to all rolls. When it has more Wounded markers than its **Wounds** attribute, it goes Down. Most models have Wounds 1, so a second Wounded result puts them Down. |
+| **Wounded** | Rows 4–5 add a **Wounded marker**. A model with any Wounded markers has −1 to all rolls: a flat −1, however many markers it has. When it has more Wounded markers than its **Wounds** attribute, it goes Down. Most models have Wounds 1, so a second Wounded result puts them Down. |
 | **Down** (row 6) | Lies prone, takes no actions, counts as out of the fight. It may recover. |
 | **Bleeding** (row 7) | Down, and dies at the end of the third round after it fell unless a Medic action gets 8+. |
 | **Critical** (row 8) | Down, and dies at the end of the next round unless a Medic action gets 10+. |
@@ -44,9 +44,9 @@ When a model goes Down, Bleeding or Critical, remove its Suppression markers and
 
 ### Down recovery
 
-At the end of each round, each **Down** model (not Bleeding or Critical) tests 2d6 + Physique.
+At the end of each round, each **Down** model (not Bleeding or Critical) tests 2d6 + Physique. Wounded markers do not modify this test, and a Down model has no Suppression, so it is a plain 2d6 + Physique.
 
-- **8+:** it gets up with **3 Suppression** (Pinned) and as many Wounded markers as its Wounds attribute, so one more Wounded result puts it Down again.
+- **8+:** it gets up with **3 Suppression** (Pinned) and its Wounded markers set to its Wounds attribute (any extra are removed), so it has −1 to all rolls and one more Wounded result puts it Down again.
 - **Fail:** it stays Down.
 
 ### Medic action
