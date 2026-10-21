@@ -19,6 +19,10 @@ factions:
     name: Contractors
     side: enemy
     summary: "Mercenary companies and hired guns Freespace pays by the job."
+  - id: un
+    name: UN Force Command
+    side: enemy
+    summary: "The Authority's regular forces: the professional 3rd Battalion and the augmented Raid Force Alpha, with their inorganic combat units."
   - id: directorate
     name: Meridian Directorate
     side: enemy
@@ -107,6 +111,114 @@ elements:
     reaction_force: true
     composition: [{ troop: ct_harlow_operator, count: 3 }, { troop: ct_harlow_gunner, count: 1 }]
 
+  - id: borz_bratva
+    name: Borz Bratva team
+    faction: contractor
+    tier: 3
+    behavior: sentry
+    composition: [{ troop: ct_borz_bratva, count: 2 }, { troop: ct_borz_bratva_hmg, count: 1 }]
+
+  - id: borz_cyka
+    name: Borz Cyka team
+    faction: contractor
+    tier: 3
+    behavior: aggressive
+    composition: [{ troop: ct_borz_cyka, count: 1 }, { troop: ct_borz_cyka_bravo, count: 1 }]
+
+  - id: borz_ubiytsa
+    name: Ubiytsa shock team
+    faction: contractor
+    tier: 3
+    behavior: aggressive
+    composition: [{ troop: ct_borz_ubiytsa_leader, count: 1 }, { troop: ct_borz_ubiytsa, count: 3 }]
+
+  - id: harlow_control
+    name: Harlow control team
+    faction: contractor
+    tier: 3
+    behavior: tactical
+    reaction_force: true
+    composition: [{ troop: ct_harlow_leader, count: 1 }, { troop: ct_harlow_grenadier, count: 1 }]
+
+  - id: harlow_engineers
+    name: Harlow engineers
+    faction: contractor
+    tier: 3
+    behavior: tactical
+    composition: [{ troop: ct_harlow_engineer, count: 2 }]
+
+  - id: harlow_crickets
+    name: Cricket drones
+    faction: contractor
+    tier: 3
+    behavior: automated
+    composition: [{ troop: ct_harlow_cricket, count: 2 }]
+
+  - id: harlow_veterans
+    name: Harlow veterans
+    faction: contractor
+    tier: 3
+    behavior: aggressive
+    composition: [{ troop: ct_harlow_veteran, count: 3 }]
+
+  - id: harlow_springbok
+    name: Springbok AI
+    faction: contractor
+    tier: 3
+    behavior: automated
+    composition: [{ troop: ct_harlow_springbok, count: 1 }]
+
+  - id: un3_fireteam
+    name: UN reserve fireteam
+    faction: un
+    tier: 4
+    behavior: tactical
+    composition: [{ troop: un3_rifleman, count: 3 }, { troop: un3_at_specialist, count: 1 }]
+    alternatives: [un3_data_specialist]
+
+  - id: un3_pointmen
+    name: UN Pointmen
+    faction: un
+    tier: 4
+    behavior: aggressive
+    composition: [{ troop: un3_pointman, count: 2 }, { troop: un3_pointman_gunner, count: 1 }]
+
+  - id: un3_batcon
+    name: UN Battalion Controller
+    faction: un
+    tier: 4
+    behavior: leader
+    composition: [{ troop: un3_batcon, count: 1 }]
+
+  - id: rfa_fireteam
+    name: Raid Force Alpha fireteam
+    faction: un
+    tier: 4
+    behavior: tactical
+    composition: [{ troop: rfa_assaulter, count: 2 }]
+    alternatives: [rfa_grenadier]
+
+  - id: rfa_specialists
+    name: Raid Force Alpha specialists
+    faction: un
+    tier: 4
+    behavior: tactical
+    composition: [{ troop: rfa_marksman, count: 1 }, { troop: rfa_grenadier, count: 1 }]
+
+  - id: rfa_golem
+    name: Golem unit
+    faction: un
+    tier: 4
+    behavior: attached
+    composition: [{ troop: rfa_golem, count: 1 }]
+
+  - id: rfa_mother
+    name: UTG Mother
+    faction: un
+    tier: 4
+    behavior: leader
+    composition: [{ troop: rfa_mother, count: 1 }]
+
   - id: directorate_handler
     name: Directorate handler
     faction: directorate
@@ -125,4 +237,4 @@ threat_tiers:
   - { tier: 1, name: Low,    summary: "Crew and asset security under a recovery captain." }
   - { tier: 2, name: Medium, summary: "Adds collections enforcers, salvage techs and automated defences." }
   - { tier: 3, name: High,   summary: "Adds repossession teams, liquidators and hired guns; a contractor reaction force answers high alert." }
-  - { tier: 4, name: Story,  summary: "Adds Meridian Directorate handlers or deniable operators." }
+  - { tier: 4, name: Story,  summary: "Adds Meridian Directorate handlers or deniable operators, or UN Force Command: the 3rd Battalion and Raid Force Alpha." }

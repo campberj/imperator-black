@@ -54,6 +54,18 @@ gear:
     grants_skills: {}
     status: settled
 
+  - id: grenade_launcher
+    name: Grenade launcher
+    text: "The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 18\". Its Throws are Very loud and count as Shoot actions for reactions."
+    grants_skills: {}
+    status: proposed
+
+  - id: ballistic_shield
+    name: Ballistic shield
+    text: "The carrier has the Shield skill. It cannot use a weapon with the Cumbersome keyword while carrying it."
+    grants_skills: { shield: 1 }
+    status: proposed
+
   - id: jammer
     name: Jammer
     text: "Enemy Automated models within 6\" take -2 to hit, and enemy Hack tests within 6\" take -2."

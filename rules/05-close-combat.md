@@ -33,6 +33,7 @@ Close combat resolves **immediately**, in a series of **exchanges**, without spe
 | Unarmed / weapon butt | 2d4 | 0 |
 | Knife or bayonet | 2d8 | 0 |
 | Breaching tool or heavy blade | 2d10 | 0 |
+| Boarding axe or combat blade | 2d10 | 1 |
 <!-- /table -->
 
 ### Overpowered

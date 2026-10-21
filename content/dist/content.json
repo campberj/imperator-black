@@ -323,6 +323,8 @@
         "close_quarters": false,
         "investigate": "Drones only. Turrets never move.",
         "engaged": [
+          "Self-destruct drone with a player model within 2\": Self-destruct.",
+          "Self-destruct drone: Move toward the nearest player model, twice, ending as close as it can.",
           "Drone with no target within short range: Move to within short range with a target, then Shoot.",
           "Otherwise: Shoot, then Overwatch. A turret only shoots into the field of fire the mission gives it."
         ],
@@ -720,6 +722,12 @@
         "summary": "Mercenary companies and hired guns Freespace pays by the job."
       },
       {
+        "id": "un",
+        "name": "UN Force Command",
+        "side": "enemy",
+        "summary": "The Authority's regular forces: the professional 3rd Battalion and the augmented Raid Force Alpha, with their inorganic combat units."
+      },
+      {
         "id": "directorate",
         "name": "Meridian Directorate",
         "side": "enemy",
@@ -891,6 +899,236 @@
         ]
       },
       {
+        "id": "borz_bratva",
+        "name": "Borz Bratva team",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "sentry",
+        "composition": [
+          {
+            "troop": "ct_borz_bratva",
+            "count": 2
+          },
+          {
+            "troop": "ct_borz_bratva_hmg",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "borz_cyka",
+        "name": "Borz Cyka team",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "aggressive",
+        "composition": [
+          {
+            "troop": "ct_borz_cyka",
+            "count": 1
+          },
+          {
+            "troop": "ct_borz_cyka_bravo",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "borz_ubiytsa",
+        "name": "Ubiytsa shock team",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "aggressive",
+        "composition": [
+          {
+            "troop": "ct_borz_ubiytsa_leader",
+            "count": 1
+          },
+          {
+            "troop": "ct_borz_ubiytsa",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "id": "harlow_control",
+        "name": "Harlow control team",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "tactical",
+        "reaction_force": true,
+        "composition": [
+          {
+            "troop": "ct_harlow_leader",
+            "count": 1
+          },
+          {
+            "troop": "ct_harlow_grenadier",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "harlow_engineers",
+        "name": "Harlow engineers",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "tactical",
+        "composition": [
+          {
+            "troop": "ct_harlow_engineer",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "harlow_crickets",
+        "name": "Cricket drones",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "automated",
+        "composition": [
+          {
+            "troop": "ct_harlow_cricket",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "harlow_veterans",
+        "name": "Harlow veterans",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "aggressive",
+        "composition": [
+          {
+            "troop": "ct_harlow_veteran",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "id": "harlow_springbok",
+        "name": "Springbok AI",
+        "faction": "contractor",
+        "tier": 3,
+        "behavior": "automated",
+        "composition": [
+          {
+            "troop": "ct_harlow_springbok",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "un3_fireteam",
+        "name": "UN reserve fireteam",
+        "faction": "un",
+        "tier": 4,
+        "behavior": "tactical",
+        "composition": [
+          {
+            "troop": "un3_rifleman",
+            "count": 3
+          },
+          {
+            "troop": "un3_at_specialist",
+            "count": 1
+          }
+        ],
+        "alternatives": [
+          "un3_data_specialist"
+        ]
+      },
+      {
+        "id": "un3_pointmen",
+        "name": "UN Pointmen",
+        "faction": "un",
+        "tier": 4,
+        "behavior": "aggressive",
+        "composition": [
+          {
+            "troop": "un3_pointman",
+            "count": 2
+          },
+          {
+            "troop": "un3_pointman_gunner",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "un3_batcon",
+        "name": "UN Battalion Controller",
+        "faction": "un",
+        "tier": 4,
+        "behavior": "leader",
+        "composition": [
+          {
+            "troop": "un3_batcon",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "rfa_fireteam",
+        "name": "Raid Force Alpha fireteam",
+        "faction": "un",
+        "tier": 4,
+        "behavior": "tactical",
+        "composition": [
+          {
+            "troop": "rfa_assaulter",
+            "count": 2
+          }
+        ],
+        "alternatives": [
+          "rfa_grenadier"
+        ]
+      },
+      {
+        "id": "rfa_specialists",
+        "name": "Raid Force Alpha specialists",
+        "faction": "un",
+        "tier": 4,
+        "behavior": "tactical",
+        "composition": [
+          {
+            "troop": "rfa_marksman",
+            "count": 1
+          },
+          {
+            "troop": "rfa_grenadier",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "rfa_golem",
+        "name": "Golem unit",
+        "faction": "un",
+        "tier": 4,
+        "behavior": "attached",
+        "composition": [
+          {
+            "troop": "rfa_golem",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "rfa_mother",
+        "name": "UTG Mother",
+        "faction": "un",
+        "tier": 4,
+        "behavior": "leader",
+        "composition": [
+          {
+            "troop": "rfa_mother",
+            "count": 1
+          }
+        ]
+      },
+      {
         "id": "directorate_handler",
         "name": "Directorate handler",
         "faction": "directorate",
@@ -936,7 +1174,7 @@
       {
         "tier": 4,
         "name": "Story",
-        "summary": "Adds Meridian Directorate handlers or deniable operators."
+        "summary": "Adds Meridian Directorate handlers or deniable operators, or UN Force Command: the 3rd Battalion and Raid Force Alpha."
       }
     ]
   },
@@ -1006,6 +1244,22 @@
         "text": "Move ignores the extra cost of obstacles and may cross gaps up to half the model's Move. In zero-g, the model may change direction freely during a Move and stop anywhere, even away from a surface (it still counts as unbraced).",
         "grants_skills": {},
         "status": "settled"
+      },
+      {
+        "id": "grenade_launcher",
+        "name": "Grenade launcher",
+        "text": "The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 18\". Its Throws are Very loud and count as Shoot actions for reactions.",
+        "grants_skills": {},
+        "status": "proposed"
+      },
+      {
+        "id": "ballistic_shield",
+        "name": "Ballistic shield",
+        "text": "The carrier has the Shield skill. It cannot use a weapon with the Cumbersome keyword while carrying it.",
+        "grants_skills": {
+          "shield": 1
+        },
+        "status": "proposed"
       },
       {
         "id": "jammer",
@@ -2131,6 +2385,38 @@
         "levels": [
           "Deploys up to 6\" beyond its side's deployment zone, out of enemy line of sight. Scrub and woods are not difficult ground for it."
         ]
+      },
+      {
+        "id": "shield",
+        "name": "Shield",
+        "status": "proposed",
+        "levels": [
+          "Carries a ballistic shield or shield emitter: when it has no other cover, it counts as in Light cover against shots from the half of the table it faces."
+        ]
+      },
+      {
+        "id": "layered_armour",
+        "name": "Layered armour",
+        "status": "proposed",
+        "levels": [
+          "Blast weapons step one extra row down against it."
+        ]
+      },
+      {
+        "id": "augmented",
+        "name": "Augmented",
+        "status": "proposed",
+        "levels": [
+          "Genetically or cybernetically augmented: +1 to Physique tests, and it ignores the first Suppression it gains each round."
+        ]
+      },
+      {
+        "id": "self_destruct",
+        "name": "Self-destruct",
+        "status": "proposed",
+        "levels": [
+          "As an action: resolve a blast centred on itself, radius 2\", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud."
+        ]
       }
     ]
   },
@@ -3146,7 +3432,8 @@
           "breaching_charge"
         ],
         "skills": {
-          "void_trained": 1
+          "void_trained": 1,
+          "layered_armour": 1
         },
         "miniatures": "BLKOUT Manticor Borz"
       },
@@ -3174,7 +3461,8 @@
         ],
         "gear": [],
         "skills": {
-          "void_trained": 1
+          "void_trained": 1,
+          "layered_armour": 1
         },
         "miniatures": "BLKOUT Manticor Borz"
       },
@@ -3289,6 +3577,688 @@
         "gear": [],
         "skills": {},
         "miniatures": "BLKOUT P3 (Szabla Group)"
+      },
+      {
+        "id": "ct_borz_bratva",
+        "faction": "contractor",
+        "name": "Borz Bratva Trooper",
+        "role": "Rifleman",
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [
+          "ballistic_shield"
+        ],
+        "skills": {
+          "layered_armour": 1
+        },
+        "miniatures": "BLKOUT Manticor Borz Group: Bratva Team"
+      },
+      {
+        "id": "ct_borz_bratva_hmg",
+        "faction": "contractor",
+        "name": "Borz Bratva HMG Gunner",
+        "role": "Gunner",
+        "rank": "regular",
+        "stats": {
+          "move": 5,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 3,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "hmg",
+        "melee": "knife",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "layered_armour": 1
+        },
+        "miniatures": "BLKOUT Manticor Borz Group: Bratva Team (HMG)"
+      },
+      {
+        "id": "ct_borz_cyka",
+        "faction": "contractor",
+        "name": "Borz Cyka Powered Trooper",
+        "role": "Gunner",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 3,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "heavy",
+        "weapon": "lmg",
+        "weapon_options": [
+          "carbine"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [],
+        "gear_options": [
+          "grenade_launcher"
+        ],
+        "skills": {
+          "layered_armour": 1
+        },
+        "miniatures": "BLKOUT Manticor Borz Group: Cyka Team"
+      },
+      {
+        "id": "ct_borz_cyka_bravo",
+        "faction": "contractor",
+        "name": "Borz Cyka Bravo Breacher",
+        "role": "Assaulter",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 3,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "heavy",
+        "weapon": "smg",
+        "melee": "combat_blade",
+        "grenades": [
+          "flashbang",
+          "frag"
+        ],
+        "gear": [
+          "breaching_charge"
+        ],
+        "skills": {
+          "layered_armour": 1,
+          "void_trained": 1
+        },
+        "miniatures": "BLKOUT Manticor Borz Group: Cyka Bravo"
+      },
+      {
+        "id": "ct_borz_ubiytsa_leader",
+        "faction": "contractor",
+        "name": "Ubiytsa Controller",
+        "role": "Leader",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "flak",
+        "weapon": "shotgun",
+        "melee": "combat_blade",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [],
+        "skills": {
+          "leader": 1,
+          "layered_armour": 1
+        },
+        "miniatures": "BLKOUT Manticor Borz Group: Ubiytsa Control Team"
+      },
+      {
+        "id": "ct_borz_ubiytsa",
+        "faction": "contractor",
+        "name": "Ubiytsa Shock Trooper",
+        "role": "Assaulter",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 3,
+          "physique": 3,
+          "nerve": 3,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "flak",
+        "weapon": "shotgun",
+        "melee": "combat_blade",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [],
+        "skills": {
+          "layered_armour": 1
+        },
+        "miniatures": "BLKOUT Manticor Borz Group: Ubiytsa"
+      },
+      {
+        "id": "ct_harlow_leader",
+        "faction": "contractor",
+        "name": "Reaction Force Controller",
+        "role": "Leader",
+        "rank": "veteran",
+        "stats": {
+          "move": 7,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 3,
+          "tech": 2,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "carbine",
+        "weapon_options": [
+          "rifle"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "hacking_rig"
+        ],
+        "skills": {
+          "leader": 1
+        },
+        "miniatures": "BLKOUT Harlow 1st Reaction Force: Control Team"
+      },
+      {
+        "id": "ct_harlow_grenadier",
+        "faction": "contractor",
+        "name": "Reaction Force Grenadier",
+        "role": "Grenadier",
+        "rank": "veteran",
+        "stats": {
+          "move": 7,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "carbine",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "grenade_launcher"
+        ],
+        "skills": {},
+        "miniatures": "BLKOUT Harlow 1st Reaction Force: Control Team (grenade launcher)"
+      },
+      {
+        "id": "ct_harlow_engineer",
+        "faction": "contractor",
+        "name": "Reaction Force Engineer",
+        "role": "Engineer",
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 2,
+          "nerve": 2,
+          "tech": 2,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "carbine",
+        "weapon_options": [
+          "at_launcher"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [
+          "breaching_charge"
+        ],
+        "skills": {},
+        "miniatures": "BLKOUT Harlow 1st Reaction Force: Engineers"
+      },
+      {
+        "id": "ct_harlow_veteran",
+        "faction": "contractor",
+        "name": "Harlow Veteran",
+        "role": "Assaulter",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 3,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "flak",
+        "weapon": "carbine",
+        "melee": "combat_blade",
+        "grenades": [
+          "flashbang",
+          "frag"
+        ],
+        "gear": [
+          "jump_pack"
+        ],
+        "skills": {},
+        "miniatures": "BLKOUT Harlow 1st Reaction Force: Veterans"
+      },
+      {
+        "id": "ct_harlow_springbok",
+        "faction": "contractor",
+        "name": "Springbok AI",
+        "role": "Combat inorganic",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 1,
+          "physique": 2,
+          "nerve": null,
+          "tech": null,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "auto_rifle",
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1
+        },
+        "miniatures": "BLKOUT Harlow 1st Reaction Force: Springbok AI"
+      },
+      {
+        "id": "ct_harlow_cricket",
+        "faction": "contractor",
+        "name": "Cricket Drone",
+        "role": "Mine drone",
+        "rank": "regular",
+        "stats": {
+          "move": 7,
+          "shoot": 0,
+          "fight": null,
+          "physique": null,
+          "nerve": null,
+          "tech": null,
+          "wounds": 1,
+          "size": 1
+        },
+        "armour": "none",
+        "weapon": null,
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1,
+          "self_destruct": 1
+        },
+        "miniatures": "BLKOUT Harlow 1st Reaction Force: Crickets"
+      },
+      {
+        "id": "un3_batcon",
+        "faction": "un",
+        "name": "Battalion Controller",
+        "role": "Leader",
+        "rank": "veteran",
+        "stats": {
+          "move": 5,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 3,
+          "tech": 2,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [
+          "hacking_rig"
+        ],
+        "skills": {
+          "leader": 1
+        },
+        "miniatures": "BLKOUT UN Forces: Batcon (with comms bot)"
+      },
+      {
+        "id": "un3_rifleman",
+        "faction": "un",
+        "name": "3rd Battalion Rifleman",
+        "role": "Rifleman",
+        "rank": "regular",
+        "stats": {
+          "move": 7,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [],
+        "skills": {},
+        "miniatures": "BLKOUT UN 3rd Battalion: Reserve Fireteam"
+      },
+      {
+        "id": "un3_data_specialist",
+        "faction": "un",
+        "name": "3rd Battalion Data Specialist",
+        "role": "Specialist",
+        "rank": "regular",
+        "stats": {
+          "move": 7,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 2,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [
+          "hacking_rig",
+          "jammer"
+        ],
+        "skills": {},
+        "miniatures": "BLKOUT UN 3rd Battalion: Reserve Fireteam (data specialist)"
+      },
+      {
+        "id": "un3_at_specialist",
+        "faction": "un",
+        "name": "3rd Battalion AT Specialist",
+        "role": "Specialist",
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 2,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "at_launcher",
+        "weapon_options": [
+          "rifle"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [],
+        "skills": {},
+        "miniatures": "BLKOUT UN 3rd Battalion: Reserve Fireteam (AT specialist)"
+      },
+      {
+        "id": "un3_pointman",
+        "faction": "un",
+        "name": "Pointman",
+        "role": "Combat inorganic",
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 2,
+          "nerve": null,
+          "tech": null,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "rifle",
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1,
+          "shield": 1
+        },
+        "miniatures": "BLKOUT UN 3rd Battalion: Pointmen"
+      },
+      {
+        "id": "un3_pointman_gunner",
+        "faction": "un",
+        "name": "Pointman SAW",
+        "role": "Gunner",
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 2,
+          "nerve": null,
+          "tech": null,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "lmg",
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1,
+          "shield": 1
+        },
+        "miniatures": "BLKOUT UN 3rd Battalion: Pointmen (SAW)"
+      },
+      {
+        "id": "rfa_mother",
+        "faction": "un",
+        "name": "UTG Mother",
+        "role": "Leader",
+        "rank": "elite",
+        "stats": {
+          "move": 5,
+          "shoot": 3,
+          "fight": 4,
+          "physique": 3,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "smg",
+        "melee": "combat_blade",
+        "grenades": [
+          "frag",
+          "flashbang"
+        ],
+        "gear": [
+          "jump_pack"
+        ],
+        "skills": {
+          "leader": 1,
+          "augmented": 1
+        },
+        "miniatures": "BLKOUT UN Forces: UTG Mothers"
+      },
+      {
+        "id": "rfa_assaulter",
+        "faction": "un",
+        "name": "UTG Assaulter",
+        "role": "Assaulter",
+        "rank": "elite",
+        "stats": {
+          "move": 5,
+          "shoot": 3,
+          "fight": 3,
+          "physique": 3,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "carbine",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "flashbang"
+        ],
+        "gear": [
+          "jump_pack"
+        ],
+        "skills": {
+          "augmented": 1
+        },
+        "miniatures": "BLKOUT UN Raid Force Alpha: UTG Assaulters"
+      },
+      {
+        "id": "rfa_grenadier",
+        "faction": "un",
+        "name": "UTG Grenadier",
+        "role": "Grenadier",
+        "rank": "elite",
+        "stats": {
+          "move": 5,
+          "shoot": 3,
+          "fight": 3,
+          "physique": 3,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "carbine",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "flashbang"
+        ],
+        "gear": [
+          "jump_pack",
+          "grenade_launcher"
+        ],
+        "skills": {
+          "augmented": 1
+        },
+        "miniatures": "BLKOUT UN Raid Force Alpha: UTG Assaulters (grenadier)"
+      },
+      {
+        "id": "rfa_marksman",
+        "faction": "un",
+        "name": "UTG Marksman",
+        "role": "Marksman",
+        "rank": "elite",
+        "stats": {
+          "move": 5,
+          "shoot": 3,
+          "fight": 2,
+          "physique": 3,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "amr",
+        "weapon_options": [
+          "carbine"
+        ],
+        "melee": "knife",
+        "grenades": [
+          "smoke"
+        ],
+        "gear": [
+          "jump_pack",
+          "low_light_optics"
+        ],
+        "skills": {
+          "augmented": 1,
+          "marksman": 2
+        },
+        "miniatures": "BLKOUT UN Raid Force Alpha: UTG Specialists (marksman)"
+      },
+      {
+        "id": "rfa_golem",
+        "faction": "un",
+        "name": "Golem",
+        "role": "Combat inorganic",
+        "rank": "veteran",
+        "stats": {
+          "move": 5,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 3,
+          "nerve": null,
+          "tech": null,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "auto_rifle",
+        "weapon_options": [
+          "at_launcher"
+        ],
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1
+        },
+        "miniatures": "BLKOUT UN Raid Force Alpha: Golem Unit"
       },
       {
         "id": "md_handler",
@@ -3873,6 +4843,40 @@
         ]
       },
       {
+        "id": "auto_rifle",
+        "name": "Auto rifle",
+        "damage": "2d8",
+        "short_range": 24,
+        "ap": 0,
+        "auto": 2,
+        "keywords": [
+          "auto"
+        ]
+      },
+      {
+        "id": "hmg",
+        "name": "HMG",
+        "damage": "2d10",
+        "short_range": 30,
+        "ap": 1,
+        "auto": 3,
+        "keywords": [
+          "auto",
+          "suppressing",
+          "cumbersome"
+        ]
+      },
+      {
+        "id": "amr",
+        "name": "Anti-materiel rifle",
+        "damage": "2d12",
+        "short_range": 48,
+        "ap": 2,
+        "keywords": [
+          "cumbersome"
+        ]
+      },
+      {
         "id": "dc17",
         "faction": "republic",
         "name": "DC-17 hand blaster",
@@ -4015,6 +5019,12 @@
         "name": "Breaching tool or heavy blade",
         "damage": "2d10",
         "ap": 0
+      },
+      {
+        "id": "combat_blade",
+        "name": "Boarding axe or combat blade",
+        "damage": "2d10",
+        "ap": 1
       },
       {
         "id": "lightsaber",

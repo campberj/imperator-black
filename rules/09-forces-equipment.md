@@ -79,6 +79,8 @@ Gear marked **Proposed** adds a rule that is new in this version; it is in play 
 | Extinguisher | May Interact with a fire cell in contact: 2d6 + Tech, 8+ to put it out (chapter 8). | — |
 | Silencer | The carrier's ranged weapon gains the Silenced keyword: its shots are not noise for the alert track. | — |
 | Jump pack | Move ignores the extra cost of obstacles and may cross gaps up to half the model's Move. In zero-g, the model may change direction freely during a Move and stop anywhere, even away from a surface (it still counts as unbraced). | — |
+| Grenade launcher | The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 18". Its Throws are Very loud and count as Shoot actions for reactions. | **Proposed** |
+| Ballistic shield | The carrier has the Shield skill. It cannot use a weapon with the Cumbersome keyword while carrying it. | **Proposed** |
 | Jammer | Enemy Automated models within 6" take -2 to hit, and enemy Hack tests within 6" take -2. | — |
 <!-- /table -->
 
@@ -100,6 +102,10 @@ Skills marked **Proposed** add a rule that is new in this version; they are in p
 | *Jedi discipline* | Never takes breaking tests and ignores casualty shock. Pinned only at 4 or more Suppression. | **Proposed** |
 | *Twin blades* | Fights with two blades: +1 to close combat exchange rolls. | **Proposed** |
 | *Scout* | Deploys up to 6" beyond its side's deployment zone, out of enemy line of sight. Scrub and woods are not difficult ground for it. | **Proposed** |
+| *Shield* | Carries a ballistic shield or shield emitter: when it has no other cover, it counts as in Light cover against shots from the half of the table it faces. | **Proposed** |
+| *Layered armour* | Blast weapons step one extra row down against it. | **Proposed** |
+| *Augmented* | Genetically or cybernetically augmented: +1 to Physique tests, and it ignores the first Suppression it gains each round. | **Proposed** |
+| *Self-destruct* | As an action: resolve a blast centred on itself, radius 2", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud. | **Proposed** |
 <!-- /table -->
 
 ## Opposition: Freespace Solutions
@@ -114,7 +120,7 @@ Missions build the enemy force from **elements**, chosen by threat tier. Behavio
 | 1 | Low | Crew and asset security under a recovery captain. |
 | 2 | Medium | Adds collections enforcers, salvage techs and automated defences. |
 | 3 | High | Adds repossession teams, liquidators and hired guns; a contractor reaction force answers high alert. |
-| 4 | Story | Adds Meridian Directorate handlers or deniable operators. |
+| 4 | Story | Adds Meridian Directorate handlers or deniable operators, or UN Force Command: the 3rd Battalion and Raid Force Alpha. |
 <!-- /table -->
 
 <!-- table:factions.elements -->
@@ -131,6 +137,21 @@ Missions build the enemy force from **elements**, chosen by threat tier. Behavio
 | Hired gun | Contractors | 3 | 1× Hired Marksman (or Hired Heavy Gunner) | Attached |
 | Contract boarding team | Contractors | 3 | 3× Contract Boarder, 1× Contract Heavy | Tactical — reaction force |
 | Contract reaction force | Contractors | 3 | 3× Reaction Force Operator, 1× Reaction Force Gunner | Aggressive — reaction force |
+| Borz Bratva team | Contractors | 3 | 2× Borz Bratva Trooper, 1× Borz Bratva HMG Gunner | Sentry |
+| Borz Cyka team | Contractors | 3 | 1× Borz Cyka Powered Trooper, 1× Borz Cyka Bravo Breacher | Aggressive |
+| Ubiytsa shock team | Contractors | 3 | 1× Ubiytsa Controller, 3× Ubiytsa Shock Trooper | Aggressive |
+| Harlow control team | Contractors | 3 | 1× Reaction Force Controller, 1× Reaction Force Grenadier | Tactical — reaction force |
+| Harlow engineers | Contractors | 3 | 2× Reaction Force Engineer | Tactical |
+| Cricket drones | Contractors | 3 | 2× Cricket Drone | Automated |
+| Harlow veterans | Contractors | 3 | 3× Harlow Veteran | Aggressive |
+| Springbok AI | Contractors | 3 | 1× Springbok AI | Automated |
+| UN reserve fireteam | UN Force Command | 4 | 3× 3rd Battalion Rifleman, 1× 3rd Battalion AT Specialist (or 3rd Battalion Data Specialist) | Tactical |
+| UN Pointmen | UN Force Command | 4 | 2× Pointman, 1× Pointman SAW | Aggressive |
+| UN Battalion Controller | UN Force Command | 4 | 1× Battalion Controller | Leader |
+| Raid Force Alpha fireteam | UN Force Command | 4 | 2× UTG Assaulter (or UTG Grenadier) | Tactical |
+| Raid Force Alpha specialists | UN Force Command | 4 | 1× UTG Marksman, 1× UTG Grenadier | Tactical |
+| Golem unit | UN Force Command | 4 | 1× Golem | Attached |
+| UTG Mother | UN Force Command | 4 | 1× UTG Mother | Leader |
 | Directorate handler | Meridian Directorate | 4 | 1× Directorate Handler | Handler |
 | Directorate deniable operators | Meridian Directorate | 4 | 3× Directorate Deniable Operator | Tactical |
 <!-- /table -->
@@ -157,12 +178,44 @@ Missions build the enemy force from **elements**, chosen by threat tier. Behavio
 <!-- table:troops.contractor -->
 | Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Contract Boarder** | Veteran | 6" | 2 | 2 | 2 | 2 | 0 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Breaching charge | Void-trained |
-| **Contract Heavy** | Veteran | 5" | 2 | 1 | 3 | 2 | 0 | 2 | 2 | Heavy plate (3) | LMG | Knife or bayonet, Frag grenade | Void-trained |
+| **Contract Boarder** | Veteran | 6" | 2 | 2 | 2 | 2 | 0 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Breaching charge | Void-trained, Layered armour |
+| **Contract Heavy** | Veteran | 5" | 2 | 1 | 3 | 2 | 0 | 2 | 2 | Heavy plate (3) | LMG | Knife or bayonet, Frag grenade | Void-trained, Layered armour |
 | **Reaction Force Operator** | Veteran | 7" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle / Carbine | Knife or bayonet, Frag grenade, Smoke grenade | — |
 | **Reaction Force Gunner** | Veteran | 6" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | LMG | Knife or bayonet, Frag grenade | — |
 | **Hired Marksman** | Veteran | 6" | 3 | 0 | 0 | 2 | 0 | 1 | 2 | Composite plate (2) | DMR | Knife or bayonet, Smoke grenade, Low-light optics | Marksman 1 |
 | **Hired Heavy Gunner** | Veteran | 5" | 2 | 1 | 3 | 2 | 0 | 2 | 2 | Composite plate (2) | LMG | Knife or bayonet, Frag grenade | — |
+| **Borz Bratva Trooper** | Regular | 6" | 2 | 2 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Ballistic shield | Layered armour |
+| **Borz Bratva HMG Gunner** | Regular | 5" | 2 | 1 | 3 | 2 | 0 | 1 | 2 | Composite plate (2) | HMG | Knife or bayonet | Layered armour |
+| **Borz Cyka Powered Trooper** | Veteran | 6" | 2 | 2 | 3 | 2 | 0 | 2 | 2 | Heavy plate (3) | LMG / Carbine | Knife or bayonet, Frag grenade; option: Grenade launcher | Layered armour |
+| **Borz Cyka Bravo Breacher** | Veteran | 6" | 2 | 2 | 3 | 2 | 0 | 2 | 2 | Heavy plate (3) | SMG | Boarding axe or combat blade, Flashbang, Frag grenade, Breaching charge | Layered armour, Void-trained |
+| **Ubiytsa Controller** | Veteran | 6" | 2 | 2 | 2 | 3 | 1 | 1 | 2 | Flak (1) | Shotgun | Boarding axe or combat blade, Frag grenade | Leader, Layered armour |
+| **Ubiytsa Shock Trooper** | Veteran | 6" | 2 | 3 | 3 | 3 | 0 | 1 | 2 | Flak (1) | Shotgun | Boarding axe or combat blade, Frag grenade | Layered armour |
+| **Reaction Force Controller** | Veteran | 7" | 2 | 1 | 1 | 3 | 2 | 1 | 2 | Composite plate (2) | Carbine / Rifle | Knife or bayonet, Frag grenade, Smoke grenade, Hacking rig | Leader |
+| **Reaction Force Grenadier** | Veteran | 7" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Smoke grenade, Grenade launcher | — |
+| **Reaction Force Engineer** | Regular | 6" | 2 | 1 | 2 | 2 | 2 | 1 | 2 | Composite plate (2) | Carbine / AT launcher | Knife or bayonet, Frag grenade, Breaching charge | — |
+| **Harlow Veteran** | Veteran | 6" | 2 | 3 | 2 | 3 | 0 | 1 | 2 | Flak (1) | Carbine | Boarding axe or combat blade, Flashbang, Frag grenade, Jump pack | — |
+| **Springbok AI** | Veteran | 6" | 3 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | Auto rifle | Unarmed / weapon butt | Automated |
+| **Cricket Drone** | Regular | 7" | 0 | — | — | — | — | 1 | 1 | None (0) | — | Unarmed / weapon butt | Automated, Self-destruct |
+<!-- /table -->
+
+### UN Force Command
+
+The Authority's regular forces, held back for escalation (threat tier 4): the professional **3rd Battalion** (Shoot 2) with its Pointman inorganics, and the augmented **Raid Force Alpha** (Shoot 3), who fight in pairs with Golem support. Inorganics are *Automated*.
+
+<!-- table:troops.un -->
+| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **Battalion Controller** | Veteran | 5" | 2 | 1 | 1 | 3 | 2 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Hacking rig | Leader |
+| **3rd Battalion Rifleman** | Regular | 7" | 2 | 2 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade | — |
+| **3rd Battalion Data Specialist** | Regular | 7" | 2 | 1 | 1 | 2 | 2 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Hacking rig, Jammer | — |
+| **3rd Battalion AT Specialist** | Regular | 6" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | AT launcher / Rifle | Knife or bayonet, Frag grenade | — |
+| **Pointman** | Regular | 6" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | Rifle | Unarmed / weapon butt | Automated, Shield |
+| **Pointman SAW** | Regular | 6" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | LMG | Unarmed / weapon butt | Automated, Shield |
+| **UTG Mother** | Elite | 5" | 3 | 4 | 3 | 3 | 1 | 2 | 2 | Composite plate (2) | SMG | Boarding axe or combat blade, Frag grenade, Flashbang, Jump pack | Leader, Augmented |
+| **UTG Assaulter** | Elite | 5" | 3 | 3 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Flashbang, Jump pack | Augmented |
+| **UTG Grenadier** | Elite | 5" | 3 | 3 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Flashbang, Jump pack, Grenade launcher | Augmented |
+| **UTG Marksman** | Elite | 5" | 3 | 2 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Anti-materiel rifle / Carbine | Knife or bayonet, Smoke grenade, Jump pack, Low-light optics | Augmented, Marksman 2 |
+| **Golem** | Veteran | 5" | 2 | 2 | 3 | — | — | 2 | 2 | Composite plate (2) | Auto rifle / AT launcher | Unarmed / weapon butt | Automated |
 <!-- /table -->
 
 ### Meridian Directorate

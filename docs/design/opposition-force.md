@@ -58,9 +58,14 @@ You own every BLKOUT and BPRE kit, so each element has a dedicated line. All are
 | Contract reaction force | BLKOUT Harlow Kinetic Solutions (Crickets as mines) |
 | Directorate handlers | BLKOUT Handler Team Alpha |
 | Directorate deniable operators | BPRE 00 Unit Nitto Close Combat Kill Team |
+| Borz Bratva, Cyka and Ubiytsa teams | BLKOUT Manticor Borz Group (full force) |
+| Harlow control team, engineers, veterans, Springbok AI, Crickets | BLKOUT Harlow 1st Reaction Force (full force) |
+| UN reserve fireteam, Pointmen, Battalion Controller | BLKOUT UN 3rd Battalion and UN Forces |
+| Raid Force Alpha fireteams and specialists, Golem unit, UTG Mother | BLKOUT UN Raid Force Alpha and UN Forces |
 
 **Held back for later:**
-- **BLKOUT UN forces (Raid Force Alpha, 3rd Battalion):** the peer naval-infantry foe, or the Meridian Directorate's own military once the campaign escalates.
+- **BLKOUT ORK Task Force Upyr (Korpus Straży, Strzyga):** the Conquest cards' text has no unit profiles; stat once the unit cards are readable.
+- **Vehicles and drones:** Razorback, UN Peacemaker, BLKOUT Dusters (mechs) wait for the vehicle rules.
 - **BPRE Crisis Troop Scorch:** allied special operators who can be attached to Task Force Boone, or a rival task force chasing the same target.
 - **BLKOUT Impisi:** a third party for later campaigns.
 - **BLKOUT Dusters (mechs):** planetside, not ship interiors.

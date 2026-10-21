@@ -171,7 +171,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 ### Sentry
 
-*Holds chokepoints, overwatches approaches, raises the alarm.* Used by: Asset security. **Proposed.**
+*Holds chokepoints, overwatches approaches, raises the alarm.* Used by: Asset security, Borz Bratva team. **Proposed.**
 
 **Target in sight**
 
@@ -197,7 +197,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 ### Aggressive
 
-*Closes distance, flanks through side passages, seeks close combat.* Used by: Collections enforcers, Repossession team, Contract reaction force. **Proposed.**
+*Closes distance, flanks through side passages, seeks close combat.* Used by: Collections enforcers, Repossession team, Contract reaction force, Borz Cyka team, Ubiytsa shock team, Harlow veterans, UN Pointmen. **Proposed.**
 
 **Target in sight**
 
@@ -220,7 +220,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 ### Tactical
 
-*Fire and manoeuvre: one element fixes while another moves; uses Overwatch and grenades.* Used by: Liquidators, Contract boarding team, Directorate deniable operators. **Proposed.**
+*Fire and manoeuvre: one element fixes while another moves; uses Overwatch and grenades.* Used by: Liquidators, Contract boarding team, Harlow control team, Harlow engineers, UN reserve fireteam, Raid Force Alpha fireteam, Raid Force Alpha specialists, Directorate deniable operators. **Proposed.**
 
 **Target in sight**
 
@@ -270,12 +270,14 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 ### Automated
 
-*Permanent Overwatch on its field of fire, or triggers on proximity.* Used by: Automated defences. **Proposed.**
+*Permanent Overwatch on its field of fire, or triggers on proximity.* Used by: Automated defences, Cricket drones, Springbok AI. **Proposed.**
 
 **Target in sight**
 
-1. Drone with no target within short range: Move to within short range with a target, then Shoot.
-2. Otherwise: Shoot, then Overwatch. A turret only shoots into the field of fire the mission gives it.
+1. Self-destruct drone with a player model within 2": Self-destruct.
+2. Self-destruct drone: Move toward the nearest player model, twice, ending as close as it can.
+3. Drone with no target within short range: Move to within short range with a target, then Shoot.
+4. Otherwise: Shoot, then Overwatch. A turret only shoots into the field of fire the mission gives it.
 
 **No target**
 
@@ -293,7 +295,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 ### Leader
 
-*Rallies the most suppressed friend nearby, then acts with its element.* Used by: Recovery captain. **Proposed.**
+*Rallies the most suppressed friend nearby, then acts with its element.* Used by: Recovery captain, UN Battalion Controller, UTG Mother. **Proposed.**
 
 **Target in sight**
 
@@ -338,7 +340,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 ### Attached
 
-*Uses the profile of the element it is attached to.* Used by: Hired gun. **Proposed.**
+*Uses the profile of the element it is attached to.* Used by: Hired gun, Golem unit. **Proposed.**
 
 **Target in sight**
 

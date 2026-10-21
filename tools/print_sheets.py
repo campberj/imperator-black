@@ -45,6 +45,7 @@ FACTION_COLOUR = {
     "contractor": colors.HexColor("#4d5560"),
     "directorate": colors.HexColor("#7a1f2b"),
     "republic": colors.HexColor("#a34a1a"),
+    "un": colors.HexColor("#2f5d62"),
 }
 
 by_id = lambda section: {x["id"]: x for x in section}
@@ -226,7 +227,7 @@ def cut_marks(c):
         c.line(letter[0] - 0.1 * inch, y, letter[0] - MARGIN_X + 0.08 * inch, y)
 
 
-def unit_cards(factions=("tfb", "freespace", "contractor", "directorate"), name="unit-cards.pdf"):
+def unit_cards(factions=("tfb", "freespace", "contractor", "un", "directorate"), name="unit-cards.pdf"):
     order = list(factions)
     troops = sorted([t for t in C["troops"]["troops"] if t["faction"] in order], key=lambda t: order.index(t["faction"]))
     path = OUT / name
@@ -454,7 +455,7 @@ def quick_reference():
         "Each exchange: both roll 2d6 + <b>Fight</b>. Charge +1 (first exchange); +1 per friend also touching the enemy (max +2); −1 per Suppression; −1 if Wounded.",
         "Higher wins and rolls its melee damage on the wound table. Tie: both +1 Suppression. No effect: loser still +1 Suppression.",
         "A model at 5 Suppression that loses is overpowered: Down, or captured if allowed.",
-        "After each exchange the loser, then the winner, declares Continue or Break. It ends only when both break (each moves 1\" apart).",
+        "After each exchange, loser then winner declares Continue or Break; it ends only when both break (move 1\" apart).",
     ])
     left2 += [Spacer(1, 5), Paragraph("Tokens (cube colours)", Q_H), qtable([
         ["Token", "Cube", "Use"],
@@ -462,9 +463,7 @@ def quick_reference():
         ["Overwatch", "Green", "Two when placed; remove one per reaction."],
         ["Suppression", "Yellow", "One per point, max 5."],
         ["Wounded", "Red", "One per Wounded marker."],
-        ["Down", "—", "Lay the model on its side."],
-        ["Bleeding / Critical", "Black", "On a Down model: 3 / 1 rounds left. Remove one each later round end; last removed: dies."],
-        ["Locked door", "Black", "On the door."],
+        ["Bleeding / Critical", "Black", "On a Down model (lay it on its side): 3 / 1 rounds left; remove one each later round end. On a door: locked."],
         ["Hack progress", "Red / White", "On the door: red per failed attempt (+1 each, max 3), white per success."],
         ["Last-known position", "White", "The enemy marker. Also marks a surrendered model."],
     ], [0.95 * inch, 0.55 * inch, half - 1.5 * inch]),

@@ -216,6 +216,8 @@ behaviors:
     close_quarters: false
     investigate: "Drones only. Turrets never move."
     engaged:
+      - "Self-destruct drone with a player model within 2\": Self-destruct."
+      - "Self-destruct drone: Move toward the nearest player model, twice, ending as close as it can."
       - "Drone with no target within short range: Move to within short range with a target, then Shoot."
       - "Otherwise: Shoot, then Overwatch. A turret only shoots into the field of fire the mission gives it."
     alerted:

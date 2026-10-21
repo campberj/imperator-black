@@ -69,3 +69,26 @@ skills:
     status: proposed
     levels:
       - "Deploys up to 6\" beyond its side's deployment zone, out of enemy line of sight. Scrub and woods are not difficult ground for it."
+
+  # BLKOUT forces (UN, Manticor, Harlow).
+  - id: shield
+    name: Shield
+    status: proposed
+    levels:
+      - "Carries a ballistic shield or shield emitter: when it has no other cover, it counts as in Light cover against shots from the half of the table it faces."
+  - id: layered_armour
+    name: Layered armour
+    status: proposed
+    levels:
+      - "Blast weapons step one extra row down against it."
+  - id: augmented
+    name: Augmented
+    status: proposed
+    levels:
+      - "Genetically or cybernetically augmented: +1 to Physique tests, and it ignores the first Suppression it gains each round."
+  - id: self_destruct
+    name: Self-destruct
+    status: proposed
+    levels:
+      - "As an action: resolve a blast centred on itself, radius 2\", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud."
+

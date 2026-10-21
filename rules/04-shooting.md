@@ -40,6 +40,9 @@ Weapons have **no maximum range**. Each has a **short range**: beyond it the sho
 | Compact LMG | 2d8 | 18" | -1 / -2 | 0 | Handy, Auto 3, Suppressing |
 | DMR | 2d10 | 48" | -1 / -2 | 0 | — |
 | AT launcher | 2d12 | 36" | -1 / -2 | 1 | One per round, Cumbersome |
+| Auto rifle | 2d8 | 24" | -1 / -2 | 0 | Auto 2 |
+| HMG | 2d10 | 30" | -1 / -2 | 1 | Auto 3, Suppressing, Cumbersome |
+| Anti-materiel rifle | 2d12 | 48" | -1 / -2 | 2 | Cumbersome |
 <!-- /table -->
 
 <!-- table:keywords.weapon -->

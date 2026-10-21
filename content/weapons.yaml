@@ -15,6 +15,9 @@ ranged:
   - { id: compact_lmg, name: Compact LMG, damage: 2d8,  short_range: 18, ap: 0, auto: 3, keywords: [handy, auto, suppressing] }
   - { id: dmr,         name: DMR,         damage: 2d10, short_range: 48, ap: 0, keywords: [] }
   - { id: at_launcher, name: AT launcher, damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome] }
+  - { id: auto_rifle,  name: Auto rifle,  damage: 2d8,  short_range: 24, ap: 0, auto: 2, keywords: [auto] }
+  - { id: hmg,         name: HMG,         damage: 2d10, short_range: 30, ap: 1, auto: 3, keywords: [auto, suppressing, cumbersome] }
+  - { id: amr,         name: Anti-materiel rifle, damage: 2d12, short_range: 48, ap: 2, keywords: [cumbersome] }
 
   # Galactic Republic (faction: republic). Listed with the Republic forces in chapter 9.
   - { id: dc17,        faction: republic, name: DC-17 hand blaster,        damage: 2d6,  short_range: 8,  ap: 0, keywords: [handy] }
@@ -33,6 +36,7 @@ melee:
   - { id: unarmed,       name: "Unarmed / weapon butt",      damage: 2d4, ap: 0 }
   - { id: knife,         name: "Knife or bayonet",           damage: 2d8, ap: 0 }
   - { id: breaching_tool, name: "Breaching tool or heavy blade", damage: 2d10, ap: 0 }
+  - { id: combat_blade,  name: "Boarding axe or combat blade", damage: 2d10, ap: 1 }
   - { id: lightsaber,    faction: republic, name: Lightsaber, damage: 2d12, ap: 2 }
 
 # Thrown weapons use the Throw action. throw_range: short range in inches.
