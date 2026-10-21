@@ -69,6 +69,18 @@ A reacting model takes **one** of these actions:
 - *Cumbersome* weapons cannot fire as reactions. *One per round* weapons count reaction shots toward their limit.
 - Close combat resolves at once and cannot be interrupted by reactions (chapter 5).
 
+### Timing
+
+Reactions are never simultaneous. The triggering action resolves in full first: hit rolls, damage, Wounded markers, Down, Suppression and casualty shock. Only then do reactions happen, and only by models still able to take them. There is no comparing of rolls to see who fires first: the model that acts has the initiative, and the reactor fires second, at −1.
+
+**Example: shot, then return fire.** The VAT gunner (compact LMG, *Auto 3*) activates in round 2. Two Freespace sentries stand together in the hold; the sentry gunner, unactivated, is 5" behind them.
+
+1. *First action, Shoot.* The burst targets the nearer sentry and spreads to the shotgun sentry 2" away (−1 on that roll). The first roll misses; the second hits and puts the shotgun sentry Down.
+2. *Resolve in full.* The sentry gunner is within 6" of a friend who went Down: casualty shock, +1 Suppression.
+3. *Reactions to the first Shoot.* The sentry gunner may react now if it is eligible and its profile says so (on Overwatch it would Shoot; unactivated and in cover, the Sentry profile does nothing). Here it does not react.
+4. *Second action, Shoot* at the sentry gunner. The roll hits: a Wounded marker and +1 Suppression. It now has 2 Suppression, so it loses any Overwatch marker.
+5. *Reaction to the second Shoot.* Had it been put Down, there would be no reaction. Had it reached 3 Suppression, it would be Pinned and could only Find Cover. It is neither, so if its profile allows, it Shoots back at the VAT gunner at −1 (reaction), −2 (Suppression) and −1 (Wounded); its *Auto 3* burst may spread to VAT models within 3" of the gunner. If it reacted as an unactivated model, it is now Activated.
+
 ### Solo opponent
 
 Enemy models react as their behavior profile says (chapter 10).

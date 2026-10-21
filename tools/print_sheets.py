@@ -412,6 +412,7 @@ def quick_reference():
         "<b>Triggers (in its line of sight):</b> enemy Moves (interrupt anywhere along the move); Shoots, Throws, Suppressive Fire or Interacts (after); comes into view of an Overwatch model for any reason (at once).",
         "<b>Door opens:</b> (1) resolve the opening; (2) cracked-in grenade lands; (3) far side reacts; (4) opening side's Overwatch reacts; (5) opener carries on. Once per model per door.",
         "<b>One action:</b> Shoot the trigger at −1; Move up to half to cover or out of sight; or Find Cover.",
+        "<b>Timing:</b> never simultaneous. The trigger resolves in full first (damage, Suppression, casualty shock); then only models still able may react. Down: no reaction; Pinned: Find Cover only.",
         "No reactions to reactions. Pinned: Find Cover only. 2+ Suppression removes Overwatch. Cumbersome can't react.",
     ])
     right = [Paragraph("Shooting", Q_H)] + bullets([
