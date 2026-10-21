@@ -30,6 +30,19 @@ attributes:
   - { id: wounds,   name: Wounds,   short: W,   text: "Wounded markers a model can carry; one more puts it Down." }
   - { id: size,     name: Size,     short: SZ,  text: "Physical bulk: 1 small drone, 2 human, 3 large (walkers and vehicles are larger). Used by rules for hatches, cover and vehicles." }
 
+# Hacking: each lock or system has a security level, set by the mission (default: secured).
+# A hack is Interact, 2d6 + Tech against the target number; some levels need several successes,
+# which accumulate across actions and models. Each failed attempt on the same target gives +1 to
+# later attempts on it (cumulative, up to working_bonus_max).
+security:
+  working_bonus_per_failure: 1
+  working_bonus_max: 3
+  levels:
+    - { id: basic,    name: Basic,    target: 7,  successes: 1, examples: "Storage, cargo hatches, crew quarters" }
+    - { id: secured,  name: Secured,  target: 9,  successes: 1, examples: "Most locked doors, ship's systems" }
+    - { id: hardened, name: Hardened, target: 9,  successes: 2, examples: "Command decks, armouries, data cores" }
+    - { id: military, name: Military, target: 10, successes: 2, examples: "Warship systems, patron-grade encryption" }
+
 # Automatic fire (Auto N): extra targets must be within zone inches of the first target.
 auto_fire:
   zone: 3

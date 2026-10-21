@@ -25,7 +25,7 @@ gear:
 
   - id: hacking_rig
     name: Hacking rig
-    text: "The carrier may Hack locked doors and consoles: Interact, 2d6 + Tech, 9+."
+    text: "The carrier may Hack locked doors and consoles: Interact, 2d6 + Tech against the security level (chapter 3). Quiet."
     grants_skills: {}
     status: settled
 

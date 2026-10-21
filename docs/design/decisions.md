@@ -4,7 +4,7 @@ Living record of design decisions. Each entry is **Settled** (build on it), **Le
 
 Imperator Black continues the earlier *A War of Worlds* design. Its documents are kept in [a-war-of-worlds/](a-war-of-worlds/): the [design statement and roadmap](a-war-of-worlds/design-statement-and-roadmap.md) and [prototype rules v0.1](a-war-of-worlds/prototype-rules-v0.1.md). Entries marked *(AWoW)* come from there. Where this log and those documents disagree, this log wins.
 
-Last updated: 2026-10-20 (rules v0.4 profiles)
+Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo opponent)
 
 ---
 
@@ -64,10 +64,11 @@ Last updated: 2026-10-20 (rules v0.4 profiles)
 | 4.4 | **Reaction:** a model that has not yet activated may react when an enemy model's action allows a reaction. Reacting marks it as activated. | Settled |
 | 4.5 | **Overwatch:** a model that activates may go on Overwatch. It may then react **up to two times** until its activation comes again next round. Supersedes the prototype's single Overwatch shot. | Settled |
 | 4.6 | **Reaction triggers:** an enemy Moving into or within line of sight (interrupts the move), Shooting/Throwing/Suppressive Fire, or Interacting (including doors). **Reaction choices:** one action: Shoot the triggering model at −1, Move up to half to cover or out of sight, or Find Cover. Reactions can't trigger reactions. | Settled |
-| 4.11 | **Exposure trigger (from Gym 1):** an enemy model that comes into an Overwatch model's line of sight for any reason (door opened, smoke clears, wall breached) also triggers a reaction. Covers a gunner overwatching a friendly breach. | Proposed — playtest |
+| 4.11 | **Exposure trigger (from Gym 1):** an enemy model that comes into an Overwatch model's line of sight for any reason (door opened, smoke clears, wall breached) also triggers a reaction. Covers a gunner overwatching a friendly breach. | Leaning — written into chapter 2 |
 | 4.12 | **Auto N (from Gym 1):** an Auto weapon's Shoot or Suppressive Fire may engage up to N different models within 3" of the first target, one roll each, −1 for every target after the first; reactions may spread too. SMG Auto 2, compact LMG Auto 3, LMG Auto 3. Simulator: gun team vs riflemen 48% → 54%; bunched targets take about 2.3× the casualties per burst. | Proposed — playtest |
-| 4.13 | **Door sequence (from Gym 1):** a clear procedure for who may react when a door opens, to what, and in what order. | Open — in discussion |
-| 4.14 | Hacking target numbers stay (variety enjoyed at the table). Whether repeated failures need relief is open. | Open |
+| 4.13 | **Door sequence (from Gym 1):** when a door opens by any means: (1) resolve the opening action; (2) a cracked-in grenade lands; (3) the far side's Overwatch and unactivated models that can now see an enemy react; (4) the opening side's Overwatch models react; (5) the opener carries on. Each model reacts once per door opening. Chapter 3, with worked examples. | Proposed — playtest |
+| 4.15 | **Crack and throw:** a model within 1" of a closed, unlocked door opens it and throws a grenade through in **one Interact**, resolved before anyone reacts to the door. A missed throw lands in the doorway. | Proposed — playtest |
+| 4.14 | **Hacking security levels:** each lock or system has a level set by the mission: Basic 7+, Secured 9+ (default), Hardened 9+ ×2 successes, Military 10+ ×2. Successes accumulate across models and rounds; each failed attempt on a target gives +1 to later attempts (max +3). Hacking is quiet. Option held back: a fail by 4 or more is noise. | Proposed — playtest |
 | 4.7 | **Suppression:** each marker −1 to all rolls (max 5); **Pinned at 3+** (only Rally, Find Cover, Move to cover, Shoot from cover). Two or more Suppression cancels Overwatch. *(AWoW prototype)* | Leaning |
 | 4.8 | **Casualty shock** (+1 Suppression when a friend within 6" goes Down/Dead; +2 for the leader) and **breaking** at half a fireteam Down or Dead. *(AWoW prototype)* | Leaning |
 | 4.9 | Leaders can pass actions to subordinates, as the scaling mechanism to squad and platoon (Stargrunt-style). *(AWoW teardown)* | Proposed — post-PoC |

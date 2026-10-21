@@ -308,7 +308,8 @@ def quick_reference():
         ["Interact", "Objective, door, console or charge within 1\"."],
     ], [0.95 * inch, half - 0.95 * inch]), Spacer(1, 4), Paragraph("Reactions", Q_H)] + bullets([
         "<b>Who:</b> a model not yet activated (it becomes Activated), or a model on Overwatch (up to two).",
-        "<b>Triggers (in its line of sight):</b> enemy Moves (interrupt anywhere along the move); Shoots, Throws or Suppressive Fire (after); Interacts, incl. doors (after).",
+        "<b>Triggers (in its line of sight):</b> enemy Moves (interrupt anywhere along the move); Shoots, Throws, Suppressive Fire or Interacts (after); comes into view of an Overwatch model for any reason (at once).",
+        "<b>Door opens:</b> (1) resolve the opening; (2) cracked-in grenade lands; (3) far side reacts; (4) opening side's Overwatch reacts; (5) opener carries on. Once per model per door.",
         "<b>One action:</b> Shoot the trigger at −1; Move up to half to cover or out of sight; or Find Cover.",
         "No reactions to reactions. Pinned: Find Cover only. 2+ Suppression removes Overwatch. Cumbersome can't react.",
     ])
@@ -357,7 +358,8 @@ def quick_reference():
         "Throw up to double range: test 2d6 + <b>Physique</b> (−1 beyond range), 8+ lands on target. Miss: lands short by the miss (min 1\"). Natural 2: lands 2\" in front of the thrower. Zero-g: bounces past instead.",
         "Frag: one damage roll for all; step down per model's Armour; Heavy cover −1 row; same compartment ≤ 6\"×6\": +1 row.",
         "Breaching charge: place (Interact), detonate later (action). Door destroyed; within 1\": 2d6; far side within 2\": +2 Suppression, no reactions this round.",
-        "Locked door: charge; breaching tool (Interact, test 8+); Tech hack (Interact, test 9+, quiet).",
+        "<b>Crack and throw:</b> within 1\" of a closed, unlocked door: open it and Throw in one Interact, before anyone reacts. Miss: lands in the doorway.",
+        "Locked door: charge; breaching tool (Interact, test 8+); or hack (Interact, 2d6 + Tech, quiet): " + "; ".join(f'{l["name"]} {l["target"]}+' + (f' ×{l["successes"]}' if l["successes"] > 1 else "") for l in core["security"]["levels"]) + ". +1 per earlier failed attempt on it (max +3).",
     ]) + [Spacer(1, 3), grenades, Spacer(1, 5), Paragraph("Suppression, morale, casualties", Q_H)] + bullets([
         "Suppression: −1 to all rolls each (max 5). <b>Pinned at 3+</b>: only Rally, Find Cover, Move to cover/out of sight, Shoot from cover.",
         "Casualty shock: friend within 6\" goes Down or Dead: +1 Suppression (+2 if the Leader).",

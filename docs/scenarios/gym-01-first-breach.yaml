@@ -26,7 +26,7 @@ tiles:
 doors:
   - { id: D1, x: 6,    y: 4.5,  orientation: v, state: closed, note: "Docking passage to cargo hold" }
   - { id: D2, x: 12,   y: 4.5,  orientation: v, state: open,   note: "Cargo hold to junction" }
-  - { id: D3, x: 13.5, y: 6,    orientation: h, state: locked, note: "Junction to control room" }
+  - { id: D3, x: 13.5, y: 6,    orientation: h, state: locked, security: secured, note: "Junction to control room" }
   - { id: D4, x: 10.5, y: 6,    orientation: h, state: closed, note: "Cargo hold to service passage" }
   - { id: D5, x: 12,   y: 10.5, orientation: v, state: closed, note: "Service passage to control room" }
 
@@ -79,7 +79,7 @@ special_rules:
       throws a frag or flashbang, uses a breaching tool or detonates a charge), or ends a Move in an
       enemy model's line of sight. Model 3 is not unaware: it is on Overwatch from the start.
   - title: "Locked door D3"
-    text: "Open it with a breaching charge, a breaching tool (2d6 + Physique, 8+) or the Data Specialist's hacking rig (2d6 + Tech, 9+, quiet). Or go around through the service passage."
+    text: "Open it with a breaching charge, a breaching tool (2d6 + Physique, 8+) or the Data Specialist's hacking rig (Secured: 2d6 + Tech, 9+, +1 for each earlier failed attempt, quiet). Or go around through the service passage."
   - title: "Data core"
     text: >
       A Task Force Boone model in base contact with the data core may Interact to pull it:

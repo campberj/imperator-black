@@ -10,6 +10,8 @@
 4. On a miss, it lands **short**: move the point straight back toward the thrower by the amount the roll missed by (minimum 1"). If that path crosses a wall or a doorway edge, it stops there and drops.
 5. On a **natural 2**, it slips: it lands 2" in front of the thrower.
 
+**Crack and throw:** a model beside a closed, unlocked door may open it and throw a grenade through in one Interact, before anyone can react to the door opening (chapter 3).
+
 In **zero-g**, a missed grenade bounces instead of falling short. Move the point straight past the target point by the miss distance, or until it hits a wall.
 
 Each model carries **two grenades** unless its roster says otherwise. Choose the types before the mission and track them on the roster.

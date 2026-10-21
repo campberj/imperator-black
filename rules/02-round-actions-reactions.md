@@ -48,7 +48,9 @@ A model may react when an enemy model, in its line of sight:
 |---|---|
 | **Moves** into or within its line of sight | At any point during the move, interrupting it. The mover then finishes its move, unless the reaction put it Down. |
 | **Shoots, throws or uses Suppressive Fire** | After the action resolves. |
-| **Interacts**, including opening, closing or breaching a door the reactor can see | After the action resolves. |
+| **Interacts**, including closing a door or placing a charge the reactor can see | After the action resolves. |
+| **A door opens** (by either side) | Follow the door sequence (chapter 3): the far side reacts first, then the opening side's Overwatch models. |
+| **Comes into view** of a model on Overwatch for any reason (smoke clears, a door opens, a wall is breached) | Immediately. |
 
 ### Reaction choices
 

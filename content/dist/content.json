@@ -186,6 +186,40 @@
         "text": "Physical bulk: 1 small drone, 2 human, 3 large (walkers and vehicles are larger). Used by rules for hatches, cover and vehicles."
       }
     ],
+    "security": {
+      "working_bonus_per_failure": 1,
+      "working_bonus_max": 3,
+      "levels": [
+        {
+          "id": "basic",
+          "name": "Basic",
+          "target": 7,
+          "successes": 1,
+          "examples": "Storage, cargo hatches, crew quarters"
+        },
+        {
+          "id": "secured",
+          "name": "Secured",
+          "target": 9,
+          "successes": 1,
+          "examples": "Most locked doors, ship's systems"
+        },
+        {
+          "id": "hardened",
+          "name": "Hardened",
+          "target": 9,
+          "successes": 2,
+          "examples": "Command decks, armouries, data cores"
+        },
+        {
+          "id": "military",
+          "name": "Military",
+          "target": 10,
+          "successes": 2,
+          "examples": "Warship systems, patron-grade encryption"
+        }
+      ]
+    },
     "auto_fire": {
       "zone": 3,
       "extra_target_modifier": -1
@@ -605,7 +639,7 @@
       {
         "id": "hacking_rig",
         "name": "Hacking rig",
-        "text": "The carrier may Hack locked doors and consoles: Interact, 2d6 + Tech, 9+.",
+        "text": "The carrier may Hack locked doors and consoles: Interact, 2d6 + Tech against the security level (chapter 3). Quiet.",
         "grants_skills": {},
         "status": "settled"
       },

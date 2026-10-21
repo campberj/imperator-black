@@ -69,7 +69,7 @@ Gear marked **Proposed** adds a rule that is new in this version; it is in play 
 | Breaching charge | One charge. Place with Interact on a door, hatch or thin bulkhead within 1"; detonate later as an action (chapter 6). | — |
 | Breaching tool | Force a locked door: Interact, 2d6 + Physique, 8+ (chapter 3). Also counts as a breaching tool or heavy blade in close combat. | — |
 | Trauma kit | The carrier has the Medic skill. | — |
-| Hacking rig | The carrier may Hack locked doors and consoles: Interact, 2d6 + Tech, 9+. | — |
+| Hacking rig | The carrier may Hack locked doors and consoles: Interact, 2d6 + Tech against the security level (chapter 3). Quiet. | — |
 | Low-light optics | The carrier has the Low-light skill: it ignores the darkness penalty. | — |
 | Extinguisher | May Interact with a fire cell in contact: 2d6 + Tech, 8+ to put it out (chapter 8). | — |
 | Silencer | The carrier's ranged weapon gains the Silenced keyword: its shots are not noise for the alert track. | — |
