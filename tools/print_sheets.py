@@ -452,6 +452,19 @@ def quick_reference():
         "A model at 5 Suppression that loses is overpowered: Down, or captured if allowed.",
         "After each exchange the loser, then the winner, declares Continue or Break. It ends only when both break (each moves 1\" apart).",
     ])
+    left2 += [Spacer(1, 5), Paragraph("Tokens (cube colours)", Q_H), qtable([
+        ["Token", "Cube", "Use"],
+        ["Activated", "Blue", "Activated or reacted unactivated this round. Clear at end of round."],
+        ["Overwatch", "Green", "Two when placed; remove one per reaction."],
+        ["Suppression", "Yellow", "One per point, max 5."],
+        ["Wounded", "Red", "One per Wounded marker."],
+        ["Down", "—", "Lay the model on its side."],
+        ["Bleeding / Critical", "Black", "On a Down model: 3 / 1 rounds left. Remove one each later round end; last removed: dies."],
+        ["Locked door", "Black", "On the door."],
+        ["Hack progress", "Red / White", "On the door: red per failed attempt (+1 each, max 3), white per success."],
+        ["Last-known position", "White", "The enemy marker. Also marks a surrendered model."],
+    ], [0.95 * inch, 0.55 * inch, half - 1.5 * inch]),
+        Paragraph("Alerted enemy element: turn its unit cards sideways.", Q_SMALL)]
     grenades = qtable([["Grenade", "Range", "Radius", "Effect"]] +
                       [[g["name"], f'{g["throw_range"]}"', f'{g["blast_radius"]}"', (g.get("damage") and f'{g["damage"]} damage') or g.get("effect", "")]
                        for g in C["weapons"]["thrown"]],

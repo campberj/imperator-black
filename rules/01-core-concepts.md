@@ -4,9 +4,33 @@
 
 - **Models:** one per soldier, on 25–32 mm bases.
 - **Dice:** two d6 in one colour (the **hit dice**), and a pair each of d4, d6, d8, d10 and d12 in a second colour (the **damage dice**).
-- **Tokens:** Suppression, Wounded, Down, Overwatch, Activated, and numbered contact chips.
+- **Tokens:** see the table below.
 - **Terrain:** for boarding actions, 6"×6", 6"×3" and 3"×3" tiles with walls and doors.
 - **A ruler** measuring in inches.
+
+### Tokens
+
+Any tokens will do. The last column is a suggested set using six colours of small cubes.
+
+| Token | Where | Meaning | Cube |
+|---|---|---|---|
+| **Activated** | Beside the model | It has activated, or reacted as an unactivated model, this round. Remove all at the end of the round. | Blue |
+| **Overwatch** | Beside the model | Place two when it goes on Overwatch; remove one for each reaction, and any left when it next activates. | Green |
+| **Suppression** | Beside the model | One per point, at most 5. | Yellow |
+| **Wounded** | Beside the model | One per Wounded marker. | Red |
+| **Down** | — | Lay the model on its side. | — |
+| **Bleeding / Critical** | On a Down model | Rounds left to live: 3 for Bleeding, 1 for Critical. Remove one at the end of each later round; when the last is removed, it dies. | Black |
+| **Surrendered** | On the model | Lay it down and mark it. | White |
+| **Last-known position** | On the floor | The enemy's marker (chapter 10). | White |
+| **Locked** | On the door | The door is locked. | Black |
+| **Hack progress** | On the door or console | Red for each failed attempt (+1 each, up to 3); white for each success. | Red, white |
+| **Breaching charge** | On the door or wall | A placed charge. | Any spare token |
+| **Contacts** | On the floor | Unrevealed enemies (missions). | Numbered chips |
+| **Fire, smoke** | On a 3" cell | Hazards (chapters 6 and 8). | Any marker, or cotton wool for smoke |
+
+An enemy element that is **Alerted**: turn its unit cards sideways.
+
+A typical game uses about 20 yellow, 12 red, 12 blue, 12 green, 8 black and 6 white.
 
 **Scale:** 1" = 2 m. A 6" tile is a 12 m compartment; a 3"-wide corridor is 6 m across.
 

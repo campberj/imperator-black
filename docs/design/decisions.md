@@ -53,6 +53,7 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 3.16 | **Wounds:** wound rows 4–5 add Wounded markers; any marker −1 to all rolls; more markers than Wounds → Down. Rows 6+ unchanged. A model getting up keeps markers equal to its Wounds. | Leaning — playtest |
 | 3.17 | **Size:** 1 small drone, 2 human, 3 large; walkers and vehicles larger. First use: crawlways and small hatches admit Size 2 or less. Stealth, resistances and similar come as special rules, not attributes. | Settled |
 | 3.18 | **Skills with levels** replace model keywords (written *Marksman 2*; higher levels include lower). First levelled skill: *Marksman* 1–2. | Settled; Marksman Proposed |
+| 3.19 | **Range bands (RJ, Gym 1 replay):** short range +1, up to double short range 0 (optimum), beyond that −1 (effective, table-wide), instead of today's 0 / −1 / −2. Note: this keeps the three bands but shifts every shot +1, the same as lowering the hit target from 8 to 7, so it raises lethality across the board (shotgun penalties would shift too). If the aim is the point-blank feel without more lethality, the alternative is +1 / 0 / −1 with the hit target at 9. Simulate both before deciding. **Held until it recurs in more playtests** (RJ: rules change on repetition, not after every game). | Open — watching |
 
 ## 4. Turn structure, reactions and morale
 
