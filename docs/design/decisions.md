@@ -87,6 +87,8 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 5.4 | Terrain density guideline per board size so a move can always reach cover. *(AWoW)* | Open — Phase 4 |
 | 5.5 | **Ship interiors:** doors open/closed/locked; opening is an Interact (or 2" of a Move) and triggers reactions; locked doors yield to breaching charge, breaching tool (test 8+) or a *Tech* hack (test 9+). Compartments ≤ 6"×6" are confined. | Leaning — playtest |
 | 5.6 | **Ship hazards are in the PoC:** zero-g (push-off movement, unbraced −1), decompression and vacuum, fire, darkness. | Settled |
+| 5.7 | **Deck layouts (Phase 4, RJ):** board size set by vessel type; the dice decide what is built and the player only orients pieces that fit either way; PoC vessels are freighter / ore hauler, salvage tender, corvette / patrol craft and station module; the 3'×5' dry-erase map is overflow for big ships and rooms that don't fit. | Settled |
+| 5.8 | **Layout procedure (chapter 11):** docking passage at the middle of the west edge; a spine of junction-and-passage pairs with turn rolls; the heart room at the far end; one branch roll per spine tile; fill to the vessel's minimum; room, second-door, door-state and hazard rolls; cover by room type. About 15–25 d6 rolls. Reference generator `tools/generate_layout.py`: over 2,000 decks per vessel, every deck connected and within 12 of each tile; 47–65% have a loop ([stats](../analysis/layout-stats.md)). | Proposed — playtest (exit: under 10 minutes at the table) |
 
 ## 6. Equipment and force building
 

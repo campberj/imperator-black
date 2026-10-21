@@ -161,7 +161,59 @@ for s in C["skills"]["skills"]:
     if s.get("status") not in ("settled", "proposed"):
         errors.append(f"skill {s['id']}: status must be settled or proposed")
 
+# Layouts (chapter 11).
+Ly = C["layouts"]
+room_ids = ids(Ly["rooms"], "layouts.rooms")
+sec_ids = {s["id"] for s in C["core"]["security"]["levels"]}
+haz_ids = ids(Ly["hazards"], "layouts.hazards")
+vessel_ids = ids(Ly["vessels"], "layouts.vessels")
+
+
+def covers_d6(rows, where):
+    got = []
+    for r in rows:
+        lo, _, hi = str(r["roll"]).partition("-")
+        got += list(range(int(lo), int(hi or lo) + 1))
+    if sorted(got) != [1, 2, 3, 4, 5, 6]:
+        errors.append(f"{where}: d6 rows must cover 1-6 exactly once")
+
+
+for tbl in ("spine_turn", "passage_branch", "junction_branch", "loop_door", "door_state", "hazard_roll", "small_rooms", "vessel_roll"):
+    covers_d6(Ly[tbl], f"layouts.{tbl}")
+for r in Ly["small_rooms"]:
+    need(r["room"], room_ids, "layouts.small_rooms room")
+for r in Ly["vessel_roll"]:
+    need(r["vessel"], vessel_ids, "layouts.vessel_roll vessel")
+for r in Ly["rooms"]:
+    if r.get("security"):
+        need(r["security"], sec_ids, f"room {r['id']} security")
+    for c in r["cover"]:
+        if c["type"] not in ("light", "heavy"):
+            errors.append(f"room {r['id']}: cover type must be light or heavy")
+for v in Ly["vessels"]:
+    w = f"vessel {v['id']}"
+    covers_d6(v["rooms"], f"{w} rooms")
+    for r in v["rooms"]:
+        need(r["room"], room_ids, f"{w} room")
+    need(v["heart"], room_ids, f"{w} heart")
+    for k in ("security", "heart_security"):
+        need(v[k], sec_ids, f"{w} {k}")
+    for h in v["hazards"]:
+        need(h, haz_ids, f"{w} hazard")
+    if any(x % 3 for x in v["board"]):
+        errors.append(f"{w}: board must be in multiples of 3 inches")
+if not errors:
+    sys.path.insert(0, str(ROOT / "tools"))
+    import generate_layout as gl
+    for vid in vessel_ids:
+        for seed in range(1, 201):
+            deck = gl.Deck(vid, seed).build()
+            counts = deck.to_scenario()["tile_counts"]
+            if not gl.connected(deck) or any(counts.get(k, 0) > gl.OWNED[k] for k in gl.OWNED):
+                errors.append(f"layout {vid} seed {seed}: disconnected or over the tile inventory")
+                break
+
 if errors:
     print("\n".join(errors))
     sys.exit(1)
-print(f"Content valid: {len(troops)} troop types, {len(elements)} elements, {len(teams)} teams, {len(gear)} gear items, {len(behaviors)} behavior profiles.")
+print(f"Content valid: {len(troops)} troop types, {len(elements)} elements, {len(teams)} teams, {len(gear)} gear items, {len(behaviors)} behavior profiles, {len(vessel_ids)} vessels.")

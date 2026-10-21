@@ -1,0 +1,279 @@
+# Ship and station deck layouts, rules v0.5 (chapter 11).
+# A deck is built on a 3" grid from three tile sizes: compartments (6"x6"), passages (6"x3")
+# and junctions or small rooms (3"x3"). The paper procedure and tools/generate_layout.py use
+# exactly these tables. status: proposed until playtested.
+version: 0.5.0
+
+tiles:
+  - { id: compartment, name: Compartment, size: "6x6", cells: [2, 2], owned: 12 }
+  - { id: passage,     name: Passage,     size: "6x3", cells: [2, 1], owned: 12 }
+  - { id: junction,    name: Junction,    size: "3x3", cells: [1, 1], owned: 12, text: "Also used for small rooms." }
+
+# Which vessel, when the mission does not say (d6).
+vessel_roll:
+  - { roll: "1-2", vessel: freighter }
+  - { roll: "3", vessel: salvage_tender }
+  - { roll: "4", vessel: corvette }
+  - { roll: "5-6", vessel: station_module }
+
+# Shared tables (d6). Results are ranges "lo-hi".
+spine_turn:
+  - { roll: "1-4", result: straight, text: "Straight on." }
+  - { roll: "5-6", result: turn, text: "Turn left or right, toward the side with more open board (your choice if equal)." }
+
+passage_branch:
+  - { roll: "1", result: none, text: "Plain walls." }
+  - { roll: "2-4", result: compartment, text: "A compartment on one side (the side with more open board; your choice if equal)." }
+  - { roll: "5", result: compartment_both, text: "A compartment on each side." }
+  - { roll: "6", result: compartment_and_small, text: "A compartment on one side and a small room on the other." }
+
+junction_branch:
+  - { roll: "1-3", result: none, text: "Plain walls." }
+  - { roll: "4-5", result: small, text: "A small room on one open side." }
+  - { roll: "6", result: side_passage, text: "A side passage (one passage tile) off one open side, ending in a compartment." }
+
+loop_door:
+  - { roll: "1-3", result: none, text: "No second door." }
+  - { roll: "4-6", result: door, text: "A second door into the other tile. Second doors make loops: more than one way round." }
+
+door_state:
+  - { roll: "1-2", result: open, text: "Open." }
+  - { roll: "3-5", result: closed, text: "Closed." }
+  - { roll: "6", result: locked, text: "Locked, at the room's security level." }
+
+hazard_roll:
+  - { roll: "1-4", result: none, text: "No hazard." }
+  - { roll: "5", result: first, text: "The vessel's first hazard." }
+  - { roll: "6", result: second, text: "The vessel's second hazard." }
+
+# Rooms. size: compartment or small. cover: pieces to place; heavy pieces go in the middle,
+# light pieces in the corners, keeping a clear lane in front of every door.
+rooms:
+  - id: cargo_hold
+    name: Cargo hold
+    size: compartment
+    cover:
+      - { type: heavy, label: "Container", w: 1.5, h: 1.5, piece: "A shipping container or crate stack taller than a model." }
+      - { type: light, label: "Crates", w: 1.5, h: 1, piece: "Two or three crates, waist-high." }
+      - { type: light, label: "Crates", w: 1.5, h: 1, piece: "Two or three crates, waist-high." }
+  - id: salvage_bay
+    name: Salvage bay
+    size: compartment
+    cover:
+      - { type: heavy, label: "Salvage", w: 1.5, h: 1.5, piece: "A large piece of wreckage or a dismantled engine." }
+      - { type: light, label: "Scrap", w: 1.5, h: 1, piece: "A pile of scrap, plating or barrels." }
+      - { type: light, label: "Scrap", w: 1.5, h: 1, piece: "A pile of scrap, plating or barrels." }
+  - id: workshop
+    name: Workshop
+    size: compartment
+    cover:
+      - { type: heavy, label: "Machine", w: 1.5, h: 1, piece: "A heavy machine: lathe, press or fabricator." }
+      - { type: light, label: "Bench", w: 1.5, h: 0.75, piece: "A workbench or tool rack." }
+  - id: crew_quarters
+    name: Crew quarters
+    size: compartment
+    cover:
+      - { type: light, label: "Bunks", w: 1.5, h: 0.75, piece: "Bunks or lockers." }
+      - { type: light, label: "Bunks", w: 1.5, h: 0.75, piece: "Bunks or lockers." }
+  - id: mess
+    name: Mess
+    size: compartment
+    cover:
+      - { type: light, label: "Tables", w: 1.5, h: 1, piece: "Tables and benches." }
+      - { type: light, label: "Counter", w: 1.5, h: 0.75, piece: "A galley counter." }
+  - id: engineering
+    name: Engineering
+    size: compartment
+    unique: true
+    cover:
+      - { type: heavy, label: "Reactor housing", w: 1.5, h: 1.5, piece: "A reactor, drive housing or large machinery block." }
+      - { type: light, label: "Console", w: 1.5, h: 0.75, piece: "A control console." }
+  - id: bridge
+    name: Bridge
+    size: compartment
+    unique: true
+    cover:
+      - { type: light, label: "Console bank", w: 2, h: 0.75, piece: "A bank of consoles." }
+      - { type: light, label: "Console bank", w: 2, h: 0.75, piece: "A bank of consoles." }
+  - id: armoury
+    name: Armoury
+    size: compartment
+    unique: true
+    security: hardened
+    cover:
+      - { type: light, label: "Weapon racks", w: 1.5, h: 0.75, piece: "Weapon racks or ammunition lockers." }
+      - { type: light, label: "Weapon racks", w: 1.5, h: 0.75, piece: "Weapon racks or ammunition lockers." }
+  - id: sensor_room
+    name: Sensors and comms
+    size: compartment
+    unique: true
+    cover:
+      - { type: light, label: "Consoles", w: 1.5, h: 0.75, piece: "Consoles and display screens." }
+      - { type: heavy, label: "Server stack", w: 1, h: 1, piece: "A floor-to-ceiling equipment stack." }
+  - id: medbay
+    name: Medbay
+    size: compartment
+    unique: true
+    cover:
+      - { type: light, label: "Beds", w: 1.5, h: 0.75, piece: "Medical beds or a treatment station." }
+      - { type: light, label: "Cabinets", w: 1.5, h: 0.75, piece: "Supply cabinets." }
+  - id: lab
+    name: Laboratory
+    size: compartment
+    cover:
+      - { type: heavy, label: "Equipment", w: 1.5, h: 1, piece: "A large piece of lab equipment." }
+      - { type: light, label: "Benches", w: 1.5, h: 0.75, piece: "Lab benches." }
+  - id: hab
+    name: Habitation
+    size: compartment
+    cover:
+      - { type: light, label: "Furniture", w: 1.5, h: 1, piece: "Furniture, bunks or partitions." }
+      - { type: light, label: "Lockers", w: 1.5, h: 0.75, piece: "Lockers." }
+  - id: storage
+    name: Storage
+    size: compartment
+    cover:
+      - { type: heavy, label: "Shelving", w: 1.5, h: 1, piece: "Tall shelving or a container." }
+      - { type: light, label: "Crates", w: 1.5, h: 1, piece: "Crates, waist-high." }
+  - id: life_support
+    name: Life support
+    size: compartment
+    unique: true
+    cover:
+      - { type: heavy, label: "Scrubbers", w: 1.5, h: 1.5, piece: "Air scrubbers or tanks." }
+      - { type: light, label: "Pipework", w: 1.5, h: 0.75, piece: "Low pipework or a pump." }
+  - id: data_core
+    name: Data core
+    size: compartment
+    unique: true
+    security: hardened
+    cover:
+      - { type: heavy, label: "Core", w: 1, h: 1, piece: "A floor-to-ceiling data core column." }
+      - { type: light, label: "Consoles", w: 1.5, h: 0.75, piece: "Access consoles." }
+  - id: operations
+    name: Operations centre
+    size: compartment
+    unique: true
+    security: hardened
+    cover:
+      - { type: light, label: "Console bank", w: 2, h: 0.75, piece: "A bank of consoles." }
+      - { type: light, label: "Plot table", w: 1.5, h: 1, piece: "A plotting table or holo-display." }
+
+  # Small rooms (3"x3", on a junction tile).
+  - id: store
+    name: Store
+    size: small
+    cover: [{ type: light, label: "Crates", w: 1, h: 1, piece: "A crate." }]
+  - id: lockers
+    name: Locker room
+    size: small
+    cover: []
+  - id: maintenance
+    name: Maintenance access
+    size: small
+    text: "A crawlway hatch leads off the deck: Size 2 or less only. Missions may use it as a second way in or out."
+    cover: []
+  - id: escape_pod
+    name: Escape pod
+    size: small
+    text: "Enemy models may flee by it: a model that ends its activation here leaves the board."
+    cover: []
+  - id: utility
+    name: Utility closet
+    size: small
+    cover: [{ type: light, label: "Pipework", w: 1, h: 0.75, piece: "Pipes or a pump." }]
+  - id: secondary_airlock
+    name: Secondary airlock
+    size: small
+    text: "A second way in or out for either side; mission reinforcements may arrive here."
+    cover: []
+
+small_rooms:
+  - { roll: "1", room: store }
+  - { roll: "2", room: lockers }
+  - { roll: "3", room: maintenance }
+  - { roll: "4", room: utility }
+  - { roll: "5", room: escape_pod }
+  - { roll: "6", room: secondary_airlock }
+
+# Vessels. board in inches (multiples of 3). entry: "short" = middle of a short edge, spine
+# along the long axis; "edge" = middle of any edge. spine: number of junction-and-passage pairs
+# after the docking passage. compartments: [min, max], counting the heart. heart: the room at the
+# far end of the spine, where missions put their objective unless they say otherwise.
+vessels:
+  - id: freighter
+    name: Freighter / ore hauler
+    board: [36, 18]
+    entry: short
+    spine: 3
+    compartments: [4, 6]
+    heart: bridge
+    heart_security: secured
+    security: secured
+    rooms:
+      - { roll: "1-3", room: cargo_hold }
+      - { roll: "4", room: crew_quarters }
+      - { roll: "5", room: mess }
+      - { roll: "6", room: engineering }
+    hazards: [darkness, zero_g]
+    text: "Long and plain: a spine of passages with holds off both sides."
+  - id: salvage_tender
+    name: Salvage tender
+    board: [24, 24]
+    entry: edge
+    spine: 3
+    compartments: [3, 5]
+    heart: bridge
+    heart_security: basic
+    security: basic
+    rooms:
+      - { roll: "1-2", room: salvage_bay }
+      - { roll: "3", room: workshop }
+      - { roll: "4", room: crew_quarters }
+      - { roll: "5", room: mess }
+      - { roll: "6", room: engineering }
+    hazards: [fire, darkness]
+    text: "Freespace's own working ships: cluttered bays and workshops, cheap locks."
+  - id: corvette
+    name: Corvette / patrol craft
+    board: [30, 18]
+    entry: short
+    spine: 2
+    compartments: [3, 5]
+    heart: bridge
+    heart_security: military
+    security: secured
+    rooms:
+      - { roll: "1", room: armoury }
+      - { roll: "2", room: crew_quarters }
+      - { roll: "3", room: sensor_room }
+      - { roll: "4", room: engineering }
+      - { roll: "5", room: mess }
+      - { roll: "6", room: medbay }
+    hazards: [decompression, darkness]
+    text: "A small warship: tight passages and hard locks."
+  - id: station_module
+    name: Station module
+    board: [24, 24]
+    entry: edge
+    spine: 3
+    compartments: [3, 5]
+    heart: operations
+    heart_security: hardened
+    security: secured
+    junction_bonus: 1
+    rooms:
+      - { roll: "1", room: lab }
+      - { roll: "2", room: hab }
+      - { roll: "3", room: storage }
+      - { roll: "4", room: life_support }
+      - { roll: "5", room: medbay }
+      - { roll: "6", room: data_core }
+    hazards: [darkness, fire]
+    text: "A mining or research station section: junction-heavy, with many small rooms. Add 1 to junction branch rolls."
+
+hazards:
+  - { id: darkness, name: Darkness, text: "Power failure: the whole deck is in darkness (chapter 8)." }
+  - { id: zero_g, name: Zero-g, text: "Gravity is off on the whole deck (chapter 8)." }
+  - { id: fire, name: Fire, text: "Place a fire marker in the middle of one compartment: the workshop, salvage bay or life support if there is one, otherwise the one nearest the heart (chapter 8)." }
+  - { id: decompression, name: Hull breach risk, text: "Every outer wall is hull: a breaching charge or frag that damages it causes decompression (chapter 8)." }

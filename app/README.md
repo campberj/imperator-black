@@ -60,7 +60,7 @@ Beyond this, the app's real features wait on rules:
 
 | App feature | Waits on |
 |---|---|
-| Layout generator (SVG ship maps from tiles) | Phase 4: ship layout procedure |
+| Layout generator (SVG ship maps from tiles) | Ready: Phase 4 tables in `content/layouts.yaml`, rules chapter 11. `tools/generate_layout.py` is the reference implementation: port it to `Imperator.Core` and check the same seed statistics (`--check`). |
 | Mission generator (briefing, enemy force, contact tables) | Phase 5: missions |
 | Enemy guidance cards | Ready: Phase 3 is done (`content/behaviors.yaml`, rules chapter 10). Can follow task 4 as an in-app behavior-card view. |
 | Campaign tracker | Phase 7: campaign loop |

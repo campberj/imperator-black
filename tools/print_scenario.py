@@ -25,6 +25,7 @@ import print_sheets as ps  # noqa: E402  (fonts, styles, content, card drawing)
 
 ROOT = ps.ROOT
 TROOPS = ps.by_id(ps.C["troops"]["troops"])
+ROOM_DEFS = ps.C["layouts"]["rooms"] if "layouts" in ps.C else []
 
 PLAYER_FILL = colors.HexColor("#27466b")
 ENEMY_FILL = colors.HexColor("#b4441f")
@@ -201,7 +202,7 @@ def sheet(s, out):
              Paragraph(f"Imperator Black gym scenario · rules v{s['rules_version']} · solo · about 60–90 minutes", SMALL),
              Spacer(1, 6), Paragraph(s["situation"].strip(), B), Spacer(1, 8),
              MapFlowable(s, W), Spacer(1, 4), legend(),
-             Paragraph('Scale: each grid square is 3". Board 18" × 12". The blue bar on the west wall of P1 is the airlock: the way in and out. Enemy positions are model centres.', SMALL),
+             Paragraph(f'Scale: each grid square is 3". Board {s["board"]["width"]}" × {s["board"]["height"]}". The blue bar on the west wall of P1 is the airlock: the way in and out. Enemy positions are model centres.', SMALL),
              Spacer(1, 6)]
 
     forces_player = [Paragraph("Task Force Boone (6)", H2)] + bullets([model_name(m) for m in s["player"]])
@@ -211,7 +212,24 @@ def sheet(s, out):
     story += [two, Spacer(1, 4), Paragraph("Setup", H2)] + bullets(s["setup"])
 
     story.append(PageBreak())
-    story += [Paragraph("Terrain", H2)]
+    story += terrain_flow(s, W)
+    story += [Spacer(1, 6), Paragraph("Special rules", H2)]
+    for r in s["special_rules"]:
+        story.append(Paragraph(f'<b>{r["title"]}.</b> {" ".join(r["text"].split())}', B))
+        story.append(Spacer(1, 2))
+    _rest(s, story, W)
+    doc.build(story)
+
+
+def grid_table(rows, widths):
+    t = Table([[Paragraph(f"<b>{h}</b>", B) for h in rows[0]]] + [[Paragraph(str(c), B) for c in r] for r in rows[1:]], colWidths=widths)
+    t.setStyle(TableStyle([("GRID", (0, 0), (-1, -1), 0.4, ps.RULE), ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                           ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#e8ecef"))]))
+    return t
+
+
+def terrain_flow(s, W):
+    story = [Paragraph("Terrain", H2)]
     if s.get("walls_and_doors"):
         story += [Paragraph(" ".join(s["walls_and_doors"].split()), B), Spacer(1, 3)]
     rows = [[Paragraph(f"<b>{h}</b>", B) for h in ("Map", "Piece", "Cover", "Footprint", "Suggested terrain")]]
@@ -223,11 +241,10 @@ def sheet(s, out):
                             ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#e8ecef"))]))
     story += [tt, Paragraph("Light cover: at least a third of the model hidden. Heavy cover: at least half hidden behind solid material. "
                             "Exact pieces don't matter; keep the footprint and height close.", SMALL)]
+    return story
 
-    story += [Spacer(1, 6), Paragraph("Special rules", H2)]
-    for r in s["special_rules"]:
-        story.append(Paragraph(f'<b>{r["title"]}.</b> {" ".join(r["text"].split())}', B))
-        story.append(Spacer(1, 2))
+
+def _rest(s, story, W):
     v = s["victory"]
     story += [Spacer(1, 4), Paragraph("Victory", H2), Paragraph(f'<b>Length:</b> {v["length"]} <b>Goal:</b> {v["goal"]}', B), Spacer(1, 2)]
     for o in v["outcomes"]:
@@ -246,6 +263,39 @@ def sheet(s, out):
     story += [et]
     story += [Spacer(1, 6), Paragraph("Watch for, and log afterwards", H2)] + bullets(s["watch_for"])
     story.append(Paragraph("Log the game with docs/playtests/TEMPLATE.md.", SMALL))
+
+
+def deck_sheet(s, out):
+    """A generated deck (tools/generate_layout.py): map, rooms, doors and terrain. No forces."""
+    doc = SimpleDocTemplate(str(out), pagesize=letter, leftMargin=0.55 * inch, rightMargin=0.55 * inch,
+                            topMargin=0.45 * inch, bottomMargin=0.45 * inch, title=s["title"], author="Imperator Black")
+    W = letter[0] - 1.1 * inch
+    story = [Paragraph(s["title"], H1),
+             Paragraph(f"Imperator Black deck layout · rules v{s['rules_version']} · chapter 11 · seed {s['seed']} · {s['rolls']} d6 rolls", SMALL),
+             Spacer(1, 6), Paragraph(s["situation"].strip(), B), Spacer(1, 8),
+             MapFlowable(s, W), Spacer(1, 4), legend(),
+             Paragraph(f'Scale: each grid square is 3". Board {s["board"]["width"]}" × {s["board"]["height"]}". '
+                       'The blue bar on the west edge is the airlock: the way in and out. Spine joints are open; other links are doors.', SMALL),
+             Spacer(1, 6)]
+    counts = s.get("tile_counts", {})
+    story += [Paragraph("Tiles", H2), Paragraph(
+        f'{counts.get("compartment", 0)} × 6"×6", {counts.get("passage", 0)} × 6"×3", {counts.get("junction", 0)} × 3"×3" '
+        '(junctions and small rooms).', B)]
+    story += [Paragraph("Hazard", H2), Paragraph(s.get("hazard") or "None", B)]
+    for n in s.get("notes", []):
+        story.append(Paragraph(n, B))
+    story.append(PageBreak())
+    rooms = [["Tile", "Room", "Notes"]]
+    texts = {r["name"]: r.get("text", "") for r in ROOM_DEFS}
+    for t in s["tiles"]:
+        if t["id"].startswith(("C", "S")):
+            rooms.append([t["id"], t["name"], texts.get(t["name"], "")])
+    story += [Paragraph("Rooms", H2), grid_table(rooms, [0.5 * inch, 1.5 * inch, W - 2.0 * inch]), Spacer(1, 6)]
+    drs = [["Door", "Between", "State", "Security"]]
+    for d in s["doors"]:
+        drs.append([d["id"], d.get("note", ""), d["state"].capitalize(), (d.get("security") or "—").capitalize()])
+    story += [Paragraph("Doors", H2), grid_table(drs, [0.5 * inch, 1.4 * inch, 0.9 * inch, W - 2.8 * inch]), Spacer(1, 6)]
+    story += terrain_flow(s, W)
     doc.build(story)
 
 
@@ -328,6 +378,13 @@ def main():
         raise SystemExit(__doc__)
     path = Path(sys.argv[1])
     s = yaml.safe_load(path.read_text())
+    if s.get("kind") == "deck":
+        ps.OUT.mkdir(parents=True, exist_ok=True)
+        out = ps.OUT / "decks" / f"{s['id']}.pdf"
+        out.parent.mkdir(exist_ok=True)
+        deck_sheet(s, out)
+        print(f"Wrote {out.relative_to(ROOT)}")
+        return
     for m in s["player"] + s["enemies"]:
         if m["troop"] not in TROOPS:
             raise SystemExit(f"Unknown troop '{m['troop']}'")

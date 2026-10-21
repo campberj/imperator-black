@@ -99,6 +99,53 @@ def render_behaviors(section):
     return bulleted(B[section])
 
 
+def render_layouts(section):
+    Ly = load("layouts")
+    rooms = {r["id"]: r for r in Ly["rooms"]}
+    vessels = {v["id"]: v for v in Ly["vessels"]}
+    hazards = {h["id"]: h["name"] for h in Ly["hazards"]}
+    sec = {s["id"]: s["name"] for s in load("core")["security"]["levels"]}
+    if section == "vessel_roll":
+        return table(["d6", "Vessel"], [(r["roll"].replace("-", "–"), vessels[r["vessel"]]["name"]) for r in Ly["vessel_roll"]])
+    if section == "vessels":
+        return table(["Vessel", "Board", "Spine", "Compartments", "Heart", "Locks", "Hazards (5 / 6)"],
+                     [(f'**{v["name"]}**', f'{v["board"][0]}" × {v["board"][1]}"', f'{v["spine"]} pairs',
+                       f'{v["compartments"][0]}–{v["compartments"][1]}',
+                       f'{rooms[v["heart"]]["name"]} ({sec[v["heart_security"]]})', sec[v["security"]],
+                       " / ".join(hazards[h] for h in v["hazards"])) for v in Ly["vessels"]])
+    if section == "vessel_rooms":
+        heads = ["d6"] + [v["name"] for v in Ly["vessels"]]
+        rows = []
+        for roll in range(1, 7):
+            row = [str(roll)]
+            for v in Ly["vessels"]:
+                for r in v["rooms"]:
+                    lo, _, hi = str(r["roll"]).partition("-")
+                    if int(lo) <= roll <= int(hi or lo):
+                        row.append(rooms[r["room"]]["name"] + (" †" if rooms[r["room"]].get("unique") else ""))
+            rows.append(row)
+        return table(heads, rows)
+    if section in ("spine_turn", "passage_branch", "junction_branch", "loop_door", "door_state", "hazard_roll"):
+        return table(["d6", "Result"], [(str(r["roll"]).replace("-", "–"), r["text"]) for r in Ly[section]])
+    if section == "small_rooms":
+        return table(["d6", "Small room", "Notes"],
+                     [(r["roll"], rooms[r["room"]]["name"], rooms[r["room"]].get("text", "—")) for r in Ly["small_rooms"]])
+    if section == "rooms":
+        out = []
+        for r in Ly["rooms"]:
+            cover = "; ".join(f'{c["label"]} ({c["type"]}): {c["piece"]}' for c in r["cover"]) or "None"
+            extra = []
+            if r.get("security"):
+                extra.append(f'Locks: {sec[r["security"]]}')
+            if r.get("unique"):
+                extra.append("Unique")
+            out.append((f'**{r["name"]}**', "6\"×6\"" if r["size"] == "compartment" else "3\"×3\"", cover, ", ".join(extra) or "—"))
+        return table(["Room", "Tile", "Cover", "Notes"], out)
+    if section == "hazards":
+        return table(["Hazard", "Effect"], [(f'**{h["name"]}**', h["text"]) for h in Ly["hazards"]])
+    return None
+
+
 def render_forces(key):
     f, section = key.split(".", 1)
     if f == "troops":
@@ -137,6 +184,8 @@ def render_forces(key):
         return table(["Rank", "Typical attributes", "Who"], [(r["name"], r["typical"], r["text"]) for r in load("core")["ranks"]])
     if f == "behaviors":
         return render_behaviors(section)
+    if f == "layouts":
+        return render_layouts(section)
     if key == "core.security":
         sec = load("core")["security"]
         return table(["Security level", "Hack test", "Successes needed", "Typical"],

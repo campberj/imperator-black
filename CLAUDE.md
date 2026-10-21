@@ -20,7 +20,9 @@ python3 tools/validate_content.py     # after any content/*.yaml edit
 python3 tools/build_content.py        # after any content/*.yaml edit
 python3 tools/render_tables.py        # after any content/*.yaml edit
 python3 tools/print_sheets.py         # after content changes that affect cards (needs reportlab)
-python3 tools/print_scenario.py docs/scenarios/<file>.yaml   # scenario sheet + curated cards
+python3 tools/print_scenario.py docs/scenarios/<file>.yaml   # scenario sheet + curated cards (or a deck sheet)
+python3 tools/generate_layout.py <vessel> --seed N --out docs/scenarios/decks/x.yaml   # chapter 11 deck
+python3 tools/generate_layout.py --check     # layout statistics over many seeds
 dotnet build app/Imperator.slnx
 dotnet run --project app/tests/Imperator.Core.Tests                     # must print "All N checks passed."
 dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.4-results.md

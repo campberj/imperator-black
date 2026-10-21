@@ -105,6 +105,13 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 3. Paper procedure: roll the vessel type, then place an entry point, rooms, connections, doors, objectives, and enemy tokens.
 4. Boarding environment rules: doors and hatches, breaching, cramped spaces, optional hazards (decompression, fire, power loss).
 
+**Progress (2026-10-21):**
+- [x] RJ's calls: board size by vessel; dice decide, player orients; four vessel types; dry-erase map as overflow
+- [x] `content/layouts.yaml`: vessels, rooms with cover, and the d6 tables; validated in CI
+- [x] Rules chapter 11: [ship and station layouts](../rules/11-ship-layout.md), with a worked example
+- [x] Reference generator `tools/generate_layout.py` (seeded, same tables) and deck sheets in [`docs/print/decks/`](print/decks/)
+- [ ] RJ builds a deck from the paper procedure and times it
+
 **Exit:** The paper procedure produces a sensible, playable layout in under 10 minutes using only owned tiles.
 
 ## Phase 5 — Missions
