@@ -133,7 +133,7 @@ def render_layouts(section):
     if section == "rooms":
         out = []
         for r in Ly["rooms"]:
-            cover = "; ".join(f'{c["label"]} ({c["type"]}): {c["piece"]}' for c in r["cover"]) or "None"
+            cover = "; ".join(f'{c["label"]} ({c["type"]}): {c["piece"].rstrip(".")}' for c in r["cover"]) or "None"
             extra = []
             if r.get("security"):
                 extra.append(f'Locks: {sec[r["security"]]}')

@@ -163,27 +163,27 @@ Place each room's cover from the table below.
 <!-- table:layouts.rooms -->
 | Room | Tile | Cover | Notes |
 |---|---|---|---|
-| **Cargo hold** | 6"×6" | Container (heavy): A shipping container or crate stack taller than a model.; Crates (light): Two or three crates, waist-high.; Crates (light): Two or three crates, waist-high. | — |
-| **Salvage bay** | 6"×6" | Salvage (heavy): A large piece of wreckage or a dismantled engine.; Scrap (light): A pile of scrap, plating or barrels.; Scrap (light): A pile of scrap, plating or barrels. | — |
-| **Workshop** | 6"×6" | Machine (heavy): A heavy machine: lathe, press or fabricator.; Bench (light): A workbench or tool rack. | — |
-| **Crew quarters** | 6"×6" | Bunks (light): Bunks or lockers.; Bunks (light): Bunks or lockers. | — |
-| **Mess** | 6"×6" | Tables (light): Tables and benches.; Counter (light): A galley counter. | — |
-| **Engineering** | 6"×6" | Reactor housing (heavy): A reactor, drive housing or large machinery block.; Console (light): A control console. | Unique |
-| **Bridge** | 6"×6" | Console bank (light): A bank of consoles.; Console bank (light): A bank of consoles. | Unique |
-| **Armoury** | 6"×6" | Weapon racks (light): Weapon racks or ammunition lockers.; Weapon racks (light): Weapon racks or ammunition lockers. | Locks: Hardened, Unique |
-| **Sensors and comms** | 6"×6" | Consoles (light): Consoles and display screens.; Server stack (heavy): A floor-to-ceiling equipment stack. | Unique |
-| **Medbay** | 6"×6" | Beds (light): Medical beds or a treatment station.; Cabinets (light): Supply cabinets. | Unique |
-| **Laboratory** | 6"×6" | Equipment (heavy): A large piece of lab equipment.; Benches (light): Lab benches. | — |
-| **Habitation** | 6"×6" | Furniture (light): Furniture, bunks or partitions.; Lockers (light): Lockers. | — |
-| **Storage** | 6"×6" | Shelving (heavy): Tall shelving or a container.; Crates (light): Crates, waist-high. | — |
-| **Life support** | 6"×6" | Scrubbers (heavy): Air scrubbers or tanks.; Pipework (light): Low pipework or a pump. | Unique |
-| **Data core** | 6"×6" | Core (heavy): A floor-to-ceiling data core column.; Consoles (light): Access consoles. | Locks: Hardened, Unique |
-| **Operations centre** | 6"×6" | Console bank (light): A bank of consoles.; Plot table (light): A plotting table or holo-display. | Locks: Hardened, Unique |
-| **Store** | 3"×3" | Crates (light): A crate. | — |
+| **Cargo hold** | 6"×6" | Container (heavy): A shipping container or crate stack taller than a model; Crates (light): Two or three crates, waist-high; Crates (light): Two or three crates, waist-high | — |
+| **Salvage bay** | 6"×6" | Salvage (heavy): A large piece of wreckage or a dismantled engine; Scrap (light): A pile of scrap, plating or barrels; Scrap (light): A pile of scrap, plating or barrels | — |
+| **Workshop** | 6"×6" | Machine (heavy): A heavy machine: lathe, press or fabricator; Bench (light): A workbench or tool rack | — |
+| **Crew quarters** | 6"×6" | Bunks (light): Bunks or lockers; Bunks (light): Bunks or lockers | — |
+| **Mess** | 6"×6" | Tables (light): Tables and benches; Counter (light): A galley counter | — |
+| **Engineering** | 6"×6" | Reactor housing (heavy): A reactor, drive housing or large machinery block; Console (light): A control console | Unique |
+| **Bridge** | 6"×6" | Console bank (light): A bank of consoles; Console bank (light): A bank of consoles | Unique |
+| **Armoury** | 6"×6" | Weapon racks (light): Weapon racks or ammunition lockers; Weapon racks (light): Weapon racks or ammunition lockers | Locks: Hardened, Unique |
+| **Sensors and comms** | 6"×6" | Consoles (light): Consoles and display screens; Server stack (heavy): A floor-to-ceiling equipment stack | Unique |
+| **Medbay** | 6"×6" | Beds (light): Medical beds or a treatment station; Cabinets (light): Supply cabinets | Unique |
+| **Laboratory** | 6"×6" | Equipment (heavy): A large piece of lab equipment; Benches (light): Lab benches | — |
+| **Habitation** | 6"×6" | Furniture (light): Furniture, bunks or partitions; Lockers (light): Lockers | — |
+| **Storage** | 6"×6" | Shelving (heavy): Tall shelving or a container; Crates (light): Crates, waist-high | — |
+| **Life support** | 6"×6" | Scrubbers (heavy): Air scrubbers or tanks; Pipework (light): Low pipework or a pump | Unique |
+| **Data core** | 6"×6" | Core (heavy): A floor-to-ceiling data core column; Consoles (light): Access consoles | Locks: Hardened, Unique |
+| **Operations centre** | 6"×6" | Console bank (light): A bank of consoles; Plot table (light): A plotting table or holo-display | Locks: Hardened, Unique |
+| **Store** | 3"×3" | Crates (light): A crate | — |
 | **Locker room** | 3"×3" | None | — |
 | **Maintenance access** | 3"×3" | None | — |
 | **Escape pod** | 3"×3" | None | — |
-| **Utility closet** | 3"×3" | Pipework (light): Pipes or a pump. | — |
+| **Utility closet** | 3"×3" | Pipework (light): Pipes or a pump | — |
 | **Secondary airlock** | 3"×3" | None | — |
 <!-- /table -->
 

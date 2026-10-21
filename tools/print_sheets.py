@@ -492,6 +492,79 @@ def quick_reference():
     return path
 
 
+# ---------------------------------------------------------------- deck builder (chapter 11)
+
+def deck_builder():
+    """Two-page table sheet for building a deck at the table."""
+    from reportlab.platypus import PageBreak
+    Ly = C["layouts"]
+    rooms = {r["id"]: r for r in Ly["rooms"]}
+    sec = {s["id"]: s["name"] for s in C["core"]["security"]["levels"]}
+    haz = {h["id"]: h for h in Ly["hazards"]}
+    path = OUT / "deck-builder.pdf"
+    doc = SimpleDocTemplate(str(path), pagesize=letter, leftMargin=0.45 * inch, rightMargin=0.45 * inch,
+                            topMargin=0.4 * inch, bottomMargin=0.4 * inch, title="Imperator Black — Deck Builder")
+    W = letter[0] - 0.9 * inch
+    half = (W - 0.25 * inch) / 2
+
+    def d6(rows, label="Result"):
+        return qtable([["d6", label]] + [[str(r["roll"]).replace("-", "–"), r["text"]] for r in rows], [0.35 * inch, half - 0.35 * inch])
+
+    def two_col(left, right):
+        tb = Table([[left, right]], colWidths=[half + 0.125 * inch, half + 0.125 * inch])
+        tb.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 6)]))
+        return tb
+
+    vessels = qtable([["Vessel", "Board", "Spine", "Rooms", "Heart (locks)", "Locks", "Hazard 5 / 6"]] +
+                     [[v["name"], f'{v["board"][0]}"×{v["board"][1]}"', v["spine"], f'{v["compartments"][0]}–{v["compartments"][1]}',
+                       f'{rooms[v["heart"]]["name"]} ({sec[v["heart_security"]]})', sec[v["security"]],
+                       " / ".join(haz[h]["name"] for h in v["hazards"])] for v in Ly["vessels"]],
+                     [1.45 * inch, 0.6 * inch, 0.45 * inch, 0.5 * inch, 1.75 * inch, 0.65 * inch, W - 5.4 * inch])
+    vroll = " · ".join(f'{r["roll"].replace("-", "–")} {next(v["name"] for v in Ly["vessels"] if v["id"] == r["vessel"])}' for r in Ly["vessel_roll"])
+    rooms_tbl = [["d6"] + [v["name"].split(" /")[0] for v in Ly["vessels"]]]
+    for roll in range(1, 7):
+        row = [str(roll)]
+        for v in Ly["vessels"]:
+            for r in v["rooms"]:
+                lo, _, hi = str(r["roll"]).partition("-")
+                if int(lo) <= roll <= int(hi or lo):
+                    row.append(rooms[r["room"]]["name"] + (" †" if rooms[r["room"]].get("unique") else ""))
+        rooms_tbl.append(row)
+    steps = bullets([
+        "<b>1. Vessel:</b> from the mission, or roll: " + vroll + ".",
+        "<b>2. Spine:</b> docking passage against the middle of the west edge, running inward (the airlock). Then junction, passage, repeated for the spine count. At each junction after the first, roll the turn. A tile that won't fit turns toward more open board; if it fits nowhere, the spine ends.",
+        "<b>3. Heart</b> against the far end of the spine, with a door (or beside the last spine tile with room).",
+        "<b>4. Branches:</b> walk the spine from the airlock (skip the docking passage); one roll per passage and per junction. A room that won't fit isn't placed. At the vessel's most rooms, ignore further compartments; a side passage then ends in a small room.",
+        "<b>5. Fill:</b> fewer rooms than the minimum? Add one beside each spine tile from the far end back. Still short: dry-erase map.",
+        "<b>6. Rooms:</b> roll each compartment (not the heart) and each small room. † unique: on a repeat, take the next line down.",
+        "<b>7. Second doors:</b> each compartment, for each other tile it touches with no door (not small rooms): roll.",
+        "<b>8. Doors:</b> spine and side-passage joints are open archways; roll every other door. Heart doors: always locked at the heart's level. Other locks: the room's level, else the vessel's.",
+        "<b>9. Cover:</b> heavy pieces in the middle, light pieces in the corners farthest from the doors, a clear lane in front of every door.",
+        "<b>10. Hazard:</b> roll once.",
+    ])
+    left = steps + [Spacer(1, 4), Paragraph("Spine turn", Q_H), d6(Ly["spine_turn"]), Spacer(1, 3), Paragraph("Each passage", Q_H), d6(Ly["passage_branch"])]
+    right = [Paragraph("Each junction (open sides)", Q_H), d6(Ly["junction_branch"]),
+             Paragraph("Station modules add 1.", Q_SMALL), Spacer(1, 3),
+             Paragraph("Second door", Q_H), d6(Ly["loop_door"]), Spacer(1, 3),
+             Paragraph("Door state", Q_H), d6(Ly["door_state"]), Spacer(1, 3),
+             Paragraph("Small room", Q_H),
+             qtable([["d6", "Room"]] + [[r["roll"], rooms[r["room"]]["name"] + (f': {rooms[r["room"]]["text"]}' if rooms[r["room"]].get("text") else "")] for r in Ly["small_rooms"]],
+                    [0.35 * inch, half - 0.35 * inch]), Spacer(1, 3),
+             Paragraph("Hazard", Q_H), d6(Ly["hazard_roll"]),
+             qtable([[h["name"], h["text"]] for h in Ly["hazards"]], [0.9 * inch, half - 0.9 * inch], header=False)]
+    story = [Paragraph("Imperator Black — Deck Builder", Q_TITLE),
+             Paragraph(f"Rules chapter 11 · content v{VERSION} · 3\" grid · compartments 6\"×6\", passages 6\"×3\", junctions and small rooms 3\"×3\"", Q_SMALL),
+             Spacer(1, 5), vessels, Spacer(1, 5), two_col(left, right), PageBreak(),
+             Paragraph("Rooms (d6, per compartment)", Q_H),
+             qtable(rooms_tbl, [0.35 * inch] + [(W - 0.35 * inch) / 4] * 4), Spacer(1, 6),
+             Paragraph("Room cover", Q_H),
+             qtable([["Room", "Cover"]] + [[r["name"] + (f' ({sec[r["security"]]} locks)' if r.get("security") else ""),
+                                            "; ".join(f'{c["label"]} ({c["type"]}): {c["piece"].rstrip(".")}' for c in r["cover"]) or "None"]
+                                           for r in Ly["rooms"]], [1.6 * inch, W - 1.6 * inch])]
+    doc.build(story)
+    return path
+
+
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     p, n = unit_cards()
@@ -499,3 +572,4 @@ if __name__ == "__main__":
     print(f"Wrote {quick_reference().relative_to(ROOT)}")
     p, n = behavior_cards()
     print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
+    print(f"Wrote {deck_builder().relative_to(ROOT)}")
