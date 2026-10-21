@@ -93,7 +93,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 - [x] Rules chapter 10: [the solo opponent](../rules/10-solo-opponent.md): awareness, noise, the marker and alarm, drill by training, activation order, targets, close quarters, surrender, tie-breakers
 - [x] Priority lists for all nine behavior profiles in `content/behaviors.yaml`, validated in CI
 - [x] [Behavior cards](print/behavior-cards.pdf); Gym 1 reprinted with them in place of the stopgap orders
-- [ ] Replay Gym 1 with the behavior cards, counting judgment calls per round
+- [x] Replayed Gym 1 with the behavior cards ([log](playtests/2026-10-21-gym-01-replay.md)): almost no judgment calls; investigation, rally and break-off all worked. **Phase 3 exit met.**
 - [ ] Contact tables per threat tier (moves to Phase 5 with the alert track and missions)
 
 **Exit:** The player makes no more than one judgment call per turn on the enemy's behalf.
