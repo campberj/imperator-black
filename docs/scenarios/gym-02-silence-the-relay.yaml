@@ -1,0 +1,119 @@
+# Gym scenario 2: Silence the Relay. The first land test (rules v0.5, chapter 12).
+# Built from RJ's table (photo, 2026-10-21): a 35" × 43" desert board, played lengthwise.
+# Printed by: python3 tools/print_scenario.py docs/scenarios/gym-02-silence-the-relay.yaml
+# Coordinates are inches from the bottom-left corner, with the Republic's edge at the bottom.
+# Positions are read from the photo: place pieces as they stand on your table and treat the map as a guide.
+id: gym-02-silence-the-relay
+title: "Gym 2: Silence the Relay"
+kind_label: "land gym scenario"
+rules_version: "0.5"
+
+situation: >
+  A UN Force Command reserve fireteam holds a comms relay on a mesa above the spire flats. While it
+  stands, the Authority can see every Republic move in the sector. A clone squad, with Commander
+  Ahsoka Tano, has worked through the spires at first light to take it down. Pointman inorganics
+  wait in a dug-out under the mesa, ready to answer the alarm.
+
+board: { width: 35, height: 43 }
+tiles: []
+doors: []
+map_note: >
+  Each grid square is 6". Board 35" × 43", played lengthwise: the Republic enters from the bottom
+  edge, the mesa is at the top. Enemy positions are model centres. Pieces are drawn as rough
+  footprints from the photo.
+
+walls_and_doors: >
+  No walls or doors. The mesa and the central ridge are raised ground, one level (3") high; the rock
+  shelf at the mesa's east end is two levels. Climbing any sheer face costs 2" per level (chapter 12).
+
+# Terrain, from the photo. type: hill (raised ground), area (area terrain), ditch, light, heavy (solid).
+cover:
+  - { id: T1,  x: 11.5, y: 30.5, w: 20,  h: 12.5, type: hill,  label: "Mesa",            piece: "The dark mesa with the relay. One level up; sheer sides, except the gentle west slope beside the spire field." }
+  - { id: T2,  x: 26,   y: 34,   w: 7.5, h: 9,    type: heavy, label: "Rock shelf",      piece: "The high rock shelf at the mesa's east end: two levels, sheer. Blocks sight across the mesa top." }
+  - { id: T3,  x: 19.5, y: 33.5, w: 2,   h: 2.5,  type: heavy, label: "Comms relay",     piece: "The relay tower. Solid: Heavy cover, blocks sight. The objective." }
+  - { id: T4,  x: 15,   y: 38.5, w: 3.5, h: 4.5,  type: area,  label: "Camo netting",    piece: "Camouflage netting over a tent: scrub (Light cover inside; sight through no more than 3\")." }
+  - { id: T5,  x: 22.5, y: 26.5, w: 5,   h: 4,    type: area,  label: "Dug-out",         piece: "Netting over the dug-out door at the mesa's foot: scrub. The Pointmen come out here." }
+  - { id: T6,  x: 16.3, y: 17.8, w: 8.4, h: 12.5, type: hill,  label: "Central ridge",   piece: "The long tan ridge: one level, sheer sides. Light cover behind its crest against shooters below." }
+  - { id: T7,  x: 12,   y: 25.8, w: 4.5, h: 4.5,  type: heavy, label: "Great spire",     piece: "The tall spire at the mesa's foot: solid, blocks sight." }
+  - { id: T8,  x: 13,   y: 9.5,  w: 10,  h: 8.5,  type: heavy, label: "Dark boulder",    piece: "The large dark rock: solid, blocks sight; too steep to climb." }
+  - { id: T9,  x: 4.2,  y: 32.3, w: 7.2, h: 9.4,  type: area,  label: "Spire field",     piece: "The round base with small spires: dense woods (Light cover inside, sight no more than 1\" through, difficult ground)." }
+  - { id: T10, x: 8.4,  y: 0.5,  w: 6.6, h: 8.2,  type: area,  label: "Spire field",     piece: "The second round spire base: dense woods, as T9." }
+  - { id: T11, x: 4.4,  y: 27.5, w: 3,   h: 3.7,  type: heavy, label: "Spire",           piece: "Small stacked spire: solid." }
+  - { id: T12, x: 7.5,  y: 23.6, w: 3.5, h: 6.5,  type: light, label: "Rock spine",      piece: "The low curved rock line west of the ridge: low wall (Heavy cover within 1\" behind it; obstacle)." }
+  - { id: T13, x: 8.9,  y: 17.2, w: 3.9, h: 5.6,  type: heavy, label: "Rock stack",      piece: "The stacked rock outcrop west of centre: solid." }
+  - { id: T14, x: 4,    y: 8.6,  w: 3.7, h: 6.4,  type: light, label: "Rock spine",      piece: "The curved rock line on the west side: low wall." }
+  - { id: T15, x: 17,   y: 1,    w: 6.8, h: 8,    type: heavy, label: "Spire mound",     piece: "The big spire on its mound south of the boulder: solid." }
+  - { id: T16, x: 24.5, y: 2.2,  w: 3.5, h: 4.3,  type: heavy, label: "Spire",           piece: "Small spire: solid." }
+  - { id: T17, x: 25.2, y: 14,   w: 3.7, h: 5.1,  type: light, label: "Rock spine",      piece: "The upright rock line east of the boulder: low wall." }
+  - { id: T18, x: 27.3, y: 9.9,  w: 6.3, h: 3.9,  type: heavy, label: "Spire ridge",     piece: "The long leaning spire on the east side: solid." }
+  - { id: T19, x: 31.3, y: 19.1, w: 3.2, h: 2.2,  type: heavy, label: "Spire",           piece: "Small spire on the east edge: solid." }
+  - { id: T20, x: 27.5, y: 22.1, w: 3.3, h: 2,    type: heavy, label: "Spire",           piece: "Small spire below the mesa: solid." }
+  - { id: T21, x: 24,   y: 23.6, w: 2.4, h: 3.5,  type: light, label: "Rock spine",      piece: "Short rock line by the dug-out: low wall." }
+  - { id: T22, x: 27.5, y: 15.5, w: 6,   h: 4.5,  type: ditch, label: "Crevice",         piece: "The brown crevice printed on the mat (east): a ditch (Heavy cover inside against shooters outside; getting in or out is an obstacle)." }
+  - { id: T23, x: 4,    y: 5.5,  w: 6,   h: 3,    type: ditch, label: "Crevice",         piece: "The brown crevice printed on the mat (west): a ditch." }
+
+deploy:
+  - { x: 0.3, y: 0.3, w: 34.4, h: 5.7, side: player, label: "Republic: within 6\" of the bottom edge" }
+
+objective: { x: 20.5, y: 32.6, label: "Comms relay" }
+
+# Enemy models are numbered on the map and on their cards. element: faction element (behavior from content).
+enemies:
+  - { n: 1, troop: un3_rifleman,      element: un3_fireteam, x: 13.8, y: 37.6, state: "Unaware" }
+  - { n: 2, troop: un3_rifleman,      element: un3_fireteam, x: 18.7, y: 35.9, state: "Unaware" }
+  - { n: 3, troop: un3_at_specialist, element: un3_fireteam, x: 25.1, y: 35.9, state: "Unaware" }
+  - { n: 4, troop: un3_rifleman,      element: un3_fireteam, x: 21.5, y: 31.8, state: "Unaware, watching the flats" }
+  - { n: 5, troop: un3_pointman,        element: un3_pointmen, x: 24.0, y: 27.6, state: "Off table: arrives at the dug-out when the alarm is raised" }
+  - { n: 6, troop: un3_pointman,        element: un3_pointmen, x: 25.0, y: 27.6, state: "Off table: arrives with model 5" }
+  - { n: 7, troop: un3_pointman_gunner, element: un3_pointmen, x: 26.0, y: 27.6, state: "Off table: arrives with model 5" }
+
+player:
+  - { troop: rep_ahsoka,         label: "Commander" }
+  - { troop: rep_clone_sergeant, label: "Sergeant" }
+  - { troop: rep_clone_trooper,  label: "Trooper" }
+  - { troop: rep_clone_trooper,  label: "Trooper" }
+  - { troop: rep_clone_trooper,  label: "Trooper" }
+  - { troop: rep_clone_heavy,    label: "Heavy (Z-6)" }
+
+setup:
+  - "Use the table as photographed; the map and Terrain table say what each piece counts as (chapter 12)."
+  - "Enemy models 1–4 on the mesa as marked. Models 5–7 start off the table."
+  - "Roll for conditions (chapter 12) before deployment."
+  - "The Republic deploys wholly within 6\" of the bottom edge. Ahsoka may deploy anywhere in that zone."
+
+special_rules:
+  - title: "Dawn approach"
+    text: "The Republic wins initiative in round 1 automatically."
+  - title: "The enemy"
+    text: >
+      Run the enemy with chapter 10 and the behavior cards. The reserve fireteam (1–4) is Tactical and
+      starts Unaware; the enemy's objective, for tie-breakers, is the relay. The Pointmen (5–7) are
+      Aggressive: at the end of the round in which the alarm is raised, place them within 2" of the
+      dug-out (T5), Alerted. They activate from the next round.
+  - title: "Silence the relay"
+    text: >
+      A Republic model in base contact with the relay may Interact to set a charge on it (one action;
+      Very loud when it blows). The relay is destroyed at the end of that round, unless an enemy model
+      is in base contact with it then.
+  - title: "Getting onto the mesa"
+    text: >
+      The mesa is one level up. Climbing a sheer face costs 2" (chapter 12); the west slope beside the
+      spire field (T9) is open ground. Ahsoka's Leap ignores the climb.
+  - title: "Range bands"
+    text: "Play the current rules (8+, short range 0, beyond −1, beyond double −2). Republic clones are Shoot 2, the UN fireteam Shoot 2."
+
+victory:
+  length: "8 rounds."
+  goal: "Destroy the relay."
+  outcomes:
+    - { grade: "Decisive",  text: "Relay destroyed and the reserve fireteam broken or out of the fight, with no Republic model Dead." }
+    - { grade: "Marginal",  text: "Relay destroyed." }
+    - { grade: "Failure",   text: "Relay standing at the end of round 8, or the Republic squad breaks." }
+
+watch_for:
+  - "Did the terrain types (area, solid, raised, ditch) cover every piece without a judgment call?"
+  - "Did the land wording on the behavior cards (approach, area, exit) work? Count judgment calls per round."
+  - "Does Loud noise at 24\" wake the mesa at the right time?"
+  - "Close combat: how did Ahsoka do, and did Deflect feel right against a Z-6 burst or rifle volley?"
+  - "Aggressive Pointmen and the Tactical fireteam: did they behave differently in a useful way?"
+  - "Shoot 2 against Shoot 2 in the open: too many misses, or about right?"

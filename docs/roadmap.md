@@ -111,6 +111,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 - [x] Rules chapter 11: [ship and station layouts](../rules/11-ship-layout.md), with a worked example
 - [x] Reference generator `tools/generate_layout.py` (seeded, same tables) and deck sheets in [`docs/print/decks/`](print/decks/)
 - [ ] RJ builds a deck from the paper procedure and times it
+- [x] Ship gym on a generated deck: [Gym 3: Wipe Race](scenarios/gym-03-wipe-race.yaml) (station module, seed 11)
 
 **Exit:** The paper procedure produces a sensible, playable layout in under 10 minutes using only owned tiles.
 
@@ -121,7 +122,8 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 - [x] Rules chapter 12: [land battles](../rules/12-land-terrain.md): terrain types, height, conditions, noise in the open, land table setup with seven environments (`content/terrain.yaml`)
 - [x] Solo opponent lists reworded for land (area, approach, exit)
 - [x] Printable [land battles reference](print/land-battles.pdf)
-- [ ] A land gym game (a woodland or urban board, a fireteam against a tier 1–2 element)
+- [x] Land gym written: [Gym 2: Silence the Relay](scenarios/gym-02-silence-the-relay.yaml), from RJ's desert table
+- [ ] Play Gym 2
 - [ ] Land missions (with Phase 5) and vehicles (after the PoC)
 
 **Exit:** A land gym plays without terrain or enemy-behavior questions that the rules don't answer.

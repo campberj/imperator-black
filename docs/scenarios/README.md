@@ -13,3 +13,7 @@ This writes `docs/print/<id>-sheet.pdf` (scenario sheet with a to-scale map) and
 | Scenario | Purpose | Print |
 |---|---|---|
 | [Gym 1: First Breach](gym-01-first-breach.yaml) | Phase 2 exit playtest: Boarding element vs four Freespace asset security on five tiles; doors, a locked door, Overwatch, close quarters, an extraction | [sheet](../print/gym-01-first-breach-sheet.pdf), [cards](../print/gym-01-first-breach-cards.pdf) |
+| [Gym 2: Silence the Relay](gym-02-silence-the-relay.yaml) | First land test (chapter 12), built from RJ's 35" × 43" desert table: a Republic clone squad and Ahsoka Tano against a UN reserve fireteam holding a mesa relay, with Pointmen as the reaction force | [sheet](../print/gym-02-silence-the-relay-sheet.pdf), [cards](../print/gym-02-silence-the-relay-cards.pdf) |
+| [Gym 3: Wipe Race](gym-03-wipe-race.yaml) | Ship test on a chapter 11 deck (station module, seed 11): Boarding element against Freespace salvage techs wiping a data core, Borz contractors, and a Hardened door | [sheet](../print/gym-03-wipe-race-sheet.pdf), [cards](../print/gym-03-wipe-race-cards.pdf) |
+
+Land scenarios set `tiles: []` and describe terrain as typed footprints (`hill`, `area`, `ditch`, `light`, `heavy`); the map draws a 6" grid instead of tiles.

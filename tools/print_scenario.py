@@ -33,7 +33,10 @@ TILE_FILL = colors.HexColor("#e9edf1")
 TILE_EDGE = colors.HexColor("#3c4650")
 GRID = colors.HexColor("#cfd6dc")
 DOOR_COLOURS = {"open": colors.HexColor("#7fb27f"), "closed": colors.HexColor("#8a5a12"), "locked": colors.HexColor("#b4441f")}
-COVER_FILL = {"light": colors.HexColor("#c8d9b8"), "heavy": colors.HexColor("#7d8a6b")}
+COVER_FILL = {"light": colors.HexColor("#c8d9b8"), "heavy": colors.HexColor("#7d8a6b"),
+              "hill": colors.HexColor("#e3cfa4"), "area": colors.HexColor("#d9e3c4"), "ditch": colors.HexColor("#b98c6a")}
+COVER_ORDER = {"hill": 0, "area": 1, "ditch": 2, "light": 3, "heavy": 4}
+COVER_NAMES = {"light": "Light cover", "heavy": "Heavy cover / solid", "hill": "Raised ground", "area": "Area terrain", "ditch": "Ditch or crevice"}
 
 
 # ---------------------------------------------------------------- map
@@ -45,7 +48,7 @@ class MapFlowable(Flowable):
         super().__init__()
         self.s = s
         self.bw, self.bh = s["board"]["width"], s["board"]["height"]
-        self.scale = width / self.bw
+        self.scale = min(width / self.bw, (4.7 * inch) / self.bh)
         self.width, self.height = width, self.bh * self.scale + 0.15 * inch
 
     def wrap(self, *_):
@@ -62,6 +65,13 @@ class MapFlowable(Flowable):
         c.setLineWidth(0.5)
         c.rect(*self.p(0, 0), self.bw * k, self.bh * k)
         c.setDash()
+        if not s.get("tiles"):   # land: a 6" reference grid over the whole board
+            c.setStrokeColor(GRID)
+            c.setLineWidth(0.3)
+            for gx in range(6, int(self.bw) + 1, 6):
+                c.line(*self.p(gx, 0), *self.p(gx, self.bh))
+            for gy in range(6, int(self.bh) + 1, 6):
+                c.line(*self.p(0, gy), *self.p(self.bw, gy))
         # tiles with grid
         for t in s["tiles"]:
             x, y = self.p(t["x"], t["y"])
@@ -85,7 +95,7 @@ class MapFlowable(Flowable):
             c.setLineWidth(0.8)
             c.rect(x, y, d["w"] * k, d["h"] * k, fill=1, stroke=1)
         # cover
-        for cv in s.get("cover", []):
+        for cv in sorted(s.get("cover", []), key=lambda c: COVER_ORDER.get(c["type"], 9)):
             x, y = self.p(cv["x"], cv["y"])
             c.setFillColor(COVER_FILL[cv["type"]])
             c.setStrokeColor(TILE_EDGE)
@@ -156,10 +166,17 @@ class MapFlowable(Flowable):
         c.drawString(lx, ly, label)
 
 
-def legend():
-    items = [("Open door", DOOR_COLOURS["open"]), ("Closed door", DOOR_COLOURS["closed"]), ("Locked door (L)", DOOR_COLOURS["locked"]),
-             ("Light cover", COVER_FILL["light"]), ("Heavy cover", COVER_FILL["heavy"]), ("Enemy model", ENEMY_FILL),
-             ("Deployment", colors.Color(0.15, 0.27, 0.42, alpha=0.35)), ("Objective", colors.HexColor("#d9a300"))]
+def legend(s=None):
+    land = bool(s) and not s.get("tiles")
+    if land:
+        types = sorted({c["type"] for c in s.get("cover", [])}, key=lambda k: COVER_ORDER.get(k, 9))
+        items = [(COVER_NAMES[k], COVER_FILL[k]) for k in types]
+        items += [("Enemy model", ENEMY_FILL), ("Deployment", colors.Color(0.15, 0.27, 0.42, alpha=0.35)), ("Objective", colors.HexColor("#d9a300"))]
+        items = items[:8] + [("", colors.white)] * (8 - len(items[:8]))
+    else:
+        items = [("Open door", DOOR_COLOURS["open"]), ("Closed door", DOOR_COLOURS["closed"]), ("Locked door (L)", DOOR_COLOURS["locked"]),
+                 ("Light cover", COVER_FILL["light"]), ("Heavy cover", COVER_FILL["heavy"]), ("Enemy model", ENEMY_FILL),
+                 ("Deployment", colors.Color(0.15, 0.27, 0.42, alpha=0.35)), ("Objective", colors.HexColor("#d9a300"))]
     cells = []
     for name, col in items:
         sw = Table([[""]], colWidths=[8], rowHeights=[8])
@@ -200,14 +217,21 @@ def sheet(s, out):
                             topMargin=0.45 * inch, bottomMargin=0.45 * inch, title=s["title"], author="Imperator Black")
     W = letter[0] - 1.1 * inch
     story = [Paragraph(s["title"], H1),
-             Paragraph(f"Imperator Black gym scenario · rules v{s['rules_version']} · solo · about 60–90 minutes", SMALL),
+             Paragraph(f"Imperator Black {s.get('kind_label', 'gym scenario')} · rules v{s['rules_version']} · solo · about 60–90 minutes", SMALL),
              Spacer(1, 6), Paragraph(s["situation"].strip(), B), Spacer(1, 8),
-             MapFlowable(s, W), Spacer(1, 4), legend(),
-             Paragraph(f'Scale: each grid square is 3". Board {s["board"]["width"]}" × {s["board"]["height"]}". The blue bar on the west wall of P1 is the airlock: the way in and out. Enemy positions are model centres.', SMALL),
+             MapFlowable(s, W), Spacer(1, 4), legend(s),
+             Paragraph(s.get("map_note") or f'Scale: each grid square is 3". Board {s["board"]["width"]}" × {s["board"]["height"]}". The blue bar on the west wall of P1 is the airlock: the way in and out. Enemy positions are model centres.', SMALL),
              Spacer(1, 6)]
 
-    forces_player = [Paragraph("Task Force Boone (6)", H2)] + bullets([model_name(m) for m in s["player"]])
-    forces_enemy = [Paragraph("Freespace Solutions (4)", H2)] + bullets([f'{enemy_name(e)}: {e["state"]}' for e in s["enemies"]])
+    pf = ps.FACTIONS[TROOPS[s["player"][0]["troop"]]["faction"]]["name"]
+    efs = []
+    for e in s["enemies"]:
+        n = ps.FACTIONS[TROOPS[e["troop"]]["faction"]]["name"]
+        if n not in efs:
+            efs.append(n)
+    ef = " and ".join(efs)
+    forces_player = [Paragraph(f"{pf} ({len(s['player'])})", H2)] + bullets([model_name(m) for m in s["player"]])
+    forces_enemy = [Paragraph(f"{ef} ({len(s['enemies'])})", H2)] + bullets([f'{enemy_name(e)}: {e["state"]}' for e in s["enemies"]])
     two = Table([[forces_player, forces_enemy]], colWidths=[W / 2, W / 2])
     two.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0)]))
     story += [two, Spacer(1, 4), Paragraph("Setup", H2)] + bullets(s["setup"])
