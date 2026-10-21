@@ -1,6 +1,6 @@
 {
   "armour": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "armour": [
       {
         "id": "none",
@@ -48,57 +48,328 @@
     ]
   },
   "behaviors": {
-    "version": "0.4.0",
+    "version": "0.5.0",
+    "awareness": [
+      {
+        "id": "unaware",
+        "name": "Unaware",
+        "text": "Busy with its work. Does not activate or react. Becomes Alerted when its element sees a player model, hears noise, is hit, or the alarm is raised."
+      },
+      {
+        "id": "alerted",
+        "name": "Alerted",
+        "text": "Knows something is wrong but has no target in sight. Activates using its profile's No target list, toward the marker."
+      },
+      {
+        "id": "engaged",
+        "name": "Engaged",
+        "text": "Any Alerted model that can see a standing player model when it activates or reacts. Uses its profile's Target in sight list."
+      },
+      {
+        "id": "setup",
+        "name": "At the start",
+        "text": "Elements start Unaware unless the mission says otherwise. Automated models, and models the mission places on Overwatch, start Alerted."
+      }
+    ],
+    "marker": [
+      "Place or move the marker to the source of the latest noise, or to where an enemy model last saw a player model.",
+      "An Alerted model that ends a Move within 3\" of the marker, seeing no player model, removes it. Its element then holds where it is.",
+      "With no marker on the board, Alerted models hold: stay in cover facing the nearest door and go on Overwatch."
+    ],
+    "alarm": [
+      "When an element first sees a player model or is hit, it raises the alarm at the end of its next activation: every element on the board becomes Alerted, and the alert track rises by 1.",
+      "If every model of the element is Down, Dead or has surrendered before then, the alarm is not raised."
+    ],
+    "noise": [
+      {
+        "id": "quiet",
+        "name": "Quiet",
+        "sources": "Moving, opening and closing doors, hacking, close combat, Silenced shots, smoke grenades",
+        "heard": "Not heard",
+        "alert": 0
+      },
+      {
+        "id": "loud",
+        "name": "Loud",
+        "sources": "Unsilenced shooting, forcing a door with a breaching tool",
+        "heard": "Elements with a model within 12\", measured through walls",
+        "alert": 1
+      },
+      {
+        "id": "very_loud",
+        "name": "Very loud",
+        "sources": "Frag grenades, flashbangs, breaching charges, any explosion",
+        "heard": "Every element on the board",
+        "alert": 2
+      }
+    ],
+    "drills": [
+      {
+        "id": "green",
+        "rank": "green",
+        "name": "No drill",
+        "text": "Each model follows its lists alone. Shoots instead of Aiming, never cracks doors, and throws grenades only where its list says."
+      },
+      {
+        "id": "regular",
+        "rank": "regular",
+        "name": "Fire and manoeuvre",
+        "text": "A model ends a Move in the open, in sight of a player model, only while a friend of its element covers it: on Overwatch, or Engaged with the same target. Otherwise it stops in the last cover on its route, or goes on Overwatch instead of moving. Charges are exempt."
+      },
+      {
+        "id": "veteran",
+        "rank": "veteran",
+        "name": "Bounding and grenades",
+        "text": "As Regular, and: throws a frag at 2 or more player models within its blast radius, with no friend in it; at a closed door with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target."
+      },
+      {
+        "id": "elite",
+        "rank": "elite",
+        "name": "Assault drill",
+        "text": "As Veteran, and: focus fire, shooting the player model its element has already hit this round if it can see it; picks Leaders and Auto gunners first at each step of the target list."
+      }
+    ],
+    "activation_order": [
+      "A Leader with a friend within 6\" that has 2 or more Suppression.",
+      "Engaged models in the open.",
+      "Other Engaged models, most Suppression first.",
+      "Alerted models, nearest the marker first.",
+      "Unaware models do not activate."
+    ],
+    "targets": [
+      "Ignore Down, Dead and surrendered models unless nothing else is in sight.",
+      "A player model it can hit without a cover penalty, nearest first.",
+      "Otherwise the player model in the least cover, nearest first.",
+      "Auto weapons spread to every other player model they can engage."
+    ],
+    "moving": [
+      "To cover: the nearest position in cover within the Move, Heavy before Light. If the line says \"with a target\", it must still see one; otherwise it ends out of sight of every player model if it can.",
+      "Toward the marker or a target: by the shortest route through doors, ending in cover if it can. Enemy models open locked doors on their own vessel with an Interact.",
+      "Away: by the shortest route out of sight of every player model, ending in cover."
+    ],
+    "close_quarters": [
+      "Used first by an Engaged model with a player model within 6\", unless its profile says otherwise. Read top-down.",
+      "Outnumbered (more standing player models than friends within 6\" of it) and not Aggressive: Move away, then Shoot if it still has a target.",
+      "Fight 2 or more, a target within its Move, and Aggressive or Tactical: charge it (close combat).",
+      "Two or more player models within a frag's blast radius of one point, no friend in it, and it carries frag: Throw it, then Move to cover.",
+      "Otherwise: use its profile's Target in sight list."
+    ],
+    "surrender": [
+      "A model whose profile allows it tests when it activates Pinned or Wounded with a player model within 6\" in its line of sight: 2d6 + Nerve, 8+, or it surrenders.",
+      "A surrendered model lies down, takes no actions, cannot react and is not a target. It is a prisoner if the mission allows it."
+    ],
+    "tie_breakers": [
+      "The option nearest the enemy's objective, or the marker if there is no objective.",
+      "The lowest-numbered enemy model, or the player model nearest the enemy's objective.",
+      "Roll a die."
+    ],
     "behaviors": [
       {
         "id": "cowed",
         "name": "Cowed",
-        "summary": "Holds its compartment, falls back under Suppression, may surrender."
+        "summary": "Holds its compartment, falls back under Suppression, may surrender.",
+        "status": "proposed",
+        "surrenders": true,
+        "close_quarters": false,
+        "investigate": "None. Cowed models never move toward the marker.",
+        "engaged": [
+          "Pinned or Wounded, with a player model within 6\" in sight: test to surrender, then carry on down the list if it passes.",
+          "In the open: Move to cover, then Move away.",
+          "Otherwise: Shoot, Shoot."
+        ],
+        "alerted": [
+          "If it can see a door toward the marker: Move away, out of sight of that door.",
+          "Otherwise: stay put."
+        ],
+        "reactions": [
+          "Unactivated: when shot at in the open, Move to cover.",
+          "Never goes on Overwatch."
+        ],
+        "close_combat": "Breaks after any lost exchange."
       },
       {
         "id": "sentry",
         "name": "Sentry",
-        "summary": "Holds chokepoints, overwatches doors, raises the alarm."
+        "summary": "Holds chokepoints, overwatches doors, raises the alarm.",
+        "status": "proposed",
+        "surrenders": false,
+        "close_quarters": true,
+        "investigate": "One model: the lowest-numbered model without an Auto weapon. The rest hold.",
+        "engaged": [
+          "In the open: Move to cover with a target, then Shoot.",
+          "Auto weapon with two or more targets in sight: Suppressive Fire, then Shoot.",
+          "A target within short range: Aim, then Shoot.",
+          "Otherwise: Shoot, then Overwatch."
+        ],
+        "alerted": [
+          "The investigator: Move toward the marker, twice.",
+          "Already in cover covering the door of its compartment nearest the marker: Overwatch.",
+          "Others: Move to cover covering that door, then Overwatch."
+        ],
+        "reactions": [
+          "Overwatch: Shoot at the first trigger it can.",
+          "Unactivated: when shot at in the open, Move to cover."
+        ],
+        "close_combat": "Breaks after a lost exchange if Wounded or with 2 or more Suppression."
       },
       {
         "id": "aggressive",
         "name": "Aggressive",
-        "summary": "Closes distance, flanks through side passages, seeks close combat."
+        "summary": "Closes distance, flanks through side passages, seeks close combat.",
+        "status": "proposed",
+        "surrenders": false,
+        "close_quarters": true,
+        "investigate": "Every model.",
+        "engaged": [
+          "Fight 2 or more and a target within its Move: charge it.",
+          "A target within short range: Shoot, Shoot.",
+          "Otherwise: Move toward the nearest target, then Shoot."
+        ],
+        "alerted": [
+          "Move toward the marker, twice. Prefer a route that does not pass through a door a player model can see."
+        ],
+        "reactions": [
+          "Overwatch: Shoot at the first trigger it can.",
+          "Unactivated: when a player model comes within short range in its sight, Shoot."
+        ],
+        "close_combat": "Never breaks while it has fewer than 3 Suppression."
       },
       {
         "id": "tactical",
         "name": "Tactical",
-        "summary": "Fire and manoeuvre: one element fixes while another moves; uses Overwatch and grenades."
+        "summary": "Fire and manoeuvre: one element fixes while another moves; uses Overwatch and grenades.",
+        "status": "proposed",
+        "surrenders": false,
+        "close_quarters": true,
+        "investigate": "Every model, in bounds: the first model to activate Moves, the next covers it from Overwatch, alternating.",
+        "engaged": [
+          "In the open: Move to cover with a target, then Shoot.",
+          "No friend of its element is covering the target: Shoot, then Overwatch.",
+          "A friend is covering and the target is beyond short range: Move to cover closer to the target, out of its line of sight on the way if it can, then Shoot.",
+          "Otherwise: Aim, then Shoot."
+        ],
+        "alerted": [
+          "First of its element this round: Move toward the marker, then Overwatch.",
+          "Otherwise: Move to cover covering the friend ahead, then Overwatch."
+        ],
+        "reactions": [
+          "Overwatch: Shoot at the first trigger it can.",
+          "Unactivated: when shot at in the open, Move to cover; when a player model comes within short range in its sight, Shoot."
+        ],
+        "close_combat": "Breaks after a lost exchange if Wounded or with 2 or more Suppression."
       },
       {
         "id": "saboteur",
         "name": "Saboteur",
-        "summary": "Avoids fights; works consoles, rigs charges, seals doors, destroys evidence."
+        "summary": "Avoids fights; works consoles, rigs charges, seals doors, destroys evidence.",
+        "status": "proposed",
+        "surrenders": true,
+        "close_quarters": false,
+        "investigate": "None. Saboteurs work their task and seal doors.",
+        "engaged": [
+          "Pinned or Wounded, with a player model within 6\" in sight: test to surrender, then carry on down the list if it passes.",
+          "Within 1\" of its task: Interact (the mission says what each Interact achieves), then Interact again.",
+          "In the open: Move away, then Throw smoke between itself and the target if it has one.",
+          "Otherwise: Shoot, then Move away."
+        ],
+        "alerted": [
+          "An open door between it and the marker within its Move: Move to it, close it and lock it (Interact).",
+          "Otherwise: Move to its task and Interact."
+        ],
+        "reactions": [
+          "Unactivated: when shot at, Move away.",
+          "Never goes on Overwatch."
+        ],
+        "close_combat": "Breaks after any lost exchange."
       },
       {
         "id": "automated",
         "name": "Automated",
-        "summary": "Permanent Overwatch on its field of fire, or triggers on proximity."
+        "summary": "Permanent Overwatch on its field of fire, or triggers on proximity.",
+        "status": "proposed",
+        "surrenders": false,
+        "close_quarters": false,
+        "investigate": "Drones only. Turrets never move.",
+        "engaged": [
+          "Drone with no target within short range: Move to within short range with a target, then Shoot.",
+          "Otherwise: Shoot, then Overwatch. A turret only shoots into the field of fire the mission gives it."
+        ],
+        "alerted": [
+          "Turret: Overwatch.",
+          "Drone: Move toward the marker, then Overwatch."
+        ],
+        "reactions": [
+          "Overwatch: Shoot at every trigger it can, up to two.",
+          "Never Unaware: it does not hear noise, and starts on Overwatch."
+        ],
+        "close_combat": "Never breaks; it has no melee weapon, so it loses every exchange it is forced into."
       },
       {
         "id": "leader",
         "name": "Leader",
-        "summary": "Rallies the most suppressed friend nearby, then acts with its element."
+        "summary": "Rallies the most suppressed friend nearby, then acts with its element.",
+        "status": "proposed",
+        "surrenders": false,
+        "close_quarters": true,
+        "investigate": "Goes with the nearest element; raises its drill one step while within 6\".",
+        "engaged": [
+          "A friend within 6\" with 2 or more Suppression: Rally the most suppressed, then take one action from the line below.",
+          "Otherwise act as the profile of the nearest friendly element (Sentry if it is alone)."
+        ],
+        "alerted": [
+          "A friend within 6\" with 2 or more Suppression: Rally it.",
+          "Otherwise act as the profile of the nearest friendly element (Sentry if it is alone)."
+        ],
+        "reactions": [
+          "As the nearest friendly element."
+        ],
+        "close_combat": "Breaks after a lost exchange if Wounded."
       },
       {
         "id": "handler",
         "name": "Handler",
-        "summary": "Independent elite; protects the patron's interests first, the mission second."
+        "summary": "Independent elite; protects the patron's interests first, the mission second.",
+        "status": "proposed",
+        "surrenders": false,
+        "close_quarters": true,
+        "investigate": "Moves to the patron's asset, never toward the marker.",
+        "engaged": [
+          "A player model within 6\" of the patron's asset: Shoot it, Shoot it (or charge it, if within its Move).",
+          "Wounded or with 2 or more Suppression, and the asset safe or lost: Move away, toward the nearest exit. It escapes if it leaves the board.",
+          "Otherwise: Aim, then Shoot, picking Leaders first."
+        ],
+        "alerted": [
+          "Move toward the patron's asset; within 3\" of it, Overwatch."
+        ],
+        "reactions": [
+          "Overwatch: Shoot at the first trigger it can.",
+          "Unactivated: when a player model comes within short range in its sight, Shoot."
+        ],
+        "close_combat": "Breaks after a lost exchange if Wounded."
       },
       {
         "id": "attached",
         "name": "Attached",
-        "summary": "Uses the profile of the element it is attached to."
+        "summary": "Uses the profile of the element it is attached to.",
+        "status": "proposed",
+        "surrenders": false,
+        "close_quarters": true,
+        "investigate": "As the element it is attached to.",
+        "engaged": [
+          "Act as the profile of the element it is attached to (Tactical if it is alone)."
+        ],
+        "alerted": [
+          "Act as the profile of the element it is attached to (Tactical if it is alone)."
+        ],
+        "reactions": [
+          "As the element it is attached to."
+        ],
+        "close_combat": "As the element it is attached to."
       }
     ]
   },
   "core": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "dice": {
       "hit": "2d6",
       "test": "2d6"
@@ -368,7 +639,7 @@
     }
   },
   "factions": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "factions": [
       {
         "id": "tfb",
@@ -610,7 +881,7 @@
     ]
   },
   "gear": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "gear": [
       {
         "id": "breaching_charge",
@@ -686,7 +957,7 @@
     ]
   },
   "keywords": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "weapon": [
       {
         "id": "handy",
@@ -748,7 +1019,7 @@
     ]
   },
   "rosters": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "teams": [
       {
         "id": "vat_fireteam",
@@ -833,7 +1104,7 @@
     ]
   },
   "skills": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "skills": [
       {
         "id": "leader",
@@ -887,7 +1158,7 @@
     ]
   },
   "troops": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "troops": [
       {
         "id": "tfb_vat_leader",
@@ -1700,7 +1971,7 @@
     ]
   },
   "weapons": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "ranged": [
       {
         "id": "sidearm",

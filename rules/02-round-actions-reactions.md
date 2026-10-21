@@ -71,4 +71,4 @@ A reacting model takes **one** of these actions:
 
 ### Solo opponent
 
-Until the behavior profiles are written (Phase 3), use this default: an enemy model on Overwatch always Shoots at the first trigger it can. An unactivated enemy model reacts only when it is shot at while in the open and survives: after the shot resolves, it Moves to cover.
+Enemy models react as their behavior profile says (chapter 10).

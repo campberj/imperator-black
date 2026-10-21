@@ -55,6 +55,50 @@ def skill_list(skills):
     return ", ".join(out) or "—"
 
 
+def numbered(lines):
+    return "\n".join(f"{i}. {x}" for i, x in enumerate(lines, 1))
+
+
+def bulleted(lines):
+    return "\n".join(f"- {x}" for x in lines)
+
+
+def render_behaviors(section):
+    B = load("behaviors")
+    if section == "awareness":
+        return table(["State", "Meaning"], [(f'**{a["name"]}**', a["text"]) for a in B["awareness"]])
+    if section == "noise":
+        return table(["Noise", "Sources", "Heard by", "Alert track"],
+                     [(f'**{n["name"]}**', n["sources"], n["heard"], f'+{n["alert"]}' if n["alert"] else "—") for n in B["noise"]])
+    if section == "drills":
+        ranks = names("core", "ranks")
+        return table(["Lowest rank", "Drill", "Effect"], [(ranks[d["rank"]], f'**{d["name"]}**', d["text"]) for d in B["drills"]])
+    if section in ("activation_order", "targets", "tie_breakers"):
+        return numbered(B[section])
+    if section == "close_quarters":
+        return B[section][0] + "\n\n" + numbered(B[section][1:])
+    if section == "behaviors":
+        users = {}
+        for e in load("factions")["elements"]:
+            users.setdefault(e["behavior"], []).append(e["name"])
+        blocks = []
+        for bh in B["behaviors"]:
+            used = ", ".join(users.get(bh["id"], [])) or "attached models and as directed by the mission"
+            status = " **Proposed.**" if bh["status"] == "proposed" else ""
+            cq = "Uses the close-quarters list first." if bh["close_quarters"] else "Uses only its own lists, even in close quarters."
+            blocks.append("\n".join([
+                f'### {bh["name"]}', "",
+                f'*{bh["summary"]}* Used by: {used}.{status}', "",
+                "**Target in sight**", "", numbered(bh["engaged"]), "",
+                "**No target**", "", numbered(bh["alerted"]), "",
+                f'**Investigates:** {bh["investigate"]}', "",
+                "**Reactions**", "", bulleted(bh["reactions"]), "",
+                f'**Close combat:** {bh["close_combat"]} {cq}' + (" May surrender." if bh["surrenders"] else ""),
+            ]))
+        return "\n\n".join(blocks)
+    return bulleted(B[section])
+
+
 def render_forces(key):
     f, section = key.split(".", 1)
     if f == "troops":
@@ -91,6 +135,8 @@ def render_forces(key):
         return table(["Skill", "Effect", "Status"], rows)
     if key == "core.ranks":
         return table(["Rank", "Typical attributes", "Who"], [(r["name"], r["typical"], r["text"]) for r in load("core")["ranks"]])
+    if f == "behaviors":
+        return render_behaviors(section)
     if key == "core.security":
         sec = load("core")["security"]
         return table(["Security level", "Hack test", "Successes needed", "Typical"],

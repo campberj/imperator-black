@@ -242,6 +242,107 @@ def unit_cards():
     return path, len(troops)
 
 
+# ---------------------------------------------------------------- behavior cards (chapter 10)
+
+SOLO = C["behaviors"]
+BEHAVIOR_COLOUR = colors.HexColor("#3a3f46")
+
+
+def text_card(c, x, y, title, subtitle, flow, colour=BEHAVIOR_COLOUR):
+    c.setStrokeColor(RULE)
+    c.setLineWidth(0.6)
+    c.rect(x, y, CARD_W, CARD_H)
+    band = 0.52 * inch
+    c.setFillColor(colour)
+    c.rect(x, y + CARD_H - band, CARD_W, band, stroke=0, fill=1)
+    c.setFillColor(colors.white)
+    c.setFont("Body-Bold", 12)
+    c.drawString(x + 0.14 * inch, y + CARD_H - 0.27 * inch, title)
+    c.setFont("Body", 7)
+    c.drawString(x + 0.14 * inch, y + CARD_H - 0.43 * inch, subtitle)
+    footer = 0.22 * inch
+    c.setFillColor(MUTED)
+    c.setFont("Body", 5.8)
+    c.drawRightString(x + CARD_W - 0.14 * inch, y + 0.08 * inch, f"Imperator Black · content v{VERSION} · chapter 10")
+    frame = Frame(x + 0.14 * inch, y + footer, CARD_W - 0.28 * inch, CARD_H - band - footer - 0.04 * inch,
+                  leftPadding=0, rightPadding=0, topPadding=4, bottomPadding=0)
+    frame.addFromList([KeepInFrame(frame._aW, frame._aH, flow, mode="shrink")], c)
+
+
+def _numbered(lines):
+    return [Paragraph(f"{i}. {x}", S_BODY) for i, x in enumerate(lines, 1)]
+
+
+def _bulleted(lines):
+    return [Paragraph(f"• {x}", S_BODY) for x in lines]
+
+
+def behavior_flowables(bh):
+    users = [e["name"] for e in C["factions"]["elements"] if e["behavior"] == bh["id"]]
+    flow = [Paragraph(f"<i>{bh['summary']}</i>", S_BODY)]
+    if users:
+        flow.append(Paragraph("Used by: " + ", ".join(users) + ".", S_SMALL))
+    if bh["close_quarters"]:
+        flow += [Spacer(1, 2), Paragraph("<b>Player model within 6\":</b> close quarters first (reference card).", S_BODY)]
+    flow += [Spacer(1, 3), Paragraph("Target in sight (Engaged)", S_HEAD)] + _numbered(bh["engaged"])
+    flow += [Spacer(1, 3), Paragraph("No target (Alerted)", S_HEAD)] + _numbered(bh["alerted"])
+    flow += [Paragraph(f"<b>Investigates:</b> {bh['investigate']}", S_BODY)]
+    flow += [Spacer(1, 3), Paragraph("Reactions", S_HEAD)] + _bulleted(bh["reactions"])
+    flow += [Spacer(1, 3), Paragraph("Close combat", S_HEAD), Paragraph(bh["close_combat"] + (" May surrender." if bh["surrenders"] else ""), S_BODY)]
+    flow += [Spacer(1, 4), Paragraph("Read each list top-down; take the first line that applies. Unaware models do not activate or react.", S_SMALL)]
+    return flow
+
+
+def solo_reference_cards():
+    """Three reference cards for running the enemy: (title, subtitle, flowables)."""
+    aw = [Paragraph(f"<b>{a['name']}:</b> {a['text']}", S_BODY) for a in SOLO["awareness"]]
+    noise = [Paragraph(f"<b>{n['name']}</b> ({n['sources']}): {n['heard'].lower() if n['alert'] == 0 else n['heard']}"
+                       + (f"; alert +{n['alert']}." if n["alert"] else "."), S_BODY) for n in SOLO["noise"]]
+    card1 = [Paragraph("Awareness", S_HEAD)] + aw + [Spacer(1, 3), Paragraph("Noise", S_HEAD)] + noise + \
+            [Spacer(1, 3), Paragraph("The marker", S_HEAD)] + _bulleted(SOLO["marker"]) + \
+            [Spacer(1, 3), Paragraph("The alarm", S_HEAD)] + _bulleted(SOLO["alarm"])
+    card2 = [Paragraph("Who activates next", S_HEAD)] + _numbered(SOLO["activation_order"]) + \
+            [Spacer(1, 3), Paragraph("Targets", S_HEAD)] + _numbered(SOLO["targets"]) + \
+            [Spacer(1, 3), Paragraph("Moving", S_HEAD)] + _bulleted(SOLO["moving"]) + \
+            [Spacer(1, 3), Paragraph("Surrender", S_HEAD)] + _bulleted(SOLO["surrender"]) + \
+            [Spacer(1, 3), Paragraph("Tie-breakers", S_HEAD)] + _numbered(SOLO["tie_breakers"])
+    card3 = [Paragraph("Drill: set by the element's lowest rank; a friendly Leader within 6\" raises it one step.", S_BODY), Spacer(1, 2)]
+    card3 += [Paragraph(f"<b>{RANKS[d['rank']]}, {d['name']}:</b> {d['text']}", S_BODY) for d in SOLO["drills"]]
+    card3 += [Spacer(1, 4), Paragraph("Close quarters", S_HEAD), Paragraph(SOLO["close_quarters"][0], S_BODY)] + _numbered(SOLO["close_quarters"][1:])
+    return [("Enemy awareness", "Solo opponent reference 1 of 3", card1),
+            ("Enemy turn", "Solo opponent reference 2 of 3", card2),
+            ("Drill and close quarters", "Solo opponent reference 3 of 3", card3)]
+
+
+def draw_behavior_card(c, x, y, bh):
+    text_card(c, x, y, bh["name"], "Enemy behavior profile" + ("  ·  proposed" if bh["status"] == "proposed" else ""),
+              behavior_flowables(bh))
+
+
+def card_sheet(path, title, drawers):
+    """drawers: list of callables (c, x, y) -> None, laid out four to a page."""
+    c = canvas.Canvas(str(path), pagesize=letter)
+    c.setTitle(title)
+    c.setAuthor("Imperator Black")
+    slots = [(MARGIN_X, MARGIN_Y + CARD_H), (MARGIN_X + CARD_W, MARGIN_Y + CARD_H), (MARGIN_X, MARGIN_Y), (MARGIN_X + CARD_W, MARGIN_Y)]
+    for i, draw in enumerate(drawers):
+        if i and i % 4 == 0:
+            c.showPage()
+        if i % 4 == 0:
+            cut_marks(c)
+        x, y = slots[i % 4]
+        draw(c, x, y)
+    c.save()
+    return len(drawers)
+
+
+def behavior_cards():
+    path = OUT / "behavior-cards.pdf"
+    drawers = [(lambda c, x, y, r=r: text_card(c, x, y, *r)) for r in solo_reference_cards()]
+    drawers += [(lambda c, x, y, b=b: draw_behavior_card(c, x, y, b)) for b in SOLO["behaviors"]]
+    return path, card_sheet(path, "Imperator Black — Behavior Cards", drawers)
+
+
 # ---------------------------------------------------------------- quick reference
 
 Q_TITLE = style(15, "Body-Bold", leading=18)
@@ -382,3 +483,5 @@ if __name__ == "__main__":
     p, n = unit_cards()
     print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
     print(f"Wrote {quick_reference().relative_to(ROOT)}")
+    p, n = behavior_cards()
+    print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")

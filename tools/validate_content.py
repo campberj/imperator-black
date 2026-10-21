@@ -114,6 +114,37 @@ for e in C["factions"]["elements"]:
     for alt in e.get("alternatives", []):
         need(alt, troops, f"{w} alternative")
 
+B = C["behaviors"]
+for bh in B["behaviors"]:
+    w = f"behavior {bh['id']}"
+    for field in ("engaged", "alerted", "reactions"):
+        if not bh.get(field):
+            errors.append(f"{w}: needs a non-empty '{field}' list")
+    for field in ("close_combat", "investigate", "summary"):
+        if not isinstance(bh.get(field), str):
+            errors.append(f"{w}: needs '{field}' text")
+    for field in ("surrenders", "close_quarters"):
+        if not isinstance(bh.get(field), bool):
+            errors.append(f"{w}: '{field}' must be true or false")
+    if bh.get("status") not in ("settled", "proposed"):
+        errors.append(f"{w}: status must be settled or proposed")
+drill_ranks = [d["rank"] for d in B["drills"]]
+for r in ranks:
+    if drill_ranks.count(r) != 1:
+        errors.append(f"behaviors.drills: rank '{r}' needs exactly one drill")
+ids(B["drills"], "behaviors.drills")
+ids(B["noise"], "behaviors.noise")
+ids(B["awareness"], "behaviors.awareness")
+for section in ("marker", "alarm", "activation_order", "targets", "moving", "close_quarters", "surrender", "tie_breakers"):
+    if not B.get(section):
+        errors.append(f"behaviors.{section}: missing or empty")
+
+sec = C["core"]["security"]
+ids(sec["levels"], "core.security")
+for lv in sec["levels"]:
+    if not 2 <= lv["target"] <= 12 or lv["successes"] < 1:
+        errors.append(f"security level {lv['id']}: target 2-12 and successes 1+")
+
 for tm in C["rosters"]["teams"]:
     for s in tm["slots"]:
         need(s["troop"], troops, f"team {tm['id']} slot")
@@ -133,4 +164,4 @@ for s in C["skills"]["skills"]:
 if errors:
     print("\n".join(errors))
     sys.exit(1)
-print(f"Content valid: {len(troops)} troop types, {len(elements)} elements, {len(teams)} teams, {len(gear)} gear items.")
+print(f"Content valid: {len(troops)} troop types, {len(elements)} elements, {len(teams)} teams, {len(gear)} gear items, {len(behaviors)} behavior profiles.")

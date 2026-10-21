@@ -216,19 +216,45 @@ def sheet(s, out):
     for o in v["outcomes"]:
         story.append(Paragraph(f'<b>{o["grade"]}:</b> {o["text"]}', B))
 
-    eo = s["enemy_orders"]
-    story += [Spacer(1, 6), Paragraph("Enemy orders (stopgap until Phase 3)", H2),
-              Paragraph("<b>Who activates next:</b> the first eligible enemy model from this list:", B)]
-    story += [Paragraph(f"{i}. {a}", B) for i, a in enumerate(eo["activation"], 1)]
-    pr = Table([[Paragraph("<b>Model</b>", B), Paragraph("<b>Each action: take the first that applies</b>", B)]] +
-               [[Paragraph(p["who"], B), Paragraph(p["what"], B)] for p in eo["priorities"]],
-               colWidths=[1.55 * inch, W - 1.55 * inch])
-    pr.setStyle(TableStyle([("GRID", (0, 0), (-1, -1), 0.4, ps.RULE), ("VALIGN", (0, 0), (-1, -1), "TOP"),
+    story += [Spacer(1, 6), Paragraph("The enemy", H2),
+              Paragraph("Run the enemy with chapter 10 and the behavior cards: read each list top-down and take the first line that applies.", B),
+              Spacer(1, 3)]
+    rows = [[Paragraph(f"<b>{h}</b>", B) for h in ("Element", "Models", "Behavior", "Drill")]]
+    for el, models in enemy_elements(s):
+        rows.append([Paragraph(el["name"], B), Paragraph(", ".join(str(m["n"]) for m in models), B),
+                     Paragraph(ps.BEHAVIORS[el["behavior"]]["name"], B), Paragraph(drill_text(el, models, s), B)])
+    et = Table(rows, colWidths=[1.6 * inch, 0.8 * inch, 1.1 * inch, W - 3.5 * inch])
+    et.setStyle(TableStyle([("GRID", (0, 0), (-1, -1), 0.4, ps.RULE), ("VALIGN", (0, 0), (-1, -1), "TOP"),
                             ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#e8ecef"))]))
-    story += [Spacer(1, 3), pr, Spacer(1, 3)] + bullets(eo["rules"])
+    story += [et]
     story += [Spacer(1, 6), Paragraph("Watch for, and log afterwards", H2)] + bullets(s["watch_for"])
     story.append(Paragraph("Log the game with docs/playtests/TEMPLATE.md.", SMALL))
     doc.build(story)
+
+
+# ---------------------------------------------------------------- enemy elements and drill
+
+ELEMENTS = ps.by_id(ps.C["factions"]["elements"])
+DRILL_BY_RANK = {d["rank"]: d for d in ps.SOLO["drills"]}
+RANK_ORDER = [r["id"] for r in ps.C["core"]["ranks"]]
+
+
+def enemy_elements(s):
+    """[(element, [enemy models])] in order of first appearance."""
+    out = {}
+    for e in s["enemies"]:
+        out.setdefault(e["element"], []).append(e)
+    return [(ELEMENTS[k], v) for k, v in out.items()]
+
+
+def drill_text(el, models, s):
+    low = min((TROOPS[m["troop"]]["rank"] for m in models), key=RANK_ORDER.index)
+    text = DRILL_BY_RANK[low]["name"]
+    leaders = [m for m in s["enemies"] if "leader" in TROOPS[m["troop"]]["skills"] and m not in models]
+    if leaders and low != "elite":
+        up = DRILL_BY_RANK[RANK_ORDER[RANK_ORDER.index(low) + 1]]["name"]
+        text += f"; {up} with model {', '.join(str(m['n']) for m in leaders)} within 6\""
+    return text
 
 
 # ---------------------------------------------------------------- cards
@@ -251,29 +277,6 @@ def troop_for(model, number=None):
     return t
 
 
-def orders_card(c, x, y, s):
-    c.setStrokeColor(ps.RULE)
-    c.setLineWidth(0.6)
-    c.rect(x, y, ps.CARD_W, ps.CARD_H)
-    band = 0.52 * inch
-    c.setFillColor(ps.FACTION_COLOUR["freespace"])
-    c.rect(x, y + ps.CARD_H - band, ps.CARD_W, band, stroke=0, fill=1)
-    c.setFillColor(colors.white)
-    c.setFont("Body-Bold", 12)
-    c.drawString(x + 0.14 * inch, y + ps.CARD_H - 0.27 * inch, "Enemy orders")
-    c.setFont("Body", 7)
-    c.drawString(x + 0.14 * inch, y + ps.CARD_H - 0.43 * inch, f"{s['title']}  ·  stopgap until Phase 3")
-    eo = s["enemy_orders"]
-    flow = [Paragraph("Who activates next", ps.S_HEAD)]
-    flow += [Paragraph(f"{i}. {a}", ps.S_BODY) for i, a in enumerate(eo["activation"], 1)]
-    flow += [Spacer(1, 3), Paragraph("Each action: first that applies", ps.S_HEAD)]
-    flow += [Paragraph(f"<b>{p['who']}:</b> {p['what']}", ps.S_BODY) for p in eo["priorities"]]
-    flow += [Spacer(1, 3), Paragraph("Rules", ps.S_HEAD)] + [Paragraph("• " + r, ps.S_BODY) for r in eo["rules"]]
-    frame = Frame(x + 0.14 * inch, y + 0.12 * inch, ps.CARD_W - 0.28 * inch, ps.CARD_H - band - 0.16 * inch,
-                  leftPadding=0, rightPadding=0, topPadding=4, bottomPadding=0)
-    frame.addFromList([KeepInFrame(frame._aW, frame._aH, flow, mode="shrink")], c)
-
-
 def cards(s, out):
     c = canvas.Canvas(str(out), pagesize=letter)
     c.setTitle(f"{s['title']} — cards")
@@ -281,7 +284,12 @@ def cards(s, out):
              (ps.MARGIN_X, ps.MARGIN_Y), (ps.MARGIN_X + ps.CARD_W, ps.MARGIN_Y)]
     items = [("troop", troop_for(m)) for m in s["player"]]
     items += [("troop", troop_for({"troop": e["troop"], "weapon": e.get("weapon")}, e["n"])) for e in s["enemies"]]
-    items.append(("orders", None))
+    items += [("ref", r) for r in ps.solo_reference_cards()]
+    seen = []
+    for el, _ in enemy_elements(s):
+        if el["behavior"] not in seen:
+            seen.append(el["behavior"])
+    items += [("behavior", ps.BEHAVIORS[b]) for b in seen]
     for i, (kind, t) in enumerate(items):
         if i and i % 4 == 0:
             c.showPage()
@@ -290,8 +298,10 @@ def cards(s, out):
         x, y = slots[i % 4]
         if kind == "troop":
             ps.draw_card(c, x, y, t)
+        elif kind == "ref":
+            ps.text_card(c, x, y, *t)
         else:
-            orders_card(c, x, y, s)
+            ps.draw_behavior_card(c, x, y, t)
     c.save()
     return len(items)
 
@@ -307,6 +317,8 @@ def main():
         for g in m.get("gear", []):
             if g not in ps.GEAR:
                 raise SystemExit(f"Unknown gear '{g}'")
+        if m in s["enemies"] and m.get("element") not in ELEMENTS:
+            raise SystemExit(f"Enemy {m['n']}: unknown element '{m.get('element')}'")
         if m.get("weapon") and m["weapon"] not in ps.RANGED:
             raise SystemExit(f"Unknown weapon '{m['weapon']}'")
     ps.OUT.mkdir(parents=True, exist_ok=True)

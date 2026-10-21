@@ -1,10 +1,11 @@
 # Gym scenario 1: First Breach.
-# A small, fixed boarding action for the Phase 2 exit playtest (rules v0.4).
+# A small, fixed boarding action. First played for the Phase 2 exit (rules v0.4); updated for rules v0.5
+# (door sequence, hacking security levels, and the chapter 10 solo opponent).
 # Printed by: python3 tools/print_scenario.py docs/scenarios/gym-01-first-breach.yaml
 # Coordinates are inches from the bottom-left corner of the board; the grid is 3".
 id: gym-01-first-breach
 title: "Gym 1: First Breach"
-rules_version: "0.4"
+rules_version: "0.5"
 
 situation: >
   Freespace Solutions has seized the ore hauler MV Halden's Promise under a disputed debt claim
@@ -47,11 +48,12 @@ deploy:
 objective: { x: 16.6, y: 10.6, label: "Data core" }
 
 # Enemy models are numbered on the map and on their cards.
+# element: the faction element each model belongs to; its behavior profile comes from content/factions.yaml.
 enemies:
-  - { n: 1, troop: fs_security,         weapon: carbine, x: 8.8,  y: 2.9,  state: "Unaware" }
-  - { n: 2, troop: fs_security,         weapon: shotgun, x: 10.4, y: 4.9,  state: "Unaware" }
-  - { n: 3, troop: fs_security_gunner,                   x: 16.2, y: 7.6,  state: "Overwatch, facing D3 and D5" }
-  - { n: 4, troop: fs_recovery_captain,                  x: 17,   y: 9.6,  state: "Unaware, guarding the data core" }
+  - { n: 1, troop: fs_security,         element: asset_security,   weapon: carbine, x: 8.8,  y: 2.9,  state: "Unaware" }
+  - { n: 2, troop: fs_security,         element: asset_security,   weapon: shotgun, x: 10.4, y: 4.9,  state: "Unaware" }
+  - { n: 3, troop: fs_security_gunner,  element: asset_security,                    x: 16.2, y: 7.6,  state: "Alerted, on Overwatch facing D3 and D5" }
+  - { n: 4, troop: fs_recovery_captain, element: recovery_captain,                  x: 17,   y: 9.6,  state: "Unaware, guarding the data core" }
 
 # Player models: troop id, chosen weapon and gear, and a label for the card.
 player:
@@ -72,12 +74,11 @@ setup:
 special_rules:
   - title: "Surprise"
     text: "Task Force Boone wins initiative in round 1 automatically."
-  - title: "Unaware"
+  - title: "The enemy"
     text: >
-      Unaware enemy models do not activate and cannot react. The whole enemy becomes aware at once
-      when a Task Force Boone model makes noise (fires a weapon without the Silenced keyword,
-      throws a frag or flashbang, uses a breaching tool or detonates a charge), or ends a Move in an
-      enemy model's line of sight. Model 3 is not unaware: it is on Overwatch from the start.
+      Run the enemy with chapter 10 and the behavior cards. Models 1, 2 and 4 start Unaware; model 3
+      starts Alerted, on Overwatch. The enemy's objective, for tie-breakers, is the data core. The
+      recovery captain never leaves the control room.
   - title: "Locked door D3"
     text: "Open it with a breaching charge, a breaching tool (2d6 + Physique, 8+) or the Data Specialist's hacking rig (Secured: 2d6 + Tech, 9+, +1 for each earlier failed attempt, quiet). Or go around through the service passage."
   - title: "Data core"
@@ -96,28 +97,12 @@ victory:
     - { grade: "Marginal",  text: "Data core extracted, with one or more Task Force Boone models Dead." }
     - { grade: "Failure",   text: "Data core not extracted by the end of round 8, or the boarding element breaks." }
 
-# Stopgap enemy orders until Phase 3's behavior tables replace them.
-enemy_orders:
-  activation:
-    - "A model with 3+ Suppression (it Rallies)."
-    - "A model in the open with a target in sight."
-    - "A model in cover with a target in sight."
-    - "Any other model, nearest the data core first."
-  priorities:
-    - { who: "All", what: "If Pinned: Rally, then Find Cover or Move to the nearest cover. If in the open with cover within one Move: Move to it." }
-    - { who: "Asset Security Officer", what: "Target within short range: Aim, then Shoot. Otherwise Move to cover closer to the target, then Shoot. No target in sight: go on Overwatch facing the nearest door." }
-    - { who: "Asset Security Gunner", what: "Two or more targets in sight: Suppressive Fire at the nearest, then Shoot another. One target: Shoot it twice. None: Overwatch." }
-    - { who: "Recovery Captain", what: "Rally the most suppressed friend within 6\", then act as an Officer. Never leaves the control room." }
-  rules:
-    - "Targets: the nearest visible Task Force Boone model not in cover; if all are in cover, the one in the least cover; ties by dice."
-    - "Reactions: a model on Overwatch always Shoots at the first trigger it can. An unactivated model reacts only when shot at in the open, by Moving to cover."
-    - "Close combat: an enemy model Breaks only if it lost the last exchange and has a Wounded marker or 3+ Suppression."
-    - "Choices the orders don't settle: the option nearest the data core, then the lowest-numbered model."
-
 watch_for:
   - "Do reactions and Overwatch make doorways feel dangerous without feeling unfair?"
   - "Are Wounded markers and Wounds easy to track?"
   - "Does close combat resolve in a few exchanges?"
   - "Is the hack, breach or go-around choice at D3 a real decision?"
   - "Can the cards and quick reference be read at arm's length?"
-  - "Where did the enemy orders act stupidly or need a judgment call? (Phase 3 input.)"
+  - "Does the door sequence settle who reacts when a door opens? Did you crack and throw?"
+  - "Where did the behavior cards act stupidly, or need a judgment call? Count the judgment calls per round (target: at most one)."
+  - "Did noise and the alarm make the enemy respond: investigate, cover doors, converge?"

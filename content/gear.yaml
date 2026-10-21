@@ -1,7 +1,7 @@
-# Gear for Imperator Black, rules v0.4.
+# Gear for Imperator Black, rules v0.5.
 # grants_skills: skills (and levels) the gear gives its carrier.
 # status: settled (approved; rules cover it) or proposed (new rule awaiting approval).
-version: 0.4.0
+version: 0.5.0
 
 gear:
   - id: breaching_charge

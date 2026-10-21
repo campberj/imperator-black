@@ -88,6 +88,14 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 3. Contact tables per threat tier, contact movement, and the alert track (see [opposition-force.md](design/opposition-force.md)).
 4. Tie-breakers for choices the tables don't cover (the prototype's "nearest the objective, then lowest-numbered model").
 
+**Progress (2026-10-20):**
+- [x] Gym 1 fixes: door sequence, crack and throw, exposure trigger, hacking security levels (rules v0.5)
+- [x] Rules chapter 10: [the solo opponent](../rules/10-solo-opponent.md): awareness, noise, the marker and alarm, drill by training, activation order, targets, close quarters, surrender, tie-breakers
+- [x] Priority lists for all nine behavior profiles in `content/behaviors.yaml`, validated in CI
+- [x] [Behavior cards](print/behavior-cards.pdf); Gym 1 reprinted with them in place of the stopgap orders
+- [ ] Replay Gym 1 with the behavior cards, counting judgment calls per round
+- [ ] Contact tables per threat tier (moves to Phase 5 with the alert track and missions)
+
 **Exit:** The player makes no more than one judgment call per turn on the enemy's behalf.
 
 ## Phase 4 — Ship and station layout procedure

@@ -1,6 +1,6 @@
-# Factions and enemy elements for Imperator Black, rules v0.4.
+# Factions and enemy elements for Imperator Black, rules v0.5.
 # Elements are the building blocks the mission generator draws enemy forces from.
-version: 0.4.0
+version: 0.5.0
 
 factions:
   - id: tfb

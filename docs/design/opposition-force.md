@@ -91,7 +91,7 @@ Numbered poker chips start as **unknown contacts**.
 | Shooting (not suppressed or silenced) | +1 |
 | Breaching a door or bulkhead | +1 |
 | Explosion | +2 |
-| A revealed enemy leaves your line of sight alive, or asset security uses Raise Alarm | +1 |
+| A revealed enemy leaves your line of sight alive, or an element raises the alarm (chapter 10) | +1 |
 
 | Threshold | Effect |
 |---|---|

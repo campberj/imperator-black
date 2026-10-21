@@ -1,5 +1,5 @@
-# Keywords for Imperator Black, rules v0.4.
-version: 0.4.0
+# Keywords for Imperator Black, rules v0.5.
+version: 0.5.0
 
 weapon:
   - { id: handy,          name: Handy,          text: "Ignores the moved-this-activation penalty." }

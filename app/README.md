@@ -36,7 +36,7 @@ These are foundations that don't depend on unfinished rules. Each should leave C
 
 ### 2. Finish content loading
 
-`ContentSet` already loads `core`, `weapons`, `armour`, `gear`, `skills` and `troops` (`TroopDef`, `TroopStats`), and `Soldier.FromTroop` builds a model from a profile. Still to do: load `factions` (factions, elements, threat tiers), `rosters` (teams, starting forces), `behaviors` and `keywords` into typed records, and validate every referenced id at load time (mirror `tools/validate_content.py`).
+`ContentSet` already loads `core`, `weapons`, `armour`, `gear`, `skills` and `troops` (`TroopDef`, `TroopStats`), and `Soldier.FromTroop` builds a model from a profile. Still to do: load `factions` (factions, elements, threat tiers), `rosters` (teams, starting forces), `behaviors` (the chapter 10 solo opponent: general procedures plus per-profile priority lists, all text for now) and `keywords` into typed records, plus `core.security` (hacking security levels), and validate every referenced id at load time (mirror `tools/validate_content.py`).
 
 - **Done when:** a test loads every element and team and resolves every id; loading fails loudly on a bad id.
 

@@ -27,7 +27,7 @@ foreach (var spec in new[] { "2d4", "2d6", "2d8", "2d10", "2d12" })
 }
 
 // --- Content ---
-Check("content version", core.Version == "0.4.0", core.Version);
+Check("content version", core.Version == "0.5.0", core.Version);
 Check("hit target 8", core.HitTarget == 8);
 Check("ten wound rows", core.WoundTable.Count == 10);
 Check("wound bands contiguous from 2", core.WoundTable[0].Min == 2 && core.WoundTable.Zip(core.WoundTable.Skip(1)).All(p => p.Second.Min == p.First.Max + 1));

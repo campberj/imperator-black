@@ -1,7 +1,7 @@
-# Player force organisation for Imperator Black, rules v0.4.
+# Player force organisation for Imperator Black, rules v0.5.
 # Tables of organisation (TOE): the player builds a force from teams, not a points list.
 # slots: role slots filled by a troop type; gear_choice lets the player pick gear per model.
-version: 0.4.0
+version: 0.5.0
 
 teams:
   - id: vat_fireteam

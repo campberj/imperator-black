@@ -24,7 +24,7 @@ CI fails if `dist/content.json` or the rulebook tables are stale, or if validati
 | `troops.yaml` | `troops` | Troop types: one profile per kind of soldier, for every faction |
 | `factions.yaml` | `factions`, `elements`, `threat_tiers` | Factions; enemy elements (troop compositions, tier, behavior); threat tiers |
 | `rosters.yaml` | `teams`, `starting_forces` | Player tables of organisation and the PoC starting force |
-| `behaviors.yaml` | `behaviors` | Enemy behavior profile ids and intent (decision tables come in Phase 3) |
+| `behaviors.yaml` | `awareness`, `marker`, `alarm`, `noise`, `drills`, `activation_order`, `targets`, `moving`, `close_quarters`, `surrender`, `tie_breakers`, `behaviors` | The solo opponent (rules chapter 10): general procedures, and one behavior profile per element type with fixed priority lists (`engaged`, `alerted`, `reactions`, `close_combat`, `investigate`, `surrenders`, `close_quarters`) |
 
 ## Troop type fields
 

@@ -1,4 +1,4 @@
-# Troop types for Imperator Black, rules v0.4.
+# Troop types for Imperator Black, rules v0.5.
 # One profile per kind of soldier. Rosters and enemy elements are built from these.
 #
 # rank: label only (green, regular, veteran, elite); it never enters a roll.
@@ -8,7 +8,7 @@
 # grenades: thrown ids carried (two at most). gear: ids from gear.yaml.
 # skills: skill id -> level, from skills.yaml.
 # miniatures: suggested models from RJ's collection.
-version: 0.4.0
+version: 0.5.0
 
 troops:
   # ---------------- Task Force Boone (player) ----------------

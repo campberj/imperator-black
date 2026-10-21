@@ -121,6 +121,11 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 8.4 | **Alert track (0–6)** driven by noise; contacts converge at 2, contractor reaction force at 4, lockdown at 6. Adapted from Zero Dark's deck clock. *(AWoW teardown)* | Leaning — playtest ([opposition](opposition-force.md)) |
 | 8.6 | Cowed enemies may **surrender**; prisoners are a campaign resource and a tactical burden. | Leaning — playtest |
 | 8.5 | Longer term: a more organic, situation-reactive AI. | Leaning |
+| 8.7 | **Fixed priority lists (Phase 3):** each behavior profile has top-down lists for Target in sight, No target, Reactions and Close combat; take the first line that applies. Fixed activation order, target choice, movement and tie-breakers leave nothing to judgment. Chapter 10, `content/behaviors.yaml`, behavior cards. | Settled (approach, RJ); lists Proposed — playtest |
+| 8.8 | **Awareness and noise:** elements are Unaware (no activation or reactions), Alerted (act toward a single last-known-position marker) or Engaged (a target in sight). Noise is Quiet, Loud (heard within 12") or Very loud (ship-wide). An element that sees a player model or is hit raises the alarm at the end of its next activation unless silenced first. From Gym 1: the enemy ignored noise. | Proposed — playtest |
+| 8.9 | **Drill by training:** an element's coordination comes from its lowest rank (Green none; Regular fire and manoeuvre; Veteran bounding, grenades and crack and throw; Elite assault drill and focus fire), raised one step by a friendly Leader within 6". | Settled (approach, RJ); details Proposed — playtest |
+| 8.10 | **Close quarters:** an Engaged model with a player model within 6" checks outnumbered (Move away), charge (Fight 2+, Aggressive or Tactical), frag on two or more, then its profile. From Gym 1: judgment calls in the cargo hold. | Proposed — playtest |
+| 8.11 | **Surrender:** Cowed and Saboteur models test 2d6 + Nerve, 8+ when Pinned or Wounded with a player model within 6"; on a fail they surrender (prisoners if the mission allows). Implements 8.6. | Proposed — playtest |
 
 ## 9. Proof of concept
 

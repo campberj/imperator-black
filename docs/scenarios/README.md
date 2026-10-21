@@ -1,6 +1,6 @@
 # Scenarios
 
-Fixed scenarios for playtesting. Each is a YAML file holding the layout, forces with their loadouts, special rules, victory conditions and, until Phase 3, stopgap enemy orders. The mission generator (Phase 5) will grow out of this format.
+Fixed scenarios for playtesting. Each is a YAML file holding the layout, forces with their loadouts, special rules and victory conditions. Each enemy model names its element, which sets its behavior profile (rules chapter 10). The mission generator (Phase 5) will grow out of this format.
 
 Print a scenario's sheet and cards with:
 
@@ -8,7 +8,7 @@ Print a scenario's sheet and cards with:
 python3 tools/print_scenario.py docs/scenarios/<scenario>.yaml
 ```
 
-This writes `docs/print/<id>-sheet.pdf` (scenario sheet with a to-scale map) and `docs/print/<id>-cards.pdf` (one card per model, with its chosen loadout, plus an enemy orders card). Profiles come from `content/`, so reprinting picks up any rules changes.
+This writes `docs/print/<id>-sheet.pdf` (scenario sheet with a to-scale map) and `docs/print/<id>-cards.pdf` (one card per model, with its chosen loadout, plus the solo opponent reference cards and a behavior card for each enemy profile in play). Profiles come from `content/`, so reprinting picks up any rules changes.
 
 | Scenario | Purpose | Print |
 |---|---|---|
