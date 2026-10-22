@@ -96,3 +96,246 @@ abbr[title] {
   text-decoration: underline dotted;
   cursor: help;
 }
+
+/* ---------- Shell ---------- */
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+nav a {
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+nav a[aria-current='page'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  margin: 8px 0 12px;
+}
+
+.filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.filters .grow {
+  flex: 1 1 200px;
+}
+
+.filters select,
+.filters input {
+  font: inherit;
+  font-size: 0.9375rem;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  min-height: 36px;
+}
+
+.summary {
+  margin: 0 0 4px;
+}
+
+table.data {
+  width: 100%;
+}
+
+/* ---------- Cards (as docs/print/ImperatorBlack_unit-cards.pdf) ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 12px;
+  margin: 12px 0 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  break-inside: avoid;
+}
+
+.card-band {
+  padding: 8px 12px;
+  color: #fff;
+}
+
+.card-band h3 {
+  margin: 0;
+  font-size: 1.0625rem;
+}
+
+.card-band p {
+  margin: 2px 0 0;
+  font-size: 0.75rem;
+  opacity: 0.9;
+  white-space: pre-wrap;
+}
+
+.card-body {
+  flex: 1;
+  padding: 8px 12px;
+}
+
+.card-body p {
+  margin: 0 0 4px;
+}
+
+.card-body h4 {
+  margin: 8px 0 2px;
+  font-size: 0.8125rem;
+}
+
+.card-body ol,
+.card-body ul {
+  margin: 0 0 4px;
+  padding-left: 18px;
+}
+
+.card .small,
+.card-foot {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.card-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 12px 6px;
+}
+
+.card-foot .minis {
+  font-style: italic;
+}
+
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+  background: none;
+  border: none;
+}
+
+.card th,
+.card td {
+  padding: 2px 4px;
+  border: none;
+}
+
+table.stats {
+  margin-bottom: 2px;
+  border: 1px solid var(--border);
+  table-layout: fixed;
+}
+
+table.stats th,
+table.stats td {
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+table.stats thead th {
+  font-size: 0.6875rem;
+}
+
+table.stats td {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+table.stats .arm {
+  background: color-mix(in srgb, var(--border) 45%, transparent);
+}
+
+table.weapons {
+  margin: 4px 0 6px;
+}
+
+table.weapons thead th {
+  border-bottom: 1px solid var(--border);
+  font-size: 0.6875rem;
+}
+
+table.weapons td:not(:first-child),
+table.weapons th:not(:first-child) {
+  text-align: center;
+  width: 3.2em;
+}
+
+table.weapons tr.note td {
+  color: var(--muted);
+  font-size: 0.75rem;
+  padding-top: 0;
+}
+
+.proposed {
+  color: #8a5a12;
+}
+
+@media (prefers-color-scheme: dark) {
+  .proposed {
+    color: #e0b060;
+  }
+}
+
+/* ---------- Print: cards only, no chrome ---------- */
+
+@media print {
+  :root {
+    --bg: #fff;
+    --surface: #fff;
+    --text: #1d1f23;
+    --muted: #5d636e;
+    --border: #c9cfd4;
+  }
+
+  nav,
+  .filters,
+  .meta {
+    display: none;
+  }
+
+  .card-band {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

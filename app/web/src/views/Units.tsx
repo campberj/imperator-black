@@ -1,0 +1,124 @@
+import { useState } from 'react'
+import type { Content, Lookup } from '../content'
+import { UnitCard } from '../components/UnitCard'
+import { Table } from '../components/Table'
+import { matches, modelsText, troopKeywords, troopSearchText } from '../format'
+
+/** Troop profiles as cards, with the faction's teams (player) or elements (enemy). */
+export function Units({ content, lookup }: { content: Content; lookup: Lookup }) {
+  const factions = content.factions.factions
+  const [faction, setFaction] = useState(factions[0]?.id ?? '')
+  const [rank, setRank] = useState('')
+  const [role, setRole] = useState('')
+  const [keyword, setKeyword] = useState('')
+  const [query, setQuery] = useState('')
+
+  const inFaction = content.troops.troops.filter((t) => !faction || t.faction === faction)
+  const roles = [...new Set(inFaction.map((t) => t.role))].sort()
+  const troops = inFaction.filter(
+    (t) =>
+      (!rank || t.rank === rank) &&
+      (!role || t.role === role) &&
+      (!keyword || troopKeywords(t, lookup).has(keyword)) &&
+      matches(query, ...troopSearchText(t, lookup)),
+  )
+  const shown = (id: string) => !faction || id === faction
+  const teams = content.rosters.teams.filter((t) => shown(t.faction))
+  const elements = content.factions.elements.filter((e) => shown(e.faction))
+  const keywords = [...content.keywords.weapon, ...content.keywords.armour]
+
+  return (
+    <>
+      <div className="filters" role="search">
+        <label>
+          Faction
+          <select
+            value={faction}
+            onChange={(e) => {
+              setFaction(e.target.value)
+              setRole('')
+            }}
+          >
+            <option value="">All factions</option>
+            {factions.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Rank
+          <select value={rank} onChange={(e) => setRank(e.target.value)}>
+            <option value="">Any rank</option>
+            {content.core.ranks.map((r) => (
+              <option key={r.id} value={r.id}>
+                {r.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Role
+          <select value={role} onChange={(e) => setRole(e.target.value)}>
+            <option value="">Any role</option>
+            {roles.map((r) => (
+              <option key={r} value={r}>
+                {r}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Keyword
+          <select value={keyword} onChange={(e) => setKeyword(e.target.value)}>
+            <option value="">Any keyword</option>
+            {keywords.map((k) => (
+              <option key={k.id} value={k.id}>
+                {k.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="grow">
+          Search
+          <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Names and rules text" />
+        </label>
+      </div>
+
+      {faction && <p className="summary">{lookup.factions.get(faction)?.summary}</p>}
+      <p className="meta" aria-live="polite">
+        {troops.length} of {inFaction.length} troop profiles
+      </p>
+      <div className="cards">
+        {troops.map((t) => (
+          <UnitCard key={t.id} troop={t} content={content} lookup={lookup} />
+        ))}
+      </div>
+
+      {teams.length > 0 && (
+        <Table
+          title="Teams"
+          headers={['Team', 'Models', 'Role']}
+          rows={teams.map((t) => [t.name, modelsText(t.slots, lookup), t.summary])}
+        />
+      )}
+      {elements.length > 0 && (
+        <Table
+          title="Elements"
+          headers={['Element', 'Faction', 'Tier', 'Models', 'Behavior']}
+          rows={elements.map((e) => [
+            e.name,
+            lookup.factions.get(e.faction)?.name ?? e.faction,
+            <abbr key="tier" title={lookup.threatTiers.get(e.tier)?.name}>
+              {e.tier}
+            </abbr>,
+            modelsText(e.composition, lookup) +
+              (e.alternatives?.length ? ` (or ${e.alternatives.map((a) => lookup.troops.get(a)?.name ?? a).join(', ')})` : ''),
+            (lookup.behaviors.get(e.behavior)?.name ?? e.behavior) + (e.reaction_force ? ' — reaction force' : ''),
+          ])}
+        />
+      )}
+    </>
+  )
+}

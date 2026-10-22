@@ -21,7 +21,7 @@ Last updated: 2026-10-20, rules v0.4 (granular profiles).
 | `app/tests/Imperator.Core.Tests` | xUnit v3 tests (198 cases: the former runner's 72 checks plus content loading and validation); run with `dotnet test app/Imperator.slnx` | Passing |
 | `app/tests/Imperator.Api.Tests` | xUnit v3 + `WebApplicationFactory`: endpoints and schema, no database needed | Passing |
 | `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON into typed records (every file, including the chapter 10 solo opponent and its terms, chapter 11 `layouts`, chapter 12 `terrain`, `core.security` and `core.shoot_scale`) and validates it at load (`ContentValidator`, mirroring `tools/validate_content.py`) | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
-| `app/web` | Vite + React + TypeScript. One page: fetches `/content` (dev server proxies to the API) and renders the ranged, melee, grenade and armour tables with the rulebook's columns. Vitest + Testing Library, oxlint. See [web/README.md](web/README.md) | Smoke test only |
+| `app/web` | Vite + React + TypeScript, read from `/content` (dev server proxies to the API). Unit database (`#units`: troop cards per faction with filters and search, teams, elements), reference (`#reference`: gear, skills, keywords, weapon and armour tables, searchable), behavior cards (`#behaviors`). Vitest + Testing Library, oxlint. See [web/README.md](web/README.md) | Read-only |
 | `docker-compose.yml` (repo root) | PostgreSQL 18 for local development | |
 | `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests, checks EF migrations match the model and apply to PostgreSQL; a `web` job lints, tests and builds `app/web` | Green |
 
@@ -73,7 +73,7 @@ After changing an entity: `dotnet ef migrations add <Name> --project app/src/Imp
 
 With the API running: `npm --prefix app/web install && npm --prefix app/web run dev`, then open http://localhost:5173.
 
-### 6. Unit database and reference (web, read-only)
+### 6. Unit database and reference (web, read-only) ✅ done (2026-10-21)
 
 The content already holds the unit database: every faction, troop profile, weapon, armour, gear item, skill, keyword, team, enemy element and behavior profile (`content/*.yaml`, served by `GET /content`). Build the screens to browse it. No new rules; every word comes from the `text` and `name` fields.
 
