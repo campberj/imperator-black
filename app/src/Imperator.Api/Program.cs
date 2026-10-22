@@ -2,6 +2,7 @@ using System.Text.Json;
 using Imperator.Api;
 using Imperator.Api.Data;
 using Imperator.Core;
+using Imperator.Core.Land;
 using Imperator.Core.Layouts;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +42,7 @@ app.MapGet("/content", (HttpContext ctx) =>
     return Results.Bytes(content.Json, "application/json");
 });
 
-// Decks use the scenario format's names (snake_case, nulls left out), as in docs/scenarios/decks/*.yaml.
+// Generated boards use the scenario format's names (snake_case, nulls left out), as in docs/scenarios/.
 var deckJson = new JsonSerializerOptions(JsonSerializerDefaults.Web)
 {
     PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
@@ -58,6 +59,21 @@ app.MapGet("/decks/{vessel}", (HttpContext ctx, string vessel, int? seed) =>
             statusCode: StatusCodes.Status400BadRequest);
     ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
     return Results.Json(DeckGenerator.Generate(content.Set, vessel, seed.Value).Deck, deckJson);
+});
+
+app.MapGet("/land/{environment}", (HttpContext ctx, string environment, int? seed, string? size) =>
+{
+    var environments = content.Set.Terrain.Environments.Select(e => e.Id).ToList();
+    if (!environments.Contains(environment))
+        return Results.Problem($"Unknown environment '{environment}'. Environments: {string.Join(", ", environments)}.", statusCode: StatusCodes.Status404NotFound);
+    size ??= "small";
+    if (!LandTableGenerator.BoardSides.ContainsKey(size))
+        return Results.Problem($"Unknown size '{size}'. Sizes: {string.Join(", ", LandTableGenerator.BoardSides.Keys)}.", statusCode: StatusCodes.Status400BadRequest);
+    if (seed is null)
+        return Results.Problem($"A seed is required, e.g. /land/{environment}?size={size}&seed=7. The same seed and content version always give the same table.",
+            statusCode: StatusCodes.Status400BadRequest);
+    ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
+    return Results.Json(LandTableGenerator.Generate(content.Set, environment, size, seed.Value), deckJson);
 });
 
 app.Run();

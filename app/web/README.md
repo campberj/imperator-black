@@ -5,6 +5,7 @@ React + TypeScript (Vite). It fetches `/content` from `Imperator.Api` once and s
 - **Units** (`#units`): troop profiles as cards laid out like `docs/print/ImperatorBlack_unit-cards.pdf`, filtered by faction, rank, role and keyword, with a search across names and rules text; then the faction's teams (player) or elements (enemy) in the rulebook's table format.
 - **Reference** (`#reference`): gear, skills (levels and Proposed status), weapon and armour keywords, and the weapon, grenade and armour tables, searchable.
 - **Behavior cards** (`#behaviors`): the three chapter 10 reference cards and one card per behavior profile, as in `docs/print/ImperatorBlack_behavior-cards.pdf`.
+- **Land tables** (`#land?environment=woodland&size=large&seed=59`): a chapter 12 table from `GET /land/{environment}?size=…&seed=N`, drawn with `BoardMap`: sectors, terrain by type, conditions, the sectors and terrain tables, and the roll log. Every environment can be named, Fortified included.
 - **Deck maps** (`#decks?vessel=corvette&seed=5`): a chapter 11 deck from `GET /decks/{vessel}?seed=N`, drawn as SVG with the printed deck sheets' conventions (`docs/print/decks/`, `tools/print_scenario.py`): the 3" grid, tiles with ids, names and sizes, cover with ids, doors coloured by state (locked marked (L), security on hover and in the doors table), the airlock and the objective. Rooms, doors and terrain tables sit beside the map. Pick a vessel, type a seed or step to the next one; the hash holds both, so a deck can be shared by link. Printing gives the map on one page and the tables after it.
 
 Every word comes from content `name` and `text` fields; labels and connecting phrases follow the printed cards (`tools/print_sheets.py`) and the rulebook renderer (`tools/render_tables.py`). Views are addressed by the URL hash, so there is no router dependency. Printing a page prints just the cards and tables. Tests render the views from the real `content/dist/content.json` (`src/test-content.ts`), so they fail if the views and content diverge.
@@ -12,7 +13,7 @@ Every word comes from content `name` and `text` fields; labels and connecting ph
 ```sh
 # from the repo root, with the API running (see app/README.md)
 npm --prefix app/web install
-npm --prefix app/web run dev       # http://localhost:5173, proxies /content, /health and /decks to http://localhost:5080
+npm --prefix app/web run dev       # http://localhost:5173, proxies /content, /health, /decks and /land to http://localhost:5080
 npm --prefix app/web run lint      # oxlint
 npm --prefix app/web run build     # type-check and production build
 ```

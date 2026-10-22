@@ -193,6 +193,11 @@ export interface Content {
   rosters: { teams: Team[] }
   behaviors: Behaviors
   layouts: { vessels: Vessel[]; rooms: Room[] }
+  terrain: {
+    types: { id: string; name: string; kind: string }[]
+    environments: { id: string; name: string; fill: string }[]
+    conditions: { id: string; name: string; text: string }[]
+  }
 }
 
 export interface LoadedContent {

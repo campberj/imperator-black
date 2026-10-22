@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 
-// Views are addressed by the URL hash (#units, #reference, #behaviors, #decks?vessel=corvette&seed=5),
+// Views are addressed by the URL hash (#units, #reference, #behaviors, #decks?vessel=corvette&seed=5, #land?…),
 // so links and reloads work without a router.
 export const ROUTES = [
   { id: 'units', label: 'Units' },
   { id: 'reference', label: 'Reference' },
   { id: 'behaviors', label: 'Behavior cards' },
   { id: 'decks', label: 'Deck maps' },
+  { id: 'land', label: 'Land tables' },
 ] as const
 
 export type Route = (typeof ROUTES)[number]['id']
