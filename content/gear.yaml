@@ -56,7 +56,7 @@ gear:
 
   - id: grenade_launcher
     name: Grenade launcher
-    text: "The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 18\". Its Throws are Very loud and count as Shoot actions for reactions."
+    text: "The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 18\". Its Throws are fired (chapter 6: a natural 2 is a dud), Very loud, and count as Shoot actions for reactions."
     grants_skills: {}
     status: proposed
 
@@ -75,13 +75,13 @@ gear:
   # Near Present robot (CCT) modules.
   - id: mk19
     name: Mk19 grenade launcher
-    text: "Mounted automatic grenade launcher. The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 30\"; one Shoot action throws two, at points within 3\" of each other. Its Throws are Very loud and count as Shoot actions for reactions."
+    text: "Mounted automatic grenade launcher. The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 30\"; one Shoot action throws two, at points within 3\" of each other. Its Throws are fired (chapter 6: a natural 2 is a dud), Very loud, and count as Shoot actions for reactions."
     grants_skills: {}
     status: proposed
 
   - id: owa_package
     name: Mobility and one-way attack package
-    text: "Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has Self-destruct 2 (a 3\" blast)."
+    text: "Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has Self-destruct 2 (Explosion 3)."
     grants_skills: { self_destruct: 2 }
     status: proposed
 

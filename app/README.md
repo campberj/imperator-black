@@ -161,7 +161,15 @@ The paper dashboard (`docs/print/ImperatorBlack_mission-dashboard.pdf`, drawn by
 - One letter page in print; the print CSS hides the app's navigation.
 - **Done when:** a Vitest test renders the dashboard for both example missions in `docs/scenarios/missions/` and checks the clock box count, the check-in boxes and the contact rows, and lint, tests and build pass.
 
-### 15. Stop and check the roadmap
+### 15. Launcher rounds and Explosion (X) in the web app
+
+Content now has half-step damage dice (`d8+d10`; `DiceSpec` parses them, with an `Extra` die) and two new ranged-weapon fields (decisions 6.14 and 6.15): `explosion` (the X in Explosion (X)) and, for launchers, `round` (the weapon's own round) and `rounds` (extra rounds: id, name, damage, AP, explosion). The *Blast* keyword is now *Explosion*; grenades keep `blast_radius` as their X.
+
+- Unit database and reference: show each launcher's rounds under the weapon (as the printed cards do: "Anti-armour above, or high explosive round: d8+d10, AP 0, Explosion (2). Choose the round before each Shoot."), and show Explosion (X) beside the keywords.
+- Simulator: model a high-explosive round in the troop value harness where a profile carries a launcher (use the better round against each target), and note it under the table.
+- **Done when:** a Vitest test renders the AT launcher's two rounds, and lint, tests and build pass.
+
+### 16. Stop and check the roadmap
 
 Beyond this, the app's real features wait on rules:
 

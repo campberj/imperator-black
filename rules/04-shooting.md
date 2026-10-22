@@ -39,7 +39,8 @@ Weapons have **no maximum range**. Each has a **short range**: beyond it the sho
 | LMG | 2d8 | 30" | -1 / -2 | 0 | Auto 3, Suppressing |
 | Compact LMG | 2d8 | 18" | -1 / -2 | 0 | Handy, Auto 3, Suppressing |
 | DMR | 2d10 | 48" | -1 / -2 | 0 | — |
-| AT launcher | 2d12 | 36" | -1 / -2 | 1 | One per round, Cumbersome |
+| AT launcher (anti-armour) | 2d12 | 36" | -1 / -2 | 1 | One per round, Cumbersome |
+| ↳ or high explosive round | d8+d10 | 36" | -1 / -2 | 0 | One per round, Cumbersome, Explosion (2) |
 | Auto rifle | 2d8 | 24" | -1 / -2 | 0 | Auto 2 |
 | HMG | 2d10 | 30" | -1 / -2 | 1 | Auto 3, Suppressing, Cumbersome |
 | Anti-materiel rifle | 2d12 | 48" | -1 / -2 | 2 | Cumbersome |
@@ -53,7 +54,7 @@ Weapons have **no maximum range**. Each has a **short range**: beyond it the sho
 | *Suppressing* | A hit also adds 1 Suppression. |
 | *One per round* | May fire once per round, including reactions. |
 | *Cumbersome* | An extra -1 when firing after a Move; cannot fire as a reaction. |
-| *Blast* | Affects every model within the blast radius with line of sight to the point of impact. |
+| *Explosion* | Explosion (X): affects every model within X" of the point of impact that has line of sight to it. One damage roll for all (chapter 6). |
 | *Confined* | +1 wound row to models in an enclosed compartment of 6" x 6" or smaller. |
 | *Breach* | Can destroy doors, hatches and thin bulkheads. |
 | *Silenced* | Shots do not count as noise for the alert track. |

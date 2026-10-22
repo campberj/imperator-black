@@ -3,37 +3,53 @@ using System.Text.Json.Serialization;
 
 namespace Imperator.Core;
 
-/// <summary>A dice expression such as "2d8".</summary>
-public readonly record struct DiceSpec(int Count, int Sides)
+/// <summary>
+/// A dice expression: a matched pair such as "2d8", or a half-step mixed pair such as "d8+d10" (rules chapter 1).
+/// <see cref="Extra"/> is the sides of the one extra die in a mixed pair, or 0 for none.
+/// </summary>
+public readonly record struct DiceSpec(int Count, int Sides, int Extra = 0)
 {
     public static DiceSpec Parse(string s)
     {
-        var parts = s.Trim().ToLowerInvariant().Split('d');
-        if (parts.Length != 2 || !int.TryParse(parts[0], out var n) || !int.TryParse(parts[1], out var d) || n < 1 || d < 2)
-            throw new FormatException($"Bad dice expression '{s}'");
-        return new DiceSpec(n, d);
+        var parts = s.Trim().ToLowerInvariant().Split('+');
+        if (parts.Length > 2) throw new FormatException($"Bad dice expression '{s}'");
+        var (n, d) = Term(parts[0], s);
+        if (parts.Length == 1) return new DiceSpec(n, d);
+        var (n2, d2) = Term(parts[1], s);
+        if (n2 != 1) throw new FormatException($"Bad dice expression '{s}': a mixed pair adds one die");
+        return new DiceSpec(n, d, d2);
     }
 
-    public int Min => Count;
-    public int Max => Count * Sides;
-    public double Mean => Count * (Sides + 1) / 2.0;
+    private static (int Count, int Sides) Term(string t, string whole)
+    {
+        var p = t.Split('d');
+        int n = 1;
+        if (p.Length != 2 || (p[0].Length > 0 && !int.TryParse(p[0], out n)) || !int.TryParse(p[1], out var d) || n < 1 || d < 2)
+            throw new FormatException($"Bad dice expression '{whole}'");
+        return (n, d);
+    }
+
+    public int Min => Count + (Extra > 0 ? 1 : 0);
+    public int Max => Count * Sides + Extra;
+    public double Mean => Count * (Sides + 1) / 2.0 + (Extra > 0 ? (Extra + 1) / 2.0 : 0);
 
     /// <summary>Exact probability of each total.</summary>
     public IReadOnlyDictionary<int, double> Pmf()
     {
         var dist = new Dictionary<int, double> { [0] = 1.0 };
-        for (int i = 0; i < Count; i++)
+        var dice = Enumerable.Repeat(Sides, Count).Concat(Extra > 0 ? [Extra] : Array.Empty<int>());
+        foreach (int sides in dice)
         {
             var next = new Dictionary<int, double>();
             foreach (var (total, p) in dist)
-                for (int face = 1; face <= Sides; face++)
-                    next[total + face] = next.GetValueOrDefault(total + face) + p / Sides;
+                for (int face = 1; face <= sides; face++)
+                    next[total + face] = next.GetValueOrDefault(total + face) + p / sides;
             dist = next;
         }
         return dist;
     }
 
-    public override string ToString() => $"{Count}d{Sides}";
+    public override string ToString() => Extra > 0 ? $"{(Count == 1 ? "" : Count.ToString())}d{Sides}+d{Extra}" : $"{Count}d{Sides}";
 }
 
 /// <summary>The roll column of a d6 table row: one face ("3") or a range ("1-4").</summary>
@@ -104,6 +120,7 @@ public sealed class Rng
     {
         int total = 0;
         for (int i = 0; i < spec.Count; i++) total += D(spec.Sides);
+        if (spec.Extra > 0) total += D(spec.Extra);
         return total;
     }
 

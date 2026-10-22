@@ -288,6 +288,22 @@ def render_layouts(section):
     return None
 
 
+def ranged_rows(w):
+    """Table rows for a ranged weapon: its own line, then one line per extra round (launchers)."""
+    pen = w.get("range_penalty", [-1, -2])
+    def kws(keys, auto=None, explosion=None):
+        out = [f"Auto {auto}" if k == "auto" and auto else KEYWORD_NAMES.get(k, k) for k in keys]
+        if explosion:
+            out.append(f"Explosion ({explosion})")
+        return ", ".join(out) or "—"
+    name = w["name"] + (f' ({w["round"].lower()})' if w.get("round") else "")
+    rows = [(name, w["damage"], f'{w["short_range"]}"', f"{pen[0]} / {pen[1]}", w["ap"], kws(w["keywords"], w.get("auto"), w.get("explosion")))]
+    for r in w.get("rounds", []):
+        rows.append((f'↳ or {r["name"].lower()} round', r["damage"], f'{w["short_range"]}"', f"{pen[0]} / {pen[1]}", r["ap"],
+                     kws(w["keywords"] + r.get("keywords", []), w.get("auto"), r.get("explosion"))))
+    return rows
+
+
 def faction_kit(faction):
     """Weapons, armour and grenades that belong to one faction (marked faction: in content)."""
     W, A = load("weapons"), load("armour")["armour"]
@@ -296,9 +312,7 @@ def faction_kit(faction):
     if ranged:
         rows = []
         for w in ranged:
-            pen = w.get("range_penalty", [-1, -2])
-            kws = ", ".join(f'Auto {w["auto"]}' if k == "auto" and w.get("auto") else KEYWORD_NAMES.get(k, k) for k in w["keywords"]) or "—"
-            rows.append((w["name"], w["damage"], f'{w["short_range"]}"', f"{pen[0]} / {pen[1]}", w["ap"], kws))
+            rows += ranged_rows(w)
         out.append(table(["Weapon", "Damage", "Short range", "Beyond / double", "AP", "Keywords"], rows))
     melee = [m for m in W["melee"] if m.get("faction") == faction]
     if melee:
@@ -411,9 +425,7 @@ def render(key):
     if key == "weapons.ranged":
         rows = []
         for w in data:
-            pen = w.get("range_penalty", [-1, -2])
-            kws = ", ".join(f'Auto {w["auto"]}' if k == "auto" and w.get("auto") else KEYWORD_NAMES.get(k, k) for k in w["keywords"]) or "—"
-            rows.append((w["name"], w["damage"], f'{w["short_range"]}"', f"{pen[0]} / {pen[1]}", w["ap"], kws))
+            rows += ranged_rows(w)
         return table(["Weapon", "Damage", "Short range", "Beyond / double", "AP", "Keywords"], rows)
     if key == "weapons.melee":
         return table(["Melee weapon", "Damage", "AP"], [(w["name"], w["damage"], w["ap"]) for w in data])

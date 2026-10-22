@@ -3,7 +3,7 @@
 ## What you need
 
 - **Models:** one per soldier, on 25–32 mm bases.
-- **Dice:** two d6 in one colour (the **hit dice**), and a pair each of d4, d6, d8, d10 and d12 in a second colour (the **damage dice**).
+- **Dice:** two d6 in one colour (the **hit dice**), and a pair each of d4, d6, d8, d10 and d12 in a second colour (the **damage dice**). A weapon's damage is a matched pair (2d4 to 2d12) or a **half-step**, one each of two sizes: d6+d8, d8+d10 or d10+d12, between the pairs on either side.
 - **Tokens:** see the table below.
 - **Terrain:** for boarding actions, 6"×6", 6"×3" and 3"×3" tiles with walls and doors.
 - **A ruler** measuring in inches.

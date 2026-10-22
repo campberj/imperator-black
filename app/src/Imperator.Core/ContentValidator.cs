@@ -60,6 +60,24 @@ public static class ContentValidator
         foreach (var a in c.Armour.Armour)
             foreach (var k in a.Keywords) Need(k, kwArmour, $"armour {a.Id} keyword");
 
+        // Damage dice: a matched pair (2d4 to 2d12) or a half-step mixed pair (decision 6.14).
+        string[] damageOk = ["2d4", "2d6", "2d8", "2d10", "2d12", "d6+d8", "d8+d10", "d10+d12"];
+        var damages = c.Weapons.Ranged.Select(w => (w.Id, (string?)w.Damage))
+            .Concat(c.Weapons.Melee.Select(w => (w.Id, (string?)w.Damage)))
+            .Concat(c.Weapons.Thrown.Select(w => (w.Id, w.Damage)))
+            .Concat(c.Weapons.Ranged.SelectMany(w => (w.Rounds ?? []).Select(r => ($"{w.Id} round {r.Id}", (string?)r.Damage))));
+        foreach (var (id, dmg) in damages)
+            if (dmg is not null && !damageOk.Contains(dmg))
+                errors.Add($"weapon {id}: damage '{dmg}' is not a pair or a half-step (d6+d8, d8+d10, d10+d12)");
+        foreach (var w in c.Weapons.Ranged)
+        {
+            if (w.Explosion is < 1 or > 6) errors.Add($"weapon {w.Id}: explosion must be a radius of 1 to 6 inches");
+            foreach (var r in w.Rounds ?? [])
+                if (r.Explosion is < 1 or > 6) errors.Add($"weapon {w.Id} round {r.Id}: explosion must be 1 to 6");
+            if (w.Rounds is { Count: > 0 } && string.IsNullOrEmpty(w.Round))
+                errors.Add($"weapon {w.Id}: a weapon with rounds names its own first round ('round')");
+        }
+
         foreach (var g in c.Gear.Gear)
         {
             foreach (var (k, lvl) in g.GrantsSkills ?? [])

@@ -21,7 +21,7 @@ Walls block movement and line of sight. Most interior walls are **thin bulkheads
 
 ### Compartments
 
-A **compartment** is an area fully enclosed by walls and doors. A compartment 6"×6" or smaller counts as **confined** for blast weapons.
+A **compartment** is an area fully enclosed by walls and doors. A compartment 6"×6" or smaller counts as **confined** for explosions (chapter 6).
 
 **Crawlways and small hatches**, where a mission marks them, admit only models of **Size 2 or less**.
 

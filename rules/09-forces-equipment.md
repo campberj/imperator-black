@@ -86,11 +86,11 @@ Gear marked **Proposed** adds a rule that is new in this version; it is in play 
 | Extinguisher | May Interact with a fire cell in contact: 2d6 + Tech, 8+ to put it out (chapter 8). | — |
 | Silencer | The carrier's ranged weapon gains the Silenced keyword: its shots are not noise for the alert track. | — |
 | Jump pack | Move ignores the extra cost of obstacles and may cross gaps up to half the model's Move. In zero-g, the model may change direction freely during a Move and stop anywhere, even away from a surface (it still counts as unbraced). | — |
-| Grenade launcher | The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 18". Its Throws are Very loud and count as Shoot actions for reactions. | **Proposed** |
+| Grenade launcher | The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 18". Its Throws are fired (chapter 6: a natural 2 is a dud), Very loud, and count as Shoot actions for reactions. | **Proposed** |
 | Ballistic shield | The carrier has the Shield skill. It cannot use a weapon with the Cumbersome keyword while carrying it. | **Proposed** |
 | Jammer | Enemy Automated models within 6" take -2 to hit, and enemy Hack tests within 6" take -2. | — |
-| Mk19 grenade launcher | Mounted automatic grenade launcher. The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 30"; one Shoot action throws two, at points within 3" of each other. Its Throws are Very loud and count as Shoot actions for reactions. | **Proposed** |
-| Mobility and one-way attack package | Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has Self-destruct 2 (a 3" blast). | **Proposed** |
+| Mk19 grenade launcher | Mounted automatic grenade launcher. The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 30"; one Shoot action throws two, at points within 3" of each other. Its Throws are fired (chapter 6: a natural 2 is a dud), Very loud, and count as Shoot actions for reactions. | **Proposed** |
+| Mobility and one-way attack package | Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has Self-destruct 2 (Explosion 3). | **Proposed** |
 | Flux warhead | Once per mission, as an action: an electromagnetic burst. Every Automated model within 6", friend or foe and including the carrier, takes a hit of 2d10 damage, AP 3. | **Proposed** |
 | Cooperative engagement package | Shares targeting data: once per round, a friendly model within 12" of the carrier gets +1 on one Shoot test against an enemy the carrier can see. | **Proposed** |
 <!-- /table -->
@@ -114,10 +114,10 @@ Skills marked **Proposed** add a rule that is new in this version; they are in p
 | *Twin blades* | Fights with two blades: +1 to close combat exchange rolls. | **Proposed** |
 | *Scout* | Deploys up to 6" beyond its side's deployment zone, out of enemy line of sight. Scrub and woods are not difficult ground for it. | **Proposed** |
 | *Shield* | Carries a ballistic shield or shield emitter: when it has no other cover, it counts as in Light cover against shots from the half of the table it faces. | **Proposed** |
-| *Layered armour* | Blast weapons step one extra row down against it. | **Proposed** |
+| *Layered armour* | Explosions step one extra row down against it. | **Proposed** |
 | *Laser detector* | Laser warning receivers cue its fire: its Reaction and Overwatch shots do not take the −1 for reacting. | **Proposed** |
 | *Augmented* | Genetically or cybernetically augmented: +1 to Physique tests, and it ignores the first Suppression it gains each round. | **Proposed** |
-| *Self-destruct* 1–2 | **1:** As an action: resolve a blast centred on itself, radius 2", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud. **2:** A bigger warhead: the blast's radius is 3". Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge. | **Proposed** |
+| *Self-destruct* 1–2 | **1:** As an action: an Explosion (2) centred on itself, 2d10 damage, AP 2 (chapter 6). Then remove the model. Very loud. **2:** A bigger warhead: Explosion (3). Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge. | **Proposed** |
 <!-- /table -->
 
 ## Opposition: Freespace Solutions
@@ -282,7 +282,8 @@ Vehicles (the AT-RT and the infantry support platform) wait for the vehicle rule
 | DC-17m (anti-armour) | 2d12 | 24" | -1 / -2 | 1 | One per round |
 | DP-23 phase-pulse blaster | 2d12 | 10" | -2 / -3 | 0 | Handy |
 | Z-6 rotary blaster | 2d8 | 18" | -1 / -2 | 0 | Auto 3, Suppressing |
-| RPS-6 rocket launcher | 2d12 | 36" | -1 / -2 | 1 | One per round, Cumbersome |
+| RPS-6 rocket launcher (anti-armour) | 2d12 | 36" | -1 / -2 | 1 | One per round, Cumbersome |
+| ↳ or high explosive round | d8+d10 | 36" | -1 / -2 | 0 | One per round, Cumbersome, Explosion (2) |
 
 | Melee weapon | Damage | AP |
 |---|---|---|
@@ -327,7 +328,8 @@ A US Navy contractor. Two **chalks** (two Scouts and a Grenadier each) and the *
 |---|---|---|---|---|---|
 | M134 minigun | 2d8 | 24" | -1 / -2 | 0 | Auto 4, Suppressing |
 | 20mm autocannon | 2d12 | 36" | -1 / -2 | 2 | Auto 2, Breach |
-| MAAWS recoilless rifle | 2d12 | 30" | -1 / -2 | 2 | One per round, Breach |
+| MAAWS recoilless rifle (anti-armour) | 2d12 | 30" | -1 / -2 | 2 | One per round, Breach |
+| ↳ or anti-personnel round | d8+d10 | 30" | -1 / -2 | 0 | One per round, Breach, Explosion (3) |
 <!-- /table -->
 
 ### Hankou Multi-Function Response Team
@@ -348,7 +350,8 @@ Hankou Advanced Maritime Systems' security force, mostly recently retired PNLAN 
 | Weapon | Damage | Short range | Beyond / double | AP | Keywords |
 |---|---|---|---|---|---|
 | CS/LM5 rotary gun | 2d8 | 24" | -1 / -2 | 0 | Auto 3, Suppressing |
-| Dual DZJ-08 recoilless | 2d12 | 30" | -1 / -2 | 2 | One per round, Breach |
+| Dual DZJ-08 recoilless (anti-armour) | 2d12 | 30" | -1 / -2 | 2 | One per round, Breach |
+| ↳ or high explosive round | d8+d10 | 30" | -1 / -2 | 0 | One per round, Breach, Explosion (2) |
 <!-- /table -->
 
 Teams are in the tables of organisation above. Cards are printed in `docs/print/ImperatorBlack_near-present-cards.pdf`.

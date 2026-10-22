@@ -80,7 +80,7 @@ skills:
     name: Layered armour
     status: proposed
     levels:
-      - "Blast weapons step one extra row down against it."
+      - "Explosions step one extra row down against it."
   # Near Present forces.
   - id: laser_detector
     name: Laser detector
@@ -97,6 +97,6 @@ skills:
     name: Self-destruct
     status: proposed
     levels:
-      - "As an action: resolve a blast centred on itself, radius 2\", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud."
-      - "A bigger warhead: the blast's radius is 3\". Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge."
+      - "As an action: an Explosion (2) centred on itself, 2d10 damage, AP 2 (chapter 6). Then remove the model. Very loud."
+      - "A bigger warhead: Explosion (3). Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge."
 

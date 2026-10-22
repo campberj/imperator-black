@@ -2,6 +2,9 @@
 # damage: dice pair thrown with the hit dice (ranged) or by the winner (melee).
 # short_range: inches; beyond it range_penalty[0], beyond double range_penalty[1].
 # auto: rate of fire for Auto weapons (the N in Auto N): how many different models one Shoot or Suppressive Fire may engage.
+# damage: a matched pair (2d4 to 2d12) or a half-step mixed pair (d6+d8, d8+d10, d10+d12).
+# explosion: the X in Explosion (X), the radius in inches (thrown weapons give it as blast_radius).
+# rounds: a launcher's other rounds; choose one before each Shoot. The weapon line itself is its first round.
 version: 0.5.0
 
 ranged:
@@ -14,7 +17,8 @@ ranged:
   - { id: lmg,         name: LMG,         damage: 2d8,  short_range: 30, ap: 0, auto: 3, keywords: [auto, suppressing] }
   - { id: compact_lmg, name: Compact LMG, damage: 2d8,  short_range: 18, ap: 0, auto: 3, keywords: [handy, auto, suppressing] }
   - { id: dmr,         name: DMR,         damage: 2d10, short_range: 48, ap: 0, keywords: [] }
-  - { id: at_launcher, name: AT launcher, damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome] }
+  - { id: at_launcher, name: AT launcher, damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome],
+      round: Anti-armour, rounds: [{ id: he, name: High explosive, damage: d8+d10, ap: 0, explosion: 2 }] }
   - { id: auto_rifle,  name: Auto rifle,  damage: 2d8,  short_range: 24, ap: 0, auto: 2, keywords: [auto] }
   - { id: hmg,         name: HMG,         damage: 2d10, short_range: 30, ap: 1, auto: 3, keywords: [auto, suppressing, cumbersome] }
   - { id: amr,         name: Anti-materiel rifle, damage: 2d12, short_range: 48, ap: 2, keywords: [cumbersome] }
@@ -30,14 +34,17 @@ ranged:
   - { id: dc17m_at,    faction: republic, name: DC-17m (anti-armour),      damage: 2d12, short_range: 24, ap: 1, keywords: [one_per_round] }
   - { id: dp23,        faction: republic, name: DP-23 phase-pulse blaster, damage: 2d12, short_range: 10, ap: 0, keywords: [handy], range_penalty: [-2, -3] }
   - { id: z6,          faction: republic, name: Z-6 rotary blaster,        damage: 2d8,  short_range: 18, ap: 0, auto: 3, keywords: [auto, suppressing] }
-  - { id: rps6,        faction: republic, name: RPS-6 rocket launcher,     damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome] }
+  - { id: rps6,        faction: republic, name: RPS-6 rocket launcher,     damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome],
+      round: Anti-armour, rounds: [{ id: he, name: High explosive, damage: d8+d10, ap: 0, explosion: 2 }] }
 
   # Near Present (faction: anchorage / hankou). Robot (CCT) weapon modules; listed with those forces in chapter 9.
   - { id: m134,      faction: anchorage, name: M134 minigun,            damage: 2d8,  short_range: 24, ap: 0, auto: 4, keywords: [auto, suppressing] }
   - { id: ac20,      faction: anchorage, name: 20mm autocannon,         damage: 2d12, short_range: 36, ap: 2, auto: 2, keywords: [auto, breach] }
-  - { id: maaws,     faction: anchorage, name: MAAWS recoilless rifle,  damage: 2d12, short_range: 30, ap: 2, keywords: [one_per_round, breach] }
+  - { id: maaws,     faction: anchorage, name: MAAWS recoilless rifle,  damage: 2d12, short_range: 30, ap: 2, keywords: [one_per_round, breach],
+      round: Anti-armour, rounds: [{ id: ap, name: Anti-personnel, damage: d8+d10, ap: 0, explosion: 3 }] }
   - { id: cs_lm5,    faction: hankou,    name: CS/LM5 rotary gun,       damage: 2d8,  short_range: 24, ap: 0, auto: 3, keywords: [auto, suppressing] }
-  - { id: dzj08,     faction: hankou,    name: Dual DZJ-08 recoilless,  damage: 2d12, short_range: 30, ap: 2, keywords: [one_per_round, breach] }
+  - { id: dzj08,     faction: hankou,    name: Dual DZJ-08 recoilless,  damage: 2d12, short_range: 30, ap: 2, keywords: [one_per_round, breach],
+      round: Anti-armour, rounds: [{ id: he, name: High explosive, damage: d8+d10, ap: 0, explosion: 2 }] }
 
 melee:
   - { id: unarmed,       name: "Unarmed / weapon butt",      damage: 2d4, ap: 0 }
@@ -54,13 +61,13 @@ thrown:
     blast_radius: 2
     damage: 2d8
     ap: 0
-    keywords: [blast, confined_bonus]
+    keywords: [explosion, confined_bonus]
   - id: flashbang
     name: Flashbang
     throw_range: 8
     blast_radius: 3
     effect: "+2 Suppression; removes Overwatch; cannot react until end of round"
-    keywords: [blast]
+    keywords: [explosion]
   - id: smoke
     name: Smoke grenade
     throw_range: 8
@@ -74,7 +81,7 @@ thrown:
     blast_radius: 2
     damage: 2d10
     ap: 0
-    keywords: [blast, confined_bonus]
+    keywords: [explosion, confined_bonus]
 
 demolitions:
   - id: breaching_charge

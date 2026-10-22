@@ -7,7 +7,7 @@ weapon:
   - { id: suppressing,    name: Suppressing,    text: "A hit also adds 1 Suppression." }
   - { id: one_per_round,  name: One per round,  text: "May fire once per round, including reactions." }
   - { id: cumbersome,     name: Cumbersome,     text: "An extra -1 when firing after a Move; cannot fire as a reaction." }
-  - { id: blast,          name: Blast,          text: "Affects every model within the blast radius with line of sight to the point of impact." }
+  - { id: explosion,      name: Explosion,      text: "Explosion (X): affects every model within X\" of the point of impact that has line of sight to it. One damage roll for all (chapter 6)." }
   - { id: confined_bonus, name: Confined,       text: "+1 wound row to models in an enclosed compartment of 6\" x 6\" or smaller." }
   - { id: breach,         name: Breach,         text: "Can destroy doors, hatches and thin bulkheads." }
   - { id: silenced,       name: Silenced,       text: "Shots do not count as noise for the alert track." }

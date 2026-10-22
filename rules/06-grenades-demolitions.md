@@ -16,9 +16,27 @@ In **zero-g**, a missed grenade bounces instead of falling short. Move the point
 
 Each model carries **two grenades** unless its roster says otherwise. Choose the types before the mission and track them on the roster.
 
-## Blast
+## Explosions
 
-A *Blast* grenade affects every model within its radius of the landing point that has line of sight to the point. Walls and closed doors block blast.
+A weapon with **Explosion (X)** affects every model within **X"** of the point of impact that has line of sight to that point. Walls and closed doors block an explosion. A grenade's X is its radius in the table below.
+
+**Damage.** Roll the damage dice once for the whole explosion. Read the result separately for each model, stepping down by each model's own Armour, less the weapon's AP.
+
+- **Heavy cover:** a model in Heavy cover relative to the point of impact steps down one extra row.
+- **Confined:** a weapon with the *Confined* keyword adds 1 row to models in the same compartment of 6"×6" or smaller as the point of impact.
+
+### Fired explosives
+
+Launchers, recoilless rifles and grenade launchers **fire** their explosives with a Shoot action, using the shooter's Shoot and the normal hit modifiers.
+
+1. Aim at a model or at a point the shooter can see. Aimed at a point, ignore cover modifiers.
+2. **Hit:** the round explodes on the target model or point. A critical hit adds 1 row for the target model only.
+3. **Miss:** the round lands **short**, as a missed grenade does: move the point straight back toward the shooter by the amount the roll missed by (minimum 1"). If that path crosses a wall or a doorway edge, it stops there and explodes.
+4. **Natural 2:** a **dud**. Nothing explodes.
+
+**Rounds.** Some launchers carry more than one kind of round, listed under the weapon (for example an AT launcher's anti-armour and high-explosive rounds). Choose the round before each Shoot. An anti-armour round is an ordinary shot at one model; a high-explosive round is an explosion.
+
+A grenade fired from a grenade launcher counts as fired: on a natural 2 it is a dud, rather than slipping in front of the shooter.
 
 <!-- table:weapons.thrown -->
 | Grenade | Throw range | Radius | Damage / effect |
@@ -28,9 +46,7 @@ A *Blast* grenade affects every model within its radius of the landing point tha
 | Smoke grenade | 8" | 2" | Blocks line of sight through the area until end of next round |
 <!-- /table -->
 
-**Frag.** Roll the damage dice once. Read the result separately for each model, stepping down by each model's own Armour. A model in Heavy cover relative to the landing point steps down one extra row.
-
-- **Confined:** if the landing point and the model are in the same compartment of 6"×6" or smaller, add 1 row.
+**Frag.** An Explosion (2) with 2d8 damage and the *Confined* keyword, resolved as above.
 
 **Flashbang.** Every model within 3" with line of sight to the point gains 2 Suppression, loses its Overwatch marker, and cannot react until the end of the round.
 

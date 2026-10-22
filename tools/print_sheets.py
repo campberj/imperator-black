@@ -118,10 +118,16 @@ def weapon_rows(t):
         kws = w["keywords"] + (extra_kw if i == 0 else [])
         pen = w.get("range_penalty")
         notes = [f'Auto {w["auto"]}' if k == "auto" and w.get("auto") else KEYWORDS[k]["name"] for k in kws]
+        if w.get("explosion"):
+            notes.append(f'Explosion ({w["explosion"]})')
         if pen:
             notes.append(f"beyond short {pen[0]}, beyond double {pen[1]}")
         if notes:
             rows.append([Paragraph(", ".join(notes), S_SMALL), "", "", ""])
+        for r in w.get("rounds", []):   # launcher rounds: choose one before each Shoot
+            rows.append([Paragraph(f"<i>  {w['round']} above, or {r['name'].lower()} round:</i>", S_CELL), r["damage"], f'{w["short_range"]}"', str(r["ap"])])
+            if r.get("explosion"):
+                rows.append([Paragraph(f'Explosion ({r["explosion"]}). Choose the round before each Shoot.', S_SMALL), "", "", ""])
     if not t["weapon"] and not t.get("weapon_options"):
         rows.append([Paragraph("<i>No ranged weapon: cannot Shoot</i>", S_SMALL), "", "", ""])
     if t["melee"]:
@@ -450,8 +456,9 @@ def quick_reference():
     from reportlab.platypus import PageBreak
     story.append(PageBreak())
     weapons = qtable([["Weapon", "Dmg", "Short", "AP", "Keywords"]] +
-                     [[w["name"], w["damage"], f'{w["short_range"]}"', w["ap"], ", ".join(f'Auto {w["auto"]}' if k == "auto" and w.get("auto") else KEYWORDS[k]["name"] for k in w["keywords"]) or "—"]
-                      for w in C["weapons"]["ranged"] if not w.get("faction")],
+                     [row for w in C["weapons"]["ranged"] if not w.get("faction") for row in
+                      [[w["name"], w["damage"], f'{w["short_range"]}"', w["ap"], ", ".join(f'Auto {w["auto"]}' if k == "auto" and w.get("auto") else KEYWORDS[k]["name"] for k in w["keywords"]) or "—"]] +
+                      [[f'  or {r["name"].lower()}', r["damage"], f'{w["short_range"]}"', r["ap"], f'Explosion ({r["explosion"]})' if r.get("explosion") else "—"] for r in w.get("rounds", [])]],
                      [0.95 * inch, 0.4 * inch, 0.42 * inch, 0.3 * inch, half - 2.07 * inch])
     melee = qtable([["Melee", "Dmg", "AP"]] + [[m["name"], m["damage"], m["ap"]] for m in C["weapons"]["melee"] if not m.get("faction")],
                    [half - 0.7 * inch, 0.4 * inch, 0.3 * inch])

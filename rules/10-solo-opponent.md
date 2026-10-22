@@ -65,7 +65,7 @@ Drill is how well an element works together. It depends on the training of its m
 |---|---|---|
 | Green | **No drill** | Each model follows its lists alone. Shoots instead of Aiming, never cracks doors, and throws grenades only where its list says. |
 | Regular | **Fire and manoeuvre** | A model ends a Move in the open, in sight of a player model, only while a friend of its element covers it: on Overwatch, or Engaged with the same target. Otherwise it stops in the last cover on its route, or goes on Overwatch instead of moving. Charges are exempt. |
-| Veteran | **Bounding and grenades** | As Regular, and: throws a frag at 2 or more player models within its blast radius, with no friend in it; at a closed door (aboard ship or into a building) with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target. |
+| Veteran | **Bounding and grenades** | As Regular, and: throws a frag at 2 or more player models within its explosion radius, with no friend in it; at a closed door (aboard ship or into a building) with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target. |
 | Elite | **Assault drill** | As Veteran, and: focus fire, shooting the player model its element has already hit this round if it can see it; picks Leaders and Auto gunners first at each step of the target list. |
 <!-- /table -->
 
@@ -115,7 +115,7 @@ Used first by an Engaged model with a player model within 6", unless its profile
 
 1. Outnumbered (more standing player models than friends within 6" of it) and not Aggressive: Move away, then Shoot if it still has a target.
 2. Fight 2 or more, a target within its Move, and Aggressive or Tactical: charge it (close combat).
-3. Two or more player models within a frag's blast radius of one point, no friend in it, and it carries frag: Throw it, then Move to cover.
+3. Two or more player models within a frag's explosion radius of one point, no friend in it, and it carries frag: Throw it, then Move to cover.
 4. Otherwise: use its profile's Target in sight list.
 <!-- /table -->
 

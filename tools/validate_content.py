@@ -33,6 +33,24 @@ melee = ids(C["weapons"]["melee"], "weapons.melee")
 thrown = ids(C["weapons"]["thrown"], "weapons.thrown")
 ids(C["weapons"].get("demolitions", []), "weapons.demolitions")
 armour = ids(C["armour"]["armour"], "armour")
+
+# Damage dice: a matched pair (2d4 to 2d12) or a half-step mixed pair (decision 6.14).
+import re as _re
+DAMAGE_OK = {f"2d{n}" for n in (4, 6, 8, 10, 12)} | {"d6+d8", "d8+d10", "d10+d12"}
+for grp in ("ranged", "melee", "thrown"):
+    for w in C["weapons"][grp]:
+        if w.get("damage") and w["damage"] not in DAMAGE_OK:
+            errors.append(f"weapon {w['id']}: damage '{w['damage']}' is not a pair or a half-step (d6+d8, d8+d10, d10+d12)")
+for w in C["weapons"]["ranged"]:
+    if w.get("explosion") is not None and not (isinstance(w["explosion"], int) and 1 <= w["explosion"] <= 6):
+        errors.append(f"weapon {w['id']}: explosion must be a radius of 1 to 6 inches")
+    for r in w.get("rounds", []):
+        if r.get("damage") not in DAMAGE_OK:
+            errors.append(f"weapon {w['id']} round {r.get('id')}: bad damage")
+        if r.get("explosion") is not None and not (isinstance(r["explosion"], int) and 1 <= r["explosion"] <= 6):
+            errors.append(f"weapon {w['id']} round {r.get('id')}: explosion must be 1 to 6")
+    if w.get("rounds") and not w.get("round"):
+        errors.append(f"weapon {w['id']}: a weapon with rounds names its own first round ('round')")
 kw_weapon = ids(C["keywords"]["weapon"], "keywords.weapon")
 kw_armour = ids(C["keywords"]["armour"], "keywords.armour")
 skills = {s["id"]: s for s in C["skills"]["skills"]}

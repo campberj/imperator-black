@@ -25,6 +25,17 @@ public class ContentTests
     public void RifleIs2d8() => Assert.Equal(new DiceSpec(2, 8), Set.Ranged("rifle").DamageDice);
 
     [Fact]
+    public void AtLauncherHasAHighExplosiveRound()
+    {
+        var w = Set.Ranged("at_launcher");
+        Assert.Equal("Anti-armour", w.Round);
+        var he = Assert.Single(w.Rounds!);
+        Assert.Equal(new DiceSpec(1, 8, 10), he.DamageDice);
+        Assert.Equal(2, he.Explosion);
+        Assert.Equal(0, he.Ap);
+    }
+
+    [Fact]
     public void ShotgunPenalties()
     {
         var shotgun = Set.Ranged("shotgun");

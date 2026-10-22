@@ -38,8 +38,18 @@ public sealed record CoreContent(
     AutoFireDef? AutoFire = null,
     List<ShootScaleDef>? ShootScale = null);
 
+/// <summary>A launcher's extra round (rules chapter 6): chosen before each Shoot instead of the weapon's own round.</summary>
+public sealed record RoundDef(string Id, string Name, string Damage, int Ap, int? Explosion = null, List<string>? Keywords = null)
+{
+    public DiceSpec DamageDice => DiceSpec.Parse(Damage);
+}
+
+/// <summary>
+/// A ranged weapon. Explosion is the X in Explosion (X); Round names the weapon's own round when it has other
+/// Rounds (launchers: anti-armour, high explosive).
+/// </summary>
 public sealed record RangedWeapon(string Id, string Name, string Damage, int ShortRange, int Ap, List<string> Keywords,
-    List<int>? RangePenalty = null, int? Auto = null)
+    List<int>? RangePenalty = null, int? Auto = null, int? Explosion = null, string? Round = null, List<RoundDef>? Rounds = null)
 {
     /// <summary>Rate of fire: how many different models one Shoot or Suppressive Fire may engage (Auto N).</summary>
     public int Rate => Has("auto") ? Math.Max(1, Auto ?? 1) : 1;

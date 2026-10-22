@@ -60,7 +60,7 @@ drills:
   - id: veteran
     rank: veteran
     name: Bounding and grenades
-    text: "As Regular, and: throws a frag at 2 or more player models within its blast radius, with no friend in it; at a closed door (aboard ship or into a building) with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target."
+    text: "As Regular, and: throws a frag at 2 or more player models within its explosion radius, with no friend in it; at a closed door (aboard ship or into a building) with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target."
   - id: elite
     rank: elite
     name: Assault drill
@@ -88,7 +88,7 @@ close_quarters:
   - "Used first by an Engaged model with a player model within 6\", unless its profile says otherwise. Read top-down."
   - "Outnumbered (more standing player models than friends within 6\" of it) and not Aggressive: Move away, then Shoot if it still has a target."
   - "Fight 2 or more, a target within its Move, and Aggressive or Tactical: charge it (close combat)."
-  - "Two or more player models within a frag's blast radius of one point, no friend in it, and it carries frag: Throw it, then Move to cover."
+  - "Two or more player models within a frag's explosion radius of one point, no friend in it, and it carries frag: Throw it, then Move to cover."
   - "Otherwise: use its profile's Target in sight list."
 
 surrender:

@@ -138,7 +138,7 @@
         "id": "veteran",
         "rank": "veteran",
         "name": "Bounding and grenades",
-        "text": "As Regular, and: throws a frag at 2 or more player models within its blast radius, with no friend in it; at a closed door (aboard ship or into a building) with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target."
+        "text": "As Regular, and: throws a frag at 2 or more player models within its explosion radius, with no friend in it; at a closed door (aboard ship or into a building) with the marker or a seen player model beyond, cracks and throws (flashbang first, else frag); the last model of the element to activate each round goes on Overwatch if it has no target."
       },
       {
         "id": "elite",
@@ -169,7 +169,7 @@
       "Used first by an Engaged model with a player model within 6\", unless its profile says otherwise. Read top-down.",
       "Outnumbered (more standing player models than friends within 6\" of it) and not Aggressive: Move away, then Shoot if it still has a target.",
       "Fight 2 or more, a target within its Move, and Aggressive or Tactical: charge it (close combat).",
-      "Two or more player models within a frag's blast radius of one point, no friend in it, and it carries frag: Throw it, then Move to cover.",
+      "Two or more player models within a frag's explosion radius of one point, no friend in it, and it carries frag: Throw it, then Move to cover.",
       "Otherwise: use its profile's Target in sight list."
     ],
     "surrender": [
@@ -1869,7 +1869,7 @@
       {
         "id": "grenade_launcher",
         "name": "Grenade launcher",
-        "text": "The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 18\". Its Throws are Very loud and count as Shoot actions for reactions.",
+        "text": "The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 18\". Its Throws are fired (chapter 6: a natural 2 is a dud), Very loud, and count as Shoot actions for reactions.",
         "grants_skills": {},
         "status": "proposed"
       },
@@ -1892,14 +1892,14 @@
       {
         "id": "mk19",
         "name": "Mk19 grenade launcher",
-        "text": "Mounted automatic grenade launcher. The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 30\"; one Shoot action throws two, at points within 3\" of each other. Its Throws are Very loud and count as Shoot actions for reactions.",
+        "text": "Mounted automatic grenade launcher. The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 30\"; one Shoot action throws two, at points within 3\" of each other. Its Throws are fired (chapter 6: a natural 2 is a dud), Very loud, and count as Shoot actions for reactions.",
         "grants_skills": {},
         "status": "proposed"
       },
       {
         "id": "owa_package",
         "name": "Mobility and one-way attack package",
-        "text": "Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has Self-destruct 2 (a 3\" blast).",
+        "text": "Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has Self-destruct 2 (Explosion 3).",
         "grants_skills": {
           "self_destruct": 2
         },
@@ -1950,9 +1950,9 @@
         "text": "An extra -1 when firing after a Move; cannot fire as a reaction."
       },
       {
-        "id": "blast",
-        "name": "Blast",
-        "text": "Affects every model within the blast radius with line of sight to the point of impact."
+        "id": "explosion",
+        "name": "Explosion",
+        "text": "Explosion (X): affects every model within X\" of the point of impact that has line of sight to it. One damage roll for all (chapter 6)."
       },
       {
         "id": "confined_bonus",
@@ -3522,7 +3522,7 @@
         "name": "Layered armour",
         "status": "proposed",
         "levels": [
-          "Blast weapons step one extra row down against it."
+          "Explosions step one extra row down against it."
         ]
       },
       {
@@ -3546,8 +3546,8 @@
         "name": "Self-destruct",
         "status": "proposed",
         "levels": [
-          "As an action: resolve a blast centred on itself, radius 2\", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud.",
-          "A bigger warhead: the blast's radius is 3\". Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge."
+          "As an action: an Explosion (2) centred on itself, 2d10 damage, AP 2 (chapter 6). Then remove the model. Very loud.",
+          "A bigger warhead: Explosion (3). Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge."
         ]
       }
     ]
@@ -6791,6 +6791,16 @@
         "keywords": [
           "one_per_round",
           "cumbersome"
+        ],
+        "round": "Anti-armour",
+        "rounds": [
+          {
+            "id": "he",
+            "name": "High explosive",
+            "damage": "d8+d10",
+            "ap": 0,
+            "explosion": 2
+          }
         ]
       },
       {
@@ -6949,6 +6959,16 @@
         "keywords": [
           "one_per_round",
           "cumbersome"
+        ],
+        "round": "Anti-armour",
+        "rounds": [
+          {
+            "id": "he",
+            "name": "High explosive",
+            "damage": "d8+d10",
+            "ap": 0,
+            "explosion": 2
+          }
         ]
       },
       {
@@ -6987,6 +7007,16 @@
         "keywords": [
           "one_per_round",
           "breach"
+        ],
+        "round": "Anti-armour",
+        "rounds": [
+          {
+            "id": "ap",
+            "name": "Anti-personnel",
+            "damage": "d8+d10",
+            "ap": 0,
+            "explosion": 3
+          }
         ]
       },
       {
@@ -7012,6 +7042,16 @@
         "keywords": [
           "one_per_round",
           "breach"
+        ],
+        "round": "Anti-armour",
+        "rounds": [
+          {
+            "id": "he",
+            "name": "High explosive",
+            "damage": "d8+d10",
+            "ap": 0,
+            "explosion": 2
+          }
         ]
       }
     ],
@@ -7057,7 +7097,7 @@
         "damage": "2d8",
         "ap": 0,
         "keywords": [
-          "blast",
+          "explosion",
           "confined_bonus"
         ]
       },
@@ -7068,7 +7108,7 @@
         "blast_radius": 3,
         "effect": "+2 Suppression; removes Overwatch; cannot react until end of round",
         "keywords": [
-          "blast"
+          "explosion"
         ]
       },
       {
@@ -7088,7 +7128,7 @@
         "damage": "2d10",
         "ap": 0,
         "keywords": [
-          "blast",
+          "explosion",
           "confined_bonus"
         ]
       }
