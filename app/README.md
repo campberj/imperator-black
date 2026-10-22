@@ -104,9 +104,9 @@ Beyond this, the app's real features wait on rules:
 | App feature | Waits on |
 |---|---|
 | Layout generator (SVG ship maps from tiles) | Tasks 7 and 8. |
-| Land table generator (chapter 12 sector tables) | Ready after task 8, same pattern; RJ to confirm priority. |
+| Land table generator (chapter 12 sector tables) | Ready after task 8, same pattern; the reference is `Mission.build_land` in `tools/generate_mission.py`. |
 | Custom troop and unit builder | Phase 7 point values, then Phase 9 (decision 6.12) |
-| Mission generator (briefing, enemy force, contact tables) | Phase 5: missions |
+| Mission generator (briefing, guard, contact chips, alert track, mission clock) and a live mission dashboard | Ready: rules chapter 13, `content/missions.yaml`, reference `tools/generate_mission.py` (uses `content/terrain.yaml` `pieces` for land tables). After tasks 7–8. |
 | Enemy guidance cards | Task 6. |
 | Campaign tracker | Phase 7: campaign loop |
 

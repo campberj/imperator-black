@@ -119,6 +119,9 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 7.3 | Missions have consequences that carry forward; decisions are tracked across missions. *(AWoW)* | Settled |
 | 7.4 | Force-level "doctrines" unlocked by campaign resources (Zone Raiders–style). *(AWoW teardown)* | Proposed — Phase 7 |
 | 7.5 | The PoC includes the full campaign loop. | Settled |
+| 7.6 | **Missions (Phase 5, RJ's calls):** four types (seize data or cargo, recover personnel, sabotage, capture a high-value target), each with an objective aboard ship and on land, a lockdown event and Decisive / Marginal / Failure grades. Threat tiers 1–4 each have one d6 table for the guard and contacts, a contact count, a reinforcement element and an HVT. Enemy placement is **mixed**: a guard placed openly at the objective, the rest hidden contacts. Complications d6. Chapter 13, `content/missions.yaml`. | Settled (approach, RJ); tables Proposed — playtest |
+| 7.7 | **Mission clock, not a round limit (RJ, 2026-10-22):** each mission sets a time limit and a clock die; at the end of each round roll the die and that many minutes pass. Small missions (up to 8 player models) 20 minutes on a d4; large (9 or more) 30 minutes on a d6. Check-ins every 5 minutes from minute 10 each raise the alert track by 1. The Tight window complication takes 5 minutes off. | Settled (approach, RJ); numbers Proposed — playtest |
+| 7.8 | **Mission dashboard:** a one-page status sheet for a dry-erase sleeve (alert track, clock with check-ins, objectives, contacts, enemy elements, player models), blank and filled for each generated mission. (RJ) | Settled |
 
 ## 8. Solo play and AI
 
@@ -126,8 +129,8 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 |---|----------|--------|
 | 8.1 | PoC solo AI = **table-driven behavior profiles** per enemy type, building on the prototype's activation-priority list and role priorities. | Settled |
 | 8.2 | The app generates enemies and gives **general play guidance** per enemy type; it does not run enemies turn by turn. | Settled |
-| 8.3 | **Hidden contacts:** enemy tokens start as unknown contacts, revealed on line of sight or noise, rolled on a contact table per threat tier. *(AWoW teardown)* | Leaning — playtest ([opposition](opposition-force.md)) |
-| 8.4 | **Alert track (0–6)** driven by noise; contacts converge at 2, contractor reaction force at 4, lockdown at 6. Adapted from Zero Dark's deck clock. *(AWoW teardown)* | Leaning — playtest ([opposition](opposition-force.md)) |
+| 8.3 | **Hidden contacts:** enemy tokens start as unknown contacts, revealed on line of sight (or a Move ending within 3"), rolled on a d6 contact table per threat tier. *(AWoW teardown)* Rules: chapter 13. | Proposed — playtest |
+| 8.4 | **Alert track (0–6)** driven by noise, the alarm and missed check-ins; contacts converge at 2, the tier's reinforcement element at 4, the mission's lockdown at 6. Adapted from Zero Dark's deck clock. *(AWoW teardown)* Rules: chapter 13. | Proposed — playtest |
 | 8.6 | Cowed enemies may **surrender**; prisoners are a campaign resource and a tactical burden. | Leaning — playtest |
 | 8.5 | Longer term: a more organic, situation-reactive AI. | Leaning |
 | 8.7 | **Fixed priority lists (Phase 3):** each behavior profile has top-down lists for Target in sight, No target, Reactions and Close combat; take the first line that applies. Fixed activation order, target choice, movement and tie-breakers leave nothing to judgment. Chapter 10, `content/behaviors.yaml`, behavior cards. | Settled (approach, RJ); lists Proposed — playtest |

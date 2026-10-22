@@ -101,6 +101,58 @@ def render_behaviors(section):
     return bulleted(B[section])
 
 
+def render_missions(section):
+    M = load("missions")
+    els = {e["id"]: e for e in load("factions")["elements"]}
+    troops = names("troops", "troops")
+    special = {c["id"]: c["name"] for c in M["contact_results"]}
+    mnames = {m["id"]: m["name"] for m in M["missions"]}
+    d = lambda r: str(r).replace("-", "–")
+    if section == "mission_roll":
+        return table(["d6", "Mission"], [(d(r["roll"]), mnames[r["mission"]]) for r in M["mission_roll"]])
+    if section == "tier_roll":
+        return table(["d6", "Threat tier"], [(d(r["roll"]), r["tier"]) for r in M["tier_roll"]])
+    if section == "missions":
+        blocks = []
+        for m in M["missions"]:
+            blocks.append("\n".join([f'### {m["name"]}', "", f'*{m["summary"]}*', "",
+                                      f'- **Objective aboard ship:** {m["ship"]}', f'- **Objective on land:** {m["land"]}',
+                                      f'- **Taking it:** {m["task"]}', f'- **Lockdown (alert 6):** {m["lockdown"]}', "",
+                                      table(["Grade", "Result"], [("**Decisive**", m["decisive"]), ("**Marginal**", m["marginal"]), ("**Failure**", m["failure"])])]))
+        return "\n\n".join(blocks)
+    if section == "tiers":
+        heads = ["d6"] + [f'Tier {t["tier"]}' for t in M["tiers"]]
+        rows = []
+        for n in range(1, 7):
+            row = [str(n)]
+            for t in M["tiers"]:
+                res = next(r["result"] for r in t["table"] if r["roll"] == str(n))
+                row.append(special.get(res) or els[res]["name"])
+            rows.append(row)
+        rows.append(["Contacts"] + [str(t["contacts"]) for t in M["tiers"]])
+        rows.append(["Reinforcement"] + [els[t["reinforcement"]]["name"] for t in M["tiers"]])
+        rows.append(["HVT"] + [troops[t["hvt"]] for t in M["tiers"]])
+        return table(heads, rows)
+    if section == "contact_results":
+        return table(["Result", "Effect"], [(f'**{c["name"]}**', c["text"]) for c in M["contact_results"]])
+    if section == "alert_raises":
+        return table(["Raises the alert track", "By"], [(r["source"], f'+{r["amount"]}') for r in M["alert"]["raises"]])
+    if section == "alert_thresholds":
+        return table(["At", "Effect"], [(f'**{t["at"]}**', t["effect"]) for t in M["alert"]["thresholds"]])
+    if section == "complications":
+        return table(["d6", "Complication", "Effect"], [(d(c["roll"]), f'**{c["name"]}**', c["text"]) for c in M["complications"]])
+    if section in ("placement", "contacts"):
+        return "\n".join(f"{i}. {x}" for i, x in enumerate(M[section], 1))
+    if section == "briefing":
+        return table(["Heading", "Contents"], [(f'**{b["heading"]}**', b["text"]) for b in M["briefing"]])
+    if section == "clock_sizes":
+        return table(["Mission size", "Player force", "Clock die", "Time limit"],
+                     [(f'**{z["name"]}**', z["force"], z["die"], f'{z["limit"]} minutes') for z in M["clock"]["sizes"]])
+    if section == "clock":
+        return "\n".join(f"- {x}" for x in M["clock"]["rules"])
+    return None
+
+
 def render_terrain(section):
     T = load("terrain")
     moves = {"normal": "Normal", "difficult": "Difficult (each inch costs 2\")", "obstacle": "Obstacle (+2\" to cross)", "blocked": "Blocked"}
@@ -241,6 +293,8 @@ def render_forces(key):
         return render_layouts(section)
     if f == "terrain":
         return render_terrain(section)
+    if f == "missions":
+        return render_missions(section)
     if key == "core.security":
         sec = load("core")["security"]
         return table(["Security level", "Hack test", "Successes needed", "Typical"],

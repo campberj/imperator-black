@@ -2132,6 +2132,378 @@
       }
     ]
   },
+  "missions": {
+    "version": "0.5.0",
+    "mission_roll": [
+      {
+        "roll": "1-2",
+        "mission": "seize"
+      },
+      {
+        "roll": "3",
+        "mission": "recover"
+      },
+      {
+        "roll": "4",
+        "mission": "sabotage"
+      },
+      {
+        "roll": "5-6",
+        "mission": "capture"
+      }
+    ],
+    "missions": [
+      {
+        "id": "seize",
+        "name": "Seize data or cargo",
+        "summary": "Reach the objective, take what it holds, and get it out.",
+        "objectives": 1,
+        "ship": "The heart (chapter 11).",
+        "land": "The middle sector of the far row (chapter 12).",
+        "task": "A model in base contact may Interact to take it: automatic for a model with a hacking rig (data) or Physique 2 or more (cargo); 2d6 + Tech (data) or Physique (cargo), 8+, for anyone else. Data travels with the model that copied it; cargo is carried, and the carrier has −2\" Move. If the carrier goes Down, a model in base contact may take it with an Interact.",
+        "lockdown": "The enemy locks it down: taking the objective now needs two successful Interacts, and a Hack of Secured (9+) first if it is data.",
+        "decisive": "Objective extracted and no player model Dead.",
+        "marginal": "Objective extracted.",
+        "failure": "Objective not extracted when time runs out."
+      },
+      {
+        "id": "recover",
+        "name": "Recover personnel",
+        "summary": "Find a captured friend or a hostage, free them, and bring them out alive.",
+        "objectives": 1,
+        "ship": "The compartment farthest from the airlock by route, other than the heart; the heart if there is no other.",
+        "land": "A sector of the far row: roll a die, 1–2 left, 3–4 middle, 5–6 right.",
+        "task": "The hostage (unit card: Hostage) starts bound in the objective. A player model in base contact frees them with an Interact. From then on the hostage is a player model: it activates after the model that freed it, every round, and must end each activation within 3\" of a player model if it can.",
+        "lockdown": "The enemy moves the hostage: at the end of the round, the nearest enemy model within 6\" of a bound hostage moves it up to 6\" toward the enemy's exit, with it.",
+        "decisive": "Hostage extracted alive and no player model Dead.",
+        "marginal": "Hostage extracted alive.",
+        "failure": "Hostage Dead, still held, or not extracted when time runs out."
+      },
+      {
+        "id": "sabotage",
+        "name": "Sabotage",
+        "summary": "Destroy two targets and get out.",
+        "objectives": 2,
+        "ship": "The heart, and the compartment farthest from it by route.",
+        "land": "Two sectors of the far row: the left and right ones.",
+        "task": "A model in base contact sets a charge with an Interact (models without breaching charges use the target's own systems: same Interact). The target is destroyed at the end of that round (Very loud), unless an enemy model is in base contact with it then, which disarms the charge.",
+        "lockdown": "The enemy guards the targets: place one new contact within 3\" of each target still standing.",
+        "decisive": "Both targets destroyed and the force extracted with no player model Dead.",
+        "marginal": "One target destroyed and the force extracted.",
+        "failure": "No target destroyed, or the force breaks."
+      },
+      {
+        "id": "capture",
+        "name": "Capture a high-value target",
+        "summary": "Take a named enemy alive and bring them out.",
+        "objectives": 1,
+        "ship": "The heart.",
+        "land": "The middle sector of the far row.",
+        "task": "The high-value target (HVT) is the tier's HVT model, placed at the objective with the guard. Take it by overpowering it in close combat, capturing it while Down (chapter 7), or when it surrenders: the HVT tests to surrender (chapter 10) whenever it is Pinned or Wounded with a player model within 6\" and no friend within 6\". A prisoner moves with a player model in base contact, which halves that model's Move.",
+        "lockdown": "The HVT runs: from now on it activates first each enemy turn, using the Handler profile's escape line toward the enemy's exit. If it leaves the board, it has escaped.",
+        "decisive": "HVT extracted as a prisoner and no player model Dead.",
+        "marginal": "HVT extracted as a prisoner, or Dead (with the body or its data recovered: an Interact in base contact).",
+        "failure": "HVT escaped or still at large when time runs out."
+      }
+    ],
+    "tier_roll": [
+      {
+        "roll": "1-3",
+        "tier": 1
+      },
+      {
+        "roll": "4-5",
+        "tier": 2
+      },
+      {
+        "roll": "6",
+        "tier": 3
+      }
+    ],
+    "tiers": [
+      {
+        "tier": 1,
+        "contacts": 3,
+        "reinforcement": "asset_security",
+        "hvt": "fs_recovery_captain",
+        "table": [
+          {
+            "roll": "1",
+            "result": "false_alarm"
+          },
+          {
+            "roll": "2",
+            "result": "salvage_crew"
+          },
+          {
+            "roll": "3",
+            "result": "salvage_crew"
+          },
+          {
+            "roll": "4",
+            "result": "asset_security"
+          },
+          {
+            "roll": "5",
+            "result": "asset_security"
+          },
+          {
+            "roll": "6",
+            "result": "recovery_captain"
+          }
+        ]
+      },
+      {
+        "tier": 2,
+        "contacts": 4,
+        "reinforcement": "collections_enforcers",
+        "hvt": "fs_recovery_captain",
+        "table": [
+          {
+            "roll": "1",
+            "result": "false_alarm"
+          },
+          {
+            "roll": "2",
+            "result": "salvage_crew"
+          },
+          {
+            "roll": "3",
+            "result": "asset_security"
+          },
+          {
+            "roll": "4",
+            "result": "collections_enforcers"
+          },
+          {
+            "roll": "5",
+            "result": "salvage_techs"
+          },
+          {
+            "roll": "6",
+            "result": "automated_defences"
+          }
+        ]
+      },
+      {
+        "tier": 3,
+        "contacts": 4,
+        "reinforcement": "contract_reaction_force",
+        "hvt": "ct_borz_ubiytsa_leader",
+        "table": [
+          {
+            "roll": "1",
+            "result": "booby_trap"
+          },
+          {
+            "roll": "2",
+            "result": "collections_enforcers"
+          },
+          {
+            "roll": "3",
+            "result": "repossession_team"
+          },
+          {
+            "roll": "4",
+            "result": "liquidators"
+          },
+          {
+            "roll": "5",
+            "result": "borz_bratva"
+          },
+          {
+            "roll": "6",
+            "result": "harlow_veterans"
+          }
+        ]
+      },
+      {
+        "tier": 4,
+        "contacts": 5,
+        "reinforcement": "rfa_fireteam",
+        "hvt": "md_handler",
+        "table": [
+          {
+            "roll": "1",
+            "result": "booby_trap"
+          },
+          {
+            "roll": "2",
+            "result": "liquidators"
+          },
+          {
+            "roll": "3",
+            "result": "directorate_operators"
+          },
+          {
+            "roll": "4",
+            "result": "un3_fireteam"
+          },
+          {
+            "roll": "5",
+            "result": "un3_pointmen"
+          },
+          {
+            "roll": "6",
+            "result": "rfa_fireteam"
+          }
+        ]
+      }
+    ],
+    "contact_results": [
+      {
+        "id": "false_alarm",
+        "name": "False alarm",
+        "text": "Nothing there: crew who fled, a ventilation fan, a stray animal. Remove the chip."
+      },
+      {
+        "id": "booby_trap",
+        "name": "Booby trap",
+        "text": "A tripwire charge: resolve a frag grenade centred on the chip (2d8, radius 2\"). It is Very loud. Remove the chip."
+      }
+    ],
+    "alert": {
+      "max": 6,
+      "raises": [
+        {
+          "source": "Loud noise (chapter 10)",
+          "amount": 1
+        },
+        {
+          "source": "Very loud noise",
+          "amount": 2
+        },
+        {
+          "source": "An element raises the alarm",
+          "amount": 1
+        },
+        {
+          "source": "Each check-in the clock reaches or passes (a check-in is missed)",
+          "amount": 1
+        }
+      ],
+      "thresholds": [
+        {
+          "at": 2,
+          "effect": "Contacts move: at the end of each round, every contact moves 6\" toward the marker (or toward the player entry if there is no marker), by the shortest route. Unrevealed elements become Alerted when revealed."
+        },
+        {
+          "at": 4,
+          "effect": "Reinforcements: at the end of the round, the tier's reinforcement element arrives at the enemy's entry, Alerted."
+        },
+        {
+          "at": 6,
+          "effect": "Lockdown: the mission type's lockdown happens at the end of the round."
+        }
+      ]
+    },
+    "complications": [
+      {
+        "roll": "1-2",
+        "id": "none",
+        "name": "None",
+        "text": "No complication."
+      },
+      {
+        "roll": "3",
+        "id": "early_warning",
+        "name": "Early warning",
+        "text": "The alert track starts at 1."
+      },
+      {
+        "roll": "4",
+        "id": "extra_contact",
+        "name": "Reinforced",
+        "text": "One more contact than the tier lists."
+      },
+      {
+        "roll": "5",
+        "id": "tight_window",
+        "name": "Tight window",
+        "text": "The time limit is 5 minutes shorter."
+      },
+      {
+        "roll": "6",
+        "id": "hazard",
+        "name": "Hazard",
+        "text": "Aboard ship, the vessel's first hazard (chapter 11). On land, Night (chapter 12)."
+      }
+    ],
+    "clock": {
+      "sizes": [
+        {
+          "id": "small",
+          "name": "Small mission",
+          "force": "Up to 8 player models",
+          "die": "d4",
+          "limit": 20
+        },
+        {
+          "id": "large",
+          "name": "Large mission",
+          "force": "9 or more player models",
+          "die": "d6",
+          "limit": 30
+        }
+      ],
+      "check_in_every": 5,
+      "first_check_in": 10,
+      "rules": [
+        "The mission sets its size, or the size of the player force does. The size gives the clock die and the time limit.",
+        "The clock starts at 0. At the end of each round, roll the clock die: that many minutes pass. Then resolve the alert track's effects, including any check-in just passed.",
+        "Check-ins fall every 5 minutes from minute 10 (10, 15, 20 and so on). Each check-in the clock reaches or passes raises the alert track by 1.",
+        "When the clock reaches the time limit, time has run out: the mission ends."
+      ]
+    },
+    "placement": [
+      "Board: a chapter 11 deck aboard ship, a chapter 12 table on land. The mission names the vessel or environment, or roll.",
+      "Player force: deploys in the docking passage aboard ship, or within 6\" of its edge on land. It extracts the same way: a model that leaves by the airlock or its own edge is out of the mission, safely.",
+      "Objective: as the mission type says. Mark it with the objective token (or two).",
+      "Guard: roll once on the tier's contact table, rerolling false alarms and booby traps, and place that element openly within 3\" of the objective, Unaware. For a capture mission, add the HVT to the guard.",
+      "Contacts: place the tier's number of contact chips. Aboard ship, one in each compartment that is not the objective, farthest from the airlock first, then in junctions and small rooms, farthest first. On land, one in each sector of the far two rows that is not the objective's, farthest first, never within 12\" of the player edge. If there are more contacts than places, go round again, farthest first. Number them.",
+      "Enemy entry and exit: aboard ship, the spine tile farthest from the airlock; a secondary airlock or escape pod is a second enemy exit. On land, the middle of the enemy's edge."
+    ],
+    "contacts": [
+      "A contact is revealed when a player model can see it, or ends a Move within 3\" of it. Roll on the tier's contact table.",
+      "Place the element with its first model on the chip and the rest within 2\", in cover where they can be; then remove the chip.",
+      "A revealed element is Unaware while the alert track is below 2, Alerted from 2 on. Either way, newly placed models cannot react until the current activation ends.",
+      "A contact that moves into sight of a player model is revealed at once."
+    ],
+    "briefing": [
+      {
+        "heading": "Tasking",
+        "text": "Mission type, and who gives the order."
+      },
+      {
+        "heading": "Situation",
+        "text": "Two or three sentences: where, who holds it, why now."
+      },
+      {
+        "heading": "Objective",
+        "text": "What to do, where it is, and how to take it."
+      },
+      {
+        "heading": "Opposition",
+        "text": "Faction and threat tier; the guard (known); the number of contacts (unknown)."
+      },
+      {
+        "heading": "Ground",
+        "text": "Vessel and deck seed, or environment and table; conditions or hazard."
+      },
+      {
+        "heading": "Complication",
+        "text": "If any."
+      },
+      {
+        "heading": "Extraction and time",
+        "text": "The way out, the time limit and clock die, and the alert track start."
+      },
+      {
+        "heading": "Grades",
+        "text": "Decisive, Marginal and Failure."
+      }
+    ]
+  },
   "rosters": {
     "version": "0.5.0",
     "teams": [
@@ -2572,30 +2944,98 @@
         "id": "urban",
         "name": "Urban",
         "fill": "Rubble, 6\" × 6\".",
+        "fill_pieces": [
+          {
+            "type": "rubble",
+            "w": 6,
+            "h": 6,
+            "label": "Rubble"
+          }
+        ],
         "table": [
           {
             "roll": "1",
-            "text": "Street: one wreck or vehicle (solid)."
+            "text": "Street: one wreck or vehicle (solid).",
+            "pieces": [
+              {
+                "type": "solid",
+                "w": 4,
+                "h": 2,
+                "label": "Wreck"
+              }
+            ]
           },
           {
             "roll": "2",
-            "text": "Rubble, 6\" × 6\", with a standing wall."
+            "text": "Rubble, 6\" × 6\", with a standing wall.",
+            "pieces": [
+              {
+                "type": "rubble",
+                "w": 6,
+                "h": 6,
+                "label": "Rubble"
+              },
+              {
+                "type": "low_wall",
+                "w": 4,
+                "h": 1,
+                "label": "Standing wall"
+              }
+            ]
           },
           {
             "roll": "3",
-            "text": "Small building, 6\" × 6\", one storey with a flat roof."
+            "text": "Small building, 6\" × 6\", one storey with a flat roof.",
+            "pieces": [
+              {
+                "type": "building",
+                "w": 6,
+                "h": 6,
+                "label": "Small building"
+              }
+            ]
           },
           {
             "roll": "4",
-            "text": "Large building, about 6\" × 9\", two storeys."
+            "text": "Large building, about 6\" × 9\", two storeys.",
+            "pieces": [
+              {
+                "type": "building",
+                "w": 6,
+                "h": 9,
+                "label": "Large building"
+              }
+            ]
           },
           {
             "roll": "5",
-            "text": "Ruined building: walls without a roof, rubble inside."
+            "text": "Ruined building: walls without a roof, rubble inside.",
+            "pieces": [
+              {
+                "type": "rubble",
+                "w": 6,
+                "h": 6,
+                "label": "Ruined building"
+              }
+            ]
           },
           {
             "roll": "6",
-            "text": "Barricade (low wall) across the sector, and a wreck."
+            "text": "Barricade (low wall) across the sector, and a wreck.",
+            "pieces": [
+              {
+                "type": "low_wall",
+                "w": 10,
+                "h": 1,
+                "label": "Barricade"
+              },
+              {
+                "type": "solid",
+                "w": 4,
+                "h": 2,
+                "label": "Wreck"
+              }
+            ]
           }
         ]
       },
@@ -2603,30 +3043,104 @@
         "id": "industrial",
         "name": "Industrial",
         "fill": "Two containers (solid).",
+        "fill_pieces": [
+          {
+            "type": "solid",
+            "w": 6,
+            "h": 2.5,
+            "label": "Container"
+          },
+          {
+            "type": "solid",
+            "w": 6,
+            "h": 2.5,
+            "label": "Container"
+          }
+        ],
         "table": [
           {
             "roll": "1",
-            "text": "Yard: two containers (solid)."
+            "text": "Yard: two containers (solid).",
+            "pieces": [
+              {
+                "type": "solid",
+                "w": 6,
+                "h": 2.5,
+                "label": "Container"
+              },
+              {
+                "type": "solid",
+                "w": 6,
+                "h": 2.5,
+                "label": "Container"
+              }
+            ]
           },
           {
             "roll": "2",
-            "text": "Tanks or pipework (solid), about 6\" across."
+            "text": "Tanks or pipework (solid), about 6\" across.",
+            "pieces": [
+              {
+                "type": "solid",
+                "w": 6,
+                "h": 6,
+                "label": "Tanks"
+              }
+            ]
           },
           {
             "roll": "3",
-            "text": "Warehouse, about 6\" × 9\", one tall storey with a gantry inside."
+            "text": "Warehouse, about 6\" × 9\", one tall storey with a gantry inside.",
+            "pieces": [
+              {
+                "type": "building",
+                "w": 6,
+                "h": 9,
+                "label": "Warehouse"
+              }
+            ]
           },
           {
             "roll": "4",
-            "text": "Scrap heap (rubble), 6\" × 6\"."
+            "text": "Scrap heap (rubble), 6\" × 6\".",
+            "pieces": [
+              {
+                "type": "rubble",
+                "w": 6,
+                "h": 6,
+                "label": "Scrap heap"
+              }
+            ]
           },
           {
             "roll": "5",
-            "text": "Crates and low walls (low wall), two pieces."
+            "text": "Crates and low walls (low wall), two pieces.",
+            "pieces": [
+              {
+                "type": "low_wall",
+                "w": 4,
+                "h": 1,
+                "label": "Crates"
+              },
+              {
+                "type": "low_wall",
+                "w": 4,
+                "h": 1,
+                "label": "Low wall"
+              }
+            ]
           },
           {
             "roll": "6",
-            "text": "Raised platform or gantry (hill, one level) with ladders."
+            "text": "Raised platform or gantry (hill, one level) with ladders.",
+            "pieces": [
+              {
+                "type": "hill",
+                "w": 6,
+                "h": 6,
+                "label": "Platform"
+              }
+            ]
           }
         ]
       },
@@ -2634,30 +3148,97 @@
         "id": "woodland",
         "name": "Woodland",
         "fill": "Scrub, 6\" × 6\".",
+        "fill_pieces": [
+          {
+            "type": "scrub",
+            "w": 6,
+            "h": 6,
+            "label": "Scrub"
+          }
+        ],
         "table": [
           {
             "roll": "1",
-            "text": "Open ground."
+            "text": "Open ground.",
+            "pieces": []
           },
           {
             "roll": "2",
-            "text": "Scrub, 6\" × 6\"."
+            "text": "Scrub, 6\" × 6\".",
+            "pieces": [
+              {
+                "type": "scrub",
+                "w": 6,
+                "h": 6,
+                "label": "Scrub"
+              }
+            ]
           },
           {
             "roll": "3",
-            "text": "Woods, 6\" × 9\"."
+            "text": "Woods, 6\" × 9\".",
+            "pieces": [
+              {
+                "type": "woods",
+                "w": 6,
+                "h": 9,
+                "label": "Woods"
+              }
+            ]
           },
           {
             "roll": "4",
-            "text": "Woods, 6\" × 6\", and a fallen tree (low wall)."
+            "text": "Woods, 6\" × 6\", and a fallen tree (low wall).",
+            "pieces": [
+              {
+                "type": "woods",
+                "w": 6,
+                "h": 6,
+                "label": "Woods"
+              },
+              {
+                "type": "low_wall",
+                "w": 4,
+                "h": 1,
+                "label": "Fallen tree"
+              }
+            ]
           },
           {
             "roll": "5",
-            "text": "Hedge or fence line across the sector."
+            "text": "Hedge or fence line across the sector.",
+            "pieces": [
+              {
+                "type": "hedge",
+                "w": 10,
+                "h": 1,
+                "label": "Hedge"
+              }
+            ]
           },
           {
             "roll": "6",
-            "text": "Rocky outcrop: a hill with two rocks (solid) on it."
+            "text": "Rocky outcrop: a hill with two rocks (solid) on it.",
+            "pieces": [
+              {
+                "type": "hill",
+                "w": 8,
+                "h": 6,
+                "label": "Outcrop"
+              },
+              {
+                "type": "solid",
+                "w": 2,
+                "h": 2,
+                "label": "Rock"
+              },
+              {
+                "type": "solid",
+                "w": 2,
+                "h": 2,
+                "label": "Rock"
+              }
+            ]
           }
         ]
       },
@@ -2665,30 +3246,110 @@
         "id": "jungle",
         "name": "Jungle",
         "fill": "Scrub, 6\" × 6\".",
+        "fill_pieces": [
+          {
+            "type": "scrub",
+            "w": 6,
+            "h": 6,
+            "label": "Scrub"
+          }
+        ],
         "table": [
           {
             "roll": "1",
-            "text": "Scrub, 6\" × 6\"."
+            "text": "Scrub, 6\" × 6\".",
+            "pieces": [
+              {
+                "type": "scrub",
+                "w": 6,
+                "h": 6,
+                "label": "Scrub"
+              }
+            ]
           },
           {
             "roll": "2",
-            "text": "Dense jungle (woods), 9\" × 9\"."
+            "text": "Dense jungle (woods), 9\" × 9\".",
+            "pieces": [
+              {
+                "type": "woods",
+                "w": 9,
+                "h": 9,
+                "label": "Dense jungle"
+              }
+            ]
           },
           {
             "roll": "3",
-            "text": "Dense jungle (woods), 6\" × 6\", and a fallen tree (low wall)."
+            "text": "Dense jungle (woods), 6\" × 6\", and a fallen tree (low wall).",
+            "pieces": [
+              {
+                "type": "woods",
+                "w": 6,
+                "h": 6,
+                "label": "Dense jungle"
+              },
+              {
+                "type": "low_wall",
+                "w": 4,
+                "h": 1,
+                "label": "Fallen tree"
+              }
+            ]
           },
           {
             "roll": "4",
-            "text": "Stream across the sector (shallow water), with scrub on its banks."
+            "text": "Stream across the sector (shallow water), with scrub on its banks.",
+            "pieces": [
+              {
+                "type": "water",
+                "w": 12,
+                "h": 2,
+                "label": "Stream"
+              },
+              {
+                "type": "scrub",
+                "w": 4,
+                "h": 3,
+                "label": "Scrub"
+              }
+            ]
           },
           {
             "roll": "5",
-            "text": "Overgrown ruins: rubble with a standing wall."
+            "text": "Overgrown ruins: rubble with a standing wall.",
+            "pieces": [
+              {
+                "type": "rubble",
+                "w": 6,
+                "h": 6,
+                "label": "Overgrown ruins"
+              },
+              {
+                "type": "low_wall",
+                "w": 4,
+                "h": 1,
+                "label": "Standing wall"
+              }
+            ]
           },
           {
             "roll": "6",
-            "text": "Rocky rise: a hill with a rock (solid)."
+            "text": "Rocky rise: a hill with a rock (solid).",
+            "pieces": [
+              {
+                "type": "hill",
+                "w": 8,
+                "h": 6,
+                "label": "Rocky rise"
+              },
+              {
+                "type": "solid",
+                "w": 2,
+                "h": 2,
+                "label": "Rock"
+              }
+            ]
           }
         ]
       },
@@ -2696,30 +3357,97 @@
         "id": "desert",
         "name": "Desert, badlands",
         "fill": "Two rocks (solid).",
+        "fill_pieces": [
+          {
+            "type": "solid",
+            "w": 3,
+            "h": 2,
+            "label": "Rock"
+          },
+          {
+            "type": "solid",
+            "w": 3,
+            "h": 2,
+            "label": "Rock"
+          }
+        ],
         "table": [
           {
             "roll": "1",
-            "text": "Open ground."
+            "text": "Open ground.",
+            "pieces": []
           },
           {
             "roll": "2",
-            "text": "Open ground with a crater."
+            "text": "Open ground with a crater.",
+            "pieces": [
+              {
+                "type": "crater",
+                "w": 3,
+                "h": 3,
+                "label": "Crater"
+              }
+            ]
           },
           {
             "roll": "3",
-            "text": "Rocks: two pieces (solid)."
+            "text": "Rocks: two pieces (solid).",
+            "pieces": [
+              {
+                "type": "solid",
+                "w": 3,
+                "h": 2,
+                "label": "Rock"
+              },
+              {
+                "type": "solid",
+                "w": 3,
+                "h": 2,
+                "label": "Rock"
+              }
+            ]
           },
           {
             "roll": "4",
-            "text": "Dune or ridge (hill) across the sector."
+            "text": "Dune or ridge (hill) across the sector.",
+            "pieces": [
+              {
+                "type": "hill",
+                "w": 10,
+                "h": 3,
+                "label": "Ridge"
+              }
+            ]
           },
           {
             "roll": "5",
-            "text": "Scrub, 6\" × 6\"."
+            "text": "Scrub, 6\" × 6\".",
+            "pieces": [
+              {
+                "type": "scrub",
+                "w": 6,
+                "h": 6,
+                "label": "Scrub"
+              }
+            ]
           },
           {
             "roll": "6",
-            "text": "Outpost: a small building and a low wall."
+            "text": "Outpost: a small building and a low wall.",
+            "pieces": [
+              {
+                "type": "building",
+                "w": 4,
+                "h": 4,
+                "label": "Outpost"
+              },
+              {
+                "type": "low_wall",
+                "w": 6,
+                "h": 1,
+                "label": "Low wall"
+              }
+            ]
           }
         ]
       },
@@ -2727,30 +3455,85 @@
         "id": "farmland",
         "name": "Farmland",
         "fill": "Hedge line across the sector.",
+        "fill_pieces": [
+          {
+            "type": "hedge",
+            "w": 10,
+            "h": 1,
+            "label": "Hedge"
+          }
+        ],
         "table": [
           {
             "roll": "1",
-            "text": "Open field."
+            "text": "Open field.",
+            "pieces": []
           },
           {
             "roll": "2",
-            "text": "Crops (scrub), 9\" × 9\"."
+            "text": "Crops (scrub), 9\" × 9\".",
+            "pieces": [
+              {
+                "type": "scrub",
+                "w": 9,
+                "h": 9,
+                "label": "Crops"
+              }
+            ]
           },
           {
             "roll": "3",
-            "text": "Hedge or stone wall (low wall) across the sector."
+            "text": "Hedge or stone wall (low wall) across the sector.",
+            "pieces": [
+              {
+                "type": "low_wall",
+                "w": 10,
+                "h": 1,
+                "label": "Stone wall"
+              }
+            ]
           },
           {
             "roll": "4",
-            "text": "Farm building, 6\" × 6\", two storeys."
+            "text": "Farm building, 6\" × 6\", two storeys.",
+            "pieces": [
+              {
+                "type": "building",
+                "w": 6,
+                "h": 6,
+                "label": "Farm building"
+              }
+            ]
           },
           {
             "roll": "5",
-            "text": "Copse (woods), 6\" × 6\"."
+            "text": "Copse (woods), 6\" × 6\".",
+            "pieces": [
+              {
+                "type": "woods",
+                "w": 6,
+                "h": 6,
+                "label": "Copse"
+              }
+            ]
           },
           {
             "roll": "6",
-            "text": "Vehicles or machinery: two pieces (solid)."
+            "text": "Vehicles or machinery: two pieces (solid).",
+            "pieces": [
+              {
+                "type": "solid",
+                "w": 4,
+                "h": 2,
+                "label": "Machinery"
+              },
+              {
+                "type": "solid",
+                "w": 4,
+                "h": 2,
+                "label": "Vehicle"
+              }
+            ]
           }
         ]
       },
@@ -2758,30 +3541,92 @@
         "id": "fortified",
         "name": "Fortified position",
         "fill": "Crater.",
+        "fill_pieces": [
+          {
+            "type": "crater",
+            "w": 3,
+            "h": 3,
+            "label": "Crater"
+          }
+        ],
         "table": [
           {
             "roll": "1",
-            "text": "Trench across the sector, with a firing step."
+            "text": "Trench across the sector, with a firing step.",
+            "pieces": [
+              {
+                "type": "crater",
+                "w": 10,
+                "h": 2,
+                "label": "Trench"
+              }
+            ]
           },
           {
             "roll": "2",
-            "text": "Sandbag line (low wall)."
+            "text": "Sandbag line (low wall).",
+            "pieces": [
+              {
+                "type": "low_wall",
+                "w": 8,
+                "h": 1,
+                "label": "Sandbags"
+              }
+            ]
           },
           {
             "roll": "3",
-            "text": "Bunker, about 6\" × 6\", with firing slits."
+            "text": "Bunker, about 6\" × 6\", with firing slits.",
+            "pieces": [
+              {
+                "type": "bunker",
+                "w": 6,
+                "h": 6,
+                "label": "Bunker"
+              }
+            ]
           },
           {
             "roll": "4",
-            "text": "Crater field: two craters."
+            "text": "Crater field: two craters.",
+            "pieces": [
+              {
+                "type": "crater",
+                "w": 3,
+                "h": 3,
+                "label": "Crater"
+              },
+              {
+                "type": "crater",
+                "w": 3,
+                "h": 3,
+                "label": "Crater"
+              }
+            ]
           },
           {
             "roll": "5",
-            "text": "Wire across the sector."
+            "text": "Wire across the sector.",
+            "pieces": [
+              {
+                "type": "wire",
+                "w": 10,
+                "h": 1,
+                "label": "Wire"
+              }
+            ]
           },
           {
             "roll": "6",
-            "text": "Rubble, 6\" × 6\"."
+            "text": "Rubble, 6\" × 6\".",
+            "pieces": [
+              {
+                "type": "rubble",
+                "w": 6,
+                "h": 6,
+                "label": "Rubble"
+              }
+            ]
           }
         ]
       }
@@ -3104,6 +3949,30 @@
           "marksman": 1
         },
         "miniatures": "BLKOUT Task Force Boone: Strikeforce (Control Team)"
+      },
+      {
+        "id": "hostage",
+        "faction": "tfb",
+        "name": "Hostage",
+        "role": "Rescued personnel",
+        "rank": "green",
+        "stats": {
+          "move": 5,
+          "shoot": 0,
+          "fight": 0,
+          "physique": 0,
+          "nerve": 0,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "none",
+        "weapon": null,
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {},
+        "miniatures": "Any crew or civilian model"
       },
       {
         "id": "fs_salvage_hand",

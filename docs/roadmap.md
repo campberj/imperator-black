@@ -135,6 +135,14 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 3. Tables: complications, atmospherics, enemy force size and composition by threat level, reinforcements.
 4. Mission briefing format.
 
+**Progress (2026-10-22):**
+- [x] RJ's calls: all four mission types (capture a high-value target in place of breach and clear); mixed placement (open guard, hidden contacts); alert track plus a **mission clock** (time limit and clock die, not a round limit)
+- [x] `content/missions.yaml`: types, tiers 1–4, contact tables, alert track, clock, complications, placement, briefing; validated in CI
+- [x] Rules chapter 13: [missions](../rules/13-missions.md), with a worked example
+- [x] Reference generator `tools/generate_mission.py` (ship and land, seeded) and printed missions in [`docs/print/missions/`](print/missions/): sheet, dashboard and cards
+- [x] Blank [mission dashboard](print/ImperatorBlack_mission-dashboard.pdf)
+- [ ] Play each mission type at least once
+
 **Exit:** Each mission type played at least once.
 
 ## Phase 6 — Playtest block 1 (gate)

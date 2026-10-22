@@ -108,77 +108,86 @@ conditions:
   - { roll: "6", id: night, name: Night, text: "Darkness (chapter 8): models are seen only within 12\"." }
 
 # Environments. table: d6 per 12" sector. fill: what a sector becomes in the density check.
+# pieces / fill_pieces: what the mission generator draws (terrain type, footprint in inches, label).
+# The rules text is the authority; pieces are its footprint, placed near the sector's middle.
 environments:
   - id: urban
     name: Urban
     fill: "Rubble, 6\" × 6\"."
+    fill_pieces: [{ type: rubble, w: 6, h: 6, label: Rubble }]
     table:
-      - { roll: "1", text: "Street: one wreck or vehicle (solid)." }
-      - { roll: "2", text: "Rubble, 6\" × 6\", with a standing wall." }
-      - { roll: "3", text: "Small building, 6\" × 6\", one storey with a flat roof." }
-      - { roll: "4", text: "Large building, about 6\" × 9\", two storeys." }
-      - { roll: "5", text: "Ruined building: walls without a roof, rubble inside." }
-      - { roll: "6", text: "Barricade (low wall) across the sector, and a wreck." }
+      - { roll: "1", text: "Street: one wreck or vehicle (solid).", pieces: [{ type: solid, w: 4, h: 2, label: Wreck }] }
+      - { roll: "2", text: "Rubble, 6\" × 6\", with a standing wall.", pieces: [{ type: rubble, w: 6, h: 6, label: Rubble }, { type: low_wall, w: 4, h: 1, label: Standing wall }] }
+      - { roll: "3", text: "Small building, 6\" × 6\", one storey with a flat roof.", pieces: [{ type: building, w: 6, h: 6, label: Small building }] }
+      - { roll: "4", text: "Large building, about 6\" × 9\", two storeys.", pieces: [{ type: building, w: 6, h: 9, label: Large building }] }
+      - { roll: "5", text: "Ruined building: walls without a roof, rubble inside.", pieces: [{ type: rubble, w: 6, h: 6, label: Ruined building }] }
+      - { roll: "6", text: "Barricade (low wall) across the sector, and a wreck.", pieces: [{ type: low_wall, w: 10, h: 1, label: Barricade }, { type: solid, w: 4, h: 2, label: Wreck }] }
   - id: industrial
     name: Industrial
     fill: "Two containers (solid)."
+    fill_pieces: [{ type: solid, w: 6, h: 2.5, label: Container }, { type: solid, w: 6, h: 2.5, label: Container }]
     table:
-      - { roll: "1", text: "Yard: two containers (solid)." }
-      - { roll: "2", text: "Tanks or pipework (solid), about 6\" across." }
-      - { roll: "3", text: "Warehouse, about 6\" × 9\", one tall storey with a gantry inside." }
-      - { roll: "4", text: "Scrap heap (rubble), 6\" × 6\"." }
-      - { roll: "5", text: "Crates and low walls (low wall), two pieces." }
-      - { roll: "6", text: "Raised platform or gantry (hill, one level) with ladders." }
+      - { roll: "1", text: "Yard: two containers (solid).", pieces: [{ type: solid, w: 6, h: 2.5, label: Container }, { type: solid, w: 6, h: 2.5, label: Container }] }
+      - { roll: "2", text: "Tanks or pipework (solid), about 6\" across.", pieces: [{ type: solid, w: 6, h: 6, label: Tanks }] }
+      - { roll: "3", text: "Warehouse, about 6\" × 9\", one tall storey with a gantry inside.", pieces: [{ type: building, w: 6, h: 9, label: Warehouse }] }
+      - { roll: "4", text: "Scrap heap (rubble), 6\" × 6\".", pieces: [{ type: rubble, w: 6, h: 6, label: Scrap heap }] }
+      - { roll: "5", text: "Crates and low walls (low wall), two pieces.", pieces: [{ type: low_wall, w: 4, h: 1, label: Crates }, { type: low_wall, w: 4, h: 1, label: Low wall }] }
+      - { roll: "6", text: "Raised platform or gantry (hill, one level) with ladders.", pieces: [{ type: hill, w: 6, h: 6, label: Platform }] }
   - id: woodland
     name: Woodland
     fill: "Scrub, 6\" × 6\"."
+    fill_pieces: [{ type: scrub, w: 6, h: 6, label: Scrub }]
     table:
-      - { roll: "1", text: "Open ground." }
-      - { roll: "2", text: "Scrub, 6\" × 6\"." }
-      - { roll: "3", text: "Woods, 6\" × 9\"." }
-      - { roll: "4", text: "Woods, 6\" × 6\", and a fallen tree (low wall)." }
-      - { roll: "5", text: "Hedge or fence line across the sector." }
-      - { roll: "6", text: "Rocky outcrop: a hill with two rocks (solid) on it." }
+      - { roll: "1", text: "Open ground.", pieces: [] }
+      - { roll: "2", text: "Scrub, 6\" × 6\".", pieces: [{ type: scrub, w: 6, h: 6, label: Scrub }] }
+      - { roll: "3", text: "Woods, 6\" × 9\".", pieces: [{ type: woods, w: 6, h: 9, label: Woods }] }
+      - { roll: "4", text: "Woods, 6\" × 6\", and a fallen tree (low wall).", pieces: [{ type: woods, w: 6, h: 6, label: Woods }, { type: low_wall, w: 4, h: 1, label: Fallen tree }] }
+      - { roll: "5", text: "Hedge or fence line across the sector.", pieces: [{ type: hedge, w: 10, h: 1, label: Hedge }] }
+      - { roll: "6", text: "Rocky outcrop: a hill with two rocks (solid) on it.", pieces: [{ type: hill, w: 8, h: 6, label: Outcrop }, { type: solid, w: 2, h: 2, label: Rock }, { type: solid, w: 2, h: 2, label: Rock }] }
   - id: jungle
     name: Jungle
     fill: "Scrub, 6\" × 6\"."
+    fill_pieces: [{ type: scrub, w: 6, h: 6, label: Scrub }]
     table:
-      - { roll: "1", text: "Scrub, 6\" × 6\"." }
-      - { roll: "2", text: "Dense jungle (woods), 9\" × 9\"." }
-      - { roll: "3", text: "Dense jungle (woods), 6\" × 6\", and a fallen tree (low wall)." }
-      - { roll: "4", text: "Stream across the sector (shallow water), with scrub on its banks." }
-      - { roll: "5", text: "Overgrown ruins: rubble with a standing wall." }
-      - { roll: "6", text: "Rocky rise: a hill with a rock (solid)." }
+      - { roll: "1", text: "Scrub, 6\" × 6\".", pieces: [{ type: scrub, w: 6, h: 6, label: Scrub }] }
+      - { roll: "2", text: "Dense jungle (woods), 9\" × 9\".", pieces: [{ type: woods, w: 9, h: 9, label: Dense jungle }] }
+      - { roll: "3", text: "Dense jungle (woods), 6\" × 6\", and a fallen tree (low wall).", pieces: [{ type: woods, w: 6, h: 6, label: Dense jungle }, { type: low_wall, w: 4, h: 1, label: Fallen tree }] }
+      - { roll: "4", text: "Stream across the sector (shallow water), with scrub on its banks.", pieces: [{ type: water, w: 12, h: 2, label: Stream }, { type: scrub, w: 4, h: 3, label: Scrub }] }
+      - { roll: "5", text: "Overgrown ruins: rubble with a standing wall.", pieces: [{ type: rubble, w: 6, h: 6, label: Overgrown ruins }, { type: low_wall, w: 4, h: 1, label: Standing wall }] }
+      - { roll: "6", text: "Rocky rise: a hill with a rock (solid).", pieces: [{ type: hill, w: 8, h: 6, label: Rocky rise }, { type: solid, w: 2, h: 2, label: Rock }] }
   - id: desert
     name: Desert, badlands
     fill: "Two rocks (solid)."
+    fill_pieces: [{ type: solid, w: 3, h: 2, label: Rock }, { type: solid, w: 3, h: 2, label: Rock }]
     table:
-      - { roll: "1", text: "Open ground." }
-      - { roll: "2", text: "Open ground with a crater." }
-      - { roll: "3", text: "Rocks: two pieces (solid)." }
-      - { roll: "4", text: "Dune or ridge (hill) across the sector." }
-      - { roll: "5", text: "Scrub, 6\" × 6\"." }
-      - { roll: "6", text: "Outpost: a small building and a low wall." }
+      - { roll: "1", text: "Open ground.", pieces: [] }
+      - { roll: "2", text: "Open ground with a crater.", pieces: [{ type: crater, w: 3, h: 3, label: Crater }] }
+      - { roll: "3", text: "Rocks: two pieces (solid).", pieces: [{ type: solid, w: 3, h: 2, label: Rock }, { type: solid, w: 3, h: 2, label: Rock }] }
+      - { roll: "4", text: "Dune or ridge (hill) across the sector.", pieces: [{ type: hill, w: 10, h: 3, label: Ridge }] }
+      - { roll: "5", text: "Scrub, 6\" × 6\".", pieces: [{ type: scrub, w: 6, h: 6, label: Scrub }] }
+      - { roll: "6", text: "Outpost: a small building and a low wall.", pieces: [{ type: building, w: 4, h: 4, label: Outpost }, { type: low_wall, w: 6, h: 1, label: Low wall }] }
   - id: farmland
     name: Farmland
     fill: "Hedge line across the sector."
+    fill_pieces: [{ type: hedge, w: 10, h: 1, label: Hedge }]
     table:
-      - { roll: "1", text: "Open field." }
-      - { roll: "2", text: "Crops (scrub), 9\" × 9\"." }
-      - { roll: "3", text: "Hedge or stone wall (low wall) across the sector." }
-      - { roll: "4", text: "Farm building, 6\" × 6\", two storeys." }
-      - { roll: "5", text: "Copse (woods), 6\" × 6\"." }
-      - { roll: "6", text: "Vehicles or machinery: two pieces (solid)." }
+      - { roll: "1", text: "Open field.", pieces: [] }
+      - { roll: "2", text: "Crops (scrub), 9\" × 9\".", pieces: [{ type: scrub, w: 9, h: 9, label: Crops }] }
+      - { roll: "3", text: "Hedge or stone wall (low wall) across the sector.", pieces: [{ type: low_wall, w: 10, h: 1, label: Stone wall }] }
+      - { roll: "4", text: "Farm building, 6\" × 6\", two storeys.", pieces: [{ type: building, w: 6, h: 6, label: Farm building }] }
+      - { roll: "5", text: "Copse (woods), 6\" × 6\".", pieces: [{ type: woods, w: 6, h: 6, label: Copse }] }
+      - { roll: "6", text: "Vehicles or machinery: two pieces (solid).", pieces: [{ type: solid, w: 4, h: 2, label: Machinery }, { type: solid, w: 4, h: 2, label: Vehicle }] }
   - id: fortified
     name: Fortified position
     fill: "Crater."
+    fill_pieces: [{ type: crater, w: 3, h: 3, label: Crater }]
     table:
-      - { roll: "1", text: "Trench across the sector, with a firing step." }
-      - { roll: "2", text: "Sandbag line (low wall)." }
-      - { roll: "3", text: "Bunker, about 6\" × 6\", with firing slits." }
-      - { roll: "4", text: "Crater field: two craters." }
-      - { roll: "5", text: "Wire across the sector." }
-      - { roll: "6", text: "Rubble, 6\" × 6\"." }
+      - { roll: "1", text: "Trench across the sector, with a firing step.", pieces: [{ type: crater, w: 10, h: 2, label: Trench }] }
+      - { roll: "2", text: "Sandbag line (low wall).", pieces: [{ type: low_wall, w: 8, h: 1, label: Sandbags }] }
+      - { roll: "3", text: "Bunker, about 6\" × 6\", with firing slits.", pieces: [{ type: bunker, w: 6, h: 6, label: Bunker }] }
+      - { roll: "4", text: "Crater field: two craters.", pieces: [{ type: crater, w: 3, h: 3, label: Crater }, { type: crater, w: 3, h: 3, label: Crater }] }
+      - { roll: "5", text: "Wire across the sector.", pieces: [{ type: wire, w: 10, h: 1, label: Wire }] }
+      - { roll: "6", text: "Rubble, 6\" × 6\".", pieces: [{ type: rubble, w: 6, h: 6, label: Rubble }] }
 
 environment_roll:
   - { roll: "1", environment: urban }

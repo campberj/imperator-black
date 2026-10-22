@@ -81,28 +81,13 @@ You own every BLKOUT and BPRE kit, so each element has a dedicated line. All are
 
 ## Mechanics adopted for playtesting
 
-### Contact tokens
+### Contacts, the alert track and the clock
 
-Numbered poker chips start as **unknown contacts**.
+These are now rules: [chapter 13, missions](../../rules/13-missions.md), with the numbers in [`content/missions.yaml`](../../content/missions.yaml).
 
-- A contact is revealed when a player model gains line of sight to it, or when noise occurs within a set distance.
-- On reveal, roll on the mission's **contact table**. The app prints it, tuned to the threat tier. Results run from *false alarm* through the tier's elements to *booby trap*.
-- Unrevealed contacts move toward noise once the alert level allows it.
-
-### Alert track (0–6)
-
-| Raises alert | |
-|---|---|
-| Shooting (not suppressed or silenced) | +1 |
-| Breaching a door or bulkhead | +1 |
-| Explosion | +2 |
-| A revealed enemy leaves your line of sight alive, or an element raises the alarm (chapter 10) | +1 |
-
-| Threshold | Effect |
-|---|---|
-| 2 | Unrevealed contacts start moving toward the last noise |
-| 4 | The contractor reaction force arrives at a set entry point over the next rounds |
-| 6 | Lockdown: a mission-specific event (doors seal, hostages are moved, data is wiped, the ship tries to break dock) |
+- **Contacts:** numbered chips, revealed when a player model sees one or ends a Move within 3", rolled on the threat tier's d6 table (false alarm or booby trap through the tier's elements). The same table gives the guard, placed openly at the objective.
+- **Alert track (0–6):** raised by Loud (+1) and Very loud (+2) noise, the alarm (+1) and each missed check-in (+1). At 2 contacts move toward the marker, at 4 the tier's reinforcement element arrives at the enemy entry, at 6 the mission type's lockdown happens.
+- **Mission clock (RJ, 2026-10-22):** no round limit. A time limit and a clock die (small missions 20 minutes on a d4, large 30 on a d6); at the end of each round roll the die and move the clock. Check-ins every 5 minutes from minute 10.
 
 ### Surrender and prisoners
 
@@ -110,5 +95,4 @@ Cowed models who surrender become **prisoners**. They are a campaign resource (i
 
 ## Open
 
-- Exact contact tables per tier (Phase 3)
 - Signature actions for hired guns and handlers (Phase 2)

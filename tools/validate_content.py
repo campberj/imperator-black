@@ -216,6 +216,19 @@ covers_d6(Tr["environment_roll"], "terrain.environment_roll")
 covers_d6(Tr["conditions"], "terrain.conditions")
 for r in Tr["environment_roll"]:
     need(r["environment"], env_ids, "terrain.environment_roll environment")
+terrain_ids = {t["id"] for t in Tr["types"]}
+for e in Tr["environments"]:
+    for w, pieces in [(f"terrain environment {e['id']} fill", e.get("fill_pieces"))] + \
+                     [(f"terrain environment {e['id']} roll {r['roll']}", r.get("pieces")) for r in e["table"]]:
+        if pieces is None:
+            errors.append(f"{w}: needs 'pieces' (the generator's footprint; [] for open ground)")
+            continue
+        for pc in pieces:
+            need(pc.get("type"), terrain_ids, f"{w} piece type")
+            if not (0 < pc.get("w", 0) <= 12 and 0 < pc.get("h", 0) <= 12):
+                errors.append(f"{w}: piece '{pc.get('label')}' must fit a 12\" sector")
+    if not e.get("fill_pieces"):
+        errors.append(f"terrain environment {e['id']}: the fill must have cover")
 for x in Tr["types"]:
     for k in ("cover", "move", "sight"):
         if not x.get(k):
@@ -223,6 +236,34 @@ for x in Tr["types"]:
 for x in C["behaviors"].get("terms", []):
     if not x.get("term") or not x.get("text"):
         errors.append("behaviors.terms: each needs term and text")
+
+# Missions (chapter 13).
+M = C["missions"]
+mission_ids = ids(M["missions"], "missions.missions")
+covers_d6(M["mission_roll"], "missions.mission_roll")
+covers_d6(M["tier_roll"], "missions.tier_roll")
+covers_d6(M["complications"], "missions.complications")
+for r in M["mission_roll"]:
+    need(r["mission"], mission_ids, "missions.mission_roll mission")
+for z in M["clock"]["sizes"]:
+    if z["die"] not in ("d4", "d6", "d8") or not isinstance(z["limit"], int) or z["limit"] <= M["clock"]["first_check_in"]:
+        errors.append(f"missions.clock size {z['id']}: needs a die (d4/d6/d8) and a whole-minute limit past the first check-in")
+special = {c["id"] for c in M["contact_results"]}
+for tr in M["tiers"]:
+    w = f"mission tier {tr['tier']}"
+    covers_d6(tr["table"], w)
+    for r in tr["table"]:
+        if r["result"] not in special:
+            need(r["result"], elements, f"{w} contact result")
+    need(tr["reinforcement"], elements, f"{w} reinforcement")
+    need(tr["hvt"], troops, f"{w} hvt")
+for r in M["tier_roll"]:
+    if r["tier"] not in [t["tier"] for t in M["tiers"]]:
+        errors.append(f"missions.tier_roll: tier {r['tier']} has no table")
+for m in M["missions"]:
+    for k in ("task", "lockdown", "decisive", "marginal", "failure", "ship", "land"):
+        if not m.get(k):
+            errors.append(f"mission {m['id']}: needs '{k}'")
 
 if not errors:
     sys.path.insert(0, str(ROOT / "tools"))

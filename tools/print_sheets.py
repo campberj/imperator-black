@@ -253,7 +253,7 @@ SOLO = C["behaviors"]
 BEHAVIOR_COLOUR = colors.HexColor("#3a3f46")
 
 
-def text_card(c, x, y, title, subtitle, flow, colour=BEHAVIOR_COLOUR):
+def text_card(c, x, y, title, subtitle, flow, colour=BEHAVIOR_COLOUR, chapter="chapter 10"):
     c.setStrokeColor(RULE)
     c.setLineWidth(0.6)
     c.rect(x, y, CARD_W, CARD_H)
@@ -268,7 +268,7 @@ def text_card(c, x, y, title, subtitle, flow, colour=BEHAVIOR_COLOUR):
     footer = 0.22 * inch
     c.setFillColor(MUTED)
     c.setFont("Body", 5.8)
-    c.drawRightString(x + CARD_W - 0.14 * inch, y + 0.08 * inch, f"Imperator Black · content v{VERSION} · chapter 10")
+    c.drawRightString(x + CARD_W - 0.14 * inch, y + 0.08 * inch, f"Imperator Black · content v{VERSION} · {chapter}")
     frame = Frame(x + 0.14 * inch, y + footer, CARD_W - 0.28 * inch, CARD_H - band - footer - 0.04 * inch,
                   leftPadding=0, rightPadding=0, topPadding=4, bottomPadding=0)
     frame.addFromList([KeepInFrame(frame._aW, frame._aH, flow, mode="shrink")], c)
