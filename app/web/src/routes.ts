@@ -1,25 +1,43 @@
 import { useEffect, useState } from 'react'
 
-// Views are addressed by the URL hash (#units, #reference, #behaviors), so links and reloads work without a router.
+// Views are addressed by the URL hash (#units, #reference, #behaviors, #decks?vessel=corvette&seed=5),
+// so links and reloads work without a router.
 export const ROUTES = [
   { id: 'units', label: 'Units' },
   { id: 'reference', label: 'Reference' },
   { id: 'behaviors', label: 'Behavior cards' },
+  { id: 'decks', label: 'Deck maps' },
 ] as const
 
 export type Route = (typeof ROUTES)[number]['id']
 
-function current(): Route {
-  const hash = window.location.hash.slice(1)
-  return ROUTES.find((r) => r.id === hash)?.id ?? 'units'
+function parse(): { route: Route; params: URLSearchParams } {
+  const [path, query = ''] = window.location.hash.slice(1).split('?', 2)
+  return { route: ROUTES.find((r) => r.id === path)?.id ?? 'units', params: new URLSearchParams(query) }
 }
 
-export function useRoute(): Route {
-  const [route, setRoute] = useState(current)
+function useHash() {
+  const [hash, setHash] = useState(() => window.location.hash)
   useEffect(() => {
-    const onChange = () => setRoute(current())
+    const onChange = () => setHash(window.location.hash)
     window.addEventListener('hashchange', onChange)
     return () => window.removeEventListener('hashchange', onChange)
   }, [])
-  return route
+  return hash
+}
+
+export function useRoute(): Route {
+  useHash()
+  return parse().route
+}
+
+/** The query part of the hash (#decks?vessel=…&seed=…). */
+export function useHashParams(): URLSearchParams {
+  useHash()
+  return parse().params
+}
+
+export function navigate(route: Route, params?: Record<string, string | number>) {
+  const query = params ? '?' + new URLSearchParams(Object.entries(params).map(([k, v]) => [k, String(v)])).toString() : ''
+  window.location.hash = route + query
 }

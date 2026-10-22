@@ -158,8 +158,31 @@ export interface Behaviors {
   behaviors: Behavior[]
 }
 
+export interface Vessel {
+  id: string
+  name: string
+  board: [number, number]
+  text: string
+}
+
+export interface Room {
+  id: string
+  name: string
+  size: 'compartment' | 'small'
+  text?: string
+  security?: string
+}
+
+export interface SecurityLevel {
+  id: string
+  name: string
+  target: number
+  successes: number
+  examples: string
+}
+
 export interface Content {
-  core: { version: string; ranks: Rank[]; attributes: Attribute[] }
+  core: { version: string; ranks: Rank[]; attributes: Attribute[]; security: { levels: SecurityLevel[] } }
   weapons: { ranged: RangedWeapon[]; melee: MeleeWeapon[]; thrown: ThrownWeapon[] }
   armour: { armour: Armour[] }
   keywords: { weapon: Keyword[]; armour: Keyword[] }
@@ -169,6 +192,7 @@ export interface Content {
   factions: { factions: Faction[]; elements: Element[]; threat_tiers: ThreatTier[] }
   rosters: { teams: Team[] }
   behaviors: Behaviors
+  layouts: { vessels: Vessel[]; rooms: Room[] }
 }
 
 export interface LoadedContent {
