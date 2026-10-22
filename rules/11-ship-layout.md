@@ -214,7 +214,7 @@ Phase 5 adds the mission tables: objectives, where the enemy starts, contacts an
 
 ## Example
 
-A freighter ([deck sheet](../docs/print/decks/deck-freighter-42.pdf)). The board is 36" × 18", the spine is three pairs, and it needs four to six compartments.
+A freighter ([deck sheet](../docs/print/decks/ImperatorBlack_deck-freighter-42.pdf)). The board is 36" × 18", the spine is three pairs, and it needs four to six compartments.
 
 1. **Spine.** The docking passage (P1) goes against the middle of the west edge, then junction J1 and passage P2. At J2 the turn roll is 3, straight on: passage P3. At J3 it is 1, straight: passage P4, which stops 3" short of the east edge.
 2. **Heart.** There is no room for the bridge beyond P4, so it goes beside P4. Both sides fit; you choose the south (C1).

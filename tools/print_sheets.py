@@ -2,8 +2,8 @@
 """Generate printable unit cards and a quick-reference sheet from content/*.yaml.
 
 Run from the repo root: python3 tools/print_sheets.py
-Writes docs/print/unit-cards.pdf (3.5" x 5" cards, four per US Letter page, with cut marks)
-and docs/print/quick-reference.pdf (two pages).
+Writes docs/print/ImperatorBlack_unit-cards.pdf (3.5" x 5" cards, four per US Letter page, with cut marks)
+and docs/print/ImperatorBlack_quick-reference.pdf (two pages).
 
 The quick reference summarises rules/ chapters 1-8. Its tables come from content; its short
 rule summaries are written here, so update them when the rules text changes.
@@ -24,6 +24,7 @@ from reportlab.platypus import (Frame, KeepInFrame, Paragraph, SimpleDocTemplate
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "print"
+PREFIX = "ImperatorBlack_"   # every printed PDF is named ImperatorBlack_<name>.pdf (RJ, 2026-10-21)
 C = {f.stem: yaml.safe_load(f.read_text()) for f in sorted((ROOT / "content").glob("*.yaml"))}
 VERSION = C["core"]["version"]
 
@@ -230,7 +231,7 @@ def cut_marks(c):
 def unit_cards(factions=("tfb", "freespace", "contractor", "un", "directorate"), name="unit-cards.pdf"):
     order = list(factions)
     troops = sorted([t for t in C["troops"]["troops"] if t["faction"] in order], key=lambda t: order.index(t["faction"]))
-    path = OUT / name
+    path = OUT / (PREFIX + name)
     c = canvas.Canvas(str(path), pagesize=letter)
     c.setTitle("Imperator Black — Unit Cards")
     c.setAuthor("Imperator Black")
@@ -342,7 +343,7 @@ def card_sheet(path, title, drawers):
 
 
 def behavior_cards():
-    path = OUT / "behavior-cards.pdf"
+    path = OUT / f"{PREFIX}behavior-cards.pdf"
     drawers = [(lambda c, x, y, r=r: text_card(c, x, y, *r)) for r in solo_reference_cards()]
     drawers += [(lambda c, x, y, b=b: draw_behavior_card(c, x, y, b)) for b in SOLO["behaviors"]]
     return path, card_sheet(path, "Imperator Black — Behavior Cards", drawers)
@@ -374,7 +375,7 @@ def bullets(items):
 
 
 def quick_reference():
-    path = OUT / "quick-reference.pdf"
+    path = OUT / f"{PREFIX}quick-reference.pdf"
     doc = SimpleDocTemplate(str(path), pagesize=letter, leftMargin=0.5 * inch, rightMargin=0.5 * inch,
                             topMargin=0.45 * inch, bottomMargin=0.45 * inch,
                             title="Imperator Black — Quick Reference", author="Imperator Black")
@@ -504,7 +505,7 @@ def deck_builder():
     rooms = {r["id"]: r for r in Ly["rooms"]}
     sec = {s["id"]: s["name"] for s in C["core"]["security"]["levels"]}
     haz = {h["id"]: h for h in Ly["hazards"]}
-    path = OUT / "deck-builder.pdf"
+    path = OUT / f"{PREFIX}deck-builder.pdf"
     doc = SimpleDocTemplate(str(path), pagesize=letter, leftMargin=0.45 * inch, rightMargin=0.45 * inch,
                             topMargin=0.4 * inch, bottomMargin=0.4 * inch, title="Imperator Black — Deck Builder")
     W = letter[0] - 0.9 * inch
@@ -573,7 +574,7 @@ def deck_builder():
 def land_reference():
     from reportlab.platypus import PageBreak
     T = C["terrain"]
-    path = OUT / "land-battles.pdf"
+    path = OUT / f"{PREFIX}land-battles.pdf"
     doc = SimpleDocTemplate(str(path), pagesize=letter, leftMargin=0.45 * inch, rightMargin=0.45 * inch,
                             topMargin=0.4 * inch, bottomMargin=0.4 * inch, title="Imperator Black — Land Battles")
     W = letter[0] - 0.9 * inch

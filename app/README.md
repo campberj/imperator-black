@@ -77,7 +77,7 @@ With the API running: `npm --prefix app/web install && npm --prefix app/web run 
 
 The content already holds the unit database: every faction, troop profile, weapon, armour, gear item, skill, keyword, team, enemy element and behavior profile (`content/*.yaml`, served by `GET /content`). Build the screens to browse it. No new rules; every word comes from the `text` and `name` fields.
 
-- **Units:** pick a faction, see its troop profiles as cards (the same layout as `docs/print/unit-cards.pdf`: attributes, armour, weapons and options, kit, skills with their text), its teams (player factions) or elements (enemy factions, with threat tier and behavior).
+- **Units:** pick a faction, see its troop profiles as cards (the same layout as `docs/print/ImperatorBlack_unit-cards.pdf`: attributes, armour, weapons and options, kit, skills with their text), its teams (player factions) or elements (enemy factions, with threat tier and behavior).
 - **Reference:** gear, skills (with levels and Proposed status), weapon and armour keywords, searchable.
 - **Behavior cards:** the chapter 10 reference cards and one card per behavior profile.
 - Filters: faction, rank, role, keyword; a search box across names and text.

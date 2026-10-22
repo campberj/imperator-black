@@ -4,7 +4,7 @@
 Usage (from the repo root):
     python3 tools/print_scenario.py docs/scenarios/gym-01-first-breach.yaml
 
-Writes docs/print/<id>-sheet.pdf and docs/print/<id>-cards.pdf.
+Writes docs/print/ImperatorBlack_<id>-sheet.pdf and docs/print/ImperatorBlack_<id>-cards.pdf.
 Troop profiles, weapons and gear come from content/ (via print_sheets.py), so the cards
 always match the rules.
 """
@@ -405,7 +405,7 @@ def main():
     s = yaml.safe_load(path.read_text())
     if s.get("kind") == "deck":
         ps.OUT.mkdir(parents=True, exist_ok=True)
-        out = ps.OUT / "decks" / f"{s['id']}.pdf"
+        out = ps.OUT / "decks" / f"{ps.PREFIX}{s['id']}.pdf"
         out.parent.mkdir(exist_ok=True)
         deck_sheet(s, out)
         print(f"Wrote {out.relative_to(ROOT)}")
@@ -421,8 +421,8 @@ def main():
         if m.get("weapon") and m["weapon"] not in ps.RANGED:
             raise SystemExit(f"Unknown weapon '{m['weapon']}'")
     ps.OUT.mkdir(parents=True, exist_ok=True)
-    sheet_path = ps.OUT / f"{s['id']}-sheet.pdf"
-    cards_path = ps.OUT / f"{s['id']}-cards.pdf"
+    sheet_path = ps.OUT / f"{ps.PREFIX}{s['id']}-sheet.pdf"
+    cards_path = ps.OUT / f"{ps.PREFIX}{s['id']}-cards.pdf"
     sheet(s, sheet_path)
     n = cards(s, cards_path)
     print(f"Wrote {sheet_path.relative_to(ROOT)}")

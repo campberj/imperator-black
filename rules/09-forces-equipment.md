@@ -286,4 +286,4 @@ Vehicles (the AT-RT and the infantry support platform) wait for the vehicle rule
 | Katarn armour | 2 | Sealed |
 <!-- /table -->
 
-Teams for the Republic are in the tables of organisation above. Cards are printed in `docs/print/republic-cards.pdf`.
+Teams for the Republic are in the tables of organisation above. Cards are printed in `docs/print/ImperatorBlack_republic-cards.pdf`.

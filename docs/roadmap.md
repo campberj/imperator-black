@@ -92,7 +92,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 - [x] Gym 1 fixes: door sequence, crack and throw, exposure trigger, hacking security levels (rules v0.5)
 - [x] Rules chapter 10: [the solo opponent](../rules/10-solo-opponent.md): awareness, noise, the marker and alarm, drill by training, activation order, targets, close quarters, surrender, tie-breakers
 - [x] Priority lists for all nine behavior profiles in `content/behaviors.yaml`, validated in CI
-- [x] [Behavior cards](print/behavior-cards.pdf); Gym 1 reprinted with them in place of the stopgap orders
+- [x] [Behavior cards](print/ImperatorBlack_behavior-cards.pdf); Gym 1 reprinted with them in place of the stopgap orders
 - [x] Replayed Gym 1 with the behavior cards ([log](playtests/2026-10-21-gym-01-replay.md)): almost no judgment calls; investigation, rally and break-off all worked. **Phase 3 exit met.**
 - [ ] Contact tables per threat tier (moves to Phase 5 with the alert track and missions)
 
@@ -121,7 +121,7 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 
 - [x] Rules chapter 12: [land battles](../rules/12-land-terrain.md): terrain types, height, conditions, noise in the open, land table setup with seven environments (`content/terrain.yaml`)
 - [x] Solo opponent lists reworded for land (area, approach, exit)
-- [x] Printable [land battles reference](print/land-battles.pdf)
+- [x] Printable [land battles reference](print/ImperatorBlack_land-battles.pdf)
 - [x] Land gym written: [Gym 2: Silence the Relay](scenarios/gym-02-silence-the-relay.yaml), from RJ's desert table
 - [ ] Play Gym 2
 - [ ] Land missions (with Phase 5) and vehicles (after the PoC)

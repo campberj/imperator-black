@@ -12,6 +12,7 @@ A 28mm sci-fi narrative campaign wargame (printed rules first) plus a companion 
 - Record design decisions in `docs/design/decisions.md` (Settled / Leaning / Proposed / Open).
 - Rules prose: plain, direct, second-person-free rules text; British "armour" spelling in rules and content; inches for distances.
 - Setting content: no occult, demonic or supernatural elements (see `docs/design/pillars.md`, non-goals).
+- **Every PDF is named `ImperatorBlack_<name>.pdf`** (RJ). The print tools add the prefix (`PREFIX` in `tools/print_sheets.py`); any new PDF output must too.
 
 ## Commands
 
