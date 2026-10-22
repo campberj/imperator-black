@@ -32,6 +32,13 @@ ranged:
   - { id: z6,          faction: republic, name: Z-6 rotary blaster,        damage: 2d8,  short_range: 18, ap: 0, auto: 3, keywords: [auto, suppressing] }
   - { id: rps6,        faction: republic, name: RPS-6 rocket launcher,     damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome] }
 
+  # Near Present (faction: anchorage / hankou). Robot (CCT) weapon modules; listed with those forces in chapter 9.
+  - { id: m134,      faction: anchorage, name: M134 minigun,            damage: 2d8,  short_range: 24, ap: 0, auto: 4, keywords: [auto, suppressing] }
+  - { id: ac20,      faction: anchorage, name: 20mm autocannon,         damage: 2d12, short_range: 36, ap: 2, auto: 2, keywords: [auto, breach] }
+  - { id: maaws,     faction: anchorage, name: MAAWS recoilless rifle,  damage: 2d12, short_range: 30, ap: 2, keywords: [one_per_round, breach] }
+  - { id: cs_lm5,    faction: hankou,    name: CS/LM5 rotary gun,       damage: 2d8,  short_range: 24, ap: 0, auto: 3, keywords: [auto, suppressing] }
+  - { id: dzj08,     faction: hankou,    name: Dual DZJ-08 recoilless,  damage: 2d12, short_range: 30, ap: 2, keywords: [one_per_round, breach] }
+
 melee:
   - { id: unarmed,       name: "Unarmed / weapon butt",      damage: 2d4, ap: 0 }
   - { id: knife,         name: "Knife or bayonet",           damage: 2d8, ap: 0 }

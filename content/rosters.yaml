@@ -71,6 +71,58 @@ teams:
       - { troop: rep_commando_leader, count: 1 }
       - { troop: rep_clone_commando,  count: 3 }
 
+  # ---------------- Near Present ----------------
+  # A Multi-Function Response Team is two chalks, the control cell and a Hound (Anchorage),
+  # or two SPEAR teams and a pair of ZQ44s (Hankou): nine warfighters and their robots.
+  - id: anc_chalk
+    name: Anchorage chalk
+    faction: anchorage
+    summary: "A three-man close combat cell: two Scouts and a Grenadier."
+    slots:
+      - { troop: anc_scout,     count: 2 }
+      - { troop: anc_grenadier, count: 1 }
+
+  - id: anc_control
+    name: Anchorage control cell
+    faction: anchorage
+    summary: "The Prime and two Systems Operators, who run the drones, the jamming and the Hound."
+    slots:
+      - { troop: anc_prime,            count: 1 }
+      - { troop: anc_systems_operator, count: 2 }
+
+  - id: anc_hound_team
+    name: Hound CCT
+    faction: anchorage
+    summary: "One Hound assault robot with its weapon modules."
+    slots:
+      - { troop: anc_hound, count: 1 }
+
+  - id: hk_spear_1
+    name: Hankou SPEAR 1
+    faction: hankou
+    summary: "The Team Leader, an Automatic Rifleman, a Pioneer and a Rifleman."
+    slots:
+      - { troop: hk_team_leader,   count: 1 }
+      - { troop: hk_auto_rifleman, count: 1 }
+      - { troop: hk_pioneer,       count: 1 }
+      - { troop: hk_rifleman,      count: 1 }
+
+  - id: hk_spear_2
+    name: Hankou SPEAR 2
+    faction: hankou
+    summary: "Three Riflemen, an Automatic Rifleman and a Pioneer."
+    slots:
+      - { troop: hk_rifleman,      count: 3 }
+      - { troop: hk_auto_rifleman, count: 1 }
+      - { troop: hk_pioneer,       count: 1 }
+
+  - id: hk_cct_pair
+    name: ZQ44 CCT pair
+    faction: hankou
+    summary: "Two light ZQ44 robots: base of fire, spotting, or one-way attack."
+    slots:
+      - { troop: hk_zq44, count: 2 }
+
 starting_forces:
   - id: poc_boarding_element
     name: Boarding element

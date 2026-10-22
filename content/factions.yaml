@@ -11,6 +11,14 @@ factions:
     name: Galactic Republic
     side: player
     summary: "The Grand Army of the Republic: clone troopers, specialists and commandos led by clone officers and Jedi."
+  - id: anchorage
+    name: Anchorage
+    side: player
+    summary: "Near Present: Anchorage Multi-Function Response Company, a US-contracted maritime PMC. Scouts in three-man cells, a Prime and Systems Operators, with a Hound combat robot."
+  - id: hankou
+    name: Hankou
+    side: player
+    summary: "Near Present: Hankou Advanced Maritime Systems' security force, ex-PNLAN marines in two SPEAR teams with a pair of ZQ44 combat robots."
   - id: freespace
     name: Freespace Solutions
     side: enemy

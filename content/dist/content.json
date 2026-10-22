@@ -710,6 +710,18 @@
         "summary": "The Grand Army of the Republic: clone troopers, specialists and commandos led by clone officers and Jedi."
       },
       {
+        "id": "anchorage",
+        "name": "Anchorage",
+        "side": "player",
+        "summary": "Near Present: Anchorage Multi-Function Response Company, a US-contracted maritime PMC. Scouts in three-man cells, a Prime and Systems Operators, with a Hound combat robot."
+      },
+      {
+        "id": "hankou",
+        "name": "Hankou",
+        "side": "player",
+        "summary": "Near Present: Hankou Advanced Maritime Systems' security force, ex-PNLAN marines in two SPEAR teams with a pair of ZQ44 combat robots."
+      },
+      {
         "id": "freespace",
         "name": "Freespace Solutions",
         "side": "enemy",
@@ -1267,6 +1279,36 @@
         "text": "Enemy Automated models within 6\" take -2 to hit, and enemy Hack tests within 6\" take -2.",
         "grants_skills": {},
         "status": "settled"
+      },
+      {
+        "id": "mk19",
+        "name": "Mk19 grenade launcher",
+        "text": "Mounted automatic grenade launcher. The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 30\"; one Shoot action throws two, at points within 3\" of each other. Its Throws are Very loud and count as Shoot actions for reactions.",
+        "grants_skills": {},
+        "status": "proposed"
+      },
+      {
+        "id": "owa_package",
+        "name": "Mobility and one-way attack package",
+        "text": "Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has the Self-destruct skill.",
+        "grants_skills": {
+          "self_destruct": 1
+        },
+        "status": "proposed"
+      },
+      {
+        "id": "flux_warhead",
+        "name": "Flux warhead",
+        "text": "Once per mission, as an action: an electromagnetic burst. Every Automated model within 6\", friend or foe and including the carrier, takes a hit of 2d10 damage, AP 3.",
+        "grants_skills": {},
+        "status": "proposed"
+      },
+      {
+        "id": "coop_engagement",
+        "name": "Cooperative engagement package",
+        "text": "Shares targeting data: once per round, a friendly model within 12\" of the carrier gets +1 on one Shoot test against an enemy the carrier can see.",
+        "grants_skills": {},
+        "status": "proposed"
       }
     ]
   },
@@ -2640,6 +2682,106 @@
             "count": 3
           }
         ]
+      },
+      {
+        "id": "anc_chalk",
+        "name": "Anchorage chalk",
+        "faction": "anchorage",
+        "summary": "A three-man close combat cell: two Scouts and a Grenadier.",
+        "slots": [
+          {
+            "troop": "anc_scout",
+            "count": 2
+          },
+          {
+            "troop": "anc_grenadier",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "anc_control",
+        "name": "Anchorage control cell",
+        "faction": "anchorage",
+        "summary": "The Prime and two Systems Operators, who run the drones, the jamming and the Hound.",
+        "slots": [
+          {
+            "troop": "anc_prime",
+            "count": 1
+          },
+          {
+            "troop": "anc_systems_operator",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "anc_hound_team",
+        "name": "Hound CCT",
+        "faction": "anchorage",
+        "summary": "One Hound assault robot with its weapon modules.",
+        "slots": [
+          {
+            "troop": "anc_hound",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "hk_spear_1",
+        "name": "Hankou SPEAR 1",
+        "faction": "hankou",
+        "summary": "The Team Leader, an Automatic Rifleman, a Pioneer and a Rifleman.",
+        "slots": [
+          {
+            "troop": "hk_team_leader",
+            "count": 1
+          },
+          {
+            "troop": "hk_auto_rifleman",
+            "count": 1
+          },
+          {
+            "troop": "hk_pioneer",
+            "count": 1
+          },
+          {
+            "troop": "hk_rifleman",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "hk_spear_2",
+        "name": "Hankou SPEAR 2",
+        "faction": "hankou",
+        "summary": "Three Riflemen, an Automatic Rifleman and a Pioneer.",
+        "slots": [
+          {
+            "troop": "hk_rifleman",
+            "count": 3
+          },
+          {
+            "troop": "hk_auto_rifleman",
+            "count": 1
+          },
+          {
+            "troop": "hk_pioneer",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "hk_cct_pair",
+        "name": "ZQ44 CCT pair",
+        "faction": "hankou",
+        "summary": "Two light ZQ44 robots: base of fire, spotting, or one-way attack.",
+        "slots": [
+          {
+            "troop": "hk_zq44",
+            "count": 2
+          }
+        ]
       }
     ],
     "starting_forces": [
@@ -2772,6 +2914,14 @@
         "status": "proposed",
         "levels": [
           "Blast weapons step one extra row down against it."
+        ]
+      },
+      {
+        "id": "laser_detector",
+        "name": "Laser detector",
+        "status": "proposed",
+        "levels": [
+          "Laser warning receivers cue its fire: its Reaction and Overwatch shots do not take the −1 for reacting."
         ]
       },
       {
@@ -5599,6 +5749,328 @@
           "jedi_discipline": 1
         },
         "miniatures": "Star Wars: Legion Galactic Republic starter (Jedi Guardian)"
+      },
+      {
+        "id": "anc_prime",
+        "faction": "anchorage",
+        "name": "Prime",
+        "role": "Assault lead",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 3,
+          "fight": 2,
+          "physique": 1,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "auto_rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "flashbang"
+        ],
+        "gear": [
+          "breaching_charge",
+          "low_light_optics"
+        ],
+        "skills": {
+          "leader": 1
+        },
+        "miniatures": "Near Present: Anchorage Prime"
+      },
+      {
+        "id": "anc_scout",
+        "faction": "anchorage",
+        "name": "Scout",
+        "role": "Rifleman",
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "auto_rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "breaching_charge",
+          "low_light_optics"
+        ],
+        "skills": {
+          "scout": 1
+        },
+        "miniatures": "Near Present: Anchorage Scout"
+      },
+      {
+        "id": "anc_grenadier",
+        "faction": "anchorage",
+        "name": "Grenadier",
+        "role": "Grenadier",
+        "rank": "regular",
+        "stats": {
+          "move": 5,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "auto_rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "grenade_launcher",
+          "low_light_optics"
+        ],
+        "skills": {},
+        "miniatures": "Near Present: Anchorage Grenadier"
+      },
+      {
+        "id": "anc_systems_operator",
+        "faction": "anchorage",
+        "name": "Systems Operator",
+        "role": "Drones and electronic warfare",
+        "rank": "regular",
+        "stats": {
+          "move": 5,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 0,
+          "nerve": 2,
+          "tech": 2,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "carbine",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "jammer",
+          "hacking_rig",
+          "low_light_optics"
+        ],
+        "skills": {},
+        "miniatures": "Near Present: Anchorage Systems Operator"
+      },
+      {
+        "id": "anc_hound",
+        "faction": "anchorage",
+        "name": "Hound CCT",
+        "role": "Collaborative combat robot (assault)",
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 3,
+          "nerve": null,
+          "tech": null,
+          "wounds": 3,
+          "size": 3
+        },
+        "armour": "heavy",
+        "weapon": "m134",
+        "weapon_options": [
+          "lmg",
+          "ac20",
+          "maaws",
+          "amr"
+        ],
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "gear_options": [
+          "ballistic_shield",
+          "mk19"
+        ],
+        "skills": {
+          "automated": 1
+        },
+        "miniatures": "Near Present: Anchorage Hound CCT"
+      },
+      {
+        "id": "hk_team_leader",
+        "faction": "hankou",
+        "name": "Team Leader",
+        "role": "Fighting leader",
+        "rank": "veteran",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "auto_rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "low_light_optics"
+        ],
+        "skills": {
+          "leader": 1,
+          "laser_detector": 1
+        },
+        "miniatures": "Near Present: Hankou Team Leader"
+      },
+      {
+        "id": "hk_rifleman",
+        "faction": "hankou",
+        "name": "Rifleman",
+        "role": "Rifleman and breacher",
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 2,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "rifle",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "breaching_charge",
+          "low_light_optics"
+        ],
+        "skills": {
+          "laser_detector": 1
+        },
+        "miniatures": "Near Present: Hankou Rifleman"
+      },
+      {
+        "id": "hk_auto_rifleman",
+        "faction": "hankou",
+        "name": "Automatic Rifleman",
+        "role": "Gunner",
+        "rank": "regular",
+        "stats": {
+          "move": 5,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 2,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "lmg",
+        "melee": "knife",
+        "grenades": [
+          "frag"
+        ],
+        "gear": [
+          "low_light_optics"
+        ],
+        "skills": {
+          "laser_detector": 1
+        },
+        "miniatures": "Near Present: Hankou Automatic Rifleman"
+      },
+      {
+        "id": "hk_pioneer",
+        "faction": "hankou",
+        "name": "Pioneer",
+        "role": "Marksman",
+        "rank": "veteran",
+        "stats": {
+          "move": 7,
+          "shoot": 3,
+          "fight": 1,
+          "physique": 1,
+          "nerve": 2,
+          "tech": 0,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "dmr",
+        "melee": "knife",
+        "grenades": [
+          "frag",
+          "smoke"
+        ],
+        "gear": [
+          "low_light_optics"
+        ],
+        "skills": {
+          "marksman": 1,
+          "laser_detector": 1
+        },
+        "miniatures": "Near Present: Hankou Pioneer"
+      },
+      {
+        "id": "hk_zq44",
+        "faction": "hankou",
+        "name": "ZQ44 CCT",
+        "role": "Collaborative combat robot (light, attritable)",
+        "rank": "regular",
+        "stats": {
+          "move": 7,
+          "shoot": 2,
+          "fight": 1,
+          "physique": 2,
+          "nerve": null,
+          "tech": null,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "composite",
+        "weapon": "cs_lm5",
+        "weapon_options": [
+          "dzj08"
+        ],
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "gear_options": [
+          "ballistic_shield",
+          "owa_package",
+          "flux_warhead",
+          "coop_engagement"
+        ],
+        "skills": {
+          "automated": 1
+        },
+        "miniatures": "Near Present: Hankou ZQ44 CCT"
       }
     ]
   },
@@ -5867,6 +6339,69 @@
         "keywords": [
           "one_per_round",
           "cumbersome"
+        ]
+      },
+      {
+        "id": "m134",
+        "faction": "anchorage",
+        "name": "M134 minigun",
+        "damage": "2d8",
+        "short_range": 24,
+        "ap": 0,
+        "auto": 4,
+        "keywords": [
+          "auto",
+          "suppressing"
+        ]
+      },
+      {
+        "id": "ac20",
+        "faction": "anchorage",
+        "name": "20mm autocannon",
+        "damage": "2d12",
+        "short_range": 36,
+        "ap": 2,
+        "auto": 2,
+        "keywords": [
+          "auto",
+          "breach"
+        ]
+      },
+      {
+        "id": "maaws",
+        "faction": "anchorage",
+        "name": "MAAWS recoilless rifle",
+        "damage": "2d12",
+        "short_range": 30,
+        "ap": 2,
+        "keywords": [
+          "one_per_round",
+          "breach"
+        ]
+      },
+      {
+        "id": "cs_lm5",
+        "faction": "hankou",
+        "name": "CS/LM5 rotary gun",
+        "damage": "2d8",
+        "short_range": 24,
+        "ap": 0,
+        "auto": 3,
+        "keywords": [
+          "auto",
+          "suppressing"
+        ]
+      },
+      {
+        "id": "dzj08",
+        "faction": "hankou",
+        "name": "Dual DZJ-08 recoilless",
+        "damage": "2d12",
+        "short_range": 30,
+        "ap": 2,
+        "keywords": [
+          "one_per_round",
+          "breach"
         ]
       }
     ],

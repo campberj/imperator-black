@@ -81,6 +81,13 @@ skills:
     status: proposed
     levels:
       - "Blast weapons step one extra row down against it."
+  # Near Present forces.
+  - id: laser_detector
+    name: Laser detector
+    status: proposed
+    levels:
+      - "Laser warning receivers cue its fire: its Reaction and Overwatch shots do not take the −1 for reacting."
+
   - id: augmented
     name: Augmented
     status: proposed

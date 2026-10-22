@@ -47,6 +47,12 @@ Forces are built from **teams**, like a table of organisation, not from a points
 | ARC trooper team | 1× ARC Trooper Leader, 3× ARC Trooper | Elite assault troopers with twin pistols and specialist weapons. |
 | ARF trooper team | 3× ARF Trooper | Scouts who deploy forward and spot for the squads behind them. |
 | Clone commando squad | 1× Clone Commando Leader, 3× Clone Commando | Four commandos in Katarn armour: breaching, slicing, sniping and demolitions. |
+| Anchorage chalk | 2× Scout, 1× Grenadier | A three-man close combat cell: two Scouts and a Grenadier. |
+| Anchorage control cell | 1× Prime, 2× Systems Operator | The Prime and two Systems Operators, who run the drones, the jamming and the Hound. |
+| Hound CCT | 1× Hound CCT | One Hound assault robot with its weapon modules. |
+| Hankou SPEAR 1 | 1× Team Leader, 1× Automatic Rifleman, 1× Pioneer, 1× Rifleman | The Team Leader, an Automatic Rifleman, a Pioneer and a Rifleman. |
+| Hankou SPEAR 2 | 3× Rifleman, 1× Automatic Rifleman, 1× Pioneer | Three Riflemen, an Automatic Rifleman and a Pioneer. |
+| ZQ44 CCT pair | 2× ZQ44 CCT | Two light ZQ44 robots: base of fire, spotting, or one-way attack. |
 <!-- /table -->
 
 ## Task Force Boone
@@ -83,6 +89,10 @@ Gear marked **Proposed** adds a rule that is new in this version; it is in play 
 | Grenade launcher | The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 18". Its Throws are Very loud and count as Shoot actions for reactions. | **Proposed** |
 | Ballistic shield | The carrier has the Shield skill. It cannot use a weapon with the Cumbersome keyword while carrying it. | **Proposed** |
 | Jammer | Enemy Automated models within 6" take -2 to hit, and enemy Hack tests within 6" take -2. | — |
+| Mk19 grenade launcher | Mounted automatic grenade launcher. The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 30"; one Shoot action throws two, at points within 3" of each other. Its Throws are Very loud and count as Shoot actions for reactions. | **Proposed** |
+| Mobility and one-way attack package | Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has the Self-destruct skill. | **Proposed** |
+| Flux warhead | Once per mission, as an action: an electromagnetic burst. Every Automated model within 6", friend or foe and including the carrier, takes a hit of 2d10 damage, AP 3. | **Proposed** |
+| Cooperative engagement package | Shares targeting data: once per round, a friendly model within 12" of the carrier gets +1 on one Shoot test against an enemy the carrier can see. | **Proposed** |
 <!-- /table -->
 
 ## Skills
@@ -105,6 +115,7 @@ Skills marked **Proposed** add a rule that is new in this version; they are in p
 | *Scout* | Deploys up to 6" beyond its side's deployment zone, out of enemy line of sight. Scrub and woods are not difficult ground for it. | **Proposed** |
 | *Shield* | Carries a ballistic shield or shield emitter: when it has no other cover, it counts as in Light cover against shots from the half of the table it faces. | **Proposed** |
 | *Layered armour* | Blast weapons step one extra row down against it. | **Proposed** |
+| *Laser detector* | Laser warning receivers cue its fire: its Reaction and Overwatch shots do not take the −1 for reacting. | **Proposed** |
 | *Augmented* | Genetically or cybernetically augmented: +1 to Physique tests, and it ignores the first Suppression it gains each round. | **Proposed** |
 | *Self-destruct* | As an action: resolve a blast centred on itself, radius 2", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud. | **Proposed** |
 <!-- /table -->
@@ -288,3 +299,56 @@ Vehicles (the AT-RT and the infantry support platform) wait for the vehicle rule
 <!-- /table -->
 
 Teams for the Republic are in the tables of organisation above. Cards are printed in `docs/print/ImperatorBlack_republic-cards.pdf`.
+
+## Near Present forces
+
+Profiles for Echelon Software's *Near Present* miniatures: two private military contractors fighting over the Marine Contingency Platforms along the Paracletus storm wall in 2046. Each fields a **Multi-Function Response Team**: nine warfighters and their Collaborative Combat Troops (CCT), autonomous combat robots.
+
+They use the Shoot scale in chapter 1. The line troops are professionals (2); the Anchorage Prime and the Hankou Pioneer are Shoot 3, and the Prime and the Team Leader are Veterans and Leaders. Their hyper-enabler helmets give every warfighter low-light optics.
+
+**Conversion notes.** Move is the *Near Present* movement range less 2". *For Effect* (two attack rolls spread over 3") becomes an auto rifle (Auto 2); *Breacher* a breaching charge; *Grenadier Front* a grenade launcher; *Cognitive Jammer* a jammer; Hankou's *Laser Detector* the skill of that name. A CCT is Automated, with its load-out table as weapon and gear options: the Hound is heavy and tough (Size 3, Wounds 3), the ZQ44 light and attritable. Drones, loitering munitions, launch tubes and the airspace phase (*Pusher*, ISR drones, *Flux Grenade*, C-RAM) wait for the air and void layer; see [docs/design/air-and-void.md](../docs/design/air-and-void.md).
+
+### Anchorage Multi-Function Response Team
+
+A US Navy contractor. Two **chalks** (two Scouts and a Grenadier each) and the **control cell** (the Prime and two Systems Operators), with one **Hound** CCT.
+
+<!-- table:troops.anchorage -->
+| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **Prime** | Veteran | 6" | 3 | 2 | 1 | 3 | 1 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Flashbang, Breaching charge, Low-light optics | Leader |
+| **Scout** | Regular | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Smoke grenade, Breaching charge, Low-light optics | Scout |
+| **Grenadier** | Regular | 5" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Smoke grenade, Grenade launcher, Low-light optics | — |
+| **Systems Operator** | Regular | 5" | 2 | 1 | 0 | 2 | 2 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Smoke grenade, Jammer, Hacking rig, Low-light optics | — |
+| **Hound CCT** | Regular | 6" | 2 | 1 | 3 | — | — | 3 | 3 | Heavy plate (3) | M134 minigun / LMG / 20mm autocannon / MAAWS recoilless rifle / Anti-materiel rifle | Unarmed / weapon butt; option: Ballistic shield or Mk19 grenade launcher | Automated |
+<!-- /table -->
+
+<!-- table:kit.anchorage -->
+| Weapon | Damage | Short range | Beyond / double | AP | Keywords |
+|---|---|---|---|---|---|
+| M134 minigun | 2d8 | 24" | -1 / -2 | 0 | Auto 4, Suppressing |
+| 20mm autocannon | 2d12 | 36" | -1 / -2 | 2 | Auto 2, Breach |
+| MAAWS recoilless rifle | 2d12 | 30" | -1 / -2 | 2 | One per round, Breach |
+<!-- /table -->
+
+### Hankou Multi-Function Response Team
+
+Hankou Advanced Maritime Systems' security force, mostly recently retired PNLAN marines and special operators. **SPEAR 1** (Team Leader, Automatic Rifleman, Pioneer, Rifleman) and **SPEAR 2** (three Riflemen, an Automatic Rifleman and a Pioneer), with two **ZQ44** CCT.
+
+<!-- table:troops.hankou -->
+| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **Team Leader** | Veteran | 6" | 2 | 2 | 2 | 3 | 1 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Leader, Laser detector |
+| **Rifleman** | Regular | 6" | 2 | 2 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Smoke grenade, Breaching charge, Low-light optics | Laser detector |
+| **Automatic Rifleman** | Regular | 5" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | LMG | Knife or bayonet, Frag grenade, Low-light optics | Laser detector |
+| **Pioneer** | Veteran | 7" | 3 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | DMR | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Marksman 1, Laser detector |
+| **ZQ44 CCT** | Regular | 7" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | CS/LM5 rotary gun / Dual DZJ-08 recoilless | Unarmed / weapon butt; option: Ballistic shield or Mobility and one-way attack package or Flux warhead or Cooperative engagement package | Automated |
+<!-- /table -->
+
+<!-- table:kit.hankou -->
+| Weapon | Damage | Short range | Beyond / double | AP | Keywords |
+|---|---|---|---|---|---|
+| CS/LM5 rotary gun | 2d8 | 24" | -1 / -2 | 0 | Auto 3, Suppressing |
+| Dual DZJ-08 recoilless | 2d12 | 30" | -1 / -2 | 2 | One per round, Breach |
+<!-- /table -->
+
+Teams are in the tables of organisation above. Cards are printed in `docs/print/ImperatorBlack_near-present-cards.pdf`.

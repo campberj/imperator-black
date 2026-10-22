@@ -47,6 +47,8 @@ FACTION_COLOUR = {
     "directorate": colors.HexColor("#7a1f2b"),
     "republic": colors.HexColor("#a34a1a"),
     "un": colors.HexColor("#2f5d62"),
+    "anchorage": colors.HexColor("#3c5a7a"),
+    "hankou": colors.HexColor("#6e3b3b"),
 }
 
 by_id = lambda section: {x["id"]: x for x in section}
@@ -168,6 +170,13 @@ def card_flowables(t):
             flow.append(Paragraph(f"<b>{gi['name']}</b>{tag}: {gi['text']}", S_BODY))
         if t.get("gear_options"):
             flow.append(Paragraph("<b>Choose one:</b> " + " / ".join(GEAR[g]["name"] for g in t["gear_options"]) + " □ □ □", S_BODY))
+            if "automated" in t["skills"]:   # robot modules: print what each option does (cards have room)
+                for g in t["gear_options"]:
+                    gi = GEAR[g]
+                    granted = " ".join(f"<i>{SKILLS[k]['name']}:</i> " + " ".join(SKILLS[k]["levels"][:v])
+                                       for k, v in gi.get("grants_skills", {}).items() if k != "shield")
+                    tag = " <font color='#8a5a12'>[proposed]</font>" if gi["status"] == "proposed" else ""
+                    flow.append(Paragraph(f"• <b>{gi['name']}</b>{tag}: {gi['text']} {granted}", S_SMALL))
         flow.append(Spacer(1, 2))
 
     # Skills granted by gear are already explained in the gear text.
@@ -615,6 +624,8 @@ if __name__ == "__main__":
     p, n = unit_cards()
     print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
     p, n = unit_cards(("republic",), "republic-cards.pdf")
+    print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
+    p, n = unit_cards(("anchorage", "hankou"), "near-present-cards.pdf")
     print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
     print(f"Wrote {quick_reference().relative_to(ROOT)}")
     p, n = behavior_cards()

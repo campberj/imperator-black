@@ -209,5 +209,6 @@ Phase 4 can begin alongside Phase 2. Phase 8 starts once layout and mission tabl
 - Full ship/outpost and sector layers; additional campaign types with tighter command guidance
 - Larger planetside battles: platoon scale, vehicles and indirect fire (land terrain and setup came forward as Phase 4b)
 - Vehicles, squad- and platoon-scale play
+- Air and void layer: drones, munitions, air and point defence, strike craft (notes and inspiration: [air-and-void.md](design/air-and-void.md))
 - PvP rules
 - More organic solo AI
