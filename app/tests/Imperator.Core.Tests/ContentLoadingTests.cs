@@ -157,6 +157,18 @@ public class ContentLoadingTests
         Assert.Contains(e.Errors, err => err.StartsWith("layouts:") && err.Contains("Bad d6 roll 'one'"));
     }
 
+    [Fact]
+    public void DecksOverTheTileInventoryFailLoudly()
+    {
+        // With one tile of each size owned, no vessel's deck fits: the generator check reports each vessel once.
+        var e = Assert.Throws<ContentException>(() => LoadMutated(root =>
+        {
+            foreach (var tile in Node(root, "layouts.tiles").AsArray()) tile!["owned"] = 1;
+        }));
+        foreach (var v in Set.Layouts.Vessels)
+            Assert.Contains($"layout {v.Id} seed 1: disconnected or over the tile inventory", e.Errors);
+    }
+
     [Theory]
     [InlineData("layouts")]
     [InlineData("terrain")]

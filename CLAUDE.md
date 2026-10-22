@@ -24,6 +24,7 @@ python3 tools/print_sheets.py         # after content changes that affect cards 
 python3 tools/print_scenario.py docs/scenarios/<file>.yaml   # scenario sheet + curated cards (or a deck sheet)
 python3 tools/generate_layout.py <vessel> --seed N --out docs/scenarios/decks/x.yaml   # chapter 11 deck
 python3 tools/generate_layout.py --check     # layout statistics over many seeds
+python3 tools/layout_reference.py            # after editing layouts.yaml: reference stats for the C# deck generator's tests
 dotnet build app/Imperator.slnx
 dotnet test app/Imperator.slnx                                         # xUnit; must pass
 docker compose up -d --wait && dotnet tool restore                    # local PostgreSQL + dotnet-ef

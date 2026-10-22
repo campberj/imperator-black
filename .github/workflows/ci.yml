@@ -38,6 +38,9 @@ jobs:
       - name: Rulebook tables are current
         run: python3 tools/render_tables.py --check
 
+      - name: Layout reference statistics are current
+        run: python3 tools/layout_reference.py --check
+
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "10.0.x"
