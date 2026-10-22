@@ -1,0 +1,302 @@
+{
+  "id": "mission-land-11",
+  "title": "Seize data or cargo: Desert, badlands, mission 11",
+  "kind": "mission",
+  "kind_label": "mission",
+  "rules_version": "0.5",
+  "setting": "land",
+  "seed": 11,
+  "mission": "seize",
+  "tier": 3,
+  "size": "small",
+  "clock": {
+    "die": "d4",
+    "limit": 20,
+    "check_in_every": 5,
+    "first_check_in": 10
+  },
+  "alert_start": 0,
+  "complication": "extra_contact",
+  "situation": "Freespace Solutions and Contractors hold a desert position. Data or cargo the force needs is in sector B3. The holders will move it soon.",
+  "briefing": [
+    {
+      "heading": "Tasking",
+      "text": "Seize data or cargo. Reach the objective, take what it holds, and get it out."
+    },
+    {
+      "heading": "Situation",
+      "text": "Freespace Solutions and Contractors hold a desert position. Data or cargo the force needs is in sector B3. The holders will move it soon."
+    },
+    {
+      "heading": "Objective",
+      "text": "Sector B3. A model in base contact may Interact to take it: automatic for a model with a hacking rig (data) or Physique 2 or more (cargo); 2d6 + Tech (data) or Physique (cargo), 8+, for anyone else. Data travels with the model that copied it; cargo is carried, and the carrier has −2\" Move. If the carrier goes Down, a model in base contact may take it with an Interact."
+    },
+    {
+      "heading": "Opposition",
+      "text": "Freespace Solutions and Contractors, threat tier 3. Guard (known): Borz Bratva team (3 models), at the objective, Unaware. Contacts (unknown): 5 chips."
+    },
+    {
+      "heading": "Ground",
+      "text": "Desert, badlands, 36\" × 36\" table (3 × 3 sectors). Conditions: Clear: No effect."
+    },
+    {
+      "heading": "Complication",
+      "text": "Reinforced: One more contact than the tier lists."
+    },
+    {
+      "heading": "Extraction and time",
+      "text": "Out by the player's own edge. Enemy entry and exit: middle of the far edge. Small mission: 20 minutes, clock die d4. Check-ins every 5 minutes from minute 10. Alert track starts at 0."
+    },
+    {
+      "heading": "Grades",
+      "text": "Decisive: Objective extracted and no player model Dead. Marginal: Objective extracted. Failure: Objective not extracted when time runs out."
+    }
+  ],
+  "board": {
+    "width": 36,
+    "height": 36
+  },
+  "tiles": [],
+  "doors": [],
+  "cover": [
+    {
+      "id": "T1",
+      "x": 3.0,
+      "y": 3.0,
+      "w": 6,
+      "h": 6,
+      "type": "area",
+      "label": "Scrub",
+      "terrain": "scrub",
+      "piece": "Scrub, crops, light woods. Sector A1: Scrub, 6\" × 6\".",
+      "sector": "A1"
+    },
+    {
+      "id": "T2",
+      "x": 16.0,
+      "y": 4.0,
+      "w": 4,
+      "h": 4,
+      "type": "heavy",
+      "label": "Outpost",
+      "terrain": "building",
+      "piece": "Building. Sector B1: Outpost: a small building and a low wall.",
+      "sector": "B1"
+    },
+    {
+      "id": "T3",
+      "x": 15.0,
+      "y": 10.0,
+      "w": 6,
+      "h": 1,
+      "type": "light",
+      "label": "Low wall",
+      "terrain": "low_wall",
+      "piece": "Low wall, sandbags, barricade, fallen tree. Sector B1: Outpost: a small building and a low wall.",
+      "sector": "B1"
+    },
+    {
+      "id": "T4",
+      "x": 4.5,
+      "y": 16.5,
+      "w": 3,
+      "h": 3,
+      "type": "ditch",
+      "label": "Crater",
+      "terrain": "crater",
+      "piece": "Crater, ditch, trench. Sector A2: Open ground with a crater.",
+      "sector": "A2"
+    },
+    {
+      "id": "T5",
+      "x": 29.0,
+      "y": 16.5,
+      "w": 2,
+      "h": 3,
+      "type": "heavy",
+      "label": "Rock",
+      "terrain": "solid",
+      "piece": "Container, vehicle, wreck, rock, tank. Sector C2: Rocks: two pieces (solid).",
+      "sector": "C2"
+    },
+    {
+      "id": "T6",
+      "x": 28.5,
+      "y": 21.5,
+      "w": 3,
+      "h": 2,
+      "type": "heavy",
+      "label": "Rock",
+      "terrain": "solid",
+      "piece": "Container, vehicle, wreck, rock, tank. Sector C2: Rocks: two pieces (solid).",
+      "sector": "C2"
+    },
+    {
+      "id": "T7",
+      "x": 5.0,
+      "y": 28.5,
+      "w": 2,
+      "h": 3,
+      "type": "heavy",
+      "label": "Rock",
+      "terrain": "solid",
+      "piece": "Container, vehicle, wreck, rock, tank. Sector A3: Rocks: two pieces (solid).",
+      "sector": "A3"
+    },
+    {
+      "id": "T8",
+      "x": 4.5,
+      "y": 33.5,
+      "w": 3,
+      "h": 2,
+      "type": "heavy",
+      "label": "Rock",
+      "terrain": "solid",
+      "piece": "Container, vehicle, wreck, rock, tank. Sector A3: Rocks: two pieces (solid).",
+      "sector": "A3"
+    }
+  ],
+  "objectives": [
+    {
+      "n": 1,
+      "x": 18.1,
+      "y": 30.1,
+      "tile": "B3",
+      "label": "Sector B3",
+      "prose": "sector B3"
+    }
+  ],
+  "enemy_entry": {
+    "x": 18.0,
+    "y": 35.6,
+    "tile": "edge",
+    "label": "Enemy entry and exit (middle of the far edge)"
+  },
+  "enemies": [
+    {
+      "n": 1,
+      "troop": "ct_borz_bratva",
+      "element": "borz_bratva",
+      "x": 18.7,
+      "y": 28.2,
+      "state": "Unaware"
+    },
+    {
+      "n": 2,
+      "troop": "ct_borz_bratva",
+      "element": "borz_bratva",
+      "x": 16.2,
+      "y": 30.7,
+      "state": "Unaware"
+    },
+    {
+      "n": 3,
+      "troop": "ct_borz_bratva_hmg",
+      "element": "borz_bratva",
+      "x": 16.7,
+      "y": 28.7,
+      "state": "Unaware"
+    }
+  ],
+  "contacts": [
+    {
+      "n": 1,
+      "x": 7.6,
+      "y": 30.1,
+      "where": "A3"
+    },
+    {
+      "n": 2,
+      "x": 30.1,
+      "y": 30.1,
+      "where": "C3"
+    },
+    {
+      "n": 3,
+      "x": 6.1,
+      "y": 18.1,
+      "where": "A2"
+    },
+    {
+      "n": 4,
+      "x": 31.6,
+      "y": 18.1,
+      "where": "C2"
+    },
+    {
+      "n": 5,
+      "x": 18.1,
+      "y": 18.1,
+      "where": "B2"
+    }
+  ],
+  "reinforcement": "contract_reaction_force",
+  "hvt": null,
+  "player": [],
+  "rolls": [
+    "Mission type: 1",
+    "Threat tier: 6",
+    "Sector A1: 5",
+    "Sector B1: 6",
+    "Sector C1: 1",
+    "Sector A2: 2",
+    "Sector B2: 1",
+    "Sector C2: 3",
+    "Sector A3: 3",
+    "Sector B3: 1",
+    "Sector C3: 1",
+    "Conditions: 3",
+    "Complication: 4",
+    "Guard: 5"
+  ],
+  "environment": "desert",
+  "conditions": "clear",
+  "deploy": [
+    {
+      "x": 0.3,
+      "y": 0.3,
+      "w": 35.4,
+      "h": 5.7,
+      "side": "player",
+      "label": "within 6\" of this edge"
+    }
+  ],
+  "sectors": [
+    {
+      "name": "A1",
+      "text": "Scrub, 6\" × 6\"."
+    },
+    {
+      "name": "B1",
+      "text": "Outpost: a small building and a low wall."
+    },
+    {
+      "name": "C1",
+      "text": "Open ground."
+    },
+    {
+      "name": "A2",
+      "text": "Open ground with a crater."
+    },
+    {
+      "name": "B2",
+      "text": "Open ground."
+    },
+    {
+      "name": "C2",
+      "text": "Rocks: two pieces (solid)."
+    },
+    {
+      "name": "A3",
+      "text": "Rocks: two pieces (solid)."
+    },
+    {
+      "name": "B3",
+      "text": "Open ground."
+    },
+    {
+      "name": "C3",
+      "text": "Open ground."
+    }
+  ]
+}
