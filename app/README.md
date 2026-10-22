@@ -136,7 +136,27 @@ The reference is `tools/generate_mission.py`; the procedure is rules chapter 13,
 - Out of scope: the live dashboard (it needs saved game state; it comes with the Phase 7 campaign tracker).
 - **Done when:** both example missions in `docs/scenarios/missions/` can be shown, and lint, tests and build pass.
 
-### 13. Stop and check the roadmap
+### 13. Troop value harness in the simulator
+
+Phase 7 needs a points value for every troop (decision 6.12, roadmap Phase 7 item 6), calibrated with the simulator. Build the data first; the points formula is a design decision that comes after.
+
+- New simulator mode `--values` (`app/src/Imperator.Sim/Values.cs`): every troop profile in `content/troops.yaml`, with its default loadout, against a **reference trooper** (Task Force Boone VAT Assaulter, `tfb_vat_assaulter`).
+- Three measures, each with a fixed seed and at least 20,000 runs: **duel at 12"** (open ground, alternate Shoot actions, first to put the other Down or worse wins); **duel at 24" with the target in Light cover**; **close combat** (the existing exchange rules). Also the expected wound rows inflicted per Shoot action against Armour 0, 2 and 3, so Auto, AP and the new heavy weapons show up.
+- Report: a Markdown table per faction to `docs/analysis/troop-values-v0.5.md`, sorted by an overall score (the mean of the three win rates), with Move, Shoot, Wounds and Armour beside it. Mark Automated models and profiles with Proposed skills.
+- Handle models with no ranged weapon (Jedi: close combat only; their ranged duels are N/A), Automated models (no Suppression, destroyed on row 6+), and Wounds 2–3 (more markers before Down).
+- Skills that change the math are modelled where Core already supports them (Marksman, Augmented, Laser detector's no-penalty reactions if reactions are simulated); list the ones that are not modelled under the table.
+- **Done when:** the report covers all 73 troop types and a test checks the reference trooper scores 50% (±2%) against itself.
+
+### 14. Mission dashboard in the web app (print)
+
+The paper dashboard (`docs/print/ImperatorBlack_mission-dashboard.pdf`, drawn by `dashboard_flow` in `tools/print_scenario.py`) as a printable page for a generated mission. No saved state.
+
+- From the mission view (task 12), a **Dashboard** button opens a print-ready page: the alert track 0–6 (start value shaded, thresholds 2/4/6 marked and named), the clock with one box per minute up to the limit (check-ins and the limit shaded), a rounds-played row of 15, the objectives with status boxes, the contact chips with "revealed as" and "state" columns, the enemy elements (the guard and the reinforcement, with U / A / E awareness), and a player force table (8 rows for a small mission, 12 for a large one).
+- Also a blank dashboard at `#dashboard` (30-minute clock, labels for both sizes), matching the blank PDF.
+- One letter page in print; the print CSS hides the app's navigation.
+- **Done when:** a Vitest test renders the dashboard for both example missions in `docs/scenarios/missions/` and checks the clock box count, the check-in boxes and the contact rows, and lint, tests and build pass.
+
+### 15. Stop and check the roadmap
 
 Beyond this, the app's real features wait on rules:
 
