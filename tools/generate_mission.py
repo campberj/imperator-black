@@ -313,7 +313,9 @@ class Mission:
         for i in range(k):
             box, where = self.places[i % len(self.places)]
             bx, by, bw, bh = box
-            pt = self.free_point(box, (bx + bw / 2, by + bh / 2), chip_taken, self.blocked, spacing=2.0)
+            # A second chip in a small room may not fit 2" from the first: then 1", as for the guard.
+            pt = self.free_point(box, (bx + bw / 2, by + bh / 2), chip_taken, self.blocked, spacing=2.0) or \
+                 self.free_point(box, (bx + bw / 2, by + bh / 2), chip_taken, self.blocked, spacing=1.0)
             chip_taken.append(pt)
             self.contacts.append({"n": i + 1, "x": pt[0], "y": pt[1], "where": where})
         self.hvt = hvt

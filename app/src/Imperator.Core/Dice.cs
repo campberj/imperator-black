@@ -82,6 +82,22 @@ public sealed class Rng
         _random = new Random(seed);
     }
 
+    /// <summary>
+    /// A stream seeded from a text key (e.g. "mission-ship-42"), so different generators that share a seed number roll
+    /// different dice. The key is hashed with 32-bit FNV-1a, which is stable across runs and platforms
+    /// (string.GetHashCode is not).
+    /// </summary>
+    public static Rng FromKey(string key)
+    {
+        uint h = 2166136261;
+        foreach (char ch in key)
+        {
+            h ^= ch;
+            h *= 16777619;
+        }
+        return new Rng((int)(h & 0x7fffffff));
+    }
+
     public int D(int sides) => _random.Next(1, sides + 1);
 
     public int Roll(DiceSpec spec)
