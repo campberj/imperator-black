@@ -1,0 +1,116 @@
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
+import { afterEach, expect, test } from 'vitest'
+import { content, lookup } from '../test-content'
+import { Units } from './Units'
+
+afterEach(cleanup)
+
+const card = (name: string) => screen.getByRole('article', { name })
+const select = (label: string, value: string) => fireEvent.change(screen.getByLabelText(label), { target: { value } })
+
+test('every troop profile renders, faction by faction', () => {
+  render(<Units content={content} lookup={lookup} />)
+  for (const f of content.factions.factions) {
+    select('Faction', f.id)
+    const troops = content.troops.troops.filter((t) => t.faction === f.id)
+    expect(screen.getAllByRole('article')).toHaveLength(troops.length)
+    for (const t of troops) expect(card(t.name)).toBeTruthy()
+  }
+  select('Faction', '')
+  expect(screen.getAllByRole('article')).toHaveLength(content.troops.troops.length)
+})
+
+test('one profile per faction matches the content', () => {
+  render(<Units content={content} lookup={lookup} />)
+  for (const f of content.factions.factions) {
+    select('Faction', f.id)
+    const t = content.troops.troops.find((x) => x.faction === f.id)!
+    const c = within(card(t.name))
+
+    // Testing Library collapses the subtitle's double spaces.
+    expect(c.getByText(`${lookup.ranks.get(t.rank)!.name} ${t.role} · ${f.name}`)).toBeTruthy()
+    for (const a of content.core.attributes) {
+      const v = t.stats[a.id]
+      const expected = v === null ? '—' : a.id === 'move' ? (v ? `${v}"` : '—') : String(v)
+      expect(card(t.name).querySelector(`td[data-attr="${a.id}"]`)!.textContent).toBe(expected)
+    }
+    const armour = lookup.armour.get(t.armour)!
+    expect(card(t.name).querySelector('td[data-attr="armour"]')!.textContent).toBe(String(armour.value))
+    expect(c.getByText(new RegExp(`^Armour: ${armour.name}`))).toBeTruthy()
+
+    if (t.weapon) {
+      const w = lookup.ranged.get(t.weapon)!
+      const row = card(t.name).querySelector(`tr[data-weapon="${w.id}"]`)!
+      expect(row.textContent).toBe(`${w.name}${w.damage}${w.short_range}"${w.ap}`)
+    } else {
+      expect(c.getByText('No ranged weapon: cannot Shoot')).toBeTruthy()
+    }
+    if (t.melee) expect(card(t.name).querySelector(`tr[data-weapon="${t.melee}"]`)!.textContent).toContain(lookup.melee.get(t.melee)!.name)
+    for (const g of t.gear) expect(c.getByText(lookup.gear.get(g)!.name)).toBeTruthy()
+    for (const [id, level] of Object.entries(t.skills)) {
+      const s = lookup.skills.get(id)!
+      expect(c.getByText(s.levels.length > 1 ? `${s.name} ${level}` : s.name)).toBeTruthy()
+    }
+    if (f.side === 'enemy') expect(c.getByText('Element:')).toBeTruthy()
+  }
+})
+
+test('weapon notes show Auto N, gear keywords and range penalties', () => {
+  render(<Units content={content} lookup={lookup} />)
+  select('Faction', '')
+  // Silencer adds Silenced to the Liquidator's weapon; the SMG is Auto 2.
+  const liq = card(lookup.troops.get('fs_liquidator')!.name)
+  expect(liq.textContent).toContain('Silenced')
+  const smgUser = content.troops.troops.find((t) => t.weapon === 'smg')!
+  expect(card(smgUser.name).textContent).toContain('Auto 2')
+  const shotgunUser = content.troops.troops.find((t) => [t.weapon, ...(t.weapon_options ?? [])].includes('shotgun'))!
+  expect(card(shotgunUser.name).textContent).toContain('beyond short -2, beyond double -3')
+})
+
+test('player factions list teams, enemy factions list elements', () => {
+  render(<Units content={content} lookup={lookup} />)
+  select('Faction', 'tfb')
+  expect(screen.getByRole('heading', { name: 'Teams' })).toBeTruthy()
+  expect(screen.queryByRole('heading', { name: 'Elements' })).toBeNull()
+  for (const t of content.rosters.teams.filter((x) => x.faction === 'tfb')) expect(screen.getByRole('rowheader', { name: t.name })).toBeTruthy()
+
+  select('Faction', 'freespace')
+  expect(screen.queryByRole('heading', { name: 'Teams' })).toBeNull()
+  const automated = content.factions.elements.find((e) => e.id === 'automated_defences')!
+  const row = screen.getByRole('rowheader', { name: automated.name }).closest('tr')!
+  expect(row.textContent).toContain(`(or ${lookup.troops.get(automated.alternatives![0])!.name})`)
+  expect(row.textContent).toContain(lookup.behaviors.get(automated.behavior)!.name)
+})
+
+test('filters by rank, role and keyword, and searches names and rules text', () => {
+  render(<Units content={content} lookup={lookup} />)
+  select('Faction', '')
+  const count = () => screen.queryAllByRole('article').length
+
+  select('Rank', 'elite')
+  expect(count()).toBe(content.troops.troops.filter((t) => t.rank === 'elite').length)
+  select('Rank', '')
+
+  select('Keyword', 'silenced')
+  expect(card(lookup.troops.get('fs_liquidator')!.name)).toBeTruthy()
+  expect(count()).toBeLessThan(content.troops.troops.length)
+  select('Keyword', '')
+
+  // "Medic" is only in rules text: the trauma kit grants it.
+  fireEvent.change(screen.getByLabelText('Search'), { target: { value: 'medic skill' } })
+  const withKit = content.troops.troops.filter((t) => [...t.gear, ...(t.gear_options ?? [])].includes('trauma_kit'))
+  expect(count()).toBeGreaterThanOrEqual(withKit.length)
+  for (const t of withKit) expect(card(t.name)).toBeTruthy()
+
+  fireEvent.change(screen.getByLabelText('Search'), { target: { value: 'zzz no such thing' } })
+  expect(count()).toBe(0)
+  expect(screen.getByText(`0 of ${content.troops.troops.length} troop profiles`)).toBeTruthy()
+})
+
+test('changing faction clears a role that no longer applies', () => {
+  render(<Units content={content} lookup={lookup} />)
+  select('Faction', 'tfb')
+  select('Role', 'Leader')
+  select('Faction', 'freespace')
+  expect((screen.getByLabelText('Role') as HTMLSelectElement).value).toBe('')
+})
