@@ -116,6 +116,55 @@ public class ContentLoadingTests
     }
 
     [Fact]
+    public void LoadsMissions()
+    {
+        var m = Set.Missions;
+        Assert.Equal(4, m.Missions.Count);
+        Assert.Equal(4, m.Tiers.Count);
+        Assert.Equal(2, m.Clock.Sizes.Count);
+        Assert.Equal(2, Set.Mission("sabotage").Objectives);
+        Assert.Equal("ct_borz_ubiytsa_leader", Set.Tier(3).Hvt);
+        Assert.Equal(5, Set.Tier(4).Contacts);
+        Assert.Equal("false_alarm", Set.Tier(1).Table.Single(r => r.Roll.Contains(1)).Result);
+        Assert.Equal(new DiceSpec(1, 4), Set.ClockSize("small").DieSpec);
+        Assert.Equal((30, 5, 10), (Set.ClockSize("large").Limit, m.Clock.CheckInEvery, m.Clock.FirstCheckIn));
+        Assert.Equal([2, 4, 6], m.Alert.Thresholds.Select(t => t.At));
+        Assert.Equal("The alert track starts at 1.", Set.Complication("early_warning").Text);
+        Assert.Equal(["false_alarm", "booby_trap"], m.ContactResults.Select(r => r.Id));
+        Assert.Equal("Tasking", m.Briefing[0].Heading);
+        Assert.Equal(8, m.Briefing.Count);
+        Assert.NotEmpty(m.Placement);
+        Assert.NotEmpty(m.Contacts);
+    }
+
+    public static TheoryData<int> TierNumbers() => new(Set.Missions.Tiers.Select(t => t.Tier));
+
+    [Theory]
+    [MemberData(nameof(TierNumbers))]
+    public void TierResolves(int tier)
+    {
+        var t = Set.Tier(tier);
+        Set.Element(t.Reinforcement);
+        Soldier.FromTroop(Set, t.Hvt);
+        foreach (var r in t.Table)
+            if (r.Result is not ("false_alarm" or "booby_trap")) Set.Element(r.Result);
+        Assert.Equal([1, 2, 3, 4, 5, 6], t.Table.SelectMany(r => r.Roll.Faces).Order());
+    }
+
+    [Fact]
+    public void EverySectorRollHasGeneratorPieces()
+    {
+        foreach (var e in Set.Terrain.Environments)
+        {
+            Assert.NotEmpty(e.FillPieces!);
+            foreach (var r in e.Table)
+                Assert.All(r.Pieces!, pc => Set.TerrainType(pc.Type));
+        }
+        // Open ground has no pieces: the density check treats it as empty.
+        Assert.Empty(Set.Environment("woodland").Table.Single(r => r.Roll.Contains(1)).Pieces!);
+    }
+
+    [Fact]
     public void LoadsTerrain()
     {
         var tr = Set.Terrain;
@@ -160,6 +209,7 @@ public class ContentLoadingTests
     [Theory]
     [InlineData("layouts")]
     [InlineData("terrain")]
+    [InlineData("missions")]
     public void MissingSectionFailsLoudly(string section)
     {
         var e = Assert.Throws<ContentException>(() => LoadMutated(root => root.AsObject().Remove(section)));
@@ -257,6 +307,12 @@ public class ContentLoadingTests
     [InlineData("layouts.vessels[0].heart_security", "vessel freighter heart_security: unknown id 'nope'")]
     [InlineData("layouts.vessels[0].hazards[0]", "vessel freighter hazard: unknown id 'nope'")]
     [InlineData("terrain.environment_roll[0].environment", "terrain.environment_roll environment: unknown id 'nope'")]
+    [InlineData("terrain.environments[0].table[0].pieces[0].type", "terrain environment urban roll 1 piece type: unknown id 'nope'")]
+    [InlineData("terrain.environments[0].fill_pieces[0].type", "terrain environment urban fill piece type: unknown id 'nope'")]
+    [InlineData("missions.mission_roll[0].mission", "missions.mission_roll mission: unknown id 'nope'")]
+    [InlineData("missions.tiers[0].table[1].result", "mission tier 1 contact result: unknown id 'nope'")]
+    [InlineData("missions.tiers[0].reinforcement", "mission tier 1 reinforcement: unknown id 'nope'")]
+    [InlineData("missions.tiers[2].hvt", "mission tier 3 hvt: unknown id 'nope'")]
     public void BadReferenceFailsLoudly(string path, string expected)
     {
         var e = Assert.Throws<ContentException>(() => LoadMutated(root =>
@@ -300,6 +356,18 @@ public class ContentLoadingTests
     [InlineData("terrain.conditions[0].roll", "\"1-2\"", "terrain.conditions: d6 rows must cover 1-6 exactly once")]
     [InlineData("terrain.types[0].cover", "\"\"", "terrain type open: needs 'cover'")]
     [InlineData("behaviors.terms[0].text", "\"\"", "behaviors.terms: each needs term and text")]
+    [InlineData("terrain.environments[0].table[0].pieces[0].w", "13", "terrain environment urban roll 1: piece 'Wreck' must fit a 12\" sector")]
+    [InlineData("terrain.environments[2].table[2].pieces[0].h", "0", "terrain environment woodland roll 3: piece 'Woods' must fit a 12\" sector")]
+    [InlineData("terrain.environments[2].fill_pieces", "[]", "terrain environment woodland: the fill must have cover")]
+    [InlineData("missions.mission_roll[0].roll", "\"1\"", "missions.mission_roll: d6 rows must cover 1-6 exactly once")]
+    [InlineData("missions.tier_roll[2].roll", "\"5\"", "missions.tier_roll: d6 rows must cover 1-6 exactly once")]
+    [InlineData("missions.complications[4].roll", "\"5\"", "missions.complications: d6 rows must cover 1-6 exactly once")]
+    [InlineData("missions.tiers[1].table[0].roll", "\"2\"", "mission tier 2: d6 rows must cover 1-6 exactly once")]
+    [InlineData("missions.clock.sizes[0].die", "\"d12\"", "missions.clock size small: needs a die (d4/d6/d8) and a whole-minute limit past the first check-in")]
+    [InlineData("missions.clock.sizes[1].limit", "10", "missions.clock size large: needs a die (d4/d6/d8) and a whole-minute limit past the first check-in")]
+    [InlineData("missions.tier_roll[2].tier", "5", "missions.tier_roll: tier 5 has no table")]
+    [InlineData("missions.missions[1].id", "\"seize\"", "missions.missions: duplicate id 'seize'")]
+    [InlineData("missions.missions[2].lockdown", "\"\"", "mission sabotage: needs 'lockdown'")]
     public void InvalidValueFailsLoudly(string path, string json, string expected)
     {
         var e = Assert.Throws<ContentException>(() => LoadMutated(root => Replace(root, path, json)));
@@ -312,6 +380,10 @@ public class ContentLoadingTests
     [InlineData("terrain.types[2]", "sight", "terrain type woods: needs 'sight'")]
     [InlineData("terrain.types[4]", "move", "terrain type low_wall: needs 'move'")]
     [InlineData("behaviors.terms[1]", "term", "behaviors.terms: each needs term and text")]
+    [InlineData("terrain.environments[2].table[0]", "pieces", "terrain environment woodland roll 1: needs 'pieces' (the generator's footprint; [] for open ground)")]
+    [InlineData("terrain.environments[2]", "fill_pieces", "terrain environment woodland: the fill must have cover")]
+    [InlineData("missions.missions[3]", "failure", "mission capture: needs 'failure'")]
+    [InlineData("missions.missions[0]", "ship", "mission seize: needs 'ship'")]
     public void MissingFieldFailsWithValidatorMessage(string parent, string key, string expected)
     {
         var e = Assert.Throws<ContentException>(() => LoadMutated(root => Node(root, parent).AsObject().Remove(key)));
