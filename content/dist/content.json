@@ -1899,9 +1899,9 @@
       {
         "id": "owa_package",
         "name": "Mobility and one-way attack package",
-        "text": "Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has the Self-destruct skill.",
+        "text": "Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has Self-destruct 2 (a 3\" blast).",
         "grants_skills": {
-          "self_destruct": 1
+          "self_destruct": 2
         },
         "status": "proposed"
       },
@@ -3546,7 +3546,8 @@
         "name": "Self-destruct",
         "status": "proposed",
         "levels": [
-          "As an action: resolve a blast centred on itself, radius 2\", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud."
+          "As an action: resolve a blast centred on itself, radius 2\", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud.",
+          "A bigger warhead: the blast's radius is 3\". Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge."
         ]
       }
     ]

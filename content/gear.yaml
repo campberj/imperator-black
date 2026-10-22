@@ -81,8 +81,8 @@ gear:
 
   - id: owa_package
     name: Mobility and one-way attack package
-    text: "Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has the Self-destruct skill."
-    grants_skills: { self_destruct: 1 }
+    text: "Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has Self-destruct 2 (a 3\" blast)."
+    grants_skills: { self_destruct: 2 }
     status: proposed
 
   - id: flux_warhead

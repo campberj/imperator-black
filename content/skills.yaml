@@ -98,4 +98,5 @@ skills:
     status: proposed
     levels:
       - "As an action: resolve a blast centred on itself, radius 2\", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud."
+      - "A bigger warhead: the blast's radius is 3\". Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge."
 

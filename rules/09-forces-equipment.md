@@ -90,7 +90,7 @@ Gear marked **Proposed** adds a rule that is new in this version; it is in play 
 | Ballistic shield | The carrier has the Shield skill. It cannot use a weapon with the Cumbersome keyword while carrying it. | **Proposed** |
 | Jammer | Enemy Automated models within 6" take -2 to hit, and enemy Hack tests within 6" take -2. | — |
 | Mk19 grenade launcher | Mounted automatic grenade launcher. The carrier may Throw frag grenades using Shoot instead of Physique, with a throw range of 30"; one Shoot action throws two, at points within 3" of each other. Its Throws are Very loud and count as Shoot actions for reactions. | **Proposed** |
-| Mobility and one-way attack package | Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has the Self-destruct skill. | **Proposed** |
+| Mobility and one-way attack package | Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has Self-destruct 2 (a 3" blast). | **Proposed** |
 | Flux warhead | Once per mission, as an action: an electromagnetic burst. Every Automated model within 6", friend or foe and including the carrier, takes a hit of 2d10 damage, AP 3. | **Proposed** |
 | Cooperative engagement package | Shares targeting data: once per round, a friendly model within 12" of the carrier gets +1 on one Shoot test against an enemy the carrier can see. | **Proposed** |
 <!-- /table -->
@@ -117,7 +117,7 @@ Skills marked **Proposed** add a rule that is new in this version; they are in p
 | *Layered armour* | Blast weapons step one extra row down against it. | **Proposed** |
 | *Laser detector* | Laser warning receivers cue its fire: its Reaction and Overwatch shots do not take the −1 for reacting. | **Proposed** |
 | *Augmented* | Genetically or cybernetically augmented: +1 to Physique tests, and it ignores the first Suppression it gains each round. | **Proposed** |
-| *Self-destruct* | As an action: resolve a blast centred on itself, radius 2", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud. | **Proposed** |
+| *Self-destruct* 1–2 | **1:** As an action: resolve a blast centred on itself, radius 2", 2d10 damage, AP 2, as a frag grenade. Then remove the model. Very loud. **2:** A bigger warhead: the blast's radius is 3". Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge. | **Proposed** |
 <!-- /table -->
 
 ## Opposition: Freespace Solutions
@@ -207,7 +207,7 @@ Missions build the enemy force from **elements**, chosen by threat tier. Behavio
 | **Reaction Force Engineer** | Regular | 6" | 2 | 1 | 2 | 2 | 2 | 1 | 2 | Composite plate (2) | Carbine / AT launcher | Knife or bayonet, Frag grenade, Breaching charge | — |
 | **Harlow Veteran** | Veteran | 6" | 2 | 3 | 2 | 3 | 0 | 1 | 2 | Flak (1) | Carbine | Boarding axe or combat blade, Flashbang, Frag grenade, Jump pack | — |
 | **Springbok AI** | Veteran | 6" | 3 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | Auto rifle | Unarmed / weapon butt | Automated |
-| **Cricket Drone** | Regular | 7" | 0 | — | — | — | — | 1 | 1 | None (0) | — | Unarmed / weapon butt | Automated, Self-destruct |
+| **Cricket Drone** | Regular | 7" | 0 | — | — | — | — | 1 | 1 | None (0) | — | Unarmed / weapon butt | Automated, Self-destruct 1 |
 <!-- /table -->
 
 ### UN Force Command
