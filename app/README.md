@@ -83,7 +83,7 @@ The content already holds the unit database: every faction, troop profile, weapo
 - Filters: faction, rank, role, keyword; a search box across names and text.
 - **Done when:** every troop in `content/troops.yaml` renders, a Vitest test checks one profile per faction against the content, and lint, tests and build pass.
 
-### 7. Missions content in Core
+### 7. Missions content in Core ✅ done (2026-10-22)
 
 `content/missions.yaml` (rules chapter 13) is in `content.json`, but `ContentSet.Parse` doesn't load it yet. `content/terrain.yaml` now carries generator footprints: `pieces` on each sector roll and `fill_pieces` on each environment. The records `TerrainPieceDef`, `SectorRollRow.Pieces` and `EnvironmentDef.FillPieces` already exist in `TerrainContent.cs`.
 

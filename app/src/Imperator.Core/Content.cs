@@ -199,6 +199,7 @@ public sealed class ContentSet
     public required BehaviorsContent Behaviors { get; init; }
     public required LayoutsContent Layouts { get; init; }
     public required TerrainContent Terrain { get; init; }
+    public required MissionsContent Missions { get; init; }
 
     public RangedWeapon Ranged(string id) => Find(Weapons.Ranged, w => w.Id, id, "ranged weapon");
     public MeleeWeapon Melee(string id) => Find(Weapons.Melee, w => w.Id, id, "melee weapon");
@@ -220,6 +221,10 @@ public sealed class ContentSet
     public HazardDef Hazard(string id) => Find(Layouts.Hazards, h => h.Id, id, "hazard");
     public TerrainTypeDef TerrainType(string id) => Find(Terrain.Types, t => t.Id, id, "terrain type");
     public EnvironmentDef Environment(string id) => Find(Terrain.Environments, e => e.Id, id, "environment");
+    public MissionDef Mission(string id) => Find(Missions.Missions, m => m.Id, id, "mission");
+    public TierDef Tier(int tier) => Find(Missions.Tiers, t => t.Tier.ToString(), tier.ToString(), "threat tier");
+    public ComplicationDef Complication(string id) => Find(Missions.Complications, x => x.Id, id, "complication");
+    public ClockSizeDef ClockSize(string id) => Find(Missions.Clock.Sizes, z => z.Id, id, "clock size");
 
     private static T Find<T>(List<T> items, Func<T, string> key, string id, string kind) =>
         items.FirstOrDefault(x => key(x) == id) ?? throw new KeyNotFoundException($"Unknown {kind} '{id}'");
@@ -267,6 +272,7 @@ public sealed class ContentSet
             Behaviors = Section<BehaviorsContent>("behaviors"),
             Layouts = Section<LayoutsContent>("layouts"),
             Terrain = Section<TerrainContent>("terrain"),
+            Missions = Section<MissionsContent>("missions"),
         };
         if (errors.Count == 0) errors.AddRange(ContentValidator.Validate(set));
         if (errors.Count > 0) throw new ContentException(errors);

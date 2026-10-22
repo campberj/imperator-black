@@ -46,7 +46,7 @@ public static class ContentValidator
         var behaviors = Ids(c.Behaviors.Behaviors, b => b.Id, "behaviors");
         var factions = Ids(c.Factions.Factions, f => f.Id, "factions");
         var troops = Ids(c.Troops.Troops, t => t.Id, "troops");
-        Ids(c.Factions.Elements, e => e.Id, "elements");
+        var elements = Ids(c.Factions.Elements, e => e.Id, "elements");
         var teams = Ids(c.Rosters.Teams, t => t.Id, "rosters.teams");
         Ids(c.Rosters.StartingForces, f => f.Id, "rosters.starting_forces");
 
@@ -204,11 +204,59 @@ public static class ContentValidator
         CoversD6(land.EnvironmentRoll.Select(r => r.Roll), "terrain.environment_roll");
         CoversD6(land.Conditions.Select(r => r.Roll), "terrain.conditions");
         foreach (var r in land.EnvironmentRoll) Need(r.Environment, envIds, "terrain.environment_roll environment");
+        // Generator footprints: every sector roll and fill lists its pieces ([] for open ground), each a known type that fits a sector.
+        var terrainIds = land.Types.Select(t => t.Id).ToHashSet();
+        foreach (var e in land.Environments)
+        {
+            var sets = new[] { ($"terrain environment {e.Id} fill", e.FillPieces) }
+                .Concat(e.Table.Select(r => ($"terrain environment {e.Id} roll {r.Roll}", r.Pieces)));
+            foreach (var (w, pieces) in sets)
+            {
+                if (pieces is null)
+                {
+                    errors.Add($"{w}: needs 'pieces' (the generator's footprint; [] for open ground)");
+                    continue;
+                }
+                foreach (var pc in pieces)
+                {
+                    Need(pc.Type, terrainIds, $"{w} piece type");
+                    if (!(pc.W is > 0 and <= 12 && pc.H is > 0 and <= 12)) errors.Add($"{w}: piece '{pc.Label}' must fit a 12\" sector");
+                }
+            }
+            if (e.FillPieces is not { Count: > 0 }) errors.Add($"terrain environment {e.Id}: the fill must have cover");
+        }
         foreach (var t in land.Types)
             foreach (var (k, text) in new[] { ("cover", t.Cover), ("move", t.Move), ("sight", t.Sight) })
                 if (string.IsNullOrEmpty(text)) errors.Add($"terrain type {t.Id}: needs '{k}'");
         foreach (var t in b.Terms)
             if (string.IsNullOrEmpty(t.Term) || string.IsNullOrEmpty(t.Text)) errors.Add("behaviors.terms: each needs term and text");
+
+        // Missions (chapter 13).
+        var m = c.Missions;
+        var missionIds = Ids(m.Missions, x => x.Id, "missions.missions");
+        CoversD6(m.MissionRoll.Select(r => r.Roll), "missions.mission_roll");
+        CoversD6(m.TierRoll.Select(r => r.Roll), "missions.tier_roll");
+        CoversD6(m.Complications.Select(r => r.Roll), "missions.complications");
+        foreach (var r in m.MissionRoll) Need(r.Mission, missionIds, "missions.mission_roll mission");
+        foreach (var z in m.Clock.Sizes)
+            if (z.Die is not ("d4" or "d6" or "d8") || z.Limit <= m.Clock.FirstCheckIn)
+                errors.Add($"missions.clock size {z.Id}: needs a die (d4/d6/d8) and a whole-minute limit past the first check-in");
+        var special = m.ContactResults.Select(x => x.Id).ToHashSet();
+        foreach (var tier in m.Tiers)
+        {
+            var w = $"mission tier {tier.Tier}";
+            CoversD6(tier.Table.Select(r => r.Roll), w);
+            foreach (var r in tier.Table)
+                if (!special.Contains(r.Result)) Need(r.Result, elements, $"{w} contact result");
+            Need(tier.Reinforcement, elements, $"{w} reinforcement");
+            Need(tier.Hvt, troops, $"{w} hvt");
+        }
+        foreach (var r in m.TierRoll)
+            if (m.Tiers.All(t => t.Tier != r.Tier)) errors.Add($"missions.tier_roll: tier {r.Tier} has no table");
+        foreach (var x in m.Missions)
+            foreach (var (k, text) in new[] { ("task", x.Task), ("lockdown", x.Lockdown), ("decisive", x.Decisive),
+                         ("marginal", x.Marginal), ("failure", x.Failure), ("ship", x.Ship), ("land", x.Land) })
+                if (string.IsNullOrEmpty(text)) errors.Add($"mission {x.Id}: needs '{k}'");
 
         // Not mirrored: validate_content.py also builds 200 decks per vessel with tools/generate_layout.py and checks
         // each is connected and within the tile inventory. That needs the generator, which is not yet ported to Core.
