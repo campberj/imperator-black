@@ -12,6 +12,7 @@ export default defineConfig({
     proxy: {
       '/content': api,
       '/health': api,
+      '/decks': api,
     },
   },
   test: {

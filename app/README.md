@@ -21,7 +21,7 @@ Last updated: 2026-10-20, rules v0.4 (granular profiles).
 | `app/tests/Imperator.Core.Tests` | xUnit v3 tests (275 cases: the former runner's 72 checks, content loading and validation, and the deck generator held to the Python reference statistics in `Fixtures/layout-reference.json`, written by `tools/layout_reference.py`); run with `dotnet test app/Imperator.slnx` | Passing |
 | `app/tests/Imperator.Api.Tests` | xUnit v3 + `WebApplicationFactory` (17 cases): endpoints (including `/decks`) and schema, no database needed | Passing |
 | `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON into typed records (every file, including the chapter 10 solo opponent and its terms, chapter 11 `layouts`, chapter 12 `terrain`, `core.security` and `core.shoot_scale`) and validates it at load (`ContentValidator`, mirroring `tools/validate_content.py`) | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
-| `app/web` | Vite + React + TypeScript, read from `/content` (dev server proxies to the API). Unit database (`#units`: troop cards per faction with filters and search, teams, elements), reference (`#reference`: gear, skills, keywords, weapon and armour tables, searchable), behavior cards (`#behaviors`). Vitest + Testing Library, oxlint. See [web/README.md](web/README.md) | Read-only |
+| `app/web` | Vite + React + TypeScript, read from `/content` (dev server proxies to the API). Unit database (`#units`: troop cards per faction with filters and search, teams, elements), reference (`#reference`: gear, skills, keywords, weapon and armour tables, searchable), behavior cards (`#behaviors`), deck maps (`#decks?vessel=…&seed=…`: SVG map of a generated deck with rooms, doors and terrain tables). Vitest + Testing Library, oxlint. See [web/README.md](web/README.md) | Read-only |
 | `docker-compose.yml` (repo root) | PostgreSQL 18 for local development | |
 | `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests, checks EF migrations match the model and apply to PostgreSQL; a `web` job lints, tests and builds `app/web` | Green |
 
@@ -92,7 +92,7 @@ The content already holds the unit database: every faction, troop profile, weapo
 - `GET /decks/{vessel}?seed=N` returns the deck as JSON, recording seed and content version.
 - **Done when:** tests pass and the endpoint returns a deck for each vessel.
 
-### 8. Deck map in the web app
+### 8. Deck map in the web app ✅ done (2026-10-21)
 
 - Render a deck from task 7 as SVG: the 3" grid, tiles with ids and names, doors coloured by state with security, cover pieces with ids, entry and objective; the same conventions as the printed deck sheets (`docs/print/decks/`).
 - Rooms, doors and terrain tables beside the map; a seed box and a vessel picker; print styles.
@@ -103,11 +103,11 @@ Beyond this, the app's real features wait on rules:
 
 | App feature | Waits on |
 |---|---|
-| Layout generator (SVG ship maps from tiles) | Tasks 7 and 8. |
+| Layout generator (SVG ship maps from tiles) | Done: tasks 7 and 8 (`GET /decks`, `#decks`). |
 | Land table generator (chapter 12 sector tables) | Ready after task 8, same pattern; RJ to confirm priority. |
 | Custom troop and unit builder | Phase 7 point values, then Phase 9 (decision 6.12) |
 | Mission generator (briefing, enemy force, contact tables) | Phase 5: missions |
-| Enemy guidance cards | Task 6. |
+| Enemy guidance cards | Done: task 6 (`#behaviors`). |
 | Campaign tracker | Phase 7: campaign loop |
 
 Planned app feature (RJ, 2026-10-20): an in-app reference that explains every gear item, keyword and special rule, read from `content/` (the list will grow). Build it from the same `text` fields the rulebook tables use.

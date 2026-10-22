@@ -339,3 +339,203 @@ table.weapons tr.note td {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ---------- Deck maps (as docs/print/decks/) ---------- */
+
+.filters button {
+  font: inherit;
+  font-size: 0.9375rem;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.filters button[type='submit'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.filters button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.deck header h2 {
+  margin: 8px 0 0;
+  font-size: 1.375rem;
+}
+
+.deck-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .deck-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.deck-figure {
+  margin: 0;
+}
+
+.deck-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+/* Map colours are the printed sheet's, in both themes, so the map reads like the paper. */
+.deck-map .board {
+  fill: none;
+  stroke: #5b6670;
+  stroke-width: 0.06;
+  stroke-dasharray: 0.3 0.45;
+}
+
+.deck-map .tile {
+  fill: #e9edf1;
+  stroke: #3c4650;
+  stroke-width: 0.14;
+}
+
+.deck-map .grid {
+  stroke: #cfd6dc;
+  stroke-width: 0.04;
+}
+
+.deck-map .cover {
+  stroke: #3c4650;
+  stroke-width: 0.04;
+}
+
+.deck-map text {
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* A halo in the tile colour keeps labels legible where they cross cover, walls or each other. */
+.deck-map .tile-label,
+.deck-map .door-label {
+  paint-order: stroke;
+  stroke: #e9edf1;
+  stroke-width: 0.12;
+  stroke-linejoin: round;
+}
+
+.deck-map .cover-id {
+  font-size: 0.42px;
+  font-weight: 700;
+  fill: #1d2329;
+}
+
+.deck-map .cover-id.heavy {
+  fill: #fff;
+}
+
+.deck-map .tile-label {
+  font-size: 0.4px;
+  fill: #1d2329;
+}
+
+.deck-map .tile-id {
+  font-size: 0.55px;
+  font-weight: 700;
+}
+
+.deck-map .tile-size {
+  font-size: 0.32px;
+  fill: #5b6670;
+}
+
+.deck-map .door {
+  stroke-width: 0.32;
+  stroke-linecap: butt;
+}
+
+.deck-map .door-label {
+  font-size: 0.42px;
+  font-weight: 700;
+}
+
+.deck-map .objective {
+  stroke: #1d2329;
+  stroke-width: 0.06;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 4px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid rgb(0 0 0 / 0.2);
+}
+
+.deck-tables h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+}
+
+.deck-tables section h2 {
+  font-size: 1rem;
+  margin: 16px 0 6px;
+}
+
+.deck-tables table {
+  font-size: 0.8125rem;
+}
+
+.small {
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+@media print {
+  .deck-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .deck-figure {
+    break-after: page;
+  }
+
+  .deck-map {
+    border: none;
+  }
+
+  .filters button {
+    display: none;
+  }
+
+  .legend .swatch {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
