@@ -6,15 +6,14 @@ import { BOARD_COLOURS, COVER_COLOURS, COVER_NAMES, COVER_ORDER, DOOR_COLOURS } 
 import { BoardLegend, BoardMap } from './BoardMap'
 // GET /decks/freighter?seed=7: open, closed and locked doors and an objective.
 import deckFixture from '../fixtures/deck-freighter-7.json'
-// The reference generator's example missions (docs/scenarios/missions/*.yaml, as JSON).
-import landFixture from '../fixtures/mission-land-11.json'
-import shipFixture from '../fixtures/mission-ship-42.json'
+// The reference generator's example missions (docs/scenarios/missions/*.yaml).
+import { landExample, shipExample } from '../test-missions'
 
 afterEach(cleanup)
 
 const deck = deckFixture as unknown as Deck
-const land = landFixture as unknown as Board & { title: string }
-const shipMission = shipFixture as unknown as Board & { title: string }
+const land = landExample
+const shipMission = shipExample
 const securityName = (id: string) => ({ basic: 'Basic', secured: 'Secured', hardened: 'Hardened', military: 'Military' })[id] ?? id
 const draw = (board: Board, title = 'Test board') =>
   render(<BoardMap board={board} title={title} securityName={securityName} troopName={(id) => `Troop ${id}`} />).container.querySelector('svg')!

@@ -608,3 +608,30 @@ table.weapons tr.note td {
 .rolls summary {
   cursor: pointer;
 }
+
+/* ---------- Mission sheet ---------- */
+
+.mission .sheet-page {
+  margin-top: 24px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.mission .sheet-page h2 {
+  font-size: 1.125rem;
+}
+
+.mission .deck-tables p {
+  margin: 0 0 8px;
+}
+
+@media print {
+  .mission .sheet-page {
+    break-before: page;
+    border-top: none;
+  }
+
+  .mission .deck-figure {
+    break-after: auto;
+  }
+}

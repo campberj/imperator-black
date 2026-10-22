@@ -193,6 +193,25 @@ export interface Content {
   rosters: { teams: Team[] }
   behaviors: Behaviors
   layouts: { vessels: Vessel[]; rooms: Room[] }
+  missions: {
+    missions: {
+      id: string
+      name: string
+      summary: string
+      objectives: number
+      task: string
+      lockdown: string
+      decisive: string
+      marginal: string
+      failure: string
+    }[]
+    tiers: { tier: number; contacts: number; reinforcement: string; hvt: string; table: { roll: string; result: string }[] }[]
+    contact_results: { id: string; name: string; text: string }[]
+    alert: { max: number; raises: { source: string; amount: number }[]; thresholds: { at: number; effect: string }[] }
+    complications: { roll: string; id: string; name: string; text: string }[]
+    clock: { sizes: { id: string; name: string; force: string; die: string; limit: number }[]; rules: string[] }
+    contacts: string[]
+  }
   terrain: {
     types: { id: string; name: string; kind: string }[]
     environments: { id: string; name: string; fill: string }[]
