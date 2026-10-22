@@ -5,6 +5,8 @@ Usage (from the repo root):
     python3 tools/print_scenario.py docs/scenarios/gym-01-first-breach.yaml
 
 Writes docs/print/ImperatorBlack_<id>-sheet.pdf and docs/print/ImperatorBlack_<id>-cards.pdf.
+With --with-unit-cards it also writes ImperatorBlack_<id>-and-unit-cards.pdf: the scenario's cards followed
+by every other unit card (Task Force Boone and the opposition), with no troop printed twice.
 Troop profiles, weapons and gear come from content/ (via print_sheets.py), so the cards
 always match the rules.
 """
@@ -371,19 +373,36 @@ def troop_for(model, number=None):
     return t
 
 
-def cards(s, out):
-    c = canvas.Canvas(str(out), pagesize=letter)
-    c.setTitle(f"{s['title']} — cards")
-    slots = [(ps.MARGIN_X, ps.MARGIN_Y + ps.CARD_H), (ps.MARGIN_X + ps.CARD_W, ps.MARGIN_Y + ps.CARD_H),
-             (ps.MARGIN_X, ps.MARGIN_Y), (ps.MARGIN_X + ps.CARD_W, ps.MARGIN_Y)]
+def scenario_items(s):
+    """The scenario's cards: player models, enemy models (identical enemies share one card), references, behaviors."""
     items = [("troop", troop_for(m)) for m in s["player"]]
-    items += [("troop", troop_for({"troop": e["troop"], "weapon": e.get("weapon")}, e["n"])) for e in s["enemies"]]
+    groups = {}
+    for e in s["enemies"]:
+        groups.setdefault((e["troop"], e.get("weapon")), []).append(e["n"])
+    for (troop, weapon), ns in groups.items():
+        label = ", ".join(str(n) for n in ns)
+        items.append(("troop", troop_for({"troop": troop, "weapon": weapon}, label)))
     items += [("ref", r) for r in ps.solo_reference_cards()]
     seen = []
     for el, _ in enemy_elements(s):
         if el["behavior"] not in seen:
             seen.append(el["behavior"])
     items += [("behavior", ps.BEHAVIORS[b]) for b in seen]
+    return items
+
+
+def unit_items(exclude):
+    """Generic unit cards for every non-Republic troop not already covered by a scenario card."""
+    order = ["tfb", "freespace", "contractor", "un", "directorate"]
+    troops = [t for t in ps.C["troops"]["troops"] if t["faction"] in order and t["id"] not in exclude]
+    return [("troop", t) for t in sorted(troops, key=lambda t: order.index(t["faction"]))]
+
+
+def write_cards(items, out, title):
+    c = canvas.Canvas(str(out), pagesize=letter)
+    c.setTitle(title)
+    slots = [(ps.MARGIN_X, ps.MARGIN_Y + ps.CARD_H), (ps.MARGIN_X + ps.CARD_W, ps.MARGIN_Y + ps.CARD_H),
+             (ps.MARGIN_X, ps.MARGIN_Y), (ps.MARGIN_X + ps.CARD_W, ps.MARGIN_Y)]
     for i, (kind, t) in enumerate(items):
         if i and i % 4 == 0:
             c.showPage()
@@ -400,10 +419,22 @@ def cards(s, out):
     return len(items)
 
 
+def cards(s, out):
+    return write_cards(scenario_items(s), out, f"{s['title']} — cards")
+
+
+def print_set(s, out):
+    """One print run: the scenario's cards, then every other unit card, packed four to a page with no repeats."""
+    used = {m["troop"] for m in s["player"] + s["enemies"]}
+    items = scenario_items(s) + unit_items(used)
+    return write_cards(items, out, f"{s['title']} — cards and unit cards")
+
+
 def main():
-    if len(sys.argv) != 2:
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if len(args) != 1:
         raise SystemExit(__doc__)
-    path = Path(sys.argv[1])
+    path = Path(args[0])
     s = yaml.safe_load(path.read_text())
     if s.get("kind") == "deck":
         ps.OUT.mkdir(parents=True, exist_ok=True)
@@ -429,6 +460,10 @@ def main():
     n = cards(s, cards_path)
     print(f"Wrote {sheet_path.relative_to(ROOT)}")
     print(f"Wrote {cards_path.relative_to(ROOT)} ({n} cards)")
+    if "--with-unit-cards" in sys.argv:
+        set_path = ps.OUT / f"{ps.PREFIX}{s['id']}-and-unit-cards.pdf"
+        n = print_set(s, set_path)
+        print(f"Wrote {set_path.relative_to(ROOT)} ({n} cards, {-(-n // 4)} pages)")
 
 
 if __name__ == "__main__":
