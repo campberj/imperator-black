@@ -18,14 +18,14 @@ This is an **alpha**. The rules have been played, but not by many people and not
 
 1. Read chapters 1 and 2 (core concepts, the round, actions and reactions), then skim chapters 3 to 7. The quick reference covers most of what you need at the table.
 2. **Play Gym 1: First Breach** (in the appendices). It is a short ship-boarding fight that teaches movement, shooting, doors and the solo opponent. Use the printed sheet, map and cards.
-3. Then try **Gym 2** (land) or **Gym 3** (a station), or one of the two sample missions.
+3. Then try **Gym 2** (land) or **Gym 3** (a station), or one of the two sample missions. With a second player, try a **Hold the ground** patrol game (chapter 16) first: it has no hidden information.
 4. When you're comfortable, build your own: generate a deck (chapter 11) or a land table (chapter 12), and a mission (chapter 13).
 
 ## Running the enemy
 
 The enemy is run by chapter 10, the solo opponent, and its behavior cards. Each enemy element has a behavior (Sentry, Tactical, Aggressive and so on). When an enemy model activates, read its card top-down and take the first line that applies. If you ever have to make a judgment call the rules don't settle, **note it**: that is one of the most useful things you can report.
 
-Two players can play **co-operatively**, sharing the player force against the solo opponent. Rules for two players fighting each other aren't written yet.
+Two players can play **co-operatively**, sharing the player force against the solo opponent, or **against each other** with chapter 16: forces matched by Troop Value (Appendix I), three even fights and three raids. The two-player rules are brand new and entirely Proposed: they are a large part of what this alpha tests.
 
 ## What we want to know
 
@@ -42,8 +42,7 @@ Please report what happened, not just what you think should change. One rule cha
 ## What isn't in this alpha
 
 - Vehicles, walkers, and air or orbital support.
-- Rules for two players fighting each other.
-- The campaign and the troop builder. They exist in draft and will come in a later alpha.
+- The campaign and the troop builder. They exist in draft and will come in a later alpha. (Each troop's Troop Value is included, in Appendix I, for two-player games.)
 
 ## A note on the forces
 

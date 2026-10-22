@@ -266,6 +266,40 @@ def render_values(section):
     return None
 
 
+def render_versus(section):
+    Vs = load("versus")
+    names = {m["id"]: m["name"] for m in Vs["missions"]}
+    clocks = {z["id"]: z for z in load("missions")["clock"]["sizes"]}
+    bullets = lambda items: "\n".join(f"- {x}" for x in items)
+    if section == "sizes":
+        return table(["Size", "Troop Value", "Models", "Board", "Mission clock"],
+                     [(f'**{z["name"]}**', z["tv"], z["models"], z["board"],
+                       f'{clocks[z["clock"]]["limit"]} minutes, {clocks[z["clock"]]["die"]}') for z in Vs["sizes"]])
+    if section == "forces":
+        return bullets(Vs["forces"])
+    if section == "mission_roll":
+        kinds = {m["id"]: "Even fight" if m["kind"] == "even" else "Raid" for m in Vs["missions"]}
+        hidden = {m["id"]: m["hidden_text"] for m in Vs["missions"]}
+        return table(["d6", "Mission", "Kind", "Hidden information"],
+                     [(r["roll"], f'**{names[r["mission"]]}**', kinds[r["mission"]], hidden[r["mission"]]) for r in Vs["mission_roll"]])
+    if section == "even":
+        out = []
+        for m in Vs["missions"]:
+            if m["kind"] == "even":
+                out.append(f'### {m["name"]}\n\n*{m["summary"]}*\n\n- **Hidden information:** {m["hidden_text"]}\n'
+                           f'- **Deployment:** {m["deploy"]}\n- **Scoring:** {m["scoring"]}')
+        return "\n\n".join(out)
+    if section in ("raid_setup", "raid_alarm", "raid_alert", "raid_grades"):
+        return bullets(Vs["raid"][section.split("_", 1)[1]])
+    if section == "raid_secrets":
+        return bullets([x["text"] for x in Vs["raid"]["secrets"]])
+    if section == "blinds":
+        return "\n".join(f"{i}. {x}" for i, x in enumerate(Vs["blinds"]["rules"], 1))
+    if section in ("casualty_points", "end", "even_grades", "changes"):
+        return bullets(Vs[section])
+    return None
+
+
 def render_terrain(section):
     T = load("terrain")
     moves = {"normal": "Normal", "difficult": "Difficult (each inch costs 2\")", "obstacle": "Obstacle (+2\" to cross)", "blocked": "Blocked"}
@@ -426,6 +460,8 @@ def render_forces(key):
         return render_campaign(section)
     if f == "values":
         return render_values(section)
+    if f == "versus":
+        return render_versus(section)
     if key == "core.security":
         sec = load("core")["security"]
         return table(["Security level", "Hack test", "Successes needed", "Typical"],

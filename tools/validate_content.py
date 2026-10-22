@@ -353,6 +353,21 @@ for grp in ("gear", "grenades", "skills"):
 if [Va["multiplier"][str(i)] for i in range(5)] != sorted(Va["multiplier"][str(i)] for i in range(5)):
     errors.append("values.multiplier: must rise with the attribute")
 
+# Two players (chapter 16).
+Vs = C["versus"]
+vs_ids = ids(Vs["missions"], "versus.missions")
+covers_d6(Vs["mission_roll"], "versus.mission_roll")
+for r in Vs["mission_roll"]:
+    need(r["mission"], vs_ids, "versus.mission_roll mission")
+clock_ids = {z["id"] for z in C["missions"]["clock"]["sizes"]}
+for z in Vs["sizes"]:
+    need(z["clock"], clock_ids, f"versus size {z['id']} clock")
+for m in Vs["missions"]:
+    if m["kind"] not in ("even", "raid") or m["hidden"] not in ("none", "blinds", "defender"):
+        errors.append(f"versus mission {m['id']}: kind even/raid and hidden none/blinds/defender")
+    if m["kind"] == "raid" and m["raid_type"] not in mission_ids | {"recover_or_capture"}:
+        errors.append(f"versus mission {m['id']}: unknown raid_type")
+
 if errors:
     print("\n".join(errors))
     sys.exit(1)

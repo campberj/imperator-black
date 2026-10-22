@@ -5,6 +5,7 @@ One form per game. Short answers are fine; specifics beat opinions.
 | | |
 |---|---|
 | **Your name** | |
+| **Solo, co-op or two-player?** (two-player: mission, sides, TV each, who won) | |
 | **Date** | |
 | **Scenario or mission** (and seed, if generated) | |
 | **Ship deck or land table** (vessel or environment, board size) | |

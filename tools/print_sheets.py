@@ -566,6 +566,30 @@ def quick_reference():
                   "Upkeep: recovering soldiers tick down one turn; ship upgrades finish; move the turn marker. Events: roll 2d6 (campaign sheets).", Q_B)]
     story += [PageBreak(), Paragraph("Imperator Black — Quick Reference (4): After-action  <font size=8 color='#5b6670'>campaign draft</font>", Q_TITLE),
               Spacer(1, 6), two_col(left4, right4)]
+
+    # Page 5: two players (chapter 16 draft) ------------------------------
+    Vs = C["versus"]
+    import re as _re
+    _b = lambda items: bullets([_re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", x) for x in items])
+    clocks = {z["id"]: z for z in C["missions"]["clock"]["sizes"]}
+    vnames = {m["id"]: m for m in Vs["missions"]}
+    left5 = [Paragraph("Forces", Q_H),
+             qtable([["Size", "TV", "Board", "Clock"]] + [[z["name"], z["tv"], z["board"], f'{clocks[z["clock"]]["limit"]} min, {clocks[z["clock"]]["die"]}'] for z in Vs["sizes"]],
+                    [0.8 * inch, 0.35 * inch, half - 1.95 * inch, 0.8 * inch])] + _b(Vs["forces"][:3]) + [
+             Spacer(1, 4), Paragraph("Missions (d6)", Q_H),
+             qtable([["d6", "Mission", "Hidden information"]] + [[r["roll"], vnames[r["mission"]]["name"], vnames[r["mission"]]["hidden_text"]] for r in Vs["mission_roll"]],
+                    [0.3 * inch, 1.3 * inch, half - 1.6 * inch])]
+    for m in Vs["missions"]:
+        if m["kind"] == "even":
+            left5 += [Paragraph(f'<b>{m["name"]}:</b> {m["scoring"]}', Q_SMALL)]
+    left5 += [Spacer(1, 4), Paragraph("Ending and winning", Q_H)] + _b(Vs["end"][:2] + Vs["casualty_points"] + Vs["even_grades"])
+    right5 = [Paragraph("Blinds", Q_H)] + _b(Vs["blinds"]["rules"]) + [
+              Spacer(1, 4), Paragraph("Raids", Q_H)] + _b(Vs["raid"]["setup"][1:3]) + [
+              Spacer(1, 2), Paragraph("<b>The alarm</b>", Q_B)] + _b(Vs["raid"]["alarm"][:2]) + [
+              Spacer(1, 2), Paragraph("<b>The alert track</b>", Q_B)] + _b(Vs["raid"]["alert"][1:]) + [
+              Paragraph(Vs["raid"]["grades"][0], Q_SMALL)]
+    story += [PageBreak(), Paragraph("Imperator Black — Quick Reference (5): Two players  <font size=8 color='#5b6670'>draft</font>", Q_TITLE),
+              Spacer(1, 6), two_col(left5, right5)]
     doc.build(story)
     return path
 
