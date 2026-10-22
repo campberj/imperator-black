@@ -210,7 +210,7 @@ Roll once for the deck:
 
 ## Missions on the deck
 
-Phase 5 adds the mission tables: objectives, where the enemy starts, contacts and the alert track. Until then, use the heart as the objective, and place enemy models in the compartments, at least one compartment away from the docking passage.
+Chapter 13 turns a deck into a mission: the objective, where the enemy starts, hidden contacts, the alert track and the mission clock. For a quick fight without it, use the heart as the objective and place enemy models in the compartments, at least one compartment away from the docking passage.
 
 ## Example
 

@@ -211,7 +211,7 @@ The dashboard is a one-page status sheet (`ImperatorBlack_mission-dashboard.pdf`
 
 - A player model that leaves by its airlock or its own edge is **extracted**. It takes no further part, and whatever it carries (data, cargo, a hostage or a prisoner in base contact) leaves with it.
 - The mission ends when every player model is extracted, Down, Dead or captured, or when time runs out.
-- Player models still on the board at the end are **left behind**. In a campaign (Phase 7), the enemy holds the field: models left behind Down are captured.
+- Player models still on the board at the end are **left behind**. In a campaign (chapter 14), the enemy holds the field: models left behind Down are captured.
 - Grade the mission with its type's table: **Decisive**, **Marginal** or **Failure**.
 
 ## The briefing

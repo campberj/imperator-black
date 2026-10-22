@@ -193,6 +193,22 @@ A custom troop is built from the baseline, within these limits, then priced as a
 
 Every profile in chapter 9, with its default loadout.
 
+### Generic forces
+
+<!-- table:values.tv_generic -->
+| Troop | TV | Requisition |
+|---|---|---|
+| **Officer** | 45 | 5 |
+| **Line Trooper** | 32 | 4 |
+| **Support Gunner** | 43 | 5 |
+| **Anti-armour Trooper** | 39 | 4 |
+| **Specialist** | 31 | 4 |
+| **Marksman** | 43 | 5 |
+| **Assault Trooper** | 56 | 6 |
+| **Heavy Infantry Sergeant** | 125 | 13 |
+| **Heavy Infantry** | 110 | 11 |
+<!-- /table -->
+
 ### Task Force Boone
 
 <!-- table:values.tv_tfb -->
@@ -322,4 +338,4 @@ Every profile in chapter 9, with its default loadout.
 | **Directorate Deniable Operator** | 68 | 7 |
 <!-- /table -->
 
-The ranking was checked against the simulator's duel scores (`docs/analysis/troop-value-calibration.md`): rank correlation 0.87 across all 73 profiles. The largest differences are where the duel can't see a troop's worth: Leaders (command), gunners and launchers (several targets), and pistol-armed troops, who are weak at duel range by design.
+The ranking was checked against the simulator's duel scores (`docs/analysis/troop-value-calibration.md`): rank correlation 0.87 across the 73 profiles in the simulator report. The largest differences are where the duel can't see a troop's worth: Leaders (command), gunners and launchers (several targets), and pistol-armed troops, who are weak at duel range by design.

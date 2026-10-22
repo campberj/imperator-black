@@ -49,6 +49,7 @@ FACTION_COLOUR = {
     "un": colors.HexColor("#2f5d62"),
     "anchorage": colors.HexColor("#3c5a7a"),
     "hankou": colors.HexColor("#6e3b3b"),
+    "generic": colors.HexColor("#4a5a3a"),
 }
 
 by_id = lambda section: {x["id"]: x for x in section}
@@ -690,6 +691,8 @@ if __name__ == "__main__":
     p, n = unit_cards(("republic",), "republic-cards.pdf")
     print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
     p, n = unit_cards(("anchorage", "hankou"), "near-present-cards.pdf")
+    print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
+    p, n = unit_cards(("generic",), "generic-cards.pdf")
     print(f"Wrote {p.relative_to(ROOT)} ({n} cards)")
     print(f"Wrote {quick_reference().relative_to(ROOT)}")
     p, n = behavior_cards()

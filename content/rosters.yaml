@@ -123,6 +123,40 @@ teams:
     slots:
       - { troop: hk_zq44, count: 2 }
 
+  # ---------------- Generic forces ----------------
+  - id: gen_line_squad
+    name: Line squad
+    faction: generic
+    summary: "An officer, four line troopers and a support gunner: six models."
+    slots:
+      - { troop: gen_officer, count: 1 }
+      - { troop: gen_trooper, count: 4 }
+      - { troop: gen_gunner,  count: 1 }
+
+  - id: gen_support_team
+    name: Support team
+    faction: generic
+    summary: "An anti-armour trooper, a specialist and a marksman, attached to a squad."
+    slots:
+      - { troop: gen_at_trooper, count: 1 }
+      - { troop: gen_specialist, count: 1 }
+      - { troop: gen_marksman,   count: 1 }
+
+  - id: gen_assault_squad
+    name: Assault squad
+    faction: generic
+    summary: "Four assault troopers for close work."
+    slots:
+      - { troop: gen_assault_trooper, count: 4 }
+
+  - id: gen_heavy_squad
+    name: Heavy infantry squad
+    faction: generic
+    summary: "A sergeant and four power-armoured heavy infantry: five elite models."
+    slots:
+      - { troop: gen_heavy_leader,   count: 1 }
+      - { troop: gen_heavy_infantry, count: 4 }
+
 starting_forces:
   - id: poc_boarding_element
     name: Boarding element

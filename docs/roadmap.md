@@ -148,6 +148,8 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 
 ## Phase 6 — Playtest block 1 (gate)
 
+- **Closed alpha (2026-10-22):** chapters 1–13 go to RJ's testers as a PDF packet built from [`docs/alpha/README.md`](alpha/README.md); their feedback forms count toward this block.
+
 - Play 4–6 solo missions using paper procedures only. Log each game with the playtest template.
 - Revise to rules **v0.2**.
 

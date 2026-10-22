@@ -292,6 +292,42 @@
     "hk_zq44": {
       "tv": 84,
       "requisition": 9
+    },
+    "gen_officer": {
+      "tv": 45,
+      "requisition": 5
+    },
+    "gen_trooper": {
+      "tv": 32,
+      "requisition": 4
+    },
+    "gen_gunner": {
+      "tv": 43,
+      "requisition": 5
+    },
+    "gen_at_trooper": {
+      "tv": 39,
+      "requisition": 4
+    },
+    "gen_specialist": {
+      "tv": 31,
+      "requisition": 4
+    },
+    "gen_marksman": {
+      "tv": 43,
+      "requisition": 5
+    },
+    "gen_assault_trooper": {
+      "tv": 56,
+      "requisition": 6
+    },
+    "gen_heavy_leader": {
+      "tv": 125,
+      "requisition": 13
+    },
+    "gen_heavy_infantry": {
+      "tv": 110,
+      "requisition": 11
     }
   },
   "weapon_base": {

@@ -34,7 +34,7 @@ Forces are built from **teams**, like a table of organisation, not from a points
 
 - A **team** has fixed role slots. Fill each slot with its troop type and choose any weapon and gear options.
 - The proof-of-concept campaign starts with the **Boarding element**: one VAT fireteam plus one attached Pathfinder or Marksman, six models in all. One VAT Assaulter usually carries a breaching charge and the other a trauma kit.
-- How the force grows, through requisition, replacements, promotions and new teams, is part of the campaign (Phase 7).
+- How the force grows, through requisition, replacements, promotions and new teams, is part of the campaign (chapter 14).
 
 <!-- table:rosters.teams -->
 | Team | Models | Role |
@@ -53,6 +53,10 @@ Forces are built from **teams**, like a table of organisation, not from a points
 | Hankou SPEAR 1 | 1× Team Leader, 1× Automatic Rifleman, 1× Pioneer, 1× Rifleman | The Team Leader, an Automatic Rifleman, a Pioneer and a Rifleman. |
 | Hankou SPEAR 2 | 3× Rifleman, 1× Automatic Rifleman, 1× Pioneer | Three Riflemen, an Automatic Rifleman and a Pioneer. |
 | ZQ44 CCT pair | 2× ZQ44 CCT | Two light ZQ44 robots: base of fire, spotting, or one-way attack. |
+| Line squad | 1× Officer, 4× Line Trooper, 1× Support Gunner | An officer, four line troopers and a support gunner: six models. |
+| Support team | 1× Anti-armour Trooper, 1× Specialist, 1× Marksman | An anti-armour trooper, a specialist and a marksman, attached to a squad. |
+| Assault squad | 4× Assault Trooper | Four assault troopers for close work. |
+| Heavy infantry squad | 1× Heavy Infantry Sergeant, 4× Heavy Infantry | A sergeant and four power-armoured heavy infantry: five elite models. |
 <!-- /table -->
 
 ## Task Force Boone
@@ -124,7 +128,7 @@ Skills marked **Proposed** add a rule that is new in this version; they are in p
 
 Freespace Solutions is a privatized debt and salvage corporation that unofficially conducts grey-zone operations for paying patrons; its current patron is the Meridian Directorate. See [the opposition force](../docs/design/opposition-force.md) for its background.
 
-Missions build the enemy force from **elements**, chosen by threat tier. Behavior profiles tell you how each element fights (Phase 3).
+Missions build the enemy force from **elements**, chosen by threat tier. Behavior profiles tell you how each element fights (chapter 10).
 
 <!-- table:factions.threat_tiers -->
 | Tier | Name | Draws on |
@@ -355,3 +359,27 @@ Hankou Advanced Maritime Systems' security force, mostly recently retired PNLAN 
 <!-- /table -->
 
 Teams are in the tables of organisation above. Cards are printed in `docs/print/ImperatorBlack_near-present-cards.pdf`.
+
+## Generic forces
+
+Model-agnostic profiles for the collections most players already own: line infantry with rifles, support and anti-armour weapons, specialists, marksmen, shock troops in carapace armour, and power-armoured superhuman heavy infantry. They use only core kit, so any miniatures that look the part will do (pillar 2).
+
+On the Shoot scale (chapter 1), line infantry are trained military (1), officers, marksmen and assault troops professionals (2), and heavy infantry elite (3, Augmented, Wounds 2, heavy plate).
+
+**As opposition:** run a generic team with the solo opponent (chapter 10) as an element with the **Tactical** behavior (heavy infantry: **Aggressive**), its drill set by its lowest rank as usual.
+
+<!-- table:troops.generic -->
+| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **Officer** | Veteran | 6" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Flak (1) | Carbine / Sidearm / SMG | Knife or bayonet, Frag grenade, Smoke grenade | Leader |
+| **Line Trooper** | Regular | 6" | 1 | 1 | 1 | 1 | 0 | 1 | 2 | Flak (1) | Rifle / Carbine | Knife or bayonet, Frag grenade | — |
+| **Support Gunner** | Regular | 5" | 1 | 1 | 2 | 1 | 0 | 1 | 2 | Flak (1) | LMG / HMG | Knife or bayonet, Frag grenade | — |
+| **Anti-armour Trooper** | Regular | 5" | 1 | 1 | 2 | 1 | 0 | 1 | 2 | Flak (1) | AT launcher | Knife or bayonet, Frag grenade | — |
+| **Specialist** | Regular | 6" | 1 | 0 | 1 | 1 | 2 | 1 | 2 | Flak (1) | Carbine | Knife or bayonet, Smoke grenade; option: Trauma kit or Hacking rig or Breaching charge | — |
+| **Marksman** | Veteran | 6" | 2 | 0 | 1 | 2 | 0 | 1 | 2 | Flak (1) | DMR | Knife or bayonet, Smoke grenade, Low-light optics | Marksman 1 |
+| **Assault Trooper** | Veteran | 6" | 2 | 2 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | SMG / Shotgun / Carbine | Boarding axe or combat blade, Frag grenade, Flashbang; option: Jump pack or Breaching charge | — |
+| **Heavy Infantry Sergeant** | Elite | 6" | 3 | 3 | 3 | 3 | 1 | 2 | 2 | Heavy plate (3) | Heavy rifle / SMG | Boarding axe or combat blade, Frag grenade | Leader, Augmented |
+| **Heavy Infantry** | Elite | 6" | 3 | 3 | 3 | 3 | 0 | 2 | 2 | Heavy plate (3) | Heavy rifle / LMG / AT launcher | Boarding axe or combat blade, Frag grenade | Augmented |
+<!-- /table -->
+
+Teams: **line squad** (officer, four line troopers, support gunner), **support team** (anti-armour trooper, specialist, marksman), **assault squad** (four assault troopers) and **heavy infantry squad** (sergeant and four heavy infantry). Cards are printed in `docs/print/ImperatorBlack_generic-cards.pdf`.

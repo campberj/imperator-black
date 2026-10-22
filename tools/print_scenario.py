@@ -347,7 +347,7 @@ def _rest(s, story, W):
                             ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#e8ecef"))]))
     story += [et]
     story += [Spacer(1, 6), Paragraph("Watch for, and log afterwards", H2)] + bullets(s["watch_for"])
-    story.append(Paragraph("Log the game with docs/playtests/TEMPLATE.md.", SMALL))
+    story.append(Paragraph("Log the game on the playtest feedback form.", SMALL))
 
 
 def deck_sheet(s, out):

@@ -1083,3 +1083,138 @@ troops:
     gear_options: [ballistic_shield, owa_package, flux_warhead, coop_engagement]
     skills: { automated: 1 }
     miniatures: "Near Present: Hankou ZQ44 CCT"
+
+  # ---------------- Generic forces: model-agnostic profiles for common 28mm collections (core kit only) ----------------
+  - id: gen_officer
+    faction: generic
+    name: Officer
+    role: Squad leader
+    rank: veteran
+    stats: { move: 6, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
+    armour: flak
+    weapon: carbine
+    weapon_options: [sidearm, smg]
+    melee: knife
+    grenades: [frag, smoke]
+    gear: []
+    skills: { leader: 1 }
+    miniatures: "Any sergeant or officer model: a line-infantry officer, a squad sergeant with pistol and sword"
+
+  - id: gen_trooper
+    faction: generic
+    name: Line Trooper
+    role: Rifleman
+    rank: regular
+    stats: { move: 6, shoot: 1, fight: 1, physique: 1, nerve: 1, tech: 0, wounds: 1, size: 2 }
+    armour: flak
+    weapon: rifle
+    weapon_options: [carbine]
+    melee: knife
+    grenades: [frag]
+    gear: []
+    skills: {}
+    miniatures: "Any line infantry with rifles or las-style rifles: guard regiments, militia, colonial troopers"
+
+  - id: gen_gunner
+    faction: generic
+    name: Support Gunner
+    role: Gunner
+    rank: regular
+    stats: { move: 5, shoot: 1, fight: 1, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
+    armour: flak
+    weapon: lmg
+    weapon_options: [hmg]
+    melee: knife
+    grenades: [frag]
+    gear: []
+    skills: {}
+    miniatures: "A trooper with a squad support weapon, or a two-man heavy weapons team on one base (use the HMG)"
+
+  - id: gen_at_trooper
+    faction: generic
+    name: Anti-armour Trooper
+    role: Launcher
+    rank: regular
+    stats: { move: 5, shoot: 1, fight: 1, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
+    armour: flak
+    weapon: at_launcher
+    melee: knife
+    grenades: [frag]
+    gear: []
+    skills: {}
+    miniatures: "A trooper with a rocket or missile launcher"
+
+  - id: gen_specialist
+    faction: generic
+    name: Specialist
+    role: Medic or technician
+    rank: regular
+    stats: { move: 6, shoot: 1, fight: 0, physique: 1, nerve: 1, tech: 2, wounds: 1, size: 2 }
+    armour: flak
+    weapon: carbine
+    melee: knife
+    grenades: [smoke]
+    gear: []
+    gear_options: [trauma_kit, hacking_rig, breaching_charge]
+    skills: {}
+    miniatures: "A medic, vox or signals trooper, or engineer"
+
+  - id: gen_marksman
+    faction: generic
+    name: Marksman
+    role: Sniper
+    rank: veteran
+    stats: { move: 6, shoot: 2, fight: 0, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
+    armour: flak
+    weapon: dmr
+    melee: knife
+    grenades: [smoke]
+    gear: [low_light_optics]
+    skills: { marksman: 1 }
+    miniatures: "Any sniper or sharpshooter"
+
+  - id: gen_assault_trooper
+    faction: generic
+    name: Assault Trooper
+    role: Close assault
+    rank: veteran
+    stats: { move: 6, shoot: 2, fight: 2, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
+    armour: composite
+    weapon: smg
+    weapon_options: [shotgun, carbine]
+    melee: combat_blade
+    grenades: [frag, flashbang]
+    gear: []
+    gear_options: [jump_pack, breaching_charge]
+    skills: {}
+    miniatures: "Storm troopers, shock troops or jump troops in carapace armour, with SMGs, shotguns or hot-shot style carbines"
+
+  - id: gen_heavy_leader
+    faction: generic
+    name: Heavy Infantry Sergeant
+    role: Heavy infantry leader
+    rank: elite
+    stats: { move: 6, shoot: 3, fight: 3, physique: 3, nerve: 3, tech: 1, wounds: 2, size: 2 }
+    armour: heavy
+    weapon: heavy_rifle
+    weapon_options: [smg]
+    melee: combat_blade
+    grenades: [frag]
+    gear: []
+    skills: { leader: 1, augmented: 1 }
+    miniatures: "A sergeant of power-armoured, superhuman heavy infantry"
+
+  - id: gen_heavy_infantry
+    faction: generic
+    name: Heavy Infantry
+    role: Power-armoured trooper
+    rank: elite
+    stats: { move: 6, shoot: 3, fight: 3, physique: 3, nerve: 3, tech: 0, wounds: 2, size: 2 }
+    armour: heavy
+    weapon: heavy_rifle
+    weapon_options: [lmg, at_launcher]
+    melee: combat_blade
+    grenades: [frag]
+    gear: []
+    skills: { augmented: 1 }
+    miniatures: "Power-armoured, superhuman heavy infantry with heavy rifles (or a heavy weapon)"

@@ -71,4 +71,4 @@ A model in base contact with a Down, Bleeding or Critical friend may use the **M
 | **Bleeding** | 8+: the bleeding stops; the patient becomes Down and may recover normally. |
 | **Critical** | 10+: the patient is stabilised. It stays Down for the rest of the mission but will not die. |
 
-Casualties carry into the campaign: every model that ended the mission Down, Bleeding, Critical or captured rolls on the injury table after the mission (Phase 7).
+Casualties carry into the campaign: a model that went Down during the mission and lived rolls for injury afterwards, and a model left behind Down is captured (chapter 14).

@@ -19,6 +19,10 @@ factions:
     name: Hankou
     side: player
     summary: "Near Present: Hankou Advanced Maritime Systems' security force, ex-PNLAN marines in two SPEAR teams with a pair of ZQ44 combat robots."
+  - id: generic
+    name: Generic forces
+    side: player
+    summary: "Model-agnostic profiles for common 28mm collections: line infantry, support weapons, assault troops and power-armoured heavy infantry. Use any miniatures that look the part."
   - id: freespace
     name: Freespace Solutions
     side: enemy
