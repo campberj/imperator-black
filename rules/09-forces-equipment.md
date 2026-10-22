@@ -212,10 +212,10 @@ The Authority's regular forces, held back for escalation (threat tier 4): the pr
 | **3rd Battalion AT Specialist** | Regular | 6" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | AT launcher / Rifle | Knife or bayonet, Frag grenade | — |
 | **Pointman** | Regular | 6" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | Rifle | Unarmed / weapon butt | Automated, Shield |
 | **Pointman SAW** | Regular | 6" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | LMG | Unarmed / weapon butt | Automated, Shield |
-| **UTG Mother** | Elite | 5" | 3 | 4 | 3 | 3 | 1 | 2 | 2 | Composite plate (2) | SMG | Boarding axe or combat blade, Frag grenade, Flashbang, Jump pack | Leader, Augmented |
-| **UTG Assaulter** | Elite | 5" | 3 | 3 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Flashbang, Jump pack | Augmented |
-| **UTG Grenadier** | Elite | 5" | 3 | 3 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Flashbang, Jump pack, Grenade launcher | Augmented |
-| **UTG Marksman** | Elite | 5" | 3 | 2 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Anti-materiel rifle / Carbine | Knife or bayonet, Smoke grenade, Jump pack, Low-light optics | Augmented, Marksman 2 |
+| **UTG Mother** | Elite | 8" | 3 | 4 | 3 | 3 | 1 | 2 | 2 | Composite plate (2) | SMG | Boarding axe or combat blade, Frag grenade, Flashbang, Jump pack | Leader, Augmented |
+| **UTG Assaulter** | Elite | 8" | 3 | 3 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Flashbang, Jump pack | Augmented |
+| **UTG Grenadier** | Elite | 8" | 3 | 3 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Flashbang, Jump pack, Grenade launcher | Augmented |
+| **UTG Marksman** | Elite | 7" | 3 | 2 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Anti-materiel rifle / Carbine | Knife or bayonet, Smoke grenade, Jump pack, Low-light optics | Augmented, Marksman 2 |
 | **Golem** | Veteran | 5" | 2 | 2 | 3 | — | — | 2 | 2 | Composite plate (2) | Auto rifle / AT launcher | Unarmed / weapon butt | Automated |
 <!-- /table -->
 

@@ -4977,7 +4977,7 @@
         "role": "Leader",
         "rank": "elite",
         "stats": {
-          "move": 5,
+          "move": 8,
           "shoot": 3,
           "fight": 4,
           "physique": 3,
@@ -5009,7 +5009,7 @@
         "role": "Assaulter",
         "rank": "elite",
         "stats": {
-          "move": 5,
+          "move": 8,
           "shoot": 3,
           "fight": 3,
           "physique": 3,
@@ -5040,7 +5040,7 @@
         "role": "Grenadier",
         "rank": "elite",
         "stats": {
-          "move": 5,
+          "move": 8,
           "shoot": 3,
           "fight": 3,
           "physique": 3,
@@ -5072,7 +5072,7 @@
         "role": "Marksman",
         "rank": "elite",
         "stats": {
-          "move": 5,
+          "move": 7,
           "shoot": 3,
           "fight": 2,
           "physique": 3,

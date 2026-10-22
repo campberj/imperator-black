@@ -638,13 +638,13 @@ troops:
     skills: { automated: 1, shield: 1 }
     miniatures: "BLKOUT UN 3rd Battalion: Pointmen (SAW)"
 
-  # ---------------- UN Force Command: Raid Force Alpha (elite, Shoot 3) ----------------
+  # ---------------- UN Force Command: Raid Force Alpha (elite, Shoot 3; gene-modified humans: Move 8, marksman 7, RJ) ----------------
   - id: rfa_mother
     faction: un
     name: UTG Mother
     role: Leader
     rank: elite
-    stats: { move: 5, shoot: 3, fight: 4, physique: 3, nerve: 3, tech: 1, wounds: 2, size: 2 }
+    stats: { move: 8, shoot: 3, fight: 4, physique: 3, nerve: 3, tech: 1, wounds: 2, size: 2 }
     armour: composite
     weapon: smg
     melee: combat_blade
@@ -658,7 +658,7 @@ troops:
     name: UTG Assaulter
     role: Assaulter
     rank: elite
-    stats: { move: 5, shoot: 3, fight: 3, physique: 3, nerve: 3, tech: 1, wounds: 1, size: 2 }
+    stats: { move: 8, shoot: 3, fight: 3, physique: 3, nerve: 3, tech: 1, wounds: 1, size: 2 }
     armour: composite
     weapon: carbine
     melee: knife
@@ -672,7 +672,7 @@ troops:
     name: UTG Grenadier
     role: Grenadier
     rank: elite
-    stats: { move: 5, shoot: 3, fight: 3, physique: 3, nerve: 3, tech: 1, wounds: 1, size: 2 }
+    stats: { move: 8, shoot: 3, fight: 3, physique: 3, nerve: 3, tech: 1, wounds: 1, size: 2 }
     armour: composite
     weapon: carbine
     melee: knife
@@ -686,7 +686,7 @@ troops:
     name: UTG Marksman
     role: Marksman
     rank: elite
-    stats: { move: 5, shoot: 3, fight: 2, physique: 3, nerve: 3, tech: 1, wounds: 1, size: 2 }
+    stats: { move: 7, shoot: 3, fight: 2, physique: 3, nerve: 3, tech: 1, wounds: 1, size: 2 }
     armour: composite
     weapon: amr
     weapon_options: [carbine]
