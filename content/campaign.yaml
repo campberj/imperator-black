@@ -1,8 +1,7 @@
 # Campaign, rules v0.5 (chapter 14, Phase 7 draft). A campaign is one or more arcs; an arc is a small
 # node map played over up to 8 campaign turns, one mission a turn. RJ's calls (2026-10-22): XP and
 # advances; Requisition, Intel and Standing; a node map of about 6 missions; examples with Task Force Boone
-# against Freespace. status: proposed until playtested. Requisition costs are provisional until the
-# troop values (Phase 7 item 6, simulator task 13) are in.
+# against Freespace. status: proposed until playtested. A soldier's Requisition comes from its Troop Value (chapter 15).
 version: 0.5.0
 
 # --------------------------------------------------------------- starting a campaign
@@ -177,12 +176,9 @@ ship:
       - { cost: 6, text: "One Intel use each mission is free." }
       - { cost: 8, text: "At the start of each turn, reveal one hidden node." }
 
-# Requisition costs (provisional until troop values are set).
+# Requisition costs: a soldier's Requisition is its TV / 10, rounded up (chapter 15).
 costs:
-  - { item: "Replacement soldier (any troop in the force's teams, 0 XP): Green", cost: 2 }
-  - { item: "Replacement soldier: Regular", cost: 3 }
-  - { item: "Replacement soldier: Veteran", cost: 5 }
-  - { item: "Replacement soldier: Elite", cost: 8 }
+  - { item: "Replacement soldier (any troop in the force's teams, 0 XP)", cost: "Its Requisition (chapter 15)" }
   - { item: "Fast-track recovery: one recovering soldier is fit a turn sooner", cost: 2 }
   - { item: "Ship upgrade", cost: "4 / 6 / 8 by level" }
 

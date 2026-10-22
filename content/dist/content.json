@@ -925,20 +925,8 @@
     ],
     "costs": [
       {
-        "item": "Replacement soldier (any troop in the force's teams, 0 XP): Green",
-        "cost": 2
-      },
-      {
-        "item": "Replacement soldier: Regular",
-        "cost": 3
-      },
-      {
-        "item": "Replacement soldier: Veteran",
-        "cost": 5
-      },
-      {
-        "item": "Replacement soldier: Elite",
-        "cost": 8
+        "item": "Replacement soldier (any troop in the force's teams, 0 XP)",
+        "cost": "Its Requisition (chapter 15)"
       },
       {
         "item": "Fast-track recovery: one recovering soldier is fit a turn sooner",
@@ -6683,6 +6671,195 @@
         "miniatures": "Near Present: Hankou ZQ44 CCT"
       }
     ]
+  },
+  "values": {
+    "version": "0.5.0",
+    "baseline": {
+      "tv": 10,
+      "move": 5,
+      "wounds": 1,
+      "size": 2
+    },
+    "multiplier": {
+      "0": 1,
+      "1": 1.5,
+      "2": 2,
+      "3": 2.5,
+      "4": 3,
+      "5": 3.25
+    },
+    "attribute_costs": {
+      "physique": 2,
+      "nerve": 2,
+      "tech": 1
+    },
+    "move_per_inch": 2,
+    "weapon_formula": {
+      "scale": 1.0,
+      "armour_mix": [
+        0,
+        1,
+        2
+      ],
+      "range": [
+        {
+          "up_to": 8,
+          "factor": 0.65
+        },
+        {
+          "up_to": 12,
+          "factor": 0.8
+        },
+        {
+          "up_to": 18,
+          "factor": 0.9
+        },
+        {
+          "up_to": 30,
+          "factor": 1.0
+        },
+        {
+          "up_to": 99,
+          "factor": 1.1
+        }
+      ],
+      "auto_extra_target": 0.6,
+      "keyword_factors": {
+        "handy": 1.1,
+        "suppressing": 1.15,
+        "cumbersome": 0.85,
+        "one_per_round": 0.85,
+        "breach": 1.05
+      },
+      "explosion_per_inch": 0.5,
+      "rounds_flexibility": 1.1
+    },
+    "melee_scale": 0.5,
+    "gear": {
+      "breaching_charge": {
+        "cost": 3
+      },
+      "breaching_tool": {
+        "cost": 1
+      },
+      "trauma_kit": {
+        "cost": 2,
+        "per": "tech"
+      },
+      "hacking_rig": {
+        "cost": 2,
+        "per": "tech"
+      },
+      "low_light_optics": {
+        "cost": 1
+      },
+      "extinguisher": {
+        "cost": 1
+      },
+      "silencer": {
+        "cost": 2
+      },
+      "jump_pack": {
+        "cost": 3
+      },
+      "grenade_launcher": {
+        "cost": 3,
+        "per": "shoot"
+      },
+      "ballistic_shield": {
+        "cost": 4
+      },
+      "jammer": {
+        "cost": 4
+      },
+      "mk19": {
+        "cost": 5,
+        "per": "shoot"
+      },
+      "owa_package": {
+        "cost": 4
+      },
+      "flux_warhead": {
+        "cost": 4
+      },
+      "coop_engagement": {
+        "cost": 5
+      }
+    },
+    "grenades": {
+      "frag": {
+        "cost": 1.5,
+        "per": "physique"
+      },
+      "flashbang": {
+        "cost": 1.5,
+        "per": "physique"
+      },
+      "smoke": {
+        "cost": 1
+      },
+      "thermal_detonator": {
+        "cost": 3,
+        "per": "physique"
+      }
+    },
+    "skills": {
+      "leader": {
+        "cost": 6
+      },
+      "void_trained": {
+        "cost": 1
+      },
+      "low_light": {
+        "cost": 1
+      },
+      "medic": {
+        "cost": 2,
+        "per": "tech"
+      },
+      "marksman": {
+        "cost": 2,
+        "per": "shoot"
+      },
+      "deflect": {
+        "cost": 8,
+        "per": "fight"
+      },
+      "leap": {
+        "cost": 3
+      },
+      "jedi_discipline": {
+        "cost": 6
+      },
+      "twin_blades": {
+        "cost": 2,
+        "per": "fight"
+      },
+      "scout": {
+        "cost": 3
+      },
+      "shield": {
+        "cost": 4
+      },
+      "layered_armour": {
+        "cost": 3
+      },
+      "laser_detector": {
+        "cost": 3
+      },
+      "augmented": {
+        "cost": 4
+      },
+      "self_destruct": {
+        "cost": 3
+      },
+      "automated": {
+        "cost": 0
+      }
+    },
+    "survival_exponent": 0.4,
+    "automated_factor": 1.3,
+    "requisition_per": 10
   },
   "weapons": {
     "version": "0.5.0",

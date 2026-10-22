@@ -218,6 +218,54 @@ def render_campaign(section):
     return None
 
 
+def render_values(section):
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import troop_values as tvm
+    Va = load("values")
+    shoots = range(5)
+    m = tvm.mult
+    names = {a["id"]: a["name"] for a in load("core")["attributes"]}
+    fmt = lambda x: f"{x:g}" if x == int(x) else f"{x:.1f}"
+    if section == "multiplier":
+        return table(["Attribute value"] + [str(i) for i in shoots], [["Multiplier"] + [fmt(m(i)) for i in shoots]])
+    if section == "attribute_costs":
+        rows = [(names[k], f"{v} per point") for k, v in Va["attribute_costs"].items()]
+        rows.append(("Move", f'{Va["move_per_inch"]} per inch above {Va["baseline"]["move"]}" (minus below it)'))
+        return table(["Attribute", "Cost"], rows)
+    if section in ("weapons_core", "weapons_faction"):
+        W = load("weapons")["ranged"]
+        sel = [w for w in W if bool(w.get("faction")) == (section == "weapons_faction")]
+        rows = []
+        for w in sel:
+            b = tvm.weapon_base(w["id"])
+            facs = {f["id"]: f["name"] for f in load("factions")["factions"]}
+            label = w["name"] + (f' ({facs[w["faction"]]})' if w.get("faction") else "")
+            rows.append([label] + [fmt(round(b * m(i), 1)) for i in shoots])
+        return table(["Weapon", "Shoot 0", "1", "2", "3", "4"], rows)
+    if section == "melee":
+        rows = [[w["name"]] + [fmt(round(tvm.melee_base(w["id"]) * m(i), 1)) for i in shoots] for w in load("weapons")["melee"]]
+        return table(["Melee weapon", "Fight 0", "1", "2", "3", "4"], rows)
+    if section in ("gear", "grenades", "skills"):
+        src = {"gear": {g["id"]: g["name"] for g in load("gear")["gear"]},
+               "grenades": {g["id"]: g["name"] for g in load("weapons")["thrown"]},
+               "skills": {k["id"]: k["name"] for k in load("skills")["skills"]}}[section]
+        rows = []
+        for k, c in Va[section].items():
+            if k == "automated":
+                continue
+            per = f' × {names[c["per"]]} multiplier' if c.get("per") else ""
+            rows.append((src[k], fmt(c["cost"]) + (" per level" if section == "skills" else "") + per))
+        return table(["Item" if section != "skills" else "Skill", "Cost"], rows)
+    if section == "survival":
+        rows = [[f"Armour {a}"] + [f"{tvm.survival(a, w):.2f}" for w in (1, 2, 3)] for a in range(4)]
+        return table(["", "Wounds 1", "Wounds 2", "Wounds 3"], rows)
+    if section.startswith("tv_"):
+        fac = section[3:]
+        rows = [(f'**{t["name"]}**', tvm.tv(t), tvm.requisition(tvm.tv(t))) for t in load("troops")["troops"] if t["faction"] == fac]
+        return table(["Troop", "TV", "Requisition"], rows)
+    return None
+
+
 def render_terrain(section):
     T = load("terrain")
     moves = {"normal": "Normal", "difficult": "Difficult (each inch costs 2\")", "obstacle": "Obstacle (+2\" to cross)", "blocked": "Blocked"}
@@ -376,6 +424,8 @@ def render_forces(key):
         return render_missions(section)
     if f == "campaign":
         return render_campaign(section)
+    if f == "values":
+        return render_values(section)
     if key == "core.security":
         sec = load("core")["security"]
         return table(["Security level", "Hack test", "Successes needed", "Typical"],

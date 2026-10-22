@@ -169,14 +169,23 @@ Content now has half-step damage dice (`d8+d10`; `DiceSpec` parses them, with an
 - Simulator: model a high-explosive round in the troop value harness where a profile carries a launcher (use the better round against each target), and note it under the table.
 - **Done when:** a Vitest test renders the AT launcher's two rounds, and lint, tests and build pass.
 
-### 16. Stop and check the roadmap
+### 16. Troop values in Core
+
+Rules chapter 15 (decision 6.16): every troop has a Troop Value (TV) and a Requisition cost. `tools/troop_values.py` is the reference implementation; `content/values.yaml` holds every number.
+
+- `Imperator.Core/Values/TroopValue.cs`: load `values` into typed records (`ContentSet`), and compute weapon base values (lethality averaged over Armour 0–2, range, Auto, Explosion, keywords, best round), melee base values, the survival multiplier (expected 2d8 hits to Down, to the power 0.4, rounded to 2 decimals), and a troop's TV and Requisition for its default loadout or a given one. Round exactly as the Python does (weapon and melee costs to 0.1, survival to 0.01, TV to the nearest whole number).
+- Tests against the fixture `app/tests/Imperator.Core.Tests/Fixtures/troop-values-reference.json` (written by `python3 tools/troop_values.py --reference`; CI fails if it is stale): every troop's TV and Requisition, every weapon base and every survival value must match.
+- `GET /values` returns every troop's TV and Requisition; the unit database shows them on each card.
+- **Done when:** tests pass and the unit database shows TV and Requisition. The builder screen (pick attributes and kit within the chapter 15 limits, see the TV update live) is Phase 9, after this.
+
+### 17. Stop and check the roadmap
 
 Beyond this, the app's real features wait on rules:
 
 | App feature | Waits on |
 |---|---|
 | Live mission dashboard (alert, clock, contacts, models during play) | Saved game state; built with the Phase 7 campaign tracker (RJ, 2026-10-22). The paper dashboard is `docs/print/ImperatorBlack_mission-dashboard.pdf`. |
-| Custom troop and unit builder | Phase 7 point values, then Phase 9 (decision 6.12) |
+| Custom troop and unit builder | Ready after task 16: chapter 15 limits and costs; Phase 9 (decision 6.12) |
 | Campaign tracker | Phase 7: chapter 14 is drafted (`content/campaign.yaml`, not yet loaded by `ContentSet`); build after a paper campaign has been played, with saved game state and the live dashboard. |
 
 Planned app feature (RJ, 2026-10-20): an in-app reference that explains every gear item, keyword and special rule, read from `content/` (the list will grow). Build it from the same `text` fields the rulebook tables use.

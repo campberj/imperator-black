@@ -166,7 +166,8 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 - [x] RJ's calls: XP and advances; Requisition, Intel and Standing; a node map of about six missions; examples with Task Force Boone against Freespace
 - [x] Rules chapter 14 draft: [campaign](../rules/14-campaign.md): the campaign turn, resources and Standing, the arc map, after-action (injuries, rewards, XP, advances, honours), the ship, Requisition, events, Evidence, with an example (`content/campaign.yaml`)
 - [x] Printable [campaign sheets](print/ImperatorBlack_campaign-sheets.pdf): status with the arc map, force roster, reference
-- [ ] Troop values (item 6): simulator data done ([troop values](analysis/troop-values-v0.5.md), app task 13); next the points formula and the custom troop builder
+- [x] Troop values (item 6): simulator data (app task 13); rules chapter 15 draft: [troop values and building troops](../rules/15-troop-values.md), `content/values.yaml`, reference `tools/troop_values.py`, printable [troop builder](print/ImperatorBlack_troop-builder.pdf); campaign replacements now cost Requisition = TV ÷ 10
+- [ ] Troop builder in the app (Phase 9; app task 16 ports the formula first)
 - [ ] Play a 3-mission campaign on paper
 
 **Exit:** A 3-mission paper campaign plays through without rule gaps.

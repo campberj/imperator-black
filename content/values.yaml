@@ -1,0 +1,100 @@
+# Troop values, rules v0.5 (chapter 15, Phase 7 item 6). RJ's calls (2026-10-22): the baseline is a human with
+# every attribute at 0 (TV 10); everything else is costed by how much more likely it makes success; a weapon's cost
+# scales with the attribute that uses it; two values per troop, Troop Value (TV) and Requisition.
+# Computed by tools/troop_values.py, which also checks the ranking against the simulator (docs/analysis).
+# status: proposed until calibrated in play.
+version: 0.5.0
+
+# The baseline: Move 5", every attribute 0, Wounds 1, Size 2, no armour, unarmed.
+baseline:
+  tv: 10
+  move: 5
+  wounds: 1
+  size: 2
+
+# Attribute multiplier: success odds of 2d6 + X, 8+, averaged over open, -1 and -2, relative to X = 0
+# (29%, 43%, 57%, 71%, 82%). Each point adds about half of what a zero-rated soldier achieves.
+multiplier: { "0": 1, "1": 1.5, "2": 2, "3": 2.5, "4": 3, "5": 3.25 }
+
+# Attributes not tied to kit: cost per point above 0. Shoot and Fight are paid through weapons; Tech also through kit.
+attribute_costs:
+  physique: 2      # recovery from Down, climbing, falls, decompression (grenades pay through their own cost)
+  nerve: 2         # breaking tests, Find Cover, a Leader's initiative
+  tech: 1          # extinguishing, and anything without its own kit
+move_per_inch: 2   # per inch above (or below) 5"
+
+# Weapon base value = scale x lethality x factors. Lethality is the expected wound row from a hit,
+# averaged over Armour 0, 1 and 2 (AP counted), before criticals. Cost on a troop = base x multiplier(Shoot).
+weapon_formula:
+  scale: 1.0
+  armour_mix: [0, 1, 2]
+  range:            # by short range, inches: the factor for the first band at or above it
+    - { up_to: 8,  factor: 0.65 }
+    - { up_to: 12, factor: 0.8 }
+    - { up_to: 18, factor: 0.9 }
+    - { up_to: 30, factor: 1.0 }
+    - { up_to: 99, factor: 1.1 }
+  auto_extra_target: 0.6     # each target after the first in Auto N
+  keyword_factors:
+    handy: 1.1
+    suppressing: 1.15
+    cumbersome: 0.85
+    one_per_round: 0.85
+    breach: 1.05
+  explosion_per_inch: 0.5    # Explosion (X) adds X x this many extra models' worth, times lethality
+  rounds_flexibility: 1.1    # a launcher with a choice of rounds: its best round, times this
+
+# Melee weapons: lethality x this scale; cost on a troop = base x multiplier(Fight).
+melee_scale: 0.5
+
+# Gear and grenades: base cost; "per" names the attribute whose multiplier applies (or none).
+gear:
+  breaching_charge: { cost: 3 }
+  breaching_tool:   { cost: 1 }       # also changes the melee weapon (paid there)
+  trauma_kit:       { cost: 2, per: tech }
+  hacking_rig:      { cost: 2, per: tech }
+  low_light_optics: { cost: 1 }
+  extinguisher:     { cost: 1 }
+  silencer:         { cost: 2 }
+  jump_pack:        { cost: 3 }
+  grenade_launcher: { cost: 3, per: shoot }
+  ballistic_shield: { cost: 4 }
+  jammer:           { cost: 4 }
+  mk19:             { cost: 5, per: shoot }
+  owa_package:      { cost: 4 }
+  flux_warhead:     { cost: 4 }
+  coop_engagement:  { cost: 5 }
+grenades:
+  frag:              { cost: 1.5, per: physique }
+  flashbang:         { cost: 1.5, per: physique }
+  smoke:             { cost: 1 }
+  thermal_detonator: { cost: 3, per: physique }
+
+# Skills: cost per level; "per" scales by an attribute's multiplier. Skills granted by gear are paid by the gear.
+skills:
+  leader:          { cost: 6 }
+  void_trained:    { cost: 1 }
+  low_light:       { cost: 1 }
+  medic:           { cost: 2, per: tech }
+  marksman:        { cost: 2, per: shoot }
+  deflect:         { cost: 8, per: fight }
+  leap:            { cost: 3 }
+  jedi_discipline: { cost: 6 }
+  twin_blades:     { cost: 2, per: fight }
+  scout:           { cost: 3 }
+  shield:          { cost: 4 }
+  layered_armour:  { cost: 3 }
+  laser_detector:  { cost: 3 }
+  augmented:       { cost: 4 }
+  self_destruct:   { cost: 3 }
+  automated:       { cost: 0 }      # see automated below
+
+# Survivability: the whole total is multiplied by this, by Armour (rows) and Wounds.
+# From expected hits to put the model Down (a 2d8, AP 0 hit), relative to Armour 0 and Wounds 1, to the power 0.4.
+survival_exponent: 0.4
+
+# Automated models: no Suppression or morale, but a row of 6 or more destroys them. Multiply the total by this.
+automated_factor: 1.3   # tuned: 1.3 best matches the simulator without letting duels (which reward ignoring Suppression) dominate
+
+# Requisition (campaign cost): TV divided by this, rounded up.
+requisition_per: 10

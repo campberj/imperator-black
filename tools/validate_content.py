@@ -334,6 +334,25 @@ for ev in Cp["events"]:
     if not ev.get("text"):
         errors.append(f"campaign event {ev['roll']}: needs text")
 
+# Troop values (chapter 15).
+Va = C["values"]
+for g in C["gear"]["gear"]:
+    if g["id"] not in Va["gear"]:
+        errors.append(f"values.gear: no cost for gear '{g['id']}'")
+for g in C["weapons"]["thrown"]:
+    if g["id"] not in Va["grenades"]:
+        errors.append(f"values.grenades: no cost for '{g['id']}'")
+for sk in C["skills"]["skills"]:
+    if sk["id"] not in Va["skills"]:
+        errors.append(f"values.skills: no cost for skill '{sk['id']}'")
+attr_ids = {a["id"] for a in C["core"]["attributes"]}
+for grp in ("gear", "grenades", "skills"):
+    for k, c in Va[grp].items():
+        if c.get("per") and c["per"] not in attr_ids:
+            errors.append(f"values.{grp}.{k}: unknown attribute '{c['per']}'")
+if [Va["multiplier"][str(i)] for i in range(5)] != sorted(Va["multiplier"][str(i)] for i in range(5)):
+    errors.append("values.multiplier: must rise with the attribute")
+
 if errors:
     print("\n".join(errors))
     sys.exit(1)

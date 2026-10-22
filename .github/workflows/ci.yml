@@ -40,6 +40,8 @@ jobs:
 
       - name: Layout reference statistics are current
         run: python3 tools/layout_reference.py --check
+      - name: Troop value fixture is current
+        run: python3 tools/troop_values.py --check
 
       - uses: actions/setup-dotnet@v4
         with:

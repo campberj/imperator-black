@@ -1,0 +1,349 @@
+{
+  "content_version": "0.5.0",
+  "troops": {
+    "tfb_vat_leader": {
+      "tv": 66,
+      "requisition": 7
+    },
+    "tfb_vat_assaulter": {
+      "tv": 53,
+      "requisition": 6
+    },
+    "tfb_vat_gunner": {
+      "tv": 71,
+      "requisition": 8
+    },
+    "tfb_data_specialist": {
+      "tv": 60,
+      "requisition": 6
+    },
+    "tfb_pathfinder_leader": {
+      "tv": 51,
+      "requisition": 6
+    },
+    "tfb_pathfinder": {
+      "tv": 42,
+      "requisition": 5
+    },
+    "tfb_pathfinder_gunner": {
+      "tv": 55,
+      "requisition": 6
+    },
+    "tfb_marksman": {
+      "tv": 48,
+      "requisition": 5
+    },
+    "hostage": {
+      "tv": 11,
+      "requisition": 2
+    },
+    "fs_salvage_hand": {
+      "tv": 19,
+      "requisition": 2
+    },
+    "fs_security": {
+      "tv": 31,
+      "requisition": 4
+    },
+    "fs_security_gunner": {
+      "tv": 39,
+      "requisition": 4
+    },
+    "fs_enforcer": {
+      "tv": 36,
+      "requisition": 4
+    },
+    "fs_repo_breacher": {
+      "tv": 63,
+      "requisition": 7
+    },
+    "fs_liquidator": {
+      "tv": 59,
+      "requisition": 6
+    },
+    "fs_tech": {
+      "tv": 30,
+      "requisition": 3
+    },
+    "fs_recovery_captain": {
+      "tv": 61,
+      "requisition": 7
+    },
+    "fs_turret": {
+      "tv": 29,
+      "requisition": 3
+    },
+    "fs_drone": {
+      "tv": 37,
+      "requisition": 4
+    },
+    "ct_borz_boarder": {
+      "tv": 64,
+      "requisition": 7
+    },
+    "ct_borz_heavy": {
+      "tv": 112,
+      "requisition": 12
+    },
+    "ct_harlow_operator": {
+      "tv": 49,
+      "requisition": 5
+    },
+    "ct_harlow_gunner": {
+      "tv": 66,
+      "requisition": 7
+    },
+    "ct_hired_marksman": {
+      "tv": 55,
+      "requisition": 6
+    },
+    "ct_hired_heavy": {
+      "tv": 76,
+      "requisition": 8
+    },
+    "ct_borz_bratva": {
+      "tv": 60,
+      "requisition": 6
+    },
+    "ct_borz_bratva_hmg": {
+      "tv": 72,
+      "requisition": 8
+    },
+    "ct_borz_cyka": {
+      "tv": 116,
+      "requisition": 12
+    },
+    "ct_borz_cyka_bravo": {
+      "tv": 116,
+      "requisition": 12
+    },
+    "ct_borz_ubiytsa_leader": {
+      "tv": 59,
+      "requisition": 6
+    },
+    "ct_borz_ubiytsa": {
+      "tv": 55,
+      "requisition": 6
+    },
+    "ct_harlow_leader": {
+      "tv": 68,
+      "requisition": 7
+    },
+    "ct_harlow_grenadier": {
+      "tv": 57,
+      "requisition": 6
+    },
+    "ct_harlow_engineer": {
+      "tv": 55,
+      "requisition": 6
+    },
+    "ct_harlow_veteran": {
+      "tv": 53,
+      "requisition": 6
+    },
+    "ct_harlow_springbok": {
+      "tv": 70,
+      "requisition": 7
+    },
+    "ct_harlow_cricket": {
+      "tv": 23,
+      "requisition": 3
+    },
+    "un3_batcon": {
+      "tv": 61,
+      "requisition": 7
+    },
+    "un3_rifleman": {
+      "tv": 49,
+      "requisition": 5
+    },
+    "un3_data_specialist": {
+      "tv": 61,
+      "requisition": 7
+    },
+    "un3_at_specialist": {
+      "tv": 60,
+      "requisition": 6
+    },
+    "un3_pointman": {
+      "tv": 61,
+      "requisition": 7
+    },
+    "un3_pointman_gunner": {
+      "tv": 88,
+      "requisition": 9
+    },
+    "rfa_mother": {
+      "tv": 115,
+      "requisition": 12
+    },
+    "rfa_assaulter": {
+      "tv": 82,
+      "requisition": 9
+    },
+    "rfa_grenadier": {
+      "tv": 93,
+      "requisition": 10
+    },
+    "rfa_marksman": {
+      "tv": 93,
+      "requisition": 10
+    },
+    "rfa_golem": {
+      "tv": 64,
+      "requisition": 7
+    },
+    "md_handler": {
+      "tv": 102,
+      "requisition": 11
+    },
+    "md_operator": {
+      "tv": 68,
+      "requisition": 7
+    },
+    "rep_clone_sergeant": {
+      "tv": 48,
+      "requisition": 5
+    },
+    "rep_clone_trooper": {
+      "tv": 39,
+      "requisition": 4
+    },
+    "rep_clone_heavy": {
+      "tv": 46,
+      "requisition": 5
+    },
+    "rep_clone_marksman": {
+      "tv": 47,
+      "requisition": 5
+    },
+    "rep_arc_leader": {
+      "tv": 64,
+      "requisition": 7
+    },
+    "rep_arc_trooper": {
+      "tv": 52,
+      "requisition": 6
+    },
+    "rep_arf_trooper": {
+      "tv": 43,
+      "requisition": 5
+    },
+    "rep_commando_leader": {
+      "tv": 88,
+      "requisition": 9
+    },
+    "rep_clone_commando": {
+      "tv": 79,
+      "requisition": 8
+    },
+    "rep_cody": {
+      "tv": 62,
+      "requisition": 7
+    },
+    "rep_obi_wan": {
+      "tv": 110,
+      "requisition": 11
+    },
+    "rep_ahsoka": {
+      "tv": 80,
+      "requisition": 8
+    },
+    "rep_jedi_guardian": {
+      "tv": 67,
+      "requisition": 7
+    },
+    "anc_prime": {
+      "tv": 79,
+      "requisition": 8
+    },
+    "anc_scout": {
+      "tv": 66,
+      "requisition": 7
+    },
+    "anc_grenadier": {
+      "tv": 60,
+      "requisition": 6
+    },
+    "anc_systems_operator": {
+      "tv": 54,
+      "requisition": 6
+    },
+    "anc_hound": {
+      "tv": 144,
+      "requisition": 15
+    },
+    "hk_team_leader": {
+      "tv": 76,
+      "requisition": 8
+    },
+    "hk_rifleman": {
+      "tv": 61,
+      "requisition": 7
+    },
+    "hk_auto_rifleman": {
+      "tv": 69,
+      "requisition": 7
+    },
+    "hk_pioneer": {
+      "tv": 70,
+      "requisition": 7
+    },
+    "hk_zq44": {
+      "tv": 84,
+      "requisition": 9
+    }
+  },
+  "weapon_base": {
+    "sidearm": 2.2,
+    "smg": 5.9,
+    "carbine": 4.1,
+    "shotgun": 5.3,
+    "rifle": 4.2,
+    "heavy_rifle": 4.8,
+    "lmg": 10.6,
+    "compact_lmg": 10.4,
+    "dmr": 5.7,
+    "at_launcher": 8.2,
+    "auto_rifle": 6.7,
+    "hmg": 12.5,
+    "amr": 6.6,
+    "dc17": 2.2,
+    "dc17_pair": 3.6,
+    "dc15s": 4.1,
+    "dc15a": 4.2,
+    "dc15x": 5.7,
+    "dc17m": 4.6,
+    "dc17m_sniper": 5.7,
+    "dc17m_at": 5.7,
+    "dp23": 5.3,
+    "z6": 9.5,
+    "rps6": 8.2,
+    "m134": 13.4,
+    "ac20": 12.9,
+    "maaws": 11.5,
+    "cs_lm5": 10.6,
+    "dzj08": 9.2
+  },
+  "melee_base": {
+    "unarmed": 1.0,
+    "knife": 2.1,
+    "breaching_tool": 2.6,
+    "combat_blade": 2.9,
+    "lightsaber": 3.5
+  },
+  "survival": {
+    "0,1": 1.0,
+    "0,2": 1.06,
+    "0,3": 1.09,
+    "1,1": 1.14,
+    "1,2": 1.25,
+    "1,3": 1.32,
+    "2,1": 1.4,
+    "2,2": 1.58,
+    "2,3": 1.7,
+    "3,1": 1.86,
+    "3,2": 2.15,
+    "3,3": 2.39
+  }
+}

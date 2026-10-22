@@ -199,7 +199,7 @@ def reference_pages():
               Spacer(1, 3),
               grid(["Support asset", "Effect"], [[x["name"], x["text"]] for x in CP["support"]], [1.6 * inch, W - 1.6 * inch]), Spacer(1, 5)]
     story += [Paragraph("Requisition", H2), grid(["Item", "Cost"], [[c["item"], c["cost"]] for c in CP["costs"]], [W - 1.2 * inch, 1.2 * inch]),
-              Paragraph("Costs are provisional until the troop values are set.", S)]
+              Paragraph("A soldier's Requisition is its Troop Value ÷ 10, rounded up (chapter 15).", S)]
     return story
 
 

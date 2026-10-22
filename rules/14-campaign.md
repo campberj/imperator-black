@@ -243,15 +243,12 @@ The force's ship is its home between missions. Three upgrade tracks improve it. 
 
 ## Requisition
 
-The force is built like a table of organisation, not from a points list. Requisition replaces soldiers within the force's teams and pays for recovery and the ship. Costs are provisional until the troop values (Phase 7) are set.
+The force is built like a table of organisation, not from a points list. Requisition replaces soldiers within the force's teams and pays for recovery and the ship. A replacement costs its Requisition: its Troop Value ÷ 10, rounded up (chapter 15).
 
 <!-- table:campaign.costs -->
 | Item | Requisition |
 |---|---|
-| Replacement soldier (any troop in the force's teams, 0 XP): Green | 2 |
-| Replacement soldier: Regular | 3 |
-| Replacement soldier: Veteran | 5 |
-| Replacement soldier: Elite | 8 |
+| Replacement soldier (any troop in the force's teams, 0 XP) | Its Requisition (chapter 15) |
 | Fast-track recovery: one recovering soldier is fit a turn sooner | 2 |
 | Ship upgrade | 4 / 6 / 8 by level |
 <!-- /table -->
@@ -293,4 +290,4 @@ Task Force Boone begins with the boarding element: a VAT fireteam (leader, two a
 
 **Turn 1.** Standing 3 gives 3 Requisition (9 in all). The force strikes the relay station: if taken, it reveals the whole map. Chapter 13 builds a sabotage mission on a station module at threat tier 1. The force wins it Marginal: one target destroyed. In the fight one assaulter went Down and was Bleeding until the other assaulter's Medic action, with its trauma kit, saved it. Its injury roll is 2d6 −1 for Bleeding +1 for the Medic: 5, a severe wound, out 2 turns. The relay is taken: +1 Requisition for the Marginal grade, +1 Intel from the node, and every node is revealed. Node 5 is a safe house. XP: every soldier gets +1 for deploying. The gunner, whose charge took out the target, gets +1 more, and +1 more again for the citation. The events roll is 8: an informant, +1 Intel.
 
-**Turn 2.** Standing 3 gives 3 Requisition (13). The assaulter is out. The force spends 3 on a Regular replacement assaulter to keep the fireteam full, and 4 on the medical bay (level 1), so injuries from turn 3 on heal a turn faster. That leaves 6. Then it picks its next strike: the safe house (node 5), for the Evidence.
+**Turn 2.** Standing 3 gives 3 Requisition (13). The assaulter is out. The force spends 6 on a replacement VAT Assaulter (TV 53, Requisition 6) to keep the fireteam full, and 4 on the medical bay (level 1), so injuries from turn 3 on heal a turn faster. That leaves 3. Then it picks its next strike: the safe house (node 5), for the Evidence.
