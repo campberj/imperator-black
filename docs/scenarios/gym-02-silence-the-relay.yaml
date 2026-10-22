@@ -6,6 +6,7 @@
 id: gym-02-silence-the-relay
 title: "Gym 2: Silence the Relay"
 kind_label: "land gym scenario"
+terrain_table: false   # RJ: the map is enough; keeps the sheet to one page, front and back
 rules_version: "0.5"
 
 situation: >

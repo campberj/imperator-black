@@ -257,6 +257,8 @@ def terrain_flow(s, W):
     story = [Paragraph("Terrain", H2)]
     if s.get("walls_and_doors"):
         story += [Paragraph(" ".join(s["walls_and_doors"].split()), B), Spacer(1, 3)]
+    if s.get("terrain_table") is False:   # scenario opts out of the per-piece table (the map still shows the pieces)
+        return story
     rows = [[Paragraph(f"<b>{h}</b>", B) for h in ("Map", "Piece", "Cover", "Footprint", "Suggested terrain")]]
     for cv in s.get("cover", []):
         rows.append([Paragraph(cv.get("id", ""), B), Paragraph(cv["label"], B), Paragraph(cv["type"].capitalize(), B),
