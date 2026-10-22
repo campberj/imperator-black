@@ -57,7 +57,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 - [x] Simulator rebuilt in C# (`app/src/Imperator.Sim`), sharing the game-logic library with the app
 - [x] First simulator pass: [findings](analysis/sim-v0.2-findings.md) (lethality retune proposed)
 - [x] Lethality retune adopted; rules v0.3 published ([results](analysis/sim-v0.3-results.md))
-- [ ] Gym playtests at the table
+- [x] Gym playtests at the table (Gym 1 played twice, 2026-10-20 and 2026-10-21)
 
 **Exit:** Gym fights play cleanly; the simulator output matches the lethality targets.
 
