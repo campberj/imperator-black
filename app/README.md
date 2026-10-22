@@ -15,11 +15,11 @@ Last updated: 2026-10-22, rules v0.5 (chapters 10–13: solo opponent, ship layo
 | Path | What it is | State |
 |---|---|---|
 | `app/Imperator.slnx` | Solution (.NET 10, new `.slnx` format) | Builds clean, 0 warnings |
-| `app/src/Imperator.Core` | Game logic: dice and seeded `Rng`, content loading (`ContentSet`), wound table, shooting (exact odds and sampled), close combat, grenades, `Soldier` state | Covers rules v0.4 chapters 4–7 math with attribute-based `Soldier` (`FromTroop` builds one from a troop profile; `Generic` makes abstract test soldiers). No movement, board, or mission logic yet |
-| `app/src/Imperator.Api` | ASP.NET Core minimal API, EF Core + Npgsql (snake_case tables). Schema: `Player`, `Campaign`, `CampaignMembership`, append-only `CampaignEvent`. Endpoints: `GET /health` (database check + content version), `GET /content` (validated `content.json`, `Imperator-Content-Version` header, ETag) | Schema only, no auth. Migration `InitialSchema` |
+| `app/src/Imperator.Core` | Game logic: dice and seeded `Rng`, content loading (`ContentSet`), wound table, shooting (exact odds and sampled), close combat, grenades, `Soldier` state, chapter 11 deck generator (`Layouts/DeckGenerator`, a port of `tools/generate_layout.py`; the deck keeps its graph: links, spine, heart, with `RouteFrom` for route distances) | Covers rules v0.4 chapters 4–7 math with attribute-based `Soldier` (`FromTroop` builds one from a troop profile; `Generic` makes abstract test soldiers). No movement, board, or mission logic yet |
+| `app/src/Imperator.Api` | ASP.NET Core minimal API, EF Core + Npgsql (snake_case tables). Schema: `Player`, `Campaign`, `CampaignMembership`, append-only `CampaignEvent`. Endpoints: `GET /health` (database check + content version), `GET /content` (validated `content.json`, `Imperator-Content-Version` header, ETag), `GET /decks/{vessel}?seed=N` (a generated deck in the scenario format, with seed and content version) | Schema only, no auth. Migration `InitialSchema` |
 | `app/src/Imperator.Sim` | Combat simulator: shot odds, duels, frag, open-ground firefights, room clearing, `--compare` for content variants | Working. Output in `docs/analysis/` |
-| `app/tests/Imperator.Core.Tests` | xUnit v3 tests (198 cases: the former runner's 72 checks plus content loading and validation); run with `dotnet test app/Imperator.slnx` | Passing |
-| `app/tests/Imperator.Api.Tests` | xUnit v3 + `WebApplicationFactory`: endpoints and schema, no database needed | Passing |
+| `app/tests/Imperator.Core.Tests` | xUnit v3 tests (310 cases: the former runner's 72 checks, content loading and validation, and the deck generator held to the Python reference statistics in `Fixtures/layout-reference.json`, written by `tools/layout_reference.py`); run with `dotnet test app/Imperator.slnx` | Passing |
+| `app/tests/Imperator.Api.Tests` | xUnit v3 + `WebApplicationFactory` (17 cases): endpoints (including `/decks`) and schema, no database needed | Passing |
 | `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON into typed records (every file, including the chapter 10 solo opponent and its terms, chapter 11 `layouts`, chapter 12 `terrain`, `core.security` and `core.shoot_scale`) and validates it at load (`ContentValidator`, mirroring `tools/validate_content.py`) | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
 | `app/web` | Vite + React + TypeScript, read from `/content` (dev server proxies to the API). Unit database (`#units`: troop cards per faction with filters and search, teams, elements), reference (`#reference`: gear, skills, keywords, weapon and armour tables, searchable), behavior cards (`#behaviors`). Vitest + Testing Library, oxlint. See [web/README.md](web/README.md) | Read-only |
 | `docker-compose.yml` (repo root) | PostgreSQL 18 for local development | |
@@ -92,7 +92,7 @@ The content already holds the unit database: every faction, troop profile, weapo
 - Tests: section counts (4 missions, 4 tiers, 2 clock sizes), one negative test per new check.
 - **Done when:** CI is green and `GET /content` still validates.
 
-### 8. Deck layout generator in Core
+### 8. Deck layout generator in Core ✅ done (2026-10-22)
 
 `tools/generate_layout.py` is the reference implementation of rules chapter 11 (`content/layouts.yaml`).
 

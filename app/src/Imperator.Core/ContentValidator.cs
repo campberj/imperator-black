@@ -1,3 +1,5 @@
+using Imperator.Core.Layouts;
+
 namespace Imperator.Core;
 
 /// <summary>
@@ -258,8 +260,21 @@ public static class ContentValidator
                          ("marginal", x.Marginal), ("failure", x.Failure), ("ship", x.Ship), ("land", x.Land) })
                 if (string.IsNullOrEmpty(text)) errors.Add($"mission {x.Id}: needs '{k}'");
 
-        // Not mirrored: validate_content.py also builds 200 decks per vessel with tools/generate_layout.py and checks
-        // each is connected and within the tile inventory. That needs the generator, which is not yet ported to Core.
+        // With everything else valid, build 200 decks per vessel: each must be connected and within the tile inventory.
+        if (errors.Count == 0)
+        {
+            var owned = ly.Tiles.ToDictionary(t => t.Id, t => t.Owned);
+            foreach (var v in ly.Vessels)
+                for (int seed = 1; seed <= 200; seed++)
+                {
+                    var deck = DeckGenerator.Generate(c, v.Id, seed);
+                    if (!deck.Connected || owned.Any(o => deck.Deck.TileCounts.GetValueOrDefault(o.Key) > o.Value))
+                    {
+                        errors.Add($"layout {v.Id} seed {seed}: disconnected or over the tile inventory");
+                        break;
+                    }
+                }
+        }
 
         return errors;
     }
