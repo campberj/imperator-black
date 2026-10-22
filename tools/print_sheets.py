@@ -406,7 +406,7 @@ def quick_reference():
     left = [Paragraph("The round", Q_H)] + bullets([
         "<b>Initiative:</b> each side 2d6 + the Nerve of its Leader with the highest Nerve. Winner chooses who activates first. Reroll ties.",
         "<b>Activations:</b> alternate one model at a time; two actions each. When one side runs out, the other finishes.",
-        "<b>End of round:</b> (1) Bleeding/Critical clocks; (2) Down models test 8+ to recover; (3) unhit models in cover lose 1 Suppression; (4) hazards; (5) mission effects; (6) clear Activated (Overwatch stays).",
+        "<b>End of round:</b> (1) Bleeding/Critical clocks; (2) Down models test 8+ to recover; (3) unhit models in cover lose 1 Suppression; (4) hazards; (5) mission clock and alert (p. 3); (6) clear Activated (Overwatch stays).",
     ]) + [Spacer(1, 4), Paragraph("Attributes", Q_H),
           qtable([["Attr.", "Used for"]] + [[a["short"], a["text"]] for a in ATTRS], [0.5 * inch, half - 0.5 * inch]),
           Paragraph("A test is 2d6 + the named attribute, −1 per Suppression, −1 if Wounded; 8+ unless stated. Rank is a label only.", Q_SMALL),
@@ -501,6 +501,63 @@ def quick_reference():
         "<b>Darkness:</b> seen only within 12\"; −2 beyond 6\" unless Low-light; a model that shot this round is seen at −1.",
     ])
     story += [Paragraph("Imperator Black — Quick Reference (2)", Q_TITLE), Spacer(1, 6), two_col(left2, right2)]
+
+    # Page 3: missions (chapter 13) -------------------------------------
+    M = C["missions"]
+    al, ck = M["alert"], M["clock"]
+    left3 = [Paragraph("Alert track (0–6)", Q_H),
+             qtable([["Raises the alert", "By"]] + [[r["source"], f'+{r["amount"]}'] for r in al["raises"]], [half - 0.4 * inch, 0.4 * inch]),
+             Spacer(1, 3),
+             qtable([["At", "Threshold (once each, at the end of the round)"]] + [[f'<b>{t["at"]}</b>', t["effect"]] for t in al["thresholds"]],
+                    [0.3 * inch, half - 0.3 * inch]),
+             Spacer(1, 5), Paragraph("Mission clock", Q_H),
+             qtable([["Size", "Player force", "Die", "Limit"]] + [[z["name"], z["force"], z["die"], f'{z["limit"]} min'] for z in ck["sizes"]],
+                    [1.0 * inch, half - 2.0 * inch, 0.4 * inch, 0.6 * inch])] + bullets(ck["rules"]) + [
+             Spacer(1, 3), Paragraph("<b>End of each round:</b> (1) roll the clock die and move the clock; a check-in reached or passed: alert +1. "
+                                     "(2) Alert threshold effects. (3) Time run out: the mission ends.", Q_B),
+             Spacer(1, 5), Paragraph("Complications (d6)", Q_H),
+             qtable([["d6", "Complication"]] + [[c["roll"].replace("-", "–"), f'<b>{c["name"]}:</b> {c["text"]}'] for c in M["complications"]],
+                    [0.35 * inch, half - 0.35 * inch]),
+             Spacer(1, 5), Paragraph("Extraction and the end", Q_H)] + bullets([
+        "A player model that leaves by its airlock or its own edge is extracted, with whatever it carries (data, cargo, a hostage or prisoner in base contact).",
+        "The mission ends when every player model is extracted, Down, Dead or captured, or when time runs out.",
+        "Models still on the board are left behind; left behind Down: captured (campaign).",
+    ])
+    tasks = []
+    for m in M["missions"]:
+        tasks += [Paragraph(f'<b>{m["name"]}.</b> {m["task"]}', Q_B),
+                  Paragraph(f'<i>Lockdown (6):</i> {m["lockdown"]}', Q_SMALL), Spacer(1, 2)]
+    right3 = [Paragraph("Contacts", Q_H)] + bullets(M["contacts"]) + \
+             [Spacer(1, 2)] + bullets([f'<b>{c["name"]}:</b> {c["text"]}' for c in M["contact_results"]]) + \
+             [Spacer(1, 5), Paragraph("Objectives: taking them", Q_H)] + tasks + \
+             [Spacer(1, 3), Paragraph("Grades", Q_H), Paragraph(
+                 "Each mission type grades <b>Decisive</b> (objective done and no player model Dead), <b>Marginal</b> (objective done) "
+                 "or <b>Failure</b>; the mission sheet gives the exact wording.", Q_B)]
+    story += [PageBreak(), Paragraph("Imperator Black — Quick Reference (3): Missions", Q_TITLE), Spacer(1, 6), two_col(left3, right3)]
+
+    # Page 4: after-action (chapter 14 draft) -----------------------------
+    Cp = C["campaign"]
+    inj = qtable([["2d6", "Injury"]] + [[r["roll"].replace("-", "–"), f'<b>{r["name"]}:</b> {r["text"]}'] for r in Cp["injuries"]],
+                 [0.4 * inch, half - 0.4 * inch])
+    mods = "; ".join(f'{m["value"]:+d} {m["text"][0].lower() + m["text"][1:]}' for m in Cp["injury_modifiers"])
+    left4 = [Paragraph("After-action, in order", Q_H), Paragraph(
+                 "(1) Casualties and injuries; (2) prisoners; (3) the grade's rewards and the node's outcome; (4) XP and the citation; (5) advances.", Q_B),
+             Spacer(1, 4), Paragraph("1. Casualties", Q_H)] + bullets(Cp["casualties"]) + [
+             Spacer(1, 3), inj, Paragraph(f"Modifiers: {mods}. 2 or less reads as 2; 12 or more as 12. Out: campaign turns missed, ticking down at Upkeep.", Q_SMALL),
+             Spacer(1, 5), Paragraph("2–3. Prisoners and rewards", Q_H),
+             qtable([["Result", "Reward"]] + [[f'<b>{r["result"]}</b>', r["text"]] for r in Cp["rewards"]], [1.35 * inch, half - 1.35 * inch]),
+             Paragraph("A taken node also gives its own reward (node table).", Q_SMALL)]
+    right4 = [Paragraph("4. XP (each soldier who deployed)", Q_H),
+              qtable([["XP", "For"]] + [[f'+{x["amount"]}', x["text"]] for x in Cp["xp"]], [0.35 * inch, half - 0.35 * inch]),
+              Spacer(1, 5), Paragraph(f'5. Advances (every {Cp["advances"]["every"]} XP)', Q_H),
+              qtable([["d6", "Advance"]] + [[r["roll"], r["text"]] for r in Cp["advances"]["table"]], [0.35 * inch, half - 0.35 * inch])] + \
+             bullets(Cp["advances"]["text"]) + [
+              Spacer(1, 5), Paragraph("Citations and honours", Q_H)] + bullets([f'<b>{h["name"]}:</b> {h["text"]}' for h in Cp["honours"]]) + \
+             [Paragraph(" · ".join(f'<b>{h["name"]}:</b> {h["text"]}' for h in Cp["honour_list"]), Q_SMALL),
+              Spacer(1, 5), Paragraph("Then: Upkeep and Events", Q_H), Paragraph(
+                  "Upkeep: recovering soldiers tick down one turn; ship upgrades finish; move the turn marker. Events: roll 2d6 (campaign sheets).", Q_B)]
+    story += [PageBreak(), Paragraph("Imperator Black — Quick Reference (4): After-action  <font size=8 color='#5b6670'>campaign draft</font>", Q_TITLE),
+              Spacer(1, 6), two_col(left4, right4)]
     doc.build(story)
     return path
 
