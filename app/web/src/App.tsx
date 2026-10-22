@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { fetchContent, indexContent, type LoadedContent } from './content'
 import { ROUTES, useRoute } from './routes'
 import { Behaviors } from './views/Behaviors'
+import { Dashboard } from './views/Dashboard'
 import { Decks } from './views/Decks'
 import { Land } from './views/Land'
 import { Missions } from './views/Missions'
@@ -55,6 +56,7 @@ export default function App() {
           {route === 'decks' && <Decks content={loaded.content} />}
           {route === 'land' && <Land content={loaded.content} />}
           {route === 'missions' && <Missions content={loaded.content} lookup={lookup} />}
+          {route === 'dashboard' && <Dashboard content={loaded.content} />}
         </>
       )}
     </main>

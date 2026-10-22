@@ -209,7 +209,12 @@ export interface Content {
     contact_results: { id: string; name: string; text: string }[]
     alert: { max: number; raises: { source: string; amount: number }[]; thresholds: { at: number; effect: string }[] }
     complications: { roll: string; id: string; name: string; text: string }[]
-    clock: { sizes: { id: string; name: string; force: string; die: string; limit: number }[]; rules: string[] }
+    clock: {
+      sizes: { id: string; name: string; force: string; die: string; limit: number }[]
+      check_in_every: number
+      first_check_in: number
+      rules: string[]
+    }
     contacts: string[]
   }
   terrain: {

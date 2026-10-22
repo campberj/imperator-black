@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react'
 import type { Content, Element, Lookup } from '../content'
-import { EXAMPLES, exampleLabel, loadExample, type Mission } from '../mission'
+import { EXAMPLES, exampleLabel, missionRequest, useMission, type Mission } from '../mission'
 import { BoardLegend, BoardMap } from '../components/BoardMap'
 import { SeedForm } from '../components/SeedForm'
 import { Table } from '../components/Table'
-import { seedFrom, useGenerated } from '../generated'
 import { navigate, useHashParams } from '../routes'
 
 // A chapter 13 mission, laid out like the printed mission sheet (tools/print_scenario.py, mission_sheet): the briefing
@@ -16,21 +14,10 @@ const inches = (v: number) => `${Number(v.toFixed(2))}"`
 
 export function Missions({ content, lookup }: { content: Content; lookup: Lookup }) {
   const params = useHashParams()
-  const example = EXAMPLES.find((e) => e.id === params.get('example'))?.id
-  const setting = params.get('setting') === 'land' ? 'land' : 'ship'
-  const pick = (key: string, ids: string[]) => (ids.includes(params.get(key) ?? '') ? params.get(key)! : '')
-  const mission = pick('mission', content.missions.missions.map((m) => m.id))
-  const tier = pick('tier', content.missions.tiers.map((t) => String(t.tier)))
-  const vessel = setting === 'ship' ? pick('vessel', content.layouts.vessels.map((v) => v.id)) : ''
-  const environment = setting === 'land' ? pick('environment', content.terrain.environments.map((e) => e.id)) : ''
-  const size = setting === 'land' && params.get('size') === 'large' ? 'large' : 'small'
-  const seed = seedFrom(params)
-
-  const asked = { setting, mission, tier, vessel, environment, size: setting === 'land' ? size : '' }
-  const query = new URLSearchParams(Object.entries({ ...asked, seed: String(seed) }).filter(([, v]) => v)).toString()
-  const generated = useGenerated<Mission>(example ? undefined : `/missions?${query}`)
-  const fromExample = useExample(example)
-  const { value: m, error } = example ? fromExample : generated
+  const { example, asked, seed, url } = missionRequest(params, content)
+  const { setting, mission, tier, vessel, environment } = asked
+  const size = asked.size || 'small'
+  const { value: m, error } = useMission(example, url)
   const show = (change: Partial<typeof asked> & { seed?: number }) => {
     const next = { ...asked, seed, ...change }
     if (next.setting === 'ship') next.environment = next.size = ''
@@ -91,25 +78,21 @@ export function Missions({ content, lookup }: { content: Content; lookup: Lookup
         </p>
       )}
       {!m && !error && <p className="meta">{example ? 'Loading example…' : 'Generating mission…'}</p>}
+      {m && (
+        <div className="filters">
+          <button type="button" onClick={() => navigate('dashboard', example ? { example } : dashboardParams(asked, seed))}>
+            Dashboard
+          </button>
+          <p className="summary">A one-page dashboard for this mission, to print and mark up during play.</p>
+        </div>
+      )}
       {m && <MissionSheet mission={m} content={content} lookup={lookup} />}
     </>
   )
 }
 
-function useExample(id: string | undefined): { value?: Mission; error?: string } {
-  const [result, setResult] = useState<{ id: string; value?: Mission; error?: string }>()
-  useEffect(() => {
-    if (!id) return
-    let live = true
-    loadExample(id)
-      .then((value) => live && setResult({ id, value }))
-      .catch((e: unknown) => live && setResult({ id, error: e instanceof Error ? e.message : String(e) }))
-    return () => {
-      live = false
-    }
-  }, [id])
-  return result && result.id === id ? { value: result.value, error: result.error } : {}
-}
+const dashboardParams = (asked: Record<string, string>, seed: number) =>
+  Object.fromEntries([...Object.entries(asked).filter(([, v]) => v), ['seed', seed]]) as Record<string, string | number>
 
 function MissionSheet({ mission: m, content, lookup }: { mission: Mission; content: Content; lookup: Lookup }) {
   const type = content.missions.missions.find((x) => x.id === m.mission)

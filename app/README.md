@@ -22,7 +22,7 @@ Last updated: 2026-10-22, rules v0.5 (chapters 10–13: solo opponent, ship layo
 | `app/tests/Imperator.Api.Tests` | xUnit v3 + `WebApplicationFactory` (40 cases): endpoints (including `/decks`) and schema, no database needed | Passing |
 | `app/tests/Imperator.Sim.Tests` | xUnit v3 (4 cases): the troop value harness, including the reference trooper scoring 50% against itself | Passing |
 | `content/*.yaml` → `content/dist/content.json` | Game data. Compiled by `tools/build_content.py`. .NET reads only the JSON into typed records (every file, including the chapter 10 solo opponent and its terms, chapter 11 `layouts`, chapter 12 `terrain`, `core.security` and `core.shoot_scale`) and validates it at load (`ContentValidator`, mirroring `tools/validate_content.py`) | `core`, `weapons`, `armour`, `keywords`, `gear`, `troops`, `factions`, `rosters`, `behaviors`. Schema: [content/README.md](../content/README.md) |
-| `app/web` | Vite + React + TypeScript, read from `/content` (dev server proxies to the API). Unit database (`#units`: troop cards per faction with filters and search, teams, elements), reference (`#reference`: gear, skills, keywords, weapon and armour tables, searchable), behavior cards (`#behaviors`), missions (`#missions?setting=…&seed=…`, or an example from `docs/scenarios/missions`), land tables (`#land?environment=…&size=…&seed=…`), deck maps (`#decks?vessel=…&seed=…`: SVG map of a generated deck with rooms, doors and terrain tables). Vitest + Testing Library, oxlint. See [web/README.md](web/README.md) | Read-only |
+| `app/web` | Vite + React + TypeScript, read from `/content` (dev server proxies to the API). Unit database (`#units`: troop cards per faction with filters and search, teams, elements), reference (`#reference`: gear, skills, keywords, weapon and armour tables, searchable), behavior cards (`#behaviors`), missions (`#missions?setting=…&seed=…`, or an example from `docs/scenarios/missions`), land tables (`#land?environment=…&size=…&seed=…`), deck maps (`#decks?vessel=…&seed=…`: SVG map of a generated deck with rooms, doors and terrain tables), the printable mission dashboard (`#dashboard`, blank or for a mission). Vitest + Testing Library, oxlint. See [web/README.md](web/README.md) | Read-only |
 | `docker-compose.yml` (repo root) | PostgreSQL 18 for local development | |
 | `.github/workflows/ci.yml` | Checks content JSON and rulebook tables are current, builds, runs tests, checks EF migrations match the model and apply to PostgreSQL; a `web` job lints, tests and builds `app/web` | Green |
 
@@ -150,7 +150,9 @@ Phase 7 needs a points value for every troop (decision 6.12, roadmap Phase 7 ite
 - Skills that change the math are modelled where Core already supports them (Marksman, Augmented, Laser detector's no-penalty reactions if reactions are simulated); list the ones that are not modelled under the table.
 - **Done when:** the report covers all 73 troop types and a test checks the reference trooper scores 50% (±2%) against itself.
 
-### 14. Mission dashboard in the web app (print)
+### 14. Mission dashboard in the web app (print) ✅ done (2026-10-22)
+
+`app/web/src/views/Dashboard.tsx`; checked in headless Chromium: the blank, a small and a large mission each print on one letter page.
 
 The paper dashboard (`docs/print/ImperatorBlack_mission-dashboard.pdf`, drawn by `dashboard_flow` in `tools/print_scenario.py`) as a printable page for a generated mission. No saved state.
 

@@ -635,3 +635,146 @@ table.weapons tr.note td {
     break-after: auto;
   }
 }
+
+/* ---------- Mission dashboard (as docs/print/ImperatorBlack_mission-dashboard.pdf) ---------- */
+
+.dashboard header h2 {
+  margin-bottom: 2px;
+}
+
+.dashboard header p {
+  margin: 0 0 4px;
+}
+
+.dashboard h3,
+.dashboard section h2 {
+  font-size: 1rem;
+  margin: 14px 0 6px;
+}
+
+.dashboard p.small {
+  margin: 4px 0;
+}
+
+table.boxes {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border: none;
+  background: none;
+  margin: 4px 0;
+}
+
+table.boxes td {
+  border: 1px solid var(--text);
+  text-align: center;
+  padding: 4px 0;
+  font-size: 0.8125rem;
+}
+
+table.boxes tr.notes td {
+  border: none;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+/* The sheet's shading, in both themes. */
+table.boxes td.start,
+table.boxes td.threshold,
+table.boxes td.check-in,
+table.boxes td.limit {
+  color: #1d1f23;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+table.boxes td.start {
+  background: #f6e3a1;
+}
+
+table.boxes td.threshold,
+table.boxes td.check-in {
+  background: #f3d2c6;
+}
+
+table.boxes td.limit {
+  background: #c9cfd4;
+}
+
+.dashboard .form td,
+.dashboard .form tbody th {
+  height: 1.75em;
+}
+
+.dashboard .form .scroll {
+  overflow: visible;
+}
+
+.dashboard .form thead th {
+  white-space: normal;
+}
+
+.dashboard-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media print {
+  main:has(.dashboard) {
+    padding: 0;
+  }
+
+  main:has(.dashboard) > header.top {
+    display: none;
+  }
+
+  .dashboard header h2 {
+    margin: 0;
+    font-size: 13pt;
+  }
+
+  .dashboard p {
+    margin: 2px 0;
+  }
+
+  .dashboard .form thead th {
+    font-size: 7pt;
+    padding: 2px 4px;
+  }
+
+  .dashboard {
+    font-size: 9pt;
+  }
+
+  .dashboard h3,
+  .dashboard section h2 {
+    font-size: 10pt;
+    margin: 8px 0 3px;
+  }
+
+  .dashboard .form td,
+  .dashboard .form tbody th {
+    height: 1.45em;
+    padding: 1px 4px;
+  }
+
+  .dashboard .form table {
+    font-size: 8pt;
+  }
+
+  .dashboard-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  table.boxes td {
+    font-size: 7.5pt;
+    padding: 2px 0;
+  }
+}
