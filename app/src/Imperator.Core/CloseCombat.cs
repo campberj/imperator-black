@@ -15,7 +15,8 @@ public static class CloseCombat
     public static readonly BreakPolicy NeverBreak = (_, _) => false;
 
     public static int Modifier(Soldier s, bool charging, int supporters, bool zeroG) =>
-        s.Fight + s.RollPenalty + (charging ? 1 : 0) + Math.Min(2, supporters) + (zeroG && !s.VoidTrained ? -1 : 0);
+        s.Fight + s.RollPenalty + (charging ? 1 : 0) + Math.Min(2, supporters) + (zeroG && !s.VoidTrained ? -1 : 0)
+        + (s.SkillLevel("twin_blades") > 0 ? 1 : 0);
 
     /// <summary>
     /// Fights close combat to its end: one side incapacitated, or both break away.

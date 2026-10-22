@@ -85,4 +85,36 @@ public class SoldierTests
         var s = Fresh(wounds: 2); s.ApplyRow(6);
         Assert.Equal(Status.Down, s.Status);
     }
+
+    [Fact]
+    public void AugmentedIgnoresFirstSuppressionEachRound()
+    {
+        var s = Soldier.FromTroop(Set, "rfa_assaulter");
+        s.AddSuppression(2);
+        Assert.Equal(1, s.Suppression);
+        s.AddSuppression(1);
+        Assert.Equal(2, s.Suppression);
+        s.StartRound();
+        s.AddSuppression(1);
+        Assert.Equal(2, s.Suppression);
+    }
+
+    [Fact]
+    public void JediDisciplinePinsAtFour()
+    {
+        var s = Soldier.FromTroop(Set, "rep_jedi_guardian");
+        s.AddSuppression(3);
+        Assert.False(s.Pinned);
+        s.AddSuppression(1);
+        Assert.True(s.Pinned);
+    }
+
+    [Fact]
+    public void ShieldIsLightCoverOnlyWithoutOther()
+    {
+        var s = Soldier.FromTroop(Set, "ct_borz_bratva");
+        Assert.Equal(Cover.Light, s.CoverFacing(Cover.Open));
+        Assert.Equal(Cover.Heavy, s.CoverFacing(Cover.Heavy));
+        Assert.Equal(Cover.Open, Fresh().CoverFacing(Cover.Open));
+    }
 }

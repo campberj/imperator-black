@@ -32,6 +32,7 @@ public sealed class Soldier
     public bool IsMedic => SkillLevel("medic") > 0;
     public bool VoidTrained => SkillLevel("void_trained") > 0;
     public bool Automated => SkillLevel("automated") > 0;
+    public bool Augmented => SkillLevel("augmented") > 0;
     /// <summary>Hit bonus from the Aim action (Marksman 1+ makes it +2).</summary>
     public int AimBonus => SkillLevel("marksman") >= 1 ? 2 : 1;
 
@@ -47,9 +48,12 @@ public sealed class Soldier
     /// <summary>Rounds left before a Bleeding or Critical model dies.</summary>
     public int DeathClock { get; private set; }
     public bool Stabilised { get; private set; }
+    /// <summary>Augmented: the first Suppression it gains each round is ignored.</summary>
+    private bool _augmentSpent;
 
     public bool IsActive => Status == Status.Active;
-    public bool Pinned => Suppression >= 3;
+    /// <summary>Pinned at 3 Suppression, or 4 with Jedi discipline.</summary>
+    public bool Pinned => Suppression >= (SkillLevel("jedi_discipline") > 0 ? 4 : 3);
     public bool CanBeTreated => Status is Status.Down or Status.Bleeding or Status.Critical && !Stabilised;
 
     /// <summary>Modifier applied to all of this model's rolls.</summary>
@@ -107,9 +111,29 @@ public sealed class Soldier
         };
     }
 
+    /// <summary>
+    /// The cover this model has against a shooter it faces, given the terrain's cover: a Shield counts as Light cover
+    /// when it has no other.
+    /// </summary>
+    public Cover CoverFacing(Cover terrain) => terrain == Cover.Open && SkillLevel("shield") > 0 ? Cover.Light : terrain;
+
+    /// <summary>Start of a round: clears Activated, hit-this-round and cannot-react, and readies Augmented.</summary>
+    public void StartRound()
+    {
+        Activated = false;
+        HitThisRound = false;
+        CannotReact = false;
+        _augmentSpent = false;
+    }
+
     public void AddSuppression(int n)
     {
-        if (!IsActive || Automated) return;
+        if (!IsActive || Automated || n <= 0) return;
+        if (Augmented && !_augmentSpent)
+        {
+            _augmentSpent = true;
+            if (--n == 0) return;
+        }
         Suppression = Math.Min(5, Suppression + n);
         if (Suppression >= 2) OverwatchReactions = 0;
     }
@@ -158,12 +182,12 @@ public sealed class Soldier
         return false;
     }
 
-    /// <summary>End-of-round recovery test for a plain Down model: 2d6 + Physique.</summary>
+    /// <summary>End-of-round recovery test for a plain Down model: 2d6 + Physique (+1 if Augmented).</summary>
     public bool TryRecover(Rng rng, int target = 8)
     {
         if (Status != Status.Down || Stabilised || Automated) return false;
         var (a, b) = rng.TwoD6();
-        if (a + b == 2 || a + b + Physique < target) return false;
+        if (a + b == 2 || a + b + Physique + (Augmented ? 1 : 0) < target) return false;
         StandUp();
         return true;
     }

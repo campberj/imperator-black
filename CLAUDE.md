@@ -37,6 +37,7 @@ npm --prefix app/web run dev                                          # web on h
 npm --prefix app/web run lint && npm --prefix app/web test && npm --prefix app/web run build
 dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.4-results.md
 dotnet run -c Release --project app/src/Imperator.Sim -- --compare Label=a.json Label2=b.json   # compare content variants
+dotnet run -c Release --project app/src/Imperator.Sim -- --values docs/analysis/troop-values-v0.5.md   # troop value harness
 ```
 
 CI (`.github/workflows/ci.yml`) fails if content JSON or rulebook tables are stale, if tests fail, if EF migrations don't match the model, or if the web app fails lint, tests or build.

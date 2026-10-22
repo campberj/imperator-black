@@ -5,7 +5,16 @@ using Imperator.Sim;
 // Imperator Black combat simulator.
 // Usage: dotnet run --project app/src/Imperator.Sim -- [output.md] [--n 20000] [--seed 1]
 //        dotnet run --project app/src/Imperator.Sim -- --compare Label=content.json Label2=other.json [--n 20000]
+//        dotnet run --project app/src/Imperator.Sim -- --values [output.md] [--n 20000] [--seed 1]
 var argList = args.ToList();
+if (argList.Contains("--values"))
+{
+    var report = Values.Report(ContentSet.LoadDefault(Directory.GetCurrentDirectory()), ArgIntStatic(argList, "--n", 20000), ArgIntStatic(argList, "--seed", 1));
+    var path = argList.FirstOrDefault(a => a.EndsWith(".md"));
+    if (path is null) Console.Write(report);
+    else { File.WriteAllText(path, report); Console.WriteLine($"Wrote {path}"); }
+    return;
+}
 if (argList.Contains("--compare"))
 {
     var variants = argList.Where(a => a.Contains('=') && a.EndsWith(".json"))

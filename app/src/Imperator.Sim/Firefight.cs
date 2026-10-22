@@ -39,7 +39,7 @@ public sealed class Firefight
     {
         for (int round = 1; round <= Rounds; round++)
         {
-            foreach (var s in _a.Concat(_b)) { s.Activated = false; s.HitThisRound = false; }
+            foreach (var s in _a.Concat(_b)) s.StartRound();
             bool aTurn = Initiative(_a) >= Initiative(_b);
             while (true)
             {

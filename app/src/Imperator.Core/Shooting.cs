@@ -16,6 +16,12 @@ public static class Shooting
     public static int Modifier(Soldier shooter, Cover targetCover, int situational) =>
         shooter.Shoot + shooter.RollPenalty + CoverModifier(targetCover) + situational;
 
+    /// <summary>
+    /// What an Aim action adds to the next Shoot: +1, or +2 with Marksman; Marksman 2 also ignores the Light cover penalty.
+    /// </summary>
+    public static int AimModifier(Soldier shooter, Cover targetCover) =>
+        shooter.AimBonus + (shooter.SkillLevel("marksman") >= 2 && targetCover == Cover.Light ? -CoverModifier(Cover.Light) : 0);
+
     public static bool IsHit(CoreContent core, int a, int b, int modifier) =>
         a + b != core.NaturalMiss && (a == 6 && b == 6 || a + b + modifier >= core.HitTarget);
 
@@ -92,5 +98,24 @@ public static class Shooting
                 result[Wounds.Classify(Wounds.FinalRow(core, dmg, crit, armour, ap))] += p2d6 * p;
         }
         return result;
+    }
+
+    /// <summary>
+    /// Exact expected final wound row of one hit roll against a fresh target, counting a miss or a row of 0 or less
+    /// as 0 and capping at 10.
+    /// </summary>
+    public static double ExpectedRow(CoreContent core, int modifier, DiceSpec damage, int armour, int ap)
+    {
+        var pmf = damage.Pmf();
+        double expected = 0;
+        for (int a = 1; a <= 6; a++)
+        for (int b = 1; b <= 6; b++)
+        {
+            if (!IsHit(core, a, b, modifier)) continue;
+            bool crit = a == 6 && b == 6;
+            foreach (var (dmg, p) in pmf)
+                expected += p / 36 * Math.Clamp(Wounds.FinalRow(core, dmg, crit, armour, ap), 0, 10);
+        }
+        return expected;
     }
 }

@@ -44,7 +44,7 @@ public sealed class RoomClear
     {
         for (int round = 1; round <= MaxRounds; round++)
         {
-            foreach (var s in _att.Concat(_def)) { s.Activated = false; s.HitThisRound = false; s.CannotReact = false; }
+            foreach (var s in _att.Concat(_def)) s.StartRound();
             bool attackersTurn = true; // the attackers choose when to go in
             while (true)
             {

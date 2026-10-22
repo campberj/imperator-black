@@ -48,4 +48,13 @@ public class CloseCombatTests
         }
         Assert.Equal(0, turretWins);
     }
+
+    [Fact]
+    public void TwinBladesAddOneToExchanges()
+    {
+        var ahsoka = Soldier.FromTroop(Set, "rep_ahsoka");
+        var guardian = Soldier.FromTroop(Set, "rep_jedi_guardian");
+        Assert.Equal(ahsoka.Fight, guardian.Fight);
+        Assert.Equal(CloseCombat.Modifier(guardian, false, 0, false) + 1, CloseCombat.Modifier(ahsoka, false, 0, false));
+    }
 }

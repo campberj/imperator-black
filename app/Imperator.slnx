@@ -7,5 +7,6 @@
   <Folder Name="/tests/">
     <Project Path="tests/Imperator.Api.Tests/Imperator.Api.Tests.csproj" />
     <Project Path="tests/Imperator.Core.Tests/Imperator.Core.Tests.csproj" />
+    <Project Path="tests/Imperator.Sim.Tests/Imperator.Sim.Tests.csproj" />
   </Folder>
 </Solution>

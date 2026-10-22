@@ -37,4 +37,34 @@ public class ShootingTests
         Assert.Equal(exact[Outcome.Miss], misses / (double)trials, 0.005);
         Assert.Equal(exactOut, outs / (double)trials, 0.005);
     }
+
+    [Fact]
+    public void SampledRowsMatchExpectedRow()
+    {
+        var rng = new Rng(7);
+        double exact = Shooting.ExpectedRow(Rules, 1, new DiceSpec(2, 8), 2, 0);
+        int trials = 200_000;
+        double total = 0;
+        for (int i = 0; i < trials; i++)
+        {
+            var r = Shooting.Resolve(rng, Rules, 1, new DiceSpec(2, 8), 2, 0);
+            if (r.Hit) total += Math.Max(0, r.Row);
+        }
+        Assert.Equal(exact, total / trials, 0.02);
+    }
+
+    [Fact]
+    public void ExpectedRowRisesWithApAgainstArmour() =>
+        Assert.True(Shooting.ExpectedRow(Rules, 0, new DiceSpec(2, 8), 2, 1) > Shooting.ExpectedRow(Rules, 0, new DiceSpec(2, 8), 2, 0));
+
+    [Fact]
+    public void MarksmanTwoAimIgnoresLightCover()
+    {
+        var m1 = Soldier.FromTroop(Set, "tfb_marksman");
+        var m2 = Soldier.FromTroop(Set, "rfa_marksman");
+        Assert.Equal(2, Shooting.AimModifier(m1, Cover.Light));
+        Assert.Equal(3, Shooting.AimModifier(m2, Cover.Light));
+        Assert.Equal(2, Shooting.AimModifier(m2, Cover.Open));
+        Assert.Equal(1, Shooting.AimModifier(Fresh(), Cover.Light));
+    }
 }
