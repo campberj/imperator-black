@@ -4,6 +4,7 @@ import { ROUTES, useRoute } from './routes'
 import { Behaviors } from './views/Behaviors'
 import { Decks } from './views/Decks'
 import { Land } from './views/Land'
+import { Missions } from './views/Missions'
 import { Reference } from './views/Reference'
 import { Units } from './views/Units'
 
@@ -53,6 +54,7 @@ export default function App() {
           {route === 'behaviors' && <Behaviors content={loaded.content} lookup={lookup} />}
           {route === 'decks' && <Decks content={loaded.content} />}
           {route === 'land' && <Land content={loaded.content} />}
+          {route === 'missions' && <Missions content={loaded.content} lookup={lookup} />}
         </>
       )}
     </main>

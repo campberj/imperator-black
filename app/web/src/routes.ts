@@ -8,6 +8,7 @@ export const ROUTES = [
   { id: 'behaviors', label: 'Behavior cards' },
   { id: 'decks', label: 'Deck maps' },
   { id: 'land', label: 'Land tables' },
+  { id: 'missions', label: 'Missions' },
 ] as const
 
 export type Route = (typeof ROUTES)[number]['id']
