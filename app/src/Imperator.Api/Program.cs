@@ -4,6 +4,7 @@ using Imperator.Api.Data;
 using Imperator.Core;
 using Imperator.Core.Land;
 using Imperator.Core.Layouts;
+using Imperator.Core.Missions;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
@@ -74,6 +75,27 @@ app.MapGet("/land/{environment}", (HttpContext ctx, string environment, int? see
             statusCode: StatusCodes.Status400BadRequest);
     ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
     return Results.Json(LandTableGenerator.Generate(content.Set, environment, size, seed.Value), deckJson);
+});
+
+app.MapGet("/missions", (HttpContext ctx, string? setting, int? seed, string? mission, int? tier, string? vessel, string? environment, string? size) =>
+{
+    var c = content.Set;
+    IResult Bad(string what, string value, IEnumerable<string> allowed) =>
+        Results.Problem($"Unknown {what} '{value}'. {char.ToUpperInvariant(what[0])}{what[1..]}s: {string.Join(", ", allowed)}.", statusCode: StatusCodes.Status400BadRequest);
+    if (setting is null || !MissionGenerator.Settings.Contains(setting)) return Bad("setting", setting ?? "", MissionGenerator.Settings);
+    if (seed is null)
+        return Results.Problem($"A seed is required, e.g. /missions?setting={setting}&seed=7. The same request and content version always give the same mission.",
+            statusCode: StatusCodes.Status400BadRequest);
+    if (mission is not null && c.Missions.Missions.All(m => m.Id != mission)) return Bad("mission", mission, c.Missions.Missions.Select(m => m.Id));
+    if (tier is not null && c.Missions.Tiers.All(t => t.Tier != tier)) return Bad("tier", tier.ToString()!, c.Missions.Tiers.Select(t => t.Tier.ToString()));
+    if (vessel is not null && c.Layouts.Vessels.All(v => v.Id != vessel)) return Bad("vessel", vessel, c.Layouts.Vessels.Select(v => v.Id));
+    if (environment is not null && c.Terrain.Environments.All(e => e.Id != environment)) return Bad("environment", environment, c.Terrain.Environments.Select(e => e.Id));
+    size ??= "small";
+    if (c.Missions.Clock.Sizes.All(z => z.Id != size)) return Bad("size", size, c.Missions.Clock.Sizes.Select(z => z.Id));
+    if (setting == "ship" && size != "small")
+        return Results.Problem("Decks are small missions (chapter 11 boards hold up to 8 a side).", statusCode: StatusCodes.Status400BadRequest);
+    ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
+    return Results.Json(MissionGenerator.Generate(c, new MissionRequest(setting, seed.Value, mission, tier, vessel, environment, size)), deckJson);
 });
 
 app.Run();
