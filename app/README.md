@@ -2,7 +2,7 @@
 
 Handoff for Claude Code (or anyone) working on the application. Read this, then [`../CLAUDE.md`](../CLAUDE.md), then [ADR-001](../docs/architecture/adr-001-architecture.md).
 
-Last updated: 2026-10-20, rules v0.4 (granular profiles).
+Last updated: 2026-10-22, rules v0.5 (chapters 10–13: solo opponent, ship layouts, land battles, missions).
 
 ## How the work is split
 
@@ -83,31 +83,67 @@ The content already holds the unit database: every faction, troop profile, weapo
 - Filters: faction, rank, role, keyword; a search box across names and text.
 - **Done when:** every troop in `content/troops.yaml` renders, a Vitest test checks one profile per faction against the content, and lint, tests and build pass.
 
-### 7. Deck layout generator in Core
+### 7. Missions content in Core
+
+`content/missions.yaml` (rules chapter 13) is in `content.json`, but `ContentSet.Parse` doesn't load it yet. `content/terrain.yaml` now carries generator footprints: `pieces` on each sector roll and `fill_pieces` on each environment. The records `TerrainPieceDef`, `SectorRollRow.Pieces` and `EnvironmentDef.FillPieces` already exist in `TerrainContent.cs`.
+
+- Add typed records for every section of `missions.yaml`: `mission_roll`, `missions`, `tier_roll`, `tiers` (contacts, reinforcement, hvt, d6 table), `contact_results`, `alert` (raises, thresholds), `complications`, `clock` (sizes, check-ins, rules), `placement`, `contacts`, `briefing`. Load them in `ContentSet.Parse` as a required section.
+- Port the mission and terrain-piece checks from `tools/validate_content.py` to `ContentValidator`: every d6 table covers 1–6; tier table results are element ids or `false_alarm` / `booby_trap`; reinforcements are element ids; HVTs are troop ids; clock sizes have a die and a limit past the first check-in; every sector roll has `pieces` with known terrain types that fit a 12" sector; every fill has cover.
+- Tests: section counts (4 missions, 4 tiers, 2 clock sizes), one negative test per new check.
+- **Done when:** CI is green and `GET /content` still validates.
+
+### 8. Deck layout generator in Core
 
 `tools/generate_layout.py` is the reference implementation of rules chapter 11 (`content/layouts.yaml`).
 
-- Port it to `Imperator.Core` (`Layouts/DeckGenerator.cs`), seeded through `Rng`, producing the same deck model (tiles, doors with state and security, cover, entry, objective, hazard, roll count).
+- Port it to `Imperator.Core` (`Layouts/DeckGenerator.cs`), seeded through `Rng`, producing the same deck model (tiles, doors with state and security, cover, entry, objective, hazard, roll count). Keep the deck graph (which tiles connect, and the spine) in the model: task 11 routes over it.
 - Match the reference statistics: run `python3 tools/generate_layout.py --check --n 2000` and assert the C# generator's compartments, loops and tile use per vessel are within a small tolerance; every deck connected and within 12 of each tile.
 - `GET /decks/{vessel}?seed=N` returns the deck as JSON, recording seed and content version.
 - **Done when:** tests pass and the endpoint returns a deck for each vessel.
 
-### 8. Deck map in the web app
+### 9. Board map in the web app
 
-- Render a deck from task 7 as SVG: the 3" grid, tiles with ids and names, doors coloured by state with security, cover pieces with ids, entry and objective; the same conventions as the printed deck sheets (`docs/print/decks/`).
+- Render a deck from task 8 as SVG: the 3" grid, tiles with ids and names, doors coloured by state with security, cover pieces with ids, entry and objective; the same conventions as the printed deck sheets (`docs/print/decks/`).
 - Rooms, doors and terrain tables beside the map; a seed box and a vessel picker; print styles.
+- Build the map as one component that takes a board model (tiles optional), so tasks 10 and 12 reuse it for land tables and mission markers: 12" sector lines with names (A1 at the player's bottom left), terrain footprints coloured by type (`tools/print_scenario.py` has the colours), guard models, contact chips (`?n`), objectives and the enemy entry.
 
-### 9. Stop and check the roadmap
+### 10. Land table generator in Core
+
+The reference is `Mission.build_land` in `tools/generate_mission.py` (rules chapter 12, "Setting up a land table").
+
+- `Land/LandTableGenerator.cs`: environment (named or rolled; fortified only when named), board by size (small 36" × 36", large 48" × 48"), one d6 per 12" sector, the density check (three sectors in a line with no `pieces` → the middle one becomes the fill, repeated until none), the conditions roll.
+- Place each roll's `pieces` near the sector's middle as the reference does: the first piece centred; rocks on a hill placed on it; others offset clear of earlier pieces and inside the sector. Which way a piece faces is the player's choice in the rules, so here it comes from `Rng`.
+- `GET /land/{environment}?size=small&seed=N`; show it in the web app with the task 9 map.
+- **Done when:** a test checks that no line of three empty sectors remains over 1,000 seeds per environment, every piece lies inside its sector, and the endpoint returns a table.
+
+### 11. Mission generator in Core
+
+The reference is `tools/generate_mission.py`; the procedure is rules chapter 13, "Building a mission".
+
+- `Missions/MissionGenerator.cs`, seeded, in the paper order: mission type and threat tier (named or rolled), board (task 8 deck or task 10 table), complication, objectives, guard, contact chips, enemy entry, clock, briefing.
+- Aboard ship, "farthest" means farthest from the airlock by route over the deck graph (fewest tile steps); ties go to the straight-line distance from the airlock. On land, "farthest" means farthest from the middle of the player's edge.
+- Complications change the mission: Early warning sets the alert start to 1; Reinforced adds a contact; Tight window takes 5 minutes off; Hazard gives the vessel's first hazard aboard ship, or Night on land in place of the conditions roll.
+- Guard: one roll on the tier table, rerolling false alarm and booby trap, models placed within 3" of the first objective and clear of cover; a capture mission adds the HVT to the guard unless it is already in it.
+- The model records everything the printed sheet shows: seed, content version, the roll log, briefing headings in the `briefing` order, objectives, guard models, contact chips, enemy entry and any second enemy exit, clock (die, limit, check-ins), alert start, reinforcement element and HVT.
+- `GET /missions?setting=ship&seed=N` (optional `mission`, `tier`, `vessel`, `environment`, `size`).
+- **Done when:** over 2,000 seeds per setting, the mission and tier frequencies match their d6 tables within tolerance; every contact chip and guard model stands inside the board, clear of solid cover; objective counts match the mission type; the endpoint returns a mission.
+
+### 12. Mission view in the web app
+
+- A mission page: the briefing, then the task 9 map with objectives, guard models (numbered), contact chips and the enemy entry. Below it: the mission type's taking-it, lockdown and grades text; the alert track and clock rules; the tier's contact table with element compositions and behaviors; the enemy elements with drill (the drill rules are in the chapter 10 content; `tools/print_scenario.py` `element_drill` is the reference).
+- Rooms and doors (ship) or sectors and terrain (land) tables; a seed box and pickers for setting, mission, tier, vessel or environment, and size.
+- Print styles that come close to `docs/print/missions/ImperatorBlack_mission-*-sheet.pdf`.
+- Out of scope: the live dashboard (it needs saved game state; it comes with the Phase 7 campaign tracker).
+- **Done when:** both example missions in `docs/scenarios/missions/` can be shown, and lint, tests and build pass.
+
+### 13. Stop and check the roadmap
 
 Beyond this, the app's real features wait on rules:
 
 | App feature | Waits on |
 |---|---|
-| Layout generator (SVG ship maps from tiles) | Tasks 7 and 8. |
-| Land table generator (chapter 12 sector tables) | Ready after task 8, same pattern; the reference is `Mission.build_land` in `tools/generate_mission.py`. |
+| Live mission dashboard (alert, clock, contacts, models during play) | Saved game state; built with the Phase 7 campaign tracker (RJ, 2026-10-22). The paper dashboard is `docs/print/ImperatorBlack_mission-dashboard.pdf`. |
 | Custom troop and unit builder | Phase 7 point values, then Phase 9 (decision 6.12) |
-| Mission generator (briefing, guard, contact chips, alert track, mission clock) and a live mission dashboard | Ready: rules chapter 13, `content/missions.yaml`, reference `tools/generate_mission.py` (uses `content/terrain.yaml` `pieces` for land tables). After tasks 7–8. |
-| Enemy guidance cards | Task 6. |
 | Campaign tracker | Phase 7: campaign loop |
 
 Planned app feature (RJ, 2026-10-20): an in-app reference that explains every gear item, keyword and special rule, read from `content/` (the list will grow). Build it from the same `text` fields the rulebook tables use.
