@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { fetchContent, indexContent, type LoadedContent } from './content'
 import { ROUTES, useRoute } from './routes'
 import { Behaviors } from './views/Behaviors'
+import { Decks } from './views/Decks'
 import { Reference } from './views/Reference'
 import { Units } from './views/Units'
 
@@ -49,6 +50,7 @@ export default function App() {
           {route === 'units' && <Units content={loaded.content} lookup={lookup} />}
           {route === 'reference' && <Reference content={loaded.content} lookup={lookup} />}
           {route === 'behaviors' && <Behaviors content={loaded.content} lookup={lookup} />}
+          {route === 'decks' && <Decks content={loaded.content} />}
         </>
       )}
     </main>
