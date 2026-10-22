@@ -94,7 +94,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 - [x] Priority lists for all nine behavior profiles in `content/behaviors.yaml`, validated in CI
 - [x] [Behavior cards](print/ImperatorBlack_behavior-cards.pdf); Gym 1 reprinted with them in place of the stopgap orders
 - [x] Replayed Gym 1 with the behavior cards ([log](playtests/2026-10-21-gym-01-replay.md)): almost no judgment calls; investigation, rally and break-off all worked. **Phase 3 exit met.**
-- [ ] Contact tables per threat tier (moves to Phase 5 with the alert track and missions)
+- [x] Contact tables per threat tier (done in Phase 5: rules chapter 13)
 
 **Exit:** The player makes no more than one judgment call per turn on the enemy's behalf.
 
@@ -111,6 +111,7 @@ Start from **prototype rules v0.1**, not a blank page. Bring it into `rules/`, a
 - [x] Rules chapter 11: [ship and station layouts](../rules/11-ship-layout.md), with a worked example
 - [x] Reference generator `tools/generate_layout.py` (seeded, same tables) and deck sheets in [`docs/print/decks/`](print/decks/)
 - [ ] RJ builds a deck from the paper procedure and times it
+- [ ] Optional: modular walls on a plain mat (Sable Badger sections) for decks and land buildings; waits on RJ's prints ([notes](design/modular-walls.md))
 - [x] Ship gym on a generated deck: [Gym 3: Wipe Race](scenarios/gym-03-wipe-race.yaml) (station module, seed 11)
 
 **Exit:** The paper procedure produces a sensible, playable layout in under 10 minutes using only owned tiles.
