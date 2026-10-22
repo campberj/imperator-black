@@ -1,0 +1,87 @@
+{
+  "source": "tools/generate_layout.py",
+  "content_version": "0.5.0",
+  "seeds": 2000,
+  "vessels": {
+    "freighter": {
+      "compartments_mean": 4.14,
+      "compartments_min": 4,
+      "compartments_max": 6,
+      "below_minimum": 0.0,
+      "with_loop": 0.648,
+      "rolls_mean": 21.3355,
+      "tiles_mean": {
+        "compartment": 4.14,
+        "passage": 4.506,
+        "junction": 4.425
+      },
+      "tiles_max": {
+        "compartment": 6,
+        "passage": 7,
+        "junction": 8
+      },
+      "disconnected": 0,
+      "over_inventory": 0
+    },
+    "salvage_tender": {
+      "compartments_mean": 3.2515,
+      "compartments_min": 3,
+      "compartments_max": 5,
+      "below_minimum": 0.0,
+      "with_loop": 0.468,
+      "rolls_mean": 15.9165,
+      "tiles_mean": {
+        "compartment": 3.2515,
+        "passage": 3.7285,
+        "junction": 3.532
+      },
+      "tiles_max": {
+        "compartment": 5,
+        "passage": 7,
+        "junction": 7
+      },
+      "disconnected": 0,
+      "over_inventory": 0
+    },
+    "corvette": {
+      "compartments_mean": 3.1865,
+      "compartments_min": 3,
+      "compartments_max": 5,
+      "below_minimum": 0.0,
+      "with_loop": 0.602,
+      "rolls_mean": 14.186,
+      "tiles_mean": {
+        "compartment": 3.1865,
+        "passage": 3.359,
+        "junction": 3.0465
+      },
+      "tiles_max": {
+        "compartment": 5,
+        "passage": 5,
+        "junction": 6
+      },
+      "disconnected": 0,
+      "over_inventory": 0
+    },
+    "station_module": {
+      "compartments_mean": 3.332,
+      "compartments_min": 3,
+      "compartments_max": 5,
+      "below_minimum": 0.0,
+      "with_loop": 0.5765,
+      "rolls_mean": 17.0825,
+      "tiles_mean": {
+        "compartment": 3.332,
+        "passage": 4.1125,
+        "junction": 3.7635
+      },
+      "tiles_max": {
+        "compartment": 5,
+        "passage": 7,
+        "junction": 8
+      },
+      "disconnected": 0,
+      "over_inventory": 0
+    }
+  }
+}
