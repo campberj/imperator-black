@@ -276,7 +276,47 @@ if not errors:
                 errors.append(f"layout {vid} seed {seed}: disconnected or over the tile inventory")
                 break
 
+# Campaign (chapter 14).
+Cp = C["campaign"]
+
+
+def covers_2d6(rows, where):
+    got = []
+    for r in rows:
+        lo, _, hi = str(r["roll"]).partition("-")
+        got += list(range(int(lo), int(hi or lo) + 1))
+    if sorted(got) != list(range(2, 13)):
+        errors.append(f"{where}: 2d6 rows must cover 2-12 exactly once")
+
+
+covers_d6(Cp["nodes"], "campaign.nodes")
+covers_d6(Cp["advances"]["table"], "campaign.advances.table")
+covers_2d6(Cp["injuries"], "campaign.injuries")
+covers_2d6(Cp["events"], "campaign.events")
+ids(Cp["nodes"] + Cp["special_nodes"], "campaign nodes")
+for n in Cp["nodes"] + Cp["special_nodes"]:
+    need(n["mission"], mission_ids, f"campaign node {n['id']} mission")
+    if n.get("vessel"):
+        need(n["vessel"], vessel_ids, f"campaign node {n['id']} vessel")
+    if n.get("environment"):
+        need(n["environment"], env_ids, f"campaign node {n['id']} environment")
+for sk in Cp["advances"]["skills"]:
+    need(sk, skills, "campaign.advances.skills")
+need(Cp["start"]["force"], {f["id"] for f in C["rosters"]["starting_forces"]}, "campaign.start force")
+if [x["level"] for x in Cp["standing"]] != list(range(0, 7)):
+    errors.append("campaign.standing: levels must run 0 to 6")
+if sum(c["nodes"] for c in Cp["arc"]["columns"]) != 6 or sum(1 for c in Cp["arc"]["columns"] if c.get("target")) != 1:
+    errors.append("campaign.arc: six nodes in all, one of them the target")
+ids(Cp["support"], "campaign.support")
+ids(Cp["ship"], "campaign.ship")
+for sh in Cp["ship"]:
+    if len(sh["levels"]) != 3:
+        errors.append(f"campaign ship {sh['id']}: three levels")
+for ev in Cp["events"]:
+    if not ev.get("text"):
+        errors.append(f"campaign event {ev['roll']}: needs text")
+
 if errors:
     print("\n".join(errors))
     sys.exit(1)
-print(f"Content valid: {len(troops)} troop types, {len(elements)} elements, {len(teams)} teams, {len(gear)} gear items, {len(behaviors)} behavior profiles, {len(vessel_ids)} vessels.")
+print(f"Content valid: {len(troops)} troop types, {len(elements)} elements, {len(teams)} teams, {len(gear)} gear items, {len(behaviors)} behavior profiles, {len(vessel_ids)} vessels, {len(Cp['nodes'])} campaign node types.")

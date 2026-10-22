@@ -26,6 +26,7 @@ python3 tools/generate_layout.py <vessel> --seed N --out docs/scenarios/decks/x.
 python3 tools/generate_layout.py --check     # layout statistics over many seeds
 python3 tools/generate_mission.py ship --seed N --out docs/scenarios/missions/x.yaml   # chapter 13 mission (or: land --environment desert)
 python3 tools/print_scenario.py --dashboard  # blank mission dashboard
+python3 tools/print_campaign.py              # campaign sheets (chapter 14): status, arc map, roster, reference
 python3 tools/layout_reference.py            # after editing layouts.yaml: reference stats for the C# deck generator's tests
 dotnet build app/Imperator.slnx
 dotnet test app/Imperator.slnx                                         # xUnit; must pass

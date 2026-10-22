@@ -164,7 +164,7 @@ Beyond this, the app's real features wait on rules:
 |---|---|
 | Live mission dashboard (alert, clock, contacts, models during play) | Saved game state; built with the Phase 7 campaign tracker (RJ, 2026-10-22). The paper dashboard is `docs/print/ImperatorBlack_mission-dashboard.pdf`. |
 | Custom troop and unit builder | Phase 7 point values, then Phase 9 (decision 6.12) |
-| Campaign tracker | Phase 7: campaign loop |
+| Campaign tracker | Phase 7: chapter 14 is drafted (`content/campaign.yaml`, not yet loaded by `ContentSet`); build after a paper campaign has been played, with saved game state and the live dashboard. |
 
 Planned app feature (RJ, 2026-10-20): an in-app reference that explains every gear item, keyword and special rule, read from `content/` (the list will grow). Build it from the same `text` fields the rulebook tables use.
 

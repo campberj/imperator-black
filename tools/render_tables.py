@@ -153,6 +153,71 @@ def render_missions(section):
     return None
 
 
+def render_campaign(section):
+    Cp = load("campaign")
+    d = lambda r: str(r).replace("-", "–")
+    names = {m["id"]: m["name"] for m in load("missions")["missions"]}
+    vessels = {v["id"]: v["name"] for v in load("layouts")["vessels"]}
+    envs = {e["id"]: e["name"] for e in load("terrain")["environments"]}
+    if section in ("start_text",):
+        return "\n".join(f"- {x}" for x in Cp["start"]["text"])
+    if section == "turn":
+        return table(["Step", "What happens"], [(f'**{i}. {t["step"]}**', t["text"]) for i, t in enumerate(Cp["turn"], 1)])
+    if section == "resources":
+        return table(["Resource", "Track", "What it does"],
+                     [(f'**{r["name"]}**', f'0–{r["max"]}' if r["max"] else "No limit", r["text"]) for r in Cp["resources"]])
+    if section == "standing":
+        return table(["Standing", "", "Income", "Support assets", "Taskings"],
+                     [(f'**{x["level"]}**', x["name"], x["income"], x["support"] or "—", x["text"]) for x in Cp["standing"]])
+    if section == "support":
+        return table(["Support asset", "Effect"], [(f'**{x["name"]}**', x["text"]) for x in Cp["support"]])
+    if section == "intel_uses":
+        return table(["Intel", "Use", "Effect"], [(x["cost"], f'**{x["name"]}**', x["text"]) for x in Cp["intel_uses"]])
+    if section in ("arc_procedure", "arc_taking", "arc_end"):
+        key = section.split("_", 1)[1]
+        items = Cp["arc"][key]
+        return "\n".join(f"{i}. {x}" for i, x in enumerate(items, 1)) if key == "procedure" else "\n".join(f"- {x}" for x in items)
+    if section == "nodes":
+        rows = []
+        for n in Cp["nodes"]:
+            where = vessels[n["vessel"]] if n["setting"] == "ship" else envs[n["environment"]] + " (land)"
+            rows.append((d(n["roll"]), f'**{n["name"]}**', where, names[n["mission"]], n["reward"]))
+        for n in Cp["special_nodes"]:
+            rows.append(("—", f'**{n["name"]}**', n["setting"], names[n["mission"]], n["reward"]))
+        return table(["d6", "Node", "Board", "Mission", "Reward when taken"], rows)
+    if section == "rewards":
+        return table(["Result", "Reward"], [(f'**{r["result"]}**', r["text"]) for r in Cp["rewards"]])
+    if section == "casualties":
+        return "\n".join(f"- {x}" for x in Cp["casualties"])
+    if section == "injury_modifiers":
+        return table(["Modifier", "When"], [(f'{m["value"]:+d}', m["text"]) for m in Cp["injury_modifiers"]])
+    if section == "injuries":
+        return table(["2d6", "Injury", "Out", "Effect"],
+                     [(d(r["roll"]), f'**{r["name"]}**', "—" if r["out"] is None else (f'{r["out"]} turn' + ("s" if r["out"] != 1 else "") if r["out"] else "0"), r["text"])
+                      for r in Cp["injuries"]])
+    if section == "xp":
+        return table(["XP", "For"], [(f'+{x["amount"]}', x["text"]) for x in Cp["xp"]])
+    if section == "advances":
+        return "\n".join(f"- {x}" for x in Cp["advances"]["text"]) + "\n\n" + \
+            table(["d6", "Advance"], [(r["roll"], r["text"]) for r in Cp["advances"]["table"]])
+    if section == "honours":
+        return table(["Honour", "How"], [(f'**{h["name"]}**', h["text"]) for h in Cp["honours"]]) + "\n\n" + \
+            table(["Unit honour", "Effect"], [(f'**{h["name"]}**', h["text"]) for h in Cp["honour_list"]])
+    if section == "ship":
+        rows = []
+        for sh in Cp["ship"]:
+            for i, lv in enumerate(sh["levels"], 1):
+                rows.append((f'**{sh["name"]}**' if i == 1 else "", i, lv["cost"], lv["text"]))
+        return table(["Upgrade", "Level", "Requisition", "Effect"], rows)
+    if section == "costs":
+        return table(["Item", "Requisition"], [(c["item"], c["cost"]) for c in Cp["costs"]])
+    if section == "events":
+        return table(["2d6", "Event", "Effect"], [(r["roll"], f'**{r["name"]}**', r["text"]) for r in Cp["events"]])
+    if section == "evidence":
+        return "\n".join(f"- {x}" for x in Cp["evidence"])
+    return None
+
+
 def render_terrain(section):
     T = load("terrain")
     moves = {"normal": "Normal", "difficult": "Difficult (each inch costs 2\")", "obstacle": "Obstacle (+2\" to cross)", "blocked": "Blocked"}
@@ -295,6 +360,8 @@ def render_forces(key):
         return render_terrain(section)
     if f == "missions":
         return render_missions(section)
+    if f == "campaign":
+        return render_campaign(section)
     if key == "core.security":
         sec = load("core")["security"]
         return table(["Security level", "Hack test", "Successes needed", "Typical"],

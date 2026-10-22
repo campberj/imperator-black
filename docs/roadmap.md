@@ -162,6 +162,13 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 5. Campaign events and narrative tables.
 6. **Troop value and custom troop builder (paper):** a points value for attributes, skills, weapons, armour and gear, calibrated with the simulator; rules for building custom troop types and units within the Shoot scale. Recruiting and requisition use the same values (decision 6.12).
 
+**Progress (2026-10-22):**
+- [x] RJ's calls: XP and advances; Requisition, Intel and Standing; a node map of about six missions; examples with Task Force Boone against Freespace
+- [x] Rules chapter 14 draft: [campaign](../rules/14-campaign.md): the campaign turn, resources and Standing, the arc map, after-action (injuries, rewards, XP, advances, honours), the ship, Requisition, events, Evidence, with an example (`content/campaign.yaml`)
+- [x] Printable [campaign sheets](print/ImperatorBlack_campaign-sheets.pdf): status with the arc map, force roster, reference
+- [ ] Troop values (item 6): simulator data first (app task 13), then the points formula and the custom troop builder
+- [ ] Play a 3-mission campaign on paper
+
 **Exit:** A 3-mission paper campaign plays through without rule gaps.
 
 ## Phase 8 — App MVP, part 1: generators
