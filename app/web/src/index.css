@@ -598,3 +598,13 @@ table.weapons tr.note td {
     -webkit-print-color-adjust: exact;
   }
 }
+
+.rolls {
+  margin-top: 12px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.rolls summary {
+  cursor: pointer;
+}

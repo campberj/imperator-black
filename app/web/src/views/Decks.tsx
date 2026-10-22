@@ -1,11 +1,11 @@
-import { useEffect, useState, type FormEvent } from 'react'
 import type { Content } from '../content'
-import { fetchDeck, type Deck } from '../deck'
+import type { Deck } from '../deck'
 import { BoardLegend, BoardMap } from '../components/BoardMap'
+import { SeedForm } from '../components/SeedForm'
 import { Table } from '../components/Table'
+import { seedFrom, useGenerated } from '../generated'
 import { navigate, useHashParams } from '../routes'
 
-const MAX_SEED = 2_147_483_647
 const capitalise = (s: string) => s[0].toUpperCase() + s.slice(1)
 const inches = (v: number) => `${Number(v.toFixed(2))}"`
 
@@ -14,38 +14,16 @@ export function Decks({ content }: { content: Content }) {
   const params = useHashParams()
   const vessels = content.layouts.vessels
   const vessel = vessels.find((v) => v.id === params.get('vessel'))?.id ?? vessels[0]?.id ?? ''
-  const asked = Number(params.get('seed'))
-  const seed = Number.isInteger(asked) && asked >= 0 && asked <= MAX_SEED && params.has('seed') ? asked : 1
-  // The latest result, keyed by what was asked for, so a stale deck or error never shows for a new request.
-  const key = `${vessel}:${seed}`
-  const [result, setResult] = useState<{ key: string; deck?: Deck; error?: string }>()
-
-  useEffect(() => {
-    if (!vessel) return
-    const abort = new AbortController()
-    fetchDeck(vessel, seed, abort.signal)
-      .then((deck) => setResult({ key: `${vessel}:${seed}`, deck }))
-      .catch((e: unknown) => {
-        if (!abort.signal.aborted) setResult({ key: `${vessel}:${seed}`, error: e instanceof Error ? e.message : String(e) })
-      })
-    return () => abort.abort()
-  }, [vessel, seed])
-
+  const seed = seedFrom(params)
+  const { value: current, error } = useGenerated<Deck>(vessel ? `/decks/${encodeURIComponent(vessel)}?seed=${seed}` : undefined)
   const show = (v: string, s: number) => navigate('decks', { vessel: v, seed: s })
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const s = Number(new FormData(e.currentTarget).get('seed'))
-    if (Number.isInteger(s) && s >= 0 && s <= MAX_SEED) show(vessel, s)
-  }
-  const current = result?.key === key ? result.deck : undefined
-  const error = result?.key === key ? result.error : undefined
   const rooms = new Map(content.layouts.rooms.map((r) => [r.id, r]))
   const security = new Map(content.core.security.levels.map((l) => [l.id, l.name]))
   const securityName = (id: string) => security.get(id) ?? capitalise(id)
 
   return (
     <>
-      <form className="filters" role="search" onSubmit={onSubmit} aria-label="Deck">
+      <SeedForm label="Deck" seed={seed} onSeed={(s) => show(vessel, s)}>
         <label>
           Vessel
           <select value={vessel} onChange={(e) => show(e.target.value, seed)}>
@@ -56,18 +34,7 @@ export function Decks({ content }: { content: Content }) {
             ))}
           </select>
         </label>
-        <label>
-          Seed
-          <input key={seed} name="seed" type="number" min={0} max={MAX_SEED} step={1} defaultValue={seed} required />
-        </label>
-        <button type="submit">Show deck</button>
-        <button type="button" onClick={() => show(vessel, Math.max(0, seed - 1))} disabled={seed === 0}>
-          Previous seed
-        </button>
-        <button type="button" onClick={() => show(vessel, Math.min(MAX_SEED, seed + 1))}>
-          Next seed
-        </button>
-      </form>
+      </SeedForm>
 
       {error && (
         <p className="error" role="alert">

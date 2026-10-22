@@ -57,12 +57,3 @@ export interface Deck {
   notes: string[]
   tile_counts: Record<string, number>
 }
-
-export async function fetchDeck(vessel: string, seed: number, signal?: AbortSignal): Promise<Deck> {
-  const response = await fetch(`/decks/${encodeURIComponent(vessel)}?seed=${seed}`, { signal })
-  if (!response.ok) {
-    const problem = await response.json().catch(() => undefined)
-    throw new Error(problem?.detail ?? `GET /decks/${vessel} failed: ${response.status} ${response.statusText}`)
-  }
-  return (await response.json()) as Deck
-}

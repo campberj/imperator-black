@@ -13,6 +13,7 @@ export default defineConfig({
       '/content': api,
       '/health': api,
       '/decks': api,
+      '/land': api,
     },
   },
   test: {

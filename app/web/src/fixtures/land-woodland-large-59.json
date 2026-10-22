@@ -1,0 +1,308 @@
+{
+  "id": "land-woodland-large-59",
+  "title": "Woodland, table 59",
+  "rules_version": "0.5",
+  "content_version": "0.5.0",
+  "kind": "land",
+  "environment": "woodland",
+  "size": "large",
+  "seed": 59,
+  "board": {
+    "width": 48,
+    "height": 48
+  },
+  "sectors": [
+    {
+      "name": "A1",
+      "text": "Woods, 6\" \u00d7 6\", and a fallen tree (low wall)."
+    },
+    {
+      "name": "B1",
+      "text": "Open ground."
+    },
+    {
+      "name": "C1",
+      "text": "Scrub, 6\" \u00d7 6\". (density check)"
+    },
+    {
+      "name": "D1",
+      "text": "Open ground."
+    },
+    {
+      "name": "A2",
+      "text": "Rocky outcrop: a hill with two rocks (solid) on it."
+    },
+    {
+      "name": "B2",
+      "text": "Scrub, 6\" \u00d7 6\". (density check)"
+    },
+    {
+      "name": "C2",
+      "text": "Woods, 6\" \u00d7 9\"."
+    },
+    {
+      "name": "D2",
+      "text": "Open ground."
+    },
+    {
+      "name": "A3",
+      "text": "Scrub, 6\" \u00d7 6\"."
+    },
+    {
+      "name": "B3",
+      "text": "Open ground."
+    },
+    {
+      "name": "C3",
+      "text": "Hedge or fence line across the sector."
+    },
+    {
+      "name": "D3",
+      "text": "Woods, 6\" \u00d7 6\", and a fallen tree (low wall)."
+    },
+    {
+      "name": "A4",
+      "text": "Scrub, 6\" \u00d7 6\"."
+    },
+    {
+      "name": "B4",
+      "text": "Open ground."
+    },
+    {
+      "name": "C4",
+      "text": "Scrub, 6\" \u00d7 6\"."
+    },
+    {
+      "name": "D4",
+      "text": "Rocky outcrop: a hill with two rocks (solid) on it."
+    }
+  ],
+  "cover": [
+    {
+      "id": "T1",
+      "x": 3,
+      "y": 3,
+      "w": 6,
+      "h": 6,
+      "type": "area",
+      "label": "Woods",
+      "terrain": "woods",
+      "piece": "Dense woods, jungle. Sector A1: Woods, 6\" \u00d7 6\", and a fallen tree (low wall).",
+      "sector": "A1"
+    },
+    {
+      "id": "T2",
+      "x": 4,
+      "y": 10,
+      "w": 4,
+      "h": 1,
+      "type": "light",
+      "label": "Fallen tree",
+      "terrain": "low_wall",
+      "piece": "Low wall, sandbags, barricade, fallen tree. Sector A1: Woods, 6\" \u00d7 6\", and a fallen tree (low wall).",
+      "sector": "A1"
+    },
+    {
+      "id": "T3",
+      "x": 27,
+      "y": 3,
+      "w": 6,
+      "h": 6,
+      "type": "area",
+      "label": "Scrub",
+      "terrain": "scrub",
+      "piece": "Scrub, crops, light woods. Sector C1: Scrub, 6\" \u00d7 6\". (density check)",
+      "sector": "C1"
+    },
+    {
+      "id": "T4",
+      "x": 2,
+      "y": 15,
+      "w": 8,
+      "h": 6,
+      "type": "hill",
+      "label": "Outcrop",
+      "terrain": "hill",
+      "piece": "Hill, ridge, dune, raised platform. Sector A2: Rocky outcrop: a hill with two rocks (solid) on it.",
+      "sector": "A2"
+    },
+    {
+      "id": "T5",
+      "x": 3,
+      "y": 17,
+      "w": 2,
+      "h": 2,
+      "type": "heavy",
+      "label": "Rock",
+      "terrain": "solid",
+      "piece": "Container, vehicle, wreck, rock, tank. Sector A2: Rocky outcrop: a hill with two rocks (solid) on it.",
+      "sector": "A2"
+    },
+    {
+      "id": "T6",
+      "x": 7,
+      "y": 17,
+      "w": 2,
+      "h": 2,
+      "type": "heavy",
+      "label": "Rock",
+      "terrain": "solid",
+      "piece": "Container, vehicle, wreck, rock, tank. Sector A2: Rocky outcrop: a hill with two rocks (solid) on it.",
+      "sector": "A2"
+    },
+    {
+      "id": "T7",
+      "x": 15,
+      "y": 15,
+      "w": 6,
+      "h": 6,
+      "type": "area",
+      "label": "Scrub",
+      "terrain": "scrub",
+      "piece": "Scrub, crops, light woods. Sector B2: Scrub, 6\" \u00d7 6\". (density check)",
+      "sector": "B2"
+    },
+    {
+      "id": "T8",
+      "x": 25.5,
+      "y": 15,
+      "w": 9,
+      "h": 6,
+      "type": "area",
+      "label": "Woods",
+      "terrain": "woods",
+      "piece": "Dense woods, jungle. Sector C2: Woods, 6\" \u00d7 9\".",
+      "sector": "C2"
+    },
+    {
+      "id": "T9",
+      "x": 3,
+      "y": 27,
+      "w": 6,
+      "h": 6,
+      "type": "area",
+      "label": "Scrub",
+      "terrain": "scrub",
+      "piece": "Scrub, crops, light woods. Sector A3: Scrub, 6\" \u00d7 6\".",
+      "sector": "A3"
+    },
+    {
+      "id": "T10",
+      "x": 29.5,
+      "y": 25,
+      "w": 1,
+      "h": 10,
+      "type": "light",
+      "label": "Hedge",
+      "terrain": "hedge",
+      "piece": "Hedge, fence, crop row. Sector C3: Hedge or fence line across the sector.",
+      "sector": "C3"
+    },
+    {
+      "id": "T11",
+      "x": 39,
+      "y": 27,
+      "w": 6,
+      "h": 6,
+      "type": "area",
+      "label": "Woods",
+      "terrain": "woods",
+      "piece": "Dense woods, jungle. Sector D3: Woods, 6\" \u00d7 6\", and a fallen tree (low wall).",
+      "sector": "D3"
+    },
+    {
+      "id": "T12",
+      "x": 40,
+      "y": 34,
+      "w": 4,
+      "h": 1,
+      "type": "light",
+      "label": "Fallen tree",
+      "terrain": "low_wall",
+      "piece": "Low wall, sandbags, barricade, fallen tree. Sector D3: Woods, 6\" \u00d7 6\", and a fallen tree (low wall).",
+      "sector": "D3"
+    },
+    {
+      "id": "T13",
+      "x": 3,
+      "y": 39,
+      "w": 6,
+      "h": 6,
+      "type": "area",
+      "label": "Scrub",
+      "terrain": "scrub",
+      "piece": "Scrub, crops, light woods. Sector A4: Scrub, 6\" \u00d7 6\".",
+      "sector": "A4"
+    },
+    {
+      "id": "T14",
+      "x": 27,
+      "y": 39,
+      "w": 6,
+      "h": 6,
+      "type": "area",
+      "label": "Scrub",
+      "terrain": "scrub",
+      "piece": "Scrub, crops, light woods. Sector C4: Scrub, 6\" \u00d7 6\".",
+      "sector": "C4"
+    },
+    {
+      "id": "T15",
+      "x": 39,
+      "y": 38,
+      "w": 6,
+      "h": 8,
+      "type": "hill",
+      "label": "Outcrop",
+      "terrain": "hill",
+      "piece": "Hill, ridge, dune, raised platform. Sector D4: Rocky outcrop: a hill with two rocks (solid) on it.",
+      "sector": "D4"
+    },
+    {
+      "id": "T16",
+      "x": 39,
+      "y": 41,
+      "w": 2,
+      "h": 2,
+      "type": "heavy",
+      "label": "Rock",
+      "terrain": "solid",
+      "piece": "Container, vehicle, wreck, rock, tank. Sector D4: Rocky outcrop: a hill with two rocks (solid) on it.",
+      "sector": "D4"
+    },
+    {
+      "id": "T17",
+      "x": 43,
+      "y": 41,
+      "w": 2,
+      "h": 2,
+      "type": "heavy",
+      "label": "Rock",
+      "terrain": "solid",
+      "piece": "Container, vehicle, wreck, rock, tank. Sector D4: Rocky outcrop: a hill with two rocks (solid) on it.",
+      "sector": "D4"
+    }
+  ],
+  "conditions": "night",
+  "rolls": [
+    "Sector A1: 4",
+    "Sector B1: 1",
+    "Sector C1: 1",
+    "Sector D1: 1",
+    "Sector A2: 6",
+    "Sector B2: 1",
+    "Sector C2: 3",
+    "Sector D2: 1",
+    "Sector A3: 2",
+    "Sector B3: 1",
+    "Sector C3: 5",
+    "Sector D3: 4",
+    "Sector A4: 2",
+    "Sector B4: 1",
+    "Sector C4: 2",
+    "Sector D4: 6",
+    "Density check: sector C1 becomes the fill",
+    "Density check: sector B2 becomes the fill",
+    "Conditions: 6"
+  ]
+}

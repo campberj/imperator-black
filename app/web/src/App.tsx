@@ -3,6 +3,7 @@ import { fetchContent, indexContent, type LoadedContent } from './content'
 import { ROUTES, useRoute } from './routes'
 import { Behaviors } from './views/Behaviors'
 import { Decks } from './views/Decks'
+import { Land } from './views/Land'
 import { Reference } from './views/Reference'
 import { Units } from './views/Units'
 
@@ -51,6 +52,7 @@ export default function App() {
           {route === 'reference' && <Reference content={loaded.content} lookup={lookup} />}
           {route === 'behaviors' && <Behaviors content={loaded.content} lookup={lookup} />}
           {route === 'decks' && <Decks content={loaded.content} />}
+          {route === 'land' && <Land content={loaded.content} />}
         </>
       )}
     </main>
