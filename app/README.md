@@ -253,7 +253,7 @@ Needs tasks 16 (TV in Core) and 18 (fireteam check in Core) merged first. RJ's b
 - A Vitest test builds that force in the planner, sees the totals, switches to by soldier, and prints.
 - Lint, tests and build pass; RJ reviews the screen before the PR is merged.
 
-### 21. Campaign and two-player content in Core — *chatgpt authorized*
+### 21. Campaign and two-player content in Core ✅ done (2026-10-23)
 
 `content/campaign.yaml` (chapter 14, including `short_arc` and `force_selection`) and `content/versus.yaml` (chapter 16) are in `content.json` but not loaded by `ContentSet.Parse`.
 
