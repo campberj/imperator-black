@@ -2,6 +2,7 @@ import { cleanup, fireEvent, render, screen, within } from '@testing-library/rea
 import { afterEach, expect, test, vi } from 'vitest'
 import { content, lookup } from '../test-content'
 import { Units } from './Units'
+import { FireteamsView } from './Fireteams'
 
 afterEach(cleanup)
 
@@ -168,9 +169,11 @@ test('clone trooper, Obi-Wan and VAT fireteam show class, pinning and type', asy
     expect(await clone.findByText('Pinned at 4 Suppression')).toBeTruthy()
     const obiWan = within(card(lookup.troops.get('rep_obi_wan')!.name))
     expect(obiWan.getByText('Never Pinned')).toBeTruthy()
+    cleanup()
+    render(<FireteamsView content={content} lookup={lookup} />)
     select('Faction', 'tfb')
-    const rows = screen.getAllByRole('rowheader', { name: 'VAT fireteam' })
-    expect(rows.some((row) => row.closest('tr')?.textContent?.includes('Assault'))).toBe(true)
+    const vatRow = (await screen.findByRole('rowheader', { name: 'VAT fireteam' })).closest('tr')!
+    expect(vatRow.textContent).toContain('Assault')
   } finally {
     vi.stubGlobal('fetch', prior)
     vi.unstubAllGlobals()
