@@ -40,6 +40,7 @@ jobs:
           "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=9000 --print-to-pdf=screenshots/ImperatorBlack_force-planner.pdf "$URL"
           test -s screenshots/ImperatorBlack_Task20_ForcePlanner.png
           test -s screenshots/ImperatorBlack_force-planner.pdf
+          test "$(pdfinfo screenshots/ImperatorBlack_force-planner.pdf | awk '/^Pages:/ {print $2}')" = "1"
       - uses: actions/upload-artifact@v4
         with:
           name: task-20-planner-screenshots
