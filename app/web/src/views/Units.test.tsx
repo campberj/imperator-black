@@ -50,7 +50,7 @@ test('one profile per faction matches the content', () => {
     for (const g of t.gear) expect(c.getByText(lookup.gear.get(g)!.name)).toBeTruthy()
     for (const [id, level] of Object.entries(t.skills)) {
       const s = lookup.skills.get(id)!
-      expect(c.getByText(s.levels.length > 1 ? `${s.name} ${level}` : s.name)).toBeTruthy()
+      expect(within(c.getByRole('region', { name: 'Skills' })).getByText(s.levels.length > 1 ? `${s.name} ${level}` : s.name)).toBeTruthy()
     }
     if (f.side === 'enemy') expect(c.getByText('Element:')).toBeTruthy()
   }
