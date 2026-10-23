@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Content, Lookup } from '../content'
 import { UnitCard } from '../components/UnitCard'
 import { Table } from '../components/Table'
@@ -19,6 +19,8 @@ export function Units({ content, lookup }: { content: Content; lookup: Lookup })
       .catch((error: unknown) => { if (!controller.signal.aborted) setValueError(String(error)) })
     return () => controller.abort()
   }, [])
+  const searchCache = useRef(new Map<string, string[]>())
+  const keywordCache = useRef(new Map<string, Set<string>>())
   const factions = content.factions.factions
   const [faction, setFaction] = useState(factions[0]?.id ?? '')
   const [rank, setRank] = useState('')
@@ -32,8 +34,8 @@ export function Units({ content, lookup }: { content: Content; lookup: Lookup })
     (t) =>
       (!rank || t.rank === rank) &&
       (!role || t.role === role) &&
-      (!keyword || troopKeywords(t, lookup).has(keyword)) &&
-      (!query.trim() || matches(query, ...troopSearchText(t, lookup))),
+      (!keyword || (keywordCache.current.get(t.id) ?? (() => { const v = troopKeywords(t, lookup); keywordCache.current.set(t.id, v); return v })()).has(keyword)) &&
+      (!query.trim() || matches(query, ...(searchCache.current.get(t.id) ?? (() => { const v = troopSearchText(t, lookup); searchCache.current.set(t.id, v); return v })()))),
   )
   const shown = (id: string) => !faction || id === faction
   const teams = content.rosters.teams.filter((t) => shown(t.faction))
