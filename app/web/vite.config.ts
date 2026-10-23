@@ -11,6 +11,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/content': api,
+      '/values': api,
       '/health': api,
       '/decks': api,
       '/land': api,
