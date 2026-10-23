@@ -309,6 +309,52 @@ public static class ContentValidator
                          ("marginal", x.Marginal), ("failure", x.Failure), ("ship", x.Ship), ("land", x.Land) })
                 if (string.IsNullOrEmpty(text)) errors.Add($"mission {x.Id}: needs '{k}'");
 
+        // Campaign (chapter 14) and two-player missions (chapter 16): mirrors tools/validate_content.py.
+        void CoversRolls(IEnumerable<D6Range> rolls, string where, int start, int end)
+        {
+            if (!rolls.SelectMany(r => r.Faces).Order().SequenceEqual(Enumerable.Range(start, end - start + 1)))
+                errors.Add($"{where}: {(start == 1 ? "d6" : "2d6")} rows must cover {start}-{end} exactly once");
+        }
+        var cp = c.Campaign;
+        CoversRolls(cp.Nodes.Select(n => n.Roll ?? new D6Range(0, 0)), "campaign.nodes", 1, 6);
+        CoversRolls(cp.Advances.Table.Select(x => x.Roll), "campaign.advances.table", 1, 6);
+        CoversRolls(cp.Injuries.Select(x => x.Roll), "campaign.injuries", 2, 12);
+        CoversRolls(cp.Events.Select(x => x.Roll), "campaign.events", 2, 12);
+        Ids(cp.Nodes.Concat(cp.SpecialNodes), n => n.Id, "campaign nodes");
+        foreach (var n in cp.Nodes.Concat(cp.SpecialNodes))
+        {
+            Need(n.Mission, missionIds, $"campaign node {n.Id} mission");
+            if (n.Vessel is not null) Need(n.Vessel, vesselIds, $"campaign node {n.Id} vessel");
+            if (n.Environment is not null) Need(n.Environment, envIds, $"campaign node {n.Id} environment");
+        }
+        foreach (string sk in cp.Advances.Skills) Need(sk, skillIds, "campaign.advances.skills");
+        Need(cp.Start.Force, c.Rosters.StartingForces.Select(x => x.Id).ToHashSet(), "campaign.start force");
+        if (!cp.Standing.Select(x => x.Level).SequenceEqual(Enumerable.Range(0, 7)))
+            errors.Add("campaign.standing: levels must run 0 to 6");
+        if (cp.Arc.Columns.Sum(x => x.Nodes) != 6 || cp.Arc.Columns.Count(x => x.Target) != 1)
+            errors.Add("campaign.arc: six nodes in all, one of them the target");
+        Ids(cp.Support, x => x.Id, "campaign.support");
+        Ids(cp.Ship, x => x.Id, "campaign.ship");
+        foreach (var sh in cp.Ship)
+            if (sh.Levels.Count != 3) errors.Add($"campaign ship {sh.Id}: three levels");
+        foreach (var ev in cp.Events)
+            if (string.IsNullOrEmpty(ev.Text)) errors.Add($"campaign event {ev.Roll}: needs text");
+
+        var vs = c.Versus;
+        var vsIds = Ids(vs.Missions, x => x.Id, "versus.missions");
+        CoversRolls(vs.MissionRoll.Select(x => x.Roll), "versus.mission_roll", 1, 6);
+        foreach (var roll in vs.MissionRoll) Need(roll.Mission, vsIds, "versus.mission_roll mission");
+        var clockIds = m.Clock.Sizes.Select(x => x.Id).ToHashSet();
+        foreach (var z in vs.Sizes) Need(z.Clock, clockIds, $"versus size {z.Id} clock");
+        foreach (var mission in vs.Missions)
+        {
+            if (mission.Kind is not ("even" or "raid") || mission.Hidden is not ("none" or "blinds" or "defender"))
+                errors.Add($"versus mission {mission.Id}: kind even/raid and hidden none/blinds/defender");
+            if (mission.Kind == "raid" && mission.RaidType is not null &&
+                !missionIds.Contains(mission.RaidType) && mission.RaidType != "recover_or_capture")
+                errors.Add($"versus mission {mission.Id}: unknown raid_type");
+        }
+
         // With everything else valid, build 200 decks per vessel: each must be connected and within the tile inventory.
         if (errors.Count == 0)
         {
