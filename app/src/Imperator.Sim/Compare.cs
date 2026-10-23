@@ -32,6 +32,17 @@ public static class Compare
             ("Real VAT team vs unready asset security, flash: cleared by R3", (c, r) => RealRoom(c, r, n, false).Cleared),
             ("Patrol Contact (both sides have LMG + SMG): fireteam / patrol wins", (c, r) => Patrol(c, r, n)),
             ("3 rifles + LMG vs 4 rifles (all Q1): LMG side wins", (c, r) => GunTeam(c, r, n)),
+            ("Pinning: 4v4 Q1 (Nerve 1): activations spent Pinned", (c, r) => Fight(c, r, n, 4, 1, 4, 1).Pinned),
+            ("Pinning: 4v4 Q2 (Nerve 2): activations spent Pinned", (c, r) => Fight(c, r, n, 4, 2, 4, 2).Pinned),
+            ("Pinning: 4 Q2 vs 4 Q1: Q2 side wins", (c, r) => Fight(c, r, n, 4, 2, 4, 1).A),
+            ("Real: clone squad vs UN reserve fireteam: clones win / draw", (c, r) => Real(c, r, n, CloneSquad, UnFireteam).Result),
+            ("Real: clone squad vs UN reserve fireteam: clone / UN activations Pinned", (c, r) => Real(c, r, n, CloneSquad, UnFireteam).Pinned),
+            ("Real: VAT fireteam vs asset security + captain: VAT win / draw", (c, r) => Real(c, r, n, VatTeam, AssetSecurity).Result),
+            ("Real: VAT fireteam vs asset security + captain: VAT / security activations Pinned", (c, r) => Real(c, r, n, VatTeam, AssetSecurity).Pinned),
+            ("Real: VAT fireteam vs UN reserve fireteam: VAT win / draw", (c, r) => Real(c, r, n, VatTeam, UnFireteam).Result),
+            ("Real: generic squad (Nerve 1) vs clone squad (Nerve 2): generic win / draw", (c, r) => Real(c, r, n, GenericSquad, CloneSquad).Result),
+            ("Real: Harlow veterans (Nerve 3) vs clone squad: Harlow win / draw", (c, r) => Real(c, r, n, HarlowTeam, CloneSquad).Result),
+            ("Real: Ahsoka + clone squad vs UN reserve fireteam: Republic win", (c, r) => Real(c, r, n, AhsokaSquad, UnFireteam).Result),
             ("Close combat Q1 vs Q1: avg exchanges", (c, r) => Melee(c, r, n).Exchanges),
             ("Close combat Q1 vs Q1: loser dead", (c, r) => Melee(c, r, n).Dead),
         };
@@ -73,19 +84,48 @@ public static class Compare
         return (P(cleared / (double)n), $"{attOut / n:0.00} / {attDead / n:0.00}");
     }
 
-    private static (string A, string Draw, string Dead) Fight(ContentSet c, Rng rng, int n, int na, int qa, int nb, int qb)
+    private static (string A, string Draw, string Dead, string Pinned) Fight(ContentSet c, Rng rng, int n, int na, int qa, int nb, int qb)
     {
-        int wa = 0, dr = 0; double dead = 0;
+        int wa = 0, dr = 0; double dead = 0; long acts = 0, pinned = 0;
         for (int i = 0; i < n; i++)
         {
             var a = Enumerable.Range(0, na).Select(k => Make(c, qa, "flak", "rifle", leader: k == 0)).ToList();
             var b = Enumerable.Range(0, nb).Select(k => Make(c, qb, "flak", "rifle", leader: k == 0)).ToList();
             Firefight.ScatterCover(rng, a); Firefight.ScatterCover(rng, b);
-            var w = new Firefight(rng, c.Core, a, b).Run();
+            var f = new Firefight(rng, c.Core, a, b);
+            var w = f.Run();
             if (w == FightWinner.A) wa++; else if (w == FightWinner.Draw) dr++;
             dead += a.Concat(b).Count(s => s.Status == Status.Dead);
+            acts += f.Activations; pinned += f.PinnedActivations;
         }
-        return (P(wa / (double)n), P(dr / (double)n), $"{dead / n:0.00}");
+        return (P(wa / (double)n), P(dr / (double)n), $"{dead / n:0.00}", P(pinned / (double)Math.Max(1, acts)));
+    }
+
+    // Real teams, by troop id (the first is the side's leader where it has one).
+    private static readonly string[] CloneSquad = ["rep_clone_sergeant", "rep_clone_trooper", "rep_clone_trooper", "rep_clone_trooper", "rep_clone_heavy"];
+    private static readonly string[] AhsokaSquad = [.. CloneSquad, "rep_ahsoka"];
+    private static readonly string[] UnFireteam = ["un3_rifleman", "un3_rifleman", "un3_rifleman", "un3_at_specialist"];
+    private static readonly string[] VatTeam = ["tfb_vat_leader", "tfb_vat_assaulter", "tfb_vat_assaulter", "tfb_vat_gunner", "tfb_data_specialist"];
+    private static readonly string[] AssetSecurity = ["fs_recovery_captain", "fs_security", "fs_security", "fs_security_gunner"];
+    private static readonly string[] GenericSquad = ["gen_officer", "gen_trooper", "gen_trooper", "gen_trooper", "gen_gunner"];
+    private static readonly string[] HarlowTeam = ["ct_harlow_leader", "ct_harlow_veteran", "ct_harlow_veteran", "ct_harlow_veteran"];
+
+    /// <summary>A firefight between two real teams: A's win / draw rate, and each side's share of activations begun Pinned.</summary>
+    private static (string Result, string Pinned) Real(ContentSet c, Rng rng, int n, string[] ta, string[] tb)
+    {
+        int wa = 0, dr = 0; long actA = 0, pinA = 0, actB = 0, pinB = 0;
+        for (int i = 0; i < n; i++)
+        {
+            var a = ta.Select(id => Soldier.FromTroop(c, id)).ToList();
+            var b = tb.Select(id => Soldier.FromTroop(c, id)).ToList();
+            Firefight.ScatterCover(rng, a); Firefight.ScatterCover(rng, b);
+            var f = new Firefight(rng, c.Core, a, b);
+            var w = f.Run();
+            if (w == FightWinner.A) wa++; else if (w == FightWinner.Draw) dr++;
+            foreach (var (s, pin, act) in f.PinnedBySoldier)
+                if (a.Contains(s)) { actA += act; pinA += pin; } else { actB += act; pinB += pin; }
+        }
+        return ($"{P(wa / (double)n)} / {P(dr / (double)n)}", $"{P(pinA / (double)Math.Max(1, actA))} / {P(pinB / (double)Math.Max(1, actB))}");
     }
 
     private static (string Cleared, string Cas, string DefOut) RealRoom(ContentSet c, Rng rng, int n, bool overwatch)

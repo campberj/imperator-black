@@ -52,8 +52,18 @@ public sealed class Soldier
     private bool _augmentSpent;
 
     public bool IsActive => Status == Status.Active;
-    /// <summary>Pinned at 3 Suppression, or 4 with Jedi discipline.</summary>
-    public bool Pinned => Suppression >= (SkillLevel("jedi_discipline") > 0 ? 4 : 3);
+    /// <summary>Suppression at which the model is Pinned: 3 by default; set from content by <see cref="UsePinningRule"/>.</summary>
+    public int PinnedAt { get; set; } = 3;
+    /// <summary>Pinned at PinnedAt Suppression, or 4 with Jedi discipline if that is higher.</summary>
+    public bool Pinned => Suppression >= (SkillLevel("jedi_discipline") > 0 ? Math.Max(4, PinnedAt) : PinnedAt);
+
+    /// <summary>Sets <see cref="PinnedAt"/> from the content's suppression rule (flat, or Nerve plus an offset).</summary>
+    public void UsePinningRule(CoreContent core)
+    {
+        var s = core.Suppression;
+        if (s is null) return;
+        PinnedAt = s.PinnedByNerve is { } off ? Math.Max(Math.Max(1, s.PinnedAtLeast), Nerve + off) : s.PinnedAt;
+    }
     public bool CanBeTreated => Status is Status.Down or Status.Bleeding or Status.Critical && !Stabilised;
 
     /// <summary>Modifier applied to all of this model's rolls.</summary>
@@ -74,7 +84,7 @@ public sealed class Soldier
             foreach (var (s, lvl) in g.GrantsSkills ?? new()) skills[s] = Math.Max(lvl, skills.GetValueOrDefault(s));
             weaponKeywords.AddRange(g.WeaponKeywords ?? new());
         }
-        return new Soldier
+        var soldier = new Soldier
         {
             Name = name ?? t.Name,
             Rank = t.Rank,
@@ -92,6 +102,8 @@ public sealed class Soldier
             Skills = skills,
             WeaponKeywords = weaponKeywords,
         };
+        soldier.UsePinningRule(content.Core);
+        return soldier;
     }
 
     /// <summary>

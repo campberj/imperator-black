@@ -24,7 +24,15 @@ public sealed class Firefight
     public Firefight(Rng rng, CoreContent core, List<Soldier> a, List<Soldier> b)
     {
         _rng = rng; _core = core; _a = a; _b = b;
+        foreach (var s in a.Concat(b)) s.UsePinningRule(core);
     }
+
+    /// <summary>Activations taken, and how many of them began Pinned (for the pinning comparison).</summary>
+    public int Activations { get; private set; }
+    public int PinnedActivations { get; private set; }
+    private readonly Dictionary<Soldier, (int Pinned, int Acts)> _bySoldier = new();
+    /// <summary>Per model: activations begun Pinned, and activations taken.</summary>
+    public IEnumerable<(Soldier Soldier, int Pinned, int Acts)> PinnedBySoldier => _bySoldier.Select(kv => (kv.Key, kv.Value.Pinned, kv.Value.Acts));
 
     public static void ScatterCover(Rng rng, IEnumerable<Soldier> side, double open = 0.2, double heavy = 0.3)
     {
@@ -115,6 +123,10 @@ public sealed class Firefight
     private void Activate(Soldier s, List<Soldier> side, List<Soldier> foe)
     {
         s.Activated = true;
+        Activations++;
+        if (s.Pinned) PinnedActivations++;
+        var (p, n) = _bySoldier.GetValueOrDefault(s);
+        _bySoldier[s] = (p + (s.Pinned ? 1 : 0), n + 1);
         if (Broken(side))
         {
             var (x, y) = _rng.TwoD6();

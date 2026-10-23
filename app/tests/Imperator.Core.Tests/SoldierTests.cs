@@ -6,6 +6,21 @@ namespace Imperator.Core.Tests;
 public class SoldierTests
 {
     [Fact]
+    public void PinnedAtThreeByDefaultAndByNerveWhenContentSaysSo()
+    {
+        var clone = Soldier.FromTroop(Set, "rep_clone_trooper");   // Nerve 2
+        Assert.Equal(3, clone.PinnedAt);
+        var byNerve = Rules with { Suppression = (Rules.Suppression ?? new SuppressionDef()) with { PinnedByNerve = 1 } };
+        clone.UsePinningRule(byNerve);
+        Assert.Equal(3, clone.PinnedAt);                            // Nerve 2 + 1
+        var vat = Soldier.FromTroop(Set, "tfb_vat_assaulter");     // Nerve 1
+        vat.UsePinningRule(byNerve);
+        Assert.Equal(2, vat.PinnedAt);
+        vat.UsePinningRule(byNerve with { Suppression = byNerve.Suppression! with { PinnedAtLeast = 3 } });
+        Assert.Equal(3, vat.PinnedAt);
+    }
+
+    [Fact]
     public void Row2AddsSuppressionCappedAt5()
     {
         var s = Fresh(); s.ApplyRow(2);

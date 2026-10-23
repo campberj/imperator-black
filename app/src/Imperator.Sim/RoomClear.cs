@@ -32,6 +32,7 @@ public sealed class RoomClear
     public RoomClear(Rng rng, ContentSet content, List<Soldier> attackers, List<Soldier> defenders, EntryMethod method, bool defendersOnOverwatch)
     {
         _rng = rng; _content = content; _core = content.Core;
+        foreach (var s in attackers.Concat(defenders)) s.UsePinningRule(content.Core);
         _att = attackers; _def = defenders; _method = method; _defendersOnOverwatch = defendersOnOverwatch;
         foreach (var d in _def)
         {

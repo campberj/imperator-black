@@ -38,7 +38,16 @@ public sealed record CoreContent(
     AutoFireDef? AutoFire = null,
     List<ShootScaleDef>? ShootScale = null,
     int OverwatchReactions = 1,
-    SuppressiveFireDef? SuppressiveFire = null);
+    SuppressiveFireDef? SuppressiveFire = null,
+    SuppressionDef? Suppression = null);
+
+/// <summary>
+/// Suppression (rules chapter 7): the cap, the Pinned threshold and where Overwatch is lost. With PinnedByNerve set,
+/// a model is Pinned at its Nerve plus that many markers (never fewer than PinnedAtLeast) instead of a flat PinnedAt
+/// (Automated models never gain any).
+/// </summary>
+public sealed record SuppressionDef(int ModifierPerMarker = -1, int Max = 5, int PinnedAt = 3, int CancelsOverwatchAt = 2, int? PinnedByNerve = null,
+    int PinnedAtLeast = 1);
 
 /// <summary>Suppressive Fire (rules chapter 4): ignores cover, 2 Suppression on a strong hit, and a hit stops reactions.</summary>
 public sealed record SuppressiveFireDef(bool IgnoresCover = true, int StrongMargin = 3, bool RemovesReactions = true);
