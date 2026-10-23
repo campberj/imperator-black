@@ -37,6 +37,17 @@ public class MissionEndpointTests(ApiFactory factory) : IClassFixture<ApiFactory
     }
 
     [Fact]
+    public async Task NamedOppositionUsesItsOwnThreatTiers()
+    {
+        var (response, mission) = await Get("/missions?setting=land&seed=42&mission=capture&tier=4&environment=industrial&opposition=separatist");
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("separatist", mission.GetProperty("opposition").GetString());
+        Assert.Equal("sep_grievous", mission.GetProperty("hvt").GetString());
+        Assert.Equal("sep_bx_squad", mission.GetProperty("reinforcement").GetString());
+        Assert.All(mission.GetProperty("enemies").EnumerateArray(), e =>
+            Assert.Equal("separatist", Content.Element(e.GetProperty("element").GetString()!).Faction));
+    }
+    [Fact]
     public async Task NamedChoicesAreKept()
     {
         var (_, m) = await Get("/missions?setting=land&seed=5&mission=sabotage&tier=4&environment=fortified&size=large");
