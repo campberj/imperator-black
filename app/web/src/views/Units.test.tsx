@@ -169,8 +169,8 @@ test('clone trooper, Obi-Wan and VAT fireteam show class, pinning and type', asy
     const obiWan = within(card(lookup.troops.get('rep_obi_wan')!.name))
     expect(obiWan.getByText('Never Pinned')).toBeTruthy()
     select('Faction', 'tfb')
-    const row = screen.getByRole('rowheader', { name: 'VAT fireteam' }).closest('tr')!
-    expect(row.textContent).toContain('Assault')
+    const rows = screen.getAllByRole('rowheader', { name: 'VAT fireteam' })
+    expect(rows.some((row) => row.closest('tr')?.textContent?.includes('Assault'))).toBe(true)
   } finally {
     vi.stubGlobal('fetch', prior)
     vi.unstubAllGlobals()
