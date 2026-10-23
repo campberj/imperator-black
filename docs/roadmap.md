@@ -196,6 +196,19 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 
 **Exit:** The whole campaign loop runs in the app for one player.
 
+### Proposed implementation slices (S0–S2, solo first)
+
+These are **proposed technical slices**, not permission to invent new rules or begin app implementation. Decision 1.10 requires the solo tracker before multiplayer. The original Phase 7 **Foundry Moon paper playthrough remains a gate**.
+
+| Slice | Deliverable | Done when | Gate |
+|---|---|---|---|
+| **S0 — Design alignment** | [ADR-002 (proposed)](architecture/adr-002-sequential-campaign.md), update decision log and this roadmap | RJ has reviewed the solo-first sequence and the unresolved mechanics; no game rules written by the app | RJ review |
+| **S1 — Solo persistence** | Native/managed PostgreSQL dev setup (Docker optional); solo campaign create, list, load and restart; Core event `Decide/Apply` projection/replay for approved Chapter 14 events | One local player's campaign remains identical through API restart and event replay; migrations and database tests pass | Existing Chapter 14 rules; approved implementation tasks |
+| **S2 — Solo tracker / short arc** | Foundry Moon campaign roster, mission outcome entry, injuries, XP, replacements, next mission by grade and history feed through append-only events; Chapter 14 arc-map node state | Play through the *approved paper-tested* solo short arc in-app, retaining progress on reload, and match outcomes to rules and reference sheets | **Complete and review the Foundry Moon paper playthrough first** |
+
+The existing Phase 9 **custom troop/unit builder** and the live mission dashboard remain separately scoped features, and must not be silently folded into S1/S2. The paper-campaign gate is not yet recorded as complete.
+
+
 ## Phase 10 — PoC validation
 
 - Play a **5-mission campaign arc** end to end with rules and app.
@@ -217,7 +230,24 @@ Phase 4 can begin alongside Phase 2. Phase 8 starts once layout and mission tabl
 
 ## After the PoC
 
-- Multiplayer: accounts, shared campaigns, Commander/Operator roles, sequential player turns (decision 1.10), after the solo campaign tracker
+### Proposed post-PoC strategic implementation slices (S3–S9)
+
+**Start only after the Phase 9 solo loop and the Phase 10 proof-of-concept gates are met**, unless RJ explicitly changes the roadmap. The stages below do **not** settle their gameplay rules; see [ADR-002](architecture/adr-002-sequential-campaign.md).
+
+| Slice | Deliverable | Done when / dependency |
+|---|---|---|
+| **S3 — Shared campaign authority** | Player identity, membership permissions, active actor for shared multiplayer sequential turns, idempotency keys, expected-version command appends | Two test members hand off the active actor; inactive commands fail; retried commands do not double-append; concurrent writers and replay tested. Requires decisions D1–D3. |
+| **S4 — Shared arc map** | Persist and display the existing Chapter 14 six-node arc map with links and appropriate revealed/hidden visibility | Reload preserves map state and hides unauthorised information. New geography and sight rules require D4. |
+| **S5 — Ships, forces and orders** | Persist ship/force assets and implement only approved strategic operations | Accepted orders replay and invalid orders produce Core findings; requires D3, D5. |
+| **S6 — Encounter/tabletop handoff** | Generate seeded missions from approved encounters and record reviewed outcomes | One mission yields exactly one accepted aftermath with campaign consequences; requires D6–D7. |
+| **S7 — Extended solo/async multiplayer** | Computer-directed *strategic* actions, shared campaign messaging or notifications as approved | Same authorised rules for human and computer turns; no hidden information leak; requires D8–D9. |
+| **S8 — Extended tactical dashboard** | Persistent in-play mission tracking integrated with approved campaign outcomes | Reload preserves progress without diverging from Core/printed rules; separately scope and review. |
+| **S9 — Extended campaign tools** | Broader sector, ship/outpost and optional customisation improvements | Scoped against proven gameplay and any new rules decisions; do not replace existing Phase 9 builder commitments. |
+
+Sequential turns mean **one active participant at a time in shared campaigns**, *not* that local Chapter 14 solo campaigns use multiplayer turn handoffs (settled decision 1.10). Authentication and member enforcement belong in S3, **after** the solo tracker, rather than blocking S1.
+
+
+- Multiplayer: accounts, shared campaigns, Commander/Operator roles, **sequential player turns for shared campaigns only** (decision 1.10), after the solo campaign tracker and PoC gates
 - Full ship/outpost and sector layers; additional campaign types with tighter command guidance
 - Larger planetside battles: platoon scale, vehicles and indirect fire (land terrain and setup came forward as Phase 4b)
 - Vehicles, squad- and platoon-scale play
