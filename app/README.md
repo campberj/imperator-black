@@ -171,7 +171,7 @@ Content now has half-step damage dice (`d8+d10`; `DiceSpec` parses them, with an
 - Simulator: model a high-explosive round in the troop value harness where a profile carries a launcher (use the better round against each target), and note it under the table.
 - **Done when:** a Vitest test renders the AT launcher's two rounds, and lint, tests and build pass.
 
-### 16. Troop values in Core — *chatgpt authorized*
+### 16. Troop values in Core ✅ done (2026-10-23)
 
 Rules chapter 15 (decision 6.16): every troop has a Troop Value (TV) and a Requisition cost. `tools/troop_values.py` is the reference implementation; `content/values.yaml` holds every number.
 
