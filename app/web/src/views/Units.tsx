@@ -21,7 +21,7 @@ export function Units({ content, lookup }: { content: Content; lookup: Lookup })
       .then(async (response) => {
         if (!response.ok) throw new Error(`GET /fireteams: ${response.status}`)
         const data = (await response.json()) as FireteamReference
-        if (!controller.signal.aborted) setFireteamReference(data)
+        if (!controller.signal.aborted && Array.isArray(data.pinning)) setFireteamReference(data)
       })
       .catch((error: unknown) => { if (!controller.signal.aborted) setFireteamError(String(error)) })
     return () => controller.abort()
@@ -132,9 +132,6 @@ export function Units({ content, lookup }: { content: Content; lookup: Lookup })
         ))}
       </div>
 
-      {(content.rosters.classes?.length ?? 0) > 0 && <Table title="Troop classes" headers={['Class', 'Description']} rows={content.rosters.classes!.map((c) => [c.name, c.text])} />}
-      {(content.rosters.fireteam_types?.length ?? 0) > 0 && <Table title="Fireteam types" headers={['Type', 'Leaders', 'Troopers', 'Specialists', 'Most models']} rows={content.rosters.fireteam_types!.map((t) => [t.name, t.leader.join('–'), t.troopers.join('–'), t.specialists.join('–'), t.max_models])} />}
-      {fireteamReference && <Table title="Standard fireteams" headers={['Fireteam', 'Type', 'Models', 'Tier', 'Behavior']} rows={fireteamReference.fireteams.filter((t) => shown(t.faction)).map((t) => [t.name, content.rosters.fireteam_types?.find((f) => f.id === t.type)?.name ?? t.type, modelsText(t.models, lookup), t.tier ?? '—', t.behavior ? lookup.behaviors.get(t.behavior)?.name ?? t.behavior : '—'])} />}
       {teams.length > 0 && (
         <Table
           title="Teams"
