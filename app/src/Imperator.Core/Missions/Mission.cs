@@ -53,11 +53,11 @@ public sealed record Mission(
     string? Environment = null, string? Conditions = null, List<MissionDeploy>? Deploy = null, List<MissionSector>? Sectors = null,
     // Named opposition and authored mission metadata (Foundry Moon, rules chapter 14).
     string? Opposition = null, MissionArc? Arc = null, string? Task = null, string? Lockdown = null,
-    MissionGrades? Grades = null, List<MissionSpecialRule>? SpecialRules = null,
+    List<MissionGrade>? Grades = null, List<MissionSpecialRule>? SpecialRules = null,
     List<MissionNext>? Next = null, string? MapNote = null, MissionForceLimit? ForceLimit = null);
 
 public sealed record MissionArc(string Id, string Name, string Label);
-public sealed record MissionGrades(string Decisive, string Marginal, string Failure);
+public sealed record MissionGrade(string Grade, string Text);
 public sealed record MissionSpecialRule(string Title, string Text);
 public sealed record MissionNext(string Grade, string Text);
 public sealed record MissionForceLimit(int Tv, int Models);
