@@ -22,6 +22,30 @@ npm --prefix app/web run build     # type-check and production build
 
 Set `IMPERATOR_API` to point the dev proxy at a different API address.
 
+### If Units, Fireteams or Force Planner return 404
+
+The web app requires **one current .NET API process** serving all four routes:
+`GET /content`, `GET /values`, `GET /fireteams` and `POST /forces/check`.
+`/content` alone is not a sufficient check because older API binaries also serve it.
+
+From the repo root, with **both the .NET API and Vite running**, diagnose the actual local processes:
+
+```sh
+python3 tools/check_app_endpoints.py
+```
+
+It checks the API on port 5080 **and** the Vite proxy on port 5173,
+and identifies which side is missing the route. No dependencies beyond Python 3.
+If the direct API reports 404, first inspect `lsof -nP -iTCP:5080 -sTCP:LISTEN`
+on macOS; terminate the **stale API process**, not unrelated processes.
+Start the current API with `dotnet run --project app/src/Imperator.Api`.
+If direct API checks pass and only the proxy fails, restart the Vite dev server
+and check `IMPERATOR_API`. Use `npm --prefix app/web run dev`,
+not `npm --prefix app/web run preview` (the development proxy is configured in
+`server.proxy`, not preview).
+
+
+
 `src/components/BoardMap.tsx` draws any board in the scenario format (`src/board.ts`): a deck, a land table or a mission. Every part but the board size is optional: tiles, doors and the airlock; the 6" land grid, 12" sectors named from A1 at the player's bottom left, terrain coloured by type (light, heavy, hill, area, ditch, water, wire); deployment; numbered objectives, guard models, contact chips (`?n`) and the enemy entry (`EE`). `BoardLegend` lists what a board shows, with the printed sheets' names. Colours are in `src/boardStyle.ts`.
 
 Tests read the example missions straight from `docs/scenarios/missions/*.yaml` (`src/test-missions.ts`). `src/fixtures/deck-freighter-7.json` is `GET /decks/freighter?seed=7`, saved for the deck map tests (it has open, closed and locked doors and an objective). Refresh it with `curl -s 'localhost:5080/decks/freighter?seed=7' | python3 -m json.tool --indent 2 > app/web/src/fixtures/deck-freighter-7.json` if the deck format changes.
