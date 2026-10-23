@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { Content, Lookup } from '../content'
 import { rangePenalty } from '../content'
 import { Keywords, Table } from '../components/Table'
-import { matches } from '../format'
+import { launcherRounds, matches } from '../format'
 
 /** Gear, skills, keywords and the weapon and armour tables, with the rulebook's columns; searchable. */
 export function Reference({ content, lookup }: { content: Content; lookup: Lookup }) {
@@ -15,7 +15,7 @@ export function Reference({ content, lookup }: { content: Content; lookup: Looku
   const skills = content.skills.skills.filter((s) => has(s.name, ...s.levels))
   const weaponKw = content.keywords.weapon.filter((k) => has(k.name, k.text))
   const armourKw = content.keywords.armour.filter((k) => has(k.name, k.text))
-  const ranged = content.weapons.ranged.filter((w) => has(w.name, ...kwNames(w.keywords)))
+  const ranged = content.weapons.ranged.filter((w) => has(w.name, ...kwNames(w.keywords), ...launcherRounds(w)))
   const melee = content.weapons.melee.filter((w) => has(w.name))
   const thrown = content.weapons.thrown.filter((g) => has(g.name, g.effect ?? '', ...kwNames(g.keywords)))
   const armour = content.armour.armour.filter((a) => has(a.name, ...kwNames(a.keywords)))
@@ -68,7 +68,7 @@ export function Reference({ content, lookup }: { content: Content; lookup: Looku
           headers={['Weapon', 'Damage', 'Short range', 'Beyond / double', 'AP', 'Keywords']}
           rows={ranged.map((w) => {
             const [beyond, double] = rangePenalty(w)
-            return [w.name, w.damage, `${w.short_range}"`, `${beyond} / ${double}`, w.ap, <Keywords key="kw" ids={w.keywords} lookup={lookup} weapon={w} />]
+            return [<span key="weapon">{w.name}{launcherRounds(w).length > 0 && <small className="meta"><br />{launcherRounds(w).join(', ')}. Choose the round before each Shoot.</small>}</span>, w.damage, `${w.short_range}"`, `${beyond} / ${double}`, w.ap, <span key="kw"><Keywords ids={w.keywords} lookup={lookup} weapon={w} />{w.explosion ? `${w.keywords.length ? ', ' : ''}Explosion (${w.explosion})` : ''}</span>]
           })}
         />
       )}

@@ -32,3 +32,16 @@ test('search narrows every section to matching names and text', () => {
   expect(screen.getByText('Nothing matches “zzz no such thing”.')).toBeTruthy()
   expect(screen.queryAllByRole('table')).toHaveLength(0)
 })
+
+test('launchers show all ammunition choices and explosion radii', () => {
+  render(<Reference content={content} lookup={lookup} />)
+  const launcher = content.weapons.ranged.find((w) => (w.rounds?.length ?? 0) > 0)!
+  const r = row(launcher.name)
+  expect(r.textContent).toContain(launcher.round!)
+  for (const round of launcher.rounds!) {
+    expect(r.textContent).toContain(round.name)
+    expect(r.textContent).toContain(round.damage)
+    if (round.explosion) expect(r.textContent).toContain(`Explosion (${round.explosion})`)
+  }
+  expect(r.textContent).toContain('Choose the round before each Shoot')
+})

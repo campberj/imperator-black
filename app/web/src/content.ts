@@ -1,6 +1,14 @@
 // Types for the parts of content/dist/content.json the web app reads, and the API call that fetches it.
 // Field names match the JSON (snake_case). The full schema is in content/README.md and Imperator.Core/Content.cs.
 
+export interface WeaponRound {
+  id: string
+  name: string
+  damage: string
+  ap: number
+  explosion?: number
+}
+
 export interface RangedWeapon {
   id: string
   name: string
@@ -11,6 +19,9 @@ export interface RangedWeapon {
   range_penalty?: [number, number]
   /** Rate of fire for Auto weapons: the N in Auto N. */
   auto?: number
+  explosion?: number
+  round?: string
+  rounds?: WeaponRound[]
 }
 
 export interface MeleeWeapon {
