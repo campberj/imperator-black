@@ -155,7 +155,7 @@ public sealed class TroopValueCalculator(ContentSet content)
         foreach (string item in chosenGear) kit += Price(item, _values.Gear);
         foreach (string item in grenades ?? troop.Grenades) kit += Price(item, _values.Grenades);
 
-        var grantedSkills = chosenGear.SelectMany(item => content.GearById(item).GrantsSkills?.Keys ?? []).ToHashSet();
+        var grantedSkills = chosenGear.SelectMany(item => content.GearById(item).GrantsSkills?.Keys.AsEnumerable() ?? Enumerable.Empty<string>()).ToHashSet();
         foreach (var (skill, level) in troop.Skills)
             if (!grantedSkills.Contains(skill))
             {
