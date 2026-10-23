@@ -21,6 +21,7 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 1.7 | Three layers: Tabletop → Ship/Outpost → Sector. | Settled |
 | 1.8 | Play modes: solo is the home mode; co-op and PvP follow. PoC = solo. | Settled |
 | 1.9 | Fresh core that borrows proven ideas, not a hack of an existing game. *(AWoW)* | Settled |
+| 1.10 | **Shared multiplayer campaigns take sequential player turns (RJ, 2026-10-23):** one participant acts at a time and the server holds who is active. Solo campaigns keep chapter 14's campaign turn and do not run through the multiplayer turn machinery. **Priority (RJ):** the solo campaign tracker (roadmap Phase 9, Foundry Moon first) comes before any multiplayer work (identity, memberships, turn authority). What a strategic turn contains (orders, order, ending, idle players) stays Open. | Settled (RJ) |
 
 ## 2. Setting
 

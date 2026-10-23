@@ -217,7 +217,7 @@ Phase 4 can begin alongside Phase 2. Phase 8 starts once layout and mission tabl
 
 ## After the PoC
 
-- Multiplayer: accounts, shared campaigns, Commander/Operator roles, asynchronous campaign turns
+- Multiplayer: accounts, shared campaigns, Commander/Operator roles, sequential player turns (decision 1.10), after the solo campaign tracker
 - Full ship/outpost and sector layers; additional campaign types with tighter command guidance
 - Larger planetside battles: platoon scale, vehicles and indirect fire (land terrain and setup came forward as Phase 4b)
 - Vehicles, squad- and platoon-scale play
