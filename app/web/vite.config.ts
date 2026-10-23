@@ -11,6 +11,7 @@ const apiProxy = {
   '/values': api,
   '/fireteams': api,
   '/forces': api,
+  '/campaigns': api,
   '/health': api,
   '/decks': api,
   '/land': api,
