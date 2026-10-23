@@ -201,7 +201,7 @@ Decision 6.18, rules chapter 9 *Building a force*, design note `docs/design/fire
 - If the web app checks fits itself, port the rule in TypeScript with a test that agrees with the C# one on every standard fireteam.
 - **Done when:** a Vitest test renders a clone trooper card with "Trooper" and "Pinned at 4 Suppression", Obi-Wan with "Never Pinned", and the VAT fireteam as Assault; lint, tests and build pass.
 
-### 19. Short arc viewer (web, read-only) — *chatgpt authorized*
+### 19. Short arc viewer (web, read-only) ✅ done (2026-10-23)
 
 Rules chapter 14 *Short arcs* (decision 7.13). The paper version is `tools/print_campaign.py --arc` (`ImperatorBlack_arc-foundry-moon.pdf`).
 
