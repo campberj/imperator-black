@@ -237,6 +237,8 @@ public sealed class ContentSet
     public required TerrainContent Terrain { get; init; }
     public required MissionsContent Missions { get; init; }
     public required ValuesContent Values { get; init; }
+    public required CampaignContent Campaign { get; init; }
+    public required VersusContent Versus { get; init; }
 
     public RangedWeapon Ranged(string id) => Find(Weapons.Ranged, w => w.Id, id, "ranged weapon");
     public MeleeWeapon Melee(string id) => Find(Weapons.Melee, w => w.Id, id, "melee weapon");
@@ -313,6 +315,8 @@ public sealed class ContentSet
             Terrain = Section<TerrainContent>("terrain"),
             Missions = Section<MissionsContent>("missions"),
             Values = Section<ValuesContent>("values"),
+            Campaign = Section<CampaignContent>("campaign"),
+            Versus = Section<VersusContent>("versus"),
         };
         if (errors.Count == 0) errors.AddRange(ContentValidator.Validate(set));
         if (errors.Count > 0) throw new ContentException(errors);
