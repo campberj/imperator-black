@@ -2,35 +2,35 @@
   "content_version": "0.5.0",
   "troops": {
     "tfb_vat_leader": {
-      "tv": 66,
+      "tv": 68,
       "requisition": 7
     },
     "tfb_vat_assaulter": {
-      "tv": 53,
+      "tv": 54,
       "requisition": 6
     },
     "tfb_vat_gunner": {
-      "tv": 71,
+      "tv": 73,
       "requisition": 8
     },
     "tfb_data_specialist": {
-      "tv": 60,
-      "requisition": 6
+      "tv": 61,
+      "requisition": 7
     },
     "tfb_pathfinder_leader": {
-      "tv": 51,
+      "tv": 54,
       "requisition": 6
     },
     "tfb_pathfinder": {
-      "tv": 42,
+      "tv": 43,
       "requisition": 5
     },
     "tfb_pathfinder_gunner": {
-      "tv": 55,
+      "tv": 56,
       "requisition": 6
     },
     "tfb_marksman": {
-      "tv": 48,
+      "tv": 50,
       "requisition": 5
     },
     "hostage": {
@@ -42,31 +42,31 @@
       "requisition": 2
     },
     "fs_security": {
-      "tv": 31,
+      "tv": 33,
       "requisition": 4
     },
     "fs_security_gunner": {
-      "tv": 39,
+      "tv": 40,
       "requisition": 4
     },
     "fs_enforcer": {
-      "tv": 36,
+      "tv": 37,
       "requisition": 4
     },
     "fs_repo_breacher": {
-      "tv": 63,
+      "tv": 65,
       "requisition": 7
     },
     "fs_liquidator": {
-      "tv": 59,
-      "requisition": 6
+      "tv": 62,
+      "requisition": 7
     },
     "fs_tech": {
       "tv": 30,
       "requisition": 3
     },
     "fs_recovery_captain": {
-      "tv": 61,
+      "tv": 63,
       "requisition": 7
     },
     "fs_turret": {
@@ -78,67 +78,67 @@
       "requisition": 4
     },
     "ct_borz_boarder": {
-      "tv": 64,
-      "requisition": 7
-    },
-    "ct_borz_heavy": {
-      "tv": 112,
-      "requisition": 12
-    },
-    "ct_harlow_operator": {
-      "tv": 49,
-      "requisition": 5
-    },
-    "ct_harlow_gunner": {
       "tv": 66,
       "requisition": 7
     },
+    "ct_borz_heavy": {
+      "tv": 116,
+      "requisition": 12
+    },
+    "ct_harlow_operator": {
+      "tv": 52,
+      "requisition": 6
+    },
+    "ct_harlow_gunner": {
+      "tv": 69,
+      "requisition": 7
+    },
     "ct_hired_marksman": {
-      "tv": 55,
+      "tv": 58,
       "requisition": 6
     },
     "ct_hired_heavy": {
-      "tv": 76,
+      "tv": 79,
       "requisition": 8
     },
     "ct_borz_bratva": {
-      "tv": 60,
-      "requisition": 6
+      "tv": 62,
+      "requisition": 7
     },
     "ct_borz_bratva_hmg": {
-      "tv": 72,
+      "tv": 74,
       "requisition": 8
     },
     "ct_borz_cyka": {
-      "tv": 116,
-      "requisition": 12
+      "tv": 121,
+      "requisition": 13
     },
     "ct_borz_cyka_bravo": {
-      "tv": 116,
-      "requisition": 12
+      "tv": 121,
+      "requisition": 13
     },
     "ct_borz_ubiytsa_leader": {
+      "tv": 62,
+      "requisition": 7
+    },
+    "ct_borz_ubiytsa": {
       "tv": 59,
       "requisition": 6
     },
-    "ct_borz_ubiytsa": {
-      "tv": 55,
-      "requisition": 6
-    },
     "ct_harlow_leader": {
-      "tv": 68,
-      "requisition": 7
+      "tv": 72,
+      "requisition": 8
     },
     "ct_harlow_grenadier": {
-      "tv": 57,
+      "tv": 60,
       "requisition": 6
     },
     "ct_harlow_engineer": {
-      "tv": 55,
+      "tv": 58,
       "requisition": 6
     },
     "ct_harlow_veteran": {
-      "tv": 53,
+      "tv": 56,
       "requisition": 6
     },
     "ct_harlow_springbok": {
@@ -150,20 +150,20 @@
       "requisition": 3
     },
     "un3_batcon": {
-      "tv": 61,
+      "tv": 66,
       "requisition": 7
     },
     "un3_rifleman": {
-      "tv": 49,
-      "requisition": 5
+      "tv": 52,
+      "requisition": 6
     },
     "un3_data_specialist": {
-      "tv": 61,
+      "tv": 64,
       "requisition": 7
     },
     "un3_at_specialist": {
-      "tv": 60,
-      "requisition": 6
+      "tv": 62,
+      "requisition": 7
     },
     "un3_pointman": {
       "tv": 61,
@@ -174,19 +174,19 @@
       "requisition": 9
     },
     "rfa_mother": {
-      "tv": 115,
+      "tv": 120,
       "requisition": 12
     },
     "rfa_assaulter": {
-      "tv": 82,
+      "tv": 87,
       "requisition": 9
     },
     "rfa_grenadier": {
-      "tv": 93,
+      "tv": 97,
       "requisition": 10
     },
     "rfa_marksman": {
-      "tv": 93,
+      "tv": 98,
       "requisition": 10
     },
     "rfa_golem": {
@@ -194,79 +194,79 @@
       "requisition": 7
     },
     "md_handler": {
-      "tv": 102,
+      "tv": 106,
       "requisition": 11
     },
     "md_operator": {
-      "tv": 68,
+      "tv": 70,
       "requisition": 7
     },
     "rep_clone_sergeant": {
-      "tv": 48,
+      "tv": 50,
       "requisition": 5
     },
     "rep_clone_trooper": {
-      "tv": 39,
-      "requisition": 4
+      "tv": 41,
+      "requisition": 5
     },
     "rep_clone_heavy": {
-      "tv": 46,
+      "tv": 48,
       "requisition": 5
     },
     "rep_clone_marksman": {
-      "tv": 47,
+      "tv": 49,
       "requisition": 5
     },
     "rep_arc_leader": {
-      "tv": 64,
+      "tv": 68,
       "requisition": 7
     },
     "rep_arc_trooper": {
-      "tv": 52,
+      "tv": 55,
       "requisition": 6
     },
     "rep_arf_trooper": {
-      "tv": 43,
+      "tv": 45,
       "requisition": 5
     },
     "rep_commando_leader": {
-      "tv": 88,
-      "requisition": 9
+      "tv": 93,
+      "requisition": 10
     },
     "rep_clone_commando": {
-      "tv": 79,
-      "requisition": 8
+      "tv": 83,
+      "requisition": 9
     },
     "rep_cody": {
-      "tv": 62,
-      "requisition": 7
-    },
-    "rep_obi_wan": {
-      "tv": 110,
-      "requisition": 11
-    },
-    "rep_ahsoka": {
-      "tv": 80,
-      "requisition": 8
-    },
-    "rep_jedi_guardian": {
-      "tv": 67,
-      "requisition": 7
-    },
-    "anc_prime": {
-      "tv": 79,
-      "requisition": 8
-    },
-    "anc_scout": {
       "tv": 66,
       "requisition": 7
     },
+    "rep_obi_wan": {
+      "tv": 114,
+      "requisition": 12
+    },
+    "rep_ahsoka": {
+      "tv": 84,
+      "requisition": 9
+    },
+    "rep_jedi_guardian": {
+      "tv": 70,
+      "requisition": 7
+    },
+    "anc_prime": {
+      "tv": 83,
+      "requisition": 9
+    },
+    "anc_scout": {
+      "tv": 68,
+      "requisition": 7
+    },
     "anc_grenadier": {
-      "tv": 60,
-      "requisition": 6
+      "tv": 63,
+      "requisition": 7
     },
     "anc_systems_operator": {
-      "tv": 54,
+      "tv": 57,
       "requisition": 6
     },
     "anc_hound": {
@@ -274,60 +274,60 @@
       "requisition": 15
     },
     "hk_team_leader": {
-      "tv": 76,
-      "requisition": 8
+      "tv": 81,
+      "requisition": 9
     },
     "hk_rifleman": {
-      "tv": 61,
+      "tv": 64,
       "requisition": 7
     },
     "hk_auto_rifleman": {
-      "tv": 69,
-      "requisition": 7
+      "tv": 72,
+      "requisition": 8
     },
     "hk_pioneer": {
-      "tv": 70,
-      "requisition": 7
+      "tv": 72,
+      "requisition": 8
     },
     "hk_zq44": {
       "tv": 84,
       "requisition": 9
     },
     "gen_officer": {
-      "tv": 45,
+      "tv": 47,
       "requisition": 5
     },
     "gen_trooper": {
-      "tv": 32,
+      "tv": 33,
       "requisition": 4
     },
     "gen_gunner": {
-      "tv": 43,
+      "tv": 45,
       "requisition": 5
     },
     "gen_at_trooper": {
-      "tv": 39,
+      "tv": 40,
       "requisition": 4
     },
     "gen_specialist": {
-      "tv": 31,
+      "tv": 32,
       "requisition": 4
     },
     "gen_marksman": {
-      "tv": 43,
+      "tv": 45,
       "requisition": 5
     },
     "gen_assault_trooper": {
-      "tv": 56,
+      "tv": 59,
       "requisition": 6
     },
     "gen_heavy_leader": {
-      "tv": 125,
-      "requisition": 13
+      "tv": 131,
+      "requisition": 14
     },
     "gen_heavy_infantry": {
-      "tv": 110,
-      "requisition": 11
+      "tv": 116,
+      "requisition": 12
     },
     "sep_b1": {
       "tv": 22,
@@ -366,7 +366,7 @@
       "requisition": 7
     },
     "sep_grievous": {
-      "tv": 142,
+      "tv": 147,
       "requisition": 15
     },
     "sep_dsd1": {

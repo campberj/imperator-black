@@ -152,7 +152,14 @@ def card_flowables(t):
         ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
     ]))
     arm_text = ARMOUR[t["armour"]]["name"] + "".join(f" or {ARMOUR[a]['name']} ({ARMOUR[a]['value']})" for a in t.get("armour_options", []))
-    flow += [stats, Paragraph(f"Armour: {arm_text}", S_SMALL), Spacer(1, 3)]
+    sup = C["core"]["suppression"]
+    nerve = t["stats"]["nerve"]
+    if nerve is None:
+        pin = ""   # Automated: never gains Suppression
+    else:
+        at = nerve + sup["pinned_by_nerve"] if sup.get("pinned_by_nerve") is not None else sup["pinned_at"]
+        pin = f"  ·  Pinned at {at} Suppression" if at <= sup["max"] else "  ·  Never Pinned"
+    flow += [stats, Paragraph(f"Armour: {arm_text}{pin}", S_SMALL), Spacer(1, 3)]
 
     wt = Table(weapon_rows(t), colWidths=[1.95 * inch, 0.42 * inch, 0.42 * inch, 0.35 * inch])
     ts = [("FONT", (0, 0), (-1, 0), "Body-Bold", 6.4), ("TEXTCOLOR", (0, 0), (-1, 0), MUTED),
@@ -507,7 +514,7 @@ def quick_reference():
         "<b>Crack and throw:</b> within 1\" of a closed, unlocked door: open it and Throw in one Interact, before anyone reacts. Miss: lands in the doorway.",
         "Locked door: charge; breaching tool (Interact, test 8+); or hack (Interact, 2d6 + Tech, quiet): " + "; ".join(f'{l["name"]} {l["target"]}+' + (f' ×{l["successes"]}' if l["successes"] > 1 else "") for l in core["security"]["levels"]) + ". +1 per earlier failed attempt on it (max +3).",
     ]) + [Spacer(1, 3), grenades, Spacer(1, 5), Paragraph("Suppression, morale, casualties", Q_H)] + bullets([
-        "Suppression: −1 to all rolls each (max 5). <b>Pinned at 3+</b>: only Rally, Find Cover, Move to cover/out of sight, Shoot from cover.",
+        "Suppression: −1 to all rolls each (max 5). <b>Pinned at Nerve + 2</b> (Nerve 4: never): only Rally, Find Cover, Move to cover/out of sight, Shoot from cover.",
         "Casualty shock: friend within 6\" goes Down or Dead: +1 Suppression (+2 if the Leader).",
         "Breaking: half a fireteam out → each tests 2d6 + <b>Nerve</b> (+1 Leader within 6\") at <b>every</b> activation; fail = both actions moving away (normal Moves). Enemy elements count as fireteams; Automated never test. Off the board via entry point = fled.",
         "Wounded markers from rows 4–5; any marker −1 to all rolls; more markers than Wounds → Down. Wounded is a flat −1, not per marker. Down: end of round 2d6 + <b>Physique</b> 8+ to rise, no Wounded penalty (gets up with 3 Suppression, markers set to Wounds); no test while a standing enemy is in base contact. Capture (if allowed): Interact in contact with a Down enemy. Medic action, 2d6 + <b>Tech</b>: Down 8+ (auto with Medic), Bleeding 8+ (becomes Down), Critical 10+ (stabilised).",

@@ -19,7 +19,7 @@ multiplier: { "0": 1, "1": 1.5, "2": 2, "3": 2.5, "4": 3, "5": 3.25 }
 # Attributes not tied to kit: cost per point above 0. Shoot and Fight are paid through weapons; Tech also through kit.
 attribute_costs:
   physique: 2      # recovery from Down, climbing, falls, decompression (grenades pay through their own cost)
-  nerve: 2         # breaking tests, Find Cover, a Leader's initiative
+  nerve: 3         # breaking tests, Find Cover, a Leader's initiative, and the Pinned threshold (Nerve + 2)
   tech: 1          # extinguishing, and anything without its own kit
 move_per_inch: 2   # per inch above (or below) 5"
 

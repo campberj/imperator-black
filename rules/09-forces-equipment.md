@@ -141,7 +141,7 @@ Skills marked **Proposed** add a rule that is new in this version; they are in p
 | *Marksman* 1–2 | **1:** Aim gives +2 instead of +1. **2:** An Aimed shot also ignores the Light cover penalty. | **Proposed** |
 | *Deflect* 1–2 | **1:** Holding a lightsaber and not Pinned: when hit by a ranged attack it can see, test 2d6 + Fight, 8+, to deflect it (no effect). −1 for each earlier deflection this round. Test each hit of a burst separately. **2:** A deflection on 12 or more sends the bolt back: the shooter takes the hit, rolling the weapon's damage dice on the wound table. | **Proposed** |
 | *Leap* | A Move may include one leap, up or down one level (3") or across a gap up to 3", at no extra cost. Drops up to 6" need no falling test. | **Proposed** |
-| *Jedi discipline* | Never takes breaking tests and ignores casualty shock. Pinned only at 4 or more Suppression. | **Proposed** |
+| *Jedi discipline* | Never takes breaking tests and ignores casualty shock. | **Proposed** |
 | *Twin blades* | Fights with two blades: +1 to close combat exchange rolls. | **Proposed** |
 | *Scout* | Deploys up to 6" beyond its side's deployment zone, out of enemy line of sight. Scrub and woods are not difficult ground for it. | **Proposed** |
 | *Shield* | Carries a ballistic shield or shield emitter: when it has no other cover, it counts as in Light cover against shots from the half of the table it faces. | **Proposed** |

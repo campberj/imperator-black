@@ -1,5 +1,7 @@
 # Pinning threshold: flat 3 or set by Nerve (2026-10-23)
 
+**Decision (RJ, 2026-10-23): Pinned at Nerve + 2** (decision 4.19). The "Flat 3" column below is the rule before the change.
+
 RJ, after Gym 2: should a model be Pinned when its Suppression exceeds its Nerve, rather than at a flat 3? Five variants, 20,000 games per metric, seed 1, with the simulator's abstract firefight (`app/src/Imperator.Sim`, `--compare`; content variants set `core.suppression.pinned_by_nerve` and `pinned_at_least`).
 
 | Variant | Nerve 0 | Nerve 1 | Nerve 2 | Nerve 3 | Nerve 4 |

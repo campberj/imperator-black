@@ -16,6 +16,9 @@
 - **Overwatch:** RJ: it should give one reaction, not two, since it takes only one action to enter. Changed to one reaction, at most one between activations; Auto weapons keep their reaction spread (decision 4.5). Long actions noted as an idea (decision 4.17, Open).
 - **Suppressive Fire** was never worth using: a Shoot hit always gave as much Suppression, plus damage. Reworked: it ignores cover and a hit stops the target reacting this round (decision 4.18).
 - **The Tactical behavior profile is working very well.**
+- **Pinning (wrap-up, 2026-10-23):** RJ: Pinned should depend on Nerve. Simulated five thresholds (`docs/analysis/pinning-comparison.md`); adopted **Nerve + 2** (decision 4.19).
+- **Pointmen and close combat:** should robots charge? Kept as is: only Fight 2 or more charges (the Pointmen are Fight 1); the Aggressive card now says so.
+- **Grouping:** troops should be fielded in fireteams, not à la carte. Built fireteams, classes and characters, with a by-fireteam or by-soldier campaign setting (decision 6.18).
 
 ## Rules friction
 

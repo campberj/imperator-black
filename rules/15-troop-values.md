@@ -34,7 +34,7 @@ Armour and Wounds multiply the whole total. A model that survives twice as many 
 | Attribute | Cost |
 |---|---|
 | Physique | 2 per point |
-| Nerve | 2 per point |
+| Nerve | 3 per point |
 | Tech | 1 per point |
 | Move | 2 per inch above 5" (minus below it) |
 <!-- /table -->
@@ -214,15 +214,15 @@ Every profile in chapter 9, with its default loadout.
 | Troop | TV | Requisition |
 |---|---|---|
 | **Hostage** | 11 | 2 |
-| **Officer** | 45 | 5 |
-| **Line Trooper** | 32 | 4 |
-| **Support Gunner** | 43 | 5 |
-| **Anti-armour Trooper** | 39 | 4 |
-| **Specialist** | 31 | 4 |
-| **Marksman** | 43 | 5 |
-| **Assault Trooper** | 56 | 6 |
-| **Heavy Infantry Sergeant** | 125 | 13 |
-| **Heavy Infantry** | 110 | 11 |
+| **Officer** | 47 | 5 |
+| **Line Trooper** | 33 | 4 |
+| **Support Gunner** | 45 | 5 |
+| **Anti-armour Trooper** | 40 | 4 |
+| **Specialist** | 32 | 4 |
+| **Marksman** | 45 | 5 |
+| **Assault Trooper** | 59 | 6 |
+| **Heavy Infantry Sergeant** | 131 | 14 |
+| **Heavy Infantry** | 116 | 12 |
 <!-- /table -->
 
 ### Task Force Boone
@@ -230,14 +230,14 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_tfb -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **VAT Team Leader** | 66 | 7 |
-| **VAT Assaulter** | 53 | 6 |
-| **VAT Gunner** | 71 | 8 |
-| **Data Specialist** | 60 | 6 |
-| **Pathfinder Team Leader** | 51 | 6 |
-| **Pathfinder** | 42 | 5 |
-| **Pathfinder SAW Gunner** | 55 | 6 |
-| **Control Team Marksman** | 48 | 5 |
+| **VAT Team Leader** | 68 | 7 |
+| **VAT Assaulter** | 54 | 6 |
+| **VAT Gunner** | 73 | 8 |
+| **Data Specialist** | 61 | 7 |
+| **Pathfinder Team Leader** | 54 | 6 |
+| **Pathfinder** | 43 | 5 |
+| **Pathfinder SAW Gunner** | 56 | 6 |
+| **Control Team Marksman** | 50 | 5 |
 <!-- /table -->
 
 ### Galactic Republic
@@ -245,19 +245,19 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_republic -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Clone Sergeant** | 48 | 5 |
-| **Clone Trooper** | 39 | 4 |
-| **Clone Heavy Trooper** | 46 | 5 |
-| **Clone Trooper Marksman** | 47 | 5 |
-| **ARC Trooper Leader** | 64 | 7 |
-| **ARC Trooper** | 52 | 6 |
-| **ARF Trooper** | 43 | 5 |
-| **Clone Commando Leader** | 88 | 9 |
-| **Clone Commando** | 79 | 8 |
-| **Commander Cody** | 62 | 7 |
-| **Obi-Wan Kenobi** | 110 | 11 |
-| **Ahsoka Tano** | 80 | 8 |
-| **Jedi Guardian** | 67 | 7 |
+| **Clone Sergeant** | 50 | 5 |
+| **Clone Trooper** | 41 | 5 |
+| **Clone Heavy Trooper** | 48 | 5 |
+| **Clone Trooper Marksman** | 49 | 5 |
+| **ARC Trooper Leader** | 68 | 7 |
+| **ARC Trooper** | 55 | 6 |
+| **ARF Trooper** | 45 | 5 |
+| **Clone Commando Leader** | 93 | 10 |
+| **Clone Commando** | 83 | 9 |
+| **Commander Cody** | 66 | 7 |
+| **Obi-Wan Kenobi** | 114 | 12 |
+| **Ahsoka Tano** | 84 | 9 |
+| **Jedi Guardian** | 70 | 7 |
 <!-- /table -->
 
 ### Anchorage
@@ -265,10 +265,10 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_anchorage -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Prime** | 79 | 8 |
-| **Scout** | 66 | 7 |
-| **Grenadier** | 60 | 6 |
-| **Systems Operator** | 54 | 6 |
+| **Prime** | 83 | 9 |
+| **Scout** | 68 | 7 |
+| **Grenadier** | 63 | 7 |
+| **Systems Operator** | 57 | 6 |
 | **Hound CCT** | 144 | 15 |
 <!-- /table -->
 
@@ -277,10 +277,10 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_hankou -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Team Leader** | 76 | 8 |
-| **Rifleman** | 61 | 7 |
-| **Automatic Rifleman** | 69 | 7 |
-| **Pioneer** | 70 | 7 |
+| **Team Leader** | 81 | 9 |
+| **Rifleman** | 64 | 7 |
+| **Automatic Rifleman** | 72 | 8 |
+| **Pioneer** | 72 | 8 |
 | **ZQ44 CCT** | 84 | 9 |
 <!-- /table -->
 
@@ -290,13 +290,13 @@ Every profile in chapter 9, with its default loadout.
 | Troop | TV | Requisition |
 |---|---|---|
 | **Salvage Hand** | 19 | 2 |
-| **Asset Security Officer** | 31 | 4 |
-| **Asset Security Gunner** | 39 | 4 |
-| **Collections Enforcer** | 36 | 4 |
-| **Repossession Breacher** | 63 | 7 |
-| **Liquidator** | 59 | 6 |
+| **Asset Security Officer** | 33 | 4 |
+| **Asset Security Gunner** | 40 | 4 |
+| **Collections Enforcer** | 37 | 4 |
+| **Repossession Breacher** | 65 | 7 |
+| **Liquidator** | 62 | 7 |
 | **Salvage Tech** | 30 | 3 |
-| **Recovery Captain** | 61 | 7 |
+| **Recovery Captain** | 63 | 7 |
 | **Sentry Turret** | 29 | 3 |
 | **Security Drone** | 37 | 4 |
 <!-- /table -->
@@ -306,22 +306,22 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_contractor -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Contract Boarder** | 64 | 7 |
-| **Contract Heavy** | 112 | 12 |
-| **Reaction Force Operator** | 49 | 5 |
-| **Reaction Force Gunner** | 66 | 7 |
-| **Hired Marksman** | 55 | 6 |
-| **Hired Heavy Gunner** | 76 | 8 |
-| **Borz Bratva Trooper** | 60 | 6 |
-| **Borz Bratva HMG Gunner** | 72 | 8 |
-| **Borz Cyka Powered Trooper** | 116 | 12 |
-| **Borz Cyka Bravo Breacher** | 116 | 12 |
-| **Ubiytsa Controller** | 59 | 6 |
-| **Ubiytsa Shock Trooper** | 55 | 6 |
-| **Reaction Force Controller** | 68 | 7 |
-| **Reaction Force Grenadier** | 57 | 6 |
-| **Reaction Force Engineer** | 55 | 6 |
-| **Harlow Veteran** | 53 | 6 |
+| **Contract Boarder** | 66 | 7 |
+| **Contract Heavy** | 116 | 12 |
+| **Reaction Force Operator** | 52 | 6 |
+| **Reaction Force Gunner** | 69 | 7 |
+| **Hired Marksman** | 58 | 6 |
+| **Hired Heavy Gunner** | 79 | 8 |
+| **Borz Bratva Trooper** | 62 | 7 |
+| **Borz Bratva HMG Gunner** | 74 | 8 |
+| **Borz Cyka Powered Trooper** | 121 | 13 |
+| **Borz Cyka Bravo Breacher** | 121 | 13 |
+| **Ubiytsa Controller** | 62 | 7 |
+| **Ubiytsa Shock Trooper** | 59 | 6 |
+| **Reaction Force Controller** | 72 | 8 |
+| **Reaction Force Grenadier** | 60 | 6 |
+| **Reaction Force Engineer** | 58 | 6 |
+| **Harlow Veteran** | 56 | 6 |
 | **Springbok AI** | 70 | 7 |
 | **Cricket Drone** | 23 | 3 |
 <!-- /table -->
@@ -331,16 +331,16 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_un -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Battalion Controller** | 61 | 7 |
-| **3rd Battalion Rifleman** | 49 | 5 |
-| **3rd Battalion Data Specialist** | 61 | 7 |
-| **3rd Battalion AT Specialist** | 60 | 6 |
+| **Battalion Controller** | 66 | 7 |
+| **3rd Battalion Rifleman** | 52 | 6 |
+| **3rd Battalion Data Specialist** | 64 | 7 |
+| **3rd Battalion AT Specialist** | 62 | 7 |
 | **Pointman** | 61 | 7 |
 | **Pointman SAW** | 88 | 9 |
-| **UTG Mother** | 115 | 12 |
-| **UTG Assaulter** | 82 | 9 |
-| **UTG Grenadier** | 93 | 10 |
-| **UTG Marksman** | 93 | 10 |
+| **UTG Mother** | 120 | 12 |
+| **UTG Assaulter** | 87 | 9 |
+| **UTG Grenadier** | 97 | 10 |
+| **UTG Marksman** | 98 | 10 |
 | **Golem** | 64 | 7 |
 <!-- /table -->
 
@@ -349,8 +349,8 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_directorate -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Directorate Handler** | 102 | 11 |
-| **Directorate Deniable Operator** | 68 | 7 |
+| **Directorate Handler** | 106 | 11 |
+| **Directorate Deniable Operator** | 70 | 7 |
 <!-- /table -->
 
 ### Separatist Alliance
@@ -367,7 +367,7 @@ Every profile in chapter 9, with its default loadout.
 | **IG-100 MagnaGuard** | 52 | 6 |
 | **T-series Tactical Droid** | 35 | 4 |
 | **Kraken** | 63 | 7 |
-| **General Grievous** | 142 | 15 |
+| **General Grievous** | 147 | 15 |
 | **DSD1 Dwarf Spider Droid** | 90 | 9 |
 <!-- /table -->
 

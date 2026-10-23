@@ -54,8 +54,8 @@ public sealed class Soldier
     public bool IsActive => Status == Status.Active;
     /// <summary>Suppression at which the model is Pinned: 3 by default; set from content by <see cref="UsePinningRule"/>.</summary>
     public int PinnedAt { get; set; } = 3;
-    /// <summary>Pinned at PinnedAt Suppression, or 4 with Jedi discipline if that is higher.</summary>
-    public bool Pinned => Suppression >= (SkillLevel("jedi_discipline") > 0 ? Math.Max(4, PinnedAt) : PinnedAt);
+    /// <summary>Pinned at PinnedAt Suppression (rules v0.5: Nerve + 2; never, above 5).</summary>
+    public bool Pinned => Suppression >= PinnedAt;
 
     /// <summary>Sets <see cref="PinnedAt"/> from the content's suppression rule (flat, or Nerve plus an offset).</summary>
     public void UsePinningRule(CoreContent core)

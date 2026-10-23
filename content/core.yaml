@@ -60,7 +60,8 @@ auto_fire:
 suppression:
   modifier_per_marker: -1
   max: 5
-  pinned_at: 3
+  pinned_at: 3            # used only if pinned_by_nerve is removed
+  pinned_by_nerve: 2      # Pinned at Nerve + 2 Suppression (RJ, 2026-10-23, decision 4.19): Nerve 4 is never Pinned
   cancels_overwatch_at: 2
 
 hit_modifiers:

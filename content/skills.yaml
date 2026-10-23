@@ -58,7 +58,7 @@ skills:
     name: Jedi discipline
     status: proposed
     levels:
-      - "Never takes breaking tests and ignores casualty shock. Pinned only at 4 or more Suppression."
+      - "Never takes breaking tests and ignores casualty shock."
   - id: twin_blades
     name: Twin blades
     status: proposed

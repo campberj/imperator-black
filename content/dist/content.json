@@ -1243,6 +1243,7 @@
       "modifier_per_marker": -1,
       "max": 5,
       "pinned_at": 3,
+      "pinned_by_nerve": 2,
       "cancels_overwatch_at": 2
     },
     "hit_modifiers": [
@@ -4069,7 +4070,7 @@
         "name": "Jedi discipline",
         "status": "proposed",
         "levels": [
-          "Never takes breaking tests and ignores casualty shock. Pinned only at 4 or more Suppression."
+          "Never takes breaking tests and ignores casualty shock."
         ]
       },
       {
@@ -7975,7 +7976,7 @@
     },
     "attribute_costs": {
       "physique": 2,
-      "nerve": 2,
+      "nerve": 3,
       "tech": 1
     },
     "move_per_inch": 2,

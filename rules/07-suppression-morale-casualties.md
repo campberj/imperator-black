@@ -4,7 +4,7 @@
 
 Each Suppression marker gives **−1 to all of that model's rolls**. A model can have at most **5**.
 
-At **3 or more**, the model is **Pinned**. A Pinned model may only:
+When its Suppression reaches its **Nerve + 2**, the model is **Pinned**: at 2 for Nerve 0, 3 for Nerve 1, 4 for Nerve 2 and 5 for Nerve 3. A Nerve 4 model is never Pinned (5 is the most Suppression a model can have). A Pinned model may only:
 
 - Rally
 - Find Cover
@@ -53,7 +53,7 @@ When a model goes Down, Bleeding or Critical, remove its Suppression markers and
 
 At the end of each round, each **Down** model (not Bleeding or Critical) tests 2d6 + Physique. Wounded markers do not modify this test, and a Down model has no Suppression, so it is a plain 2d6 + Physique.
 
-- **8+:** it gets up with **3 Suppression** (Pinned) and its Wounded markers set to its Wounds attribute (any extra are removed), so it has −1 to all rolls and one more Wounded result puts it Down again.
+- **8+:** it gets up with **3 Suppression** and its Wounded markers set to its Wounds attribute (any extra are removed), so it has −1 to all rolls and one more Wounded result puts it Down again.
 - **Fail:** it stays Down.
 - **Under guard:** a Down model in base contact with a standing enemy model does not test.
 
