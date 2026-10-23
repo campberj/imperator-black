@@ -144,3 +144,35 @@ test('unit database displays TV and Requisition supplied by GET /values', async 
     vi.unstubAllGlobals()
   }
 })
+
+test('clone trooper, Obi-Wan and VAT fireteam show class, pinning and type', async () => {
+  const prior = globalThis.fetch
+  vi.stubGlobal('fetch', vi.fn(async (url: string) => {
+    if (url === '/fireteams') return Response.json({
+      pinning: [
+        { troop: 'rep_clone_trooper', text: 'Pinned at 4 Suppression' },
+        { troop: 'rep_obi_wan', text: 'Never Pinned' },
+      ],
+      fireteams: [{
+        id: 'vat_fireteam', name: 'VAT fireteam', faction: 'tfb', type: 'assault',
+        source: 'team', models: content.rosters.teams.find((t) => t.id === 'vat_fireteam')!.slots, findings: [],
+      }],
+    })
+    return Response.json([])
+  }))
+  try {
+    render(<Units content={content} lookup={lookup} />)
+    select('Faction', 'republic')
+    const clone = within(card(lookup.troops.get('rep_clone_trooper')!.name))
+    expect(clone.getByText('Trooper')).toBeTruthy()
+    expect(await clone.findByText('Pinned at 4 Suppression')).toBeTruthy()
+    const obiWan = within(card(lookup.troops.get('rep_obi_wan')!.name))
+    expect(obiWan.getByText('Never Pinned')).toBeTruthy()
+    select('Faction', 'tfb')
+    const row = screen.getByRole('rowheader', { name: 'VAT fireteam' }).closest('tr')!
+    expect(row.textContent).toContain('Assault')
+  } finally {
+    vi.stubGlobal('fetch', prior)
+    vi.unstubAllGlobals()
+  }
+})
