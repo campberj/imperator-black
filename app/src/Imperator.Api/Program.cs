@@ -51,6 +51,12 @@ var deckJson = new JsonSerializerOptions(JsonSerializerDefaults.Web)
     DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
 };
 
+app.MapGet("/fireteams", (HttpContext ctx) =>
+{
+    ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
+    return Results.Json(Fireteams.Reference(content.Set), deckJson);
+});
+
 app.MapGet("/values", (HttpContext ctx) =>
 {
     ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
