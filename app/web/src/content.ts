@@ -232,6 +232,7 @@ export interface Content {
     }
     contacts: string[]
   }
+  versus?: { sizes: { id: string; name: string; tv: number }[] }
   campaign?: { short_arc?: { missions: number; text: string[] } }
   terrain: {
     types: { id: string; name: string; kind: string }[]
