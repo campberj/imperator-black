@@ -19,3 +19,5 @@ This writes `docs/print/ImperatorBlack_<id>-sheet.pdf` (scenario sheet with a to
 To print a scenario together with every other unit card in one run, add `--with-unit-cards`: it writes `docs/print/ImperatorBlack_<id>-and-unit-cards.pdf`, the scenario's cards first, then the rest of the unit cards, four to a page with no troop printed twice. Identical enemy models share one card ("1, 2. Salvage Tech"). Current set: [Gym 3 and unit cards](../print/ImperatorBlack_gym-03-wipe-race-and-unit-cards.pdf) (57 cards, 15 pages).
 
 Land scenarios set `tiles: []` and describe terrain as typed footprints (`hill`, `area`, `ditch`, `light`, `heavy`); the map draws a 6" grid instead of tiles.
+
+Short arcs (three authored missions, chapter 14) are in [`arcs/`](arcs/README.md).

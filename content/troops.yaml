@@ -129,7 +129,7 @@ troops:
     miniatures: "BLKOUT Task Force Boone: Strikeforce (Control Team)"
 
   - id: hostage
-    faction: tfb
+    faction: generic
     name: Hostage
     role: Rescued personnel
     rank: green

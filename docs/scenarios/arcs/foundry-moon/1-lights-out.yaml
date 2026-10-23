@@ -1,0 +1,310 @@
+# Short arc Foundry Moon: mission 1, Lights Out at Refinery Nine (industrial table, generated board seed 3).
+# Republic against the Separatist Alliance (rules chapter 14, short arcs).
+# Printed by: python3 tools/print_scenario.py docs/scenarios/arcs/foundry-moon/<this file>
+id: foundry-moon-1-lights-out
+title: 'Foundry Moon 1: Lights Out at Refinery Nine'
+kind: mission
+kind_label: short arc mission
+rules_version: '0.5'
+setting: land
+seed: 3
+mission: sabotage
+tier: 1
+opposition: separatist
+size: small
+clock:
+  die: d4
+  limit: 20
+  check_in_every: 5
+  first_check_in: 10
+alert_start: 0
+complication: none
+situation: Refinery Nine is the outermost station of the droid foundry on Ordo Kessa. Its two uplink masts tie it into the
+  defence grid that guards the landing fields. A B1 section stands watch at the west mast; more droids work the yards. Knock
+  both masts out before dawn and the gunships can land.
+briefing:
+- heading: Tasking
+  text: Sabotage. Destroy the two uplink masts and get out.
+- heading: Situation
+  text: Refinery Nine is the outermost station of the droid foundry on Ordo Kessa. Its two uplink masts tie it into the defence
+    grid that guards the landing fields. A B1 section stands watch at the west mast; more droids work the yards. Knock both
+    masts out before dawn and the gunships can land.
+- heading: Objective
+  text: 'The uplink masts in sector A3 (west) and sector C3 (east). A model in base contact sets a charge with an Interact
+    (models without breaching charges use the mast''s own maintenance panel: same Interact). The mast is destroyed at the
+    end of that round (Very loud), unless an enemy model is in base contact with it then, which disarms the charge.'
+- heading: Opposition
+  text: 'Separatist Alliance, threat tier 1. Guard (known): B1 battle droid section (4 models), at the west mast, Unaware.
+    Contacts (unknown): 3 chips.'
+- heading: Ground
+  text: 'Industrial, 36" × 36" table (3 × 3 sectors), from RJ''s industrial terrain. Conditions: Night: Darkness (chapter
+    8): models are seen only within 12".'
+- heading: Complication
+  text: None.
+- heading: Extraction and time
+  text: 'Out by the Republic''s own edge. Enemy entry and exit: middle of the far edge. Small mission: 20 minutes, clock die
+    d4. Check-ins every 5 minutes from minute 10. Alert track starts at 0.'
+- heading: Force
+  text: 'Republic: up to 250 TV and 6 models from the roster (chapter 14, short arcs).'
+board:
+  width: 36
+  height: 36
+tiles: []
+doors: []
+cover:
+- id: T1
+  x: 4.75
+  y: 3.0
+  w: 2.5
+  h: 6
+  type: heavy
+  label: Container
+  terrain: solid
+  piece: 'Container, vehicle, wreck, rock, tank. Sector A1: Yard: two containers (solid).'
+  sector: A1
+- id: T2
+  x: 9.2
+  y: 3.0
+  w: 2.5
+  h: 6
+  type: heavy
+  label: Container
+  terrain: solid
+  piece: 'Container, vehicle, wreck, rock, tank. Sector A1: Yard: two containers (solid).'
+  sector: A1
+- id: T3
+  x: 17.5
+  y: 4.0
+  w: 1
+  h: 4
+  type: light
+  label: Crates
+  terrain: low_wall
+  piece: 'Low wall, sandbags, barricade, fallen tree. Sector B1: Crates and low walls (low wall), two pieces.'
+  sector: B1
+- id: T4
+  x: 16.0
+  y: 10.0
+  w: 4
+  h: 1
+  type: light
+  label: Low wall
+  terrain: low_wall
+  piece: 'Low wall, sandbags, barricade, fallen tree. Sector B1: Crates and low walls (low wall), two pieces.'
+  sector: B1
+- id: T5
+  x: 25.5
+  y: 3.0
+  w: 9
+  h: 6
+  type: heavy
+  label: Warehouse
+  terrain: building
+  piece: 'Building. Sector C1: Warehouse, about 6" × 9", one tall storey with a gantry inside.'
+  sector: C1
+- id: T6
+  x: 3.0
+  y: 15.0
+  w: 6
+  h: 6
+  type: hill
+  label: Platform
+  terrain: hill
+  piece: 'Hill, ridge, dune, raised platform. Sector A2: Raised platform or gantry (hill, one level) with ladders.'
+  sector: A2
+- id: T7
+  x: 15.0
+  y: 15.0
+  w: 6
+  h: 6
+  type: heavy
+  label: Tanks
+  terrain: solid
+  piece: 'Container, vehicle, wreck, rock, tank. Sector B2: Tanks or pipework (solid), about 6" across.'
+  sector: B2
+- id: T8
+  x: 29.5
+  y: 16.0
+  w: 1
+  h: 4
+  type: light
+  label: Crates
+  terrain: low_wall
+  piece: 'Low wall, sandbags, barricade, fallen tree. Sector C2: Crates and low walls (low wall), two pieces.'
+  sector: C2
+- id: T9
+  x: 28.0
+  y: 22.0
+  w: 4
+  h: 1
+  type: light
+  label: Low wall
+  terrain: low_wall
+  piece: 'Low wall, sandbags, barricade, fallen tree. Sector C2: Crates and low walls (low wall), two pieces.'
+  sector: C2
+- id: T10
+  x: 3.0
+  y: 27.0
+  w: 6
+  h: 6
+  type: hill
+  label: Platform
+  terrain: hill
+  piece: 'Hill, ridge, dune, raised platform. Sector A3: Raised platform or gantry (hill, one level) with ladders.'
+  sector: A3
+- id: T11
+  x: 16.75
+  y: 27.0
+  w: 2.5
+  h: 6
+  type: heavy
+  label: Container
+  terrain: solid
+  piece: 'Container, vehicle, wreck, rock, tank. Sector B3: Yard: two containers (solid).'
+  sector: B3
+- id: T12
+  x: 15.0
+  y: 33.2
+  w: 6
+  h: 2.5
+  type: heavy
+  label: Container
+  terrain: solid
+  piece: 'Container, vehicle, wreck, rock, tank. Sector B3: Yard: two containers (solid).'
+  sector: B3
+- id: T13
+  x: 27.0
+  y: 27.0
+  w: 6
+  h: 6
+  type: area
+  label: Scrap heap
+  terrain: rubble
+  piece: 'Rubble, scrap, ruins. Sector C3: Scrap heap (rubble), 6" × 6".'
+  sector: C3
+objectives:
+- n: 1
+  x: 6.1
+  y: 30.1
+  tile: A3
+  label: West mast (A3)
+  prose: the west mast
+- n: 2
+  x: 30.1
+  y: 30.1
+  tile: C3
+  label: East mast (C3)
+  prose: the east mast
+enemy_entry:
+  x: 18.0
+  y: 35.6
+  tile: edge
+  label: Enemy entry and exit (middle of the far edge)
+enemies:
+- n: 1
+  troop: sep_b1
+  element: sep_b1_section
+  x: 4.2
+  y: 30.7
+  state: Unaware
+- n: 2
+  troop: sep_b1
+  element: sep_b1_section
+  x: 6.7
+  y: 28.2
+  state: Unaware
+- n: 3
+  troop: sep_b1
+  element: sep_b1_section
+  x: 4.7
+  y: 28.7
+  state: Unaware
+- n: 4
+  troop: sep_b1_heavy
+  element: sep_b1_section
+  x: 7.2
+  y: 31.7
+  state: Unaware
+contacts:
+- n: 1
+  x: 16.1
+  y: 30.1
+  where: B3
+- n: 2
+  x: 6.1
+  y: 18.1
+  where: A2
+- n: 3
+  x: 31.1
+  y: 18.1
+  where: C2
+reinforcement: sep_b1_section
+hvt: null
+player: []
+rolls:
+- 'Mission type: named, Sabotage'
+- 'Threat tier: named, 1'
+- 'Sector A1: 1'
+- 'Sector B1: 5'
+- 'Sector C1: 3'
+- 'Sector A2: 6'
+- 'Sector B2: 2'
+- 'Sector C2: 5'
+- 'Sector A3: 6'
+- 'Sector B3: 1'
+- 'Sector C3: 4'
+- 'Conditions: 6'
+- 'Complication: 2'
+- 'Guard: 1'
+- 'Guard: 1'
+- 'Guard: 3'
+environment: industrial
+conditions: night
+deploy:
+- x: 0.3
+  y: 0.3
+  w: 35.4
+  h: 5.7
+  side: player
+  label: within 6" of this edge
+sectors:
+- name: A1
+  text: 'Yard: two containers (solid).'
+- name: B1
+  text: Crates and low walls (low wall), two pieces.
+- name: C1
+  text: Warehouse, about 6" × 9", one tall storey with a gantry inside.
+- name: A2
+  text: Raised platform or gantry (hill, one level) with ladders.
+- name: B2
+  text: Tanks or pipework (solid), about 6" across.
+- name: C2
+  text: Crates and low walls (low wall), two pieces.
+- name: A3
+  text: Raised platform or gantry (hill, one level) with ladders.
+- name: B3
+  text: 'Yard: two containers (solid).'
+- name: C3
+  text: Scrap heap (rubble), 6" × 6".
+arc:
+  id: foundry-moon
+  name: Foundry Moon
+  label: mission 1 of 3
+map_note: 'Each grid square is 6"; heavier lines mark the 12" sectors (A1 bottom left). Board 36" × 36". The Republic enters
+  from the bottom edge. Pieces are footprints from the sector rolls: build the yard from your industrial terrain to match.
+  Put a tall piece (a mast, pylon or antenna) at each objective. Contact chips (?n) are hidden contacts.'
+next:
+- grade: Decisive
+  text: 'Mission 2A, Kraken''s Convoy. The grid is down and the landing is clean: the Republic wins initiative in round 1
+    of 2A.'
+- grade: Marginal
+  text: 'Mission 2A, Kraken''s Convoy. The grid is down, but the droids know a raid came: 2A''s alert track starts at 1.'
+- grade: Failure
+  text: Mission 2B, Bring Them Home. The grid stays up and shoots down the gunship bringing the second wave.
+special_rules:
+- title: Droids at night
+  text: 'The B1s start Unaware, busy at the masts: only turrets and drones start Alerted (chapter 10). Night limits sight
+    to 12", for them as for the clones.'
+- title: The tactical droid
+  text: If a contact turns out to be the tactical droid and its escort, every Separatist element within 12" of it, in its
+    sight, uses the Tactical profile (Battle computer). Put it down first.

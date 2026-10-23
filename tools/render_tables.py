@@ -160,6 +160,8 @@ def render_campaign(section):
     names = {m["id"]: m["name"] for m in load("missions")["missions"]}
     vessels = {v["id"]: v["name"] for v in load("layouts")["vessels"]}
     envs = {e["id"]: e["name"] for e in load("terrain")["environments"]}
+    if section == "short_arc":
+        return "\n".join(f"{i}. {x}" for i, x in enumerate(Cp["short_arc"]["text"], 1))
     if section in ("start_text",):
         return "\n".join(f"- {x}" for x in Cp["start"]["text"])
     if section == "turn":

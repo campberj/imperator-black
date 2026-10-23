@@ -3,9 +3,14 @@
 
 Usage (from the repo root): python3 tools/print_campaign.py
 Writes docs/print/ImperatorBlack_campaign-sheets.pdf. Every table comes from content/campaign.yaml.
+
+Short arcs: python3 tools/print_campaign.py --arc docs/scenarios/arcs/<arc>/arc.yaml
+Writes docs/print/arcs/ImperatorBlack_arc-<id>.pdf: the story, the mission flow, the short arc rules and the roster.
 """
 import sys
 from pathlib import Path
+
+import yaml
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
@@ -203,7 +208,108 @@ def reference_pages():
     return story
 
 
+class ArcFlow(Flowable):
+    """The short arc's flow: mission 1, then 2A (Decisive or Marginal) or 2B (Failure), then mission 3."""
+
+    def __init__(self, width, names, height=1.25 * inch):
+        super().__init__()
+        self.width, self.height, self.names = width, height, names
+
+    def wrap(self, *_):
+        return self.width, self.height
+
+    def box(self, x, y, w, h, label, name):
+        c = self.canv
+        c.setFillColor(SHADE)
+        c.setStrokeColor(ps.INK)
+        c.setLineWidth(0.8)
+        c.roundRect(x, y, w, h, 4, stroke=1, fill=1)
+        c.setFillColor(ps.INK)
+        c.setFont("Body-Bold", 9)
+        c.drawCentredString(x + w / 2, y + h - 13, label)
+        c.setFont("Body", 7)
+        c.drawCentredString(x + w / 2, y + h - 24, name)
+
+    def arrow(self, x1, y1, x2, y2, text):
+        c = self.canv
+        c.setStrokeColor(ps.INK)
+        c.setLineWidth(0.8)
+        c.line(x1, y1, x2, y2)
+        c.setFillColor(ps.INK)
+        c.circle(x2, y2, 1.8, stroke=0, fill=1)
+        c.setFillColor(ps.MUTED)
+        c.setFont("Body", 6.5)
+        tx, ty = x1 + (x2 - x1) * 0.4, y1 + (y2 - y1) * 0.4
+        c.drawCentredString(tx, ty + (4 if y2 >= y1 else -9), text)
+
+    def draw(self):
+        w, h = 1.6 * inch, 0.42 * inch
+        gap = (self.width - 3 * w) / 2
+        mid = self.height / 2 - h / 2
+        top, low = self.height - h - 2, 2
+        x1, x2, x3 = 0, w + gap, 2 * (w + gap)
+        self.box(x1, mid, w, h, "Mission 1", self.names["1"])
+        self.box(x2, top, w, h, "Mission 2A", self.names["2A"])
+        self.box(x2, low, w, h, "Mission 2B", self.names["2B"])
+        self.box(x3, mid, w, h, "Mission 3 (finale)", self.names["3"])
+        self.arrow(x1 + w, mid + h * 0.7, x2, top + h / 2, "Decisive or Marginal")
+        self.arrow(x1 + w, mid + h * 0.3, x2, low + h / 2, "Failure")
+        self.arrow(x2 + w, top + h / 2, x3, mid + h * 0.7, "any grade")
+        self.arrow(x2 + w, low + h / 2, x3, mid + h * 0.3, "any grade")
+
+
+def arc_sheet(path):
+    arc = yaml.safe_load(Path(path).read_text())
+    base = Path(path).parent
+    ms = [(m, yaml.safe_load((base / m["file"]).read_text())) for m in arc["missions"]]
+    names = {m["label"]: s["title"].split(": ", 1)[-1] for m, s in ms}
+    opp = next(o["name"] for o in ps.C["missions"]["oppositions"] if o["id"] == arc["opposition"])
+    faction = next(f["name"] for f in ps.C["factions"]["factions"] if f["id"] == arc["faction"])
+    out = ps.OUT / "arcs" / f"{ps.PREFIX}arc-{arc['id']}.pdf"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    doc = SimpleDocTemplate(str(out), pagesize=letter, leftMargin=0.55 * inch, rightMargin=0.55 * inch,
+                            topMargin=0.45 * inch, bottomMargin=0.45 * inch, title=f"Imperator Black short arc: {arc['name']}", author="Imperator Black")
+    story = [Paragraph(arc["name"], H1),
+             Paragraph(f'Imperator Black short arc · rules v{arc["rules_version"]} · chapter 14 · {faction} against the {opp} · solo · three missions', S),
+             Spacer(1, 5), Paragraph(" ".join(arc["summary"].split()), B), Spacer(1, 8), ArcFlow(W, names), Spacer(1, 8)]
+    rows = []
+    for m, s in ms:
+        task = next(b["text"] for b in s["briefing"] if b["heading"] == "Tasking")
+        rows.append([m["label"], f'<b>{names[m["label"]]}</b><br/>{task}', m["board"], f'{opp}, tier {s["tier"]}', m["force"]])
+    story += [Paragraph("Missions", H2),
+              grid(["", "Mission", "Board", "Opposition", "Force"], rows,
+                   [0.3 * inch, 2.55 * inch, 1.95 * inch, 1.25 * inch, W - 6.05 * inch]), Spacer(1, 6)]
+    nxt = []
+    for m, s in ms:
+        for x in s.get("next", []):
+            nxt.append([m["label"], x["grade"], x["text"]])
+    story += [Paragraph("What each grade leads to", H2), grid(["", "Grade", "Next"], nxt, [0.3 * inch, 0.7 * inch, W - 1.0 * inch]), Spacer(1, 6)]
+    story += [Paragraph("Short arc rules (chapter 14)", H2)] + \
+             [Paragraph(f"{i}. {x}", B) for i, x in enumerate(CP["short_arc"]["text"], 1)]
+
+    # page 2: the roster and the log
+    story += [PageBreak(), Paragraph(f'{arc["name"]}: roster and log', H1),
+              Paragraph("Name every soldier the first time they deploy. Per mission: D if deployed, then XP earned; mark Dead, Down (and the injury roll) or Out. "
+                        f"An advance every {CP['advances']['every']} XP. Count each soldier at its profile's TV.", S), Spacer(1, 4)]
+    head = ["Name", "Profile", "TV", "Mission 1", "Mission 2", "Mission 3", "XP", "Advances", "Injuries / out", "Notes"]
+    widths = [1.1 * inch, 1.1 * inch, 0.35 * inch, 0.62 * inch, 0.62 * inch, 0.62 * inch, 0.35 * inch, 1.05 * inch, 0.95 * inch, W - 6.76 * inch]
+    story += [grid(head, [], widths, blank=arc.get("roster_rows", 12), row_h=0.34 * inch), Spacer(1, 8)]
+    log = [[m["label"], names[m["label"]], "", "", ""] for m, _ in ms]
+    story += [Paragraph("Mission log", H2),
+              grid(["", "Mission", "Played?", "Grade", "Edge or setback carried on, citation, what happened"], log,
+                   [0.3 * inch, 1.9 * inch, 0.6 * inch, 0.8 * inch, W - 3.6 * inch], row_h=0.4 * inch), Spacer(1, 8)]
+    story += [Paragraph("The arc's result", H2),
+              grid(["Result", "The story"], [[r["grade"], r["text"]] for r in arc["results"]], [0.9 * inch, W - 0.9 * inch]), Spacer(1, 4),
+              boxes(["Finale grade", "One step better (1 and 2 both Decisive)", "One step worse (1 or 2 a Failure)", "Arc result"],
+                    [W / 4] * 4, height=0.4 * inch)]
+    doc.build(story)
+    return out
+
+
 def main():
+    if "--arc" in sys.argv:
+        print(f"Wrote {arc_sheet(sys.argv[sys.argv.index('--arc') + 1]).relative_to(ps.ROOT)}")
+        return
     out = ps.OUT / f"{ps.PREFIX}campaign-sheets.pdf"
     ps.OUT.mkdir(parents=True, exist_ok=True)
     doc = SimpleDocTemplate(str(out), pagesize=letter, leftMargin=0.55 * inch, rightMargin=0.55 * inch,

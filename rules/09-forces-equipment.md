@@ -72,7 +72,6 @@ Forces are built from **teams**, like a table of organisation, not from a points
 | **Pathfinder** | Regular | 7" | 2 | 1 | 1 | 1 | 1 | 1 | 2 | Void suit (1) | Heavy rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics; option: Trauma kit or Breaching charge | Void-trained |
 | **Pathfinder SAW Gunner** | Regular | 6" | 2 | 1 | 2 | 1 | 0 | 1 | 2 | Void suit (1) | LMG | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Void-trained |
 | **Control Team Marksman** | Veteran | 6" | 3 | 0 | 0 | 2 | 0 | 1 | 2 | Void suit (1) | DMR | Knife or bayonet, Smoke grenade, Frag grenade, Low-light optics | Void-trained, Marksman 1 |
-| **Hostage** | Green | 5" | 0 | 0 | 0 | 0 | 0 | 1 | 2 | None (0) | — | Unarmed / weapon butt | — |
 <!-- /table -->
 
 ## Gear
@@ -441,6 +440,7 @@ On the Shoot scale (chapter 1), line infantry are trained military (1), officers
 <!-- table:troops.generic -->
 | Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **Hostage** | Green | 5" | 0 | 0 | 0 | 0 | 0 | 1 | 2 | None (0) | — | Unarmed / weapon butt | — |
 | **Officer** | Veteran | 6" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Flak (1) | Carbine / Sidearm / SMG | Knife or bayonet, Frag grenade, Smoke grenade | Leader |
 | **Line Trooper** | Regular | 6" | 1 | 1 | 1 | 1 | 0 | 1 | 2 | Flak (1) | Rifle / Carbine | Knife or bayonet, Frag grenade | — |
 | **Support Gunner** | Regular | 5" | 1 | 1 | 2 | 1 | 0 | 1 | 2 | Flak (1) | LMG / HMG | Knife or bayonet, Frag grenade | — |

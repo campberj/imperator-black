@@ -213,6 +213,7 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_generic -->
 | Troop | TV | Requisition |
 |---|---|---|
+| **Hostage** | 11 | 2 |
 | **Officer** | 45 | 5 |
 | **Line Trooper** | 32 | 4 |
 | **Support Gunner** | 43 | 5 |
@@ -237,7 +238,6 @@ Every profile in chapter 9, with its default loadout.
 | **Pathfinder** | 42 | 5 |
 | **Pathfinder SAW Gunner** | 55 | 6 |
 | **Control Team Marksman** | 48 | 5 |
-| **Hostage** | 11 | 2 |
 <!-- /table -->
 
 ### Galactic Republic

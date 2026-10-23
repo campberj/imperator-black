@@ -19,6 +19,20 @@ The examples follow Task Force Boone against Freespace Solutions. Any player fac
 
 Keep the campaign on the campaign sheets: the force roster, and the campaign status sheet with the arc map (`ImperatorBlack_campaign-sheets.pdf`).
 
+## Short arcs
+
+A **short arc** is a story of three missions, written in advance: the opening, a second mission that depends on how the opening went, and a finale. It uses the force rules of this chapter (injuries, experience, advances) without the arc map, resources or ship, so it plays in an evening or two. Short arcs are written for one faction against one opposition (chapter 13); their sheets are under `docs/scenarios/arcs/`.
+
+<!-- table:campaign.short_arc -->
+1. A short arc is three authored missions: an opening, a second mission chosen by the opening's grade, and a finale. The arc sheet lists them and what each grade leads to.
+2. Roster: any troops of the faction you own. Name every soldier the first time they deploy; they carry their XP, advances and injuries through the arc.
+3. Force: each mission sets a Troop Value limit (chapter 15) and a model limit. Before it, choose who deploys from the soldiers fit for duty. Count each soldier at its profile's TV; advances are free.
+4. After each mission: casualties and injuries, XP and advances as in a full campaign (chapter 14). An injury that puts a soldier out for turns puts them out for that many missions. A soldier left behind Down is captured and out for the rest of the arc, unless the arc gives a chance to bring them back.
+5. Replacements: a Dead, captured or injured soldier of a line profile (a clone trooper, not a named character) may be replaced by a new soldier of the same profile with no XP. A named character who dies is gone for the arc.
+6. Grades lead on: the arc sheet says which mission comes next and any edge or setback it carries (a bigger or smaller force, the alert track's start, contacts removed or added).
+7. The arc's result is the finale's grade, one step better if the first two missions were both Decisive, one step worse if either was a Failure (Decisive, Marginal, Failure; never past either end).
+<!-- /table -->
+
 ## The campaign turn
 
 <!-- table:campaign.turn -->

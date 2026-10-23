@@ -26,9 +26,10 @@ python3 tools/print_sheets.py         # after content changes that affect cards 
 python3 tools/print_scenario.py docs/scenarios/<file>.yaml   # scenario sheet + curated cards (or a deck sheet)
 python3 tools/generate_layout.py <vessel> --seed N --out docs/scenarios/decks/x.yaml   # chapter 11 deck
 python3 tools/generate_layout.py --check     # layout statistics over many seeds
-python3 tools/generate_mission.py ship --seed N --out docs/scenarios/missions/x.yaml   # chapter 13 mission (or: land --environment desert)
+python3 tools/generate_mission.py ship --seed N --out docs/scenarios/missions/x.yaml   # chapter 13 mission (or: land --environment desert; --opposition separatist)
 python3 tools/print_scenario.py --dashboard  # blank mission dashboard
 python3 tools/print_campaign.py              # campaign sheets (chapter 14): status, arc map, roster, reference
+python3 tools/print_campaign.py --arc docs/scenarios/arcs/<arc>/arc.yaml   # short arc sheet; print its missions with print_scenario.py
 python3 tools/troop_values.py [--calibrate]   # troop values (chapter 15); --reference after editing values or troops (C# fixture)
 python3 tools/print_builder.py               # troop builder worksheet and cost tables
 python3 tools/layout_reference.py            # after editing layouts.yaml: reference stats for the C# deck generator's tests

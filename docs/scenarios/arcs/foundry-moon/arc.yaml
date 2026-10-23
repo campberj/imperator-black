@@ -1,0 +1,24 @@
+# Short arc: Foundry Moon (rules chapter 14, short arcs). Galactic Republic against the Separatist Alliance, solo.
+# Printed by: python3 tools/print_campaign.py --arc docs/scenarios/arcs/foundry-moon/arc.yaml
+# Then print each mission: python3 tools/print_scenario.py docs/scenarios/arcs/foundry-moon/<mission>.yaml
+id: foundry-moon
+kind: arc
+name: Foundry Moon
+faction: republic
+opposition: separatist
+rules_version: "0.5"
+summary: >
+  The Separatists have restarted the droid foundry on Ordo Kessa, a mining moon the Republic thought was worked out.
+  Every few weeks a frigate lifts from its landing field with a battalion of new battle droids. A clone company and
+  its Jedi commander have one window before the next shipment leaves: blind the moon's defence grid, break the
+  droids' command, and stop the ship.
+missions:
+  - { label: "1", file: 1-lights-out.yaml, board: "Industrial table, 36\" × 36\" (generated layout)", force: "250 TV, 6 models" }
+  - { label: "2A", file: 2a-krakens-convoy.yaml, board: "Desert table, 35\" × 43\" (Gym 2)", force: "300 TV, 7 models" }
+  - { label: "2B", file: 2b-bring-them-home.yaml, board: "Desert table, 35\" × 43\" (Gym 2)", force: "300 TV, 7 models" }
+  - { label: "3", file: 3-the-foundry-ship.yaml, board: "Frigate command deck, 30\" × 18\" (corvette layout, deck 8)", force: "350 TV, 8 models (400 or 300 after 2B)" }
+results:
+  - { grade: Decisive, text: "The foundry's shipment never leaves Ordo Kessa, and the moon's droid army is blind and leaderless. The company is mentioned in dispatches." }
+  - { grade: Marginal, text: "The shipment is delayed by weeks, at a price. The foundry will have to be finished by a bigger force." }
+  - { grade: Failure, text: "The battalion reaches the front. Ordo Kessa keeps building, and the Separatists know the Republic is watching." }
+roster_rows: 12

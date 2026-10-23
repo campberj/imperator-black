@@ -1055,7 +1055,19 @@
     "evidence": [
       "Evidence comes from the after-action rewards, safe houses and winning an arc. It is never spent.",
       "At 6 Evidence, the Directorate is exposed: the next arc is against the Meridian Directorate. Its column 1 is threat tier 2, column 2 tier 3, and the target tier 4."
-    ]
+    ],
+    "short_arc": {
+      "missions": 3,
+      "text": [
+        "A short arc is three authored missions: an opening, a second mission chosen by the opening's grade, and a finale. The arc sheet lists them and what each grade leads to.",
+        "Roster: any troops of the faction you own. Name every soldier the first time they deploy; they carry their XP, advances and injuries through the arc.",
+        "Force: each mission sets a Troop Value limit (chapter 15) and a model limit. Before it, choose who deploys from the soldiers fit for duty. Count each soldier at its profile's TV; advances are free.",
+        "After each mission: casualties and injuries, XP and advances as in a full campaign (chapter 14). An injury that puts a soldier out for turns puts them out for that many missions. A soldier left behind Down is captured and out for the rest of the arc, unless the arc gives a chance to bring them back.",
+        "Replacements: a Dead, captured or injured soldier of a line profile (a clone trooper, not a named character) may be replaced by a new soldier of the same profile with no XP. A named character who dies is gone for the arc.",
+        "Grades lead on: the arc sheet says which mission comes next and any edge or setback it carries (a bigger or smaller force, the alert track's start, contacts removed or added).",
+        "The arc's result is the finale's grade, one step better if the first two missions were both Decisive, one step worse if either was a Failure (Decisive, Marginal, Failure; never past either end)."
+      ]
+    }
   },
   "core": {
     "version": "0.5.0",
@@ -5142,7 +5154,7 @@
       },
       {
         "id": "hostage",
-        "faction": "tfb",
+        "faction": "generic",
         "name": "Hostage",
         "role": "Rescued personnel",
         "rank": "green",

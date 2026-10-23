@@ -1,0 +1,344 @@
+# Short arc Foundry Moon: mission 2A, Kraken's Convoy (RJ's desert table, from Gym 2).
+# Republic against the Separatist Alliance (rules chapter 14, short arcs).
+# Printed by: python3 tools/print_scenario.py docs/scenarios/arcs/foundry-moon/<this file>
+id: foundry-moon-2a-krakens-convoy
+title: 'Foundry Moon 2A: Kraken''s Convoy'
+kind: mission
+kind_label: short arc mission
+arc:
+  id: foundry-moon
+  name: Foundry Moon
+  label: mission 2A of 3
+rules_version: '0.5'
+setting: land
+mission: capture
+tier: 2
+opposition: separatist
+size: small
+clock:
+  die: d4
+  limit: 20
+  check_in_every: 5
+  first_check_in: 10
+alert_start: 0
+complication: none
+situation: 'With the grid down, a gunship spotted Kraken''s convoy halted on the mesa above the spire flats: its AAT has thrown
+  a repulsor, and the super tactical droid is at the old relay post, re-routing the moon''s droids by hand. Kraken runs the
+  foundry''s defence. Its memory core holds the codes of the ship that carries the foundry''s output.'
+board:
+  width: 35
+  height: 43
+tiles: []
+doors: []
+cover:
+- id: T1
+  x: 11.5
+  y: 30.5
+  w: 20
+  h: 12.5
+  type: hill
+  label: Mesa
+  piece: The dark mesa with the relay. One level up; sheer sides, except the gentle west slope beside the spire field.
+- id: T2
+  x: 26
+  y: 34
+  w: 7.5
+  h: 9
+  type: heavy
+  label: Rock shelf
+  piece: 'The high rock shelf at the mesa''s east end: two levels, sheer. Blocks sight across the mesa top.'
+- id: T3
+  x: 19.5
+  y: 33.5
+  w: 2
+  h: 2.5
+  type: heavy
+  label: Relay mast
+  piece: 'The relay tower, now a Separatist signal post. Solid: Heavy cover, blocks sight.'
+- id: T4
+  x: 15
+  y: 38.5
+  w: 3.5
+  h: 4.5
+  type: area
+  label: Camo netting
+  piece: 'Camouflage netting over a tent: scrub (Light cover inside; sight through no more than 3").'
+- id: T5
+  x: 22.5
+  y: 26.5
+  w: 5
+  h: 4
+  type: area
+  label: Dug-out
+  piece: 'Netting over the dug-out door at the mesa''s foot: scrub. The Pointmen come out here.'
+- id: T6
+  x: 16.3
+  y: 17.8
+  w: 8.4
+  h: 12.5
+  type: hill
+  label: Central ridge
+  piece: 'The long tan ridge: one level, sheer sides. Light cover behind its crest against shooters below.'
+- id: T7
+  x: 12
+  y: 25.8
+  w: 4.5
+  h: 4.5
+  type: heavy
+  label: Great spire
+  piece: 'The tall spire at the mesa''s foot: solid, blocks sight.'
+- id: T8
+  x: 13
+  y: 9.5
+  w: 10
+  h: 8.5
+  type: heavy
+  label: Dark boulder
+  piece: 'The large dark rock: solid, blocks sight; too steep to climb.'
+- id: T9
+  x: 4.2
+  y: 32.3
+  w: 7.2
+  h: 9.4
+  type: area
+  label: Spire field
+  piece: 'The round base with small spires: dense woods (Light cover inside, sight no more than 1" through, difficult ground).'
+- id: T10
+  x: 8.4
+  y: 0.5
+  w: 6.6
+  h: 8.2
+  type: area
+  label: Spire field
+  piece: 'The second round spire base: dense woods, as T9.'
+- id: T11
+  x: 4.4
+  y: 27.5
+  w: 3
+  h: 3.7
+  type: heavy
+  label: Spire
+  piece: 'Small stacked spire: solid.'
+- id: T12
+  x: 7.5
+  y: 23.6
+  w: 3.5
+  h: 6.5
+  type: light
+  label: Rock spine
+  piece: 'The low curved rock line west of the ridge: low wall (Heavy cover within 1" behind it; obstacle).'
+- id: T13
+  x: 8.9
+  y: 17.2
+  w: 3.9
+  h: 5.6
+  type: heavy
+  label: Rock stack
+  piece: 'The stacked rock outcrop west of centre: solid.'
+- id: T14
+  x: 4
+  y: 8.6
+  w: 3.7
+  h: 6.4
+  type: light
+  label: Rock spine
+  piece: 'The curved rock line on the west side: low wall.'
+- id: T15
+  x: 17
+  y: 1
+  w: 6.8
+  h: 8
+  type: heavy
+  label: Spire mound
+  piece: 'The big spire on its mound south of the boulder: solid.'
+- id: T16
+  x: 24.5
+  y: 2.2
+  w: 3.5
+  h: 4.3
+  type: heavy
+  label: Spire
+  piece: 'Small spire: solid.'
+- id: T17
+  x: 25.2
+  y: 14
+  w: 3.7
+  h: 5.1
+  type: light
+  label: Rock spine
+  piece: 'The upright rock line east of the boulder: low wall.'
+- id: T18
+  x: 27.3
+  y: 9.9
+  w: 6.3
+  h: 3.9
+  type: heavy
+  label: Spire ridge
+  piece: 'The long leaning spire on the east side: solid.'
+- id: T19
+  x: 31.3
+  y: 19.1
+  w: 3.2
+  h: 2.2
+  type: heavy
+  label: Spire
+  piece: 'Small spire on the east edge: solid.'
+- id: T20
+  x: 27.5
+  y: 22.1
+  w: 3.3
+  h: 2
+  type: heavy
+  label: Spire
+  piece: 'Small spire below the mesa: solid.'
+- id: T21
+  x: 24
+  y: 23.6
+  w: 2.4
+  h: 3.5
+  type: light
+  label: Rock spine
+  piece: 'Short rock line by the dug-out: low wall.'
+- id: T22
+  x: 27.5
+  y: 15.5
+  w: 6
+  h: 4.5
+  type: ditch
+  label: Crevice
+  piece: 'The brown crevice printed on the mat (east): a ditch (Heavy cover inside against shooters outside; getting in or
+    out is an obstacle).'
+- id: T23
+  x: 4
+  y: 5.5
+  w: 6
+  h: 3
+  type: ditch
+  label: Crevice
+  piece: 'The brown crevice printed on the mat (west): a ditch.'
+- id: T24
+  x: 13
+  y: 33.5
+  w: 5.5
+  h: 4
+  type: heavy
+  label: AAT
+  piece: 'The broken-down AAT on the mesa top (any tank or wreck): solid, Heavy cover, blocks sight.'
+objectives:
+- n: 1
+  x: 20.5
+  y: 32.6
+  tile: mesa
+  label: Kraken
+  prose: the relay post on the mesa
+enemy_entry:
+  x: 0.5
+  y: 42.5
+  tile: edge
+  label: Enemy entry and exit (the north-west corner, past the spire field)
+enemies:
+- n: 1
+  troop: sep_kraken
+  element: sep_kraken_command
+  x: 21.8
+  y: 33.0
+  state: Unaware (the HVT)
+- n: 2
+  troop: sep_b2
+  element: sep_kraken_command
+  x: 18.6
+  y: 32.0
+  state: Unaware
+- n: 3
+  troop: sep_b2
+  element: sep_kraken_command
+  x: 22.5
+  y: 35.8
+  state: Unaware
+contacts:
+- n: 1
+  x: 16.5
+  y: 31.5
+  where: the mesa, by the AAT
+- n: 2
+  x: 25.0
+  y: 28.0
+  where: the dug-out (T5)
+- n: 3
+  x: 6.0
+  y: 25.5
+  where: the west flats, by the rock spine
+- n: 4
+  x: 29.5
+  y: 21.0
+  where: the east flats, below the mesa
+reinforcement: sep_b2_squad
+hvt: sep_kraken
+player: []
+deploy:
+- x: 0.3
+  y: 0.3
+  w: 34.4
+  h: 5.7
+  side: player
+  label: 'Republic: within 6" of the bottom edge'
+map_note: 'Each grid square is 6". RJ''s 35" × 43" desert table, played lengthwise, as in Gym 2: the Republic enters from
+  the bottom edge, the mesa is at the top. The mesa and central ridge are one level up (sheer sides; the mesa''s west slope
+  beside the spire field is open ground); the rock shelf is two levels. Enemy positions are model centres.'
+task: 'Kraken is the HVT. A droid cannot be taken prisoner: put Kraken Down, or destroy it, then a model in base contact pulls
+  its memory core with an Interact. The core travels with the model that took it, as data (chapter 13, seize); if that model
+  goes Down, a model in base contact may take it with an Interact. Extract it by the Republic''s edge.'
+lockdown: 'Kraken runs: from now on it activates first each enemy turn, using the Handler profile''s escape line toward the
+  enemy''s exit (the north-west corner). If it leaves the board, it has escaped. It also runs once the alert track reaches
+  4 (see Special rules).'
+grades:
+- grade: Decisive
+  text: Kraken's memory core extracted, and no Republic model Dead.
+- grade: Marginal
+  text: Kraken's memory core extracted, or Kraken destroyed.
+- grade: Failure
+  text: Kraken escaped, or still active when time runs out.
+next:
+- grade: Decisive
+  text: 'Mission 3, The Foundry Ship. The core holds the frigate''s codes: before setting up, remove two contact chips of
+    your choice.'
+- grade: Marginal
+  text: 'Mission 3, The Foundry Ship. Some codes survived: before setting up, remove one contact chip of your choice.'
+- grade: Failure
+  text: 'Mission 3, The Foundry Ship. Kraken reaches the frigate and warns it: mission 3''s alert track starts 1 higher.'
+special_rules:
+- title: From Refinery Nine
+  text: If mission 1 was Decisive, the Republic wins initiative in round 1. If it was Marginal, the alert track starts at
+    1.
+- title: The convoy is leaving
+  text: Kraken runs (as the lockdown) from the end of the round in which the alert track reaches 4, as well as at 6.
+- title: Battle computer
+  text: 'While Kraken stands, every Separatist element within 18" of it uses the Tactical profile with the Veteran drill (Battle
+    computer 2): no line of sight needed.'
+- title: Getting onto the mesa
+  text: The mesa is one level up. Climbing a sheer face costs 2" (chapter 12); the west slope beside the spire field (T9)
+    is open ground. A Leap ignores the climb.
+briefing:
+- heading: Tasking
+  text: 'Capture a high-value target: Kraken''s memory core.'
+- heading: Situation
+  text: 'With the grid down, a gunship spotted Kraken''s convoy halted on the mesa above the spire flats: its AAT has thrown
+    a repulsor, and the super tactical droid is at the old relay post, re-routing the moon''s droids by hand. Kraken runs
+    the foundry''s defence. Its memory core holds the codes of the ship that carries the foundry''s output.'
+- heading: Objective
+  text: 'Kraken, at the relay post on the mesa. Kraken is the HVT. A droid cannot be taken prisoner: put Kraken Down, or destroy
+    it, then a model in base contact pulls its memory core with an Interact. The core travels with the model that took it,
+    as data (chapter 13, seize); if that model goes Down, a model in base contact may take it with an Interact. Extract it
+    by the Republic''s edge.'
+- heading: Opposition
+  text: 'Separatist Alliance, threat tier 2. Guard (known): Kraken and two B2 super battle droids, at the relay post, Unaware.
+    Contacts (unknown): 4 chips. Reinforcements: a B2 squad.'
+- heading: Ground
+  text: 'RJ''s desert table (Gym 2), with the AAT on the mesa. Conditions: roll (chapter 12).'
+- heading: Complication
+  text: None, but see From Refinery Nine (Special rules).
+- heading: Extraction and time
+  text: 'Out by the Republic''s own edge. Enemy entry and exit: the north-west corner. Small mission: 20 minutes, clock die
+    d4. Check-ins every 5 minutes from minute 10. Alert track starts at 0 (1 after a Marginal mission 1).'
+- heading: Force
+  text: 'Republic: up to 300 TV and 7 models from the soldiers fit for duty (chapter 14, short arcs).'

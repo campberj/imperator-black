@@ -170,7 +170,8 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 - [x] Printable [campaign sheets](print/ImperatorBlack_campaign-sheets.pdf): status with the arc map, force roster, reference
 - [x] Troop values (item 6): simulator data (app task 13); rules chapter 15 draft: [troop values and building troops](../rules/15-troop-values.md), `content/values.yaml`, reference `tools/troop_values.py`, printable [troop builder](print/ImperatorBlack_troop-builder.pdf); campaign replacements now cost Requisition = TV ÷ 10
 - [ ] Troop builder in the app (Phase 9; app task 16 ports the formula first)
-- [ ] Play a 3-mission campaign on paper
+- [x] Short arcs (decision 7.13): chapter 14 *Short arcs*; the first, [Foundry Moon](scenarios/arcs/README.md) (Republic against the new Separatist opposition, solo), with its [arc sheet](print/arcs/ImperatorBlack_arc-foundry-moon.pdf) and four mission sheets
+- [ ] Play a 3-mission campaign on paper (Foundry Moon first)
 
 **Exit:** A 3-mission paper campaign plays through without rule gaps.
 

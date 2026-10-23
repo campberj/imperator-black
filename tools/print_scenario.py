@@ -89,7 +89,7 @@ class MapFlowable(Flowable):
                     c.line(*self.p(0, gy), *self.p(self.bw, gy))
                 c.setFillColor(ps.MUTED)
                 c.setFont("Body-Bold", 7)
-                for sec in s["sectors"]:
+                for sec in s.get("sectors", []):
                     col, row = "ABCDE".index(sec["name"][0]), int(sec["name"][1:]) - 1
                     c.drawString(*self.p(col * 12 + 0.3, row * 12 + 11.0), sec["name"])
         # tiles with grid
@@ -500,6 +500,20 @@ OPPOSITIONS = {o["id"]: {t["tier"]: t for t in o["tiers"]} for o in MC.get("oppo
 def tier_def(s):
     """The mission's threat tier: from its named opposition (chapter 13), else the default tiers."""
     return (OPPOSITIONS[s["opposition"]] if s.get("opposition") else TIER_DEFS)[s["tier"]]
+
+
+def reinforcement(s):
+    """The element that answers alert 4: the mission's own (an authored mission may name one), else the tier's."""
+    return s.get("reinforcement") or tier_def(s)["reinforcement"]
+
+
+def mission_text(s):
+    """Task, lockdown and grades: the mission type's, with an authored mission's own text where it gives one."""
+    m = MISSIONS[s["mission"]]
+    g = {x["grade"].lower(): x["text"] for x in s.get("grades", [])}
+    return {"task": s.get("task") or m["task"], "lockdown": s.get("lockdown") or m["lockdown"],
+            "decisive": g.get("decisive", m["decisive"]), "marginal": g.get("marginal", m["marginal"]),
+            "failure": g.get("failure", m["failure"])}
 SPECIALS = {c["id"]: c for c in MC["contact_results"]}
 MISSION_COLOUR = colors.HexColor("#6b4a12")
 
@@ -512,7 +526,7 @@ def composition(el):
 def mission_elements(s):
     """Every element the mission can put on the table: guard, contact table, reinforcement. In that order, no repeats."""
     tier = tier_def(s)
-    ids = [s["enemies"][0]["element"]] + [r["result"] for r in tier["table"] if r["result"] in ELEMENTS] + [tier["reinforcement"]]
+    ids = [s["enemies"][0]["element"]] + [r["result"] for r in tier["table"] if r["result"] in ELEMENTS] + [reinforcement(s)]
     out = []
     for i in ids:
         if i not in out:
@@ -549,9 +563,13 @@ def mission_sheet(s, out):
     W = letter[0] - 1.1 * inch
     brief = {b["heading"]: b["text"] for b in s["briefing"]}
     where = "aboard ship" if s["setting"] == "ship" else "land"
-    story = [Paragraph(s["title"], H1),
-             Paragraph(f'Imperator Black mission · rules v{s["rules_version"]} · chapter 13 · {where} · threat tier {s["tier"]} · '
-                       f'seed {s["seed"]} · solo', SMALL),
+    opp = f'{next(o["name"] for o in MC["oppositions"] if o["id"] == s["opposition"])}, ' if s.get("opposition") else ""
+    if s.get("arc"):
+        head = (f'Imperator Black short arc · {s["arc"]["name"]} · {s["arc"]["label"]} · rules v{s["rules_version"]} · '
+                f'{where} · {opp}threat tier {s["tier"]} · solo')
+    else:
+        head = f'Imperator Black mission · rules v{s["rules_version"]} · chapter 13 · {where} · {opp}threat tier {s["tier"]} · seed {s["seed"]} · solo'
+    story = [Paragraph(s["title"], H1), Paragraph(head, SMALL),
              Spacer(1, 5),
              Paragraph(f'<b>Tasking.</b> {brief["Tasking"]}', B), Spacer(1, 2),
              Paragraph(f'<b>Situation.</b> {brief["Situation"]}', B), Spacer(1, 6),
@@ -564,17 +582,26 @@ def mission_sheet(s, out):
         note = (f'Each grid square is 6"; heavier lines mark the 12" sectors (A1 bottom left). Board {s["board"]["width"]}" × '
                 f'{s["board"]["height"]}". The player edge is the bottom. Pieces are footprints from the sector rolls: '
                 'place your own terrain to match. Contact chips (?n) are hidden contacts.')
-    story += [Paragraph(note, SMALL), Spacer(1, 5)]
-    for h in ("Objective", "Opposition", "Ground", "Complication", "Extraction and time"):
+    story += [Paragraph(s.get("map_note") or note, SMALL), Spacer(1, 5)]
+    standard = ("Tasking", "Situation", "Objective", "Opposition", "Ground", "Complication", "Extraction and time", "Grades")
+    for h in standard[2:7] + tuple(b["heading"] for b in s["briefing"] if b["heading"] not in standard):
         story += [Paragraph(f'<b>{h}.</b> {brief[h]}', B), Spacer(1, 2)]
 
     # page 2: how it plays
     story.append(PageBreak())
+    mt = mission_text(s)
     story += [Paragraph(f'{m["name"]}', H2),
-              Paragraph(f'<b>Taking it.</b> {m["task"]}', B), Spacer(1, 2),
-              Paragraph(f'<b>Lockdown (alert 6).</b> {m["lockdown"]}', B), Spacer(1, 3),
-              grid_table([["Grade", "Result"], ["Decisive", m["decisive"]], ["Marginal", m["marginal"]], ["Failure", m["failure"]]],
+              Paragraph(f'<b>Taking it.</b> {mt["task"]}', B), Spacer(1, 2),
+              Paragraph(f'<b>Lockdown (alert 6).</b> {mt["lockdown"]}', B), Spacer(1, 3),
+              grid_table([["Grade", "Result"], ["Decisive", mt["decisive"]], ["Marginal", mt["marginal"]], ["Failure", mt["failure"]]],
                          [0.9 * inch, W - 0.9 * inch]), Spacer(1, 6)]
+    if s.get("next"):
+        story += [Paragraph("After the mission", H2),
+                  grid_table([["Grade", "Next"]] + [[x["grade"], x["text"]] for x in s["next"]], [0.9 * inch, W - 0.9 * inch]),
+                  Spacer(1, 6)]
+    if s.get("special_rules"):
+        story += [Paragraph("Special rules", H2)]
+        story += [Paragraph(f'<b>{r["title"]}.</b> {r["text"]}', B) for r in s["special_rules"]] + [Spacer(1, 6)]
     al = MC["alert"]
     raises = "; ".join(f'{r["source"]} +{r["amount"]}' for r in al["raises"])
     story += [Paragraph("Alert track and clock", H2),
@@ -597,7 +624,7 @@ def mission_sheet(s, out):
             when.append(f'Guard: models {", ".join(str(e["n"]) for e in s["enemies"])}')
         if any(r["result"] == el["id"] for r in tier["table"]):
             when.append("Contact")
-        if el["id"] == tier["reinforcement"]:
+        if el["id"] == reinforcement(s):
             when.append("Reinforcements (alert 4), at the enemy entry")
         guard = el["id"] == s["enemies"][0]["element"]
         rows.append([el["name"], "; ".join(when), ps.BEHAVIORS[el["behavior"]]["name"], element_drill(el, guard and hvt_extra)])
@@ -618,10 +645,12 @@ def mission_sheet(s, out):
         story += [Paragraph(n, B) for n in s.get("deck_notes", [])]
         story += [Spacer(1, 6)] + terrain_flow(s, W)
     else:
-        secs = [["Sector", "Roll result"]] + [[x["name"], x["text"]] for x in s["sectors"]]
-        story += [Paragraph("Sectors", H2), grid_table(secs, [0.6 * inch, W - 0.6 * inch]), Spacer(1, 6)]
+        if s.get("sectors"):
+            secs = [["Sector", "Roll result"]] + [[x["name"], x["text"]] for x in s["sectors"]]
+            story += [Paragraph("Sectors", H2), grid_table(secs, [0.6 * inch, W - 0.6 * inch]), Spacer(1, 6)]
         story += terrain_flow(s, W)
-    story += [Spacer(1, 6), Paragraph("Rolls", H2), Paragraph("; ".join(s["rolls"]) + ".", SMALL)]
+    if s.get("rolls"):
+        story += [Spacer(1, 6), Paragraph("Rolls", H2), Paragraph("; ".join(s["rolls"]) + ".", SMALL)]
     story.append(PageBreak())
     story += dashboard_flow(s, W)
     doc.build(story)
@@ -698,7 +727,7 @@ def dashboard_flow(s, W):
     ctab = _form(["Chip", "Where", "Revealed as", "State"], cts, [0.4 * inch, 0.55 * inch, 1.25 * inch, 1.3 * inch], max(0, 6 - len(cts)))
     if s:
         els = [[ELEMENTS[s["enemies"][0]["element"]]["name"] + " (guard)", "U  A  E", ""]]
-        els += [[tier_def(s)["reinforcement"] and ELEMENTS[tier_def(s)["reinforcement"]]["name"] + " (reinf.)", "U  A  E", ""]]
+        els += [[ELEMENTS[reinforcement(s)]["name"] + " (reinf.)", "U  A  E", ""]]
     else:
         els = []
     etab = _form(["Element", "Awareness", "Down / Dead / surrendered"], els, [1.45 * inch, 0.7 * inch, W / 2 - 2.3 * inch], max(0, 6 - len(els)))
@@ -723,12 +752,12 @@ def dashboard_pdf(out):
 # ---------------------------------------------------------------- mission cards
 
 def mission_cards(s):
-    m, tier = MISSIONS[s["mission"]], tier_def(s)
+    m, tier, mt = MISSIONS[s["mission"]], tier_def(s), mission_text(s)
     S, H = ps.S_BODY, ps.S_HEAD
-    obj = [Paragraph(f'<i>{m["summary"]}</i>', S), Spacer(1, 2), Paragraph("Taking it", H), Paragraph(m["task"], S),
-           Spacer(1, 2), Paragraph("Lockdown (alert 6)", H), Paragraph(m["lockdown"], S), Spacer(1, 2), Paragraph("Grades", H),
-           Paragraph(f'<b>Decisive:</b> {m["decisive"]}', S), Paragraph(f'<b>Marginal:</b> {m["marginal"]}', S),
-           Paragraph(f'<b>Failure:</b> {m["failure"]}', S)]
+    obj = [Paragraph(f'<i>{m["summary"]}</i>', S), Spacer(1, 2), Paragraph("Taking it", H), Paragraph(mt["task"], S),
+           Spacer(1, 2), Paragraph("Lockdown (alert 6)", H), Paragraph(mt["lockdown"], S), Spacer(1, 2), Paragraph("Grades", H),
+           Paragraph(f'<b>Decisive:</b> {mt["decisive"]}', S), Paragraph(f'<b>Marginal:</b> {mt["marginal"]}', S),
+           Paragraph(f'<b>Failure:</b> {mt["failure"]}', S)]
     al, ck = MC["alert"], s["clock"]
     alert = [Paragraph("Raises", H)] + [Paragraph(f'• {r["source"]}: +{r["amount"]}', S) for r in al["raises"]] + \
             [Spacer(1, 2), Paragraph("Thresholds (once each)", H)] + [Paragraph(f'<b>{t["at"]}:</b> {t["effect"]}', S) for t in al["thresholds"]] + \
@@ -738,11 +767,15 @@ def mission_cards(s):
     rows = contact_table_rows(s)[1:]
     cts = [Paragraph(f'{i}. {x}', S) for i, x in enumerate(MC["contacts"], 1)] + [Spacer(1, 2), Paragraph(f"d6 (threat tier {s['tier']})", H)]
     cts += [Paragraph(f'<b>{r[0]}:</b> {r[1]}' + (f' ({r[2]})' if r[3] != "—" else ""), S) for r in rows]
-    cts += [Spacer(1, 2), Paragraph(f'<b>Reinforcements:</b> {ELEMENTS[tier["reinforcement"]]["name"]} ({composition(ELEMENTS[tier["reinforcement"]])}).', S)]
+    cts += [Spacer(1, 2), Paragraph(f'<b>Reinforcements:</b> {ELEMENTS[reinforcement(s)]["name"]} ({composition(ELEMENTS[reinforcement(s)])}).', S)]
     col = MISSION_COLOUR
-    return [("mission", (m["name"], "Mission card · objective and grades", obj, col, "chapter 13")),
-            ("mission", ("Alert and clock", "Mission card · the pressure", alert, col, "chapter 13")),
-            ("mission", ("Contacts", f"Mission card · threat tier {s['tier']}", cts, col, "chapter 13"))]
+    out = [("mission", (m["name"], "Mission card · objective and grades", obj, col, "chapter 13")),
+           ("mission", ("Alert and clock", "Mission card · the pressure", alert, col, "chapter 13")),
+           ("mission", ("Contacts", f"Mission card · threat tier {s['tier']}", cts, col, "chapter 13"))]
+    if s.get("special_rules"):
+        sr = [Paragraph(f'<b>{r["title"]}.</b> {r["text"]}', S) for r in s["special_rules"]]
+        out.append(("mission", ("Special rules", "Mission card · this mission only", sr, col, "chapter 13")))
+    return out
 
 
 def mission_items(s):
@@ -790,7 +823,7 @@ def main():
         print(f"Wrote {out.relative_to(ROOT)}")
         return
     if s.get("kind") == "mission":
-        out_dir = ps.OUT / "missions"
+        out_dir = ps.OUT / ("arcs" if s.get("arc") else "missions")
         out_dir.mkdir(parents=True, exist_ok=True)
         sheet_path = out_dir / f"{ps.PREFIX}{s['id']}-sheet.pdf"
         cards_path = out_dir / f"{ps.PREFIX}{s['id']}-cards.pdf"
