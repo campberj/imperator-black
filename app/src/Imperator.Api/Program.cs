@@ -5,6 +5,7 @@ using Imperator.Core;
 using Imperator.Core.Land;
 using Imperator.Core.Layouts;
 using Imperator.Core.Missions;
+using Imperator.Core.Values;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
@@ -49,6 +50,12 @@ var deckJson = new JsonSerializerOptions(JsonSerializerDefaults.Web)
     PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
     DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
 };
+
+app.MapGet("/values", (HttpContext ctx) =>
+{
+    ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
+    return Results.Json(new TroopValueCalculator(content.Set).AllTroops(), deckJson);
+});
 
 app.MapGet("/decks/{vessel}", (HttpContext ctx, string vessel, int? seed) =>
 {
