@@ -10,6 +10,7 @@ export const ROUTES = [
   { id: 'decks', label: 'Deck maps' },
   { id: 'land', label: 'Land tables' },
   { id: 'missions', label: 'Missions' },
+  { id: 'arcs', label: 'Short arcs' },
   { id: 'dashboard', label: 'Dashboard' },
 ] as const
 
