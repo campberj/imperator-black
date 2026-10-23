@@ -40,9 +40,8 @@ If the direct API reports 404, first inspect `lsof -nP -iTCP:5080 -sTCP:LISTEN`
 on macOS; terminate the **stale API process**, not unrelated processes.
 Start the current API with `dotnet run --project app/src/Imperator.Api`.
 If direct API checks pass and only the proxy fails, restart the Vite dev server
-and check `IMPERATOR_API`. Use `npm --prefix app/web run dev`,
-not `npm --prefix app/web run preview` (the development proxy is configured in
-`server.proxy`, not preview).
+and check `IMPERATOR_API`. Both `npm --prefix app/web run dev` and `npm --prefix app/web run preview`
+now share the same API proxy; restart the process after pulling the fix.
 
 
 
