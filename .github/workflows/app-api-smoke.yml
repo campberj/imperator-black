@@ -1,0 +1,64 @@
+name: App API routes (real servers)
+
+on:
+  pull_request:
+    paths:
+      - 'app/src/Imperator.Api/**'
+      - 'app/src/Imperator.Core/**'
+      - 'app/web/**'
+      - 'tools/check_app_endpoints.py'
+      - '.github/workflows/app-api-smoke.yml'
+  push:
+    paths:
+      - 'app/src/Imperator.Api/**'
+      - 'app/src/Imperator.Core/**'
+      - 'app/web/**'
+      - 'tools/check_app_endpoints.py'
+      - '.github/workflows/app-api-smoke.yml'
+
+jobs:
+  routes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: app/web/package-lock.json
+      - name: Launch the current .NET API
+        run: |
+          dotnet run --project app/src/Imperator.Api --no-launch-profile --urls http://localhost:5080 > /tmp/imperator-api.log 2>&1 &
+          curl -fsS --retry 60 --retry-delay 2 --retry-connrefused http://localhost:5080/content >/dev/null
+      - name: Check direct endpoints
+        run: |
+          npm --prefix app/web ci
+          python3 - <<'PY'
+          import importlib.util
+          spec = importlib.util.spec_from_file_location("endpoint_check", "tools/check_app_endpoints.py")
+          mod = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+          for method, path, shape in mod.ROUTES:
+              err = mod.probe(mod.API, method, path, shape)
+              assert err is None, f"{method} {path}: {err}"
+          PY
+      - name: Check Vite dev proxy
+        run: |
+          npm --prefix app/web run dev -- --host 127.0.0.1 > /tmp/imperator-vite.log 2>&1 &
+          curl -fsS --retry 30 --retry-delay 1 --retry-connrefused http://localhost:5173/ >/dev/null
+          python3 tools/check_app_endpoints.py
+      - name: Check Vite production preview proxy
+        run: |
+          npm --prefix app/web run build
+          npm --prefix app/web run preview -- --host 127.0.0.1 > /tmp/imperator-preview.log 2>&1 &
+          curl -fsS --retry 30 --retry-delay 1 --retry-connrefused http://localhost:4173/ >/dev/null
+          IMPERATOR_WEB=http://localhost:4173 python3 tools/check_app_endpoints.py
+      - name: Print server logs on failure
+        if: failure()
+        run: |
+          for log in /tmp/imperator-api.log /tmp/imperator-vite.log /tmp/imperator-preview.log; do
+            if test -f "$log"; then echo "== $log =="; tail -n 100 "$log"; fi
+          done
