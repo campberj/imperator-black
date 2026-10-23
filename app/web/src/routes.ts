@@ -11,6 +11,7 @@ export const ROUTES = [
   { id: 'land', label: 'Land tables' },
   { id: 'missions', label: 'Missions' },
   { id: 'arcs', label: 'Short arcs' },
+  { id: 'planner', label: 'Force planner' },
   { id: 'dashboard', label: 'Dashboard' },
 ] as const
 
