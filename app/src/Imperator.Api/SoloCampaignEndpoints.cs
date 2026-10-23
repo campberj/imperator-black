@@ -67,12 +67,6 @@ public static class SoloCampaignEndpoints
             .FirstOrDefaultAsync(c => c.Id == id && c.Members.Any(m => m.PlayerId == playerId), ct);
     }
 
-    private static IResult BadName(string? name)
-    {
-        try { SoloCampaignLifecycle.ValidName(name); return Results.Ok(); }
-        catch (ArgumentException e) { return Results.BadRequest(new { error = e.Message }); }
-    }
-
     private static async Task<IResult> Create(CreateCampaignRequest request, ImperatorDb db,
         IConfiguration config, ContentFile content, CancellationToken ct)
     {
