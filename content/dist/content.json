@@ -289,7 +289,7 @@
         "close_quarters": true,
         "investigate": "Every model.",
         "engaged": [
-          "Fight 2 or more and a target within its Move: charge it.",
+          "Fight 2 or more and a target within its Move: charge it. (Fight 1 or less never charges: it closes and shoots.)",
           "A target within short range: Shoot, Shoot.",
           "Otherwise: Move toward the nearest target, then Shoot."
         ],

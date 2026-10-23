@@ -201,7 +201,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 **Target in sight**
 
-1. Fight 2 or more and a target within its Move: charge it.
+1. Fight 2 or more and a target within its Move: charge it. (Fight 1 or less never charges: it closes and shoots.)
 2. A target within short range: Shoot, Shoot.
 3. Otherwise: Move toward the nearest target, then Shoot.
 
