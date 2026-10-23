@@ -181,7 +181,7 @@ Rules chapter 15 (decision 6.16): every troop has a Troop Value (TV) and a Requi
 - Nerve now costs 3 per point (decision 4.19; the fixture already reflects it).
 - **Done when:** tests pass and the unit database shows TV and Requisition. The builder screen (pick attributes and kit within the chapter 15 limits, see the TV update live) is Phase 9, after this.
 
-### 17. Bring the C# mission generator level with the Python one — *chatgpt authorized*
+### 17. Bring the C# mission generator level with the Python one ✅ done (2026-10-23)
 
 **Do this first: the two have drifted.** The reference is `tools/generate_mission.py`; the printed sheets come from `tools/print_scenario.py`. Changes since task 11 (2026-10-22 and 23):
 
