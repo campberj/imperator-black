@@ -261,6 +261,26 @@ Needs tasks 16 (TV in Core) and 18 (fireteam check in Core) merged first. RJ's b
 - No screens: this is the groundwork for the campaign tracker.
 - **Done when:** tests load both sections and CI is green.
 
+### 23. S1: native PostgreSQL and solo campaign persistence ✅ done (2026-10-23)
+
+**Scope (approved S0 roadmap):** a database-backed single-player campaign lifecycle; no Foundry Moon gameplay screens, strategic turns, multiplayer identity, game rules, or outpost mechanics. The current development API uses one stable server-configured *local* player, and is available only in Development until authentication exists.
+
+- Homebrew PostgreSQL 18 guide: [`app/docs/native-postgresql-macos.md`](docs/native-postgresql-macos.md). Docker is optional. Use the existing EF schema and apply the existing migration, without generated migration edits.
+- A pure `Imperator.Core` lifecycle projection (`DecideCreate`, `DecideRename`, `Apply`, `Replay`) and immutable creation/rename events; events are not fabricated game-rule outcomes.
+- Development-only `POST /campaigns`, `GET /campaigns`, `GET /campaigns/{id}`, `GET /campaigns/{id}/events`, `PATCH /campaigns/{id}/name`. The event log is authoritative and membership filters each read.
+- Reuse Player, Campaign, CampaignMembership and CampaignEvent tables; no required schema changes in S1.
+
+**Done when:**
+1. On macOS with native PostgreSQL (no Docker), the documented setup creates/connects a development database, applies migrations, and the API health check reports healthy.
+2. A single development player can create, list, load and rename a solo campaign; the immutable event log records creation and rename, and all reads are scoped to that player.
+3. `Imperator.Core` replays the event history deterministically, rejects gaps, duplicates, unknown events and invalid names, and the state remains identical after a fresh API instance loads it.
+4. A real PostgreSQL integration test covers create → rename → API restart → load/list/event replay, including isolation between local player IDs. CI tests use its ephemeral PostgreSQL service.
+5. Native backup/restore instructions preserve data without resetting the working database. Web lint/tests/build, .NET tests and migration checks are green. No unapproved campaign mechanics or S2 screens.
+
+**S1 implementation complete:** native macOS setup is documented; the real PostgreSQL/API restart and event-replay checks pass in CI. Local Homebrew installation remains for RJ to verify after merging.
+
+---
+
 ### 22. Stop and check the roadmap
 
 Beyond this, the app's real features wait on rules:

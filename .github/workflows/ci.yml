@@ -50,8 +50,10 @@ jobs:
       - name: Build
         run: dotnet build app/Imperator.slnx -c Release
 
-      - name: Tests
+      - name: Tests (including real PostgreSQL solo campaign lifecycle)
         run: dotnet test app/Imperator.slnx -c Release --no-build
+        env:
+          IMPERATOR_TEST_CONNECTION: Host=localhost;Port=5432;Database=imperator;Username=imperator;Password=imperator
 
       - name: Restore .NET tools
         run: dotnet tool restore
