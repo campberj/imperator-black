@@ -1,0 +1,46 @@
+name: Task 20 planner screen captures
+
+on:
+  pull_request:
+    paths:
+      - 'app/web/**'
+      - 'app/src/Imperator.Api/**'
+      - 'app/src/Imperator.Core/Forces/**'
+      - '.github/workflows/task-20-planner-preview.yml'
+
+jobs:
+  screenshot:
+    if: github.event.pull_request.number == 19
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: app/web/package-lock.json
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Start real Core API and Vite
+        run: |
+          npm --prefix app/web ci
+          dotnet run --project app/src/Imperator.Api --no-launch-profile --urls http://localhost:5080 > /tmp/imperator-api.log 2>&1 &
+          curl -fsS --retry 60 --retry-delay 2 --retry-connrefused http://localhost:5080/content >/dev/null
+          npm --prefix app/web run dev -- --host 127.0.0.1 > /tmp/imperator-vite.log 2>&1 &
+          curl -fsS --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:5173/ >/dev/null
+      - name: Capture actual planner screen and letter print
+        run: |
+          mkdir -p screenshots
+          node -e 'const fs = require("node:fs"); const p={name:"Gym 2: Ahsoka and Clone trooper squad",faction:"republic",setting:"fireteam",source:"versus",sourceId:"patrol",tvLimit:350,fireteams:[{id:"clone-1",name:"Clone trooper squad",type:"line",standard:"clone_squad",slots:[{troop:"rep_clone_sergeant",count:1},{troop:"rep_clone_trooper",count:3},{troop:"rep_clone_heavy",count:1}]}],characters:[{troop:"rep_ahsoka",joins:"clone-1"}],soldiers:[]};fs.writeFileSync("/tmp/planner-url","http://127.0.0.1:5173/#planner?plan="+encodeURIComponent(JSON.stringify(p)));'
+          CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          URL="$(cat /tmp/planner-url)"
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=1440,1450 --virtual-time-budget=9000 --screenshot=screenshots/ImperatorBlack_Task20_ForcePlanner.png "$URL"
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=9000 --print-to-pdf=screenshots/ImperatorBlack_force-planner.pdf "$URL"
+          test -s screenshots/ImperatorBlack_Task20_ForcePlanner.png
+          test -s screenshots/ImperatorBlack_force-planner.pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: task-20-planner-screenshots
+          path: screenshots/
