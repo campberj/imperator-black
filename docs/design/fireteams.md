@@ -1,89 +1,78 @@
 # Fireteams and attachments: design note
 
-Status: **Proposed, for RJ's review** (2026-10-23). Nothing here is built yet. Decision 6.18.
+Status: **Proposed, revision 2, for RJ's review** (2026-10-23). Nothing here is built yet. Decision 6.18.
 
 ## The problem
 
-After Gym 2, RJ: troops should be grouped into fireteams (elements, teams) so that a mission, a reinforcement or a campaign force fields them together, not picked à la carte. And: the player should be able either to deploy whole fireteams or to pick individual soldiers, with a campaign setting to switch between them.
+After Gym 2, RJ: troops should be grouped into fireteams (elements, teams) so that a mission, a reinforcement or a campaign force fields them together, not picked à la carte. The player should be able either to deploy whole fireteams or to pick individual soldiers, with a campaign setting to switch between them. And (revision 2): **no heavy army-building system**. There should be structure where it helps, and room for players to customize their teams and their force.
 
-## What exists today
+## RJ's calls (2026-10-23)
 
-| Piece | Where | Used by | Gap |
-|---|---|---|---|
-| **Teams** (player) | `content/rosters.yaml`: fixed role slots, `gear_choice` | Chapter 9 force building, two-player forces (whole teams, at least half the slots and the Leader) | Player factions only. No minimums or maximums per slot, no troop alternatives, no attachments. |
-| **Elements** (enemy) | `content/factions.yaml`: composition, `alternatives`, `tier`, `behavior` | Mission guards, contact tables, reinforcements, opposition tables, the solo opponent | Enemy factions only. The Republic can't be an opposition and the Separatists can't be a player force without duplicating everything. |
-| **Attached** | The *Attached* behavior; "Hired gun" and "Golem unit" elements; chapter 7 counts an attached model as part of its fireteam for breaking | Enemy specialists | No player rule. A Jedi, Cody or a marksman can't join a squad. They deploy as loose models. |
-| **Picking soldiers** | Chapter 14 (deploy any fit soldiers up to 8 or 12), short arcs (TV and model limit) | Campaigns, short arcs | Purely à la carte. |
+- **A fireteam fields at least half its slots, plus its Leader** (as two-player games do now).
+- **Characters are separate from specialists.** Characters (Jedi, Cody, Grievous, a tactical droid) attach to a fireteam or deploy alone, the player's choice. Specialists are fireteam members.
+- **The kind of fireteam sets how many specialists it takes.** A line fireteam takes one; a VAT team takes several (gunner, data specialist).
+- **Each army decides who counts as a specialist.** Typically gunners, medics, data specialists and hackers, engineers, drone operators, anti-armour troopers and marksmen.
+- **"Fireteam" and "element" mean the same thing** in the rules.
 
-The pieces are almost there. They're split by side, and the campaign rules ignore them.
+## The proposal: one rule, a tag per troop, a few fireteam types per army
 
-## Proposal
+### 1. Every troop has a class
 
-### 1. One fireteam structure for both sides
+One field on each troop profile, shown on its card:
 
-Teams and elements merge into **fireteams**, in one content file (`content/fireteams.yaml`), used by player and enemy alike.
-
-```yaml
-- id: clone_squad
-  name: Clone trooper squad
-  faction: republic
-  summary: "A sergeant, three riflemen and a heavy trooper."
-  slots:
-    - { troop: rep_clone_sergeant, min: 1, max: 1, leader: true }
-    - { troop: rep_clone_trooper,  min: 2, max: 3 }
-    - { troop: rep_clone_heavy,    min: 0, max: 1, alternatives: [rep_clone_marksman] }
-  # Used when the fireteam is an enemy (solo opponent, opposition tables):
-  tier: 2
-  behavior: tactical
-```
-
-- **Slots** have a minimum and maximum, an optional Leader slot, troop `alternatives` (a different profile in the same slot) and `gear_choice` (as now).
-- **Enemy use**: `tier` and `behavior` say how the solo opponent runs it. A fireteam without them is player-only until someone adds them. The Republic gets them for a Separatist-player game later; the Separatists get player slots.
-- **The guard, contacts and reinforcements** place a fireteam at its full listed size: its `max` per slot, defaults first. That matches today's elements.
-- **Terminology**: rules text says *fireteam* everywhere (chapter 7 already does). "Element" stays as a synonym in chapter 10, where the solo opponent talks about elements, unless RJ prefers to rename it there too.
-
-### 2. Attachments
-
-Some troops are **attachments**: characters, specialists and lone heavy assets. Examples: a Jedi, Cody, a clone marksman, a tactical droid, Grievous, a Golem, a hired gun.
-
-- Content marks them on the troop (`attachment: true`) or lists them per faction. Each lists the fireteams it may join (by role, or "any of its faction").
-- **Before deployment, the player chooses for each attachment** (RJ: either, player's choice):
-  - **Attached**: it joins one fireteam for the mission. It is part of that fireteam for breaking (chapter 7, as now), Rally and casualty shock. If it is a Leader, it is that fireteam's Leader (drill, initiative). At most one attachment per fireteam (to be confirmed).
-  - **Alone**: it is a fireteam of one. It never takes breaking tests (half of one is itself), and nothing rallies it but itself or a Leader.
-- **Enemy attachments** work the same way. The *Attached* behavior already says "act as the fireteam it is attached to". A tactical droid attached to a B1 section is the natural Separatist fireteam; Grievous attached to his MagnaGuards is another.
-
-### 3. Force selection: a setting per campaign
-
-Chosen when a campaign or short arc starts, and written on the campaign sheet:
-
-| Setting | Deploying a force | Replacements and growth |
+| Class | Who | Examples |
 |---|---|---|
-| **By fireteam** (default) | Whole fireteams, each with at least its minimums and its Leader, plus attachments, within the mission's TV and model limits. | Replacements fill empty slots in their own fireteam. A new fireteam is bought whole. |
-| **By soldier** | Any soldiers fit for duty, within the same limits, as now. Fireteams are formed at the table: before deployment, group the soldiers into fireteams of 2 to 6 for breaking and Rally. | Replacements are any troop the faction fields. |
+| **Leader** | Leads a fireteam | Clone sergeant, VAT team leader, OOM-free B1s have none |
+| **Trooper** | The fireteam's core | Clone trooper, VAT assaulter, B1, Pointman |
+| **Specialist** | A fireteam member with a job | Clone heavy, VAT gunner, data specialist, medic, marksman, B1 heavy, AT specialist |
+| **Character** | Joins a fireteam or acts alone | Jedi, Cody, Grievous, tactical droids, a Golem, a hired gun |
 
-- **Two-player games are always by fireteam** (chapter 16 already uses whole teams).
-- **Short arcs** name a default on the arc sheet. Foundry Moon would default to *by fireteam* (a clone squad plus Ahsoka attached, for example) and say the player may switch.
-- The roster sheet groups soldiers under their fireteam, with a column for attachments.
+Each army's chapter 9 section lists its classes in the troop table, so who counts as what is the army's call.
 
-### 4. Deferred
+### 2. Each army has a few fireteam types
 
-- **Squads and platoons** (two fireteams and a leader, and so on) wait for larger games and vehicles.
-- **Fireteam-level activation** (activating a whole fireteam at once) is a separate question. Activation stays per model.
+A fireteam type is a single line, not a roster:
+
+| Type | Leader | Troopers | Specialists | Size |
+|---|---|---|---|---|
+| **Line** | 1 | 2 to 5 | up to 1 | 4 to 6 |
+| **Assault** (VAT, ARC, commandos, BX) | 1 | 1 to 3 | up to 2 | 3 to 5 |
+| **Support** (marksmen, gun teams) | 0 or 1 | 0 to 1 | 2 to 3 | 2 to 3 |
+
+The numbers are a starting point; an army may change them, or have only some of the types. Fireteams without a Leader (marksman pairs, droid squads) are allowed where the army says so.
+
+**Building a fireteam:** pick a type and fill it from the army's troops by class. That's the whole rule. The fireteams listed today (clone squad, VAT fireteam, UN reserve fireteam, B1 section) stay in the content as **standard fireteams**: ready-made examples that follow their type, used by missions, the solo opponent and quick setup. A player may field a standard fireteam as it is, or build their own to the type.
+
+### 3. Characters
+
+- Before deployment, each character either **joins a fireteam** (at most one character per fireteam) or **acts alone**.
+- **Joined:** it is part of that fireteam for breaking, Rally and casualty shock. A Leader character leads it (drill, initiative, the +1 to breaking tests).
+- **Alone:** a fireteam of one. It never takes breaking tests.
+- Enemies work the same way. The *Attached* behavior is already "act as the fireteam it joined".
+
+### 4. Picking a force: a setting per campaign
+
+| Setting | Deploying | Replacements |
+|---|---|---|
+| **By fireteam** (default) | Fireteams with at least half their slots and their Leader, plus characters, within the mission's TV and model limits. | Fill empty slots in the soldier's own fireteam. |
+| **By soldier** | Any soldiers fit for duty, within the same limits. Before deployment, group them into fireteams of 2 to 6 for breaking and Rally. | Any troop the army fields. |
+
+Two-player games are always by fireteam. A short arc sheet names its default; the player may switch at the start.
+
+### 5. The enemy
+
+Missions, contacts, reinforcements and opposition tables keep placing standard fireteams at full size, as elements do now. Nothing changes for the solo opponent except the word, which may be either.
 
 ## What would change
 
 | Area | Change |
 |---|---|
-| Content | New `fireteams.yaml` (from `rosters.yaml` teams and `factions.yaml` elements); `attachment` on troops; opposition tables and missions point at fireteam ids (current element ids kept where possible, so mission files don't break). |
-| Rules | Chapter 9 (building a force, attachments), 7 (a lone attachment and breaking), 10 (fireteams and attached models), 13 (wording), 14 and short arcs (the setting, replacements), 16 (minimums). |
-| Tools | Validator, table renderer, troop values (fireteam TV), mission generator, scenario and campaign printers (roster grouped by fireteam), cards ("Fireteam:" line instead of "Element:"). |
-| App | C# content records (TeamDef and ElementDef become FireteamDef), validator, tests, mission generator; the web app's force views. |
+| Content | A `class` on every troop (leader, trooper, specialist, character); `fireteam_types` per faction; teams and elements become standard fireteams with a `type` (current ids kept, so missions don't break). |
+| Rules | Chapter 9: classes, fireteam types, building a fireteam, characters (about one page). Chapter 7: a lone character and breaking. Chapters 14, 16 and the short arc rules: the setting and replacements. |
+| Tools and app | Validator (standard fireteams must fit their type), troop tables (class column), cards (class in the subtitle), campaign and arc rosters grouped by fireteam, C# records and tests. |
 
-About two to three sessions of work. The content migration and C# records come first, so CI stays green throughout.
+## Still to settle
 
-## Questions for RJ
-
-1. **Minimum fill (by fireteam):** each slot's minimum plus the Leader, or the two-player rule (at least half the slots and the Leader)?
-2. **Attachments per fireteam:** at most one, or one character plus one specialist?
-3. **Which troops are attachments?** Proposed: named characters, Jedi, marksmen and snipers, tactical droids, Golems, hired guns, the DSD1, Grievous.
-4. **"Element" in chapter 10:** keep it as the solo opponent's word, or rename it to fireteam everywhere?
+1. **Type limits.** Are the Line / Assault / Support numbers above about right?
+2. **Characters per force.** Is any limit needed beyond TV and models (for example, one Jedi per fireteam already holds; a force cap of two characters)?
+3. **Robots and drones** (a Hound, a ZQ44 pair, a DSD1): characters, or specialists in a support fireteam?
