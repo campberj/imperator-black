@@ -18,6 +18,8 @@ public class SoldierTests
         Assert.Equal(2, vat.PinnedAt);
         vat.UsePinningRule(byNerve with { Suppression = byNerve.Suppression! with { PinnedAtLeast = 3 } });
         Assert.Equal(3, vat.PinnedAt);
+        vat.UsePinningRule(Rules with { Suppression = new SuppressionDef(PinnedByNerve: 0, PinnedNerveFactor: 2) });
+        Assert.Equal(2, vat.PinnedAt);                              // double Nerve 1
     }
 
     [Fact]

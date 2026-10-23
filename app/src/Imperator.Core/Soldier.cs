@@ -62,7 +62,7 @@ public sealed class Soldier
     {
         var s = core.Suppression;
         if (s is null) return;
-        PinnedAt = s.PinnedByNerve is { } off ? Math.Max(Math.Max(1, s.PinnedAtLeast), Nerve + off) : s.PinnedAt;
+        PinnedAt = s.PinnedByNerve is { } off ? Math.Max(Math.Max(1, s.PinnedAtLeast), Nerve * s.PinnedNerveFactor + off) : s.PinnedAt;
     }
     public bool CanBeTreated => Status is Status.Down or Status.Bleeding or Status.Critical && !Stabilised;
 
