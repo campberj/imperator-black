@@ -97,7 +97,7 @@ const dashboardParams = (asked: Record<string, string>, seed: number) =>
 
 function MissionSheet({ mission: m, content, lookup }: { mission: Mission; content: Content; lookup: Lookup }) {
   const type = content.missions.missions.find((x) => x.id === m.mission)
-  const brief = new Map(m.briefing.map((b) => [b.heading, b.text]))
+  const brief = new Map((m.briefing ?? []).map((b) => [b.heading, b.text]))
   const para = (heading: string) =>
     brief.has(heading) && (
       <p key={heading}>
@@ -223,7 +223,7 @@ function MissionSheet({ mission: m, content, lookup }: { mission: Mission; conte
           the footprint and height close.
         </p>
         <h2>Rolls</h2>
-        <p className="small">{m.rolls.join('; ')}.</p>
+        <p className="small">{(m.rolls ?? []).join('; ')}.</p>
       </section>
     </article>
   )
