@@ -13,6 +13,7 @@ export default defineConfig({
       '/content': api,
       '/values': api,
       '/fireteams': api,
+      '/forces': api,
       '/health': api,
       '/decks': api,
       '/land': api,
