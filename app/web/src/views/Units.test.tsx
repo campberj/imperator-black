@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
-import { afterEach, expect, test } from 'vitest'
+import { afterEach, expect, test, vi } from 'vitest'
 import { content, lookup } from '../test-content'
 import { Units } from './Units'
 
@@ -127,4 +127,20 @@ test('AT launcher card shows both anti-armour and high explosive rounds', () => 
     if (round.explosion) expect(c.textContent).toContain(`Explosion (${round.explosion})`)
   }
   expect(c.textContent).toContain('Choose the round before each Shoot')
+})
+
+test('unit database displays TV and Requisition supplied by GET /values', async () => {
+  vi.stubGlobal('fetch', vi.fn(async () => Response.json([
+    { troop: 'rep_clone_trooper', tv: 41, requisition: 5 },
+  ])))
+  try {
+    render(<Units content={content} lookup={lookup} />)
+    select('Faction', 'republic')
+    const clone = within(card(lookup.troops.get('rep_clone_trooper')!.name))
+    expect(await clone.findByText('Troop Value (TV): 41')).toBeTruthy()
+    expect(clone.getByText(/Requisition: 5/)).toBeTruthy()
+    expect(fetch).toHaveBeenCalledWith('/values', expect.anything())
+  } finally {
+    vi.unstubAllGlobals()
+  }
 })
