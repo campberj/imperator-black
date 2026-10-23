@@ -20,7 +20,7 @@ export function Units({ content, lookup }: { content: Content; lookup: Lookup })
       (!rank || t.rank === rank) &&
       (!role || t.role === role) &&
       (!keyword || troopKeywords(t, lookup).has(keyword)) &&
-      matches(query, ...troopSearchText(t, lookup)),
+      (!query.trim() || matches(query, ...troopSearchText(t, lookup))),
   )
   const shown = (id: string) => !faction || id === faction
   const teams = content.rosters.teams.filter((t) => shown(t.faction))
