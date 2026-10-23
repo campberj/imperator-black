@@ -217,6 +217,7 @@ export interface Content {
       failure: string
     }[]
     tiers: { tier: number; contacts: number; reinforcement: string; hvt: string; table: { roll: string; result: string }[] }[]
+    oppositions?: { id: string; name: string; tiers: { tier: number; contacts: number; reinforcement: string; hvt: string; table: { roll: string; result: string }[] }[] }[]
     contact_results: { id: string; name: string; text: string }[]
     alert: { max: number; raises: { source: string; amount: number }[]; thresholds: { at: number; effect: string }[] }
     complications: { roll: string; id: string; name: string; text: string }[]
