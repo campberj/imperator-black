@@ -1,11 +1,11 @@
-import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, expect, test, vi } from 'vitest'
 import { content } from '../test-content'
 import { Planner } from './Planner'
 
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); window.location.hash = '' })
 
-const response = (plan: { fireteams: { slots: { troop: string; count: number }[] }[]; characters: { troop: string }[]; soldiers: { troop: string }[] }) => {
+const response = (plan: { fireteams: { id: string; slots: { troop: string; count: number }[] }[]; characters: { troop: string }[]; soldiers: { troop: string }[] }) => {
   const values: Record<string, number> = { rep_clone_sergeant: 50, rep_clone_trooper: 41, rep_clone_heavy: 48, rep_ahsoka: 84 }
   const count = plan.fireteams.reduce((n, t) => n + t.slots.reduce((m, s) => m + s.count, 0), 0) + plan.characters.length + plan.soldiers.length
   const tv = plan.fireteams.reduce((n, t) => n + t.slots.reduce((m, s) => m + (values[s.troop] ?? 0) * s.count, 0), 0) + plan.characters.reduce((n, c) => n + (values[c.troop] ?? 0), 0)
