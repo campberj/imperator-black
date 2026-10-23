@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace Imperator.Core;
 
 // Chapter 14: every part of content/campaign.yaml, including the short-arc and force-selection rules.
@@ -25,7 +27,8 @@ public sealed record CampaignHonourDef(string Name, string Text);
 public sealed record CampaignHonourListDef(string Id, string Name, string Text);
 public sealed record CampaignShipLevelDef(int Cost, string Text);
 public sealed record CampaignShipDef(string Id, string Name, List<CampaignShipLevelDef> Levels);
-public sealed record CampaignCostDef(string Item, string Cost);
+// Costs are authored as either an integer or explanatory text (e.g. Requisition by troop TV).
+public sealed record CampaignCostDef(string Item, JsonElement Cost);
 public sealed record CampaignEventDef(D6Range Roll, string Name, string Text);
 public sealed record CampaignShortArcDef(int Missions, List<string> Text);
 
