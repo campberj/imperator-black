@@ -5,7 +5,7 @@ namespace Imperator.Core.Missions;
 
 /// <summary>What the player names; everything left null is rolled.</summary>
 public sealed record MissionRequest(string Setting, int Seed, string? Mission = null, int? Tier = null, string? Vessel = null,
-    string? Environment = null, string Size = "small");
+    string? Environment = null, string Size = "small", string? Opposition = null);
 
 /// <summary>
 /// The chapter 13 procedure, "Building a mission": a port of tools/generate_mission.py, the reference. In the paper
@@ -76,6 +76,8 @@ public static class MissionGenerator
             _want = want;
             _m = content.Missions;
             _size = content.ClockSize(want.Size);
+            if (want.Opposition is not null) _ = content.Missions.Oppositions?.Single(o => o.Id == want.Opposition)
+                ?? throw new ArgumentException($"Unknown opposition '{want.Opposition}'", nameof(want));
             _rng = Rng.FromKey($"mission-{want.Setting}-{want.Seed}");
         }
 
@@ -133,10 +135,10 @@ public static class MissionGenerator
             else _mission = _c.Mission(Row(_m.MissionRoll, r => r.Roll, D6("Mission type")).Mission);
             if (_want.Tier is { } tier)
             {
-                _tier = _c.Tier(tier);
+                _tier = _c.Tier(tier, _want.Opposition);
                 _log.Add($"Threat tier: named, {_tier.Tier}");
             }
-            else _tier = _c.Tier(Row(_m.TierRoll, r => r.Roll, D6("Threat tier")).Tier);
+            else _tier = _c.Tier(Row(_m.TierRoll, r => r.Roll, D6("Threat tier")).Tier, _want.Opposition);
         }
 
         // ------------------------------------------------------------ geometry
@@ -309,7 +311,7 @@ public static class MissionGenerator
                          ?? FreePoint(_guardBox, (o.X, o.Y), taken, pref: 2.0, spacing: 1.0)
                          ?? throw new InvalidOperationException($"No room for guard model {n} near the objective");
                 taken.Add(pt);
-                var state = "Unaware" + (models[n - 1] == _hvt ? " (the HVT)" : "");
+                var state = (_guard.Behavior == "automated" ? "Alerted" : "Unaware") + (models[n - 1] == _hvt ? " (the HVT)" : "");
                 _enemies.Add(new MissionEnemy(n, models[n - 1], _guard.Id, pt.X, pt.Y, state));
             }
 
@@ -351,10 +353,11 @@ public static class MissionGenerator
         {
             var m = _mission;
             var where = string.Join(" and ", _objectives.Select(x => x.Prose));
+            var env = _want.Setting == "land" ? _c.Environment(_land!.Environment).Name.Split(",")[0].ToLowerInvariant() : "";
             var place = _want.Setting == "ship"
                 ? $"a {_vessel!.Name.Split(" / ")[0].ToLowerInvariant()}"
-                : $"a {_c.Environment(_land!.Environment).Name.Split(",")[0].ToLowerInvariant()} position";
-            var holder = Holders();
+                : $"{("aeiou".Contains(env[0]) ? "an" : "a")} {env} position";
+            var holder = _want.Opposition is null ? Holders() : _c.Missions.Oppositions!.Single(o => o.Id == _want.Opposition).Name;
             var hvtName = _hvt is null ? null : _c.Troop(_hvt).Name;
             var why = m.Id switch
             {
@@ -375,7 +378,7 @@ public static class MissionGenerator
                 ["Tasking"] = $"{m.Name}. {m.Summary}",
                 ["Situation"] = $"{holder} hold {place}. {why}",
                 ["Objective"] = $"{Cap(where)}. {m.Task}",
-                ["Opposition"] = $"{holder}, threat tier {_tier.Tier}. Guard (known): {guardText}, at the objective, Unaware. " +
+                ["Opposition"] = $"{holder}, threat tier {_tier.Tier}. Guard (known): {guardText}, at the objective, {(_guard.Behavior == "automated" ? "Alerted" : "Unaware")}. " +
                                  $"Contacts (unknown): {_contacts.Count} chips.",
                 ["Ground"] = _ground,
                 ["Complication"] = comp.Id == "none" ? "None." : $"{comp.Name}: " + (comp.Id == "hazard" ? "see Ground." : comp.Text),
@@ -410,6 +413,7 @@ public static class MissionGenerator
                 Seed: _want.Seed,
                 MissionType: _mission.Id,
                 Tier: _tier.Tier,
+                Opposition: _want.Opposition,
                 Size: _size.Id,
                 Clock: new MissionClock(_size.Die, Limit, _m.Clock.CheckInEvery, _m.Clock.FirstCheckIn),
                 AlertStart: AlertStart,
