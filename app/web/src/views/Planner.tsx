@@ -8,9 +8,9 @@ type Slot = { troop: string; count: number; weapon?: string; armour?: string; ge
 type Team = { id: string; name: string; type: string; standard?: string; slots: Slot[] }
 type Character = { troop: string; joins?: string; weapon?: string; armour?: string; gear?: string[] }
 type Soldier = { troop: string; group: number; weapon?: string; armour?: string; gear?: string[] }
-type Plan = { name: string; faction: string; setting: 'fireteam' | 'soldier'; source: string; source_id?: string; tv_limit?: number; model_limit?: number; fireteams: Team[]; characters: Character[]; soldiers: Soldier[] }
+type Plan = { name: string; faction: string; setting: 'fireteam' | 'soldier'; source: string; sourceId?: string; tvLimit?: number; modelLimit?: number; fireteams: Team[]; characters: Character[]; soldiers: Soldier[] }
 type Result = { tv: number; models: number; fireteams: number; characters: number; findings: { code: string; subject?: string; message: string }[]; team_totals: { id: string; tv: number; models: number }[]; character_totals: { index: number; tv: number }[]; troop_values: Record<string, number> }
-const example = (): Plan => ({ name: 'My force', faction: 'republic', setting: 'fireteam', source: 'custom', tv_limit: 350, fireteams: [], characters: [], soldiers: [] })
+const example = (): Plan => ({ name: 'My force', faction: 'republic', setting: 'fireteam', source: 'custom', tvLimit: 350, fireteams: [], characters: [], soldiers: [] })
 export function Planner({ content }: { content: Content }) {
   const params = useHashParams()
   const encoded = params.get('plan')
@@ -41,14 +41,14 @@ export function Planner({ content }: { content: Content }) {
   const setLimit = async (source: string, sourceId: string) => {
     if (source === 'versus') {
       const size = content.versus?.sizes.find(s => s.id === sourceId)
-      update(p => ({ ...p, source, source_id: sourceId, setting: 'fireteam', tv_limit: size?.tv, model_limit: undefined }))
+      update(p => ({ ...p, source, sourceId: sourceId, setting: 'fireteam', tvLimit: size?.tv, modelLimit: undefined }))
     } else if (source === 'mission') {
       const size = content.missions.clock.sizes.find(s => s.id === sourceId)
-      update(p => ({ ...p, source, source_id: sourceId, model_limit: size?.id === 'small' ? 8 : 12, tv_limit: undefined }))
+      update(p => ({ ...p, source, sourceId: sourceId, modelLimit: size?.id === 'small' ? 8 : 12, tvLimit: undefined }))
     } else if (source === 'arc') {
       const mission = await loadExample(sourceId)
-      update(p => ({ ...p, source, source_id: sourceId, model_limit: mission.force_limit?.models, tv_limit: mission.force_limit?.tv }))
-    } else update(p => ({ ...p, source: 'custom', source_id: undefined }))
+      update(p => ({ ...p, source, sourceId: sourceId, modelLimit: mission.force_limit?.models, tvLimit: mission.force_limit?.tv }))
+    } else update(p => ({ ...p, source: 'custom', sourceId: undefined }))
   }
   const addStandard = () => {
     const team = standard.find(t => t.id === newTeam) ?? standard[0]
@@ -83,22 +83,22 @@ export function Planner({ content }: { content: Content }) {
     <div className="filters planner-settings">
       <label>Force name<input value={plan.name} onChange={e => update(p => ({ ...p, name: e.target.value }))} /></label>
       <label>Faction<select value={plan.faction} onChange={e => update(p => ({ ...p, faction: e.target.value, fireteams: [], characters: [], soldiers: [] }))}>{content.factions.factions.map(f => <option key={f.id} value={f.id}>{f.name}</option>)}</select></label>
-      <label>Limits from<select value={plan.source === 'custom' ? 'custom' : `${plan.source}:${plan.source_id ?? ''}`} onChange={e => { const [source, ...id] = e.target.value.split(':'); void setLimit(source, id.join(':')) }}>
+      <label>Limits from<select value={plan.source === 'custom' ? 'custom' : `${plan.source}:${plan.sourceId ?? ''}`} onChange={e => { const [source, ...id] = e.target.value.split(':'); void setLimit(source, id.join(':')) }}>
         <option value="custom">Custom</option>
         {(content.versus?.sizes ?? []).map(s => <option key={s.id} value={`versus:${s.id}`}>{s.name} (two-player)</option>)}
         {content.missions.clock.sizes.map(s => <option key={s.id} value={`mission:${s.id}`}>{s.name}</option>)}
         {EXAMPLES.filter(e => e.id.includes('/')).map(e => <option key={e.id} value={`arc:${e.id}`}>{e.id}</option>)}
       </select></label>
-      <label>TV limit<input type="number" value={plan.tv_limit ?? ''} onChange={e => update(p => ({ ...p, tv_limit: e.target.value ? Number(e.target.value) : undefined }))} /></label>
-      <label>Model limit<input type="number" value={plan.model_limit ?? ''} onChange={e => update(p => ({ ...p, model_limit: e.target.value ? Number(e.target.value) : undefined }))} /></label>
+      <label>TV limit<input type="number" value={plan.tvLimit ?? ''} onChange={e => update(p => ({ ...p, tvLimit: e.target.value ? Number(e.target.value) : undefined }))} /></label>
+      <label>Model limit<input type="number" value={plan.modelLimit ?? ''} onChange={e => update(p => ({ ...p, modelLimit: e.target.value ? Number(e.target.value) : undefined }))} /></label>
       <label>Force selection<select value={plan.setting} disabled={plan.source === 'versus'} onChange={e => update(p => ({ ...p, setting: e.target.value as Plan['setting'] }))}>
         <option value="fireteam">By fireteam</option><option value="soldier">By soldier</option>
       </select></label>
     </div>
     <div className="planner-summary" aria-live="polite">{result ? <>
       <strong>{result.tv} TV</strong> · {result.models} models · {result.fireteams} fireteams · {result.characters} characters
-      {plan.tv_limit !== undefined && ` · TV limit ${plan.tv_limit}`}
-      {plan.model_limit !== undefined && ` · Model limit ${plan.model_limit}`}
+      {plan.tvLimit !== undefined && ` · TV limit ${plan.tvLimit}`}
+      {plan.modelLimit !== undefined && ` · Model limit ${plan.modelLimit}`}
     </> : 'Checking force…'}</div>
     {error && <p role="alert" className="error">{error}</p>}
     <h2>Findings</h2>
