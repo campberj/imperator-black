@@ -163,7 +163,7 @@ The paper dashboard (`docs/print/ImperatorBlack_mission-dashboard.pdf`, drawn by
 - One letter page in print; the print CSS hides the app's navigation.
 - **Done when:** a Vitest test renders the dashboard for both example missions in `docs/scenarios/missions/` and checks the clock box count, the check-in boxes and the contact rows, and lint, tests and build pass.
 
-### 15. Launcher rounds and Explosion (X) in the web app — *chatgpt authorized*
+### 15. Launcher rounds and Explosion (X) in the web app ✅ done (2026-10-23)
 
 Content now has half-step damage dice (`d8+d10`; `DiceSpec` parses them, with an `Extra` die) and two new ranged-weapon fields (decisions 6.14 and 6.15): `explosion` (the X in Explosion (X)) and, for launchers, `round` (the weapon's own round) and `rounds` (extra rounds: id, name, damage, AP, explosion). The *Blast* keyword is now *Explosion*; grenades keep `blast_radius` as their X.
 
