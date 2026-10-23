@@ -4,7 +4,7 @@ import type { Content } from '../content'
 import { Table } from '../components/Table'
 import { useHashParams } from '../routes'
 import { loadExample, type Mission } from '../mission'
-import foundryMoon from '../../../docs/scenarios/arcs/foundry-moon/arc.yaml?raw'
+import foundryMoon from '../../../../docs/scenarios/arcs/foundry-moon/arc.yaml?raw'
 
 export interface ShortArc {
   id: string
@@ -19,7 +19,7 @@ export interface ShortArc {
   results: { grade: string; text: string }[]
 }
 
-const RAW_ARCS = import.meta.glob('../../../docs/scenarios/arcs/*/*.yaml', { query: '?raw', import: 'default' }) as Record<string, () => Promise<string>>
+const RAW_ARCS = import.meta.glob('../../../../docs/scenarios/arcs/*/*.yaml', { query: '?raw', import: 'default' }) as Record<string, () => Promise<string>>
 
 export const ARCS = [
   { id: 'foundry-moon', load: async () => foundryMoon },
