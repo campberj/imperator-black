@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 // so links and reloads work without a router.
 export const ROUTES = [
   { id: 'units', label: 'Units' },
+  { id: 'fireteams', label: 'Fireteams' },
   { id: 'reference', label: 'Reference' },
   { id: 'behaviors', label: 'Behavior cards' },
   { id: 'decks', label: 'Deck maps' },
