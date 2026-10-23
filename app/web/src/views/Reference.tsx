@@ -68,7 +68,7 @@ export function Reference({ content, lookup }: { content: Content; lookup: Looku
           headers={['Weapon', 'Damage', 'Short range', 'Beyond / double', 'AP', 'Keywords']}
           rows={ranged.map((w) => {
             const [beyond, double] = rangePenalty(w)
-            return [<span key="weapon">{w.name}{launcherRounds(w).length > 0 && <small className="meta"><br />{launcherRounds(w).join(', ')}. Choose the round before each Shoot.</small>}</span>, w.damage, `${w.short_range}"`, `${beyond} / ${double}`, w.ap, <span key="kw"><Keywords ids={w.keywords} lookup={lookup} weapon={w} />{w.explosion ? `${w.keywords.length ? ', ' : ''}Explosion (${w.explosion})` : ''}</span>]
+            return [w.name, w.damage, `${w.short_range}"`, `${beyond} / ${double}`, w.ap, <span key="kw"><Keywords ids={w.keywords} lookup={lookup} weapon={w} />{w.explosion ? `${w.keywords.length ? ', ' : ''}Explosion (${w.explosion})` : ''}{launcherRounds(w).length > 0 && <small className="meta"><br />{launcherRounds(w).join(', ')}. Choose the round before each Shoot.</small>}</span>]
           })}
         />
       )}
