@@ -149,6 +149,7 @@ test('shows the API error', async () => {
 test('Foundry Moon authored missions show all four stages and their own rules', async () => {
   const authored = EXAMPLES.filter((e) => e.id.startsWith('foundry-moon/'))
   expect(authored).toHaveLength(4)
+  render(<Missions content={content} lookup={lookup} />)
   for (const e of authored) {
     hashChange(`#missions?example=${e.id}`)
     const heading = await screen.findByRole('heading', { name: /Foundry Moon \d|Foundry Moon 2[A-B]/i, level: 2 }).catch(() => null)
