@@ -407,7 +407,7 @@ def quick_reference():
 
     # Page 1 -----------------------------------------------------------
     kw_rows = [["Keyword", "Effect"]] + [[f'<b>{k["name"]}</b>', k["text"]] for group in ("weapon", "armour") for k in C["keywords"][group]]
-    kw_rows.append(["<b>Suppressive Fire</b> (action)", "Auto weapons only. Hit roll, no damage: +1 Suppression, or +2 if the roll beats 8 by 3+."])
+    kw_rows.append(["<b>Suppressive Fire</b> (action)", "Auto only. Hit roll ignoring cover, no damage: +1 Suppression (+2 if beating 8 by 3+); target loses Overwatch, can't react this round."])
     keywords = qtable(kw_rows, [1.0 * inch, half - 1.0 * inch])
 
     left = [Paragraph("The round", Q_H)] + bullets([
@@ -422,7 +422,7 @@ def quick_reference():
         ["Move", "Up to Move. Obstacle +2\". Contact with an enemy starts close combat."],
         ["Shoot", "Hit roll vs a visible target."],
         ["Aim", "+1 to the next Shoot this activation."],
-        ["Suppressive Fire", "Auto only. Hit: +1 Suppression (+2 if beating 8 by 3+). No damage."],
+        ["Suppressive Fire", "Auto only. Ignores cover. Hit: +1 Supp. (+2 by 3+), no reactions. No damage."],
         ["Throw", "Grenade; 2d6 + Physique, 8+ to land on the point. Handy."],
         ["Overwatch", "Last action. One reaction before this model next activates."],
         ["Find Cover", "In the open within 1\" of micro-terrain: 2d6 + Nerve, 7+ Light, 10+ Heavy."],

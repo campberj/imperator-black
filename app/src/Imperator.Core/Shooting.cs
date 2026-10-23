@@ -72,14 +72,23 @@ public static class Shooting
         return hits;
     }
 
-    /// <summary>Suppressive Fire: hit roll only; 1 Suppression on a hit, 2 if it beats the target by 3+.</summary>
+    /// <summary>
+    /// Suppressive Fire: hit roll only, ignoring cover; 1 Suppression on a hit, 2 if it beats the target by 3+;
+    /// a hit removes Overwatch and stops the target reacting until the end of the round.
+    /// </summary>
     public static bool Suppress(Rng rng, CoreContent core, Soldier shooter, Soldier target, int situational)
     {
+        var sf = core.SuppressiveFire ?? new SuppressiveFireDef();
         var (a, b) = rng.TwoD6();
-        int mod = Modifier(shooter, target.Cover, situational);
+        int mod = Modifier(shooter, sf.IgnoresCover ? Cover.Open : target.Cover, situational);
         if (!IsHit(core, a, b, mod)) return false;
         target.HitThisRound = true;
-        target.AddSuppression(a + b + mod >= core.HitTarget + 3 ? 2 : 1);
+        target.AddSuppression(a + b + mod >= core.HitTarget + sf.StrongMargin ? 2 : 1);
+        if (sf.RemovesReactions)
+        {
+            target.OverwatchReactions = 0;
+            target.CannotReact = true;
+        }
         return true;
     }
 

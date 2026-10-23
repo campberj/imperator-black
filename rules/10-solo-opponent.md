@@ -176,7 +176,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 **Target in sight**
 
 1. In the open: Move to cover with a target, then Shoot.
-2. Auto weapon with two or more targets in sight: Suppressive Fire, then Shoot.
+2. Auto weapon with a target in cover in sight: Suppressive Fire on it (and others within 3"), then Shoot.
 3. A target within short range: Aim, then Shoot.
 4. Otherwise: Shoot, then Overwatch.
 

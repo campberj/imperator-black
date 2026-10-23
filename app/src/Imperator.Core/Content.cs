@@ -37,7 +37,11 @@ public sealed record CoreContent(
     SecurityDef Security,
     AutoFireDef? AutoFire = null,
     List<ShootScaleDef>? ShootScale = null,
-    int OverwatchReactions = 1);
+    int OverwatchReactions = 1,
+    SuppressiveFireDef? SuppressiveFire = null);
+
+/// <summary>Suppressive Fire (rules chapter 4): ignores cover, 2 Suppression on a strong hit, and a hit stops reactions.</summary>
+public sealed record SuppressiveFireDef(bool IgnoresCover = true, int StrongMargin = 3, bool RemovesReactions = true);
 
 /// <summary>A launcher's extra round (rules chapter 6): chosen before each Shoot instead of the weapon's own round.</summary>
 public sealed record RoundDef(string Id, string Name, string Damage, int Ap, int? Explosion = null, List<string>? Keywords = null)

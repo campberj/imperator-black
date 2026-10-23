@@ -21,7 +21,7 @@ An activating model takes **two actions**, in any order. It may repeat an action
 | **Move** | Up to the model's Move in inches. Moving into base contact with an enemy starts close combat. | 3, 5 |
 | **Shoot** | Fire a ranged weapon at a visible target. | 4 |
 | **Aim** | +1 to the next Shoot this activation. | 4 |
-| **Suppressive Fire** | *Auto* weapons only. Pin a target without damage. | 4 |
+| **Suppressive Fire** | *Auto* weapons only. No damage; ignores cover; a hit adds Suppression and stops the target reacting. | 4 |
 | **Throw** | Throw a grenade. | 6 |
 | **Overwatch** | Must be the last action. Place an Overwatch marker (see Reactions). | 2 |
 | **Find Cover** | Use micro-terrain in the open: test 2d6 + Nerve, 7+ Light cover, 10+ Heavy cover, until the model moves. | 4 |

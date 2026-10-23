@@ -78,6 +78,7 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 4.9 | Leaders can pass actions to subordinates, as the scaling mechanism to squad and platoon (Stargrunt-style). *(AWoW teardown)* | Proposed — post-PoC |
 | 4.10 | No forced unit-cohesion abstractions. *(AWoW)* | Settled |
 | 4.17 | **Long actions (RJ idea, Gym 2):** some actions might take both of a model's actions (a "long action"): Overwatch, crack and throw, perhaps hacking, a breaching tool or Medic. To explore after more play: it would make holding a lane a whole-activation choice and slow the room-clearing combo. Interacts with 4.5 (one Overwatch reaction) and the door sequence (4.13). | Open |
+| 4.18 | **Suppressive Fire reworked (RJ, Gym 2, 2026-10-22):** it was dominated by Shoot (same roll and modifiers; a Shoot hit always gave as much Suppression, plus damage). Now it ignores the target's cover, gives 1 Suppression (2 if beating 8 by 3+), and a hit removes the target's Overwatch and stops it reacting until the end of the round. Shoot stays better against targets in the open; Suppressive Fire pins targets in cover so friends can move. Enemy line updated: Auto weapon with a target in cover → Suppressive Fire, then Shoot. `core.suppressive_fire`. | Settled (approach, RJ); Proposed — playtest |
 
 ## 5. Movement, scale and terrain
 

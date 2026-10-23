@@ -67,4 +67,28 @@ public class ShootingTests
         Assert.Equal(2, Shooting.AimModifier(m2, Cover.Open));
         Assert.Equal(1, Shooting.AimModifier(Fresh(), Cover.Light));
     }
+
+    [Fact]
+    public void SuppressiveFireIgnoresCoverAndStopsReactions()
+    {
+        var rng = new Rng(7);
+        var rifle = Set.Ranged("lmg");
+        int n = 20000, hits = 0;
+        for (int k = 0; k < n; k++)
+        {
+            var shooter = Soldier.Generic("gunner", 2, 0, rifle, null);
+            var target = Soldier.Generic("target", 2, 0, rifle, null);
+            target.Cover = Cover.Heavy;
+            target.OverwatchReactions = 1;
+            if (Shooting.Suppress(rng, Rules, shooter, target, 0))
+            {
+                hits++;
+                Assert.True(target.CannotReact);
+                Assert.Equal(0, target.OverwatchReactions);
+                Assert.True(target.Suppression >= 1);
+            }
+        }
+        // 2d6 + 2 vs 8 with no cover penalty: 26/36 (natural 2 misses, double 6 hits).
+        Assert.Equal(26.0 / 36, hits / (double)n, 0.015);
+    }
 }

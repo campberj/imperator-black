@@ -138,7 +138,7 @@ behaviors:
     investigate: "One model: the lowest-numbered model without an Auto weapon. The rest hold."
     engaged:
       - "In the open: Move to cover with a target, then Shoot."
-      - "Auto weapon with two or more targets in sight: Suppressive Fire, then Shoot."
+      - "Auto weapon with a target in cover in sight: Suppressive Fire on it (and others within 3\"), then Shoot."
       - "A target within short range: Aim, then Shoot."
       - "Otherwise: Shoot, then Overwatch."
     alerted:

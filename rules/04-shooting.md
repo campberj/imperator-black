@@ -81,7 +81,13 @@ A weapon with **Auto N** (for example *Auto 3*) can engage several models with o
 
 ## Suppressive Fire
 
-*Auto* weapons only. Pick a visible target and make a hit roll, without damage dice. On a hit the target gains 1 Suppression, or 2 if the roll beats 8 by 3 or more. An *Auto N* weapon may spread Suppressive Fire across up to N models within 3" of the first target, rolling for each, with −1 for every target after the first.
+*Auto* weapons only. Suppressive Fire saturates a position to keep heads down, rather than picking off a target.
+
+- Pick a visible target and make a hit roll, without damage dice. **Cover doesn't modify the roll**: Light and Heavy cover give no penalty. Range, Aim, Suppression and Wounded apply as normal.
+- On a hit the target gains **1 Suppression**, or **2** if the roll beats 8 by 3 or more. It also **loses its Overwatch marker and cannot react until the end of the round**.
+- An *Auto N* weapon may spread Suppressive Fire across up to N models within 3" of the first target, rolling for each, with −1 for every target after the first.
+
+Against a target in the open, Shoot is usually better. Against a target dug in behind cover, Suppressive Fire is the way to pin it down while friends move: the core of fire and manoeuvre.
 
 ## Wound table
 

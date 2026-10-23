@@ -92,6 +92,12 @@ movement:
   obstacle_cost: 2
   reaction_move: half
 
+# Suppressive Fire (decision 4.18, RJ 2026-10-22): saturates a position rather than picking a target.
+suppressive_fire:
+  ignores_cover: true      # Light and Heavy cover don't modify the roll
+  strong_margin: 3         # beat the target by this much: 2 Suppression instead of 1
+  removes_reactions: true  # a hit removes Overwatch and the target can't react until the end of the round
+
 # Overwatch (decision 4.5, RJ 2026-10-22): one reaction before the model next activates.
 overwatch_reactions: 1
 
