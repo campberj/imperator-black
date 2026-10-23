@@ -1,6 +1,8 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Net.Http.Json;
+using Imperator.Core.Forces;
 using Imperator.Core;
 
 namespace Imperator.Api.Tests;
@@ -20,6 +22,26 @@ public class EndpointTests(ApiFactory factory) : IClassFixture<ApiFactory>
         Assert.NotNull(response.Headers.ETag);
         Assert.Equal(await File.ReadAllBytesAsync(ContentPath, TestContext.Current.CancellationToken),
             await response.Content.ReadAsByteArrayAsync(TestContext.Current.CancellationToken));
+    }
+
+    [Fact]
+    public async Task GymTwoForceCheckReturnsReferenceTVAndWarnings()
+    {
+        var plan = new ForcePlan("Gym 2", "republic", "fireteam", "custom", null, 350, 8,
+            [new ForceTeam("clone-1", "Clone trooper squad", "line", "clone_squad",
+                [new("rep_clone_sergeant", 1), new("rep_clone_trooper", 3), new("rep_clone_heavy", 1)])],
+            [new ForceCharacter("rep_ahsoka", "clone-1")], []);
+        var client = factory.CreateClient();
+        var ok = await client.PostAsJsonAsync("/forces/check", plan, TestContext.Current.CancellationToken);
+        Assert.Equal(HttpStatusCode.OK, ok.StatusCode);
+        using var doc = JsonDocument.Parse(await ok.Content.ReadAsStringAsync(TestContext.Current.CancellationToken));
+        Assert.Equal(305, doc.RootElement.GetProperty("tv").GetInt32());
+        Assert.Equal(6, doc.RootElement.GetProperty("models").GetInt32());
+        Assert.Empty(doc.RootElement.GetProperty("findings").EnumerateArray());
+        var over = await client.PostAsJsonAsync("/forces/check", plan with { TvLimit = 300 }, TestContext.Current.CancellationToken);
+        using var other = JsonDocument.Parse(await over.Content.ReadAsStringAsync(TestContext.Current.CancellationToken));
+        Assert.Contains(other.RootElement.GetProperty("findings").EnumerateArray(),
+            f => f.GetProperty("code").GetString() == "over_tv");
     }
 
     [Fact]
