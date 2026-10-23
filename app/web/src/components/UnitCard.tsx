@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import type { Content, Lookup, Troop } from '../content'
 import {
   elementsFor,
@@ -14,7 +15,7 @@ import {
 import { Card, Proposed } from './Card'
 
 /** One troop profile, laid out like docs/print/ImperatorBlack_unit-cards.pdf (tools/print_sheets.py). */
-export function UnitCard({ troop, content, lookup }: { troop: Troop; content: Content; lookup: Lookup }) {
+export const UnitCard = memo(function UnitCard({ troop, content, lookup }: { troop: Troop; content: Content; lookup: Lookup }) {
   const faction = lookup.factions.get(troop.faction)
   const rank = lookup.ranks.get(troop.rank)?.name ?? troop.rank
   const armour = lookup.armour.get(troop.armour)
@@ -173,4 +174,4 @@ export function UnitCard({ troop, content, lookup }: { troop: Troop; content: Co
       )}
     </Card>
   )
-}
+})
