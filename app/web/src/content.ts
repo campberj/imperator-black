@@ -232,6 +232,7 @@ export interface Content {
     }
     contacts: string[]
   }
+  campaign?: { short_arc?: { missions: number; text: string[] } }
   terrain: {
     types: { id: string; name: string; kind: string }[]
     environments: { id: string; name: string; fill: string }[]
