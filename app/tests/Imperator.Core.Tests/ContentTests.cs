@@ -25,6 +25,9 @@ public class ContentTests
     public void RifleIs2d8() => Assert.Equal(new DiceSpec(2, 8), Set.Ranged("rifle").DamageDice);
 
     [Fact]
+    public void OverwatchGivesOneReaction() => Assert.Equal(1, Rules.OverwatchReactions);
+
+    [Fact]
     public void AtLauncherHasAHighExplosiveRound()
     {
         var w = Set.Ranged("at_launcher");

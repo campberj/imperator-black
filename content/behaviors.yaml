@@ -224,7 +224,7 @@ behaviors:
       - "Turret: Overwatch."
       - "Drone: Move toward the marker, then Overwatch."
     reactions:
-      - "Overwatch: Shoot at every trigger it can, up to two."
+      - "Overwatch: Shoot at the first trigger it can."
       - "Never Unaware: it does not hear noise, and starts on Overwatch."
     close_combat: "Never breaks; it has no melee weapon, so it loses every exchange it is forced into."
 

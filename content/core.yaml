@@ -92,6 +92,9 @@ movement:
   obstacle_cost: 2
   reaction_move: half
 
+# Overwatch (decision 4.5, RJ 2026-10-22): one reaction before the model next activates.
+overwatch_reactions: 1
+
 casualty_shock:
   range: 6
   suppression: 1

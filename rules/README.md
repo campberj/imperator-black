@@ -39,6 +39,7 @@ From the first gym playtest ([log](../docs/playtests/2026-10-20-gym-01-first-bre
 - **Land battles** (chapter 12): terrain types, height and falling, conditions, noise in the open, and land table setup for seven environments. The solo opponent's lists now work on land too.
 - **Shoot scale** (chapter 1): what each Shoot value means; Task Force Boone line troopers are professionals (Shoot 2).
 - **Ship and station layouts** (chapter 11): build a deck from your tiles with about 20 d6 rolls; four vessel types, rooms with cover, doors and hazards.
+- **Overwatch** (chapter 2): one reaction, not two, and at most one reaction between a model's activations (from Gym 2).
 - **Explosion (X)** (chapter 6): replaces Blast. Launchers fire explosives with Shoot (a miss lands short; a natural 2 is a dud) and choose a round before each Shoot (anti-armour or high explosive). **Half-step damage dice** (chapter 1): d6+d8, d8+d10, d10+d12.
 - **Missions** (chapter 13): four mission types, threat tiers 1–4, an open guard and hidden contact chips, the alert track, and a mission clock (a time limit and a clock die instead of a round limit). A one-page mission dashboard tracks it all.
 

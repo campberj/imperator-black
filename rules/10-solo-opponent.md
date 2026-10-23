@@ -288,7 +288,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 **Reactions**
 
-- Overwatch: Shoot at every trigger it can, up to two.
+- Overwatch: Shoot at the first trigger it can.
 - Never Unaware: it does not hear noise, and starts on Overwatch.
 
 **Close combat:** Never breaks; it has no melee weapon, so it loses every exchange it is forced into. Uses only its own lists, even in close quarters.

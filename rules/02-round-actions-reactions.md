@@ -36,9 +36,9 @@ A reaction is a single action taken out of turn, in response to an enemy action.
 ### Who can react
 
 - **A model that has not yet activated this round.** Reacting uses up its activation: mark it Activated. It gives up two actions for one.
-- **A model with an Overwatch marker.** It may react up to **two times** before its next activation, then the marker is removed. Overwatch reactions do not mark the model Activated. When the model next activates, remove the marker and any unused reactions are lost.
+- **A model with an Overwatch marker.** It may react **once** before its next activation; then the marker is removed. An Overwatch reaction does not mark the model Activated. When the model next activates, remove the marker; an unused reaction is lost.
 
-A model on Overwatch that has used both reactions and has not yet activated this round may still react once more as an unactivated model.
+A model reacts at most once between its activations: a model on Overwatch cannot also react as an unactivated model. An *Auto* weapon's reaction Shoot still spreads across up to N targets, each at −1 (chapter 4).
 
 ### Triggers
 

@@ -108,5 +108,5 @@ These follow from the rules above:
 
 - Models stacked beside a closed door are out of sight of anyone inside.
 - Opening the door starts the door sequence: anyone inside on Overwatch or still to activate may react to whoever they can see.
-- Models on Overwatch inside can react twice, to the first models through.
+- Models on Overwatch inside each get one reaction: against the first model through, or held for a better target.
 - A flashbang, cracked in or thrown through first, strips Overwatch and stops reactions, which is why breach-and-clear teams use them.

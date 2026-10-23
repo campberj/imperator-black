@@ -36,7 +36,8 @@ public sealed record CoreContent(
     List<WoundRowDef> WoundTable,
     SecurityDef Security,
     AutoFireDef? AutoFire = null,
-    List<ShootScaleDef>? ShootScale = null);
+    List<ShootScaleDef>? ShootScale = null,
+    int OverwatchReactions = 1);
 
 /// <summary>A launcher's extra round (rules chapter 6): chosen before each Shoot instead of the weapon's own round.</summary>
 public sealed record RoundDef(string Id, string Name, string Damage, int Ap, int? Explosion = null, List<string>? Keywords = null)

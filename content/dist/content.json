@@ -333,7 +333,7 @@
           "Drone: Move toward the marker, then Overwatch."
         ],
         "reactions": [
-          "Overwatch: Shoot at every trigger it can, up to two.",
+          "Overwatch: Shoot at the first trigger it can.",
           "Never Unaware: it does not hear noise, and starts on Overwatch."
         ],
         "close_combat": "Never breaks; it has no melee weapon, so it loses every exchange it is forced into."
@@ -1278,6 +1278,7 @@
       "obstacle_cost": 2,
       "reaction_move": "half"
     },
+    "overwatch_reactions": 1,
     "casualty_shock": {
       "range": 6,
       "suppression": 1,

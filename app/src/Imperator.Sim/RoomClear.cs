@@ -36,7 +36,7 @@ public sealed class RoomClear
         foreach (var d in _def)
         {
             d.Cover = Cover.Light;
-            d.OverwatchReactions = defendersOnOverwatch ? 2 : 0;
+            d.OverwatchReactions = defendersOnOverwatch ? content.Core.OverwatchReactions : 0;
         }
     }
 

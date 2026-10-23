@@ -353,6 +353,9 @@ for grp in ("gear", "grenades", "skills"):
 if [Va["multiplier"][str(i)] for i in range(5)] != sorted(Va["multiplier"][str(i)] for i in range(5)):
     errors.append("values.multiplier: must rise with the attribute")
 
+if not isinstance(C["core"].get("overwatch_reactions"), int) or C["core"]["overwatch_reactions"] < 1:
+    errors.append("core.overwatch_reactions: a whole number, 1 or more")
+
 # Two players (chapter 16).
 Vs = C["versus"]
 vs_ids = ids(Vs["missions"], "versus.missions")

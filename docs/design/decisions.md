@@ -65,7 +65,7 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 4.2 | Players **alternate activating single models**; when one side runs out, the other finishes. *(AWoW)* | Settled |
 | 4.3 | **Two actions** per activation: Move, Shoot, Aim, Suppressive Fire, Overwatch, Find Cover, Rally, Medic, Interact. *(AWoW prototype)* | Settled (action list Leaning) |
 | 4.4 | **Reaction:** a model that has not yet activated may react when an enemy model's action allows a reaction. Reacting marks it as activated. | Settled |
-| 4.5 | **Overwatch:** a model that activates may go on Overwatch. It may then react **up to two times** until its activation comes again next round. Supersedes the prototype's single Overwatch shot. | Settled |
+| 4.5 | **Overwatch:** a model that activates may go on Overwatch (its last action). It may then react **once** before it next activates; a model reacts at most once between activations (no extra reaction as an unactivated model). Auto weapons keep their spread on a reaction (N targets, each −1). Was two reactions; changed by RJ in Gym 2 (2026-10-22): Overwatch costs one action, so two reactions outvalued Move + Shoot. `core.overwatch_reactions`. | Settled (RJ) |
 | 4.6 | **Reaction triggers:** an enemy Moving into or within line of sight (interrupts the move), Shooting/Throwing/Suppressive Fire, or Interacting (including doors). **Reaction choices:** one action: Shoot the triggering model at −1, Move up to half to cover or out of sight, or Find Cover. Reactions can't trigger reactions. | Settled |
 | 4.11 | **Exposure trigger (from Gym 1):** an enemy model that comes into an Overwatch model's line of sight for any reason (door opened, smoke clears, wall breached) also triggers a reaction. Covers a gunner overwatching a friendly breach. | Leaning — written into chapter 2 |
 | 4.12 | **Auto N (from Gym 1):** an Auto weapon's Shoot or Suppressive Fire may engage up to N different models within 3" of the first target, one roll each, −1 for every target after the first; reactions may spread too. SMG Auto 2, compact LMG Auto 3, LMG Auto 3. Simulator: gun team vs riflemen 48% → 54%; bunched targets take about 2.3× the casualties per burst. | Proposed — playtest |
@@ -77,6 +77,7 @@ Last updated: 2026-10-20 (Gym 1 fixes: door sequence, hacking; Phase 3 solo oppo
 | 4.16 | **Breaking clarified (Gym 1 replay):** test at every activation while at half strength; normal test modifiers; attached models count with their team; enemy elements count as fireteams; Automated never test; recovered models count again; leaving by the entry point = fled. | Settled (RJ) |
 | 4.9 | Leaders can pass actions to subordinates, as the scaling mechanism to squad and platoon (Stargrunt-style). *(AWoW teardown)* | Proposed — post-PoC |
 | 4.10 | No forced unit-cohesion abstractions. *(AWoW)* | Settled |
+| 4.17 | **Long actions (RJ idea, Gym 2):** some actions might take both of a model's actions (a "long action"): Overwatch, crack and throw, perhaps hacking, a breaching tool or Medic. To explore after more play: it would make holding a lane a whole-activation choice and slow the room-clearing combo. Interacts with 4.5 (one Overwatch reaction) and the door sequence (4.13). | Open |
 
 ## 5. Movement, scale and terrain
 
