@@ -50,4 +50,14 @@ public sealed record Mission(
     // Ship
     DeckEntry? Entry = null, string? Vessel = null, string? Hazard = null, List<string>? DeckNotes = null, List<DeckLink>? Links = null,
     // Land
-    string? Environment = null, string? Conditions = null, List<MissionDeploy>? Deploy = null, List<MissionSector>? Sectors = null);
+    string? Environment = null, string? Conditions = null, List<MissionDeploy>? Deploy = null, List<MissionSector>? Sectors = null,
+    // Named opposition and authored mission metadata (Foundry Moon, rules chapter 14).
+    string? Opposition = null, MissionArc? Arc = null, string? Task = null, string? Lockdown = null,
+    MissionGrades? Grades = null, List<MissionSpecialRule>? SpecialRules = null,
+    List<MissionNext>? Next = null, string? MapNote = null, MissionForceLimit? ForceLimit = null);
+
+public sealed record MissionArc(string Id, string Name, string Label);
+public sealed record MissionGrades(string Decisive, string Marginal, string Failure);
+public sealed record MissionSpecialRule(string Title, string Text);
+public sealed record MissionNext(string Grade, string Text);
+public sealed record MissionForceLimit(int Tv, int Models);
