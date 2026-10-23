@@ -84,7 +84,7 @@ The chapters were written in a working repository, so a few things must change i
 
 ## 6. Generic profiles
 
-The packet already includes **Generic forces** (chapter 9 and `ImperatorBlack_generic-cards.pdf`): nine model-agnostic profiles in four teams for common collections, such as Warhammer 40,000 guard-style infantry, heavy weapons teams, storm troopers and power-armoured heavy infantry. They were made in the project's content files so their numbers match the rules. **Do not write new profiles yourself**: troop profiles must come from the content files, or their costs, cards and rules tables will disagree. If RJ wants more (for example vehicle crews, or other common collections), ask him to request them in the design project, then rebuild.
+The packet already includes **Generic forces** (chapter 9 and `ImperatorBlack_generic-cards.pdf`): nine model-agnostic profiles in four teams for common collections, such as Warhammer 40,000 guard-style infantry, heavy weapons teams, storm troopers and power-armoured heavy infantry. They were made in the project's content files so their numbers match the rules. **Never write a profile into the PDF directly**: troop profiles must come from the content files, or their costs, cards and rules tables will disagree. If RJ asks for more (for example other common collections), add them to the content files by following [`docs/guides/profiles-and-cards.md`](../guides/profiles-and-cards.md), run its checks, regenerate the cards, then rebuild the packet.
 
 The generic profiles use descriptive names, not trademarks ("Heavy Infantry", not a brand's name for it); keep it that way in anything you write.
 
@@ -98,7 +98,7 @@ The packet includes fan conversion profiles: BLKOUT (Task Force Boone, Manticor 
 - [ ] Search the PDF text: no `<!-- table`, no `docs/`, no `tools/`, no `.md`, no `content/`, no "Phase ", no "the app " or "the app's" (note: "the approach" is fine).
 - [ ] Every table in the chapters rendered as a table (spot-check chapters 4, 9, 10, 11, 12, 13).
 - [ ] Quick reference: 4 pages (1, 2, 3 and 5; not the campaign page 4).
-- [ ] Unit cards at 100% scale (a card is 4.25" × 5.5" with cut marks).
+- [ ] Unit cards at 100% scale (a card is 3.5" × 5", four to a page, with cut marks).
 - [ ] Bookmarks for every chapter and appendix; page numbers in the contents match.
 - [ ] Cover and running header say "not for distribution".
 - [ ] File named `ImperatorBlack_alpha-rules-v0.5.pdf`.

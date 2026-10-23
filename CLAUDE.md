@@ -4,6 +4,8 @@ A 28mm sci-fi narrative campaign wargame (printed rules first) plus a companion 
 
 **Working on the app? Start with [`app/README.md`](app/README.md)**: current state and the next tasks in order.
 
+**Adding miniatures (profiles, weapons, cards)? Follow [`docs/guides/profiles-and-cards.md`](docs/guides/profiles-and-cards.md).**
+
 ## Ground rules
 
 - **Content is the single source of truth.** Game numbers live in `content/*.yaml`. Never hand-edit tables in `rules/*.md` between `<!-- table:… -->` markers, or `content/dist/content.json`.
