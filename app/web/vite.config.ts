@@ -17,7 +17,7 @@ export default defineConfig({
       '/missions': api,
     },
     // The mission view reads the example missions from docs/scenarios/missions (outside app/web).
-    fs: { allow: [searchForWorkspaceRoot(process.cwd()), '../../docs/scenarios/missions'] },
+    fs: { allow: [searchForWorkspaceRoot(process.cwd()), '../../docs/scenarios/missions', '../../docs/scenarios/arcs/foundry-moon'] },
   },
   test: {
     environment: 'jsdom',
