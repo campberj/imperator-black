@@ -9,6 +9,7 @@ import { Missions } from './views/Missions'
 import { Reference } from './views/Reference'
 import { Units } from './views/Units'
 import { Arcs } from './views/Arcs'
+import { Planner } from './views/Planner'
 import { FireteamsView } from './views/Fireteams'
 
 // The unit database and reference: everything on these pages is read from /content
@@ -60,6 +61,7 @@ export default function App() {
           {route === 'land' && <Land content={loaded.content} />}
           {route === 'missions' && <Missions content={loaded.content} lookup={lookup} />}
           {route === 'arcs' && <Arcs content={loaded.content} />}
+          {route === 'planner' && <Planner content={loaded.content} />}
           {route === 'dashboard' && <Dashboard content={loaded.content} />}
         </>
       )}
