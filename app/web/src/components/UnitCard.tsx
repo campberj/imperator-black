@@ -15,7 +15,7 @@ import {
 import { Card, Proposed } from './Card'
 
 /** One troop profile, laid out like docs/print/ImperatorBlack_unit-cards.pdf (tools/print_sheets.py). */
-export const UnitCard = memo(function UnitCard({ troop, content, lookup, value }: { troop: Troop; content: Content; lookup: Lookup; value?: { tv: number; requisition: number } }) {
+export const UnitCard = memo(function UnitCard({ troop, content, lookup, value, pinning }: { troop: Troop; content: Content; lookup: Lookup; value?: { tv: number; requisition: number }; pinning?: string | null }) {
   const faction = lookup.factions.get(troop.faction)
   const rank = lookup.ranks.get(troop.rank)?.name ?? troop.rank
   const armour = lookup.armour.get(troop.armour)
@@ -29,6 +29,7 @@ export const UnitCard = memo(function UnitCard({ troop, content, lookup, value }
       title={troop.name}
       subtitle={`${rank} ${troop.role}  ·  ${faction?.name ?? troop.faction}`}
       colour={factionColour(troop.faction)}
+      corner={content.rosters.classes?.find((c) => c.id === troop.class)?.name ?? troop.class}
       footer={
         <>
           <span className="minis">{troop.miniatures}</span>
@@ -63,6 +64,7 @@ export const UnitCard = memo(function UnitCard({ troop, content, lookup, value }
           </tr>
         </tbody>
       </table>
+      {pinning && <p className="small">{pinning}</p>}
       <p className="small">
         Armour: {armour?.name}
         {(troop.armour_options ?? []).map((id) => {
