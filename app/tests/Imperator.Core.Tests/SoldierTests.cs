@@ -120,10 +120,10 @@ public class SoldierTests
     }
 
     [Fact]
-    public void JediDisciplinePinsAtFour()
+    public void JediGuardianPinnedAtNervePlusTwo()
     {
-        var s = Soldier.FromTroop(Set, "rep_jedi_guardian");
-        s.AddSuppression(3);
+        var s = Soldier.FromTroop(Set, "rep_jedi_guardian");   // Nerve 3: Pinned at 5
+        s.AddSuppression(4);
         Assert.False(s.Pinned);
         s.AddSuppression(1);
         Assert.True(s.Pinned);
