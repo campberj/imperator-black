@@ -17,6 +17,15 @@ export interface Mission extends Board {
   /** The mission type id. */
   mission: string
   tier: number
+  opposition?: string
+  arc?: { id: string; name: string; label: string }
+  force_limit?: { tv: number; models: number }
+  task?: string
+  lockdown?: string
+  grades?: { decisive: string; marginal: string; failure: string }
+  special_rules?: { title: string; text: string }[]
+  next?: { grade: string; text: string }[]
+  map_note?: string
   size: string
   clock: { die: string; limit: number; check_in_every: number; first_check_in: number }
   alert_start: number
@@ -41,10 +50,14 @@ export interface Mission extends Board {
 }
 
 // The example missions, read from the YAML files themselves so docs/scenarios/missions stays the one source.
-const RAW = import.meta.glob('../../../docs/scenarios/missions/*.yaml', { query: '?raw', import: 'default' }) as Record<string, () => Promise<string>>
+const RAW = {
+  ...import.meta.glob('../../../docs/scenarios/missions/*.yaml', { query: '?raw', import: 'default' }),
+  ...import.meta.glob('../../../docs/scenarios/arcs/foundry-moon/*.yaml', { query: '?raw', import: 'default' }),
+} as Record<string, () => Promise<string>>
 
 export const EXAMPLES = Object.keys(RAW)
-  .map((path) => ({ id: path.slice(path.lastIndexOf('/') + 1, -'.yaml'.length), path }))
+  .filter((path) => !path.endsWith('/arc.yaml'))
+  .map((path) => ({ id: path.includes('/arcs/') ? `foundry-moon/${path.slice(path.lastIndexOf('/') + 1, -'.yaml'.length)}` : path.slice(path.lastIndexOf('/') + 1, -'.yaml'.length), path }))
   .sort((a, b) => a.id.localeCompare(b.id))
 
 /** "mission-ship-42" → "Example: ship, seed 42". */
@@ -69,12 +82,13 @@ export function missionRequest(params: URLSearchParams, content: Content) {
   const setting = params.get('setting') === 'land' ? 'land' : 'ship'
   const pick = (key: string, ids: string[]) => (ids.includes(params.get(key) ?? '') ? params.get(key)! : '')
   const mission = pick('mission', content.missions.missions.map((m) => m.id))
+  const opposition = pick('opposition', (content.missions.oppositions ?? []).map((o) => o.id))
   const tier = pick('tier', content.missions.tiers.map((t) => String(t.tier)))
   const vessel = setting === 'ship' ? pick('vessel', content.layouts.vessels.map((v) => v.id)) : ''
   const environment = setting === 'land' ? pick('environment', content.terrain.environments.map((e) => e.id)) : ''
   const size = setting === 'land' && params.get('size') === 'large' ? 'large' : 'small'
   const seed = seedFrom(params)
-  const asked = { setting, mission, tier, vessel, environment, size: setting === 'land' ? size : '' }
+  const asked = { setting, mission, tier, vessel, environment, size: setting === 'land' ? size : '', opposition }
   const query = new URLSearchParams(Object.entries({ ...asked, seed: String(seed) }).filter(([, v]) => v)).toString()
   return { example, asked, seed, url: `/missions?${query}` }
 }
