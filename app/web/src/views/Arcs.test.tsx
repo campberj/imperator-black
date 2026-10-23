@@ -21,7 +21,7 @@ test('Foundry Moon shows both branches, all four missions, and authored short ar
   for (const link of links) expect(link.getAttribute('href')).toMatch(/^#missions\?example=foundry-moon%2F/)
   const branch = links.find((l) => l.textContent?.includes('2B'))!
   expect(branch.textContent).toContain('Bring Them Home')
-  expect(within(missions).getByText('300 TV, 7 models')).toBeTruthy()
+  expect(within(missions).getAllByText('300 TV, 7 models')).toHaveLength(2)
   expect(screen.getByRole('heading', { name: 'Short arc rules' })).toBeTruthy()
   expect(screen.getByText(content.campaign!.short_arc!.text[0])).toBeTruthy()
   expect(screen.getByRole('heading', { name: 'What each grade leads to' })).toBeTruthy()
