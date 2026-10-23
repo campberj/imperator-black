@@ -113,7 +113,44 @@ public static class Values
             if (s.Pinned && s.Cover == Cover.Open) { Rally(s); return; }
         }
         else situational += Shooting.AimModifier(s, target.Cover);
-        Shooting.Fire(rng, core, s, target, situational);
+        var round = BestRound(core, s, target.Armour, situational);
+        if (round is null)
+        {
+            Shooting.Fire(rng, core, s, target, situational);
+        }
+        else
+        {
+            // The simulator chooses the round with the higher expected wound row for this target.
+            // Core still owns shot resolution and wound effects; splash targets are not modelled.
+            var shot = Shooting.Resolve(rng, core, Shooting.Modifier(s, target.Cover, situational),
+                round.DamageDice, target.Armour, round.Ap);
+            if (shot.Hit)
+            {
+                target.HitThisRound = true;
+                target.ApplyRow(shot.Row);
+                if (s.Weapon.Has("suppressing")) target.AddSuppression(1);
+            }
+        }
+    }
+
+    /// <summary>Best launcher round against this target, or null for the default round.</summary>
+    private static RoundDef? BestRound(CoreContent core, Soldier shooter, int armour, int situational)
+    {
+        var weapon = shooter.Weapon;
+        if (weapon.Rounds is not { Count: > 0 }) return null;
+        int modifier = Shooting.Modifier(shooter, Cover.Open, situational);
+        double best = Shooting.ExpectedRow(core, modifier, weapon.DamageDice, armour, weapon.Ap);
+        RoundDef? selected = null;
+        foreach (var round in weapon.Rounds)
+        {
+            double score = Shooting.ExpectedRow(core, modifier, round.DamageDice, armour, round.Ap);
+            if (score > best)
+            {
+                best = score;
+                selected = round;
+            }
+        }
+        return selected;
     }
 
     private static void Rally(Soldier s) => s.RemoveSuppression(s.IsLeader ? 2 : 1);
@@ -143,8 +180,14 @@ public static class Values
     {
         int extra = core.AutoFire?.ExtraTargetModifier ?? -1;
         int mod = Shooting.Modifier(s, Cover.Open, s.Weapon.RangeModifier(12) + Shooting.AimModifier(s, Cover.Open));
-        return Enumerable.Range(0, s.Weapon.Rate)
-            .Sum(i => Shooting.ExpectedRow(core, mod + (i > 0 ? extra : 0), s.Weapon.DamageDice, armour, s.Weapon.Ap));
+        return Enumerable.Range(0, s.Weapon.Rate).Sum(i =>
+        {
+            int modifier = mod + (i > 0 ? extra : 0);
+            double best = Shooting.ExpectedRow(core, modifier, s.Weapon.DamageDice, armour, s.Weapon.Ap);
+            foreach (var round in s.Weapon.Rounds ?? [])
+                best = Math.Max(best, Shooting.ExpectedRow(core, modifier, round.DamageDice, armour, round.Ap));
+            return best;
+        });
     }
 
     public static string Report(ContentSet content, int n, int seed)
@@ -163,7 +206,7 @@ public static class Values
         md.AppendLine("- **Duel 24\" cover**: the same at 24\", both models in Light cover; end-of-round recovery applies.");
         md.AppendLine("- **Close combat**: the exchange rules of chapter 5, a coin deciding who charges, both using the default break rule (break only after losing while Wounded or at 3+ Suppression; it ends only if both break).");
         md.AppendLine($"- **Score**: the mean of the three win rates. A draw (both broke away, or no result after {RoundLimit} rounds) counts as half a win. The reference scores 50% against itself.");
-        md.AppendLine("- **Rows A0 / A2 / A3**: expected total wound rows from one aimed Shoot at 12\" against fresh targets in the open with Armour 0, 2 and 3 (a miss or no effect counts 0, rows cap at 10). An *Auto N* weapon engages N targets, −1 after the first. *Suppressing* adds Suppression, not rows, so it does not show here.");
+        md.AppendLine("- **Rows A0 / A2 / A3**: expected total wound rows from one aimed Shoot at 12\" against fresh targets in the open with Armour 0, 2 and 3 (a miss or no effect counts 0, rows cap at 10). An *Auto N* weapon engages N targets, −1 after the first. Launchers choose the round with the higher expected wound row against each target (anti-armour or high explosive); explosion splash damage to nearby models is not modelled. *Suppressing* adds Suppression, not rows, so it does not show here.");
         md.AppendLine("- No grenades, Moves or reactions. † Automated. \\* has a Proposed skill. N/A: no ranged weapon (its score is close combat alone).");
         md.AppendLine();
 
