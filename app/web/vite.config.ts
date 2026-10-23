@@ -24,5 +24,7 @@ export default defineConfig({
   },
   test: {
     environment: 'jsdom',
+    // The card-heavy Units regression needs CPU headroom when Planner tests run alongside it.
+    maxWorkers: 2,
   },
 })
