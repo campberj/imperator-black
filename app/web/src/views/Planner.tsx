@@ -14,7 +14,7 @@ const example = (): Plan => ({ name: 'My force', faction: 'republic', setting: '
 export function Planner({ content }: { content: Content }) {
   const params = useHashParams()
   const encoded = params.get('plan')
-  const [plan, setPlan] = useState<Plan>(() => { try { return encoded ? JSON.parse(decodeURIComponent(encoded)) as Plan : example() } catch { return example() } })
+  const [plan, setPlan] = useState<Plan>(() => { try { return encoded ? JSON.parse(encoded) as Plan : example() } catch { return example() } })
   const [result, setResult] = useState<Result>()
   const [error, setError] = useState('')
   const [newTeam, setNewTeam] = useState('')
