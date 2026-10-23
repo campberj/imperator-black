@@ -199,6 +199,20 @@ The app runs the campaign like a video game: story text, decisions, the outpost 
 
 **Exit:** The whole campaign loop runs in the app for one player.
 
+### Proposed campaign-game implementation slices (S0–S3)
+
+The [campaign-game design note](design/campaign-game.md) is the authority for the solo-game experience. These are proposed development slices, **not permission to invent gameplay rules** or start coding. The paper Foundry Moon playthrough remains incomplete and is the gate for S2 gameplay screens.
+
+| Slice | Scope | Done when / gate |
+|---|---|---|
+| **S0 — Design alignment** | Proposed [ADR-002](architecture/adr-002-sequential-campaign.md), decisions and this single roadmap | RJ approves or amends the solo-first architecture and records missing design work |
+| **S1 — Solo persistence** | PostgreSQL without mandatory Docker; create/list/load a one-player campaign; Core event projection and replay | Campaign persists through API restart and replays to identical state; migrations and tests pass |
+| **S2 — Foundry Moon bespoke campaign game** | Authored story and briefing text, grade-based branching, deployment and printed mission handoff, debrief, injuries, XP and consequences | One paper-validated Foundry Moon arc runs in the app and resumes correctly after restart; **paper Foundry Moon playthrough first** |
+| **S3 — Procedural adventure campaign game** | Chapter 14 arc generation, generated story text, outpost hub (distinct from ship), commander taskings and meaningful events/choices | One adventure loop runs from hub through mission and aftermath with persistent consequences; **outpost rules and bespoke/procedural content schema must be approved first** |
+
+S2 is a *game*, not a results-entry tracker. S3 does not invent facilities, outpost economy, procedural prose rules or event-choice costs. These depend on [RJ's open design questions](design/campaign-game.md). The existing Phase 9 custom troop builder remains separately scoped.
+
+
 ## Phase 10 — PoC validation
 
 - Play a **5-mission campaign arc** end to end with rules and app.
@@ -219,6 +233,20 @@ P0 → P1 → P2 → P3 ─┐
 Phase 4 can begin alongside Phase 2. Phase 8 starts once layout and mission tables exist.
 
 ## After the PoC
+
+### Proposed post-PoC work (after S1–S3 and Phase 10 validation)
+
+| Slice | Scope | Acceptance gate |
+|---|---|---|
+| **S4 — Shared campaign authority** | Identity, membership permissions, multiplayer-only sequential player-turn actor, expected-sequence concurrency and persistent idempotency keys | Two authorised test participants hand off safely; inactive commands rejected; retries produce no duplicate events; design D1–D3 approved |
+| **S5 — Expanded strategic map** | Extend the existing Chapter 14 six-node arc map into a larger sector only when authored and approved | Location visibility, links and ownership persist without revealing hidden information; D4 approved |
+| **S6 — Ships, forces and orders** | Persist assets and process rules-defined travel and commands | Approved movements replay deterministically; D3/D5 approved |
+| **S7 — Shared encounter-to-tabletop loop** | Produce seeded tabletop mission handoffs and apply accepted results | One encounter produces one mission and one reviewed aftermath; D6/D7 approved |
+| **S8 — Extended solo AI and async play** | Strategic computer decisions, idle-player handling and notifications | Authored rules, visibility and D8/D9 checked |
+| **S9 — Extended play interface** | Live mission dashboard and broader campaign/ship tooling where separately approved | All effects use existing Core/content rules; no automated tabletop-combat engine |
+
+Shared strategic turns apply only to multiplayer (decision 1.10); solo retains Chapter 14. The procedural outpost hub belongs to **S3 before multiplayer**, not to a post-PoC tracker.
+
 
 - Multiplayer: accounts, shared campaigns, Commander/Operator roles, sequential player turns (decision 1.10), after the solo campaign tracker
 - Full ship/outpost and sector layers; additional campaign types with tighter command guidance
