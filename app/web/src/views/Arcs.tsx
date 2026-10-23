@@ -4,6 +4,7 @@ import type { Content } from '../content'
 import { Table } from '../components/Table'
 import { useHashParams } from '../routes'
 import { loadExample, type Mission } from '../mission'
+import foundryMoon from '../../../docs/scenarios/arcs/foundry-moon/arc.yaml?raw'
 
 export interface ShortArc {
   id: string
@@ -20,10 +21,12 @@ export interface ShortArc {
 
 const RAW_ARCS = import.meta.glob('../../../docs/scenarios/arcs/*/*.yaml', { query: '?raw', import: 'default' }) as Record<string, () => Promise<string>>
 
-export const ARCS = Object.entries(RAW_ARCS).filter(([path]) => path.endsWith('/arc.yaml')).map(([path, load]) => ({
-  id: path.split('/').at(-2)!,
-  load,
-})).sort((a, b) => a.id.localeCompare(b.id))
+export const ARCS = [
+  { id: 'foundry-moon', load: async () => foundryMoon },
+  ...Object.entries(RAW_ARCS)
+    .filter(([path]) => path.endsWith('/arc.yaml') && !path.includes('/foundry-moon/'))
+    .map(([path, load]) => ({ id: path.split('/').at(-2)!, load })),
+].sort((a, b) => a.id.localeCompare(b.id))
 
 export function Arcs({ content }: { content: Content }) {
   const params = useHashParams()
