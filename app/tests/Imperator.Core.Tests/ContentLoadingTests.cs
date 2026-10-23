@@ -116,6 +116,44 @@ public class ContentLoadingTests
     }
 
     [Fact]
+    public void LoadsCampaignAndTwoPlayerContent()
+    {
+        Assert.Equal("poc_boarding_element", Set.Campaign.Start.Force);
+        Assert.Equal(3, Set.Campaign.ShortArc.Missions);
+        Assert.Equal(["fireteam", "soldier"], Set.Campaign.ForceSelection.Select(x => x.Id));
+        Assert.Equal(11, Set.Campaign.Events.Count);
+        Assert.Equal(["patrol", "strike"], Set.Versus.Sizes.Select(x => x.Id));
+        Assert.Equal(350, Set.Versus.Sizes.Single(x => x.Id == "patrol").Tv);
+        Assert.Equal(6, Set.Versus.Missions.Count);
+    }
+
+    [Theory]
+    [InlineData("campaign.nodes[0].roll", "\"2\"", "campaign.nodes: d6 rows must cover 1-6 exactly once")]
+    [InlineData("campaign.advances.table[0].roll", "\"2\"", "campaign.advances.table: d6 rows must cover 1-6 exactly once")]
+    [InlineData("campaign.injuries[0].roll", "\"3\"", "campaign.injuries: 2d6 rows must cover 2-12 exactly once")]
+    [InlineData("campaign.events[0].roll", "\"3\"", "campaign.events: 2d6 rows must cover 2-12 exactly once")]
+    [InlineData("campaign.nodes[0].mission", "\"not_a_mission\"", "campaign node salvage_yard mission: unknown id 'not_a_mission'")]
+    [InlineData("campaign.nodes[0].vessel", "\"bad_vessel\"", "campaign node salvage_yard vessel: unknown id 'bad_vessel'")]
+    [InlineData("campaign.nodes[3].environment", "\"bad_environment\"", "campaign node safe_house environment: unknown id 'bad_environment'")]
+    [InlineData("campaign.start.force", "\"bad_force\"", "campaign.start force: unknown id 'bad_force'")]
+    [InlineData("campaign.advances.skills[0]", "\"bad_skill\"", "campaign.advances.skills: unknown id 'bad_skill'")]
+    [InlineData("campaign.standing[0].level", "1", "campaign.standing: levels must run 0 to 6")]
+    [InlineData("campaign.arc.columns[0].nodes", "1", "campaign.arc: six nodes in all, one of them the target")]
+    [InlineData("campaign.ship[0].levels", "[]", "campaign ship medbay: three levels")]
+    [InlineData("campaign.events[0].text", "\"\"", "campaign event 2: needs text")]
+    [InlineData("versus.mission_roll[0].roll", "\"2\"", "versus.mission_roll: d6 rows must cover 1-6 exactly once")]
+    [InlineData("versus.mission_roll[0].mission", "\"bad_mission\"", "versus.mission_roll mission: unknown id 'bad_mission'")]
+    [InlineData("versus.sizes[0].clock", "\"bad_clock\"", "versus size patrol clock: unknown id 'bad_clock'")]
+    [InlineData("versus.missions[0].kind", "\"bad_kind\"", "versus mission meeting: kind even/raid and hidden none/blinds/defender")]
+    [InlineData("versus.missions[0].hidden", "\"bad_hidden\"", "versus mission meeting: kind even/raid and hidden none/blinds/defender")]
+    [InlineData("versus.missions[3].raid_type", "\"bad_raid\"", "versus mission raid_seize: unknown raid_type")]
+    public void CampaignAndVersusRejectInvalidContent(string path, string json, string expected)
+    {
+        var e = Assert.Throws<ContentException>(() => LoadMutated(root => Replace(root, path, json)));
+        Assert.Contains(expected, e.Errors);
+    }
+
+    [Fact]
     public void LoadsMissions()
     {
         var m = Set.Missions;
@@ -225,6 +263,8 @@ public class ContentLoadingTests
     }
 
     [Theory]
+    [InlineData("campaign")]
+    [InlineData("versus")]
     [InlineData("layouts")]
     [InlineData("terrain")]
     [InlineData("missions")]
