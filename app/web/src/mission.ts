@@ -52,12 +52,12 @@ export interface Mission extends Board {
 // The example missions, read from the YAML files themselves so docs/scenarios/missions stays the one source.
 const RAW = {
   ...import.meta.glob('../../../docs/scenarios/missions/*.yaml', { query: '?raw', import: 'default' }),
-  ...import.meta.glob('../../../docs/scenarios/arcs/foundry-moon/*.yaml', { query: '?raw', import: 'default' }),
+  ...import.meta.glob('../../../docs/scenarios/arcs/*/*.yaml', { query: '?raw', import: 'default' }),
 } as Record<string, () => Promise<string>>
 
 export const EXAMPLES = Object.keys(RAW)
   .filter((path) => !path.endsWith('/arc.yaml'))
-  .map((path) => ({ id: path.includes('/arcs/') ? `foundry-moon/${path.slice(path.lastIndexOf('/') + 1, -'.yaml'.length)}` : path.slice(path.lastIndexOf('/') + 1, -'.yaml'.length), path }))
+  .map((path) => ({ id: path.includes('/arcs/') ? `${path.split('/').at(-2)}/${path.slice(path.lastIndexOf('/') + 1, -'.yaml'.length)}` : path.slice(path.lastIndexOf('/') + 1, -'.yaml'.length), path }))
   .sort((a, b) => a.id.localeCompare(b.id))
 
 /** "mission-ship-42" → "Example: ship, seed 42". */
