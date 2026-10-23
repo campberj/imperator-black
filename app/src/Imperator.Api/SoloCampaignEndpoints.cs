@@ -23,8 +23,8 @@ public static class SoloCampaignEndpoints
             throw new InvalidOperationException("Unauthenticated solo campaign endpoints are development-only.");
 
         var routes = app.MapGroup("/campaigns");
-        routes.MapPost("/", Create);
-        routes.MapGet("/", List);
+        routes.MapPost("", Create);
+        routes.MapGet("", List);
         routes.MapGet("/{id:guid}", Load);
         routes.MapGet("/{id:guid}/events", History);
         routes.MapPatch("/{id:guid}/name", Rename);
