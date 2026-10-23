@@ -12,7 +12,7 @@ export function keywordLabel(id: string, lookup: Lookup, weapon?: RangedWeapon):
 export function launcherRounds(w: RangedWeapon): string[] {
   const first = w.round ? [`${w.round} above`] : []
   const extras = (w.rounds ?? []).map((r) => `${r.name}: ${r.damage}, AP ${r.ap}${r.explosion ? `, Explosion (${r.explosion})` : ''}`)
-  return [...first, ...extras]
+  return [...first, ...extras.map((item) => `or ${item.charAt(0).toLowerCase()}${item.slice(1)} round`)]
 }
 
 /** A weapon's own range penalty, noted on cards only when it differs from the default. */
