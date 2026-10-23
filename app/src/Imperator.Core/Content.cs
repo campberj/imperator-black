@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Imperator.Core.Values;
 
 namespace Imperator.Core;
 
@@ -235,6 +236,7 @@ public sealed class ContentSet
     public required LayoutsContent Layouts { get; init; }
     public required TerrainContent Terrain { get; init; }
     public required MissionsContent Missions { get; init; }
+    public required ValuesContent Values { get; init; }
 
     public RangedWeapon Ranged(string id) => Find(Weapons.Ranged, w => w.Id, id, "ranged weapon");
     public MeleeWeapon Melee(string id) => Find(Weapons.Melee, w => w.Id, id, "melee weapon");
@@ -310,6 +312,7 @@ public sealed class ContentSet
             Layouts = Section<LayoutsContent>("layouts"),
             Terrain = Section<TerrainContent>("terrain"),
             Missions = Section<MissionsContent>("missions"),
+            Values = Section<ValuesContent>("values"),
         };
         if (errors.Count == 0) errors.AddRange(ContentValidator.Validate(set));
         if (errors.Count > 0) throw new ContentException(errors);
