@@ -30,7 +30,7 @@ const rowOf = (table: string, name: string) => section(table).getByRole('rowhead
 
 // Done when: both example missions in docs/scenarios/missions/ can be shown.
 test('finds both example missions in docs/scenarios/missions', () => {
-  expect(EXAMPLES.map((e) => e.id)).toEqual(['mission-land-11', 'mission-ship-42'])
+  expect(EXAMPLES.filter((e) => !e.id.startsWith('foundry-moon/')).map((e) => e.id)).toEqual(['mission-land-11', 'mission-ship-42'])
 })
 
 test('shows the ship example: briefing, map, how it plays, ground', async () => {
@@ -144,4 +144,16 @@ test('shows the API error', async () => {
   vi.stubGlobal('fetch', vi.fn(async () => Response.json({ detail: 'Decks are small missions.' }, { status: 400 })))
   render(<Missions content={content} lookup={lookup} />)
   expect((await screen.findByRole('alert')).textContent).toContain('Decks are small missions.')
+})
+
+test('Foundry Moon authored missions show all four stages and their own rules', async () => {
+  const authored = EXAMPLES.filter((e) => e.id.startsWith('foundry-moon/'))
+  expect(authored).toHaveLength(4)
+  for (const e of authored) {
+    hashChange(`#missions?example=${e.id}`)
+    const heading = await screen.findByRole('heading', { name: /Foundry Moon \d|Foundry Moon 2[A-B]/i, level: 2 }).catch(() => null)
+    // Each authored mission must render without relying on generated fallback text.
+    expect(heading).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'The enemy' })).toBeTruthy()
+  }
 })
