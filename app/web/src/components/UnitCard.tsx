@@ -4,6 +4,7 @@ import {
   factionColour,
   gearWeaponKeywords,
   keywordLabel,
+  launcherRounds,
   rangePenaltyNote,
   skillName,
   skillText,
@@ -83,6 +84,7 @@ export function UnitCard({ troop, content, lookup }: { troop: Troop; content: Co
             const notes = keywords.map((k) => keywordLabel(k, lookup, w))
             const penalty = rangePenaltyNote(w)
             if (penalty) notes.push(penalty)
+            if (w.explosion) notes.push(`Explosion (${w.explosion})`)
             return [
               <tr key={w.id} data-weapon={w.id}>
                 <td>{i === 0 ? <b>{w.name}</b> : <i>or {w.name}</i>}</td>
@@ -90,6 +92,11 @@ export function UnitCard({ troop, content, lookup }: { troop: Troop; content: Co
                 <td>{w.short_range}"</td>
                 <td>{w.ap}</td>
               </tr>,
+              launcherRounds(w).length > 0 && (
+                <tr key={`${w.id}-rounds`} className="note">
+                  <td colSpan={4}>{launcherRounds(w).join(', ')}. Choose the round before each Shoot.</td>
+                </tr>
+              ),
               notes.length > 0 && (
                 <tr key={`${w.id}-notes`} className="note">
                   <td colSpan={4}>{notes.join(', ')}</td>

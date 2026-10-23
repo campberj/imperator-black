@@ -8,6 +8,13 @@ export function keywordLabel(id: string, lookup: Lookup, weapon?: RangedWeapon):
   return lookup.keywords.get(id)?.name ?? id
 }
 
+/** Round choices use the same wording as the printed unit cards. */
+export function launcherRounds(w: RangedWeapon): string[] {
+  const first = w.round ? [`${w.round} above`] : []
+  const extras = (w.rounds ?? []).map((r) => `${r.name}: ${r.damage}, AP ${r.ap}${r.explosion ? `, Explosion (${r.explosion})` : ''}`)
+  return [...first, ...extras]
+}
+
 /** A weapon's own range penalty, noted on cards only when it differs from the default. */
 export function rangePenaltyNote(w: RangedWeapon): string | undefined {
   return w.range_penalty && `beyond short ${w.range_penalty[0]}, beyond double ${w.range_penalty[1]}`
