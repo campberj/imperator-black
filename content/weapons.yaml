@@ -46,12 +46,27 @@ ranged:
   - { id: dzj08,     faction: hankou,    name: Dual DZJ-08 recoilless,  damage: 2d12, short_range: 30, ap: 2, keywords: [one_per_round, breach],
       round: Anti-armour, rounds: [{ id: he, name: High explosive, damage: d8+d10, ap: 0, explosion: 2 }] }
 
+  # Separatist Alliance (faction: separatist). Droid weapons; listed with the Separatists in chapter 9.
+  - { id: e5,          faction: separatist, name: E-5 blaster rifle,        damage: 2d8,  short_range: 24, ap: 0, keywords: [] }
+  - { id: e5c,         faction: separatist, name: E-5C heavy blaster rifle, damage: 2d8,  short_range: 24, ap: 0, auto: 2, keywords: [auto] }
+  - { id: e5s,         faction: separatist, name: E-5s sniper rifle,        damage: 2d10, short_range: 40, ap: 0, keywords: [] }
+  - { id: e60r,        faction: separatist, name: E-60R missile launcher,   damage: 2d12, short_range: 36, ap: 1, keywords: [one_per_round, cumbersome],
+      round: Anti-armour, rounds: [{ id: he, name: High explosive, damage: d8+d10, ap: 0, explosion: 2 }] }
+  - { id: b2_blasters, faction: separatist, name: Wrist blasters,           damage: 2d8,  short_range: 18, ap: 0, auto: 2, keywords: [handy, auto] }
+  - { id: acm_blaster, faction: separatist, name: ACM heavy blaster,        damage: 2d8,  short_range: 24, ap: 0, auto: 3, keywords: [auto, suppressing] }
+  - { id: b2_rocket,   faction: separatist, name: Wrist rocket launcher,    damage: d8+d10, short_range: 24, ap: 0, explosion: 2, keywords: [one_per_round] }
+  - { id: droideka_cannons, faction: separatist, name: Twin blaster cannons, damage: 2d10, short_range: 24, ap: 0, auto: 2, keywords: [auto, suppressing] }
+  - { id: dsd1_cannon, faction: separatist, name: Heavy blaster cannon,     damage: 2d12, short_range: 30, ap: 1, keywords: [] }
+  - { id: dt12,        faction: separatist, name: DT-12 heavy blaster pistol, damage: 2d8, short_range: 12, ap: 0, keywords: [handy] }
+
 melee:
   - { id: unarmed,       name: "Unarmed / weapon butt",      damage: 2d4, ap: 0 }
   - { id: knife,         name: "Knife or bayonet",           damage: 2d8, ap: 0 }
   - { id: breaching_tool, name: "Breaching tool or heavy blade", damage: 2d10, ap: 0 }
   - { id: combat_blade,  name: "Boarding axe or combat blade", damage: 2d10, ap: 1 }
   - { id: lightsaber,    faction: republic, name: Lightsaber, damage: 2d12, ap: 2 }
+  - { id: electrostaff,  faction: separatist, name: Electrostaff, damage: 2d10, ap: 1 }
+  - { id: vibrosword,    faction: separatist, name: Vibrosword,   damage: 2d10, ap: 1 }
 
 # Thrown weapons use the Throw action. throw_range: short range in inches.
 thrown:

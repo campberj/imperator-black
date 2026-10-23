@@ -85,6 +85,16 @@ Armour and Wounds multiply the whole total. A model that survives twice as many 
 | MAAWS recoilless rifle (Anchorage) | 11.5 | 17.2 | 23 | 28.8 | 34.5 |
 | CS/LM5 rotary gun (Hankou) | 10.6 | 15.9 | 21.2 | 26.5 | 31.8 |
 | Dual DZJ-08 recoilless (Hankou) | 9.2 | 13.8 | 18.4 | 23 | 27.6 |
+| E-5 blaster rifle (Separatist Alliance) | 4.2 | 6.3 | 8.4 | 10.5 | 12.6 |
+| E-5C heavy blaster rifle (Separatist Alliance) | 6.7 | 10.1 | 13.4 | 16.8 | 20.1 |
+| E-5s sniper rifle (Separatist Alliance) | 5.7 | 8.6 | 11.4 | 14.2 | 17.1 |
+| E-60R missile launcher (Separatist Alliance) | 8.2 | 12.3 | 16.4 | 20.5 | 24.6 |
+| Wrist blasters (Separatist Alliance) | 6.6 | 9.9 | 13.2 | 16.5 | 19.8 |
+| ACM heavy blaster (Separatist Alliance) | 10.6 | 15.9 | 21.2 | 26.5 | 31.8 |
+| Wrist rocket launcher (Separatist Alliance) | 7.9 | 11.9 | 15.8 | 19.8 | 23.7 |
+| Twin blaster cannons (Separatist Alliance) | 9.5 | 14.2 | 19 | 23.8 | 28.5 |
+| Heavy blaster cannon (Separatist Alliance) | 6.7 | 10.1 | 13.4 | 16.8 | 20.1 |
+| DT-12 heavy blaster pistol (Separatist Alliance) | 3.7 | 5.6 | 7.4 | 9.2 | 11.1 |
 <!-- /table -->
 
 A weapon's base value is the average wound row it deals on a hit against Armour 0, 1 and 2. That is then adjusted for range, Auto N (each target after the first counts 0.6), Explosion (X), and keywords: Handy and Suppressing add to it, while Cumbersome and One per round take away. A launcher with a choice of rounds uses its best round, plus 10% for the choice.
@@ -99,6 +109,8 @@ A weapon's base value is the average wound row it deals on a hit against Armour 
 | Breaching tool or heavy blade | 2.6 | 3.9 | 5.2 | 6.5 | 7.8 |
 | Boarding axe or combat blade | 2.9 | 4.3 | 5.8 | 7.2 | 8.7 |
 | Lightsaber | 3.5 | 5.2 | 7 | 8.8 | 10.5 |
+| Electrostaff | 2.9 | 4.3 | 5.8 | 7.2 | 8.7 |
+| Vibrosword | 2.9 | 4.3 | 5.8 | 7.2 | 8.7 |
 <!-- /table -->
 
 ### Gear, grenades and skills
@@ -121,6 +133,7 @@ A weapon's base value is the average wound row it deals on a hit against Armour 
 | Mobility and one-way attack package | 4 |
 | Flux warhead | 4 |
 | Cooperative engagement package | 5 |
+| Deflector shield | 4 |
 <!-- /table -->
 
 <!-- table:values.grenades -->
@@ -150,6 +163,8 @@ A weapon's base value is the average wound row it deals on a hit against Armour 
 | Laser detector | 3 per level |
 | Augmented | 4 per level |
 | Self-destruct | 3 per level |
+| Rolling | 3 per level |
+| Battle computer | 5 per level |
 <!-- /table -->
 
 ### Survival multiplier
@@ -336,6 +351,24 @@ Every profile in chapter 9, with its default loadout.
 |---|---|---|
 | **Directorate Handler** | 102 | 11 |
 | **Directorate Deniable Operator** | 68 | 7 |
+<!-- /table -->
+
+### Separatist Alliance
+
+<!-- table:values.tv_separatist -->
+| Troop | TV | Requisition |
+|---|---|---|
+| **B1 Battle Droid** | 22 | 3 |
+| **B1 Heavy Weapons Droid** | 26 | 3 |
+| **B2 Super Battle Droid** | 46 | 5 |
+| **B2 Heavy Weapons Droid** | 57 | 6 |
+| **Droideka** | 68 | 7 |
+| **BX Commando Droid** | 57 | 6 |
+| **IG-100 MagnaGuard** | 52 | 6 |
+| **T-series Tactical Droid** | 35 | 4 |
+| **Kraken** | 63 | 7 |
+| **General Grievous** | 142 | 15 |
+| **DSD1 Dwarf Spider Droid** | 90 | 9 |
 <!-- /table -->
 
 The ranking was checked against the simulator's duel scores (`docs/analysis/troop-value-calibration.md`): rank correlation 0.87 across the 73 profiles in the simulator report. The largest differences are where the duel can't see a troop's worth: Leaders (command), gunners and launchers (several targets), and pistol-armed troops, who are weak at duel range by design.

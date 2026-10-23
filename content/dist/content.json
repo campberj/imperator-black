@@ -62,6 +62,42 @@
         "keywords": [
           "sealed"
         ]
+      },
+      {
+        "id": "b1_chassis",
+        "faction": "separatist",
+        "name": "B1 chassis",
+        "value": 0,
+        "keywords": [
+          "sealed"
+        ]
+      },
+      {
+        "id": "droid_plating",
+        "faction": "separatist",
+        "name": "Droid plating",
+        "value": 1,
+        "keywords": [
+          "sealed"
+        ]
+      },
+      {
+        "id": "duranium_plating",
+        "faction": "separatist",
+        "name": "Duranium plating",
+        "value": 2,
+        "keywords": [
+          "sealed"
+        ]
+      },
+      {
+        "id": "dsd1_hull",
+        "faction": "separatist",
+        "name": "Spider droid hull",
+        "value": 3,
+        "keywords": [
+          "sealed"
+        ]
       }
     ]
   },
@@ -86,7 +122,7 @@
       {
         "id": "setup",
         "name": "At the start",
-        "text": "Elements start Unaware unless the mission says otherwise. Automated models, and models the mission places on Overwatch, start Alerted."
+        "text": "Elements start Unaware unless the mission says otherwise. Elements with the Automated profile (turrets and drones), and models the mission places on Overwatch, start Alerted. Other Automated troops (battle droids, combat robots) start Unaware like anyone else: their sensors are cued to their task, not to the intruder."
       }
     ],
     "marker": [
@@ -337,6 +373,28 @@
           "Never Unaware: it does not hear noise, and starts on Overwatch."
         ],
         "close_combat": "Never breaks; it has no melee weapon, so it loses every exchange it is forced into."
+      },
+      {
+        "id": "battle_droid",
+        "name": "Battle droid",
+        "summary": "Advances and fires by the numbers; slow to use cover unless a tactical droid commands it.",
+        "status": "proposed",
+        "surrenders": false,
+        "close_quarters": false,
+        "investigate": "Every model, together, keeping within 3\" of a friend of its element.",
+        "engaged": [
+          "A tactical droid's battle computer reaches it: use the Tactical profile instead.",
+          "A target within short range: Shoot, Shoot.",
+          "Otherwise: Move toward the nearest target by the shortest route, then Shoot."
+        ],
+        "alerted": [
+          "Move toward the marker by the shortest route, then Overwatch."
+        ],
+        "reactions": [
+          "Overwatch: Shoot at the first trigger it can.",
+          "Unactivated: never reacts unless on Overwatch."
+        ],
+        "close_combat": "Never breaks; it fights until destroyed."
       },
       {
         "id": "leader",
@@ -1353,6 +1411,12 @@
         "name": "Meridian Directorate",
         "side": "enemy",
         "summary": "Technocratic state run through its intelligence ministries; Freespace's current patron."
+      },
+      {
+        "id": "separatist",
+        "name": "Separatist Alliance",
+        "side": "enemy",
+        "summary": "The Confederacy of Independent Systems' droid army: battle droids by the hundred, droidekas, commando droids and MagnaGuards, run by tactical droids and General Grievous."
       }
     ],
     "elements": [
@@ -1774,6 +1838,143 @@
             "count": 3
           }
         ]
+      },
+      {
+        "id": "sep_b1_section",
+        "name": "B1 battle droid section",
+        "faction": "separatist",
+        "tier": 1,
+        "behavior": "battle_droid",
+        "composition": [
+          {
+            "troop": "sep_b1",
+            "count": 3
+          },
+          {
+            "troop": "sep_b1_heavy",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "sep_b2_squad",
+        "name": "B2 super battle droid squad",
+        "faction": "separatist",
+        "tier": 2,
+        "behavior": "battle_droid",
+        "composition": [
+          {
+            "troop": "sep_b2",
+            "count": 2
+          },
+          {
+            "troop": "sep_b2_heavy",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "sep_droidekas",
+        "name": "Droideka pair",
+        "faction": "separatist",
+        "tier": 2,
+        "behavior": "sentry",
+        "composition": [
+          {
+            "troop": "sep_droideka",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "sep_tactical_command",
+        "name": "Tactical droid and escort",
+        "faction": "separatist",
+        "tier": 2,
+        "behavior": "tactical",
+        "composition": [
+          {
+            "troop": "sep_tactical",
+            "count": 1
+          },
+          {
+            "troop": "sep_b1",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "sep_bx_squad",
+        "name": "BX commando droid squad",
+        "faction": "separatist",
+        "tier": 3,
+        "behavior": "tactical",
+        "composition": [
+          {
+            "troop": "sep_bx",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "id": "sep_magnaguards",
+        "name": "MagnaGuard pair",
+        "faction": "separatist",
+        "tier": 3,
+        "behavior": "aggressive",
+        "composition": [
+          {
+            "troop": "sep_magnaguard",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "sep_dsd1",
+        "name": "Dwarf spider droid",
+        "faction": "separatist",
+        "tier": 3,
+        "behavior": "battle_droid",
+        "composition": [
+          {
+            "troop": "sep_dsd1",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "sep_kraken_command",
+        "name": "Kraken and bodyguard",
+        "faction": "separatist",
+        "tier": 3,
+        "behavior": "tactical",
+        "composition": [
+          {
+            "troop": "sep_kraken",
+            "count": 1
+          },
+          {
+            "troop": "sep_b2",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "sep_grievous",
+        "name": "General Grievous and MagnaGuards",
+        "faction": "separatist",
+        "tier": 4,
+        "behavior": "aggressive",
+        "composition": [
+          {
+            "troop": "sep_grievous",
+            "count": 1
+          },
+          {
+            "troop": "sep_magnaguard",
+            "count": 2
+          }
+        ]
       }
     ],
     "threat_tiers": [
@@ -1916,6 +2117,13 @@
         "id": "coop_engagement",
         "name": "Cooperative engagement package",
         "text": "Shares targeting data: once per round, a friendly model within 12\" of the carrier gets +1 on one Shoot test against an enemy the carrier can see.",
+        "grants_skills": {},
+        "status": "proposed"
+      },
+      {
+        "id": "deflector_shield",
+        "name": "Deflector shield",
+        "text": "A droideka's shield generator. While the carrier has not Moved or rolled this round, it counts as in Heavy cover against every shot. Suppressive Fire ignores it, as it ignores cover.",
         "grants_skills": {},
         "status": "proposed"
       }
@@ -3001,6 +3209,143 @@
         ]
       }
     ],
+    "oppositions": [
+      {
+        "id": "separatist",
+        "name": "Separatist Alliance",
+        "summary": "The droid army: battle droid sections, droidekas and tactical droids; at higher tiers B2s, commando droids, MagnaGuards and dwarf spider droids.",
+        "tiers": [
+          {
+            "tier": 1,
+            "contacts": 3,
+            "reinforcement": "sep_b1_section",
+            "hvt": "sep_tactical",
+            "table": [
+              {
+                "roll": "1",
+                "result": "false_alarm"
+              },
+              {
+                "roll": "2",
+                "result": "sep_b1_section"
+              },
+              {
+                "roll": "3",
+                "result": "sep_b1_section"
+              },
+              {
+                "roll": "4",
+                "result": "sep_b1_section"
+              },
+              {
+                "roll": "5",
+                "result": "sep_droidekas"
+              },
+              {
+                "roll": "6",
+                "result": "sep_tactical_command"
+              }
+            ]
+          },
+          {
+            "tier": 2,
+            "contacts": 4,
+            "reinforcement": "sep_b2_squad",
+            "hvt": "sep_tactical",
+            "table": [
+              {
+                "roll": "1",
+                "result": "false_alarm"
+              },
+              {
+                "roll": "2",
+                "result": "sep_b1_section"
+              },
+              {
+                "roll": "3",
+                "result": "sep_b1_section"
+              },
+              {
+                "roll": "4",
+                "result": "sep_b2_squad"
+              },
+              {
+                "roll": "5",
+                "result": "sep_droidekas"
+              },
+              {
+                "roll": "6",
+                "result": "sep_tactical_command"
+              }
+            ]
+          },
+          {
+            "tier": 3,
+            "contacts": 4,
+            "reinforcement": "sep_bx_squad",
+            "hvt": "sep_kraken",
+            "table": [
+              {
+                "roll": "1",
+                "result": "booby_trap"
+              },
+              {
+                "roll": "2",
+                "result": "sep_b1_section"
+              },
+              {
+                "roll": "3",
+                "result": "sep_b2_squad"
+              },
+              {
+                "roll": "4",
+                "result": "sep_droidekas"
+              },
+              {
+                "roll": "5",
+                "result": "sep_bx_squad"
+              },
+              {
+                "roll": "6",
+                "result": "sep_dsd1"
+              }
+            ]
+          },
+          {
+            "tier": 4,
+            "contacts": 5,
+            "reinforcement": "sep_bx_squad",
+            "hvt": "sep_grievous",
+            "table": [
+              {
+                "roll": "1",
+                "result": "booby_trap"
+              },
+              {
+                "roll": "2",
+                "result": "sep_b2_squad"
+              },
+              {
+                "roll": "3",
+                "result": "sep_droidekas"
+              },
+              {
+                "roll": "4",
+                "result": "sep_bx_squad"
+              },
+              {
+                "roll": "5",
+                "result": "sep_magnaguards"
+              },
+              {
+                "roll": "6",
+                "result": "sep_dsd1"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "contact_results": [
       {
         "id": "false_alarm",
@@ -3616,6 +3961,23 @@
         "levels": [
           "As an action: an Explosion (2) centred on itself, 2d10 damage, AP 2 (chapter 6). Then remove the model. Very loud.",
           "A bigger warhead: Explosion (3). Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge."
+        ]
+      },
+      {
+        "id": "rolling",
+        "name": "Rolling",
+        "status": "proposed",
+        "levels": [
+          "Instead of a Move, it may roll up to 12\" by the shortest route: not through difficult ground, up or down a level, or over an obstacle. It cannot Shoot, Aim or go on Overwatch in an activation in which it rolls."
+        ]
+      },
+      {
+        "id": "battle_computer",
+        "name": "Battle computer",
+        "status": "proposed",
+        "levels": [
+          "Commands the droids around it. Separatist elements with a model within 12\" of it, and in its line of sight, use the Tactical behavior profile with the Regular drill (chapter 10) instead of their own.",
+          "As level 1, within 18\" and with no line of sight needed (it commands over the droid network), and with the Veteran drill."
         ]
       }
     ]
@@ -7026,6 +7388,313 @@
           "augmented": 1
         },
         "miniatures": "Power-armoured, superhuman heavy infantry with heavy rifles (or a heavy weapon)"
+      },
+      {
+        "id": "sep_b1",
+        "faction": "separatist",
+        "name": "B1 Battle Droid",
+        "role": "Rifleman",
+        "rank": "green",
+        "stats": {
+          "move": 5,
+          "shoot": 0,
+          "fight": 0,
+          "physique": 1,
+          "nerve": null,
+          "tech": null,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "b1_chassis",
+        "weapon": "e5",
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1
+        },
+        "miniatures": "Star Wars: Legion B1 Battle Droids"
+      },
+      {
+        "id": "sep_b1_heavy",
+        "faction": "separatist",
+        "name": "B1 Heavy Weapons Droid",
+        "role": "Heavy weapons",
+        "rank": "green",
+        "stats": {
+          "move": 5,
+          "shoot": 0,
+          "fight": 0,
+          "physique": 1,
+          "nerve": null,
+          "tech": null,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "b1_chassis",
+        "weapon": "e5c",
+        "weapon_options": [
+          "e60r"
+        ],
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1
+        },
+        "miniatures": "Star Wars: Legion B1 Battle Droids (E-5C or E-60R upgrade)"
+      },
+      {
+        "id": "sep_b2",
+        "faction": "separatist",
+        "name": "B2 Super Battle Droid",
+        "role": "Rifleman",
+        "rank": "regular",
+        "stats": {
+          "move": 5,
+          "shoot": 1,
+          "fight": 1,
+          "physique": 2,
+          "nerve": null,
+          "tech": null,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "duranium_plating",
+        "weapon": "b2_blasters",
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1
+        },
+        "miniatures": "Star Wars: Legion B2 Super Battle Droids"
+      },
+      {
+        "id": "sep_b2_heavy",
+        "faction": "separatist",
+        "name": "B2 Heavy Weapons Droid",
+        "role": "Heavy weapons",
+        "rank": "regular",
+        "stats": {
+          "move": 5,
+          "shoot": 1,
+          "fight": 1,
+          "physique": 2,
+          "nerve": null,
+          "tech": null,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "duranium_plating",
+        "weapon": "acm_blaster",
+        "weapon_options": [
+          "b2_rocket"
+        ],
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1
+        },
+        "miniatures": "Star Wars: Legion B2 Super Battle Droids (ACM or rocket upgrade)"
+      },
+      {
+        "id": "sep_droideka",
+        "faction": "separatist",
+        "name": "Droideka",
+        "role": "Destroyer droid",
+        "rank": "regular",
+        "stats": {
+          "move": 4,
+          "shoot": 1,
+          "fight": null,
+          "physique": 2,
+          "nerve": null,
+          "tech": null,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "duranium_plating",
+        "weapon": "droideka_cannons",
+        "melee": null,
+        "grenades": [],
+        "gear": [
+          "deflector_shield"
+        ],
+        "skills": {
+          "automated": 1,
+          "rolling": 1
+        },
+        "miniatures": "Star Wars: Legion Droidekas"
+      },
+      {
+        "id": "sep_bx",
+        "faction": "separatist",
+        "name": "BX Commando Droid",
+        "role": "Commando",
+        "rank": "veteran",
+        "stats": {
+          "move": 7,
+          "shoot": 2,
+          "fight": 2,
+          "physique": 2,
+          "nerve": null,
+          "tech": null,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "droid_plating",
+        "weapon": "e5",
+        "weapon_options": [
+          "e5s"
+        ],
+        "melee": "vibrosword",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1,
+          "scout": 1,
+          "leap": 1
+        },
+        "miniatures": "Star Wars: Legion BX-series Droid Commandos"
+      },
+      {
+        "id": "sep_magnaguard",
+        "faction": "separatist",
+        "name": "IG-100 MagnaGuard",
+        "role": "Bodyguard",
+        "rank": "elite",
+        "stats": {
+          "move": 7,
+          "shoot": 2,
+          "fight": 3,
+          "physique": 2,
+          "nerve": null,
+          "tech": null,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "duranium_plating",
+        "weapon": null,
+        "melee": "electrostaff",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1
+        },
+        "miniatures": "Star Wars: Legion IG-100 MagnaGuards"
+      },
+      {
+        "id": "sep_tactical",
+        "faction": "separatist",
+        "name": "T-series Tactical Droid",
+        "role": "Commander",
+        "rank": "regular",
+        "stats": {
+          "move": 6,
+          "shoot": 1,
+          "fight": 0,
+          "physique": 1,
+          "nerve": null,
+          "tech": null,
+          "wounds": 1,
+          "size": 2
+        },
+        "armour": "droid_plating",
+        "weapon": "sidearm",
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1,
+          "battle_computer": 1
+        },
+        "miniatures": "Star Wars: Legion T-series Tactical Droid"
+      },
+      {
+        "id": "sep_kraken",
+        "faction": "separatist",
+        "name": "Kraken",
+        "role": "Super tactical droid",
+        "rank": "elite",
+        "stats": {
+          "move": 6,
+          "shoot": 1,
+          "fight": 1,
+          "physique": 2,
+          "nerve": null,
+          "tech": null,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "duranium_plating",
+        "weapon": "sidearm",
+        "melee": "unarmed",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1,
+          "battle_computer": 2
+        },
+        "miniatures": "Star Wars: Legion Super Tactical Droid"
+      },
+      {
+        "id": "sep_grievous",
+        "faction": "separatist",
+        "name": "General Grievous",
+        "role": "Cyborg general",
+        "rank": "elite",
+        "stats": {
+          "move": 8,
+          "shoot": 2,
+          "fight": 4,
+          "physique": 3,
+          "nerve": 3,
+          "tech": 1,
+          "wounds": 2,
+          "size": 2
+        },
+        "armour": "duranium_plating",
+        "weapon": "dt12",
+        "melee": "lightsaber",
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "leader": 1,
+          "augmented": 1,
+          "deflect": 1,
+          "leap": 1,
+          "twin_blades": 1
+        },
+        "miniatures": "Star Wars: Legion General Grievous"
+      },
+      {
+        "id": "sep_dsd1",
+        "faction": "separatist",
+        "name": "DSD1 Dwarf Spider Droid",
+        "role": "Walker",
+        "rank": "regular",
+        "stats": {
+          "move": 5,
+          "shoot": 1,
+          "fight": null,
+          "physique": 3,
+          "nerve": null,
+          "tech": null,
+          "wounds": 3,
+          "size": 3
+        },
+        "armour": "dsd1_hull",
+        "weapon": "dsd1_cannon",
+        "melee": null,
+        "grenades": [],
+        "gear": [],
+        "skills": {
+          "automated": 1,
+          "self_destruct": 1
+        },
+        "miniatures": "Star Wars: Legion DSD1 Dwarf Spider Droid"
       }
     ]
   },
@@ -7141,6 +7810,9 @@
       },
       "coop_engagement": {
         "cost": 5
+      },
+      "deflector_shield": {
+        "cost": 4
       }
     },
     "grenades": {
@@ -7209,6 +7881,12 @@
       },
       "self_destruct": {
         "cost": 3
+      },
+      "rolling": {
+        "cost": 3
+      },
+      "battle_computer": {
+        "cost": 5
       },
       "automated": {
         "cost": 0
@@ -7761,6 +8439,129 @@
             "explosion": 2
           }
         ]
+      },
+      {
+        "id": "e5",
+        "faction": "separatist",
+        "name": "E-5 blaster rifle",
+        "damage": "2d8",
+        "short_range": 24,
+        "ap": 0,
+        "keywords": []
+      },
+      {
+        "id": "e5c",
+        "faction": "separatist",
+        "name": "E-5C heavy blaster rifle",
+        "damage": "2d8",
+        "short_range": 24,
+        "ap": 0,
+        "auto": 2,
+        "keywords": [
+          "auto"
+        ]
+      },
+      {
+        "id": "e5s",
+        "faction": "separatist",
+        "name": "E-5s sniper rifle",
+        "damage": "2d10",
+        "short_range": 40,
+        "ap": 0,
+        "keywords": []
+      },
+      {
+        "id": "e60r",
+        "faction": "separatist",
+        "name": "E-60R missile launcher",
+        "damage": "2d12",
+        "short_range": 36,
+        "ap": 1,
+        "keywords": [
+          "one_per_round",
+          "cumbersome"
+        ],
+        "round": "Anti-armour",
+        "rounds": [
+          {
+            "id": "he",
+            "name": "High explosive",
+            "damage": "d8+d10",
+            "ap": 0,
+            "explosion": 2
+          }
+        ]
+      },
+      {
+        "id": "b2_blasters",
+        "faction": "separatist",
+        "name": "Wrist blasters",
+        "damage": "2d8",
+        "short_range": 18,
+        "ap": 0,
+        "auto": 2,
+        "keywords": [
+          "handy",
+          "auto"
+        ]
+      },
+      {
+        "id": "acm_blaster",
+        "faction": "separatist",
+        "name": "ACM heavy blaster",
+        "damage": "2d8",
+        "short_range": 24,
+        "ap": 0,
+        "auto": 3,
+        "keywords": [
+          "auto",
+          "suppressing"
+        ]
+      },
+      {
+        "id": "b2_rocket",
+        "faction": "separatist",
+        "name": "Wrist rocket launcher",
+        "damage": "d8+d10",
+        "short_range": 24,
+        "ap": 0,
+        "explosion": 2,
+        "keywords": [
+          "one_per_round"
+        ]
+      },
+      {
+        "id": "droideka_cannons",
+        "faction": "separatist",
+        "name": "Twin blaster cannons",
+        "damage": "2d10",
+        "short_range": 24,
+        "ap": 0,
+        "auto": 2,
+        "keywords": [
+          "auto",
+          "suppressing"
+        ]
+      },
+      {
+        "id": "dsd1_cannon",
+        "faction": "separatist",
+        "name": "Heavy blaster cannon",
+        "damage": "2d12",
+        "short_range": 30,
+        "ap": 1,
+        "keywords": []
+      },
+      {
+        "id": "dt12",
+        "faction": "separatist",
+        "name": "DT-12 heavy blaster pistol",
+        "damage": "2d8",
+        "short_range": 12,
+        "ap": 0,
+        "keywords": [
+          "handy"
+        ]
       }
     ],
     "melee": [
@@ -7794,6 +8595,20 @@
         "name": "Lightsaber",
         "damage": "2d12",
         "ap": 2
+      },
+      {
+        "id": "electrostaff",
+        "faction": "separatist",
+        "name": "Electrostaff",
+        "damage": "2d10",
+        "ap": 1
+      },
+      {
+        "id": "vibrosword",
+        "faction": "separatist",
+        "name": "Vibrosword",
+        "damage": "2d10",
+        "ap": 1
       }
     ],
     "thrown": [

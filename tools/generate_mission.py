@@ -6,7 +6,7 @@ complication, guard and contact chips, from content/missions.yaml, with a seed. 
 scenario format (kind: mission) so tools/print_scenario.py can print the sheet, dashboard and cards.
 
 Usage (from the repo root):
-    python3 tools/generate_mission.py ship --seed 42 [--vessel freighter] [--mission capture] [--tier 1]
+    python3 tools/generate_mission.py ship --seed 42 [--vessel freighter] [--mission capture] [--tier 1] [--opposition separatist]
     python3 tools/generate_mission.py land --seed 3 [--environment desert] [--size small|large]
     ... [--out docs/scenarios/missions/x.yaml]
 
@@ -30,6 +30,7 @@ M = C["missions"]
 T = C["terrain"]
 MISSIONS = {m["id"]: m for m in M["missions"]}
 TIERS = {t["tier"]: t for t in M["tiers"]}
+OPPOSITIONS = {o["id"]: o for o in M.get("oppositions", [])}
 ELEMENTS = {e["id"]: e for e in C["factions"]["elements"]}
 FACTIONS = {f["id"]: f["name"] for f in C["factions"]["factions"]}
 TROOPS = {t["id"]: t for t in C["troops"]["troops"]}
@@ -50,7 +51,9 @@ def lookup(table, roll):
 
 
 class Mission:
-    def __init__(self, setting, seed, mission=None, tier=None, vessel=None, environment=None, size="small"):
+    def __init__(self, setting, seed, mission=None, tier=None, vessel=None, environment=None, size="small", opposition=None):
+        self.opposition = opposition
+        self.tiers = {t["tier"]: t for t in OPPOSITIONS[opposition]["tiers"]} if opposition else TIERS
         self.setting, self.seed = setting, seed
         self.rng = random.Random(f"mission-{setting}-{seed}")
         self.want = dict(mission=mission, tier=tier, vessel=vessel, environment=environment)
@@ -91,10 +94,10 @@ class Mission:
         else:
             self.mission = MISSIONS[lookup(M["mission_roll"], self.d6("Mission type"))["mission"]]
         if self.want["tier"]:
-            self.tier = TIERS[self.want["tier"]]
+            self.tier = self.tiers[self.want["tier"]]
             self.log.append(f"Threat tier: named, {self.tier['tier']}")
         else:
-            self.tier = TIERS[lookup(M["tier_roll"], self.d6("Threat tier"))["tier"]]
+            self.tier = self.tiers[lookup(M["tier_roll"], self.d6("Threat tier"))["tier"]]
 
     def roll_complication(self):
         self.complication = lookup(M["complications"], self.d6("Complication"))
@@ -305,7 +308,7 @@ class Mission:
             pt = self.free_point(box, (o["x"], o["y"]), taken, self.blocked, pref=2.0, rmax=3.0) or \
                  self.free_point(box, (o["x"], o["y"]), taken, self.blocked, pref=2.0, spacing=1.0)
             taken.append(pt)
-            state = "Unaware" + (" (the HVT)" if troop == hvt else "")
+            state = ("Alerted" if guard["behavior"] == "automated" else "Unaware") + (" (the HVT)" if troop == hvt else "")
             self.enemies.append({"n": n, "troop": troop, "element": guard["id"], "x": pt[0], "y": pt[1], "state": state})
         k = self.tier["contacts"] + (1 if self.complication_is("extra_contact") else 0)
         self.contacts = []
@@ -336,7 +339,8 @@ class Mission:
         if self.setting == "ship":
             place = f'a {self.deck.v["name"].split(" / ")[0].lower()}'
         else:
-            place = f'a {self.env["name"].split(",")[0].lower()} position'
+            env = self.env["name"].split(",")[0].lower()
+            place = f'{"an" if env[0] in "aeiou" else "a"} {env} position'
         holder = self.factions()
         why = {
             "seize": f"Data or cargo the force needs is in {where}. The holders will move it soon.",
@@ -362,8 +366,9 @@ class Mission:
             ("Tasking", f'{m["name"]}. {m["summary"]}'),
             ("Situation", f'{holder} hold {place}. {why}'),
             ("Objective", f'{where[0].upper() + where[1:]}. {m["task"]}'),
-            ("Opposition", f'{holder}, threat tier {self.tier["tier"]}. Guard (known): {guard_txt}, at the objective, Unaware. '
-                           f'Contacts (unknown): {len(self.contacts)} chips.'),
+            ("Opposition", f'{holder}, threat tier {self.tier["tier"]}. Guard (known): {guard_txt}, at the objective, '
+                           + ('Alerted. ' if self.guard['behavior'] == 'automated' else 'Unaware. ')
+                           + f'Contacts (unknown): {len(self.contacts)} chips.'),
             ("Ground", self.ground),
             ("Complication", "None." if comp["id"] == "none" else
              f'{comp["name"]}: ' + ("see Ground." if comp["id"] == "hazard" else comp["text"])),
@@ -388,6 +393,7 @@ class Mission:
             "seed": self.seed,
             "mission": m["id"],
             "tier": self.tier["tier"],
+            **({"opposition": self.opposition} if self.opposition else {}),
             "size": self.size["id"],
             "clock": {"die": self.size["die"], "limit": limit, "check_in_every": M["clock"]["check_in_every"],
                       "first_check_in": M["clock"]["first_check_in"]},
@@ -430,11 +436,12 @@ def main():
     ap.add_argument("--vessel", choices=list(gl.VESSELS))
     ap.add_argument("--environment", choices=list(ENVS))
     ap.add_argument("--size", choices=list(SIZES), default="small")
+    ap.add_argument("--opposition", choices=list(OPPOSITIONS), help="another enemy faction's threat tiers (chapter 13)")
     ap.add_argument("--out")
     a = ap.parse_args()
     if a.setting == "ship" and a.size == "large":
         ap.error("decks are small missions (chapter 11 boards hold up to 8 a side)")
-    ms = Mission(a.setting, a.seed, a.mission, a.tier, a.vessel, a.environment, a.size).build()
+    ms = Mission(a.setting, a.seed, a.mission, a.tier, a.vessel, a.environment, a.size, a.opposition).build()
     s = ms.to_scenario()
     text = yaml.safe_dump(s, sort_keys=False, allow_unicode=True, width=120)
     if a.out:

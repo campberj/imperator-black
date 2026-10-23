@@ -24,6 +24,9 @@ public sealed record ContactRollRow(D6Range Roll, string Result);
 /// </summary>
 public sealed record TierDef(int Tier, int Contacts, string Reinforcement, string Hvt, List<ContactRollRow> Table);
 
+/// <summary>Another enemy faction's threat tiers (tiers 1 to 4, as the default tiers). A mission names it to use it.</summary>
+public sealed record OppositionDef(string Id, string Name, string Summary, List<TierDef> Tiers);
+
 /// <summary>A contact table result that is not an element (false alarm, booby trap).</summary>
 public sealed record ContactResultDef(string Id, string Name, string Text);
 
@@ -50,4 +53,5 @@ public sealed record BriefingHeadingDef(string Heading, string Text);
 public sealed record MissionsContent(
     List<MissionRollRow> MissionRoll, List<MissionDef> Missions, List<TierRollRow> TierRoll, List<TierDef> Tiers,
     List<ContactResultDef> ContactResults, AlertDef Alert, List<ComplicationDef> Complications, ClockDef Clock,
-    List<string> Placement, List<string> Contacts, List<BriefingHeadingDef> Briefing);
+    List<string> Placement, List<string> Contacts, List<BriefingHeadingDef> Briefing,
+    List<OppositionDef>? Oppositions = null);

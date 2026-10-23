@@ -39,6 +39,10 @@ factions:
     name: Meridian Directorate
     side: enemy
     summary: "Technocratic state run through its intelligence ministries; Freespace's current patron."
+  - id: separatist
+    name: Separatist Alliance
+    side: enemy
+    summary: "The Confederacy of Independent Systems' droid army: battle droids by the hundred, droidekas, commando droids and MagnaGuards, run by tactical droids and General Grievous."
 
 # composition: troop id and count. alternatives: other troop ids the generator may swap in.
 elements:
@@ -244,6 +248,70 @@ elements:
     tier: 4
     behavior: tactical
     composition: [{ troop: md_operator, count: 3 }]
+
+  # Separatist Alliance (Star Wars: Legion). The droids are Automated troops; tactical droids command them (Battle computer).
+  - id: sep_b1_section
+    name: B1 battle droid section
+    faction: separatist
+    tier: 1
+    behavior: battle_droid
+    composition: [{ troop: sep_b1, count: 3 }, { troop: sep_b1_heavy, count: 1 }]
+
+  - id: sep_b2_squad
+    name: B2 super battle droid squad
+    faction: separatist
+    tier: 2
+    behavior: battle_droid
+    composition: [{ troop: sep_b2, count: 2 }, { troop: sep_b2_heavy, count: 1 }]
+
+  - id: sep_droidekas
+    name: Droideka pair
+    faction: separatist
+    tier: 2
+    behavior: sentry
+    composition: [{ troop: sep_droideka, count: 2 }]
+
+  - id: sep_tactical_command
+    name: Tactical droid and escort
+    faction: separatist
+    tier: 2
+    behavior: tactical
+    composition: [{ troop: sep_tactical, count: 1 }, { troop: sep_b1, count: 2 }]
+
+  - id: sep_bx_squad
+    name: BX commando droid squad
+    faction: separatist
+    tier: 3
+    behavior: tactical
+    composition: [{ troop: sep_bx, count: 3 }]
+
+  - id: sep_magnaguards
+    name: MagnaGuard pair
+    faction: separatist
+    tier: 3
+    behavior: aggressive
+    composition: [{ troop: sep_magnaguard, count: 2 }]
+
+  - id: sep_dsd1
+    name: Dwarf spider droid
+    faction: separatist
+    tier: 3
+    behavior: battle_droid
+    composition: [{ troop: sep_dsd1, count: 1 }]
+
+  - id: sep_kraken_command
+    name: Kraken and bodyguard
+    faction: separatist
+    tier: 3
+    behavior: tactical
+    composition: [{ troop: sep_kraken, count: 1 }, { troop: sep_b2, count: 2 }]
+
+  - id: sep_grievous
+    name: General Grievous and MagnaGuards
+    faction: separatist
+    tier: 4
+    behavior: aggressive
+    composition: [{ troop: sep_grievous, count: 1 }, { troop: sep_magnaguard, count: 2 }]
 
 threat_tiers:
   - { tier: 1, name: Low,    summary: "Crew and asset security under a recovery captain." }

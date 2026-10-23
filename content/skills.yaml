@@ -99,4 +99,15 @@ skills:
     levels:
       - "As an action: an Explosion (2) centred on itself, 2d10 damage, AP 2 (chapter 6). Then remove the model. Very loud."
       - "A bigger warhead: Explosion (3). Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge."
-
+  # Separatist droids.
+  - id: rolling
+    name: Rolling
+    status: proposed
+    levels:
+      - "Instead of a Move, it may roll up to 12\" by the shortest route: not through difficult ground, up or down a level, or over an obstacle. It cannot Shoot, Aim or go on Overwatch in an activation in which it rolls."
+  - id: battle_computer
+    name: Battle computer
+    status: proposed
+    levels:
+      - "Commands the droids around it. Separatist elements with a model within 12\" of it, and in its line of sight, use the Tactical behavior profile with the Regular drill (chapter 10) instead of their own."
+      - "As level 1, within 18\" and with no line of sight needed (it commands over the droid network), and with the Veteran drill."

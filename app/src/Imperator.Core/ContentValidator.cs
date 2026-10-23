@@ -262,9 +262,15 @@ public static class ContentValidator
             if (z.Die is not ("d4" or "d6" or "d8") || z.Limit <= m.Clock.FirstCheckIn)
                 errors.Add($"missions.clock size {z.Id}: needs a die (d4/d6/d8) and a whole-minute limit past the first check-in");
         var special = m.ContactResults.Select(x => x.Id).ToHashSet();
-        foreach (var tier in m.Tiers)
+        Ids(m.Oppositions ?? [], x => x.Id, "missions.oppositions");
+        foreach (var o in m.Oppositions ?? [])
+            if (!o.Tiers.Select(t => t.Tier).Order().SequenceEqual([1, 2, 3, 4]))
+                errors.Add($"missions.oppositions {o.Id}: needs tiers 1 to 4");
+        var allTiers = m.Tiers.Select(t => ("", t))
+            .Concat((m.Oppositions ?? []).SelectMany(o => o.Tiers.Select(t => (o.Id + " ", t))));
+        foreach (var (pre, tier) in allTiers)
         {
-            var w = $"mission tier {tier.Tier}";
+            var w = $"mission {pre}tier {tier.Tier}";
             CoversD6(tier.Table.Select(r => r.Roll), w);
             foreach (var r in tier.Table)
                 if (!special.Contains(r.Result)) Need(r.Result, elements, $"{w} contact result");

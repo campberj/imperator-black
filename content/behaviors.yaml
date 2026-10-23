@@ -17,7 +17,7 @@ awareness:
     text: "Any Alerted model that can see a standing player model when it activates or reacts. Uses its profile's Target in sight list."
   - id: setup
     name: At the start
-    text: "Elements start Unaware unless the mission says otherwise. Automated models, and models the mission places on Overwatch, start Alerted."
+    text: "Elements start Unaware unless the mission says otherwise. Elements with the Automated profile (turrets and drones), and models the mission places on Overwatch, start Alerted. Other Automated troops (battle droids, combat robots) start Unaware like anyone else: their sensors are cued to their task, not to the intruder."
 
 # The marker: one last-known-position marker for the whole board.
 marker:
@@ -227,6 +227,24 @@ behaviors:
       - "Overwatch: Shoot at the first trigger it can."
       - "Never Unaware: it does not hear noise, and starts on Overwatch."
     close_combat: "Never breaks; it has no melee weapon, so it loses every exchange it is forced into."
+
+  - id: battle_droid
+    name: Battle droid
+    summary: "Advances and fires by the numbers; slow to use cover unless a tactical droid commands it."
+    status: proposed
+    surrenders: false
+    close_quarters: false
+    investigate: "Every model, together, keeping within 3\" of a friend of its element."
+    engaged:
+      - "A tactical droid's battle computer reaches it: use the Tactical profile instead."
+      - "A target within short range: Shoot, Shoot."
+      - "Otherwise: Move toward the nearest target by the shortest route, then Shoot."
+    alerted:
+      - "Move toward the marker by the shortest route, then Overwatch."
+    reactions:
+      - "Overwatch: Shoot at the first trigger it can."
+      - "Unactivated: never reacts unless on Overwatch."
+    close_combat: "Never breaks; it fights until destroyed."
 
   - id: leader
     name: Leader

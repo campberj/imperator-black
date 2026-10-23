@@ -96,3 +96,10 @@ gear:
     text: "Shares targeting data: once per round, a friendly model within 12\" of the carrier gets +1 on one Shoot test against an enemy the carrier can see."
     grants_skills: {}
     status: proposed
+
+  # Separatist droids.
+  - id: deflector_shield
+    name: Deflector shield
+    text: "A droideka's shield generator. While the carrier has not Moved or rolled this round, it counts as in Heavy cover against every shot. Suppressive Fire ignores it, as it ignores cover."
+    grants_skills: {}
+    status: proposed

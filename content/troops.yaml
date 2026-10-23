@@ -1218,3 +1218,152 @@ troops:
     gear: []
     skills: { augmented: 1 }
     miniatures: "Power-armoured, superhuman heavy infantry with heavy rifles (or a heavy weapon)"
+
+  # Separatist Alliance (faction: separatist), from Star Wars: Legion. Droids are Automated; Shoot by the Shoot scale:
+  # B1s 0 (crude targeting), B2s, droidekas and tactical droids 1, BX commandos and MagnaGuards 2.
+  - id: sep_b1
+    faction: separatist
+    name: B1 Battle Droid
+    role: Rifleman
+    rank: green
+    stats: { move: 5, shoot: 0, fight: 0, physique: 1, nerve: null, tech: null, wounds: 1, size: 2 }
+    armour: b1_chassis
+    weapon: e5
+    melee: unarmed
+    grenades: []
+    gear: []
+    skills: { automated: 1 }
+    miniatures: "Star Wars: Legion B1 Battle Droids"
+  - id: sep_b1_heavy
+    faction: separatist
+    name: B1 Heavy Weapons Droid
+    role: Heavy weapons
+    rank: green
+    stats: { move: 5, shoot: 0, fight: 0, physique: 1, nerve: null, tech: null, wounds: 1, size: 2 }
+    armour: b1_chassis
+    weapon: e5c
+    weapon_options: [e60r]
+    melee: unarmed
+    grenades: []
+    gear: []
+    skills: { automated: 1 }
+    miniatures: "Star Wars: Legion B1 Battle Droids (E-5C or E-60R upgrade)"
+  - id: sep_b2
+    faction: separatist
+    name: B2 Super Battle Droid
+    role: Rifleman
+    rank: regular
+    stats: { move: 5, shoot: 1, fight: 1, physique: 2, nerve: null, tech: null, wounds: 1, size: 2 }
+    armour: duranium_plating
+    weapon: b2_blasters
+    melee: unarmed
+    grenades: []
+    gear: []
+    skills: { automated: 1 }
+    miniatures: "Star Wars: Legion B2 Super Battle Droids"
+  - id: sep_b2_heavy
+    faction: separatist
+    name: B2 Heavy Weapons Droid
+    role: Heavy weapons
+    rank: regular
+    stats: { move: 5, shoot: 1, fight: 1, physique: 2, nerve: null, tech: null, wounds: 1, size: 2 }
+    armour: duranium_plating
+    weapon: acm_blaster
+    weapon_options: [b2_rocket]
+    melee: unarmed
+    grenades: []
+    gear: []
+    skills: { automated: 1 }
+    miniatures: "Star Wars: Legion B2 Super Battle Droids (ACM or rocket upgrade)"
+  - id: sep_droideka
+    faction: separatist
+    name: Droideka
+    role: Destroyer droid
+    rank: regular
+    stats: { move: 4, shoot: 1, fight: null, physique: 2, nerve: null, tech: null, wounds: 2, size: 2 }
+    armour: duranium_plating
+    weapon: droideka_cannons
+    melee: null
+    grenades: []
+    gear: [deflector_shield]
+    skills: { automated: 1, rolling: 1 }
+    miniatures: "Star Wars: Legion Droidekas"
+  - id: sep_bx
+    faction: separatist
+    name: BX Commando Droid
+    role: Commando
+    rank: veteran
+    stats: { move: 7, shoot: 2, fight: 2, physique: 2, nerve: null, tech: null, wounds: 1, size: 2 }
+    armour: droid_plating
+    weapon: e5
+    weapon_options: [e5s]
+    melee: vibrosword
+    grenades: []
+    gear: []
+    skills: { automated: 1, scout: 1, leap: 1 }
+    miniatures: "Star Wars: Legion BX-series Droid Commandos"
+  - id: sep_magnaguard
+    faction: separatist
+    name: IG-100 MagnaGuard
+    role: Bodyguard
+    rank: elite
+    stats: { move: 7, shoot: 2, fight: 3, physique: 2, nerve: null, tech: null, wounds: 2, size: 2 }
+    armour: duranium_plating
+    weapon: null
+    melee: electrostaff
+    grenades: []
+    gear: []
+    skills: { automated: 1 }
+    miniatures: "Star Wars: Legion IG-100 MagnaGuards"
+  - id: sep_tactical
+    faction: separatist
+    name: T-series Tactical Droid
+    role: Commander
+    rank: regular
+    stats: { move: 6, shoot: 1, fight: 0, physique: 1, nerve: null, tech: null, wounds: 1, size: 2 }
+    armour: droid_plating
+    weapon: sidearm
+    melee: unarmed
+    grenades: []
+    gear: []
+    skills: { automated: 1, battle_computer: 1 }
+    miniatures: "Star Wars: Legion T-series Tactical Droid"
+  - id: sep_kraken
+    faction: separatist
+    name: Kraken
+    role: Super tactical droid
+    rank: elite
+    stats: { move: 6, shoot: 1, fight: 1, physique: 2, nerve: null, tech: null, wounds: 2, size: 2 }
+    armour: duranium_plating
+    weapon: sidearm
+    melee: unarmed
+    grenades: []
+    gear: []
+    skills: { automated: 1, battle_computer: 2 }
+    miniatures: "Star Wars: Legion Super Tactical Droid"
+  - id: sep_grievous
+    faction: separatist
+    name: General Grievous
+    role: Cyborg general
+    rank: elite
+    stats: { move: 8, shoot: 2, fight: 4, physique: 3, nerve: 3, tech: 1, wounds: 2, size: 2 }
+    armour: duranium_plating
+    weapon: dt12
+    melee: lightsaber
+    grenades: []
+    gear: []
+    skills: { leader: 1, augmented: 1, deflect: 1, leap: 1, twin_blades: 1 }
+    miniatures: "Star Wars: Legion General Grievous"
+  - id: sep_dsd1
+    faction: separatist
+    name: DSD1 Dwarf Spider Droid
+    role: Walker
+    rank: regular
+    stats: { move: 5, shoot: 1, fight: null, physique: 3, nerve: null, tech: null, wounds: 3, size: 3 }
+    armour: dsd1_hull
+    weapon: dsd1_cannon
+    melee: null
+    grenades: []
+    gear: []
+    skills: { automated: 1, self_destruct: 1 }
+    miniatures: "Star Wars: Legion DSD1 Dwarf Spider Droid"

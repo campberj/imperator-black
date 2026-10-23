@@ -64,6 +64,7 @@ gear:
   owa_package:      { cost: 4 }
   flux_warhead:     { cost: 4 }
   coop_engagement:  { cost: 5 }
+  deflector_shield: { cost: 4 }
 grenades:
   frag:              { cost: 1.5, per: physique }
   flashbang:         { cost: 1.5, per: physique }
@@ -87,6 +88,8 @@ skills:
   laser_detector:  { cost: 3 }
   augmented:       { cost: 4 }
   self_destruct:   { cost: 3 }
+  rolling:         { cost: 3 }
+  battle_computer: { cost: 5 }
   automated:       { cost: 0 }      # see automated below
 
 # Survivability: the whole total is multiplied by this, by Armour (rows) and Wounds.

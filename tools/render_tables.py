@@ -120,18 +120,19 @@ def render_missions(section):
                                       f'- **Taking it:** {m["task"]}', f'- **Lockdown (alert 6):** {m["lockdown"]}', "",
                                       table(["Grade", "Result"], [("**Decisive**", m["decisive"]), ("**Marginal**", m["marginal"]), ("**Failure**", m["failure"])])]))
         return "\n\n".join(blocks)
-    if section == "tiers":
-        heads = ["d6"] + [f'Tier {t["tier"]}' for t in M["tiers"]]
+    if section == "tiers" or section.startswith("opposition_"):
+        tiers = M["tiers"] if section == "tiers" else next(o for o in M["oppositions"] if o["id"] == section[len("opposition_"):])["tiers"]
+        heads = ["d6"] + [f'Tier {t["tier"]}' for t in tiers]
         rows = []
         for n in range(1, 7):
             row = [str(n)]
-            for t in M["tiers"]:
+            for t in tiers:
                 res = next(r["result"] for r in t["table"] if r["roll"] == str(n))
                 row.append(special.get(res) or els[res]["name"])
             rows.append(row)
-        rows.append(["Contacts"] + [str(t["contacts"]) for t in M["tiers"]])
-        rows.append(["Reinforcement"] + [els[t["reinforcement"]]["name"] for t in M["tiers"]])
-        rows.append(["HVT"] + [troops[t["hvt"]] for t in M["tiers"]])
+        rows.append(["Contacts"] + [str(t["contacts"]) for t in tiers])
+        rows.append(["Reinforcement"] + [els[t["reinforcement"]]["name"] for t in tiers])
+        rows.append(["HVT"] + [troops[t["hvt"]] for t in tiers])
         return table(heads, rows)
     if section == "contact_results":
         return table(["Result", "Effect"], [(f'**{c["name"]}**', c["text"]) for c in M["contact_results"]])

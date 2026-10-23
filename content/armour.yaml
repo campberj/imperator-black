@@ -11,3 +11,8 @@ armour:
   - { id: heavy,      name: Heavy plate,     value: 3, keywords: [sealed, heavy] }
   - { id: clone_armour,  faction: republic, name: Clone armour,  value: 1, keywords: [sealed] }
   - { id: katarn_armour, faction: republic, name: Katarn armour, value: 2, keywords: [sealed] }
+  # Separatist droids: sealed, since they need no air.
+  - { id: b1_chassis,       faction: separatist, name: B1 chassis,        value: 0, keywords: [sealed] }
+  - { id: droid_plating,    faction: separatist, name: Droid plating,     value: 1, keywords: [sealed] }
+  - { id: duranium_plating, faction: separatist, name: Duranium plating,  value: 2, keywords: [sealed] }
+  - { id: dsd1_hull,        faction: separatist, name: Spider droid hull, value: 3, keywords: [sealed] }

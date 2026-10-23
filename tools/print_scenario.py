@@ -494,6 +494,12 @@ def print_set(s, out):
 MISSIONS = ps.by_id(ps.C["missions"]["missions"])
 MC = ps.C["missions"]
 TIER_DEFS = {t["tier"]: t for t in MC["tiers"]}
+OPPOSITIONS = {o["id"]: {t["tier"]: t for t in o["tiers"]} for o in MC.get("oppositions", [])}
+
+
+def tier_def(s):
+    """The mission's threat tier: from its named opposition (chapter 13), else the default tiers."""
+    return (OPPOSITIONS[s["opposition"]] if s.get("opposition") else TIER_DEFS)[s["tier"]]
 SPECIALS = {c["id"]: c for c in MC["contact_results"]}
 MISSION_COLOUR = colors.HexColor("#6b4a12")
 
@@ -505,7 +511,7 @@ def composition(el):
 
 def mission_elements(s):
     """Every element the mission can put on the table: guard, contact table, reinforcement. In that order, no repeats."""
-    tier = TIER_DEFS[s["tier"]]
+    tier = tier_def(s)
     ids = [s["enemies"][0]["element"]] + [r["result"] for r in tier["table"] if r["result"] in ELEMENTS] + [tier["reinforcement"]]
     out = []
     for i in ids:
@@ -524,7 +530,7 @@ def element_drill(el, extra_leader=False):
 
 
 def contact_table_rows(s):
-    tier = TIER_DEFS[s["tier"]]
+    tier = tier_def(s)
     rows = [["d6", "Contact", "Models", "Behavior"]]
     for r in tier["table"]:
         res = r["result"]
@@ -582,7 +588,7 @@ def mission_sheet(s, out):
     story += [Paragraph(f'Contacts (threat tier {s["tier"]})', H2)] + \
              [Paragraph(f'{i}. {x}', B) for i, x in enumerate(MC["contacts"], 1)] + [Spacer(1, 3)]
     story += [grid_table(contact_table_rows(s), [0.35 * inch, 1.5 * inch, W - 2.85 * inch, 1.0 * inch]), Spacer(1, 6)]
-    tier = TIER_DEFS[s["tier"]]
+    tier = tier_def(s)
     rows = [["Element", "When", "Behavior", "Drill"]]
     hvt_extra = bool(s.get("hvt")) and "leader" in TROOPS[s["hvt"]]["skills"]
     for el in mission_elements(s):
@@ -692,7 +698,7 @@ def dashboard_flow(s, W):
     ctab = _form(["Chip", "Where", "Revealed as", "State"], cts, [0.4 * inch, 0.55 * inch, 1.25 * inch, 1.3 * inch], max(0, 6 - len(cts)))
     if s:
         els = [[ELEMENTS[s["enemies"][0]["element"]]["name"] + " (guard)", "U  A  E", ""]]
-        els += [[TIER_DEFS[s["tier"]]["reinforcement"] and ELEMENTS[TIER_DEFS[s["tier"]]["reinforcement"]]["name"] + " (reinf.)", "U  A  E", ""]]
+        els += [[tier_def(s)["reinforcement"] and ELEMENTS[tier_def(s)["reinforcement"]]["name"] + " (reinf.)", "U  A  E", ""]]
     else:
         els = []
     etab = _form(["Element", "Awareness", "Down / Dead / surrendered"], els, [1.45 * inch, 0.7 * inch, W / 2 - 2.3 * inch], max(0, 6 - len(els)))
@@ -717,7 +723,7 @@ def dashboard_pdf(out):
 # ---------------------------------------------------------------- mission cards
 
 def mission_cards(s):
-    m, tier = MISSIONS[s["mission"]], TIER_DEFS[s["tier"]]
+    m, tier = MISSIONS[s["mission"]], tier_def(s)
     S, H = ps.S_BODY, ps.S_HEAD
     obj = [Paragraph(f'<i>{m["summary"]}</i>', S), Spacer(1, 2), Paragraph("Taking it", H), Paragraph(m["task"], S),
            Spacer(1, 2), Paragraph("Lockdown (alert 6)", H), Paragraph(m["lockdown"], S), Spacer(1, 2), Paragraph("Grades", H),

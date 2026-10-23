@@ -24,7 +24,7 @@ Each enemy element is in one awareness state at a time. Engaged applies model by
 | **Unaware** | Busy with its work. Does not activate or react. Becomes Alerted when its element sees a player model, hears noise, is hit, or the alarm is raised. |
 | **Alerted** | Knows something is wrong but has no target in sight. Activates using its profile's No target list, toward the marker. |
 | **Engaged** | Any Alerted model that can see a standing player model when it activates or reacts. Uses its profile's Target in sight list. |
-| **At the start** | Elements start Unaware unless the mission says otherwise. Automated models, and models the mission places on Overwatch, start Alerted. |
+| **At the start** | Elements start Unaware unless the mission says otherwise. Elements with the Automated profile (turrets and drones), and models the mission places on Overwatch, start Alerted. Other Automated troops (battle droids, combat robots) start Unaware like anyone else: their sensors are cued to their task, not to the intruder. |
 <!-- /table -->
 
 ### Noise
@@ -171,7 +171,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 ### Sentry
 
-*Holds chokepoints, overwatches approaches, raises the alarm.* Used by: Asset security, Borz Bratva team. **Proposed.**
+*Holds chokepoints, overwatches approaches, raises the alarm.* Used by: Asset security, Borz Bratva team, Droideka pair. **Proposed.**
 
 **Target in sight**
 
@@ -197,7 +197,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 ### Aggressive
 
-*Closes distance, flanks through side passages, seeks close combat.* Used by: Collections enforcers, Repossession team, Contract reaction force, Borz Cyka team, Ubiytsa shock team, Harlow veterans, UN Pointmen. **Proposed.**
+*Closes distance, flanks through side passages, seeks close combat.* Used by: Collections enforcers, Repossession team, Contract reaction force, Borz Cyka team, Ubiytsa shock team, Harlow veterans, UN Pointmen, MagnaGuard pair, General Grievous and MagnaGuards. **Proposed.**
 
 **Target in sight**
 
@@ -220,7 +220,7 @@ Read each list top-down and take the first line that applies. **Target in sight*
 
 ### Tactical
 
-*Fire and manoeuvre: one element fixes while another moves; uses Overwatch and grenades.* Used by: Liquidators, Contract boarding team, Harlow control team, Harlow engineers, UN reserve fireteam, Raid Force Alpha fireteam, Raid Force Alpha specialists, Directorate deniable operators. **Proposed.**
+*Fire and manoeuvre: one element fixes while another moves; uses Overwatch and grenades.* Used by: Liquidators, Contract boarding team, Harlow control team, Harlow engineers, UN reserve fireteam, Raid Force Alpha fireteam, Raid Force Alpha specialists, Directorate deniable operators, Tactical droid and escort, BX commando droid squad, Kraken and bodyguard. **Proposed.**
 
 **Target in sight**
 
@@ -292,6 +292,29 @@ Read each list top-down and take the first line that applies. **Target in sight*
 - Never Unaware: it does not hear noise, and starts on Overwatch.
 
 **Close combat:** Never breaks; it has no melee weapon, so it loses every exchange it is forced into. Uses only its own lists, even in close quarters.
+
+### Battle droid
+
+*Advances and fires by the numbers; slow to use cover unless a tactical droid commands it.* Used by: B1 battle droid section, B2 super battle droid squad, Dwarf spider droid. **Proposed.**
+
+**Target in sight**
+
+1. A tactical droid's battle computer reaches it: use the Tactical profile instead.
+2. A target within short range: Shoot, Shoot.
+3. Otherwise: Move toward the nearest target by the shortest route, then Shoot.
+
+**No target**
+
+1. Move toward the marker by the shortest route, then Overwatch.
+
+**Investigates:** Every model, together, keeping within 3" of a friend of its element.
+
+**Reactions**
+
+- Overwatch: Shoot at the first trigger it can.
+- Unactivated: never reacts unless on Overwatch.
+
+**Close combat:** Never breaks; it fights until destroyed. Uses only its own lists, even in close quarters.
 
 ### Leader
 

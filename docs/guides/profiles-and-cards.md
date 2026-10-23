@@ -42,7 +42,7 @@ Profiles are granular: each attribute is its own number, not one quality value. 
 | **Wounds** | Wounded markers before Down | 1 humans; 2 legendary heroes, augmented elites, man-sized robots; 3 large robots |
 | **Size** | 1 small drone, 2 human, 3 large; walkers and vehicles larger | |
 
-Limits for any troop (chapter 15): Fight, Physique, Nerve and Tech at most Shoot + 1, never above 4 (Physique and Tech 3 unless Augmented or Automated).
+Limits for a built troop (chapter 15): Fight, Physique, Nerve and Tech at most Shoot + 1, never above 4 (Physique and Tech 3 unless Augmented or Automated). A named character converted from its source (a Jedi, General Grievous) may break the Shoot + 1 limit where the source clearly does; say so in the chapter 9 note.
 
 **Rank** (`green`, `regular`, `veteran`, `elite`) is a label. It never enters a roll, but enemy elements use their lowest rank for their drill (chapter 10), so set it honestly.
 
@@ -170,6 +170,6 @@ Text shrinks to fit if a card is crowded. **Check by eye:** render the page (`pd
 - [ ] `build_content.py`, `render_tables.py`, `troop_values.py --reference` and `print_sheets.py` all run; commit their output.
 - [ ] Chapter 9 has the new section and tables; chapter 15 lists the faction's troop values.
 - [ ] Each new weapon, gear item or skill has a cost in `values.yaml`, and new rules are `status: proposed`.
-- [ ] A decision row in `docs/design/decisions.md` (section 9 for forces): what was added, the conversion method, and **Proposed — playtest**.
+- [ ] A decision row in `docs/design/decisions.md` (section 6, equipment and force building): what was added, the conversion method, and **Proposed — playtest**.
 - [ ] The cards look right at 100% scale, every PDF name starts with `ImperatorBlack_`, and no artwork, logos or text was copied from another company's product.
 - [ ] Run `python3 tools/troop_values.py` and sanity-check the new troops' TV against similar existing troops (a trained rifleman about 30–40, a professional about 45–55, an elite trooper 80+).

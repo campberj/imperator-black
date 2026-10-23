@@ -237,7 +237,9 @@ public sealed class ContentSet
     public TerrainTypeDef TerrainType(string id) => Find(Terrain.Types, t => t.Id, id, "terrain type");
     public EnvironmentDef Environment(string id) => Find(Terrain.Environments, e => e.Id, id, "environment");
     public MissionDef Mission(string id) => Find(Missions.Missions, m => m.Id, id, "mission");
-    public TierDef Tier(int tier) => Find(Missions.Tiers, t => t.Tier.ToString(), tier.ToString(), "threat tier");
+    public TierDef Tier(int tier, string? opposition = null) => Find(
+        opposition is null ? Missions.Tiers : Find(Missions.Oppositions ?? [], o => o.Id, opposition, "opposition").Tiers,
+        t => t.Tier.ToString(), tier.ToString(), "threat tier");
     public ComplicationDef Complication(string id) => Find(Missions.Complications, x => x.Id, id, "complication");
     public ClockSizeDef ClockSize(string id) => Find(Missions.Clock.Sizes, z => z.Id, id, "clock size");
 

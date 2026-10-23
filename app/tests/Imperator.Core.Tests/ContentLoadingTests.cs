@@ -16,11 +16,11 @@ public class ContentLoadingTests
     public void CountsMatchPythonValidator()
     {
         // tools/validate_content.py: "82 troop types, 28 elements, 18 teams, 15 gear items, 9 behavior profiles, 4 vessels."
-        Assert.Equal(82, Set.Troops.Troops.Count);
-        Assert.Equal(28, Set.Factions.Elements.Count);
+        Assert.Equal(93, Set.Troops.Troops.Count);
+        Assert.Equal(37, Set.Factions.Elements.Count);
         Assert.Equal(18, Set.Rosters.Teams.Count);
-        Assert.Equal(15, Set.Gear.Gear.Count);
-        Assert.Equal(9, Set.Behaviors.Behaviors.Count);
+        Assert.Equal(16, Set.Gear.Gear.Count);
+        Assert.Equal(10, Set.Behaviors.Behaviors.Count);
         Assert.Equal(4, Set.Layouts.Vessels.Count);
     }
 
@@ -126,6 +126,8 @@ public class ContentLoadingTests
         Assert.Equal("ct_borz_ubiytsa_leader", Set.Tier(3).Hvt);
         Assert.Equal(5, Set.Tier(4).Contacts);
         Assert.Equal("false_alarm", Set.Tier(1).Table.Single(r => r.Roll.Contains(1)).Result);
+        Assert.Equal("sep_grievous", Set.Tier(4, "separatist").Hvt);
+        Assert.Equal("sep_b1_section", Set.Tier(1, "separatist").Reinforcement);
         Assert.Equal(new DiceSpec(1, 4), Set.ClockSize("small").DieSpec);
         Assert.Equal((30, 5, 10), (Set.ClockSize("large").Limit, m.Clock.CheckInEvery, m.Clock.FirstCheckIn));
         Assert.Equal([2, 4, 6], m.Alert.Thresholds.Select(t => t.At));

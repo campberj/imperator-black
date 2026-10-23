@@ -328,6 +328,50 @@
     "gen_heavy_infantry": {
       "tv": 110,
       "requisition": 11
+    },
+    "sep_b1": {
+      "tv": 22,
+      "requisition": 3
+    },
+    "sep_b1_heavy": {
+      "tv": 26,
+      "requisition": 3
+    },
+    "sep_b2": {
+      "tv": 46,
+      "requisition": 5
+    },
+    "sep_b2_heavy": {
+      "tv": 57,
+      "requisition": 6
+    },
+    "sep_droideka": {
+      "tv": 68,
+      "requisition": 7
+    },
+    "sep_bx": {
+      "tv": 57,
+      "requisition": 6
+    },
+    "sep_magnaguard": {
+      "tv": 52,
+      "requisition": 6
+    },
+    "sep_tactical": {
+      "tv": 35,
+      "requisition": 4
+    },
+    "sep_kraken": {
+      "tv": 63,
+      "requisition": 7
+    },
+    "sep_grievous": {
+      "tv": 142,
+      "requisition": 15
+    },
+    "sep_dsd1": {
+      "tv": 90,
+      "requisition": 9
     }
   },
   "weapon_base": {
@@ -359,14 +403,26 @@
     "ac20": 12.9,
     "maaws": 11.5,
     "cs_lm5": 10.6,
-    "dzj08": 9.2
+    "dzj08": 9.2,
+    "e5": 4.2,
+    "e5c": 6.7,
+    "e5s": 5.7,
+    "e60r": 8.2,
+    "b2_blasters": 6.6,
+    "acm_blaster": 10.6,
+    "b2_rocket": 7.9,
+    "droideka_cannons": 9.5,
+    "dsd1_cannon": 6.7,
+    "dt12": 3.7
   },
   "melee_base": {
     "unarmed": 1.0,
     "knife": 2.1,
     "breaching_tool": 2.6,
     "combat_blade": 2.9,
-    "lightsaber": 3.5
+    "lightsaber": 3.5,
+    "electrostaff": 2.9,
+    "vibrosword": 2.9
   },
   "survival": {
     "0,1": 1.0,

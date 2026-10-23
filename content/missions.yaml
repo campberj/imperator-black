@@ -114,6 +114,59 @@ tiers:
       - { roll: "5", result: un3_pointmen }
       - { roll: "6", result: rfa_fireteam }
 
+# Other oppositions: the same four threat tiers drawn from another enemy faction. A mission that names an
+# opposition uses its tiers; one that names none uses the tiers above (the Outer Reach: Freespace, its
+# contractors and patrons, and the UN). Each tier: as above.
+oppositions:
+  - id: separatist
+    name: Separatist Alliance
+    summary: "The droid army: battle droid sections, droidekas and tactical droids; at higher tiers B2s, commando droids, MagnaGuards and dwarf spider droids."
+    tiers:
+      - tier: 1
+        contacts: 3
+        reinforcement: sep_b1_section
+        hvt: sep_tactical
+        table:
+          - { roll: "1", result: false_alarm }
+          - { roll: "2", result: sep_b1_section }
+          - { roll: "3", result: sep_b1_section }
+          - { roll: "4", result: sep_b1_section }
+          - { roll: "5", result: sep_droidekas }
+          - { roll: "6", result: sep_tactical_command }
+      - tier: 2
+        contacts: 4
+        reinforcement: sep_b2_squad
+        hvt: sep_tactical
+        table:
+          - { roll: "1", result: false_alarm }
+          - { roll: "2", result: sep_b1_section }
+          - { roll: "3", result: sep_b1_section }
+          - { roll: "4", result: sep_b2_squad }
+          - { roll: "5", result: sep_droidekas }
+          - { roll: "6", result: sep_tactical_command }
+      - tier: 3
+        contacts: 4
+        reinforcement: sep_bx_squad
+        hvt: sep_kraken
+        table:
+          - { roll: "1", result: booby_trap }
+          - { roll: "2", result: sep_b1_section }
+          - { roll: "3", result: sep_b2_squad }
+          - { roll: "4", result: sep_droidekas }
+          - { roll: "5", result: sep_bx_squad }
+          - { roll: "6", result: sep_dsd1 }
+      - tier: 4
+        contacts: 5
+        reinforcement: sep_bx_squad
+        hvt: sep_grievous
+        table:
+          - { roll: "1", result: booby_trap }
+          - { roll: "2", result: sep_b2_squad }
+          - { roll: "3", result: sep_droidekas }
+          - { roll: "4", result: sep_bx_squad }
+          - { roll: "5", result: sep_magnaguards }
+          - { roll: "6", result: sep_dsd1 }
+
 contact_results:
   - { id: false_alarm, name: False alarm, text: "Nothing there: crew who fled, a ventilation fan, a stray animal. Remove the chip." }
   - { id: booby_trap, name: Booby trap, text: "A tripwire charge: resolve a frag grenade centred on the chip (2d8, radius 2\"). It is Very loud. Remove the chip." }

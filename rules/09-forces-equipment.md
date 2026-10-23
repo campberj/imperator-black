@@ -97,6 +97,7 @@ Gear marked **Proposed** adds a rule that is new in this version; it is in play 
 | Mobility and one-way attack package | Climbing legs and a warhead: the carrier crosses obstacles at no extra cost and has Self-destruct 2 (Explosion 3). | **Proposed** |
 | Flux warhead | Once per mission, as an action: an electromagnetic burst. Every Automated model within 6", friend or foe and including the carrier, takes a hit of 2d10 damage, AP 3. | **Proposed** |
 | Cooperative engagement package | Shares targeting data: once per round, a friendly model within 12" of the carrier gets +1 on one Shoot test against an enemy the carrier can see. | **Proposed** |
+| Deflector shield | A droideka's shield generator. While the carrier has not Moved or rolled this round, it counts as in Heavy cover against every shot. Suppressive Fire ignores it, as it ignores cover. | **Proposed** |
 <!-- /table -->
 
 ## Skills
@@ -122,6 +123,8 @@ Skills marked **Proposed** add a rule that is new in this version; they are in p
 | *Laser detector* | Laser warning receivers cue its fire: its Reaction and Overwatch shots do not take the −1 for reacting. | **Proposed** |
 | *Augmented* | Genetically or cybernetically augmented: +1 to Physique tests, and it ignores the first Suppression it gains each round. | **Proposed** |
 | *Self-destruct* 1–2 | **1:** As an action: an Explosion (2) centred on itself, 2d10 damage, AP 2 (chapter 6). Then remove the model. Very loud. **2:** A bigger warhead: Explosion (3). Set off in base contact with a door, hatch or thin bulkhead, it also destroys it, as a breaching charge. | **Proposed** |
+| *Rolling* | Instead of a Move, it may roll up to 12" by the shortest route: not through difficult ground, up or down a level, or over an obstacle. It cannot Shoot, Aim or go on Overwatch in an activation in which it rolls. | **Proposed** |
+| *Battle computer* 1–2 | **1:** Commands the droids around it. Separatist elements with a model within 12" of it, and in its line of sight, use the Tactical behavior profile with the Regular drill (chapter 10) instead of their own. **2:** As level 1, within 18" and with no line of sight needed (it commands over the droid network), and with the Veteran drill. | **Proposed** |
 <!-- /table -->
 
 ## Opposition: Freespace Solutions
@@ -170,6 +173,15 @@ Missions build the enemy force from **elements**, chosen by threat tier. Behavio
 | UTG Mother | UN Force Command | 4 | 1× UTG Mother | Leader |
 | Directorate handler | Meridian Directorate | 4 | 1× Directorate Handler | Handler |
 | Directorate deniable operators | Meridian Directorate | 4 | 3× Directorate Deniable Operator | Tactical |
+| B1 battle droid section | Separatist Alliance | 1 | 3× B1 Battle Droid, 1× B1 Heavy Weapons Droid | Battle droid |
+| B2 super battle droid squad | Separatist Alliance | 2 | 2× B2 Super Battle Droid, 1× B2 Heavy Weapons Droid | Battle droid |
+| Droideka pair | Separatist Alliance | 2 | 2× Droideka | Sentry |
+| Tactical droid and escort | Separatist Alliance | 2 | 1× T-series Tactical Droid, 2× B1 Battle Droid | Tactical |
+| BX commando droid squad | Separatist Alliance | 3 | 3× BX Commando Droid | Tactical |
+| MagnaGuard pair | Separatist Alliance | 3 | 2× IG-100 MagnaGuard | Aggressive |
+| Dwarf spider droid | Separatist Alliance | 3 | 1× DSD1 Dwarf Spider Droid | Battle droid |
+| Kraken and bodyguard | Separatist Alliance | 3 | 1× Kraken, 2× B2 Super Battle Droid | Tactical |
+| General Grievous and MagnaGuards | Separatist Alliance | 4 | 1× General Grievous, 2× IG-100 MagnaGuard | Aggressive |
 <!-- /table -->
 
 ### Freespace troops
@@ -304,6 +316,64 @@ Vehicles (the AT-RT and the infantry support platform) wait for the vehicle rule
 <!-- /table -->
 
 Teams for the Republic are in the tables of organisation above. Cards are printed in `docs/print/ImperatorBlack_republic-cards.pdf`.
+
+## Separatist Alliance
+
+Opposition profiles for Star Wars: Legion Separatist Alliance miniatures, to fight the Galactic Republic. The droid army is the enemy in solo play: missions draw it from the Separatist opposition tables (chapter 13), and the solo opponent runs it (chapter 10). The profiles are an unofficial conversion for personal play.
+
+Every droid is **Automated**: it never gains Suppression or breaks, but a wound row of 6 or more destroys it. On the Shoot scale, B1 battle droids are 0 (crude targeting, and plenty of them); B2s, droidekas and tactical droids 1; BX commando droids and MagnaGuards 2. **General Grievous** is a cyborg, not a droid: he has Nerve, takes Suppression and can be Pinned. He fights with captured lightsabers, trained, not with any Force power.
+
+**Battle droids** (the *Battle droid* behavior) advance and shoot by the numbers and are slow to use cover. A **tactical droid's** *Battle computer* changes that: elements it commands use the Tactical profile with a better drill. Kill the tactical droid and the droids around it go back to marching in the open.
+
+**Droidekas** roll fast (*Rolling*) and fight behind a deflector shield once they stop. Suppressive Fire ignores the shield; it cannot suppress a droid, but a hit still stops it reacting this round.
+
+The AAT tank and STAP speeders wait for the vehicle rules. Until then, use an AAT as a wreck or a mission objective.
+
+<!-- table:troops.separatist -->
+| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **B1 Battle Droid** | Green | 5" | 0 | 0 | 1 | — | — | 1 | 2 | B1 chassis (0) | E-5 blaster rifle | Unarmed / weapon butt | Automated |
+| **B1 Heavy Weapons Droid** | Green | 5" | 0 | 0 | 1 | — | — | 1 | 2 | B1 chassis (0) | E-5C heavy blaster rifle / E-60R missile launcher | Unarmed / weapon butt | Automated |
+| **B2 Super Battle Droid** | Regular | 5" | 1 | 1 | 2 | — | — | 1 | 2 | Duranium plating (2) | Wrist blasters | Unarmed / weapon butt | Automated |
+| **B2 Heavy Weapons Droid** | Regular | 5" | 1 | 1 | 2 | — | — | 1 | 2 | Duranium plating (2) | ACM heavy blaster / Wrist rocket launcher | Unarmed / weapon butt | Automated |
+| **Droideka** | Regular | 4" | 1 | — | 2 | — | — | 2 | 2 | Duranium plating (2) | Twin blaster cannons | Deflector shield | Automated, Rolling |
+| **BX Commando Droid** | Veteran | 7" | 2 | 2 | 2 | — | — | 1 | 2 | Droid plating (1) | E-5 blaster rifle / E-5s sniper rifle | Vibrosword | Automated, Scout, Leap |
+| **IG-100 MagnaGuard** | Elite | 7" | 2 | 3 | 2 | — | — | 2 | 2 | Duranium plating (2) | — | Electrostaff | Automated |
+| **T-series Tactical Droid** | Regular | 6" | 1 | 0 | 1 | — | — | 1 | 2 | Droid plating (1) | Sidearm | Unarmed / weapon butt | Automated, Battle computer 1 |
+| **Kraken** | Elite | 6" | 1 | 1 | 2 | — | — | 2 | 2 | Duranium plating (2) | Sidearm | Unarmed / weapon butt | Automated, Battle computer 2 |
+| **General Grievous** | Elite | 8" | 2 | 4 | 3 | 3 | 1 | 2 | 2 | Duranium plating (2) | DT-12 heavy blaster pistol | Lightsaber | Leader, Augmented, Deflect 1, Leap, Twin blades |
+| **DSD1 Dwarf Spider Droid** | Regular | 5" | 1 | — | 3 | — | — | 3 | 3 | Spider droid hull (3) | Heavy blaster cannon | — | Automated, Self-destruct 1 |
+<!-- /table -->
+
+### Separatist weapons and armour
+
+<!-- table:kit.separatist -->
+| Weapon | Damage | Short range | Beyond / double | AP | Keywords |
+|---|---|---|---|---|---|
+| E-5 blaster rifle | 2d8 | 24" | -1 / -2 | 0 | — |
+| E-5C heavy blaster rifle | 2d8 | 24" | -1 / -2 | 0 | Auto 2 |
+| E-5s sniper rifle | 2d10 | 40" | -1 / -2 | 0 | — |
+| E-60R missile launcher (anti-armour) | 2d12 | 36" | -1 / -2 | 1 | One per round, Cumbersome |
+| ↳ or high explosive round | d8+d10 | 36" | -1 / -2 | 0 | One per round, Cumbersome, Explosion (2) |
+| Wrist blasters | 2d8 | 18" | -1 / -2 | 0 | Handy, Auto 2 |
+| ACM heavy blaster | 2d8 | 24" | -1 / -2 | 0 | Auto 3, Suppressing |
+| Wrist rocket launcher | d8+d10 | 24" | -1 / -2 | 0 | One per round, Explosion (2) |
+| Twin blaster cannons | 2d10 | 24" | -1 / -2 | 0 | Auto 2, Suppressing |
+| Heavy blaster cannon | 2d12 | 30" | -1 / -2 | 1 | — |
+| DT-12 heavy blaster pistol | 2d8 | 12" | -1 / -2 | 0 | Handy |
+
+| Melee weapon | Damage | AP |
+|---|---|---|
+| Electrostaff | 2d10 | 1 |
+| Vibrosword | 2d10 | 1 |
+
+| Armour | Value | Keywords |
+|---|---|---|
+| B1 chassis | 0 | Sealed |
+| Droid plating | 1 | Sealed |
+| Duranium plating | 2 | Sealed |
+| Spider droid hull | 3 | Sealed |
+<!-- /table -->
 
 ## Near Present forces
 

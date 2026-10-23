@@ -30,12 +30,15 @@ public static class Values
     private static readonly Dictionary<string, string> NotModelled = new()
     {
         ["laser_detector"] = "Laser detector (reactions are not simulated)",
-        ["deflect"] = "Deflect (its holders have no ranged weapon, so they fight no ranged duel)",
+        ["deflect"] = "Deflect (deflection tests are not simulated)",
         ["self_destruct"] = "Self-destruct (blasts are not simulated)",
         ["grenade_launcher"] = "grenade launcher (Throws are not simulated)",
         ["mk19"] = "Mk19 grenade launcher (Throws are not simulated)",
         ["coop_engagement"] = "cooperative engagement package (helps friends, not the carrier)",
         ["flux_warhead"] = "flux warhead (blasts are not simulated)",
+        ["rolling"] = "Rolling (duels do not move)",
+        ["battle_computer"] = "Battle computer (commands other droids, not itself)",
+        ["deflector_shield"] = "deflector shield (cover is not simulated)",
     };
 
     public static TroopValue Measure(ContentSet content, string troopId, int n, int seed)

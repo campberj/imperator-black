@@ -267,8 +267,13 @@ for z in M["clock"]["sizes"]:
     if z["die"] not in ("d4", "d6", "d8") or not isinstance(z["limit"], int) or z["limit"] <= M["clock"]["first_check_in"]:
         errors.append(f"missions.clock size {z['id']}: needs a die (d4/d6/d8) and a whole-minute limit past the first check-in")
 special = {c["id"] for c in M["contact_results"]}
-for tr in M["tiers"]:
-    w = f"mission tier {tr['tier']}"
+opp_ids = ids(M.get("oppositions", []), "missions.oppositions")
+all_tiers = [("", tr) for tr in M["tiers"]] + [(f"{o['id']} ", tr) for o in M.get("oppositions", []) for tr in o["tiers"]]
+for o in M.get("oppositions", []):
+    if sorted(t["tier"] for t in o["tiers"]) != [1, 2, 3, 4]:
+        errors.append(f"missions.oppositions {o['id']}: needs tiers 1 to 4")
+for pre, tr in all_tiers:
+    w = f"mission {pre}tier {tr['tier']}"
     covers_d6(tr["table"], w)
     for r in tr["table"]:
         if r["result"] not in special:

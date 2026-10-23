@@ -158,6 +158,26 @@ Contacts are numbered chips (poker chips work). Until revealed, a contact is onl
 
 The high-value target (HVT) is used by capture missions. A *Leader* HVT raises its guard's drill (chapter 10).
 
+### Other oppositions
+
+The tiers above are the Outer Reach: Freespace, the contractors it hires and the patrons behind it. Another enemy faction brings its own tier tables, used the same way. A mission names its opposition; without one, use the tiers above. Generate one with `--opposition` (for example `--opposition separatist`).
+
+**Separatist Alliance.** The droid army, for Galactic Republic forces (chapter 9). Battle droids hold their ground in the open unless a tactical droid is near to command them, so a force that takes out the tactical droid first fights a slower, clumsier enemy.
+
+<!-- table:missions.opposition_separatist -->
+| d6 | Tier 1 | Tier 2 | Tier 3 | Tier 4 |
+|---|---|---|---|---|
+| 1 | False alarm | False alarm | Booby trap | Booby trap |
+| 2 | B1 battle droid section | B1 battle droid section | B1 battle droid section | B2 super battle droid squad |
+| 3 | B1 battle droid section | B1 battle droid section | B2 super battle droid squad | Droideka pair |
+| 4 | B1 battle droid section | B2 super battle droid squad | Droideka pair | BX commando droid squad |
+| 5 | Droideka pair | Droideka pair | BX commando droid squad | MagnaGuard pair |
+| 6 | Tactical droid and escort | Tactical droid and escort | Dwarf spider droid | Dwarf spider droid |
+| Contacts | 3 | 4 | 4 | 5 |
+| Reinforcement | B1 battle droid section | B2 super battle droid squad | BX commando droid squad | BX commando droid squad |
+| HVT | T-series Tactical Droid | T-series Tactical Droid | Kraken | General Grievous |
+<!-- /table -->
+
 ## The alert track
 
 Keep the alert track on the mission dashboard (or beside the board, 0 to 6, with a die or a cube). Noise from chapter 10 raises it, along with the alarm and missed check-ins on the mission clock.
