@@ -2,7 +2,7 @@
 
 Handoff for Claude Code (or anyone) working on the application. Read this, then [`../CLAUDE.md`](../CLAUDE.md), then [ADR-001](../docs/architecture/adr-001-architecture.md).
 
-Last updated: 2026-10-22, rules v0.5 (chapters 10–13: solo opponent, ship layouts, land battles, missions).
+Last updated: 2026-10-23, rules v0.5 (chapters 10–16: solo opponent, ship layouts, land battles, missions, campaign and short arcs, troop values, two players; fireteams and Pinned at Nerve + 2).
 
 ## How the work is split
 
@@ -33,6 +33,8 @@ Last updated: 2026-10-22, rules v0.5 (chapters 10–13: solo opponent, ship layo
 ## Next tasks, in order
 
 These are foundations that don't depend on unfinished rules. Each should leave CI green.
+
+**Open tasks, suggested order: 17, 15, 16, 18, 19, 20, 21, then 22.** Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
 
 ### 1. Move tests to xUnit ✅ done (2026-10-20)
 
@@ -161,7 +163,7 @@ The paper dashboard (`docs/print/ImperatorBlack_mission-dashboard.pdf`, drawn by
 - One letter page in print; the print CSS hides the app's navigation.
 - **Done when:** a Vitest test renders the dashboard for both example missions in `docs/scenarios/missions/` and checks the clock box count, the check-in boxes and the contact rows, and lint, tests and build pass.
 
-### 15. Launcher rounds and Explosion (X) in the web app
+### 15. Launcher rounds and Explosion (X) in the web app — *chatgpt authorized*
 
 Content now has half-step damage dice (`d8+d10`; `DiceSpec` parses them, with an `Extra` die) and two new ranged-weapon fields (decisions 6.14 and 6.15): `explosion` (the X in Explosion (X)) and, for launchers, `round` (the weapon's own round) and `rounds` (extra rounds: id, name, damage, AP, explosion). The *Blast* keyword is now *Explosion*; grenades keep `blast_radius` as their X.
 
@@ -169,24 +171,71 @@ Content now has half-step damage dice (`d8+d10`; `DiceSpec` parses them, with an
 - Simulator: model a high-explosive round in the troop value harness where a profile carries a launcher (use the better round against each target), and note it under the table.
 - **Done when:** a Vitest test renders the AT launcher's two rounds, and lint, tests and build pass.
 
-### 16. Troop values in Core
+### 16. Troop values in Core — *chatgpt authorized*
 
 Rules chapter 15 (decision 6.16): every troop has a Troop Value (TV) and a Requisition cost. `tools/troop_values.py` is the reference implementation; `content/values.yaml` holds every number.
 
 - `Imperator.Core/Values/TroopValue.cs`: load `values` into typed records (`ContentSet`), and compute weapon base values (lethality averaged over Armour 0–2, range, Auto, Explosion, keywords, best round), melee base values, the survival multiplier (expected 2d8 hits to Down, to the power 0.4, rounded to 2 decimals), and a troop's TV and Requisition for its default loadout or a given one. Round exactly as the Python does (weapon and melee costs to 0.1, survival to 0.01, TV to the nearest whole number).
 - Tests against the fixture `app/tests/Imperator.Core.Tests/Fixtures/troop-values-reference.json` (written by `python3 tools/troop_values.py --reference`; CI fails if it is stale): every troop's TV and Requisition, every weapon base and every survival value must match.
 - `GET /values` returns every troop's TV and Requisition; the unit database shows them on each card.
+- Nerve now costs 3 per point (decision 4.19; the fixture already reflects it).
 - **Done when:** tests pass and the unit database shows TV and Requisition. The builder screen (pick attributes and kit within the chapter 15 limits, see the TV update live) is Phase 9, after this.
 
-### 17. Stop and check the roadmap
+### 17. Bring the C# mission generator level with the Python one — *chatgpt authorized*
+
+**Do this first: the two have drifted.** The reference is `tools/generate_mission.py`; the printed sheets come from `tools/print_scenario.py`. Changes since task 11 (2026-10-22 and 23):
+
+- **Oppositions** (decision 8.14, chapter 13 *Other oppositions*): `missions.yaml` has `oppositions` (first: `separatist`), each with its own four tiers. `MissionsContent.Oppositions` and `ContentSet.Tier(tier, opposition)` already exist in Core. Add an `opposition` option to `MissionGenerator` and `GET /missions?opposition=separatist`, record it in the mission model, and use the opposition's tiers for the guard, contacts, reinforcement and HVT, and its faction name in the briefing.
+- **Awareness** (decision 8.14): only elements with the *Automated* behavior profile start Alerted. A guard from such an element is placed "Alerted", and the briefing's Opposition line says "Alerted" instead of "Unaware".
+- **Briefing text:** "an industrial position" (a/an by the environment's first letter).
+- **Authored missions** (short arcs, chapter 14): mission files may carry `arc` (`id`, `name`, `label`), `task`, `lockdown` and `grades` (replacing the mission type's text), `reinforcement` (replacing the tier's), `special_rules` (title, text), `next` (grade, text), `map_note`, extra `briefing` headings (such as `Force`), and land boards with no `sectors` or `rolls`. Add them to the mission model as optional fields, and show them in the mission view (task 12): taking it, lockdown and grades from the mission when given, then *After the mission* and *Special rules*, as `mission_sheet` in `tools/print_scenario.py` does.
+- **Done when:** tests check that a Separatist mission draws only Separatist elements (tier 4 HVT `sep_grievous`); a mission whose guard has the Automated profile places it Alerted; the web mission view shows all four Foundry Moon missions in `docs/scenarios/arcs/foundry-moon/`; lint, tests and build pass.
+
+### 18. Fireteams in the web unit database — *chatgpt authorized*
+
+Decision 6.18, rules chapter 9 *Building a force*, design note `docs/design/fireteams.md`.
+
+- **Core:** load `rosters.fireteam_types` and `rosters.classes` (records `FireteamTypeDef` and `TroopClassDef` exist; `ContentValidator` already checks every standard fireteam). Move the fit check into a reusable `Fireteams.Check(type, troops)` in Core that the validator, the web app (through the API or a ported copy, see below) and task 20 all use: leaders, troopers and specialists within the type's ranges, at most `max_models` (characters not counted), at most one character; `character` as a type means one character acting alone.
+- **Unit cards:** each troop's class (top right of the card header, as the printed cards) and its **Pinned threshold** under the stat line ("Pinned at 4 Suppression", "Never Pinned"; Automated models show none). The threshold is Nerve + `core.suppression.pinned_by_nerve`, never above `core.suppression.max` (decision 4.19).
+- **Fireteams view:** the class table and fireteam types table (chapter 9), then the standard fireteams of the chosen faction: teams and enemy elements in one list, each with its type, models and (for enemies) tier and behavior. "Fireteam" and "element" mean the same thing.
+- If the web app checks fits itself, port the rule in TypeScript with a test that agrees with the C# one on every standard fireteam.
+- **Done when:** a Vitest test renders a clone trooper card with "Trooper" and "Pinned at 4 Suppression", Obi-Wan with "Never Pinned", and the VAT fireteam as Assault; lint, tests and build pass.
+
+### 19. Short arc viewer (web, read-only) — *chatgpt authorized*
+
+Rules chapter 14 *Short arcs* (decision 7.13). The paper version is `tools/print_campaign.py --arc` (`ImperatorBlack_arc-foundry-moon.pdf`).
+
+- `#arcs`: the arcs in `docs/scenarios/arcs/` (bundled like the example missions). For one arc: its summary; the mission flow (mission 1, then 2A on Decisive or Marginal and 2B on Failure, then 3); the missions table (board, opposition and tier, force limit); *What each grade leads to*, from each mission's `next`; the short arc rules (`content/campaign.yaml` `short_arc`, not yet loaded: read it from `/content`); the arc's results.
+- Each mission opens in the mission view (task 17 makes the authored fields show).
+- **Done when:** a Vitest test renders Foundry Moon's flow with all four missions and the 2B branch; lint, tests and build pass.
+
+### 20. Force planner (web, no saved state)
+
+Needs tasks 16 and 18, and RJ's go-ahead on the screen (not authorized yet: it is the first screen that applies force-building rules, so the layout and wording want a look first).
+
+- Pick a faction, a TV limit and a model limit (or a mission or short arc mission, which sets them), and a force-selection setting: **by fireteam** or **by soldier** (chapter 14 *Force selection*).
+- By fireteam: add standard fireteams or build one to a type; each must field at least half its slots and its Leader (chapter 9). Characters join a fireteam (one each) or act alone.
+- By soldier: add any troops; group them into fireteams of up to 6 before deployment.
+- Show the running TV and model count, and every rule the force breaks, using Core's checks (task 18). Print a force list.
+- **Done when:** RJ has approved the screen; tests cover each rule; lint, tests and build pass.
+
+### 21. Campaign and two-player content in Core — *chatgpt authorized*
+
+`content/campaign.yaml` (chapter 14, including `short_arc` and `force_selection`) and `content/versus.yaml` (chapter 16) are in `content.json` but not loaded by `ContentSet.Parse`.
+
+- Typed records for every section of both files, loaded as required sections; port their checks from `tools/validate_content.py` (campaign: d6 and 2d6 tables cover their ranges, node missions and settings exist, the start force exists; versus: whatever `tools/validate_content.py` checks for it), with one negative test per check.
+- No screens: this is the groundwork for the campaign tracker.
+- **Done when:** tests load both sections and CI is green.
+
+### 22. Stop and check the roadmap
 
 Beyond this, the app's real features wait on rules:
 
 | App feature | Waits on |
 |---|---|
 | Live mission dashboard (alert, clock, contacts, models during play) | Saved game state; built with the Phase 7 campaign tracker (RJ, 2026-10-22). The paper dashboard is `docs/print/ImperatorBlack_mission-dashboard.pdf`. |
-| Custom troop and unit builder | Ready after task 16: chapter 15 limits and costs; Phase 9 (decision 6.12) |
-| Campaign tracker | Phase 7: chapter 14 is drafted (`content/campaign.yaml`, not yet loaded by `ContentSet`); build after a paper campaign has been played, with saved game state and the live dashboard. |
+| Custom troop and unit builder | Ready after tasks 16, 18 and 20: chapter 15 limits and costs; Phase 9 (decision 6.12) |
+| Campaign tracker | Phase 7: chapter 14 is drafted (loaded by task 21); build after a paper campaign (Foundry Moon) has been played, with saved game state and the live dashboard. |
 
 Planned app feature (RJ, 2026-10-20): an in-app reference that explains every gear item, keyword and special rule, read from `content/` (the list will grow). Build it from the same `text` fields the rulebook tables use.
 
