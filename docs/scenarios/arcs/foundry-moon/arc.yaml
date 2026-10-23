@@ -7,6 +7,7 @@ name: Foundry Moon
 faction: republic
 opposition: separatist
 rules_version: "0.5"
+force_selection: fireteam   # the default; the player may switch at the start (chapter 14)
 summary: >
   The Separatists have restarted the droid foundry on Ordo Kessa, a mining moon the Republic thought was worked out.
   Every few weeks a frigate lifts from its landing field with a battalion of new battle droids. A clone company and

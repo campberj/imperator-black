@@ -471,11 +471,28 @@
       "evidence": 0,
       "text": [
         "Force: the starting force for the faction (for Task Force Boone, the boarding element: one VAT fireteam and one attached specialist). Name every soldier.",
-        "Roster: up to 12 soldiers. Up to 8 deploy on a small mission (chapter 13), 12 on a large one.",
+        "Roster: up to 12 soldiers, grouped by fireteam. Up to 8 deploy on a small mission (chapter 13), 12 on a large one.",
+        "Force selection: by fireteam (the default) or by soldier. Choose now; it holds for the campaign.",
         "Resources: 6 Requisition, 1 Intel, Standing 3, Evidence 0.",
         "Arc: generate the first arc map. The campaign turn marker starts at 1."
       ]
     },
+    "force_selection": [
+      {
+        "id": "fireteam",
+        "name": "By fireteam",
+        "default": true,
+        "deploy": "Fireteams (standard, or built to their type: chapter 9), each fielding at least half its slots and its Leader, plus characters, each joining a fireteam or acting alone. Within the mission's TV and model limits.",
+        "replace": "A replacement fills an empty slot in its own fireteam. New fireteams join whole."
+      },
+      {
+        "id": "soldier",
+        "name": "By soldier",
+        "default": false,
+        "deploy": "Any soldiers fit for duty, within the mission's TV and model limits. Before deployment, group them into fireteams of up to 6 for breaking and Rally; characters join one or act alone.",
+        "replace": "A replacement may be any troop the force fields."
+      }
+    ],
     "turn": [
       {
         "step": "Tasking",
@@ -983,8 +1000,12 @@
     ],
     "costs": [
       {
-        "item": "Replacement soldier (any troop in the force's teams, 0 XP)",
+        "item": "Replacement soldier (0 XP): by fireteam, a troop that fills an empty slot in its fireteam; by soldier, any troop the force fields",
         "cost": "Its Requisition (chapter 15)"
+      },
+      {
+        "item": "New fireteam (a standard fireteam, or one built to its type, chapter 9), at least half its slots and its Leader",
+        "cost": "Its soldiers' Requisition"
       },
       {
         "item": "Fast-track recovery: one recovering soldier is fit a turn sooner",
@@ -1039,7 +1060,7 @@
       {
         "roll": "10",
         "name": "Volunteers",
-        "text": "One free Regular replacement from the force's teams, if the roster has room."
+        "text": "One free Regular replacement for an empty slot in one of the force's fireteams (any troop the force fields, if picking by soldier), if the roster has room."
       },
       {
         "roll": "11",
@@ -1061,9 +1082,9 @@
       "text": [
         "A short arc is three authored missions: an opening, a second mission chosen by the opening's grade, and a finale. The arc sheet lists them and what each grade leads to.",
         "Roster: any troops of the faction you own. Name every soldier the first time they deploy; they carry their XP, advances and injuries through the arc.",
-        "Force: each mission sets a Troop Value limit (chapter 15) and a model limit. Before it, choose who deploys from the soldiers fit for duty. Count each soldier at its profile's TV; advances are free.",
+        "Force: each mission sets a Troop Value limit (chapter 15) and a model limit. Before it, choose who deploys from the soldiers fit for duty, by fireteam or by soldier as the arc's force-selection setting says (the arc sheet names a default; choose at the start). Count each soldier at its profile's TV; advances are free.",
         "After each mission: casualties and injuries, XP and advances as in a full campaign (chapter 14). An injury that puts a soldier out for turns puts them out for that many missions. A soldier left behind Down is captured and out for the rest of the arc, unless the arc gives a chance to bring them back.",
-        "Replacements: a Dead, captured or injured soldier of a line profile (a clone trooper, not a named character) may be replaced by a new soldier of the same profile with no XP. A named character who dies is gone for the arc.",
+        "Replacements: a Dead, captured or injured soldier who is not a character may be replaced by a new soldier of the same profile with no XP. A character who dies is gone for the arc.",
         "Grades lead on: the arc sheet says which mission comes next and any edge or setback it carries (a bigger or smaller force, the alert track's start, contacts removed or added).",
         "The arc's result is the finale's grade, one step better if the first two missions were both Decisive, one step worse if either was a Failure (Decisive, Marginal, Failure; never past either end)."
       ]
@@ -1436,6 +1457,7 @@
         "id": "salvage_crew",
         "name": "Salvage crew",
         "faction": "freespace",
+        "type": "line",
         "tier": 1,
         "behavior": "cowed",
         "composition": [
@@ -1449,6 +1471,7 @@
         "id": "asset_security",
         "name": "Asset security",
         "faction": "freespace",
+        "type": "line",
         "tier": 1,
         "behavior": "sentry",
         "composition": [
@@ -1466,6 +1489,7 @@
         "id": "recovery_captain",
         "name": "Recovery captain",
         "faction": "freespace",
+        "type": "character",
         "tier": 1,
         "behavior": "leader",
         "composition": [
@@ -1479,6 +1503,7 @@
         "id": "collections_enforcers",
         "name": "Collections enforcers",
         "faction": "freespace",
+        "type": "line",
         "tier": 2,
         "behavior": "aggressive",
         "composition": [
@@ -1492,6 +1517,7 @@
         "id": "salvage_techs",
         "name": "Salvage techs",
         "faction": "freespace",
+        "type": "support",
         "tier": 2,
         "behavior": "saboteur",
         "composition": [
@@ -1505,6 +1531,7 @@
         "id": "automated_defences",
         "name": "Automated defences",
         "faction": "freespace",
+        "type": "support",
         "tier": 2,
         "behavior": "automated",
         "composition": [
@@ -1521,6 +1548,7 @@
         "id": "repossession_team",
         "name": "Repossession team",
         "faction": "freespace",
+        "type": "line",
         "tier": 3,
         "behavior": "aggressive",
         "composition": [
@@ -1534,6 +1562,7 @@
         "id": "liquidators",
         "name": "Liquidators",
         "faction": "freespace",
+        "type": "assault",
         "tier": 3,
         "behavior": "tactical",
         "composition": [
@@ -1547,6 +1576,7 @@
         "id": "hired_gun",
         "name": "Hired gun",
         "faction": "contractor",
+        "type": "character",
         "tier": 3,
         "behavior": "attached",
         "composition": [
@@ -1563,6 +1593,7 @@
         "id": "contract_boarding_team",
         "name": "Contract boarding team",
         "faction": "contractor",
+        "type": "line",
         "tier": 3,
         "behavior": "tactical",
         "reaction_force": true,
@@ -1581,6 +1612,7 @@
         "id": "contract_reaction_force",
         "name": "Contract reaction force",
         "faction": "contractor",
+        "type": "line",
         "tier": 3,
         "behavior": "aggressive",
         "reaction_force": true,
@@ -1599,6 +1631,7 @@
         "id": "borz_bratva",
         "name": "Borz Bratva team",
         "faction": "contractor",
+        "type": "line",
         "tier": 3,
         "behavior": "sentry",
         "composition": [
@@ -1616,6 +1649,7 @@
         "id": "borz_cyka",
         "name": "Borz Cyka team",
         "faction": "contractor",
+        "type": "assault",
         "tier": 3,
         "behavior": "aggressive",
         "composition": [
@@ -1633,6 +1667,7 @@
         "id": "borz_ubiytsa",
         "name": "Ubiytsa shock team",
         "faction": "contractor",
+        "type": "assault",
         "tier": 3,
         "behavior": "aggressive",
         "composition": [
@@ -1650,6 +1685,7 @@
         "id": "harlow_control",
         "name": "Harlow control team",
         "faction": "contractor",
+        "type": "support",
         "tier": 3,
         "behavior": "tactical",
         "reaction_force": true,
@@ -1668,6 +1704,7 @@
         "id": "harlow_engineers",
         "name": "Harlow engineers",
         "faction": "contractor",
+        "type": "support",
         "tier": 3,
         "behavior": "tactical",
         "composition": [
@@ -1681,6 +1718,7 @@
         "id": "harlow_crickets",
         "name": "Cricket drones",
         "faction": "contractor",
+        "type": "support",
         "tier": 3,
         "behavior": "automated",
         "composition": [
@@ -1694,6 +1732,7 @@
         "id": "harlow_veterans",
         "name": "Harlow veterans",
         "faction": "contractor",
+        "type": "assault",
         "tier": 3,
         "behavior": "aggressive",
         "composition": [
@@ -1707,6 +1746,7 @@
         "id": "harlow_springbok",
         "name": "Springbok AI",
         "faction": "contractor",
+        "type": "support",
         "tier": 3,
         "behavior": "automated",
         "composition": [
@@ -1720,6 +1760,7 @@
         "id": "un3_fireteam",
         "name": "UN reserve fireteam",
         "faction": "un",
+        "type": "line",
         "tier": 4,
         "behavior": "tactical",
         "composition": [
@@ -1740,6 +1781,7 @@
         "id": "un3_pointmen",
         "name": "UN Pointmen",
         "faction": "un",
+        "type": "line",
         "tier": 4,
         "behavior": "aggressive",
         "composition": [
@@ -1757,6 +1799,7 @@
         "id": "un3_batcon",
         "name": "UN Battalion Controller",
         "faction": "un",
+        "type": "character",
         "tier": 4,
         "behavior": "leader",
         "composition": [
@@ -1770,6 +1813,7 @@
         "id": "rfa_fireteam",
         "name": "Raid Force Alpha fireteam",
         "faction": "un",
+        "type": "assault",
         "tier": 4,
         "behavior": "tactical",
         "composition": [
@@ -1786,6 +1830,7 @@
         "id": "rfa_specialists",
         "name": "Raid Force Alpha specialists",
         "faction": "un",
+        "type": "support",
         "tier": 4,
         "behavior": "tactical",
         "composition": [
@@ -1803,6 +1848,7 @@
         "id": "rfa_golem",
         "name": "Golem unit",
         "faction": "un",
+        "type": "support",
         "tier": 4,
         "behavior": "attached",
         "composition": [
@@ -1816,6 +1862,7 @@
         "id": "rfa_mother",
         "name": "UTG Mother",
         "faction": "un",
+        "type": "character",
         "tier": 4,
         "behavior": "leader",
         "composition": [
@@ -1829,6 +1876,7 @@
         "id": "directorate_handler",
         "name": "Directorate handler",
         "faction": "directorate",
+        "type": "character",
         "tier": 4,
         "behavior": "handler",
         "composition": [
@@ -1842,6 +1890,7 @@
         "id": "directorate_operators",
         "name": "Directorate deniable operators",
         "faction": "directorate",
+        "type": "assault",
         "tier": 4,
         "behavior": "tactical",
         "composition": [
@@ -1855,6 +1904,7 @@
         "id": "sep_b1_section",
         "name": "B1 battle droid section",
         "faction": "separatist",
+        "type": "line",
         "tier": 1,
         "behavior": "battle_droid",
         "composition": [
@@ -1872,6 +1922,7 @@
         "id": "sep_b2_squad",
         "name": "B2 super battle droid squad",
         "faction": "separatist",
+        "type": "line",
         "tier": 2,
         "behavior": "battle_droid",
         "composition": [
@@ -1889,6 +1940,7 @@
         "id": "sep_droidekas",
         "name": "Droideka pair",
         "faction": "separatist",
+        "type": "support",
         "tier": 2,
         "behavior": "sentry",
         "composition": [
@@ -1902,6 +1954,7 @@
         "id": "sep_tactical_command",
         "name": "Tactical droid and escort",
         "faction": "separatist",
+        "type": "line",
         "tier": 2,
         "behavior": "tactical",
         "composition": [
@@ -1919,6 +1972,7 @@
         "id": "sep_bx_squad",
         "name": "BX commando droid squad",
         "faction": "separatist",
+        "type": "assault",
         "tier": 3,
         "behavior": "tactical",
         "composition": [
@@ -1932,6 +1986,7 @@
         "id": "sep_magnaguards",
         "name": "MagnaGuard pair",
         "faction": "separatist",
+        "type": "assault",
         "tier": 3,
         "behavior": "aggressive",
         "composition": [
@@ -1945,6 +2000,7 @@
         "id": "sep_dsd1",
         "name": "Dwarf spider droid",
         "faction": "separatist",
+        "type": "support",
         "tier": 3,
         "behavior": "battle_droid",
         "composition": [
@@ -1958,6 +2014,7 @@
         "id": "sep_kraken_command",
         "name": "Kraken and bodyguard",
         "faction": "separatist",
+        "type": "line",
         "tier": 3,
         "behavior": "tactical",
         "composition": [
@@ -1975,6 +2032,7 @@
         "id": "sep_grievous",
         "name": "General Grievous and MagnaGuards",
         "faction": "separatist",
+        "type": "assault",
         "tier": 4,
         "behavior": "aggressive",
         "composition": [
@@ -3514,11 +3572,90 @@
   },
   "rosters": {
     "version": "0.5.0",
+    "fireteam_types": [
+      {
+        "id": "line",
+        "name": "Line",
+        "leader": [
+          0,
+          1
+        ],
+        "troopers": [
+          2,
+          5
+        ],
+        "specialists": [
+          0,
+          1
+        ],
+        "max_models": 6,
+        "summary": "The core of a force: riflemen with a Leader and one specialist."
+      },
+      {
+        "id": "assault",
+        "name": "Assault",
+        "leader": [
+          0,
+          1
+        ],
+        "troopers": [
+          1,
+          3
+        ],
+        "specialists": [
+          0,
+          2
+        ],
+        "max_models": 5,
+        "summary": "Smaller, better-equipped teams: boarding, commando and assault teams."
+      },
+      {
+        "id": "support",
+        "name": "Support",
+        "leader": [
+          0,
+          1
+        ],
+        "troopers": [
+          0,
+          1
+        ],
+        "specialists": [
+          1,
+          3
+        ],
+        "max_models": 3,
+        "summary": "Specialists working together: marksmen, gun and launcher teams, technicians, robots and drones."
+      }
+    ],
+    "classes": [
+      {
+        "id": "leader",
+        "name": "Leader",
+        "text": "Leads a fireteam: at most one per fireteam."
+      },
+      {
+        "id": "trooper",
+        "name": "Trooper",
+        "text": "The fireteam's core."
+      },
+      {
+        "id": "specialist",
+        "name": "Specialist",
+        "text": "A fireteam member with a job: gunners, medics, data specialists, engineers, drone operators, marksmen, anti-armour, robots and drones. Each army decides who counts."
+      },
+      {
+        "id": "character",
+        "name": "Character",
+        "text": "Joins one fireteam for the mission (at most one per fireteam) or acts alone. Named characters, Jedi, commanders and hired guns."
+      }
+    ],
     "teams": [
       {
         "id": "vat_fireteam",
         "name": "Void Assault Team (VAT) fireteam",
         "faction": "tfb",
+        "type": "assault",
         "summary": "The boarding fireteam: assault, a close-quarters gunner, and a data specialist.",
         "slots": [
           {
@@ -3544,6 +3681,7 @@
         "id": "pathfinder_team",
         "name": "Pathfinder recon team",
         "faction": "tfb",
+        "type": "line",
         "summary": "Recon and fire support with armour-piercing heavy rifles and a SAW.",
         "slots": [
           {
@@ -3565,6 +3703,7 @@
         "id": "control_team",
         "name": "Control team",
         "faction": "tfb",
+        "type": "support",
         "summary": "Two marksmen who hold overwatch over long passages, hangars and open decks.",
         "slots": [
           {
@@ -3577,6 +3716,7 @@
         "id": "clone_squad",
         "name": "Clone trooper squad",
         "faction": "republic",
+        "type": "line",
         "summary": "A sergeant, three riflemen and a Z-6 or RPS-6 heavy trooper.",
         "slots": [
           {
@@ -3597,6 +3737,7 @@
         "id": "clone_marksman_team",
         "name": "Clone marksman team",
         "faction": "republic",
+        "type": "support",
         "summary": "Two marksmen with DC-15x rifles for overwatch and long shots.",
         "slots": [
           {
@@ -3609,6 +3750,7 @@
         "id": "arc_team",
         "name": "ARC trooper team",
         "faction": "republic",
+        "type": "assault",
         "summary": "Elite assault troopers with twin pistols and specialist weapons.",
         "slots": [
           {
@@ -3625,6 +3767,7 @@
         "id": "arf_team",
         "name": "ARF trooper team",
         "faction": "republic",
+        "type": "line",
         "summary": "Scouts who deploy forward and spot for the squads behind them.",
         "slots": [
           {
@@ -3637,6 +3780,7 @@
         "id": "commando_squad",
         "name": "Clone commando squad",
         "faction": "republic",
+        "type": "assault",
         "summary": "Four commandos in Katarn armour: breaching, slicing, sniping and demolitions.",
         "slots": [
           {
@@ -3653,6 +3797,7 @@
         "id": "anc_chalk",
         "name": "Anchorage chalk",
         "faction": "anchorage",
+        "type": "assault",
         "summary": "A three-man close combat cell: two Scouts and a Grenadier.",
         "slots": [
           {
@@ -3669,6 +3814,7 @@
         "id": "anc_control",
         "name": "Anchorage control cell",
         "faction": "anchorage",
+        "type": "support",
         "summary": "The Prime and two Systems Operators, who run the drones, the jamming and the Hound.",
         "slots": [
           {
@@ -3685,6 +3831,7 @@
         "id": "anc_hound_team",
         "name": "Hound CCT",
         "faction": "anchorage",
+        "type": "support",
         "summary": "One Hound assault robot with its weapon modules.",
         "slots": [
           {
@@ -3697,6 +3844,7 @@
         "id": "hk_spear_1",
         "name": "Hankou SPEAR 1",
         "faction": "hankou",
+        "type": "assault",
         "summary": "The Team Leader, an Automatic Rifleman, a Pioneer and a Rifleman.",
         "slots": [
           {
@@ -3721,6 +3869,7 @@
         "id": "hk_spear_2",
         "name": "Hankou SPEAR 2",
         "faction": "hankou",
+        "type": "assault",
         "summary": "Three Riflemen, an Automatic Rifleman and a Pioneer.",
         "slots": [
           {
@@ -3741,6 +3890,7 @@
         "id": "hk_cct_pair",
         "name": "ZQ44 CCT pair",
         "faction": "hankou",
+        "type": "support",
         "summary": "Two light ZQ44 robots: base of fire, spotting, or one-way attack.",
         "slots": [
           {
@@ -3753,6 +3903,7 @@
         "id": "gen_line_squad",
         "name": "Line squad",
         "faction": "generic",
+        "type": "line",
         "summary": "An officer, four line troopers and a support gunner: six models.",
         "slots": [
           {
@@ -3773,6 +3924,7 @@
         "id": "gen_support_team",
         "name": "Support team",
         "faction": "generic",
+        "type": "support",
         "summary": "An anti-armour trooper, a specialist and a marksman, attached to a squad.",
         "slots": [
           {
@@ -3793,6 +3945,7 @@
         "id": "gen_assault_squad",
         "name": "Assault squad",
         "faction": "generic",
+        "type": "line",
         "summary": "Four assault troopers for close work.",
         "slots": [
           {
@@ -3805,6 +3958,7 @@
         "id": "gen_heavy_squad",
         "name": "Heavy infantry squad",
         "faction": "generic",
+        "type": "line",
         "summary": "A sergeant and four power-armoured heavy infantry: five elite models.",
         "slots": [
           {
@@ -4885,6 +5039,7 @@
         "faction": "tfb",
         "name": "VAT Team Leader",
         "role": "Leader",
+        "class": "leader",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -4921,6 +5076,7 @@
         "faction": "tfb",
         "name": "VAT Assaulter",
         "role": "Assaulter",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -4961,6 +5117,7 @@
         "faction": "tfb",
         "name": "VAT Gunner",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -4993,6 +5150,7 @@
         "faction": "tfb",
         "name": "Data Specialist",
         "role": "Specialist",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -5027,6 +5185,7 @@
         "faction": "tfb",
         "name": "Pathfinder Team Leader",
         "role": "Leader",
+        "class": "leader",
         "rank": "veteran",
         "stats": {
           "move": 7,
@@ -5059,6 +5218,7 @@
         "faction": "tfb",
         "name": "Pathfinder",
         "role": "Rifleman",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 7,
@@ -5094,6 +5254,7 @@
         "faction": "tfb",
         "name": "Pathfinder SAW Gunner",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -5125,6 +5286,7 @@
         "faction": "tfb",
         "name": "Control Team Marksman",
         "role": "Marksman",
+        "class": "specialist",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5157,6 +5319,7 @@
         "faction": "generic",
         "name": "Hostage",
         "role": "Rescued personnel",
+        "class": "character",
         "rank": "green",
         "stats": {
           "move": 5,
@@ -5181,6 +5344,7 @@
         "faction": "freespace",
         "name": "Salvage Hand",
         "role": "Crew",
+        "class": "trooper",
         "rank": "green",
         "stats": {
           "move": 6,
@@ -5210,6 +5374,7 @@
         "faction": "freespace",
         "name": "Asset Security Officer",
         "role": "Guard",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -5239,6 +5404,7 @@
         "faction": "freespace",
         "name": "Asset Security Gunner",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -5263,6 +5429,7 @@
         "faction": "freespace",
         "name": "Collections Enforcer",
         "role": "Enforcer",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -5296,6 +5463,7 @@
         "faction": "freespace",
         "name": "Repossession Breacher",
         "role": "Breacher",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -5328,6 +5496,7 @@
         "faction": "freespace",
         "name": "Liquidator",
         "role": "Hitter",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5361,6 +5530,7 @@
         "faction": "freespace",
         "name": "Salvage Tech",
         "role": "Specialist",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -5390,6 +5560,7 @@
         "faction": "freespace",
         "name": "Recovery Captain",
         "role": "Leader",
+        "class": "character",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5423,6 +5594,7 @@
         "faction": "freespace",
         "name": "Sentry Turret",
         "role": "Automated",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 0,
@@ -5449,6 +5621,7 @@
         "faction": "freespace",
         "name": "Security Drone",
         "role": "Automated",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 7,
@@ -5478,6 +5651,7 @@
         "faction": "contractor",
         "name": "Contract Boarder",
         "role": "Assaulter",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5513,6 +5687,7 @@
         "faction": "contractor",
         "name": "Contract Heavy",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "veteran",
         "stats": {
           "move": 5,
@@ -5542,6 +5717,7 @@
         "faction": "contractor",
         "name": "Reaction Force Operator",
         "role": "Rifleman",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 7,
@@ -5572,6 +5748,7 @@
         "faction": "contractor",
         "name": "Reaction Force Gunner",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5598,6 +5775,7 @@
         "faction": "contractor",
         "name": "Hired Marksman",
         "role": "Marksman",
+        "class": "character",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5628,6 +5806,7 @@
         "faction": "contractor",
         "name": "Hired Heavy Gunner",
         "role": "Gunner",
+        "class": "character",
         "rank": "veteran",
         "stats": {
           "move": 5,
@@ -5654,6 +5833,7 @@
         "faction": "contractor",
         "name": "Borz Bratva Trooper",
         "role": "Rifleman",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -5684,6 +5864,7 @@
         "faction": "contractor",
         "name": "Borz Bratva HMG Gunner",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -5710,6 +5891,7 @@
         "faction": "contractor",
         "name": "Borz Cyka Powered Trooper",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5744,6 +5926,7 @@
         "faction": "contractor",
         "name": "Borz Cyka Bravo Breacher",
         "role": "Assaulter",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5776,6 +5959,7 @@
         "faction": "contractor",
         "name": "Ubiytsa Controller",
         "role": "Leader",
+        "class": "leader",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5805,6 +5989,7 @@
         "faction": "contractor",
         "name": "Ubiytsa Shock Trooper",
         "role": "Assaulter",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5833,6 +6018,7 @@
         "faction": "contractor",
         "name": "Reaction Force Controller",
         "role": "Leader",
+        "class": "leader",
         "rank": "veteran",
         "stats": {
           "move": 7,
@@ -5867,6 +6053,7 @@
         "faction": "contractor",
         "name": "Reaction Force Grenadier",
         "role": "Grenadier",
+        "class": "specialist",
         "rank": "veteran",
         "stats": {
           "move": 7,
@@ -5896,6 +6083,7 @@
         "faction": "contractor",
         "name": "Reaction Force Engineer",
         "role": "Engineer",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -5927,6 +6115,7 @@
         "faction": "contractor",
         "name": "Harlow Veteran",
         "role": "Assaulter",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5956,6 +6145,7 @@
         "faction": "contractor",
         "name": "Springbok AI",
         "role": "Combat inorganic",
+        "class": "specialist",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -5982,6 +6172,7 @@
         "faction": "contractor",
         "name": "Cricket Drone",
         "role": "Mine drone",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 7,
@@ -6009,6 +6200,7 @@
         "faction": "un",
         "name": "Battalion Controller",
         "role": "Leader",
+        "class": "character",
         "rank": "veteran",
         "stats": {
           "move": 5,
@@ -6039,6 +6231,7 @@
         "faction": "un",
         "name": "3rd Battalion Rifleman",
         "role": "Rifleman",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 7,
@@ -6065,6 +6258,7 @@
         "faction": "un",
         "name": "3rd Battalion Data Specialist",
         "role": "Specialist",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 7,
@@ -6094,6 +6288,7 @@
         "faction": "un",
         "name": "3rd Battalion AT Specialist",
         "role": "Specialist",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -6123,6 +6318,7 @@
         "faction": "un",
         "name": "Pointman",
         "role": "Combat inorganic",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -6150,6 +6346,7 @@
         "faction": "un",
         "name": "Pointman SAW",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -6177,6 +6374,7 @@
         "faction": "un",
         "name": "UTG Mother",
         "role": "Leader",
+        "class": "character",
         "rank": "elite",
         "stats": {
           "move": 8,
@@ -6209,6 +6407,7 @@
         "faction": "un",
         "name": "UTG Assaulter",
         "role": "Assaulter",
+        "class": "trooper",
         "rank": "elite",
         "stats": {
           "move": 8,
@@ -6240,6 +6439,7 @@
         "faction": "un",
         "name": "UTG Grenadier",
         "role": "Grenadier",
+        "class": "specialist",
         "rank": "elite",
         "stats": {
           "move": 8,
@@ -6272,6 +6472,7 @@
         "faction": "un",
         "name": "UTG Marksman",
         "role": "Marksman",
+        "class": "specialist",
         "rank": "elite",
         "stats": {
           "move": 7,
@@ -6307,6 +6508,7 @@
         "faction": "un",
         "name": "Golem",
         "role": "Combat inorganic",
+        "class": "specialist",
         "rank": "veteran",
         "stats": {
           "move": 5,
@@ -6336,6 +6538,7 @@
         "faction": "directorate",
         "name": "Directorate Handler",
         "role": "Leader",
+        "class": "character",
         "rank": "elite",
         "stats": {
           "move": 6,
@@ -6371,6 +6574,7 @@
         "faction": "directorate",
         "name": "Directorate Deniable Operator",
         "role": "Assaulter",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -6401,6 +6605,7 @@
         "faction": "republic",
         "name": "Clone Sergeant",
         "role": "Leader",
+        "class": "leader",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -6432,6 +6637,7 @@
         "faction": "republic",
         "name": "Clone Trooper",
         "role": "Rifleman",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -6461,6 +6667,7 @@
         "faction": "republic",
         "name": "Clone Heavy Trooper",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -6488,6 +6695,7 @@
         "faction": "republic",
         "name": "Clone Trooper Marksman",
         "role": "Marksman",
+        "class": "specialist",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -6516,6 +6724,7 @@
         "faction": "republic",
         "name": "ARC Trooper Leader",
         "role": "Leader",
+        "class": "leader",
         "rank": "elite",
         "stats": {
           "move": 6,
@@ -6548,6 +6757,7 @@
         "faction": "republic",
         "name": "ARC Trooper",
         "role": "Assaulter",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -6581,6 +6791,7 @@
         "faction": "republic",
         "name": "ARF Trooper",
         "role": "Scout",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 7,
@@ -6614,6 +6825,7 @@
         "faction": "republic",
         "name": "Clone Commando Leader",
         "role": "Leader",
+        "class": "leader",
         "rank": "elite",
         "stats": {
           "move": 6,
@@ -6652,6 +6864,7 @@
         "faction": "republic",
         "name": "Clone Commando",
         "role": "Commando",
+        "class": "trooper",
         "rank": "elite",
         "stats": {
           "move": 6,
@@ -6689,6 +6902,7 @@
         "faction": "republic",
         "name": "Commander Cody",
         "role": "Leader",
+        "class": "character",
         "rank": "elite",
         "stats": {
           "move": 6,
@@ -6720,6 +6934,7 @@
         "faction": "republic",
         "name": "Obi-Wan Kenobi",
         "role": "Jedi General",
+        "class": "character",
         "rank": "elite",
         "stats": {
           "move": 7,
@@ -6749,6 +6964,7 @@
         "faction": "republic",
         "name": "Ahsoka Tano",
         "role": "Jedi Commander",
+        "class": "character",
         "rank": "elite",
         "stats": {
           "move": 8,
@@ -6779,6 +6995,7 @@
         "faction": "republic",
         "name": "Jedi Guardian",
         "role": "Jedi Knight",
+        "class": "character",
         "rank": "veteran",
         "stats": {
           "move": 7,
@@ -6807,6 +7024,7 @@
         "faction": "anchorage",
         "name": "Prime",
         "role": "Assault lead",
+        "class": "leader",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -6839,6 +7057,7 @@
         "faction": "anchorage",
         "name": "Scout",
         "role": "Rifleman",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -6871,6 +7090,7 @@
         "faction": "anchorage",
         "name": "Grenadier",
         "role": "Grenadier",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -6901,6 +7121,7 @@
         "faction": "anchorage",
         "name": "Systems Operator",
         "role": "Drones and electronic warfare",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -6932,6 +7153,7 @@
         "faction": "anchorage",
         "name": "Hound CCT",
         "role": "Collaborative combat robot (assault)",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -6968,6 +7190,7 @@
         "faction": "hankou",
         "name": "Team Leader",
         "role": "Fighting leader",
+        "class": "leader",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -7000,6 +7223,7 @@
         "faction": "hankou",
         "name": "Rifleman",
         "role": "Rifleman and breacher",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -7032,6 +7256,7 @@
         "faction": "hankou",
         "name": "Automatic Rifleman",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -7062,6 +7287,7 @@
         "faction": "hankou",
         "name": "Pioneer",
         "role": "Marksman",
+        "class": "specialist",
         "rank": "veteran",
         "stats": {
           "move": 7,
@@ -7094,6 +7320,7 @@
         "faction": "hankou",
         "name": "ZQ44 CCT",
         "role": "Collaborative combat robot (light, attritable)",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 7,
@@ -7129,6 +7356,7 @@
         "faction": "generic",
         "name": "Officer",
         "role": "Squad leader",
+        "class": "leader",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -7162,6 +7390,7 @@
         "faction": "generic",
         "name": "Line Trooper",
         "role": "Rifleman",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -7191,6 +7420,7 @@
         "faction": "generic",
         "name": "Support Gunner",
         "role": "Gunner",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -7220,6 +7450,7 @@
         "faction": "generic",
         "name": "Anti-armour Trooper",
         "role": "Launcher",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -7246,6 +7477,7 @@
         "faction": "generic",
         "name": "Specialist",
         "role": "Medic or technician",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -7277,6 +7509,7 @@
         "faction": "generic",
         "name": "Marksman",
         "role": "Sniper",
+        "class": "specialist",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -7307,6 +7540,7 @@
         "faction": "generic",
         "name": "Assault Trooper",
         "role": "Close assault",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 6,
@@ -7342,6 +7576,7 @@
         "faction": "generic",
         "name": "Heavy Infantry Sergeant",
         "role": "Heavy infantry leader",
+        "class": "leader",
         "rank": "elite",
         "stats": {
           "move": 6,
@@ -7374,6 +7609,7 @@
         "faction": "generic",
         "name": "Heavy Infantry",
         "role": "Power-armoured trooper",
+        "class": "trooper",
         "rank": "elite",
         "stats": {
           "move": 6,
@@ -7406,6 +7642,7 @@
         "faction": "separatist",
         "name": "B1 Battle Droid",
         "role": "Rifleman",
+        "class": "trooper",
         "rank": "green",
         "stats": {
           "move": 5,
@@ -7432,6 +7669,7 @@
         "faction": "separatist",
         "name": "B1 Heavy Weapons Droid",
         "role": "Heavy weapons",
+        "class": "specialist",
         "rank": "green",
         "stats": {
           "move": 5,
@@ -7461,6 +7699,7 @@
         "faction": "separatist",
         "name": "B2 Super Battle Droid",
         "role": "Rifleman",
+        "class": "trooper",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -7487,6 +7726,7 @@
         "faction": "separatist",
         "name": "B2 Heavy Weapons Droid",
         "role": "Heavy weapons",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -7516,6 +7756,7 @@
         "faction": "separatist",
         "name": "Droideka",
         "role": "Destroyer droid",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 4,
@@ -7545,6 +7786,7 @@
         "faction": "separatist",
         "name": "BX Commando Droid",
         "role": "Commando",
+        "class": "trooper",
         "rank": "veteran",
         "stats": {
           "move": 7,
@@ -7576,6 +7818,7 @@
         "faction": "separatist",
         "name": "IG-100 MagnaGuard",
         "role": "Bodyguard",
+        "class": "trooper",
         "rank": "elite",
         "stats": {
           "move": 7,
@@ -7602,6 +7845,7 @@
         "faction": "separatist",
         "name": "T-series Tactical Droid",
         "role": "Commander",
+        "class": "character",
         "rank": "regular",
         "stats": {
           "move": 6,
@@ -7629,6 +7873,7 @@
         "faction": "separatist",
         "name": "Kraken",
         "role": "Super tactical droid",
+        "class": "character",
         "rank": "elite",
         "stats": {
           "move": 6,
@@ -7656,6 +7901,7 @@
         "faction": "separatist",
         "name": "General Grievous",
         "role": "Cyborg general",
+        "class": "character",
         "rank": "elite",
         "stats": {
           "move": 8,
@@ -7686,6 +7932,7 @@
         "faction": "separatist",
         "name": "DSD1 Dwarf Spider Droid",
         "role": "Walker",
+        "class": "specialist",
         "rank": "regular",
         "stats": {
           "move": 5,
@@ -7929,8 +8176,8 @@
       }
     ],
     "forces": [
-      "Agree the game size. Each side builds a force of whole teams from its faction's tables of organisation (chapter 9), with a total Troop Value no higher than the size's limit (chapter 15).",
-      "A team may leave slots empty, but must field at least half of them, and its Leader if it has one.",
+      "Agree the game size. Each side builds a force of fireteams (standard fireteams, or ones built to their type: chapter 9) and characters, with a total Troop Value no higher than the size's limit (chapter 15).",
+      "A fireteam may leave slots empty, but must field at least half of them, and its Leader if it has one. Each character joins a fireteam (at most one each) or acts alone.",
       "Choose loadouts from each troop's options. Use the troop's listed TV whatever its loadout; players who want exact values can work out the chosen loadout with chapter 15.",
       "Custom troops (chapter 15) only if both players agree.",
       "Either player may field any faction, including the same one; Automated models count as normal models for everything here."

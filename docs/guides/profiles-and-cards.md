@@ -72,6 +72,7 @@ In `content/troops.yaml`, grouped by faction under a comment header. Schema: [`c
     faction: separatist          # an id from factions.yaml
     name: B1 Battle Droid        # what the card shows
     role: Rifleman               # descriptive
+    class: trooper               # leader, trooper, specialist or character (chapter 9): who it is in a fireteam
     rank: green                  # a label (drill for enemies)
     stats: { move: 5, shoot: 0, fight: 0, physique: 1, nerve: null, tech: null, wounds: 1, size: 2 }
     armour: none                 # an id from armour.yaml (armour_options: [...] for alternatives)
@@ -126,8 +127,10 @@ In `content/troops.yaml`, grouped by faction under a comment header. Schema: [`c
 ## 5. Factions, teams and elements
 
 - **Faction** (`factions.yaml`, `factions`): `{ id, name, side: player | enemy, summary }`. Add its card colour to `FACTION_COLOUR` in `tools/print_sheets.py` (a darkish hex colour that white text reads on).
-- **Teams** (`rosters.yaml`, `teams`) for player factions: `{ id, name, faction, summary, slots: [{ troop, count }] }`. Build from the miniatures' real organisation (a squad of a leader, riflemen and a gunner).
-- **Elements** (`factions.yaml`, `elements`) for enemy factions, so missions and the solo opponent can use them: `{ id, name, faction, tier, behavior, composition: [{ troop, count }] }`. `behavior` is one of the profiles in `behaviors.yaml`: `sentry`, `tactical`, `aggressive`, `cowed`, `saboteur`, `leader`, `automated`, `attached`, `handler`. `tier` is the threat tier 1–4 it belongs to.
+- **Classes:** give every troop a `class`. Leaders lead a fireteam; troopers are its core; specialists have a job (gunners, medics, data specialists, engineers, drone operators, marksmen, anti-armour, robots and drones: the army decides); characters (named characters, Jedi, commanders, hired guns) join a fireteam or act alone.
+- **Standard fireteams** come in two lists, one per use, and each has a `type` (`line`, `assault` or `support`, from `rosters.yaml` `fireteam_types`; or `character` for a character alone). The validator checks each fits its type: how many leaders, troopers and specialists, the most models, at most one character.
+- **Teams** (`rosters.yaml`, `teams`) for player factions: `{ id, name, faction, type, summary, slots: [{ troop, count }] }`. Build from the miniatures' real organisation (a squad of a leader, riflemen and a gunner).
+- **Elements** (`factions.yaml`, `elements`) for enemy factions, so missions and the solo opponent can use them: `{ id, name, faction, type, tier, behavior, composition: [{ troop, count }] }`. An `alternatives` troop replaces one model of its class. `behavior` is one of the profiles in `behaviors.yaml`: `sentry`, `tactical`, `aggressive`, `cowed`, `saboteur`, `leader`, `automated`, `attached`, `handler`. `tier` is the threat tier 1–4 it belongs to.
 - A faction used both ways (a player force that can also be fought) can have both teams and elements.
 
 ## 6. Rules chapter and print

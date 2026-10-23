@@ -16,6 +16,7 @@ troops:
     faction: tfb
     name: VAT Team Leader
     role: Leader
+    class: leader
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 2, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
     armour: void_plate
@@ -31,6 +32,7 @@ troops:
     faction: tfb
     name: VAT Assaulter
     role: Assaulter
+    class: trooper
     rank: regular
     stats: { move: 6, shoot: 2, fight: 2, physique: 1, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: void_plate
@@ -47,6 +49,7 @@ troops:
     faction: tfb
     name: VAT Gunner
     role: Gunner
+    class: specialist
     rank: regular
     stats: { move: 6, shoot: 2, fight: 1, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: void_plate
@@ -61,6 +64,7 @@ troops:
     faction: tfb
     name: Data Specialist
     role: Specialist
+    class: specialist
     rank: regular
     stats: { move: 6, shoot: 2, fight: 1, physique: 0, nerve: 1, tech: 2, wounds: 1, size: 2 }
     armour: void_plate
@@ -75,6 +79,7 @@ troops:
     faction: tfb
     name: Pathfinder Team Leader
     role: Leader
+    class: leader
     rank: veteran
     stats: { move: 7, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
     armour: void_suit
@@ -89,6 +94,7 @@ troops:
     faction: tfb
     name: Pathfinder
     role: Rifleman
+    class: trooper
     rank: regular
     stats: { move: 7, shoot: 2, fight: 1, physique: 1, nerve: 1, tech: 1, wounds: 1, size: 2 }
     armour: void_suit
@@ -104,6 +110,7 @@ troops:
     faction: tfb
     name: Pathfinder SAW Gunner
     role: Gunner
+    class: specialist
     rank: regular
     stats: { move: 6, shoot: 2, fight: 1, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: void_suit
@@ -118,6 +125,7 @@ troops:
     faction: tfb
     name: Control Team Marksman
     role: Marksman
+    class: specialist
     rank: veteran
     stats: { move: 6, shoot: 3, fight: 0, physique: 0, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: void_suit
@@ -132,6 +140,7 @@ troops:
     faction: generic
     name: Hostage
     role: Rescued personnel
+    class: character
     rank: green
     stats: { move: 5, shoot: 0, fight: 0, physique: 0, nerve: 0, tech: 0, wounds: 1, size: 2 }
     armour: none
@@ -147,6 +156,7 @@ troops:
     faction: freespace
     name: Salvage Hand
     role: Crew
+    class: trooper
     rank: green
     stats: { move: 6, shoot: 0, fight: 0, physique: 1, nerve: 0, tech: 1, wounds: 1, size: 2 }
     armour: none
@@ -162,6 +172,7 @@ troops:
     faction: freespace
     name: Asset Security Officer
     role: Guard
+    class: trooper
     rank: regular
     stats: { move: 6, shoot: 1, fight: 1, physique: 1, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: flak
@@ -177,6 +188,7 @@ troops:
     faction: freespace
     name: Asset Security Gunner
     role: Gunner
+    class: specialist
     rank: regular
     stats: { move: 5, shoot: 1, fight: 0, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: flak
@@ -191,6 +203,7 @@ troops:
     faction: freespace
     name: Collections Enforcer
     role: Enforcer
+    class: trooper
     rank: regular
     stats: { move: 6, shoot: 1, fight: 2, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: flak
@@ -207,6 +220,7 @@ troops:
     faction: freespace
     name: Repossession Breacher
     role: Breacher
+    class: trooper
     rank: regular
     stats: { move: 6, shoot: 1, fight: 2, physique: 2, nerve: 1, tech: 0, wounds: 2, size: 2 }
     armour: composite
@@ -222,6 +236,7 @@ troops:
     faction: freespace
     name: Liquidator
     role: Hitter
+    class: trooper
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 2, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
     armour: composite
@@ -237,6 +252,7 @@ troops:
     faction: freespace
     name: Salvage Tech
     role: Specialist
+    class: specialist
     rank: regular
     stats: { move: 6, shoot: 0, fight: 0, physique: 0, nerve: 0, tech: 2, wounds: 1, size: 2 }
     armour: flak
@@ -251,6 +267,7 @@ troops:
     faction: freespace
     name: Recovery Captain
     role: Leader
+    class: character
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
     armour: composite
@@ -266,6 +283,7 @@ troops:
     faction: freespace
     name: Sentry Turret
     role: Automated
+    class: specialist
     rank: regular
     stats: { move: 0, shoot: 1, fight: null, physique: null, nerve: null, tech: null, wounds: 1, size: 2 }
     armour: composite
@@ -280,6 +298,7 @@ troops:
     faction: freespace
     name: Security Drone
     role: Automated
+    class: specialist
     rank: regular
     stats: { move: 7, shoot: 1, fight: null, physique: null, nerve: null, tech: null, wounds: 1, size: 1 }
     armour: flak
@@ -295,6 +314,7 @@ troops:
     faction: contractor
     name: Contract Boarder
     role: Assaulter
+    class: trooper
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 2, physique: 2, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: void_plate
@@ -310,6 +330,7 @@ troops:
     faction: contractor
     name: Contract Heavy
     role: Gunner
+    class: specialist
     rank: veteran
     stats: { move: 5, shoot: 2, fight: 1, physique: 3, nerve: 2, tech: 0, wounds: 2, size: 2 }
     armour: heavy
@@ -324,6 +345,7 @@ troops:
     faction: contractor
     name: Reaction Force Operator
     role: Rifleman
+    class: trooper
     rank: veteran
     stats: { move: 7, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -339,6 +361,7 @@ troops:
     faction: contractor
     name: Reaction Force Gunner
     role: Gunner
+    class: specialist
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 1, physique: 2, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -353,6 +376,7 @@ troops:
     faction: contractor
     name: Hired Marksman
     role: Marksman
+    class: character
     rank: veteran
     stats: { move: 6, shoot: 3, fight: 0, physique: 0, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -367,6 +391,7 @@ troops:
     faction: contractor
     name: Hired Heavy Gunner
     role: Gunner
+    class: character
     rank: veteran
     stats: { move: 5, shoot: 2, fight: 1, physique: 3, nerve: 2, tech: 0, wounds: 2, size: 2 }
     armour: composite
@@ -383,6 +408,7 @@ troops:
     faction: contractor
     name: Borz Bratva Trooper
     role: Rifleman
+    class: trooper
     rank: regular
     stats: { move: 6, shoot: 2, fight: 2, physique: 2, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -397,6 +423,7 @@ troops:
     faction: contractor
     name: Borz Bratva HMG Gunner
     role: Gunner
+    class: specialist
     rank: regular
     stats: { move: 5, shoot: 2, fight: 1, physique: 3, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -411,6 +438,7 @@ troops:
     faction: contractor
     name: Borz Cyka Powered Trooper
     role: Gunner
+    class: specialist
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 2, physique: 3, nerve: 2, tech: 0, wounds: 2, size: 2 }
     armour: heavy
@@ -427,6 +455,7 @@ troops:
     faction: contractor
     name: Borz Cyka Bravo Breacher
     role: Assaulter
+    class: trooper
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 2, physique: 3, nerve: 2, tech: 0, wounds: 2, size: 2 }
     armour: heavy
@@ -441,6 +470,7 @@ troops:
     faction: contractor
     name: Ubiytsa Controller
     role: Leader
+    class: leader
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 2, physique: 2, nerve: 3, tech: 1, wounds: 1, size: 2 }
     armour: flak
@@ -455,6 +485,7 @@ troops:
     faction: contractor
     name: Ubiytsa Shock Trooper
     role: Assaulter
+    class: trooper
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 3, physique: 3, nerve: 3, tech: 0, wounds: 1, size: 2 }
     armour: flak
@@ -470,6 +501,7 @@ troops:
     faction: contractor
     name: Reaction Force Controller
     role: Leader
+    class: leader
     rank: veteran
     stats: { move: 7, shoot: 2, fight: 1, physique: 1, nerve: 3, tech: 2, wounds: 1, size: 2 }
     armour: composite
@@ -485,6 +517,7 @@ troops:
     faction: contractor
     name: Reaction Force Grenadier
     role: Grenadier
+    class: specialist
     rank: veteran
     stats: { move: 7, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -499,6 +532,7 @@ troops:
     faction: contractor
     name: Reaction Force Engineer
     role: Engineer
+    class: specialist
     rank: regular
     stats: { move: 6, shoot: 2, fight: 1, physique: 2, nerve: 2, tech: 2, wounds: 1, size: 2 }
     armour: composite
@@ -514,6 +548,7 @@ troops:
     faction: contractor
     name: Harlow Veteran
     role: Assaulter
+    class: trooper
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 3, physique: 2, nerve: 3, tech: 0, wounds: 1, size: 2 }
     armour: flak
@@ -528,6 +563,7 @@ troops:
     faction: contractor
     name: Springbok AI
     role: Combat inorganic
+    class: specialist
     rank: veteran
     stats: { move: 6, shoot: 3, fight: 1, physique: 2, nerve: null, tech: null, wounds: 2, size: 2 }
     armour: composite
@@ -542,6 +578,7 @@ troops:
     faction: contractor
     name: Cricket Drone
     role: Mine drone
+    class: specialist
     rank: regular
     stats: { move: 7, shoot: 0, fight: null, physique: null, nerve: null, tech: null, wounds: 1, size: 1 }
     armour: none
@@ -557,6 +594,7 @@ troops:
     faction: un
     name: Battalion Controller
     role: Leader
+    class: character
     rank: veteran
     stats: { move: 5, shoot: 2, fight: 1, physique: 1, nerve: 3, tech: 2, wounds: 1, size: 2 }
     armour: composite
@@ -571,6 +609,7 @@ troops:
     faction: un
     name: 3rd Battalion Rifleman
     role: Rifleman
+    class: trooper
     rank: regular
     stats: { move: 7, shoot: 2, fight: 2, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -585,6 +624,7 @@ troops:
     faction: un
     name: 3rd Battalion Data Specialist
     role: Specialist
+    class: specialist
     rank: regular
     stats: { move: 7, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 2, wounds: 1, size: 2 }
     armour: composite
@@ -599,6 +639,7 @@ troops:
     faction: un
     name: 3rd Battalion AT Specialist
     role: Specialist
+    class: specialist
     rank: regular
     stats: { move: 6, shoot: 2, fight: 1, physique: 2, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -614,6 +655,7 @@ troops:
     faction: un
     name: Pointman
     role: Combat inorganic
+    class: trooper
     rank: regular
     stats: { move: 6, shoot: 2, fight: 1, physique: 2, nerve: null, tech: null, wounds: 2, size: 2 }
     armour: composite
@@ -628,6 +670,7 @@ troops:
     faction: un
     name: Pointman SAW
     role: Gunner
+    class: specialist
     rank: regular
     stats: { move: 6, shoot: 2, fight: 1, physique: 2, nerve: null, tech: null, wounds: 2, size: 2 }
     armour: composite
@@ -643,6 +686,7 @@ troops:
     faction: un
     name: UTG Mother
     role: Leader
+    class: character
     rank: elite
     stats: { move: 8, shoot: 3, fight: 4, physique: 3, nerve: 3, tech: 1, wounds: 2, size: 2 }
     armour: composite
@@ -657,6 +701,7 @@ troops:
     faction: un
     name: UTG Assaulter
     role: Assaulter
+    class: trooper
     rank: elite
     stats: { move: 8, shoot: 3, fight: 3, physique: 3, nerve: 3, tech: 1, wounds: 1, size: 2 }
     armour: composite
@@ -671,6 +716,7 @@ troops:
     faction: un
     name: UTG Grenadier
     role: Grenadier
+    class: specialist
     rank: elite
     stats: { move: 8, shoot: 3, fight: 3, physique: 3, nerve: 3, tech: 1, wounds: 1, size: 2 }
     armour: composite
@@ -685,6 +731,7 @@ troops:
     faction: un
     name: UTG Marksman
     role: Marksman
+    class: specialist
     rank: elite
     stats: { move: 7, shoot: 3, fight: 2, physique: 3, nerve: 3, tech: 1, wounds: 1, size: 2 }
     armour: composite
@@ -700,6 +747,7 @@ troops:
     faction: un
     name: Golem
     role: Combat inorganic
+    class: specialist
     rank: veteran
     stats: { move: 5, shoot: 2, fight: 2, physique: 3, nerve: null, tech: null, wounds: 2, size: 2 }
     armour: composite
@@ -716,6 +764,7 @@ troops:
     faction: directorate
     name: Directorate Handler
     role: Leader
+    class: character
     rank: elite
     stats: { move: 6, shoot: 3, fight: 3, physique: 2, nerve: 3, tech: 2, wounds: 2, size: 2 }
     armour: void_plate
@@ -730,6 +779,7 @@ troops:
     faction: directorate
     name: Directorate Deniable Operator
     role: Assaulter
+    class: trooper
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 3, physique: 2, nerve: 2, tech: 1, wounds: 1, size: 2 }
     armour: composite
@@ -747,6 +797,7 @@ troops:
     faction: republic
     name: Clone Sergeant
     role: Leader
+    class: leader
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 2, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
     armour: clone_armour
@@ -762,6 +813,7 @@ troops:
     faction: republic
     name: Clone Trooper
     role: Rifleman
+    class: trooper
     rank: regular
     stats: { move: 6, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: clone_armour
@@ -777,6 +829,7 @@ troops:
     faction: republic
     name: Clone Heavy Trooper
     role: Gunner
+    class: specialist
     rank: regular
     stats: { move: 5, shoot: 2, fight: 1, physique: 2, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: clone_armour
@@ -792,6 +845,7 @@ troops:
     faction: republic
     name: Clone Trooper Marksman
     role: Marksman
+    class: specialist
     rank: veteran
     stats: { move: 6, shoot: 3, fight: 1, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: clone_armour
@@ -806,6 +860,7 @@ troops:
     faction: republic
     name: ARC Trooper Leader
     role: Leader
+    class: leader
     rank: elite
     stats: { move: 6, shoot: 3, fight: 2, physique: 2, nerve: 3, tech: 1, wounds: 2, size: 2 }
     armour: clone_armour
@@ -821,6 +876,7 @@ troops:
     faction: republic
     name: ARC Trooper
     role: Assaulter
+    class: trooper
     rank: veteran
     stats: { move: 6, shoot: 3, fight: 2, physique: 2, nerve: 3, tech: 1, wounds: 1, size: 2 }
     armour: clone_armour
@@ -836,6 +892,7 @@ troops:
     faction: republic
     name: ARF Trooper
     role: Scout
+    class: trooper
     rank: veteran
     stats: { move: 7, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
     armour: clone_armour
@@ -851,6 +908,7 @@ troops:
     faction: republic
     name: Clone Commando Leader
     role: Leader
+    class: leader
     rank: elite
     stats: { move: 6, shoot: 3, fight: 2, physique: 2, nerve: 3, tech: 2, wounds: 2, size: 2 }
     armour: katarn_armour
@@ -867,6 +925,7 @@ troops:
     faction: republic
     name: Clone Commando
     role: Commando
+    class: trooper
     rank: elite
     stats: { move: 6, shoot: 3, fight: 2, physique: 2, nerve: 3, tech: 2, wounds: 2, size: 2 }
     armour: katarn_armour
@@ -883,6 +942,7 @@ troops:
     faction: republic
     name: Commander Cody
     role: Leader
+    class: character
     rank: elite
     stats: { move: 6, shoot: 3, fight: 2, physique: 2, nerve: 3, tech: 1, wounds: 2, size: 2 }
     armour: clone_armour
@@ -898,6 +958,7 @@ troops:
     faction: republic
     name: Obi-Wan Kenobi
     role: Jedi General
+    class: character
     rank: elite
     stats: { move: 7, shoot: 1, fight: 4, physique: 2, nerve: 4, tech: 1, wounds: 3, size: 2 }
     armour: none
@@ -912,6 +973,7 @@ troops:
     faction: republic
     name: Ahsoka Tano
     role: Jedi Commander
+    class: character
     rank: elite
     stats: { move: 8, shoot: 1, fight: 3, physique: 2, nerve: 3, tech: 1, wounds: 2, size: 2 }
     armour: none
@@ -926,6 +988,7 @@ troops:
     faction: republic
     name: Jedi Guardian
     role: Jedi Knight
+    class: character
     rank: veteran
     stats: { move: 7, shoot: 1, fight: 3, physique: 2, nerve: 3, tech: 1, wounds: 2, size: 2 }
     armour: none
@@ -943,6 +1006,7 @@ troops:
     faction: anchorage
     name: Prime
     role: Assault lead
+    class: leader
     rank: veteran
     stats: { move: 6, shoot: 3, fight: 2, physique: 1, nerve: 3, tech: 1, wounds: 1, size: 2 }
     armour: composite
@@ -957,6 +1021,7 @@ troops:
     faction: anchorage
     name: Scout
     role: Rifleman
+    class: trooper
     rank: regular
     stats: { move: 6, shoot: 2, fight: 2, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
     armour: composite
@@ -971,6 +1036,7 @@ troops:
     faction: anchorage
     name: Grenadier
     role: Grenadier
+    class: specialist
     rank: regular
     stats: { move: 5, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -985,6 +1051,7 @@ troops:
     faction: anchorage
     name: Systems Operator
     role: Drones and electronic warfare
+    class: specialist
     rank: regular
     stats: { move: 5, shoot: 2, fight: 1, physique: 0, nerve: 2, tech: 2, wounds: 1, size: 2 }
     armour: composite
@@ -999,6 +1066,7 @@ troops:
     faction: anchorage
     name: Hound CCT
     role: Collaborative combat robot (assault)
+    class: specialist
     rank: regular
     stats: { move: 6, shoot: 2, fight: 1, physique: 3, nerve: null, tech: null, wounds: 3, size: 3 }
     armour: heavy
@@ -1016,6 +1084,7 @@ troops:
     faction: hankou
     name: Team Leader
     role: Fighting leader
+    class: leader
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 2, physique: 2, nerve: 3, tech: 1, wounds: 1, size: 2 }
     armour: composite
@@ -1030,6 +1099,7 @@ troops:
     faction: hankou
     name: Rifleman
     role: Rifleman and breacher
+    class: trooper
     rank: regular
     stats: { move: 6, shoot: 2, fight: 2, physique: 2, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -1044,6 +1114,7 @@ troops:
     faction: hankou
     name: Automatic Rifleman
     role: Gunner
+    class: specialist
     rank: regular
     stats: { move: 5, shoot: 2, fight: 1, physique: 2, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -1058,6 +1129,7 @@ troops:
     faction: hankou
     name: Pioneer
     role: Marksman
+    class: specialist
     rank: veteran
     stats: { move: 7, shoot: 3, fight: 1, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -1072,6 +1144,7 @@ troops:
     faction: hankou
     name: ZQ44 CCT
     role: Collaborative combat robot (light, attritable)
+    class: specialist
     rank: regular
     stats: { move: 7, shoot: 2, fight: 1, physique: 2, nerve: null, tech: null, wounds: 2, size: 2 }
     armour: composite
@@ -1089,6 +1162,7 @@ troops:
     faction: generic
     name: Officer
     role: Squad leader
+    class: leader
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 1, physique: 1, nerve: 2, tech: 1, wounds: 1, size: 2 }
     armour: flak
@@ -1104,6 +1178,7 @@ troops:
     faction: generic
     name: Line Trooper
     role: Rifleman
+    class: trooper
     rank: regular
     stats: { move: 6, shoot: 1, fight: 1, physique: 1, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: flak
@@ -1119,6 +1194,7 @@ troops:
     faction: generic
     name: Support Gunner
     role: Gunner
+    class: specialist
     rank: regular
     stats: { move: 5, shoot: 1, fight: 1, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: flak
@@ -1134,6 +1210,7 @@ troops:
     faction: generic
     name: Anti-armour Trooper
     role: Launcher
+    class: specialist
     rank: regular
     stats: { move: 5, shoot: 1, fight: 1, physique: 2, nerve: 1, tech: 0, wounds: 1, size: 2 }
     armour: flak
@@ -1148,6 +1225,7 @@ troops:
     faction: generic
     name: Specialist
     role: Medic or technician
+    class: specialist
     rank: regular
     stats: { move: 6, shoot: 1, fight: 0, physique: 1, nerve: 1, tech: 2, wounds: 1, size: 2 }
     armour: flak
@@ -1163,6 +1241,7 @@ troops:
     faction: generic
     name: Marksman
     role: Sniper
+    class: specialist
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 0, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: flak
@@ -1177,6 +1256,7 @@ troops:
     faction: generic
     name: Assault Trooper
     role: Close assault
+    class: trooper
     rank: veteran
     stats: { move: 6, shoot: 2, fight: 2, physique: 1, nerve: 2, tech: 0, wounds: 1, size: 2 }
     armour: composite
@@ -1193,6 +1273,7 @@ troops:
     faction: generic
     name: Heavy Infantry Sergeant
     role: Heavy infantry leader
+    class: leader
     rank: elite
     stats: { move: 6, shoot: 3, fight: 3, physique: 3, nerve: 3, tech: 1, wounds: 2, size: 2 }
     armour: heavy
@@ -1208,6 +1289,7 @@ troops:
     faction: generic
     name: Heavy Infantry
     role: Power-armoured trooper
+    class: trooper
     rank: elite
     stats: { move: 6, shoot: 3, fight: 3, physique: 3, nerve: 3, tech: 0, wounds: 2, size: 2 }
     armour: heavy
@@ -1225,6 +1307,7 @@ troops:
     faction: separatist
     name: B1 Battle Droid
     role: Rifleman
+    class: trooper
     rank: green
     stats: { move: 5, shoot: 0, fight: 0, physique: 1, nerve: null, tech: null, wounds: 1, size: 2 }
     armour: b1_chassis
@@ -1238,6 +1321,7 @@ troops:
     faction: separatist
     name: B1 Heavy Weapons Droid
     role: Heavy weapons
+    class: specialist
     rank: green
     stats: { move: 5, shoot: 0, fight: 0, physique: 1, nerve: null, tech: null, wounds: 1, size: 2 }
     armour: b1_chassis
@@ -1252,6 +1336,7 @@ troops:
     faction: separatist
     name: B2 Super Battle Droid
     role: Rifleman
+    class: trooper
     rank: regular
     stats: { move: 5, shoot: 1, fight: 1, physique: 2, nerve: null, tech: null, wounds: 1, size: 2 }
     armour: duranium_plating
@@ -1265,6 +1350,7 @@ troops:
     faction: separatist
     name: B2 Heavy Weapons Droid
     role: Heavy weapons
+    class: specialist
     rank: regular
     stats: { move: 5, shoot: 1, fight: 1, physique: 2, nerve: null, tech: null, wounds: 1, size: 2 }
     armour: duranium_plating
@@ -1279,6 +1365,7 @@ troops:
     faction: separatist
     name: Droideka
     role: Destroyer droid
+    class: specialist
     rank: regular
     stats: { move: 4, shoot: 1, fight: null, physique: 2, nerve: null, tech: null, wounds: 2, size: 2 }
     armour: duranium_plating
@@ -1292,6 +1379,7 @@ troops:
     faction: separatist
     name: BX Commando Droid
     role: Commando
+    class: trooper
     rank: veteran
     stats: { move: 7, shoot: 2, fight: 2, physique: 2, nerve: null, tech: null, wounds: 1, size: 2 }
     armour: droid_plating
@@ -1306,6 +1394,7 @@ troops:
     faction: separatist
     name: IG-100 MagnaGuard
     role: Bodyguard
+    class: trooper
     rank: elite
     stats: { move: 7, shoot: 2, fight: 3, physique: 2, nerve: null, tech: null, wounds: 2, size: 2 }
     armour: duranium_plating
@@ -1319,6 +1408,7 @@ troops:
     faction: separatist
     name: T-series Tactical Droid
     role: Commander
+    class: character
     rank: regular
     stats: { move: 6, shoot: 1, fight: 0, physique: 1, nerve: null, tech: null, wounds: 1, size: 2 }
     armour: droid_plating
@@ -1332,6 +1422,7 @@ troops:
     faction: separatist
     name: Kraken
     role: Super tactical droid
+    class: character
     rank: elite
     stats: { move: 6, shoot: 1, fight: 1, physique: 2, nerve: null, tech: null, wounds: 2, size: 2 }
     armour: duranium_plating
@@ -1345,6 +1436,7 @@ troops:
     faction: separatist
     name: General Grievous
     role: Cyborg general
+    class: character
     rank: elite
     stats: { move: 8, shoot: 2, fight: 4, physique: 3, nerve: 3, tech: 1, wounds: 2, size: 2 }
     armour: duranium_plating
@@ -1358,6 +1450,7 @@ troops:
     faction: separatist
     name: DSD1 Dwarf Spider Droid
     role: Walker
+    class: specialist
     rank: regular
     stats: { move: 5, shoot: 1, fight: null, physique: 3, nerve: null, tech: null, wounds: 3, size: 3 }
     armour: dsd1_hull

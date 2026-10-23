@@ -12,9 +12,21 @@ The examples follow Task Force Boone against Freespace Solutions. Any player fac
 
 <!-- table:campaign.start_text -->
 - Force: the starting force for the faction (for Task Force Boone, the boarding element: one VAT fireteam and one attached specialist). Name every soldier.
-- Roster: up to 12 soldiers. Up to 8 deploy on a small mission (chapter 13), 12 on a large one.
+- Roster: up to 12 soldiers, grouped by fireteam. Up to 8 deploy on a small mission (chapter 13), 12 on a large one.
+- Force selection: by fireteam (the default) or by soldier. Choose now; it holds for the campaign.
 - Resources: 6 Requisition, 1 Intel, Standing 3, Evidence 0.
 - Arc: generate the first arc map. The campaign turn marker starts at 1.
+<!-- /table -->
+
+### Force selection
+
+A campaign picks its force one of two ways, chosen at the start (decision 6.18). Two-player games always go by fireteam.
+
+<!-- table:campaign.force_selection -->
+| Setting | Deploying a force | Replacements |
+|---|---|---|
+| **By fireteam** (default) | Fireteams (standard, or built to their type: chapter 9), each fielding at least half its slots and its Leader, plus characters, each joining a fireteam or acting alone. Within the mission's TV and model limits. | A replacement fills an empty slot in its own fireteam. New fireteams join whole. |
+| **By soldier** | Any soldiers fit for duty, within the mission's TV and model limits. Before deployment, group them into fireteams of up to 6 for breaking and Rally; characters join one or act alone. | A replacement may be any troop the force fields. |
 <!-- /table -->
 
 Keep the campaign on the campaign sheets: the force roster, and the campaign status sheet with the arc map (`ImperatorBlack_campaign-sheets.pdf`).
@@ -26,9 +38,9 @@ A **short arc** is a story of three missions, written in advance: the opening, a
 <!-- table:campaign.short_arc -->
 1. A short arc is three authored missions: an opening, a second mission chosen by the opening's grade, and a finale. The arc sheet lists them and what each grade leads to.
 2. Roster: any troops of the faction you own. Name every soldier the first time they deploy; they carry their XP, advances and injuries through the arc.
-3. Force: each mission sets a Troop Value limit (chapter 15) and a model limit. Before it, choose who deploys from the soldiers fit for duty. Count each soldier at its profile's TV; advances are free.
+3. Force: each mission sets a Troop Value limit (chapter 15) and a model limit. Before it, choose who deploys from the soldiers fit for duty, by fireteam or by soldier as the arc's force-selection setting says (the arc sheet names a default; choose at the start). Count each soldier at its profile's TV; advances are free.
 4. After each mission: casualties and injuries, XP and advances as in a full campaign (chapter 14). An injury that puts a soldier out for turns puts them out for that many missions. A soldier left behind Down is captured and out for the rest of the arc, unless the arc gives a chance to bring them back.
-5. Replacements: a Dead, captured or injured soldier of a line profile (a clone trooper, not a named character) may be replaced by a new soldier of the same profile with no XP. A named character who dies is gone for the arc.
+5. Replacements: a Dead, captured or injured soldier who is not a character may be replaced by a new soldier of the same profile with no XP. A character who dies is gone for the arc.
 6. Grades lead on: the arc sheet says which mission comes next and any edge or setback it carries (a bigger or smaller force, the alert track's start, contacts removed or added).
 7. The arc's result is the finale's grade, one step better if the first two missions were both Decisive, one step worse if either was a Failure (Decisive, Marginal, Failure; never past either end).
 <!-- /table -->
@@ -262,7 +274,8 @@ The force is built like a table of organisation, not from a points list. Requisi
 <!-- table:campaign.costs -->
 | Item | Requisition |
 |---|---|
-| Replacement soldier (any troop in the force's teams, 0 XP) | Its Requisition (chapter 15) |
+| Replacement soldier (0 XP): by fireteam, a troop that fills an empty slot in its fireteam; by soldier, any troop the force fields | Its Requisition (chapter 15) |
+| New fireteam (a standard fireteam, or one built to its type, chapter 9), at least half its slots and its Leader | Its soldiers' Requisition |
 | Fast-track recovery: one recovering soldier is fit a turn sooner | 2 |
 | Ship upgrade | 4 / 6 / 8 by level |
 <!-- /table -->
@@ -284,7 +297,7 @@ At the end of each campaign turn, roll 2d6.
 | 7 | **Quiet** | Nothing happens. |
 | 8 | **Informant** | +1 Intel. |
 | 9 | **Supply drop** | +2 Requisition. |
-| 10 | **Volunteers** | One free Regular replacement from the force's teams, if the roster has room. |
+| 10 | **Volunteers** | One free Regular replacement for an empty slot in one of the force's fireteams (any troop the force fields, if picking by soldier), if the roster has room. |
 | 11 | **Opportunity** | A new node joins the map: roll its type; threat tier 1; linked to the ship or to any taken node; revealed. |
 | 12 | **Commendation** | +1 Standing. |
 <!-- /table -->

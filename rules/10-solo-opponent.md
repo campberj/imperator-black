@@ -1,6 +1,6 @@
 # 10. The solo opponent
 
-In solo play the enemy is run by fixed priority lists. Each enemy element has a **behavior profile** (chapter 9 lists which). When an enemy model activates or reacts, read its list from the top and take the first line that applies. When the lists leave a choice, use the tie-breakers at the end of this chapter; nothing else is left to judgment.
+In solo play the enemy is run by fixed priority lists. Each enemy element (an element is a fireteam: the words mean the same) has a **behavior profile** (chapter 9 lists which). When an enemy model activates or reacts, read its list from the top and take the first line that applies. When the lists leave a choice, use the tie-breakers at the end of this chapter; nothing else is left to judgment.
 
 Every profile is printed on a behavior card. Lay the cards beside the board with the enemy unit cards.
 

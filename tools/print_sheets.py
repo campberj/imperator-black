@@ -217,8 +217,17 @@ def draw_card(c, x, y, t):
     c.setFillColor(colors.white)
     c.setFont("Body-Bold", 12)
     c.drawString(x + 0.14 * inch, y + CARD_H - 0.27 * inch, t["name"])
-    c.setFont("Body", 7)
-    c.drawString(x + 0.14 * inch, y + CARD_H - 0.43 * inch, f"{RANKS[t['rank']]} {t['role']}  ·  {fac['name']}")
+    # Subtitle on the left, the troop's class (chapter 9) on the right; the subtitle shrinks if they would meet.
+    sub = f"{RANKS[t['rank']]} {t['role']}  ·  {fac['name']}"
+    cls = t.get("class", "").upper()
+    room = CARD_W - 0.28 * inch - pdfmetrics.stringWidth(cls, "Body-Bold", 6.5) - 0.12 * inch
+    size = 7
+    while size > 5 and pdfmetrics.stringWidth(sub, "Body", size) > room:
+        size -= 0.25
+    c.setFont("Body", size)
+    c.drawString(x + 0.14 * inch, y + CARD_H - 0.43 * inch, sub)
+    c.setFont("Body-Bold", 6.5)
+    c.drawRightString(x + CARD_W - 0.14 * inch, y + CARD_H - 0.43 * inch, cls)
 
     footer = 0.32 * inch
     c.setFillColor(MUTED)

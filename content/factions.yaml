@@ -49,6 +49,7 @@ elements:
   - id: salvage_crew
     name: Salvage crew
     faction: freespace
+    type: line
     tier: 1
     behavior: cowed
     composition: [{ troop: fs_salvage_hand, count: 3 }]
@@ -56,6 +57,7 @@ elements:
   - id: asset_security
     name: Asset security
     faction: freespace
+    type: line
     tier: 1
     behavior: sentry
     composition: [{ troop: fs_security, count: 2 }, { troop: fs_security_gunner, count: 1 }]
@@ -63,6 +65,7 @@ elements:
   - id: recovery_captain
     name: Recovery captain
     faction: freespace
+    type: character
     tier: 1
     behavior: leader
     composition: [{ troop: fs_recovery_captain, count: 1 }]
@@ -70,6 +73,7 @@ elements:
   - id: collections_enforcers
     name: Collections enforcers
     faction: freespace
+    type: line
     tier: 2
     behavior: aggressive
     composition: [{ troop: fs_enforcer, count: 3 }]
@@ -77,6 +81,7 @@ elements:
   - id: salvage_techs
     name: Salvage techs
     faction: freespace
+    type: support
     tier: 2
     behavior: saboteur
     composition: [{ troop: fs_tech, count: 2 }]
@@ -84,6 +89,7 @@ elements:
   - id: automated_defences
     name: Automated defences
     faction: freespace
+    type: support
     tier: 2
     behavior: automated
     composition: [{ troop: fs_turret, count: 1 }]
@@ -92,6 +98,7 @@ elements:
   - id: repossession_team
     name: Repossession team
     faction: freespace
+    type: line
     tier: 3
     behavior: aggressive
     composition: [{ troop: fs_repo_breacher, count: 3 }]
@@ -99,6 +106,7 @@ elements:
   - id: liquidators
     name: Liquidators
     faction: freespace
+    type: assault
     tier: 3
     behavior: tactical
     composition: [{ troop: fs_liquidator, count: 2 }]
@@ -106,6 +114,7 @@ elements:
   - id: hired_gun
     name: Hired gun
     faction: contractor
+    type: character
     tier: 3
     behavior: attached
     composition: [{ troop: ct_hired_marksman, count: 1 }]
@@ -114,6 +123,7 @@ elements:
   - id: contract_boarding_team
     name: Contract boarding team
     faction: contractor
+    type: line
     tier: 3
     behavior: tactical
     reaction_force: true
@@ -122,6 +132,7 @@ elements:
   - id: contract_reaction_force
     name: Contract reaction force
     faction: contractor
+    type: line
     tier: 3
     behavior: aggressive
     reaction_force: true
@@ -130,6 +141,7 @@ elements:
   - id: borz_bratva
     name: Borz Bratva team
     faction: contractor
+    type: line
     tier: 3
     behavior: sentry
     composition: [{ troop: ct_borz_bratva, count: 2 }, { troop: ct_borz_bratva_hmg, count: 1 }]
@@ -137,6 +149,7 @@ elements:
   - id: borz_cyka
     name: Borz Cyka team
     faction: contractor
+    type: assault
     tier: 3
     behavior: aggressive
     composition: [{ troop: ct_borz_cyka, count: 1 }, { troop: ct_borz_cyka_bravo, count: 1 }]
@@ -144,6 +157,7 @@ elements:
   - id: borz_ubiytsa
     name: Ubiytsa shock team
     faction: contractor
+    type: assault
     tier: 3
     behavior: aggressive
     composition: [{ troop: ct_borz_ubiytsa_leader, count: 1 }, { troop: ct_borz_ubiytsa, count: 3 }]
@@ -151,6 +165,7 @@ elements:
   - id: harlow_control
     name: Harlow control team
     faction: contractor
+    type: support
     tier: 3
     behavior: tactical
     reaction_force: true
@@ -159,6 +174,7 @@ elements:
   - id: harlow_engineers
     name: Harlow engineers
     faction: contractor
+    type: support
     tier: 3
     behavior: tactical
     composition: [{ troop: ct_harlow_engineer, count: 2 }]
@@ -166,6 +182,7 @@ elements:
   - id: harlow_crickets
     name: Cricket drones
     faction: contractor
+    type: support
     tier: 3
     behavior: automated
     composition: [{ troop: ct_harlow_cricket, count: 2 }]
@@ -173,6 +190,7 @@ elements:
   - id: harlow_veterans
     name: Harlow veterans
     faction: contractor
+    type: assault
     tier: 3
     behavior: aggressive
     composition: [{ troop: ct_harlow_veteran, count: 3 }]
@@ -180,6 +198,7 @@ elements:
   - id: harlow_springbok
     name: Springbok AI
     faction: contractor
+    type: support
     tier: 3
     behavior: automated
     composition: [{ troop: ct_harlow_springbok, count: 1 }]
@@ -187,6 +206,7 @@ elements:
   - id: un3_fireteam
     name: UN reserve fireteam
     faction: un
+    type: line
     tier: 4
     behavior: tactical
     composition: [{ troop: un3_rifleman, count: 3 }, { troop: un3_at_specialist, count: 1 }]
@@ -195,6 +215,7 @@ elements:
   - id: un3_pointmen
     name: UN Pointmen
     faction: un
+    type: line
     tier: 4
     behavior: aggressive
     composition: [{ troop: un3_pointman, count: 2 }, { troop: un3_pointman_gunner, count: 1 }]
@@ -202,6 +223,7 @@ elements:
   - id: un3_batcon
     name: UN Battalion Controller
     faction: un
+    type: character
     tier: 4
     behavior: leader
     composition: [{ troop: un3_batcon, count: 1 }]
@@ -209,6 +231,7 @@ elements:
   - id: rfa_fireteam
     name: Raid Force Alpha fireteam
     faction: un
+    type: assault
     tier: 4
     behavior: tactical
     composition: [{ troop: rfa_assaulter, count: 2 }]
@@ -217,6 +240,7 @@ elements:
   - id: rfa_specialists
     name: Raid Force Alpha specialists
     faction: un
+    type: support
     tier: 4
     behavior: tactical
     composition: [{ troop: rfa_marksman, count: 1 }, { troop: rfa_grenadier, count: 1 }]
@@ -224,6 +248,7 @@ elements:
   - id: rfa_golem
     name: Golem unit
     faction: un
+    type: support
     tier: 4
     behavior: attached
     composition: [{ troop: rfa_golem, count: 1 }]
@@ -231,6 +256,7 @@ elements:
   - id: rfa_mother
     name: UTG Mother
     faction: un
+    type: character
     tier: 4
     behavior: leader
     composition: [{ troop: rfa_mother, count: 1 }]
@@ -238,6 +264,7 @@ elements:
   - id: directorate_handler
     name: Directorate handler
     faction: directorate
+    type: character
     tier: 4
     behavior: handler
     composition: [{ troop: md_handler, count: 1 }]
@@ -245,6 +272,7 @@ elements:
   - id: directorate_operators
     name: Directorate deniable operators
     faction: directorate
+    type: assault
     tier: 4
     behavior: tactical
     composition: [{ troop: md_operator, count: 3 }]
@@ -253,6 +281,7 @@ elements:
   - id: sep_b1_section
     name: B1 battle droid section
     faction: separatist
+    type: line
     tier: 1
     behavior: battle_droid
     composition: [{ troop: sep_b1, count: 3 }, { troop: sep_b1_heavy, count: 1 }]
@@ -260,6 +289,7 @@ elements:
   - id: sep_b2_squad
     name: B2 super battle droid squad
     faction: separatist
+    type: line
     tier: 2
     behavior: battle_droid
     composition: [{ troop: sep_b2, count: 2 }, { troop: sep_b2_heavy, count: 1 }]
@@ -267,6 +297,7 @@ elements:
   - id: sep_droidekas
     name: Droideka pair
     faction: separatist
+    type: support
     tier: 2
     behavior: sentry
     composition: [{ troop: sep_droideka, count: 2 }]
@@ -274,6 +305,7 @@ elements:
   - id: sep_tactical_command
     name: Tactical droid and escort
     faction: separatist
+    type: line
     tier: 2
     behavior: tactical
     composition: [{ troop: sep_tactical, count: 1 }, { troop: sep_b1, count: 2 }]
@@ -281,6 +313,7 @@ elements:
   - id: sep_bx_squad
     name: BX commando droid squad
     faction: separatist
+    type: assault
     tier: 3
     behavior: tactical
     composition: [{ troop: sep_bx, count: 3 }]
@@ -288,6 +321,7 @@ elements:
   - id: sep_magnaguards
     name: MagnaGuard pair
     faction: separatist
+    type: assault
     tier: 3
     behavior: aggressive
     composition: [{ troop: sep_magnaguard, count: 2 }]
@@ -295,6 +329,7 @@ elements:
   - id: sep_dsd1
     name: Dwarf spider droid
     faction: separatist
+    type: support
     tier: 3
     behavior: battle_droid
     composition: [{ troop: sep_dsd1, count: 1 }]
@@ -302,6 +337,7 @@ elements:
   - id: sep_kraken_command
     name: Kraken and bodyguard
     faction: separatist
+    type: line
     tier: 3
     behavior: tactical
     composition: [{ troop: sep_kraken, count: 1 }, { troop: sep_b2, count: 2 }]
@@ -309,6 +345,7 @@ elements:
   - id: sep_grievous
     name: General Grievous and MagnaGuards
     faction: separatist
+    type: assault
     tier: 4
     behavior: aggressive
     composition: [{ troop: sep_grievous, count: 1 }, { troop: sep_magnaguard, count: 2 }]

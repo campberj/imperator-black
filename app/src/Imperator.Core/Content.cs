@@ -121,7 +121,7 @@ public sealed record TroopDef(
     string Id, string Faction, string Name, string Role, string Rank, TroopStats Stats,
     string Armour, string? Weapon, string? Melee, List<string> Grenades, List<string> Gear, Dictionary<string, int> Skills,
     List<string>? ArmourOptions = null, List<string>? WeaponOptions = null, List<string>? GearOptions = null,
-    string? Miniatures = null);
+    string? Miniatures = null, string? Class = null);
 
 public sealed record TroopsContent(List<TroopDef> Troops);
 
@@ -131,7 +131,7 @@ public sealed record ElementPart(string Troop, int Count);
 
 /// <summary>An enemy element: the building block the mission generator draws enemy forces from.</summary>
 public sealed record ElementDef(string Id, string Name, string Faction, int Tier, string Behavior, List<ElementPart> Composition,
-    List<string>? Alternatives = null, bool ReactionForce = false);
+    List<string>? Alternatives = null, bool ReactionForce = false, string? Type = null);
 
 public sealed record ThreatTierDef(int Tier, string Name, string Summary);
 
@@ -140,14 +140,25 @@ public sealed record FactionsContent(List<FactionDef> Factions, List<ElementDef>
 /// <summary>A role slot in a team; GearChoice is how many gear options each model in the slot picks.</summary>
 public sealed record TeamSlot(string Troop, int Count, int GearChoice = 0);
 
-public sealed record TeamDef(string Id, string Name, string Faction, string Summary, List<TeamSlot> Slots);
+public sealed record TeamDef(string Id, string Name, string Faction, string Summary, List<TeamSlot> Slots, string? Type = null);
+
+/// <summary>
+/// A fireteam type (decision 6.18): how many leaders, troopers and specialists a fireteam of this type holds, as
+/// [min, max], and its most models (characters not counted; a fireteam may also take one character).
+/// </summary>
+public sealed record FireteamTypeDef(string Id, string Name, List<int> Leader, List<int> Troopers, List<int> Specialists,
+    int MaxModels, string Summary);
+
+/// <summary>A troop class: leader, trooper, specialist or character.</summary>
+public sealed record TroopClassDef(string Id, string Name, string Text);
 
 public sealed record AttachmentChoice(int Choose, List<string> From);
 
 public sealed record StartingForceDef(string Id, string Name, string Faction, string Summary, List<string> Teams,
     AttachmentChoice? Attachments = null, List<string>? RecommendedGear = null);
 
-public sealed record RostersContent(List<TeamDef> Teams, List<StartingForceDef> StartingForces);
+public sealed record RostersContent(List<TeamDef> Teams, List<StartingForceDef> StartingForces,
+    List<FireteamTypeDef>? FireteamTypes = null, List<TroopClassDef>? Classes = null);
 
 // The solo opponent (rules chapter 10). Everything is rules text for now; the app shows it, it does not run it.
 

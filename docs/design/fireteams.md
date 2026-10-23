@@ -1,6 +1,6 @@
 # Fireteams and attachments: design note
 
-Status: **Proposed, revision 2, for RJ's review** (2026-10-23). Nothing here is built yet. Decision 6.18.
+Status: **Built** (2026-10-23), Proposed — playtest. Decision 6.18. RJ approved revision 2: the type numbers stand, no cap on characters beyond TV, robots stay as they are (specialists for now; they may move to the vehicle rules). Two adjustments to fit the existing fireteams: every type takes 0 or 1 Leader (droid sections, crews and contractor teams have none), and Support takes 1 to 3 specialists (a lone Hound, turret or DSD1 is a support fireteam of one).
 
 ## The problem
 
@@ -35,9 +35,9 @@ A fireteam type is a single line, not a roster:
 
 | Type | Leader | Troopers | Specialists | Size |
 |---|---|---|---|---|
-| **Line** | 1 | 2 to 5 | up to 1 | 4 to 6 |
-| **Assault** (VAT, ARC, commandos, BX) | 1 | 1 to 3 | up to 2 | 3 to 5 |
-| **Support** (marksmen, gun teams) | 0 or 1 | 0 to 1 | 2 to 3 | 2 to 3 |
+| **Line** | 0 or 1 | 2 to 5 | up to 1 | up to 6 |
+| **Assault** (VAT, ARC, commandos, BX) | 0 or 1 | 1 to 3 | up to 2 | up to 5 |
+| **Support** (marksmen, gun teams, robots) | 0 or 1 | 0 to 1 | 1 to 3 | up to 3 |
 
 The numbers are a starting point; an army may change them, or have only some of the types. Fireteams without a Leader (marksman pairs, droid squads) are allowed where the army says so.
 

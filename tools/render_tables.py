@@ -160,6 +160,9 @@ def render_campaign(section):
     names = {m["id"]: m["name"] for m in load("missions")["missions"]}
     vessels = {v["id"]: v["name"] for v in load("layouts")["vessels"]}
     envs = {e["id"]: e["name"] for e in load("terrain")["environments"]}
+    if section == "force_selection":
+        return table(["Setting", "Deploying a force", "Replacements"],
+                     [(f'**{x["name"]}**' + (" (default)" if x.get("default") else ""), x["deploy"], x["replace"]) for x in Cp["force_selection"]])
     if section == "short_arc":
         return "\n".join(f"{i}. {x}" for i, x in enumerate(Cp["short_arc"]["text"], 1))
     if section in ("start_text",):
@@ -439,9 +442,9 @@ def render_forces(key):
             if opts:
                 kit_text += "; option: " + " or ".join(gear[g] for g in opts)
             mov = f'{s["move"]}"' if s["move"] else "—"
-            rows.append((f'**{t["name"]}**', ranks[t["rank"]], mov, dash(s["shoot"]), dash(s["fight"]), dash(s["physique"]),
+            rows.append((f'**{t["name"]}**', f'{ranks[t["rank"]]} {t["class"]}', mov, dash(s["shoot"]), dash(s["fight"]), dash(s["physique"]),
                          dash(s["nerve"]), dash(s["tech"]), s["wounds"], s["size"], arm, weapon, kit_text, skill_list(t["skills"])))
-        return table(["Troop", "Rank", "MOV", "SHT", "FGT", "PHY", "NRV", "TEC", "W", "SZ", "Armour", "Weapon", "Kit", "Skills"], rows)
+        return table(["Troop", "Rank, class", "MOV", "SHT", "FGT", "PHY", "NRV", "TEC", "W", "SZ", "Armour", "Weapon", "Kit", "Skills"], rows)
     if key == "skills.skills":
         rows = []
         for sk in load("skills")["skills"]:
@@ -478,9 +481,17 @@ def render_forces(key):
                      [(g["name"], g["text"], "**Proposed**" if g["status"] == "proposed" else "—") for g in load("gear")["gear"]])
     if key == "rosters.teams":
         troops = names("troops", "troops")
-        return table(["Team", "Models", "Role"],
-                     [(tm["name"], ", ".join(f'{s["count"]}× {troops[s["troop"]]}' for s in tm["slots"]), tm["summary"])
+        types = {t["id"]: t["name"] for t in load("rosters")["fireteam_types"]}
+        return table(["Fireteam", "Type", "Models", "Role"],
+                     [(tm["name"], types[tm["type"]], ", ".join(f'{s["count"]}× {troops[s["troop"]]}' for s in tm["slots"]), tm["summary"])
                       for tm in load("rosters")["teams"]])
+    if key == "rosters.fireteam_types":
+        rng = lambda r: str(r[0]) if r[0] == r[1] else f"{r[0]}–{r[1]}"
+        return table(["Type", "Leader", "Troopers", "Specialists", "Most models", "For"],
+                     [(f'**{t["name"]}**', rng(t["leader"]), rng(t["troopers"]), rng(t["specialists"]), t["max_models"], t["summary"])
+                      for t in load("rosters")["fireteam_types"]])
+    if key == "rosters.classes":
+        return table(["Class", "Who"], [(f'**{c["name"]}**', c["text"]) for c in load("rosters")["classes"]])
     if key == "factions.elements":
         troops = names("troops", "troops")
         behaviors = names("behaviors", "behaviors")
@@ -490,9 +501,10 @@ def render_forces(key):
             comp = ", ".join(f'{p["count"]}× {troops[p["troop"]]}' for p in e["composition"])
             if e.get("alternatives"):
                 comp += " (or " + ", ".join(troops[a] for a in e["alternatives"]) + ")"
-            rows.append((e["name"], fac[e["faction"]], e["tier"], comp, behaviors[e["behavior"]]
+            ftype = "Character" if e["type"] == "character" else e["type"].capitalize()
+            rows.append((e["name"], fac[e["faction"]], e["tier"], ftype, comp, behaviors[e["behavior"]]
                          + (" — reaction force" if e.get("reaction_force") else "")))
-        return table(["Element", "Faction", "Tier", "Models", "Behavior"], rows)
+        return table(["Element", "Faction", "Tier", "Type", "Models", "Behavior"], rows)
     if key == "factions.threat_tiers":
         return table(["Tier", "Name", "Draws on"], [(t["tier"], t["name"], t["summary"]) for t in load("factions")["threat_tiers"]])
     return None

@@ -27,8 +27,8 @@ More than two players split into two sides; each player runs their own models, a
 <!-- /table -->
 
 <!-- table:versus.forces -->
-- Agree the game size. Each side builds a force of whole teams from its faction's tables of organisation (chapter 9), with a total Troop Value no higher than the size's limit (chapter 15).
-- A team may leave slots empty, but must field at least half of them, and its Leader if it has one.
+- Agree the game size. Each side builds a force of fireteams (standard fireteams, or ones built to their type: chapter 9) and characters, with a total Troop Value no higher than the size's limit (chapter 15).
+- A fireteam may leave slots empty, but must field at least half of them, and its Leader if it has one. Each character joins a fireteam (at most one each) or acts alone.
 - Choose loadouts from each troop's options. Use the troop's listed TV whatever its loadout; players who want exact values can work out the chosen loadout with chapter 15.
 - Custom troops (chapter 15) only if both players agree.
 - Either player may field any faction, including the same one; Automated models count as normal models for everything here.

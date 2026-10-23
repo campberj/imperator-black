@@ -170,6 +170,50 @@ for lv in sec["levels"]:
 for tm in C["rosters"]["teams"]:
     for s in tm["slots"]:
         need(s["troop"], troops, f"team {tm['id']} slot")
+# Fireteams (decision 6.18): classes on troops, types on standard fireteams (teams and elements).
+FT = {t["id"]: t for t in C["rosters"]["fireteam_types"]}
+CLASSES = {c["id"] for c in C["rosters"]["classes"]}
+troop_class = {t["id"]: t.get("class") for t in C["troops"]["troops"]}
+for tid, cls in troop_class.items():
+    if cls not in CLASSES:
+        errors.append(f"troop {tid}: class must be one of {sorted(CLASSES)}")
+
+
+def check_fireteam(where, ftype, parts):
+    """parts: (troop, count). A type is a fireteam type, or 'character' for a character acting alone."""
+    counts = {c: 0 for c in CLASSES}
+    for troop, n in parts:
+        if troop in troop_class:
+            counts[troop_class[troop]] = counts.get(troop_class[troop], 0) + n
+    if ftype == "character":
+        if counts["character"] != 1 or sum(counts.values()) != 1:
+            errors.append(f"{where}: type character is one character acting alone")
+        return
+    if ftype not in FT:
+        errors.append(f"{where}: type must be one of {sorted(FT)} or character")
+        return
+    t = FT[ftype]
+    if counts["character"] > 1:
+        errors.append(f"{where}: at most one character")
+    for cls, key in (("leader", "leader"), ("trooper", "troopers"), ("specialist", "specialists")):
+        lo, hi = t[key]
+        if not lo <= counts[cls] <= hi:
+            errors.append(f"{where}: {counts[cls]} {cls}(s), but a {ftype} fireteam takes {lo} to {hi}")
+    if counts["leader"] + counts["trooper"] + counts["specialist"] > t["max_models"]:
+        errors.append(f"{where}: more than {t['max_models']} models (characters not counted)")
+
+
+for tm in C["rosters"]["teams"]:
+    check_fireteam(f"team {tm['id']}", tm.get("type"), [(s["troop"], s["count"]) for s in tm["slots"]])
+for e in C["factions"]["elements"]:
+    check_fireteam(f"element {e['id']}", e.get("type"), [(p["troop"], p["count"]) for p in e["composition"]])
+    for alt in e.get("alternatives", []):
+        # An alternative replaces one model: of the same class if the element has one, else of its first part.
+        parts = [(p["troop"], p["count"]) for p in e["composition"]]
+        i = next((k for k, (tr, _) in enumerate(parts) if troop_class.get(tr) == troop_class.get(alt)), 0)
+        swapped = [(tr, n - (1 if k == i else 0)) for k, (tr, n) in enumerate(parts)] + [(alt, 1)]
+        check_fireteam(f"element {e['id']} with {alt}", e.get("type"), swapped)
+
 for sf in C["rosters"]["starting_forces"]:
     for tm in sf["teams"]:
         need(tm, teams, f"starting force {sf['id']} team")

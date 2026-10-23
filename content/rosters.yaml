@@ -1,12 +1,30 @@
 # Player force organisation for Imperator Black, rules v0.5.
 # Tables of organisation (TOE): the player builds a force from teams, not a points list.
 # slots: role slots filled by a troop type; gear_choice lets the player pick gear per model.
+# Fireteams (decision 6.18): every troop has a class (leader, trooper, specialist, character). A fireteam type sets how
+# many of each class a fireteam may hold; a fireteam may also take one character. Teams here and enemy elements
+# (factions.yaml) are standard fireteams, each of a type. "Fireteam" and "element" mean the same thing.
 version: 0.5.0
+
+fireteam_types:
+  - { id: line,    name: Line,    leader: [0, 1], troopers: [2, 5], specialists: [0, 1], max_models: 6,
+      summary: "The core of a force: riflemen with a Leader and one specialist." }
+  - { id: assault, name: Assault, leader: [0, 1], troopers: [1, 3], specialists: [0, 2], max_models: 5,
+      summary: "Smaller, better-equipped teams: boarding, commando and assault teams." }
+  - { id: support, name: Support, leader: [0, 1], troopers: [0, 1], specialists: [1, 3], max_models: 3,
+      summary: "Specialists working together: marksmen, gun and launcher teams, technicians, robots and drones." }
+
+classes:
+  - { id: leader,     name: Leader,     text: "Leads a fireteam: at most one per fireteam." }
+  - { id: trooper,    name: Trooper,    text: "The fireteam's core." }
+  - { id: specialist, name: Specialist, text: "A fireteam member with a job: gunners, medics, data specialists, engineers, drone operators, marksmen, anti-armour, robots and drones. Each army decides who counts." }
+  - { id: character,  name: Character,  text: "Joins one fireteam for the mission (at most one per fireteam) or acts alone. Named characters, Jedi, commanders and hired guns." }
 
 teams:
   - id: vat_fireteam
     name: Void Assault Team (VAT) fireteam
     faction: tfb
+    type: assault
     summary: "The boarding fireteam: assault, a close-quarters gunner, and a data specialist."
     slots:
       - { troop: tfb_vat_leader,      count: 1 }
@@ -17,6 +35,7 @@ teams:
   - id: pathfinder_team
     name: Pathfinder recon team
     faction: tfb
+    type: line
     summary: "Recon and fire support with armour-piercing heavy rifles and a SAW."
     slots:
       - { troop: tfb_pathfinder_leader, count: 1 }
@@ -26,6 +45,7 @@ teams:
   - id: control_team
     name: Control team
     faction: tfb
+    type: support
     summary: "Two marksmen who hold overwatch over long passages, hangars and open decks."
     slots:
       - { troop: tfb_marksman, count: 2 }
@@ -35,6 +55,7 @@ teams:
   - id: clone_squad
     name: Clone trooper squad
     faction: republic
+    type: line
     summary: "A sergeant, three riflemen and a Z-6 or RPS-6 heavy trooper."
     slots:
       - { troop: rep_clone_sergeant, count: 1 }
@@ -44,6 +65,7 @@ teams:
   - id: clone_marksman_team
     name: Clone marksman team
     faction: republic
+    type: support
     summary: "Two marksmen with DC-15x rifles for overwatch and long shots."
     slots:
       - { troop: rep_clone_marksman, count: 2 }
@@ -51,6 +73,7 @@ teams:
   - id: arc_team
     name: ARC trooper team
     faction: republic
+    type: assault
     summary: "Elite assault troopers with twin pistols and specialist weapons."
     slots:
       - { troop: rep_arc_leader,  count: 1 }
@@ -59,6 +82,7 @@ teams:
   - id: arf_team
     name: ARF trooper team
     faction: republic
+    type: line
     summary: "Scouts who deploy forward and spot for the squads behind them."
     slots:
       - { troop: rep_arf_trooper, count: 3 }
@@ -66,6 +90,7 @@ teams:
   - id: commando_squad
     name: Clone commando squad
     faction: republic
+    type: assault
     summary: "Four commandos in Katarn armour: breaching, slicing, sniping and demolitions."
     slots:
       - { troop: rep_commando_leader, count: 1 }
@@ -77,6 +102,7 @@ teams:
   - id: anc_chalk
     name: Anchorage chalk
     faction: anchorage
+    type: assault
     summary: "A three-man close combat cell: two Scouts and a Grenadier."
     slots:
       - { troop: anc_scout,     count: 2 }
@@ -85,6 +111,7 @@ teams:
   - id: anc_control
     name: Anchorage control cell
     faction: anchorage
+    type: support
     summary: "The Prime and two Systems Operators, who run the drones, the jamming and the Hound."
     slots:
       - { troop: anc_prime,            count: 1 }
@@ -93,6 +120,7 @@ teams:
   - id: anc_hound_team
     name: Hound CCT
     faction: anchorage
+    type: support
     summary: "One Hound assault robot with its weapon modules."
     slots:
       - { troop: anc_hound, count: 1 }
@@ -100,6 +128,7 @@ teams:
   - id: hk_spear_1
     name: Hankou SPEAR 1
     faction: hankou
+    type: assault
     summary: "The Team Leader, an Automatic Rifleman, a Pioneer and a Rifleman."
     slots:
       - { troop: hk_team_leader,   count: 1 }
@@ -110,6 +139,7 @@ teams:
   - id: hk_spear_2
     name: Hankou SPEAR 2
     faction: hankou
+    type: assault
     summary: "Three Riflemen, an Automatic Rifleman and a Pioneer."
     slots:
       - { troop: hk_rifleman,      count: 3 }
@@ -119,6 +149,7 @@ teams:
   - id: hk_cct_pair
     name: ZQ44 CCT pair
     faction: hankou
+    type: support
     summary: "Two light ZQ44 robots: base of fire, spotting, or one-way attack."
     slots:
       - { troop: hk_zq44, count: 2 }
@@ -127,6 +158,7 @@ teams:
   - id: gen_line_squad
     name: Line squad
     faction: generic
+    type: line
     summary: "An officer, four line troopers and a support gunner: six models."
     slots:
       - { troop: gen_officer, count: 1 }
@@ -136,6 +168,7 @@ teams:
   - id: gen_support_team
     name: Support team
     faction: generic
+    type: support
     summary: "An anti-armour trooper, a specialist and a marksman, attached to a squad."
     slots:
       - { troop: gen_at_trooper, count: 1 }
@@ -145,6 +178,7 @@ teams:
   - id: gen_assault_squad
     name: Assault squad
     faction: generic
+    type: line
     summary: "Four assault troopers for close work."
     slots:
       - { troop: gen_assault_trooper, count: 4 }
@@ -152,6 +186,7 @@ teams:
   - id: gen_heavy_squad
     name: Heavy infantry squad
     faction: generic
+    type: line
     summary: "A sergeant and four power-armoured heavy infantry: five elite models."
     slots:
       - { troop: gen_heavy_leader,   count: 1 }

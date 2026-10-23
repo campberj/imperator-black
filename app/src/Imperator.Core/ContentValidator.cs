@@ -167,6 +167,49 @@ public static class ContentValidator
 
         foreach (var tm in c.Rosters.Teams)
             foreach (var s in tm.Slots) Need(s.Troop, troops, $"team {tm.Id} slot");
+
+        // Fireteams (decision 6.18): every troop has a class; standard fireteams (teams and elements) fit their type.
+        var types = (c.Rosters.FireteamTypes ?? []).ToDictionary(t => t.Id);
+        var classes = (c.Rosters.Classes ?? []).Select(x => x.Id).ToHashSet();
+        var troopClass = c.Troops.Troops.ToDictionary(t => t.Id, t => t.Class);
+        foreach (var t in c.Troops.Troops)
+            if (t.Class is null || !classes.Contains(t.Class)) errors.Add($"troop {t.Id}: class must be one of [{string.Join(", ", classes.Order())}]");
+        void CheckFireteam(string where, string? type, IEnumerable<(string Troop, int Count)> parts)
+        {
+            var n = classes.ToDictionary(x => x, _ => 0);
+            foreach (var (troop, count) in parts)
+                if (troopClass.GetValueOrDefault(troop) is { } k && n.ContainsKey(k)) n[k] += count;
+            int Get(string k) => n.GetValueOrDefault(k);
+            if (type == "character")
+            {
+                if (Get("character") != 1 || n.Values.Sum() != 1) errors.Add($"{where}: type character is one character acting alone");
+                return;
+            }
+            if (type is null || !types.TryGetValue(type, out var ft))
+            {
+                errors.Add($"{where}: type must be one of [{string.Join(", ", types.Keys.Order())}] or character");
+                return;
+            }
+            if (Get("character") > 1) errors.Add($"{where}: at most one character");
+            foreach (var (cls, range) in new[] { ("leader", ft.Leader), ("trooper", ft.Troopers), ("specialist", ft.Specialists) })
+                if (Get(cls) < range[0] || Get(cls) > range[1])
+                    errors.Add($"{where}: {Get(cls)} {cls}(s), but a {type} fireteam takes {range[0]} to {range[1]}");
+            if (Get("leader") + Get("trooper") + Get("specialist") > ft.MaxModels)
+                errors.Add($"{where}: more than {ft.MaxModels} models (characters not counted)");
+        }
+        foreach (var tm in c.Rosters.Teams) CheckFireteam($"team {tm.Id}", tm.Type, tm.Slots.Select(s => (s.Troop, s.Count)));
+        foreach (var e in c.Factions.Elements)
+        {
+            CheckFireteam($"element {e.Id}", e.Type, e.Composition.Select(p => (p.Troop, p.Count)));
+            foreach (var alt in e.Alternatives ?? [])
+            {
+                // An alternative replaces one model: of the same class if the element has one, else of its first part.
+                var parts = e.Composition.Select(p => (p.Troop, p.Count)).ToList();
+                int i = Math.Max(0, parts.FindIndex(p => troopClass.GetValueOrDefault(p.Troop) == troopClass.GetValueOrDefault(alt)));
+                var swapped = parts.Select((p, k) => (p.Troop, k == i ? p.Count - 1 : p.Count)).Append((alt, 1));
+                CheckFireteam($"element {e.Id} with {alt}", e.Type, swapped);
+            }
+        }
         foreach (var sf in c.Rosters.StartingForces)
         {
             foreach (var tm in sf.Teams) Need(tm, teams, $"starting force {sf.Id} team");

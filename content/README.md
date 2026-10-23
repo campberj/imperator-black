@@ -25,7 +25,7 @@ The .NET loader (`ContentSet.Parse` in `app/src/Imperator.Core`) runs the same c
 | `gear.yaml` | `gear` | Equipment: rules text, skills granted, status (`settled` or `proposed`) |
 | `troops.yaml` | `troops` | Troop types: one profile per kind of soldier, for every faction |
 | `factions.yaml` | `factions`, `elements`, `threat_tiers` | Factions; enemy elements (troop compositions, tier, behavior); threat tiers |
-| `rosters.yaml` | `teams`, `starting_forces` | Player tables of organisation and the PoC starting force |
+| `rosters.yaml` | `fireteam_types`, `classes`, `teams`, `starting_forces` | Fireteam types and troop classes, standard player fireteams, and the PoC starting force |
 | `layouts.yaml` | `tiles`, `vessel_roll`, d6 tables, `rooms`, `small_rooms`, `vessels`, `hazards` | Ship and station deck layouts (rules chapter 11) |
 | `terrain.yaml` | `types`, `height`, `noise`, `conditions`, `environments`, `environment_roll`, `boards` | Land terrain and table setup (rules chapter 12) |
 | `behaviors.yaml` | `awareness`, `marker`, `alarm`, `noise`, `drills`, `activation_order`, `targets`, `moving`, `close_quarters`, `surrender`, `tie_breakers`, `behaviors` | The solo opponent (rules chapter 10): general procedures, and one behavior profile per element type with fixed priority lists (`engaged`, `alerted`, `reactions`, `close_combat`, `investigate`, `surrenders`, `close_quarters`) |
@@ -39,6 +39,7 @@ The .NET loader (`ContentSet.Parse` in `app/src/Imperator.Core`) runs the same c
 | Field | Required | Meaning |
 |---|---|---|
 | `id`, `name`, `role` | yes | Identity. `role` is descriptive (Leader, Gunner, …). |
+| `class` | yes | `leader`, `trooper`, `specialist` or `character` (chapter 9, fireteams). |
 | `faction` | yes | Id from `factions.yaml`. |
 | `rank` | yes | `green`, `regular`, `veteran` or `elite`. A label; never used in rolls. |
 | `stats` | yes | `move`, `shoot`, `fight`, `physique`, `nerve`, `tech`, `wounds`, `size`. Rolled attributes usually 0–3 (−1 to 4 allowed); `null` only on Automated models. |

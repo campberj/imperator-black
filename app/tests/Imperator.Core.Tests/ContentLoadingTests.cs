@@ -127,6 +127,10 @@ public class ContentLoadingTests
         Assert.Equal(5, Set.Tier(4).Contacts);
         Assert.Equal("false_alarm", Set.Tier(1).Table.Single(r => r.Roll.Contains(1)).Result);
         Assert.Equal("sep_grievous", Set.Tier(4, "separatist").Hvt);
+        Assert.All(Set.Troops.Troops, t => Assert.Contains(t.Class, new[] { "leader", "trooper", "specialist", "character" }));
+        Assert.Equal(["line", "assault", "support"], Set.Rosters.FireteamTypes!.Select(t => t.Id));
+        Assert.Equal("assault", Set.Team("vat_fireteam").Type);
+        Assert.Equal("character", Set.Element("hired_gun").Type);
         Assert.Equal("sep_b1_section", Set.Tier(1, "separatist").Reinforcement);
         Assert.Equal(new DiceSpec(1, 4), Set.ClockSize("small").DieSpec);
         Assert.Equal((30, 5, 10), (Set.ClockSize("large").Limit, m.Clock.CheckInEvery, m.Clock.FirstCheckIn));

@@ -33,7 +33,7 @@ When half of a fireteam (rounded up) is Down, Dead, captured or fled, each remai
 Clarifications:
 
 - **Every activation.** A model tests at the start of every activation while its fireteam is at half strength or worse. Passing once does not make it immune.
-- **Who counts.** A model attached to a fireteam counts as part of it. Each enemy element counts as a fireteam. *Automated* models never test.
+- **Who counts.** A character that joined a fireteam (chapter 9), or any model attached to it, counts as part of it. A character acting alone never tests. Each enemy element is a fireteam. *Automated* models never test.
 - **Recovered models count again.** A model that gets back up is no longer a casualty, so the fireteam may climb back above half strength and stop testing.
 - **Fleeing.** A breaking model that leaves the board through its side's entry point has **fled**. It takes no further part in the mission, but it is not a casualty.
 

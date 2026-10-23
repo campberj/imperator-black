@@ -127,6 +127,7 @@ class ArcMap(Flowable):
 def status_page():
     st = CP["standing"]
     story = [Paragraph("Campaign status", H1), Paragraph("Campaign: ______________________   Force: ______________________   Arc: ___", B),
+             Paragraph("Force selection (chapter 14): □ by fireteam (default)   □ by soldier", B),
              Paragraph("Imperator Black · chapter 14 (draft) · in a dry-erase sleeve or in pencil.", S), Spacer(1, 6)]
     story += [Paragraph(f"Campaign turn (an arc lasts {CP['arc']['turns']})", H2),
               boxes([str(i) for i in range(1, CP["arc"]["turns"] + 1)], [W / CP["arc"]["turns"]] * CP["arc"]["turns"]), Spacer(1, 5)]
@@ -157,7 +158,7 @@ def roster_page():
     story = [PageBreak(), Paragraph("Force roster", H1),
              Paragraph(f"Up to {CP['start']['roster_max']} soldiers. An advance every {CP['advances']['every']} XP. "
                        "Out: turns still to miss (tick down at Upkeep).", S), Spacer(1, 4)]
-    head = ["Name", "Troop and team", "Rank", "XP", "Advances taken", "Cit.", "Injuries", "Out", "Notes"]
+    head = ["Name", "Troop and fireteam", "Rank", "XP", "Advances taken", "Cit.", "Injuries", "Out", "Notes"]
     widths = [1.15 * inch, 1.2 * inch, 0.55 * inch, 0.4 * inch, 1.45 * inch, 0.4 * inch, 1.0 * inch, 0.35 * inch, W - 6.5 * inch]
     story += [grid(head, [], widths, blank=CP["start"]["roster_max"], row_h=0.36 * inch), Spacer(1, 8)]
     story += [Paragraph("Unit honours", H2),
@@ -290,9 +291,10 @@ def arc_sheet(path):
     # page 2: the roster and the log
     story += [PageBreak(), Paragraph(f'{arc["name"]}: roster and log', H1),
               Paragraph("Name every soldier the first time they deploy. Per mission: D if deployed, then XP earned; mark Dead, Down (and the injury roll) or Out. "
-                        f"An advance every {CP['advances']['every']} XP. Count each soldier at its profile's TV.", S), Spacer(1, 4)]
-    head = ["Name", "Profile", "TV", "Mission 1", "Mission 2", "Mission 3", "XP", "Advances", "Injuries / out", "Notes"]
-    widths = [1.1 * inch, 1.1 * inch, 0.35 * inch, 0.62 * inch, 0.62 * inch, 0.62 * inch, 0.35 * inch, 1.05 * inch, 0.95 * inch, W - 6.76 * inch]
+                        f"An advance every {CP['advances']['every']} XP. Count each soldier at its profile's TV.", S), Spacer(1, 2),
+              Paragraph(f"Force selection: □ by fireteam   □ by soldier   (this arc's default: by {arc.get('force_selection', 'fireteam')}; chapter 14)", B), Spacer(1, 4)]
+    head = ["Name", "Profile", "Fireteam", "TV", "Mission 1", "Mission 2", "Mission 3", "XP", "Advances", "Injuries / out"]
+    widths = [1.05 * inch, 1.05 * inch, 0.95 * inch, 0.35 * inch, 0.6 * inch, 0.6 * inch, 0.6 * inch, 0.35 * inch, 0.95 * inch, W - 6.5 * inch]
     story += [grid(head, [], widths, blank=arc.get("roster_rows", 12), row_h=0.34 * inch), Spacer(1, 8)]
     log = [[m["label"], names[m["label"]], "", "", ""] for m, _ in ms]
     story += [Paragraph("Mission log", H2),

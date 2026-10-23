@@ -30,48 +30,75 @@ Pick the rank that fits, then set the main attributes near that rank's typical v
 
 ## Building a force
 
-Forces are built from **teams**, like a table of organisation, not from a points list.
+Forces are built from **fireteams** of up to 6 models, plus characters. "Fireteam" and "element" mean the same thing.
 
-- A **team** has fixed role slots. Fill each slot with its troop type and choose any weapon and gear options.
-- The proof-of-concept campaign starts with the **Boarding element**: one VAT fireteam plus one attached Pathfinder or Marksman, six models in all. One VAT Assaulter usually carries a breaching charge and the other a trauma kit.
-- How the force grows, through requisition, replacements, promotions and new teams, is part of the campaign (chapter 14).
+**Classes.** Every troop has a class, shown in its profile's Rank column and on its card. Each army decides who is a specialist.
+
+<!-- table:rosters.classes -->
+| Class | Who |
+|---|---|
+| **Leader** | Leads a fireteam: at most one per fireteam. |
+| **Trooper** | The fireteam's core. |
+| **Specialist** | A fireteam member with a job: gunners, medics, data specialists, engineers, drone operators, marksmen, anti-armour, robots and drones. Each army decides who counts. |
+| **Character** | Joins one fireteam for the mission (at most one per fireteam) or acts alone. Named characters, Jedi, commanders and hired guns. |
+<!-- /table -->
+
+**Fireteam types.** A fireteam's type says how many of each class it holds. Characters don't count toward these numbers.
+
+<!-- table:rosters.fireteam_types -->
+| Type | Leader | Troopers | Specialists | Most models | For |
+|---|---|---|---|---|---|
+| **Line** | 0–1 | 2–5 | 0–1 | 6 | The core of a force: riflemen with a Leader and one specialist. |
+| **Assault** | 0–1 | 1–3 | 0–2 | 5 | Smaller, better-equipped teams: boarding, commando and assault teams. |
+| **Support** | 0–1 | 0–1 | 1–3 | 3 | Specialists working together: marksmen, gun and launcher teams, technicians, robots and drones. |
+<!-- /table -->
+
+**Building a fireteam.** Pick a type and fill it from your army's troops by class, then choose weapon and gear options. The fireteams below are **standard fireteams**: ready-made ones that follow their types. Field one as it stands, or build your own to the type.
+
+**Fielding a fireteam.** A fireteam fields at least half its slots (rounded up) and its Leader, if it has one.
+
+**Characters.** Before deployment, each character either **joins** one fireteam (at most one character per fireteam) or **acts alone**. A joined character is part of that fireteam for breaking, Rally and casualty shock (chapter 7); a Leader character leads it. A character acting alone is a fireteam of one.
+
+**Picking a force.** Missions set a Troop Value and model limit (chapter 15). In a campaign, the force-selection setting (chapter 14) says whether the force deploys by fireteam or by soldier. Two-player games are always by fireteam (chapter 16).
+
+The proof-of-concept campaign starts with the **Boarding element**: one VAT fireteam plus one attached Pathfinder or Marksman, six models in all. A starting force may add that one soldier beyond the fireteam's type. One VAT Assaulter usually carries a breaching charge and the other a trauma kit. How the force grows, through requisition, replacements, promotions and new fireteams, is part of the campaign (chapter 14).
 
 <!-- table:rosters.teams -->
-| Team | Models | Role |
-|---|---|---|
-| Void Assault Team (VAT) fireteam | 1× VAT Team Leader, 2× VAT Assaulter, 1× VAT Gunner, 1× Data Specialist | The boarding fireteam: assault, a close-quarters gunner, and a data specialist. |
-| Pathfinder recon team | 1× Pathfinder Team Leader, 2× Pathfinder, 1× Pathfinder SAW Gunner | Recon and fire support with armour-piercing heavy rifles and a SAW. |
-| Control team | 2× Control Team Marksman | Two marksmen who hold overwatch over long passages, hangars and open decks. |
-| Clone trooper squad | 1× Clone Sergeant, 3× Clone Trooper, 1× Clone Heavy Trooper | A sergeant, three riflemen and a Z-6 or RPS-6 heavy trooper. |
-| Clone marksman team | 2× Clone Trooper Marksman | Two marksmen with DC-15x rifles for overwatch and long shots. |
-| ARC trooper team | 1× ARC Trooper Leader, 3× ARC Trooper | Elite assault troopers with twin pistols and specialist weapons. |
-| ARF trooper team | 3× ARF Trooper | Scouts who deploy forward and spot for the squads behind them. |
-| Clone commando squad | 1× Clone Commando Leader, 3× Clone Commando | Four commandos in Katarn armour: breaching, slicing, sniping and demolitions. |
-| Anchorage chalk | 2× Scout, 1× Grenadier | A three-man close combat cell: two Scouts and a Grenadier. |
-| Anchorage control cell | 1× Prime, 2× Systems Operator | The Prime and two Systems Operators, who run the drones, the jamming and the Hound. |
-| Hound CCT | 1× Hound CCT | One Hound assault robot with its weapon modules. |
-| Hankou SPEAR 1 | 1× Team Leader, 1× Automatic Rifleman, 1× Pioneer, 1× Rifleman | The Team Leader, an Automatic Rifleman, a Pioneer and a Rifleman. |
-| Hankou SPEAR 2 | 3× Rifleman, 1× Automatic Rifleman, 1× Pioneer | Three Riflemen, an Automatic Rifleman and a Pioneer. |
-| ZQ44 CCT pair | 2× ZQ44 CCT | Two light ZQ44 robots: base of fire, spotting, or one-way attack. |
-| Line squad | 1× Officer, 4× Line Trooper, 1× Support Gunner | An officer, four line troopers and a support gunner: six models. |
-| Support team | 1× Anti-armour Trooper, 1× Specialist, 1× Marksman | An anti-armour trooper, a specialist and a marksman, attached to a squad. |
-| Assault squad | 4× Assault Trooper | Four assault troopers for close work. |
-| Heavy infantry squad | 1× Heavy Infantry Sergeant, 4× Heavy Infantry | A sergeant and four power-armoured heavy infantry: five elite models. |
+| Fireteam | Type | Models | Role |
+|---|---|---|---|
+| Void Assault Team (VAT) fireteam | Assault | 1× VAT Team Leader, 2× VAT Assaulter, 1× VAT Gunner, 1× Data Specialist | The boarding fireteam: assault, a close-quarters gunner, and a data specialist. |
+| Pathfinder recon team | Line | 1× Pathfinder Team Leader, 2× Pathfinder, 1× Pathfinder SAW Gunner | Recon and fire support with armour-piercing heavy rifles and a SAW. |
+| Control team | Support | 2× Control Team Marksman | Two marksmen who hold overwatch over long passages, hangars and open decks. |
+| Clone trooper squad | Line | 1× Clone Sergeant, 3× Clone Trooper, 1× Clone Heavy Trooper | A sergeant, three riflemen and a Z-6 or RPS-6 heavy trooper. |
+| Clone marksman team | Support | 2× Clone Trooper Marksman | Two marksmen with DC-15x rifles for overwatch and long shots. |
+| ARC trooper team | Assault | 1× ARC Trooper Leader, 3× ARC Trooper | Elite assault troopers with twin pistols and specialist weapons. |
+| ARF trooper team | Line | 3× ARF Trooper | Scouts who deploy forward and spot for the squads behind them. |
+| Clone commando squad | Assault | 1× Clone Commando Leader, 3× Clone Commando | Four commandos in Katarn armour: breaching, slicing, sniping and demolitions. |
+| Anchorage chalk | Assault | 2× Scout, 1× Grenadier | A three-man close combat cell: two Scouts and a Grenadier. |
+| Anchorage control cell | Support | 1× Prime, 2× Systems Operator | The Prime and two Systems Operators, who run the drones, the jamming and the Hound. |
+| Hound CCT | Support | 1× Hound CCT | One Hound assault robot with its weapon modules. |
+| Hankou SPEAR 1 | Assault | 1× Team Leader, 1× Automatic Rifleman, 1× Pioneer, 1× Rifleman | The Team Leader, an Automatic Rifleman, a Pioneer and a Rifleman. |
+| Hankou SPEAR 2 | Assault | 3× Rifleman, 1× Automatic Rifleman, 1× Pioneer | Three Riflemen, an Automatic Rifleman and a Pioneer. |
+| ZQ44 CCT pair | Support | 2× ZQ44 CCT | Two light ZQ44 robots: base of fire, spotting, or one-way attack. |
+| Line squad | Line | 1× Officer, 4× Line Trooper, 1× Support Gunner | An officer, four line troopers and a support gunner: six models. |
+| Support team | Support | 1× Anti-armour Trooper, 1× Specialist, 1× Marksman | An anti-armour trooper, a specialist and a marksman, attached to a squad. |
+| Assault squad | Line | 4× Assault Trooper | Four assault troopers for close work. |
+| Heavy infantry squad | Line | 1× Heavy Infantry Sergeant, 4× Heavy Infantry | A sergeant and four power-armoured heavy infantry: five elite models. |
 <!-- /table -->
 
 ## Task Force Boone
 
 <!-- table:troops.tfb -->
-| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+| Troop | Rank, class | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **VAT Team Leader** | Veteran | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Jump pack, Low-light optics | Leader, Void-trained |
-| **VAT Assaulter** | Regular | 6" | 2 | 2 | 1 | 1 | 0 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Jump pack, Low-light optics; option: Breaching charge or Breaching tool or Trauma kit | Void-trained |
-| **VAT Gunner** | Regular | 6" | 2 | 1 | 2 | 1 | 0 | 1 | 2 | Void plate (2) | Compact LMG | Knife or bayonet, Frag grenade, Smoke grenade, Jump pack, Low-light optics | Void-trained |
-| **Data Specialist** | Regular | 6" | 2 | 1 | 0 | 1 | 2 | 1 | 2 | Void plate (2) | Carbine | Knife or bayonet, Flashbang, Smoke grenade, Jump pack, Low-light optics, Jammer, Hacking rig | Void-trained |
-| **Pathfinder Team Leader** | Veteran | 7" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Void suit (1) | Heavy rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Leader, Void-trained |
-| **Pathfinder** | Regular | 7" | 2 | 1 | 1 | 1 | 1 | 1 | 2 | Void suit (1) | Heavy rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics; option: Trauma kit or Breaching charge | Void-trained |
-| **Pathfinder SAW Gunner** | Regular | 6" | 2 | 1 | 2 | 1 | 0 | 1 | 2 | Void suit (1) | LMG | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Void-trained |
-| **Control Team Marksman** | Veteran | 6" | 3 | 0 | 0 | 2 | 0 | 1 | 2 | Void suit (1) | DMR | Knife or bayonet, Smoke grenade, Frag grenade, Low-light optics | Void-trained, Marksman 1 |
+| **VAT Team Leader** | Veteran leader | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Jump pack, Low-light optics | Leader, Void-trained |
+| **VAT Assaulter** | Regular trooper | 6" | 2 | 2 | 1 | 1 | 0 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Jump pack, Low-light optics; option: Breaching charge or Breaching tool or Trauma kit | Void-trained |
+| **VAT Gunner** | Regular specialist | 6" | 2 | 1 | 2 | 1 | 0 | 1 | 2 | Void plate (2) | Compact LMG | Knife or bayonet, Frag grenade, Smoke grenade, Jump pack, Low-light optics | Void-trained |
+| **Data Specialist** | Regular specialist | 6" | 2 | 1 | 0 | 1 | 2 | 1 | 2 | Void plate (2) | Carbine | Knife or bayonet, Flashbang, Smoke grenade, Jump pack, Low-light optics, Jammer, Hacking rig | Void-trained |
+| **Pathfinder Team Leader** | Veteran leader | 7" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Void suit (1) | Heavy rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Leader, Void-trained |
+| **Pathfinder** | Regular trooper | 7" | 2 | 1 | 1 | 1 | 1 | 1 | 2 | Void suit (1) | Heavy rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics; option: Trauma kit or Breaching charge | Void-trained |
+| **Pathfinder SAW Gunner** | Regular specialist | 6" | 2 | 1 | 2 | 1 | 0 | 1 | 2 | Void suit (1) | LMG | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Void-trained |
+| **Control Team Marksman** | Veteran specialist | 6" | 3 | 0 | 0 | 2 | 0 | 1 | 2 | Void suit (1) | DMR | Knife or bayonet, Smoke grenade, Frag grenade, Low-light optics | Void-trained, Marksman 1 |
 <!-- /table -->
 
 ## Gear
@@ -142,87 +169,87 @@ Missions build the enemy force from **elements**, chosen by threat tier. Behavio
 <!-- /table -->
 
 <!-- table:factions.elements -->
-| Element | Faction | Tier | Models | Behavior |
-|---|---|---|---|---|
-| Salvage crew | Freespace Solutions | 1 | 3× Salvage Hand | Cowed |
-| Asset security | Freespace Solutions | 1 | 2× Asset Security Officer, 1× Asset Security Gunner | Sentry |
-| Recovery captain | Freespace Solutions | 1 | 1× Recovery Captain | Leader |
-| Collections enforcers | Freespace Solutions | 2 | 3× Collections Enforcer | Aggressive |
-| Salvage techs | Freespace Solutions | 2 | 2× Salvage Tech | Saboteur |
-| Automated defences | Freespace Solutions | 2 | 1× Sentry Turret (or Security Drone) | Automated |
-| Repossession team | Freespace Solutions | 3 | 3× Repossession Breacher | Aggressive |
-| Liquidators | Freespace Solutions | 3 | 2× Liquidator | Tactical |
-| Hired gun | Contractors | 3 | 1× Hired Marksman (or Hired Heavy Gunner) | Attached |
-| Contract boarding team | Contractors | 3 | 3× Contract Boarder, 1× Contract Heavy | Tactical — reaction force |
-| Contract reaction force | Contractors | 3 | 3× Reaction Force Operator, 1× Reaction Force Gunner | Aggressive — reaction force |
-| Borz Bratva team | Contractors | 3 | 2× Borz Bratva Trooper, 1× Borz Bratva HMG Gunner | Sentry |
-| Borz Cyka team | Contractors | 3 | 1× Borz Cyka Powered Trooper, 1× Borz Cyka Bravo Breacher | Aggressive |
-| Ubiytsa shock team | Contractors | 3 | 1× Ubiytsa Controller, 3× Ubiytsa Shock Trooper | Aggressive |
-| Harlow control team | Contractors | 3 | 1× Reaction Force Controller, 1× Reaction Force Grenadier | Tactical — reaction force |
-| Harlow engineers | Contractors | 3 | 2× Reaction Force Engineer | Tactical |
-| Cricket drones | Contractors | 3 | 2× Cricket Drone | Automated |
-| Harlow veterans | Contractors | 3 | 3× Harlow Veteran | Aggressive |
-| Springbok AI | Contractors | 3 | 1× Springbok AI | Automated |
-| UN reserve fireteam | UN Force Command | 4 | 3× 3rd Battalion Rifleman, 1× 3rd Battalion AT Specialist (or 3rd Battalion Data Specialist) | Tactical |
-| UN Pointmen | UN Force Command | 4 | 2× Pointman, 1× Pointman SAW | Aggressive |
-| UN Battalion Controller | UN Force Command | 4 | 1× Battalion Controller | Leader |
-| Raid Force Alpha fireteam | UN Force Command | 4 | 2× UTG Assaulter (or UTG Grenadier) | Tactical |
-| Raid Force Alpha specialists | UN Force Command | 4 | 1× UTG Marksman, 1× UTG Grenadier | Tactical |
-| Golem unit | UN Force Command | 4 | 1× Golem | Attached |
-| UTG Mother | UN Force Command | 4 | 1× UTG Mother | Leader |
-| Directorate handler | Meridian Directorate | 4 | 1× Directorate Handler | Handler |
-| Directorate deniable operators | Meridian Directorate | 4 | 3× Directorate Deniable Operator | Tactical |
-| B1 battle droid section | Separatist Alliance | 1 | 3× B1 Battle Droid, 1× B1 Heavy Weapons Droid | Battle droid |
-| B2 super battle droid squad | Separatist Alliance | 2 | 2× B2 Super Battle Droid, 1× B2 Heavy Weapons Droid | Battle droid |
-| Droideka pair | Separatist Alliance | 2 | 2× Droideka | Sentry |
-| Tactical droid and escort | Separatist Alliance | 2 | 1× T-series Tactical Droid, 2× B1 Battle Droid | Tactical |
-| BX commando droid squad | Separatist Alliance | 3 | 3× BX Commando Droid | Tactical |
-| MagnaGuard pair | Separatist Alliance | 3 | 2× IG-100 MagnaGuard | Aggressive |
-| Dwarf spider droid | Separatist Alliance | 3 | 1× DSD1 Dwarf Spider Droid | Battle droid |
-| Kraken and bodyguard | Separatist Alliance | 3 | 1× Kraken, 2× B2 Super Battle Droid | Tactical |
-| General Grievous and MagnaGuards | Separatist Alliance | 4 | 1× General Grievous, 2× IG-100 MagnaGuard | Aggressive |
+| Element | Faction | Tier | Type | Models | Behavior |
+|---|---|---|---|---|---|
+| Salvage crew | Freespace Solutions | 1 | Line | 3× Salvage Hand | Cowed |
+| Asset security | Freespace Solutions | 1 | Line | 2× Asset Security Officer, 1× Asset Security Gunner | Sentry |
+| Recovery captain | Freespace Solutions | 1 | Character | 1× Recovery Captain | Leader |
+| Collections enforcers | Freespace Solutions | 2 | Line | 3× Collections Enforcer | Aggressive |
+| Salvage techs | Freespace Solutions | 2 | Support | 2× Salvage Tech | Saboteur |
+| Automated defences | Freespace Solutions | 2 | Support | 1× Sentry Turret (or Security Drone) | Automated |
+| Repossession team | Freespace Solutions | 3 | Line | 3× Repossession Breacher | Aggressive |
+| Liquidators | Freespace Solutions | 3 | Assault | 2× Liquidator | Tactical |
+| Hired gun | Contractors | 3 | Character | 1× Hired Marksman (or Hired Heavy Gunner) | Attached |
+| Contract boarding team | Contractors | 3 | Line | 3× Contract Boarder, 1× Contract Heavy | Tactical — reaction force |
+| Contract reaction force | Contractors | 3 | Line | 3× Reaction Force Operator, 1× Reaction Force Gunner | Aggressive — reaction force |
+| Borz Bratva team | Contractors | 3 | Line | 2× Borz Bratva Trooper, 1× Borz Bratva HMG Gunner | Sentry |
+| Borz Cyka team | Contractors | 3 | Assault | 1× Borz Cyka Powered Trooper, 1× Borz Cyka Bravo Breacher | Aggressive |
+| Ubiytsa shock team | Contractors | 3 | Assault | 1× Ubiytsa Controller, 3× Ubiytsa Shock Trooper | Aggressive |
+| Harlow control team | Contractors | 3 | Support | 1× Reaction Force Controller, 1× Reaction Force Grenadier | Tactical — reaction force |
+| Harlow engineers | Contractors | 3 | Support | 2× Reaction Force Engineer | Tactical |
+| Cricket drones | Contractors | 3 | Support | 2× Cricket Drone | Automated |
+| Harlow veterans | Contractors | 3 | Assault | 3× Harlow Veteran | Aggressive |
+| Springbok AI | Contractors | 3 | Support | 1× Springbok AI | Automated |
+| UN reserve fireteam | UN Force Command | 4 | Line | 3× 3rd Battalion Rifleman, 1× 3rd Battalion AT Specialist (or 3rd Battalion Data Specialist) | Tactical |
+| UN Pointmen | UN Force Command | 4 | Line | 2× Pointman, 1× Pointman SAW | Aggressive |
+| UN Battalion Controller | UN Force Command | 4 | Character | 1× Battalion Controller | Leader |
+| Raid Force Alpha fireteam | UN Force Command | 4 | Assault | 2× UTG Assaulter (or UTG Grenadier) | Tactical |
+| Raid Force Alpha specialists | UN Force Command | 4 | Support | 1× UTG Marksman, 1× UTG Grenadier | Tactical |
+| Golem unit | UN Force Command | 4 | Support | 1× Golem | Attached |
+| UTG Mother | UN Force Command | 4 | Character | 1× UTG Mother | Leader |
+| Directorate handler | Meridian Directorate | 4 | Character | 1× Directorate Handler | Handler |
+| Directorate deniable operators | Meridian Directorate | 4 | Assault | 3× Directorate Deniable Operator | Tactical |
+| B1 battle droid section | Separatist Alliance | 1 | Line | 3× B1 Battle Droid, 1× B1 Heavy Weapons Droid | Battle droid |
+| B2 super battle droid squad | Separatist Alliance | 2 | Line | 2× B2 Super Battle Droid, 1× B2 Heavy Weapons Droid | Battle droid |
+| Droideka pair | Separatist Alliance | 2 | Support | 2× Droideka | Sentry |
+| Tactical droid and escort | Separatist Alliance | 2 | Line | 1× T-series Tactical Droid, 2× B1 Battle Droid | Tactical |
+| BX commando droid squad | Separatist Alliance | 3 | Assault | 3× BX Commando Droid | Tactical |
+| MagnaGuard pair | Separatist Alliance | 3 | Assault | 2× IG-100 MagnaGuard | Aggressive |
+| Dwarf spider droid | Separatist Alliance | 3 | Support | 1× DSD1 Dwarf Spider Droid | Battle droid |
+| Kraken and bodyguard | Separatist Alliance | 3 | Line | 1× Kraken, 2× B2 Super Battle Droid | Tactical |
+| General Grievous and MagnaGuards | Separatist Alliance | 4 | Assault | 1× General Grievous, 2× IG-100 MagnaGuard | Aggressive |
 <!-- /table -->
 
 ### Freespace troops
 
 <!-- table:troops.freespace -->
-| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+| Troop | Rank, class | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Salvage Hand** | Green | 6" | 0 | 0 | 1 | 0 | 1 | 1 | 2 | None (0) | Sidearm / SMG | Unarmed / weapon butt, Extinguisher | — |
-| **Asset Security Officer** | Regular | 6" | 1 | 1 | 1 | 1 | 0 | 1 | 2 | Flak (1) | Carbine / Shotgun | Knife or bayonet, Flashbang | — |
-| **Asset Security Gunner** | Regular | 5" | 1 | 0 | 2 | 1 | 0 | 1 | 2 | Flak (1) | LMG | Knife or bayonet | — |
-| **Collections Enforcer** | Regular | 6" | 1 | 2 | 2 | 1 | 0 | 1 | 2 | Flak (1) / Composite plate (2) | Rifle / SMG / Shotgun | Knife or bayonet, Frag grenade | — |
-| **Repossession Breacher** | Regular | 6" | 1 | 2 | 2 | 1 | 0 | 2 | 2 | Composite plate (2) | Shotgun / SMG | Breaching tool or heavy blade, Flashbang, Frag grenade, Breaching charge | — |
-| **Liquidator** | Veteran | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Composite plate (2) | SMG / Rifle | Knife or bayonet, Frag grenade, Flashbang, Silencer, Low-light optics | — |
-| **Salvage Tech** | Regular | 6" | 0 | 0 | 0 | 0 | 2 | 1 | 2 | Flak (1) | Sidearm | Knife or bayonet, Smoke grenade, Hacking rig, Breaching charge | — |
-| **Recovery Captain** | Veteran | 6" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Composite plate (2) | SMG / Rifle | Knife or bayonet, Frag grenade, Low-light optics | Leader |
-| **Sentry Turret** | Regular | — | 1 | — | — | — | — | 1 | 2 | Composite plate (2) | LMG | — | Automated |
-| **Security Drone** | Regular | 7" | 1 | — | — | — | — | 1 | 1 | Flak (1) | SMG | Low-light optics | Automated, Void-trained |
+| **Salvage Hand** | Green trooper | 6" | 0 | 0 | 1 | 0 | 1 | 1 | 2 | None (0) | Sidearm / SMG | Unarmed / weapon butt, Extinguisher | — |
+| **Asset Security Officer** | Regular trooper | 6" | 1 | 1 | 1 | 1 | 0 | 1 | 2 | Flak (1) | Carbine / Shotgun | Knife or bayonet, Flashbang | — |
+| **Asset Security Gunner** | Regular specialist | 5" | 1 | 0 | 2 | 1 | 0 | 1 | 2 | Flak (1) | LMG | Knife or bayonet | — |
+| **Collections Enforcer** | Regular trooper | 6" | 1 | 2 | 2 | 1 | 0 | 1 | 2 | Flak (1) / Composite plate (2) | Rifle / SMG / Shotgun | Knife or bayonet, Frag grenade | — |
+| **Repossession Breacher** | Regular trooper | 6" | 1 | 2 | 2 | 1 | 0 | 2 | 2 | Composite plate (2) | Shotgun / SMG | Breaching tool or heavy blade, Flashbang, Frag grenade, Breaching charge | — |
+| **Liquidator** | Veteran trooper | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Composite plate (2) | SMG / Rifle | Knife or bayonet, Frag grenade, Flashbang, Silencer, Low-light optics | — |
+| **Salvage Tech** | Regular specialist | 6" | 0 | 0 | 0 | 0 | 2 | 1 | 2 | Flak (1) | Sidearm | Knife or bayonet, Smoke grenade, Hacking rig, Breaching charge | — |
+| **Recovery Captain** | Veteran character | 6" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Composite plate (2) | SMG / Rifle | Knife or bayonet, Frag grenade, Low-light optics | Leader |
+| **Sentry Turret** | Regular specialist | — | 1 | — | — | — | — | 1 | 2 | Composite plate (2) | LMG | — | Automated |
+| **Security Drone** | Regular specialist | 7" | 1 | — | — | — | — | 1 | 1 | Flak (1) | SMG | Low-light optics | Automated, Void-trained |
 <!-- /table -->
 
 ### Contractors
 
 <!-- table:troops.contractor -->
-| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+| Troop | Rank, class | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Contract Boarder** | Veteran | 6" | 2 | 2 | 2 | 2 | 0 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Breaching charge | Void-trained, Layered armour |
-| **Contract Heavy** | Veteran | 5" | 2 | 1 | 3 | 2 | 0 | 2 | 2 | Heavy plate (3) | LMG | Knife or bayonet, Frag grenade | Void-trained, Layered armour |
-| **Reaction Force Operator** | Veteran | 7" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle / Carbine | Knife or bayonet, Frag grenade, Smoke grenade | — |
-| **Reaction Force Gunner** | Veteran | 6" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | LMG | Knife or bayonet, Frag grenade | — |
-| **Hired Marksman** | Veteran | 6" | 3 | 0 | 0 | 2 | 0 | 1 | 2 | Composite plate (2) | DMR | Knife or bayonet, Smoke grenade, Low-light optics | Marksman 1 |
-| **Hired Heavy Gunner** | Veteran | 5" | 2 | 1 | 3 | 2 | 0 | 2 | 2 | Composite plate (2) | LMG | Knife or bayonet, Frag grenade | — |
-| **Borz Bratva Trooper** | Regular | 6" | 2 | 2 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Ballistic shield | Layered armour |
-| **Borz Bratva HMG Gunner** | Regular | 5" | 2 | 1 | 3 | 2 | 0 | 1 | 2 | Composite plate (2) | HMG | Knife or bayonet | Layered armour |
-| **Borz Cyka Powered Trooper** | Veteran | 6" | 2 | 2 | 3 | 2 | 0 | 2 | 2 | Heavy plate (3) | LMG / Carbine | Knife or bayonet, Frag grenade; option: Grenade launcher | Layered armour |
-| **Borz Cyka Bravo Breacher** | Veteran | 6" | 2 | 2 | 3 | 2 | 0 | 2 | 2 | Heavy plate (3) | SMG | Boarding axe or combat blade, Flashbang, Frag grenade, Breaching charge | Layered armour, Void-trained |
-| **Ubiytsa Controller** | Veteran | 6" | 2 | 2 | 2 | 3 | 1 | 1 | 2 | Flak (1) | Shotgun | Boarding axe or combat blade, Frag grenade | Leader, Layered armour |
-| **Ubiytsa Shock Trooper** | Veteran | 6" | 2 | 3 | 3 | 3 | 0 | 1 | 2 | Flak (1) | Shotgun | Boarding axe or combat blade, Frag grenade | Layered armour |
-| **Reaction Force Controller** | Veteran | 7" | 2 | 1 | 1 | 3 | 2 | 1 | 2 | Composite plate (2) | Carbine / Rifle | Knife or bayonet, Frag grenade, Smoke grenade, Hacking rig | Leader |
-| **Reaction Force Grenadier** | Veteran | 7" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Smoke grenade, Grenade launcher | — |
-| **Reaction Force Engineer** | Regular | 6" | 2 | 1 | 2 | 2 | 2 | 1 | 2 | Composite plate (2) | Carbine / AT launcher | Knife or bayonet, Frag grenade, Breaching charge | — |
-| **Harlow Veteran** | Veteran | 6" | 2 | 3 | 2 | 3 | 0 | 1 | 2 | Flak (1) | Carbine | Boarding axe or combat blade, Flashbang, Frag grenade, Jump pack | — |
-| **Springbok AI** | Veteran | 6" | 3 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | Auto rifle | Unarmed / weapon butt | Automated |
-| **Cricket Drone** | Regular | 7" | 0 | — | — | — | — | 1 | 1 | None (0) | — | Unarmed / weapon butt | Automated, Self-destruct 1 |
+| **Contract Boarder** | Veteran trooper | 6" | 2 | 2 | 2 | 2 | 0 | 1 | 2 | Void plate (2) | Carbine / Shotgun | Knife or bayonet, Flashbang, Frag grenade, Breaching charge | Void-trained, Layered armour |
+| **Contract Heavy** | Veteran specialist | 5" | 2 | 1 | 3 | 2 | 0 | 2 | 2 | Heavy plate (3) | LMG | Knife or bayonet, Frag grenade | Void-trained, Layered armour |
+| **Reaction Force Operator** | Veteran trooper | 7" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle / Carbine | Knife or bayonet, Frag grenade, Smoke grenade | — |
+| **Reaction Force Gunner** | Veteran specialist | 6" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | LMG | Knife or bayonet, Frag grenade | — |
+| **Hired Marksman** | Veteran character | 6" | 3 | 0 | 0 | 2 | 0 | 1 | 2 | Composite plate (2) | DMR | Knife or bayonet, Smoke grenade, Low-light optics | Marksman 1 |
+| **Hired Heavy Gunner** | Veteran character | 5" | 2 | 1 | 3 | 2 | 0 | 2 | 2 | Composite plate (2) | LMG | Knife or bayonet, Frag grenade | — |
+| **Borz Bratva Trooper** | Regular trooper | 6" | 2 | 2 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Ballistic shield | Layered armour |
+| **Borz Bratva HMG Gunner** | Regular specialist | 5" | 2 | 1 | 3 | 2 | 0 | 1 | 2 | Composite plate (2) | HMG | Knife or bayonet | Layered armour |
+| **Borz Cyka Powered Trooper** | Veteran specialist | 6" | 2 | 2 | 3 | 2 | 0 | 2 | 2 | Heavy plate (3) | LMG / Carbine | Knife or bayonet, Frag grenade; option: Grenade launcher | Layered armour |
+| **Borz Cyka Bravo Breacher** | Veteran trooper | 6" | 2 | 2 | 3 | 2 | 0 | 2 | 2 | Heavy plate (3) | SMG | Boarding axe or combat blade, Flashbang, Frag grenade, Breaching charge | Layered armour, Void-trained |
+| **Ubiytsa Controller** | Veteran leader | 6" | 2 | 2 | 2 | 3 | 1 | 1 | 2 | Flak (1) | Shotgun | Boarding axe or combat blade, Frag grenade | Leader, Layered armour |
+| **Ubiytsa Shock Trooper** | Veteran trooper | 6" | 2 | 3 | 3 | 3 | 0 | 1 | 2 | Flak (1) | Shotgun | Boarding axe or combat blade, Frag grenade | Layered armour |
+| **Reaction Force Controller** | Veteran leader | 7" | 2 | 1 | 1 | 3 | 2 | 1 | 2 | Composite plate (2) | Carbine / Rifle | Knife or bayonet, Frag grenade, Smoke grenade, Hacking rig | Leader |
+| **Reaction Force Grenadier** | Veteran specialist | 7" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Smoke grenade, Grenade launcher | — |
+| **Reaction Force Engineer** | Regular specialist | 6" | 2 | 1 | 2 | 2 | 2 | 1 | 2 | Composite plate (2) | Carbine / AT launcher | Knife or bayonet, Frag grenade, Breaching charge | — |
+| **Harlow Veteran** | Veteran trooper | 6" | 2 | 3 | 2 | 3 | 0 | 1 | 2 | Flak (1) | Carbine | Boarding axe or combat blade, Flashbang, Frag grenade, Jump pack | — |
+| **Springbok AI** | Veteran specialist | 6" | 3 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | Auto rifle | Unarmed / weapon butt | Automated |
+| **Cricket Drone** | Regular specialist | 7" | 0 | — | — | — | — | 1 | 1 | None (0) | — | Unarmed / weapon butt | Automated, Self-destruct 1 |
 <!-- /table -->
 
 ### UN Force Command
@@ -230,28 +257,28 @@ Missions build the enemy force from **elements**, chosen by threat tier. Behavio
 The Authority's regular forces, held back for escalation (threat tier 4): the professional **3rd Battalion** (Shoot 2) with its Pointman inorganics, and the augmented **Raid Force Alpha** (Shoot 3), who fight in pairs with Golem support. Inorganics are *Automated*.
 
 <!-- table:troops.un -->
-| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+| Troop | Rank, class | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Battalion Controller** | Veteran | 5" | 2 | 1 | 1 | 3 | 2 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Hacking rig | Leader |
-| **3rd Battalion Rifleman** | Regular | 7" | 2 | 2 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade | — |
-| **3rd Battalion Data Specialist** | Regular | 7" | 2 | 1 | 1 | 2 | 2 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Hacking rig, Jammer | — |
-| **3rd Battalion AT Specialist** | Regular | 6" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | AT launcher / Rifle | Knife or bayonet, Frag grenade | — |
-| **Pointman** | Regular | 6" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | Rifle | Unarmed / weapon butt | Automated, Shield |
-| **Pointman SAW** | Regular | 6" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | LMG | Unarmed / weapon butt | Automated, Shield |
-| **UTG Mother** | Elite | 8" | 3 | 4 | 3 | 3 | 1 | 2 | 2 | Composite plate (2) | SMG | Boarding axe or combat blade, Frag grenade, Flashbang, Jump pack | Leader, Augmented |
-| **UTG Assaulter** | Elite | 8" | 3 | 3 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Flashbang, Jump pack | Augmented |
-| **UTG Grenadier** | Elite | 8" | 3 | 3 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Flashbang, Jump pack, Grenade launcher | Augmented |
-| **UTG Marksman** | Elite | 7" | 3 | 2 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Anti-materiel rifle / Carbine | Knife or bayonet, Smoke grenade, Jump pack, Low-light optics | Augmented, Marksman 2 |
-| **Golem** | Veteran | 5" | 2 | 2 | 3 | — | — | 2 | 2 | Composite plate (2) | Auto rifle / AT launcher | Unarmed / weapon butt | Automated |
+| **Battalion Controller** | Veteran character | 5" | 2 | 1 | 1 | 3 | 2 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Hacking rig | Leader |
+| **3rd Battalion Rifleman** | Regular trooper | 7" | 2 | 2 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade | — |
+| **3rd Battalion Data Specialist** | Regular specialist | 7" | 2 | 1 | 1 | 2 | 2 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Hacking rig, Jammer | — |
+| **3rd Battalion AT Specialist** | Regular specialist | 6" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | AT launcher / Rifle | Knife or bayonet, Frag grenade | — |
+| **Pointman** | Regular trooper | 6" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | Rifle | Unarmed / weapon butt | Automated, Shield |
+| **Pointman SAW** | Regular specialist | 6" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | LMG | Unarmed / weapon butt | Automated, Shield |
+| **UTG Mother** | Elite character | 8" | 3 | 4 | 3 | 3 | 1 | 2 | 2 | Composite plate (2) | SMG | Boarding axe or combat blade, Frag grenade, Flashbang, Jump pack | Leader, Augmented |
+| **UTG Assaulter** | Elite trooper | 8" | 3 | 3 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Flashbang, Jump pack | Augmented |
+| **UTG Grenadier** | Elite specialist | 8" | 3 | 3 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Flashbang, Jump pack, Grenade launcher | Augmented |
+| **UTG Marksman** | Elite specialist | 7" | 3 | 2 | 3 | 3 | 1 | 1 | 2 | Composite plate (2) | Anti-materiel rifle / Carbine | Knife or bayonet, Smoke grenade, Jump pack, Low-light optics | Augmented, Marksman 2 |
+| **Golem** | Veteran specialist | 5" | 2 | 2 | 3 | — | — | 2 | 2 | Composite plate (2) | Auto rifle / AT launcher | Unarmed / weapon butt | Automated |
 <!-- /table -->
 
 ### Meridian Directorate
 
 <!-- table:troops.directorate -->
-| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+| Troop | Rank, class | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Directorate Handler** | Elite | 6" | 3 | 3 | 2 | 3 | 2 | 2 | 2 | Void plate (2) | Carbine | Knife or bayonet, Flashbang, Frag grenade, Silencer, Low-light optics, Hacking rig | Leader, Void-trained, Marksman 1 |
-| **Directorate Deniable Operator** | Veteran | 6" | 2 | 3 | 2 | 2 | 1 | 1 | 2 | Composite plate (2) | SMG | Breaching tool or heavy blade, Flashbang, Frag grenade, Silencer, Low-light optics | — |
+| **Directorate Handler** | Elite character | 6" | 3 | 3 | 2 | 3 | 2 | 2 | 2 | Void plate (2) | Carbine | Knife or bayonet, Flashbang, Frag grenade, Silencer, Low-light optics, Hacking rig | Leader, Void-trained, Marksman 1 |
+| **Directorate Deniable Operator** | Veteran trooper | 6" | 2 | 3 | 2 | 2 | 1 | 1 | 2 | Composite plate (2) | SMG | Breaching tool or heavy blade, Flashbang, Frag grenade, Silencer, Low-light optics | — |
 <!-- /table -->
 
 Directorate handlers' independent action, and the hired guns' signature actions, are still to be written.
@@ -265,21 +292,21 @@ Profiles for Star Wars: Legion Galactic Republic miniatures: clone troopers, spe
 Vehicles (the AT-RT and the infantry support platform) wait for the vehicle rules, after the proof of concept.
 
 <!-- table:troops.republic -->
-| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+| Troop | Rank, class | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Clone Sergeant** | Veteran | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Clone armour (1) | DC-15A blaster rifle / DC-15S blaster carbine | Knife or bayonet, Thermal detonator | Leader |
-| **Clone Trooper** | Regular | 6" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Clone armour (1) | DC-15A blaster rifle / DC-15S blaster carbine | Knife or bayonet, Thermal detonator | — |
-| **Clone Heavy Trooper** | Regular | 5" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Clone armour (1) | Z-6 rotary blaster / RPS-6 rocket launcher | Knife or bayonet | — |
-| **Clone Trooper Marksman** | Veteran | 6" | 3 | 1 | 1 | 2 | 0 | 1 | 2 | Clone armour (1) | DC-15x sniper rifle | Knife or bayonet, Low-light optics | Marksman 1 |
-| **ARC Trooper Leader** | Elite | 6" | 3 | 2 | 2 | 3 | 1 | 2 | 2 | Clone armour (1) | Twin DC-17s / DC-15S blaster carbine | Knife or bayonet, Thermal detonator, Flashbang | Leader |
-| **ARC Trooper** | Veteran | 6" | 3 | 2 | 2 | 3 | 1 | 1 | 2 | Clone armour (1) | Twin DC-17s / DC-15S blaster carbine / DP-23 phase-pulse blaster / Z-6 rotary blaster / DC-15x sniper rifle | Knife or bayonet, Thermal detonator, Flashbang | — |
-| **ARF Trooper** | Veteran | 7" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Clone armour (1) | DC-15S blaster carbine / DC-15x sniper rifle | Knife or bayonet, Smoke grenade, Low-light optics | Scout |
-| **Clone Commando Leader** | Elite | 6" | 3 | 2 | 2 | 3 | 2 | 2 | 2 | Katarn armour (2) | DC-17m (blaster) / DC-17m (sniper) / DC-17m (anti-armour) | Knife or bayonet, Thermal detonator, Flashbang; option: Hacking rig or Breaching charge | Leader, Void-trained |
-| **Clone Commando** | Elite | 6" | 3 | 2 | 2 | 3 | 2 | 2 | 2 | Katarn armour (2) | DC-17m (blaster) / DC-17m (sniper) / DC-17m (anti-armour) | Knife or bayonet, Thermal detonator, Flashbang; option: Hacking rig or Breaching charge | Void-trained |
-| **Commander Cody** | Elite | 6" | 3 | 2 | 2 | 3 | 1 | 2 | 2 | Clone armour (1) | DC-15S blaster carbine / DC-15A blaster rifle | Knife or bayonet, Thermal detonator | Leader |
-| **Obi-Wan Kenobi** | Elite | 7" | 1 | 4 | 2 | 4 | 1 | 3 | 2 | None (0) | — | Lightsaber | Leader, Deflect 2, Leap, Jedi discipline |
-| **Ahsoka Tano** | Elite | 8" | 1 | 3 | 2 | 3 | 1 | 2 | 2 | None (0) | — | Lightsaber | Leader, Deflect 1, Leap, Jedi discipline, Twin blades |
-| **Jedi Guardian** | Veteran | 7" | 1 | 3 | 2 | 3 | 1 | 2 | 2 | None (0) | — | Lightsaber | Deflect 1, Leap, Jedi discipline |
+| **Clone Sergeant** | Veteran leader | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Clone armour (1) | DC-15A blaster rifle / DC-15S blaster carbine | Knife or bayonet, Thermal detonator | Leader |
+| **Clone Trooper** | Regular trooper | 6" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Clone armour (1) | DC-15A blaster rifle / DC-15S blaster carbine | Knife or bayonet, Thermal detonator | — |
+| **Clone Heavy Trooper** | Regular specialist | 5" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Clone armour (1) | Z-6 rotary blaster / RPS-6 rocket launcher | Knife or bayonet | — |
+| **Clone Trooper Marksman** | Veteran specialist | 6" | 3 | 1 | 1 | 2 | 0 | 1 | 2 | Clone armour (1) | DC-15x sniper rifle | Knife or bayonet, Low-light optics | Marksman 1 |
+| **ARC Trooper Leader** | Elite leader | 6" | 3 | 2 | 2 | 3 | 1 | 2 | 2 | Clone armour (1) | Twin DC-17s / DC-15S blaster carbine | Knife or bayonet, Thermal detonator, Flashbang | Leader |
+| **ARC Trooper** | Veteran trooper | 6" | 3 | 2 | 2 | 3 | 1 | 1 | 2 | Clone armour (1) | Twin DC-17s / DC-15S blaster carbine / DP-23 phase-pulse blaster / Z-6 rotary blaster / DC-15x sniper rifle | Knife or bayonet, Thermal detonator, Flashbang | — |
+| **ARF Trooper** | Veteran trooper | 7" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Clone armour (1) | DC-15S blaster carbine / DC-15x sniper rifle | Knife or bayonet, Smoke grenade, Low-light optics | Scout |
+| **Clone Commando Leader** | Elite leader | 6" | 3 | 2 | 2 | 3 | 2 | 2 | 2 | Katarn armour (2) | DC-17m (blaster) / DC-17m (sniper) / DC-17m (anti-armour) | Knife or bayonet, Thermal detonator, Flashbang; option: Hacking rig or Breaching charge | Leader, Void-trained |
+| **Clone Commando** | Elite trooper | 6" | 3 | 2 | 2 | 3 | 2 | 2 | 2 | Katarn armour (2) | DC-17m (blaster) / DC-17m (sniper) / DC-17m (anti-armour) | Knife or bayonet, Thermal detonator, Flashbang; option: Hacking rig or Breaching charge | Void-trained |
+| **Commander Cody** | Elite character | 6" | 3 | 2 | 2 | 3 | 1 | 2 | 2 | Clone armour (1) | DC-15S blaster carbine / DC-15A blaster rifle | Knife or bayonet, Thermal detonator | Leader |
+| **Obi-Wan Kenobi** | Elite character | 7" | 1 | 4 | 2 | 4 | 1 | 3 | 2 | None (0) | — | Lightsaber | Leader, Deflect 2, Leap, Jedi discipline |
+| **Ahsoka Tano** | Elite character | 8" | 1 | 3 | 2 | 3 | 1 | 2 | 2 | None (0) | — | Lightsaber | Leader, Deflect 1, Leap, Jedi discipline, Twin blades |
+| **Jedi Guardian** | Veteran character | 7" | 1 | 3 | 2 | 3 | 1 | 2 | 2 | None (0) | — | Lightsaber | Deflect 1, Leap, Jedi discipline |
 <!-- /table -->
 
 ### Republic weapons and armour
@@ -329,19 +356,19 @@ Every droid is **Automated**: it never gains Suppression or breaks, but a wound 
 The AAT tank and STAP speeders wait for the vehicle rules. Until then, use an AAT as a wreck or a mission objective.
 
 <!-- table:troops.separatist -->
-| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+| Troop | Rank, class | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **B1 Battle Droid** | Green | 5" | 0 | 0 | 1 | — | — | 1 | 2 | B1 chassis (0) | E-5 blaster rifle | Unarmed / weapon butt | Automated |
-| **B1 Heavy Weapons Droid** | Green | 5" | 0 | 0 | 1 | — | — | 1 | 2 | B1 chassis (0) | E-5C heavy blaster rifle / E-60R missile launcher | Unarmed / weapon butt | Automated |
-| **B2 Super Battle Droid** | Regular | 5" | 1 | 1 | 2 | — | — | 1 | 2 | Duranium plating (2) | Wrist blasters | Unarmed / weapon butt | Automated |
-| **B2 Heavy Weapons Droid** | Regular | 5" | 1 | 1 | 2 | — | — | 1 | 2 | Duranium plating (2) | ACM heavy blaster / Wrist rocket launcher | Unarmed / weapon butt | Automated |
-| **Droideka** | Regular | 4" | 1 | — | 2 | — | — | 2 | 2 | Duranium plating (2) | Twin blaster cannons | Deflector shield | Automated, Rolling |
-| **BX Commando Droid** | Veteran | 7" | 2 | 2 | 2 | — | — | 1 | 2 | Droid plating (1) | E-5 blaster rifle / E-5s sniper rifle | Vibrosword | Automated, Scout, Leap |
-| **IG-100 MagnaGuard** | Elite | 7" | 2 | 3 | 2 | — | — | 2 | 2 | Duranium plating (2) | — | Electrostaff | Automated |
-| **T-series Tactical Droid** | Regular | 6" | 1 | 0 | 1 | — | — | 1 | 2 | Droid plating (1) | Sidearm | Unarmed / weapon butt | Automated, Battle computer 1 |
-| **Kraken** | Elite | 6" | 1 | 1 | 2 | — | — | 2 | 2 | Duranium plating (2) | Sidearm | Unarmed / weapon butt | Automated, Battle computer 2 |
-| **General Grievous** | Elite | 8" | 2 | 4 | 3 | 3 | 1 | 2 | 2 | Duranium plating (2) | DT-12 heavy blaster pistol | Lightsaber | Leader, Augmented, Deflect 1, Leap, Twin blades |
-| **DSD1 Dwarf Spider Droid** | Regular | 5" | 1 | — | 3 | — | — | 3 | 3 | Spider droid hull (3) | Heavy blaster cannon | — | Automated, Self-destruct 1 |
+| **B1 Battle Droid** | Green trooper | 5" | 0 | 0 | 1 | — | — | 1 | 2 | B1 chassis (0) | E-5 blaster rifle | Unarmed / weapon butt | Automated |
+| **B1 Heavy Weapons Droid** | Green specialist | 5" | 0 | 0 | 1 | — | — | 1 | 2 | B1 chassis (0) | E-5C heavy blaster rifle / E-60R missile launcher | Unarmed / weapon butt | Automated |
+| **B2 Super Battle Droid** | Regular trooper | 5" | 1 | 1 | 2 | — | — | 1 | 2 | Duranium plating (2) | Wrist blasters | Unarmed / weapon butt | Automated |
+| **B2 Heavy Weapons Droid** | Regular specialist | 5" | 1 | 1 | 2 | — | — | 1 | 2 | Duranium plating (2) | ACM heavy blaster / Wrist rocket launcher | Unarmed / weapon butt | Automated |
+| **Droideka** | Regular specialist | 4" | 1 | — | 2 | — | — | 2 | 2 | Duranium plating (2) | Twin blaster cannons | Deflector shield | Automated, Rolling |
+| **BX Commando Droid** | Veteran trooper | 7" | 2 | 2 | 2 | — | — | 1 | 2 | Droid plating (1) | E-5 blaster rifle / E-5s sniper rifle | Vibrosword | Automated, Scout, Leap |
+| **IG-100 MagnaGuard** | Elite trooper | 7" | 2 | 3 | 2 | — | — | 2 | 2 | Duranium plating (2) | — | Electrostaff | Automated |
+| **T-series Tactical Droid** | Regular character | 6" | 1 | 0 | 1 | — | — | 1 | 2 | Droid plating (1) | Sidearm | Unarmed / weapon butt | Automated, Battle computer 1 |
+| **Kraken** | Elite character | 6" | 1 | 1 | 2 | — | — | 2 | 2 | Duranium plating (2) | Sidearm | Unarmed / weapon butt | Automated, Battle computer 2 |
+| **General Grievous** | Elite character | 8" | 2 | 4 | 3 | 3 | 1 | 2 | 2 | Duranium plating (2) | DT-12 heavy blaster pistol | Lightsaber | Leader, Augmented, Deflect 1, Leap, Twin blades |
+| **DSD1 Dwarf Spider Droid** | Regular specialist | 5" | 1 | — | 3 | — | — | 3 | 3 | Spider droid hull (3) | Heavy blaster cannon | — | Automated, Self-destruct 1 |
 <!-- /table -->
 
 ### Separatist weapons and armour
@@ -387,13 +414,13 @@ They use the Shoot scale in chapter 1. The line troops are professionals (2); th
 A US Navy contractor. Two **chalks** (two Scouts and a Grenadier each) and the **control cell** (the Prime and two Systems Operators), with one **Hound** CCT.
 
 <!-- table:troops.anchorage -->
-| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+| Troop | Rank, class | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Prime** | Veteran | 6" | 3 | 2 | 1 | 3 | 1 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Flashbang, Breaching charge, Low-light optics | Leader |
-| **Scout** | Regular | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Smoke grenade, Breaching charge, Low-light optics | Scout |
-| **Grenadier** | Regular | 5" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Smoke grenade, Grenade launcher, Low-light optics | — |
-| **Systems Operator** | Regular | 5" | 2 | 1 | 0 | 2 | 2 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Smoke grenade, Jammer, Hacking rig, Low-light optics | — |
-| **Hound CCT** | Regular | 6" | 2 | 1 | 3 | — | — | 3 | 3 | Heavy plate (3) | M134 minigun / LMG / 20mm autocannon / MAAWS recoilless rifle / Anti-materiel rifle | Unarmed / weapon butt; option: Ballistic shield or Mk19 grenade launcher | Automated |
+| **Prime** | Veteran leader | 6" | 3 | 2 | 1 | 3 | 1 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Flashbang, Breaching charge, Low-light optics | Leader |
+| **Scout** | Regular trooper | 6" | 2 | 2 | 1 | 2 | 1 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Smoke grenade, Breaching charge, Low-light optics | Scout |
+| **Grenadier** | Regular specialist | 5" | 2 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Smoke grenade, Grenade launcher, Low-light optics | — |
+| **Systems Operator** | Regular specialist | 5" | 2 | 1 | 0 | 2 | 2 | 1 | 2 | Composite plate (2) | Carbine | Knife or bayonet, Frag grenade, Smoke grenade, Jammer, Hacking rig, Low-light optics | — |
+| **Hound CCT** | Regular specialist | 6" | 2 | 1 | 3 | — | — | 3 | 3 | Heavy plate (3) | M134 minigun / LMG / 20mm autocannon / MAAWS recoilless rifle / Anti-materiel rifle | Unarmed / weapon butt; option: Ballistic shield or Mk19 grenade launcher | Automated |
 <!-- /table -->
 
 <!-- table:kit.anchorage -->
@@ -410,13 +437,13 @@ A US Navy contractor. Two **chalks** (two Scouts and a Grenadier each) and the *
 Hankou Advanced Maritime Systems' security force, mostly recently retired PNLAN marines and special operators. **SPEAR 1** (Team Leader, Automatic Rifleman, Pioneer, Rifleman) and **SPEAR 2** (three Riflemen, an Automatic Rifleman and a Pioneer), with two **ZQ44** CCT.
 
 <!-- table:troops.hankou -->
-| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+| Troop | Rank, class | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Team Leader** | Veteran | 6" | 2 | 2 | 2 | 3 | 1 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Leader, Laser detector |
-| **Rifleman** | Regular | 6" | 2 | 2 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Smoke grenade, Breaching charge, Low-light optics | Laser detector |
-| **Automatic Rifleman** | Regular | 5" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | LMG | Knife or bayonet, Frag grenade, Low-light optics | Laser detector |
-| **Pioneer** | Veteran | 7" | 3 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | DMR | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Marksman 1, Laser detector |
-| **ZQ44 CCT** | Regular | 7" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | CS/LM5 rotary gun / Dual DZJ-08 recoilless | Unarmed / weapon butt; option: Ballistic shield or Mobility and one-way attack package or Flux warhead or Cooperative engagement package | Automated |
+| **Team Leader** | Veteran leader | 6" | 2 | 2 | 2 | 3 | 1 | 1 | 2 | Composite plate (2) | Auto rifle | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Leader, Laser detector |
+| **Rifleman** | Regular trooper | 6" | 2 | 2 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | Rifle | Knife or bayonet, Frag grenade, Smoke grenade, Breaching charge, Low-light optics | Laser detector |
+| **Automatic Rifleman** | Regular specialist | 5" | 2 | 1 | 2 | 2 | 0 | 1 | 2 | Composite plate (2) | LMG | Knife or bayonet, Frag grenade, Low-light optics | Laser detector |
+| **Pioneer** | Veteran specialist | 7" | 3 | 1 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | DMR | Knife or bayonet, Frag grenade, Smoke grenade, Low-light optics | Marksman 1, Laser detector |
+| **ZQ44 CCT** | Regular specialist | 7" | 2 | 1 | 2 | — | — | 2 | 2 | Composite plate (2) | CS/LM5 rotary gun / Dual DZJ-08 recoilless | Unarmed / weapon butt; option: Ballistic shield or Mobility and one-way attack package or Flux warhead or Cooperative engagement package | Automated |
 <!-- /table -->
 
 <!-- table:kit.hankou -->
@@ -438,18 +465,18 @@ On the Shoot scale (chapter 1), line infantry are trained military (1), officers
 **As opposition:** run a generic team with the solo opponent (chapter 10) as an element with the **Tactical** behavior (heavy infantry: **Aggressive**), its drill set by its lowest rank as usual.
 
 <!-- table:troops.generic -->
-| Troop | Rank | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
+| Troop | Rank, class | MOV | SHT | FGT | PHY | NRV | TEC | W | SZ | Armour | Weapon | Kit | Skills |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Hostage** | Green | 5" | 0 | 0 | 0 | 0 | 0 | 1 | 2 | None (0) | — | Unarmed / weapon butt | — |
-| **Officer** | Veteran | 6" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Flak (1) | Carbine / Sidearm / SMG | Knife or bayonet, Frag grenade, Smoke grenade | Leader |
-| **Line Trooper** | Regular | 6" | 1 | 1 | 1 | 1 | 0 | 1 | 2 | Flak (1) | Rifle / Carbine | Knife or bayonet, Frag grenade | — |
-| **Support Gunner** | Regular | 5" | 1 | 1 | 2 | 1 | 0 | 1 | 2 | Flak (1) | LMG / HMG | Knife or bayonet, Frag grenade | — |
-| **Anti-armour Trooper** | Regular | 5" | 1 | 1 | 2 | 1 | 0 | 1 | 2 | Flak (1) | AT launcher | Knife or bayonet, Frag grenade | — |
-| **Specialist** | Regular | 6" | 1 | 0 | 1 | 1 | 2 | 1 | 2 | Flak (1) | Carbine | Knife or bayonet, Smoke grenade; option: Trauma kit or Hacking rig or Breaching charge | — |
-| **Marksman** | Veteran | 6" | 2 | 0 | 1 | 2 | 0 | 1 | 2 | Flak (1) | DMR | Knife or bayonet, Smoke grenade, Low-light optics | Marksman 1 |
-| **Assault Trooper** | Veteran | 6" | 2 | 2 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | SMG / Shotgun / Carbine | Boarding axe or combat blade, Frag grenade, Flashbang; option: Jump pack or Breaching charge | — |
-| **Heavy Infantry Sergeant** | Elite | 6" | 3 | 3 | 3 | 3 | 1 | 2 | 2 | Heavy plate (3) | Heavy rifle / SMG | Boarding axe or combat blade, Frag grenade | Leader, Augmented |
-| **Heavy Infantry** | Elite | 6" | 3 | 3 | 3 | 3 | 0 | 2 | 2 | Heavy plate (3) | Heavy rifle / LMG / AT launcher | Boarding axe or combat blade, Frag grenade | Augmented |
+| **Hostage** | Green character | 5" | 0 | 0 | 0 | 0 | 0 | 1 | 2 | None (0) | — | Unarmed / weapon butt | — |
+| **Officer** | Veteran leader | 6" | 2 | 1 | 1 | 2 | 1 | 1 | 2 | Flak (1) | Carbine / Sidearm / SMG | Knife or bayonet, Frag grenade, Smoke grenade | Leader |
+| **Line Trooper** | Regular trooper | 6" | 1 | 1 | 1 | 1 | 0 | 1 | 2 | Flak (1) | Rifle / Carbine | Knife or bayonet, Frag grenade | — |
+| **Support Gunner** | Regular specialist | 5" | 1 | 1 | 2 | 1 | 0 | 1 | 2 | Flak (1) | LMG / HMG | Knife or bayonet, Frag grenade | — |
+| **Anti-armour Trooper** | Regular specialist | 5" | 1 | 1 | 2 | 1 | 0 | 1 | 2 | Flak (1) | AT launcher | Knife or bayonet, Frag grenade | — |
+| **Specialist** | Regular specialist | 6" | 1 | 0 | 1 | 1 | 2 | 1 | 2 | Flak (1) | Carbine | Knife or bayonet, Smoke grenade; option: Trauma kit or Hacking rig or Breaching charge | — |
+| **Marksman** | Veteran specialist | 6" | 2 | 0 | 1 | 2 | 0 | 1 | 2 | Flak (1) | DMR | Knife or bayonet, Smoke grenade, Low-light optics | Marksman 1 |
+| **Assault Trooper** | Veteran trooper | 6" | 2 | 2 | 1 | 2 | 0 | 1 | 2 | Composite plate (2) | SMG / Shotgun / Carbine | Boarding axe or combat blade, Frag grenade, Flashbang; option: Jump pack or Breaching charge | — |
+| **Heavy Infantry Sergeant** | Elite leader | 6" | 3 | 3 | 3 | 3 | 1 | 2 | 2 | Heavy plate (3) | Heavy rifle / SMG | Boarding axe or combat blade, Frag grenade | Leader, Augmented |
+| **Heavy Infantry** | Elite trooper | 6" | 3 | 3 | 3 | 3 | 0 | 2 | 2 | Heavy plate (3) | Heavy rifle / LMG / AT launcher | Boarding axe or combat blade, Frag grenade | Augmented |
 <!-- /table -->
 
 Teams: **line squad** (officer, four line troopers, support gunner), **support team** (anti-armour trooper, specialist, marksman), **assault squad** (four assault troopers) and **heavy infantry squad** (sergeant and four heavy infantry). Cards are printed in `docs/print/ImperatorBlack_generic-cards.pdf`.
