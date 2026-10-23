@@ -12,6 +12,7 @@ mission: sabotage
 tier: 1
 opposition: separatist
 size: small
+force_limit: { tv: 250, models: 6 }   # the Force briefing heading in numbers (chapter 14, short arcs)
 clock:
   die: d4
   limit: 20

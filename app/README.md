@@ -34,7 +34,7 @@ Last updated: 2026-10-23, rules v0.5 (chapters 10–16: solo opponent, ship layo
 
 These are foundations that don't depend on unfinished rules. Each should leave CI green.
 
-**Open tasks, suggested order: 17, 15, 16, 18, 19, 20, 21, then 22.** Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
+**Open tasks, suggested order: 15 (in PR #14), 17, 16, 18, 19, 20, 21, then 22.** Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
 
 ### 1. Move tests to xUnit ✅ done (2026-10-20)
 
@@ -209,15 +209,49 @@ Rules chapter 14 *Short arcs* (decision 7.13). The paper version is `tools/print
 - Each mission opens in the mission view (task 17 makes the authored fields show).
 - **Done when:** a Vitest test renders Foundry Moon's flow with all four missions and the 2B branch; lint, tests and build pass.
 
-### 20. Force planner (web, no saved state)
+### 20. Force planner (web, no saved state) — *chatgpt authorized* (RJ, 2026-10-23)
 
-Needs tasks 16 and 18, and RJ's go-ahead on the screen (not authorized yet: it is the first screen that applies force-building rules, so the layout and wording want a look first).
+Needs tasks 16 (TV in Core) and 18 (fireteam check in Core) merged first. RJ's brief: structure where it helps, room to customize, **no heavy army building**. The planner is a calculator that shows the rules; it never blocks the player.
 
-- Pick a faction, a TV limit and a model limit (or a mission or short arc mission, which sets them), and a force-selection setting: **by fireteam** or **by soldier** (chapter 14 *Force selection*).
-- By fireteam: add standard fireteams or build one to a type; each must field at least half its slots and its Leader (chapter 9). Characters join a fireteam (one each) or act alone.
-- By soldier: add any troops; group them into fireteams of up to 6 before deployment.
-- Show the running TV and model count, and every rule the force breaks, using Core's checks (task 18). Print a force list.
-- **Done when:** RJ has approved the screen; tests cover each rule; lint, tests and build pass.
+**Where the rules live.** Every check and every total is computed in `Imperator.Core` (CLAUDE.md: rules math exists once), exposed by the API, and shown by the web app. No force rule in TypeScript.
+
+- **Core:** `Forces/ForcePlan.cs` (the plan: faction, setting, limits, fireteams with their models and loadout choices, characters with "joins fireteam N" or "alone", for by-soldier a flat list of models with a group number) and `Forces/ForceCheck.cs` (returns the total TV, the model count, and a list of findings, each with a code, the fireteam or model it concerns, and a message).
+- **API:** `POST /forces/check` takes a plan as JSON and returns the totals and findings, with the content version.
+- **Web:** `#planner`, calling the API as the plan changes (debounced). The plan lives in the URL (encoded in the hash) so a force can be bookmarked or shared; no database, no accounts.
+
+**Limits.** Pick one of: a two-player size (`versus.yaml` `sizes`: Patrol 350 TV, Strike force 600 TV); a mission size (`missions.yaml` `clock.sizes`: up to 8 or 12 models); a short arc mission (each mission file in `docs/scenarios/arcs/` has `force_limit: { tv, models }`); or custom numbers. The limits can always be edited by hand (Foundry Moon mission 3 is 50 TV higher or lower after 2B).
+
+**The setting** (chapter 14 *Force selection*, `campaign.yaml` `force_selection`): **by fireteam** (default) or **by soldier**. Two-player sizes force by fireteam.
+
+**By fireteam** (chapter 9 *Building a force*):
+- Add a **standard fireteam** of the faction (its `teams` for player factions, its `elements` for enemy ones), then adjust each slot's count from 0 up to the standard count. Or **build one to a type**: pick Line, Assault or Support and add the faction's troops by class.
+- Characters: add any troop of class `character`; choose "joins" (pick a fireteam) or "alone".
+- Loadouts: choose each model's weapon, armour and gear options from its profile. The TV shown is the troop's listed TV whatever its loadout (chapter 16's rule; exact loadout costs are the Phase 9 builder).
+
+**By soldier:** add any troops of the faction; assign each to a group (fireteams of up to 6); characters join a group or act alone.
+
+**Findings** (warnings, never blocking; wording plain and taken from the rules):
+
+| Code | When | Message (example) |
+|---|---|---|
+| `over_tv` | Total TV above the limit | "312 TV: 12 over the 300 limit." |
+| `over_models` | Models above the limit | "8 models: 1 over the limit of 7." |
+| `half_slots` | A fireteam fields fewer than half its slots, rounded up (by fireteam) | "Clone trooper squad: 2 of 5 slots; at least 3." |
+| `no_leader` | A fireteam whose standard version has a Leader fields none | "Clone trooper squad: its Leader must be fielded." |
+| `type_limits` | A fireteam breaks its type's class ranges or most models (task 18's check) | "Line: 2 specialists; at most 1." |
+| `two_characters` | More than one character joins the same fireteam | "VAT fireteam: two characters; at most one." |
+| `group_size` | A by-soldier group above 6 | "Group 2: 7 models; at most 6." |
+| `wrong_faction` | A troop from another faction | "Kraken is not a Galactic Republic troop." |
+
+**Output.** Running totals (TV, models, fireteams, characters) beside the plan; the findings list; a **print** view: one letter page with the force name, setting, limits, each fireteam (type, models, loadouts, TV) and each character (joined or alone), in the style of the printed sheets. Link each troop to its unit card (`#units`).
+
+**Not in scope:** saving forces, the campaign roster, custom troops (attributes and kit), exact loadout TV, the enemy's forces.
+
+**Done when:**
+- Core tests cover each finding, including the rounding of half slots (5 slots: 3; 4 slots: 2), a joined Leader character leading a leaderless fireteam, and a lone character never breaking a rule by being alone.
+- An API test posts Gym 2's force (Ahsoka joined to a clone squad) and gets its TV from task 16, with no findings at 350 TV and `over_tv` at 300.
+- A Vitest test builds that force in the planner, sees the totals, switches to by soldier, and prints.
+- Lint, tests and build pass; RJ reviews the screen before the PR is merged.
 
 ### 21. Campaign and two-player content in Core — *chatgpt authorized*
 
@@ -240,6 +274,17 @@ Beyond this, the app's real features wait on rules:
 Planned app feature (RJ, 2026-10-20): an in-app reference that explains every gear item, keyword and special rule, read from `content/` (the list will grow). Build it from the same `text` fields the rulebook tables use.
 
 Unit cards and the quick reference are generated by `tools/print_sheets.py` (Python, reportlab) into `docs/print/`, not by the app, for now.
+
+## Pull requests
+
+For any agent working from this list:
+
+- **One task per pull request**, named after its task ("Task 15: launcher rounds in the web app"). Don't bundle tasks: a draft holding seven tasks can't be reviewed or merged piece by piece.
+- **CI green before asking for review.** Run `npm --prefix app/web run lint && npm --prefix app/web test && npm --prefix app/web run build` and `dotnet test app/Imperator.slnx` locally first. A changed screen often breaks an older test (a cell's accessible name, a row count): fix the cause, don't loosen the test.
+- **Quote the task's "Done when" in the PR description** and say how each point is met.
+- **When a task merges**, mark it ✅ done (with the date) in this README in the same PR.
+- **Don't change** `content/`, `rules/`, `docs/design/` or `docs/scenarios/` in an app PR. If the app needs something there, say so in the PR and RJ (or the design project) adds it.
+- Rebase on `main` before review; main moves daily.
 
 ## Rules for app code
 
