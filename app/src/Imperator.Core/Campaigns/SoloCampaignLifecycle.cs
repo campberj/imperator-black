@@ -59,7 +59,8 @@ public static class SoloCampaignLifecycle
                     ?? throw new JsonException("Missing creation payload.")),
                 Renamed when state is not null => state with
                 {
-                    Name = ValidName(JsonSerializer.Deserialize<RenamedData>(e.Payload)?.Name)
+                    Name = ValidName(JsonSerializer.Deserialize<RenamedData>(e.Payload)?.Name),
+                    Version = e.Sequence
                 },
                 _ => throw new InvalidOperationException($"Unsupported lifecycle event '{e.Type}'.")
             };
