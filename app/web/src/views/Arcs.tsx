@@ -71,7 +71,8 @@ export function Arcs({ content }: { content: Content }) {
         <p className="meta">{content.factions.factions.find((f) => f.id === arc.faction)?.name ?? arc.faction} against {content.missions.oppositions?.find((o) => o.id === arc.opposition)?.name ?? arc.opposition} · Force selection: {arc.force_selection}</p>
         <section aria-label="Mission flow">
           <h2>Mission flow</h2>
-          <p>{link('1')} → Decisive or Marginal: {link('2A')} · Failure: {link('2B')} → {link('3')}</p>
+          <p>{link('1')} → Decisive or Marginal → {link('2A')} → {link('3')}</p>
+          <p>{link('1')} → Failure → {link('2B')} → {link('3')}</p>
         </section>
         <Table title="Missions" headers={['Mission', 'Board', 'Opposition / tier', 'Force limit']}
           rows={arc.missions.map((m, i) => [
