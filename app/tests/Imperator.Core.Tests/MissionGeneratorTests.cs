@@ -137,6 +137,35 @@ public class MissionGeneratorTests
     }
 
     [Fact]
+    public void SeparatistMissionsUseOnlySeparatistElementsAndTheirHvt()
+    {
+        foreach (int tier in Enumerable.Range(1, 4))
+        {
+            var mission = MissionGenerator.Generate(Set, new MissionRequest("land", 8 + tier, Mission: "capture", Tier: tier,
+                Environment: "industrial", Opposition: "separatist"));
+            Assert.Equal("separatist", mission.Opposition);
+            Assert.Equal(Set.Tier(tier, "separatist").Hvt, mission.Hvt);
+            Assert.All(mission.Enemies, enemy => Assert.Equal("separatist", Set.Element(enemy.Element).Faction));
+            Assert.Equal("separatist", Set.Element(mission.Reinforcement).Faction);
+        }
+        var top = MissionGenerator.Generate(Set, new MissionRequest("land", 42, Mission: "capture", Tier: 4,
+            Environment: "industrial", Opposition: "separatist"));
+        Assert.Equal("sep_grievous", top.Hvt);
+        Assert.Contains("Separatist Alliance", top.Situation);
+        Assert.Contains("an industrial position", top.Situation);
+    }
+
+    [Fact]
+    public void GuardsWithAutomatedBehaviourBeginAlerted()
+    {
+        var found = Enumerable.Range(1, 500).Select(i => MissionGenerator.Generate(Set,
+            new MissionRequest("land", i, Tier: 2, Environment: "desert")))
+            .First(m => Set.Element(m.Enemies[0].Element).Behavior == "automated");
+        Assert.All(found.Enemies, enemy => Assert.StartsWith("Alerted", enemy.State));
+        Assert.Contains("Alerted", found.Briefing.Single(b => b.Heading == "Opposition").Text);
+    }
+
+    [Fact]
     public void ShipObjectivesFollowTheMissionType()
     {
         foreach (var m in Missions("ship"))
