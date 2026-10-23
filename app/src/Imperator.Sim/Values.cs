@@ -113,7 +113,7 @@ public static class Values
             if (s.Pinned && s.Cover == Cover.Open) { Rally(s); return; }
         }
         else situational += Shooting.AimModifier(s, target.Cover);
-        var round = BestRound(core, s, target.Armour, situational);
+        var round = BestRound(core, s, target.Cover, target.Armour, situational);
         if (round is null)
         {
             Shooting.Fire(rng, core, s, target, situational);
@@ -134,11 +134,11 @@ public static class Values
     }
 
     /// <summary>Best launcher round against this target, or null for the default round.</summary>
-    private static RoundDef? BestRound(CoreContent core, Soldier shooter, int armour, int situational)
+    private static RoundDef? BestRound(CoreContent core, Soldier shooter, Cover cover, int armour, int situational)
     {
         var weapon = shooter.Weapon;
         if (weapon.Rounds is not { Count: > 0 }) return null;
-        int modifier = Shooting.Modifier(shooter, Cover.Open, situational);
+        int modifier = Shooting.Modifier(shooter, cover, situational);
         double best = Shooting.ExpectedRow(core, modifier, weapon.DamageDice, armour, weapon.Ap);
         RoundDef? selected = null;
         foreach (var round in weapon.Rounds)
