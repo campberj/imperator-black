@@ -101,7 +101,8 @@ public class MissionGeneratorTests
             {
                 Assert.Equal(Set.Tier(m.Tier).Hvt, m.Hvt);
                 if (!models.Contains(m.Hvt!)) models.Add(m.Hvt!);
-                Assert.Contains(m.Enemies, e => e.Troop == m.Hvt && e.State == "Unaware (the HVT)");
+                Assert.Contains(m.Enemies, e => e.Troop == m.Hvt && e.State ==
+                    (guard.Behavior == "automated" ? "Alerted (the HVT)" : "Unaware (the HVT)"));
             }
             else Assert.Null(m.Hvt);
             Assert.Equal(models, m.Enemies.Select(e => e.Troop));
