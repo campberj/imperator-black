@@ -77,12 +77,20 @@ export function Planner({ content }: { content: Content }) {
     </span>
   }
   const addSoldier = () => update(p => ({ ...p, soldiers: [...p.soldiers, { troop: newTroop, group: 1 }] }))
+  const kitSummary = (selection: Slot | Character | Soldier) => {
+    const profile = troop(selection.troop)
+    if (!profile) return ''
+    const weapon = selection.weapon ?? profile.weapon
+    const armour = selection.armour ?? profile.armour
+    const gear = selection.gear ?? profile.gear
+    return [weapon ? content.weapons.ranged.find(w => w.id === weapon)?.name ?? weapon : 'Unarmed', content.armour.armour.find(a => a.id === armour)?.name ?? armour, ...gear.map(g => content.gear.gear.find(x => x.id === g)?.name ?? g)].join(', ')
+  }
   return <section className="planner">
     <div className="planner-heading"><h2>Force planner</h2><button type="button" onClick={() => window.print()}>Print force list</button></div>
     <p className="meta">A planning calculator. Warnings do not prevent play. The plan stays in the URL; nothing is saved.</p>
     <div className="filters planner-settings">
       <label>Force name<input value={plan.name} onChange={e => update(p => ({ ...p, name: e.target.value }))} /></label>
-      <label>Faction<select value={plan.faction} onChange={e => update(p => ({ ...p, faction: e.target.value, fireteams: [], characters: [], soldiers: [] }))}>{content.factions.factions.map(f => <option key={f.id} value={f.id}>{f.name}</option>)}</select></label>
+      <label>Faction<select value={plan.faction} onChange={e => update(p => ({ ...p, faction: e.target.value, fireteams: [], characters: [], soldiers: [] }))}>{content.factions.factions.filter(f => f.side === 'player').map(f => <option key={f.id} value={f.id}>{f.name}</option>)}</select></label>
       <label>Limits from<select value={plan.source === 'custom' ? 'custom' : `${plan.source}:${plan.sourceId ?? ''}`} onChange={e => { const [source, ...id] = e.target.value.split(':'); void setLimit(source, id.join(':')) }}>
         <option value="custom">Custom</option>
         {(content.versus?.sizes ?? []).map(s => <option key={s.id} value={`versus:${s.id}`}>{s.name} (two-player)</option>)}
@@ -96,7 +104,7 @@ export function Planner({ content }: { content: Content }) {
       </select></label>
     </div>
     <div className="planner-summary" aria-live="polite">{result ? <>
-      <strong>{result.tv} TV</strong> · {result.models} models · {result.fireteams} fireteams · {result.characters} characters
+      <strong>{result.tv} TV</strong> · {plan.setting === 'fireteam' ? 'By fireteam' : 'By soldier'} · {result.models} models · {result.fireteams} fireteams · {result.characters} characters
       {plan.tvLimit !== undefined && ` · TV limit ${plan.tvLimit}`}
       {plan.modelLimit !== undefined && ` · Model limit ${plan.modelLimit}`}
     </> : 'Checking force…'}</div>
@@ -145,7 +153,7 @@ export function Planner({ content }: { content: Content }) {
     </div>)}
     <section className="planner-print">
       <Table title={plan.name} headers={['Fireteam / group', 'Models and loadout', 'TV']}
-        rows={[...plan.fireteams.map(t => [t.name, t.slots.filter(s => s.count > 0).map(s => `${s.count} × ${names(s.troop)} (${s.weapon ?? troop(s.troop)?.weapon ?? 'unarmed'})`).join('; '), result?.team_totals.find(x => x.id === t.id)?.tv ?? '—']), ...plan.soldiers.map(s => [`Group ${s.group}`, names(s.troop), result?.troop_values[s.troop] ?? '—']), ...plan.characters.map((c,i) => [c.joins ? `Joins ${c.joins}` : 'Alone', names(c.troop), result?.character_totals.find(x => x.index === i)?.tv ?? '—'])]} />
+        rows={[...plan.fireteams.map(t => [`${t.name} (${t.type})`, t.slots.filter(s => s.count > 0).map(s => `${s.count} × ${names(s.troop)} (${kitSummary(s)})`).join('; '), result?.team_totals.find(x => x.id === t.id)?.tv ?? '—']), ...plan.soldiers.map(s => [`Group ${s.group}`, `${names(s.troop)} (${kitSummary(s)})`, result?.troop_values[s.troop] ?? '—']), ...plan.characters.map((c,i) => [c.joins ? `Joins ${c.joins}` : 'Alone', `${names(c.troop)} (${kitSummary(c)})`, result?.character_totals.find(x => x.index === i)?.tv ?? '—'])]} />
     </section>
   </section>
 }
