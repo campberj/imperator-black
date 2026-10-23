@@ -151,9 +151,9 @@ function MissionSheet({ mission: m, content, lookup }: { mission: Mission; conte
               title="Grades"
               headers={['Grade', 'Result']}
               rows={[
-                ['Decisive', m.grades?.decisive ?? type.decisive],
-                ['Marginal', m.grades?.marginal ?? type.marginal],
-                ['Failure', m.grades?.failure ?? type.failure],
+                ['Decisive', m.grades?.find((g) => g.grade === 'Decisive')?.text ?? type.decisive],
+                ['Marginal', m.grades?.find((g) => g.grade === 'Marginal')?.text ?? type.marginal],
+                ['Failure', m.grades?.find((g) => g.grade === 'Failure')?.text ?? type.failure],
               ]}
             />
           </>
