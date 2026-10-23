@@ -120,6 +120,9 @@ app.MapGet("/missions", (HttpContext ctx, string? setting, int? seed, string? mi
     return Results.Json(MissionGenerator.Generate(c, new MissionRequest(setting, seed.Value, mission, tier, vessel, environment, size, opposition)), deckJson);
 });
 
+// No authentication exists yet: S1 campaign saves are deliberately available only in Development.
+if (app.Environment.IsDevelopment()) app.MapSoloCampaigns();
+
 app.Run();
 
 // Exposed for WebApplicationFactory in Imperator.Api.Tests.
