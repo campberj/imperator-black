@@ -191,7 +191,7 @@ Rules chapter 15 (decision 6.16): every troop has a Troop Value (TV) and a Requi
 - **Authored missions** (short arcs, chapter 14): mission files may carry `arc` (`id`, `name`, `label`), `task`, `lockdown` and `grades` (replacing the mission type's text), `reinforcement` (replacing the tier's), `special_rules` (title, text), `next` (grade, text), `map_note`, extra `briefing` headings (such as `Force`), and land boards with no `sectors` or `rolls`. Add them to the mission model as optional fields, and show them in the mission view (task 12): taking it, lockdown and grades from the mission when given, then *After the mission* and *Special rules*, as `mission_sheet` in `tools/print_scenario.py` does.
 - **Done when:** tests check that a Separatist mission draws only Separatist elements (tier 4 HVT `sep_grievous`); a mission whose guard has the Automated profile places it Alerted; the web mission view shows all four Foundry Moon missions in `docs/scenarios/arcs/foundry-moon/`; lint, tests and build pass.
 
-### 18. Fireteams in the web unit database — *chatgpt authorized*
+### 18. Fireteams in the web unit database ✅ done (2026-10-23)
 
 Decision 6.18, rules chapter 9 *Building a force*, design note `docs/design/fireteams.md`.
 
