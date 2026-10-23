@@ -39,7 +39,7 @@ test('launchers show all ammunition choices and explosion radii', () => {
   const r = row(launcher.name)
   expect(r.textContent).toContain(launcher.round!)
   for (const round of launcher.rounds!) {
-    expect(r.textContent).toContain(round.name)
+    expect(r.textContent).toContain(`or ${round.name.toLowerCase()} round`)
     expect(r.textContent).toContain(round.damage)
     if (round.explosion) expect(r.textContent).toContain(`Explosion (${round.explosion})`)
   }
