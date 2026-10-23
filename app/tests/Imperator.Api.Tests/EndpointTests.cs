@@ -23,6 +23,20 @@ public class EndpointTests(ApiFactory factory) : IClassFixture<ApiFactory>
     }
 
     [Fact]
+    public async Task ValuesAreCalculatedByCore()
+    {
+        var response = await factory.CreateClient().GetAsync("/values", TestContext.Current.CancellationToken);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        using var body = JsonDocument.Parse(await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken));
+        var rows = body.RootElement.EnumerateArray().ToList();
+        var set = ContentSet.LoadFile(ContentPath);
+        Assert.Equal(set.Troops.Troops.Count, rows.Count);
+        var clone = rows.Single(row => row.GetProperty("troop").GetString() == "rep_clone_trooper");
+        Assert.Equal(41, clone.GetProperty("tv").GetInt32());
+        Assert.Equal(5, clone.GetProperty("requisition").GetInt32());
+    }
+
+    [Fact]
     public async Task ContentIsNotModifiedWhenETagMatches()
     {
         var client = factory.CreateClient();
