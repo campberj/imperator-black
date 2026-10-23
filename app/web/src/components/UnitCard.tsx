@@ -15,7 +15,7 @@ import {
 import { Card, Proposed } from './Card'
 
 /** One troop profile, laid out like docs/print/ImperatorBlack_unit-cards.pdf (tools/print_sheets.py). */
-export const UnitCard = memo(function UnitCard({ troop, content, lookup }: { troop: Troop; content: Content; lookup: Lookup }) {
+export const UnitCard = memo(function UnitCard({ troop, content, lookup, value }: { troop: Troop; content: Content; lookup: Lookup; value?: { tv: number; requisition: number } }) {
   const faction = lookup.factions.get(troop.faction)
   const rank = lookup.ranks.get(troop.rank)?.name ?? troop.rank
   const armour = lookup.armour.get(troop.armour)
@@ -36,6 +36,7 @@ export const UnitCard = memo(function UnitCard({ troop, content, lookup }: { tro
         </>
       }
     >
+      {value && <p className="small"><b>Troop Value (TV): {value.tv}</b> · Requisition: {value.requisition}</p>}
       <table className="stats">
         <thead>
           <tr>
