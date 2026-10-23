@@ -6,6 +6,7 @@ using Imperator.Core.Land;
 using Imperator.Core.Layouts;
 using Imperator.Core.Missions;
 using Imperator.Core.Values;
+using Imperator.Core.Forces;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
@@ -55,6 +56,12 @@ app.MapGet("/fireteams", (HttpContext ctx) =>
 {
     ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
     return Results.Json(Fireteams.Reference(content.Set), deckJson);
+});
+
+app.MapPost("/forces/check", (HttpContext ctx, ForcePlan plan) =>
+{
+    ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
+    return Results.Json(new ForceCheck(content.Set).Check(plan), deckJson);
 });
 
 app.MapGet("/values", (HttpContext ctx) =>
