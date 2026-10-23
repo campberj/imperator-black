@@ -2,12 +2,30 @@ import { useEffect, useRef, useState } from 'react'
 import type { Content, Lookup } from '../content'
 import { UnitCard } from '../components/UnitCard'
 import { Table } from '../components/Table'
+
+type FireteamReference = {
+  pinning: { troop: string; text: string | null }[]
+  fireteams: { id: string; name: string; faction: string; type: string; source: string; models: { troop: string; count: number }[]; findings: string[]; tier?: number; behavior?: string }[]
+}
 import { matches, modelsText, troopKeywords, troopSearchText } from '../format'
 
 /** Troop profiles as cards, with the faction's teams (player) or elements (enemy). */
 export function Units({ content, lookup }: { content: Content; lookup: Lookup }) {
   const [values, setValues] = useState<Map<string, { tv: number; requisition: number }>>(new Map())
   const [valueError, setValueError] = useState('')
+  const [fireteamReference, setFireteamReference] = useState<FireteamReference>()
+  const [fireteamError, setFireteamError] = useState('')
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch('/fireteams', { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`GET /fireteams: ${response.status}`)
+        const data = (await response.json()) as FireteamReference
+        if (!controller.signal.aborted) setFireteamReference(data)
+      })
+      .catch((error: unknown) => { if (!controller.signal.aborted) setFireteamError(String(error)) })
+    return () => controller.abort()
+  }, [])
   useEffect(() => {
     const controller = new AbortController()
     fetch('/values', { signal: controller.signal })
@@ -41,6 +59,7 @@ export function Units({ content, lookup }: { content: Content; lookup: Lookup })
   const teams = content.rosters.teams.filter((t) => shown(t.faction))
   const elements = content.factions.elements.filter((e) => shown(e.faction))
   const keywords = [...content.keywords.weapon, ...content.keywords.armour]
+  const pins = new Map(fireteamReference?.pinning.map((p) => [p.troop, p.text]) ?? [])
 
   return (
     <>
@@ -106,12 +125,16 @@ export function Units({ content, lookup }: { content: Content; lookup: Lookup })
         {troops.length} of {inFaction.length} troop profiles
       </p>
       {valueError && <p className="error" role="alert">Troop Values unavailable: {valueError}</p>}
+      {fireteamError && <p className="error" role="alert">Fireteams unavailable: {fireteamError}</p>}
       <div className="cards">
         {troops.map((t) => (
-          <UnitCard key={t.id} troop={t} content={content} lookup={lookup} value={values.get(t.id)} />
+          <UnitCard key={t.id} troop={t} content={content} lookup={lookup} value={values.get(t.id)} pinning={pins.get(t.id)} />
         ))}
       </div>
 
+      {(content.rosters.classes?.length ?? 0) > 0 && <Table title="Troop classes" headers={['Class', 'Description']} rows={content.rosters.classes!.map((c) => [c.name, c.text])} />}
+      {(content.rosters.fireteam_types?.length ?? 0) > 0 && <Table title="Fireteam types" headers={['Type', 'Leaders', 'Troopers', 'Specialists', 'Most models']} rows={content.rosters.fireteam_types!.map((t) => [t.name, t.leader.join('–'), t.troopers.join('–'), t.specialists.join('–'), t.max_models])} />}
+      {fireteamReference && <Table title="Standard fireteams" headers={['Fireteam', 'Type', 'Models', 'Tier', 'Behavior']} rows={fireteamReference.fireteams.filter((t) => shown(t.faction)).map((t) => [t.name, content.rosters.fireteam_types?.find((f) => f.id === t.type)?.name ?? t.type, modelsText(t.models, lookup), t.tier ?? '—', t.behavior ? lookup.behaviors.get(t.behavior)?.name ?? t.behavior : '—'])} />}
       {teams.length > 0 && (
         <Table
           title="Teams"
