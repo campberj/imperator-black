@@ -22,7 +22,7 @@ export interface Mission extends Board {
   force_limit?: { tv: number; models: number }
   task?: string
   lockdown?: string
-  grades?: { decisive: string; marginal: string; failure: string }
+  grades?: { grade: string; text: string }[]
   special_rules?: { title: string; text: string }[]
   next?: { grade: string; text: string }[]
   map_note?: string
