@@ -261,7 +261,7 @@ Needs tasks 16 (TV in Core) and 18 (fireteam check in Core) merged first. RJ's b
 - No screens: this is the groundwork for the campaign tracker.
 - **Done when:** tests load both sections and CI is green.
 
-### 23. S1: native PostgreSQL and solo campaign persistence — in progress
+### 23. S1: native PostgreSQL and solo campaign persistence ✅ done (2026-10-23)
 
 **Scope (approved S0 roadmap):** a database-backed single-player campaign lifecycle; no Foundry Moon gameplay screens, strategic turns, multiplayer identity, game rules, or outpost mechanics. The current development API uses one stable server-configured *local* player, and is available only in Development until authentication exists.
 
@@ -277,7 +277,7 @@ Needs tasks 16 (TV in Core) and 18 (fireteam check in Core) merged first. RJ's b
 4. A real PostgreSQL integration test covers create → rename → API restart → load/list/event replay, including isolation between local player IDs. CI tests use its ephemeral PostgreSQL service.
 5. Native backup/restore instructions preserve data without resetting the working database. Web lint/tests/build, .NET tests and migration checks are green. No unapproved campaign mechanics or S2 screens.
 
-**After merge:** mark this task ✅ done (date) in the same PR.
+**S1 implementation complete:** native macOS setup is documented; the real PostgreSQL/API restart and event-replay checks pass in CI. Local Homebrew installation remains for RJ to verify after merging.
 
 ---
 
