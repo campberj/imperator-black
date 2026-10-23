@@ -187,12 +187,15 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 
 **Exit:** One click produces a printable briefing and a map that matches what the paper procedure could produce.
 
-## Phase 9 — App MVP, part 2: campaign tracker
+## Phase 9 — App MVP, part 2: the campaign game (solo)
 
-1. Data model: Campaign, Player, CampaignMembership, Roster, Soldier, Ship, SectorNode, and the event log.
-2. Screens: roster, after-action report entry, post-battle resolution (using the same tables), ship upgrades, sector map, next tasking.
-3. Campaign history feed from the event log.
-4. **Custom troop and unit builder:** build and cost custom troop types and units with the Phase 7 values; print their cards.
+The app runs the campaign like a video game: story text, decisions, the outpost and ship, command's taskings; missions are played on the tabletop (decisions 1.11, 7.14, 7.15; [campaign-game.md](design/campaign-game.md)).
+
+1. Data model: Campaign, Player, CampaignMembership, Roster, Soldier, Ship, Outpost, SectorNode, and the event log.
+2. Screens: the hub (roster, outpost, ship, messages), the situation (arc or sector map with story text), decisions with their costs, deployment (force planner), debrief (after-action entry and post-battle resolution with the same tables), events with choices, next tasking.
+3. Bespoke campaigns (Foundry Moon first) and procedural adventure campaigns (chapter 14 arcs with generated story text).
+4. Campaign history feed from the event log.
+5. **Custom troop and unit builder:** build and cost custom troop types and units with the Phase 7 values; print their cards.
 
 **Exit:** The whole campaign loop runs in the app for one player.
 

@@ -20,4 +20,4 @@ To print a scenario together with every other unit card in one run, add `--with-
 
 Land scenarios set `tiles: []` and describe terrain as typed footprints (`hill`, `area`, `ditch`, `light`, `heavy`); the map draws a 6" grid instead of tiles.
 
-Short arcs (three authored missions, chapter 14) are in [`arcs/`](arcs/README.md).
+Short arcs (three authored missions, chapter 14) are in [`arcs/`](arcs/README.md). They are the first bespoke campaigns for the campaign game (decision 7.15).
