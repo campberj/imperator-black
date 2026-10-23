@@ -209,7 +209,7 @@ Rules chapter 14 *Short arcs* (decision 7.13). The paper version is `tools/print
 - Each mission opens in the mission view (task 17 makes the authored fields show).
 - **Done when:** a Vitest test renders Foundry Moon's flow with all four missions and the 2B branch; lint, tests and build pass.
 
-### 20. Force planner (web, no saved state) — *chatgpt authorized* (RJ, 2026-10-23)
+### 20. Force planner (web, no saved state) ✅ done (2026-10-23)
 
 Needs tasks 16 (TV in Core) and 18 (fireteam check in Core) merged first. RJ's brief: structure where it helps, room to customize, **no heavy army building**. The planner is a calculator that shows the rules; it never blocks the player.
 
