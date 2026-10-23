@@ -8,6 +8,7 @@ import { Land } from './views/Land'
 import { Missions } from './views/Missions'
 import { Reference } from './views/Reference'
 import { Units } from './views/Units'
+import { FireteamsView } from './views/Fireteams'
 
 // The unit database and reference: everything on these pages is read from /content
 // (content/*.yaml compiled to content.json and served by Imperator.Api).
@@ -51,6 +52,7 @@ export default function App() {
       {loaded && lookup && (
         <>
           {route === 'units' && <Units content={loaded.content} lookup={lookup} />}
+          {route === 'fireteams' && <FireteamsView content={loaded.content} lookup={lookup} />}
           {route === 'reference' && <Reference content={loaded.content} lookup={lookup} />}
           {route === 'behaviors' && <Behaviors content={loaded.content} lookup={lookup} />}
           {route === 'decks' && <Decks content={loaded.content} />}
