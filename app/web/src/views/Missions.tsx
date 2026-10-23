@@ -43,7 +43,7 @@ export function Missions({ content, lookup }: { content: Content; lookup: Lookup
       {example ? (
         <div className="filters">
           <p className="summary">
-            Showing <b>{exampleLabel(example)}</b>, read from <code>docs/scenarios/missions/{example}.yaml</code>.
+            Showing <b>{exampleLabel(example)}</b>, read from <code>{example.startsWith('foundry-moon/') ? `docs/scenarios/arcs/${example}.yaml` : `docs/scenarios/missions/${example}.yaml`}</code>.
           </p>
           <button type="button" onClick={() => navigate('missions')}>
             Generate a mission
@@ -53,6 +53,7 @@ export function Missions({ content, lookup }: { content: Content; lookup: Lookup
         <SeedForm label="Mission" seed={seed} onSeed={(s) => show({ seed: s })}>
           {select('Setting', setting, [{ id: 'ship', name: 'Aboard ship' }, { id: 'land', name: 'On land' }], (v) => show({ setting: v as 'ship' | 'land' }), false)}
           {select('Mission', mission, content.missions.missions, (v) => show({ mission: v }))}
+          {select('Opposition', asked.opposition, (content.missions.oppositions ?? []).map((o) => ({ id: o.id, name: o.name })), (v) => show({ opposition: v }))}
           {select('Tier', tier, content.missions.tiers.map((t) => ({ id: String(t.tier), name: `Threat tier ${t.tier}` })), (v) => show({ tier: v }))}
           {setting === 'ship' && select('Vessel', vessel, content.layouts.vessels, (v) => show({ vessel: v }))}
           {setting === 'land' && select('Environment', environment, content.terrain.environments, (v) => show({ environment: v }))}
@@ -118,13 +119,14 @@ function MissionSheet({ mission: m, content, lookup }: { mission: Mission; conte
         </p>
         {para('Tasking')}
         {para('Situation')}
+        {m.arc && <p className="meta">{m.arc.name} · {m.arc.label}</p>}
       </header>
 
       <div className="deck-layout">
         <figure className="deck-figure">
           <BoardMap board={m} title={m.title} securityName={securityName} troopName={troopName} />
           <BoardLegend board={m} />
-          <figcaption className="small">
+          <figcaption className="small">{m.map_note && <p>{m.map_note}</p>}
             {m.setting === 'ship'
               ? `Scale: each grid square is 3". Board ${m.board.width}" × ${m.board.height}". The blue bar is the airlock: the way in and out. ` +
                 'Enemy models (numbered) are the guard, placed openly. Contact chips (?n) are hidden contacts: roll for them when revealed.'
@@ -132,7 +134,7 @@ function MissionSheet({ mission: m, content, lookup }: { mission: Mission; conte
                 'The player edge is the bottom. Pieces are footprints from the sector rolls: place your own terrain to match. Contact chips (?n) are hidden contacts.'}
           </figcaption>
         </figure>
-        <div className="deck-tables">{['Objective', 'Opposition', 'Ground', 'Complication', 'Extraction and time'].map(para)}</div>
+        <div className="deck-tables">{['Objective', 'Opposition', 'Ground', 'Complication', 'Extraction and time', 'Force'].map(para)}</div>
       </div>
 
       <section className="sheet-page" aria-labelledby="plays">
@@ -140,23 +142,25 @@ function MissionSheet({ mission: m, content, lookup }: { mission: Mission; conte
         {type && (
           <>
             <p>
-              <b>Taking it.</b> {type.task}
+              <b>Taking it.</b> {m.task ?? type.task}
             </p>
             <p>
-              <b>Lockdown (alert 6).</b> {type.lockdown}
+              <b>Lockdown (alert 6).</b> {m.lockdown ?? type.lockdown}
             </p>
             <Table
               title="Grades"
               headers={['Grade', 'Result']}
               rows={[
-                ['Decisive', type.decisive],
-                ['Marginal', type.marginal],
-                ['Failure', type.failure],
+                ['Decisive', m.grades?.decisive ?? type.decisive],
+                ['Marginal', m.grades?.marginal ?? type.marginal],
+                ['Failure', m.grades?.failure ?? type.failure],
               ]}
             />
           </>
         )}
 
+        {(m.next?.length ?? 0) > 0 && <Table title="After the mission" headers={['Grade', 'Next']} rows={m.next!.map((n) => [n.grade, n.text])} />}
+        {(m.special_rules?.length ?? 0) > 0 && <section><h2>Special rules</h2>{m.special_rules!.map((r) => <p key={r.title}><b>{r.title}.</b> {r.text}</p>)}</section>}
         <h2>Alert track and clock</h2>
         <p>
           <b>Raises:</b> {alert.raises.map((r) => `${r.source} +${r.amount}`).join('; ')}. Starts at {m.alert_start}.
@@ -231,7 +235,7 @@ function composition(el: Element, lookup: Lookup) {
 }
 
 function ContactTable({ mission: m, content, lookup }: { mission: Mission; content: Content; lookup: Lookup }) {
-  const tier = content.missions.tiers.find((t) => t.tier === m.tier)
+  const tier = (content.missions.oppositions?.find((o) => o.id === m.opposition)?.tiers ?? content.missions.tiers).find((t) => t.tier === m.tier)
   const elements = new Map(content.factions.elements.map((e) => [e.id, e]))
   const special = new Map(content.missions.contact_results.map((r) => [r.id, r]))
   return (
@@ -256,7 +260,7 @@ function EnemyTable({ mission: m, content, lookup }: { mission: Mission; content
   const tier = content.missions.tiers.find((t) => t.tier === m.tier)
   const elements = new Map(content.factions.elements.map((e) => [e.id, e]))
   const guardId = m.enemies[0]?.element
-  const ids = [guardId, ...(tier?.table ?? []).map((r) => r.result), tier?.reinforcement].filter((id): id is string => !!id && elements.has(id))
+  const ids = [guardId, ...(tier?.table ?? []).map((r) => r.result), m.reinforcement ?? tier?.reinforcement].filter((id): id is string => !!id && elements.has(id))
   const ranks = content.core.ranks.map((r) => r.id)
   const drillByRank = new Map(content.behaviors.drills.map((d) => [d.rank, d.name]))
   const isLeader = (troop: string) => 'leader' in (lookup.troops.get(troop)?.skills ?? {})
