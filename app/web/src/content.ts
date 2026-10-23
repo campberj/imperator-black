@@ -105,6 +105,7 @@ export interface Troop {
   gear_options?: string[]
   skills: Record<string, number>
   miniatures?: string
+  class?: string
 }
 
 export interface Faction {
@@ -123,6 +124,7 @@ export interface Element {
   composition: { troop: string; count: number }[]
   alternatives?: string[]
   reaction_force?: boolean
+  type?: string
 }
 
 export interface ThreatTier {
@@ -137,6 +139,7 @@ export interface Team {
   faction: string
   summary: string
   slots: { troop: string; count: number; gear_choice?: number }[]
+  type?: string
 }
 
 export interface Behavior {
@@ -201,7 +204,7 @@ export interface Content {
   skills: { skills: Skill[] }
   troops: { troops: Troop[] }
   factions: { factions: Faction[]; elements: Element[]; threat_tiers: ThreatTier[] }
-  rosters: { teams: Team[] }
+  rosters: { teams: Team[]; fireteam_types?: { id: string; name: string; leader: number[]; troopers: number[]; specialists: number[]; max_models: number; summary: string }[]; classes?: { id: string; name: string; text: string }[] }
   behaviors: Behaviors
   layouts: { vessels: Vessel[]; rooms: Room[] }
   missions: {
