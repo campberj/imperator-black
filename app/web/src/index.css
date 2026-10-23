@@ -780,3 +780,31 @@ table.boxes td.limit {
     padding: 2px 0;
   }
 }
+
+
+/* Force planner: compact editable list, single-page paper handoff. */
+.planner-heading, .planner-actions, .planner-model, .planner-summary { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.planner-heading { justify-content: space-between; }
+.planner-heading h2 { margin-right: auto; }
+.planner-actions { margin: 10px 0 16px; }
+.planner-actions label, .planner-model label { display: inline-flex; flex-direction: column; gap: 2px; font-size: 0.75rem; }
+.planner-actions select, .planner-model select, .planner-model input, .planner-settings input { padding: 5px; max-width: 200px; }
+.planner-model { margin: 6px 0; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.planner-model input[type=number] { width: 64px; }
+.planner-kit { display: flex; flex-wrap: wrap; gap: 8px; }
+.planner-team { border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin: 14px 0; background: var(--surface); }
+.planner-team h3 { margin: 0 0 8px; }
+.planner-summary { padding: 12px 16px; margin-top: 12px; border: 1px solid var(--border); background: var(--surface); }
+.planner-print { margin-top: 16px; }
+@media print {
+  @page { size: letter; margin: 0.45in; }
+  .top, .planner-settings, .planner-actions, .planner-model, .planner-team, .planner-heading button, .planner > h2, .planner > ul, .planner > p:not(.meta), .planner > .error, .planner > .meta { display: none !important; }
+  .planner { font-size: 10pt; }
+  .planner-heading { display: block; }
+  .planner-heading h2 { margin: 0 0 6px; }
+  .planner-summary { padding: 3px; margin: 0 0 8px; }
+  .planner-print { display: block; margin: 0; }
+  .planner-print h2 { margin: 4px 0; }
+  .planner-print table { font-size: 9pt; }
+  .planner-print tr { break-inside: avoid; }
+}
