@@ -18,9 +18,9 @@ export interface ShortArc {
   results: { grade: string; text: string }[]
 }
 
-const RAW_ARCS = import.meta.glob('../../../docs/scenarios/arcs/*/arc.yaml', { query: '?raw', import: 'default' }) as Record<string, () => Promise<string>>
+const RAW_ARCS = import.meta.glob('../../../docs/scenarios/arcs/*/*.yaml', { query: '?raw', import: 'default' }) as Record<string, () => Promise<string>>
 
-export const ARCS = Object.entries(RAW_ARCS).map(([path, load]) => ({
+export const ARCS = Object.entries(RAW_ARCS).filter(([path]) => path.endsWith('/arc.yaml')).map(([path, load]) => ({
   id: path.split('/').at(-2)!,
   load,
 })).sort((a, b) => a.id.localeCompare(b.id))
