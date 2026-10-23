@@ -114,3 +114,17 @@ test('changing faction clears a role that no longer applies', () => {
   select('Faction', 'freespace')
   expect((screen.getByLabelText('Role') as HTMLSelectElement).value).toBe('')
 })
+
+test('AT launcher card shows both anti-armour and high explosive rounds', () => {
+  const launcher = content.weapons.ranged.find((w) => w.rounds?.length && w.round)!
+  const troop = content.troops.troops.find((t) => [t.weapon, ...(t.weapon_options ?? [])].includes(launcher.id))!
+  render(<Units content={content} lookup={lookup} />)
+  select('Faction', troop.faction)
+  const c = card(troop.name)
+  expect(c.textContent).toContain(`${launcher.round} above`)
+  for (const round of launcher.rounds!) {
+    expect(c.textContent).toContain(`or ${round.name.toLowerCase()} round: ${round.damage}, AP ${round.ap}`)
+    if (round.explosion) expect(c.textContent).toContain(`Explosion (${round.explosion})`)
+  }
+  expect(c.textContent).toContain('Choose the round before each Shoot')
+})
