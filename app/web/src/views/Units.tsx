@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Content, Lookup } from '../content'
 import { UnitCard } from '../components/UnitCard'
 import { Table } from '../components/Table'
@@ -6,6 +6,19 @@ import { matches, modelsText, troopKeywords, troopSearchText } from '../format'
 
 /** Troop profiles as cards, with the faction's teams (player) or elements (enemy). */
 export function Units({ content, lookup }: { content: Content; lookup: Lookup }) {
+  const [values, setValues] = useState<Map<string, { tv: number; requisition: number }>>(new Map())
+  const [valueError, setValueError] = useState('')
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch('/values', { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`GET /values: ${response.status}`)
+        const rows = (await response.json()) as { troop: string; tv: number; requisition: number }[]
+        if (!controller.signal.aborted) setValues(new Map(rows.map((row) => [row.troop, row])))
+      })
+      .catch((error: unknown) => { if (!controller.signal.aborted) setValueError(String(error)) })
+    return () => controller.abort()
+  }, [])
   const factions = content.factions.factions
   const [faction, setFaction] = useState(factions[0]?.id ?? '')
   const [rank, setRank] = useState('')
@@ -90,9 +103,10 @@ export function Units({ content, lookup }: { content: Content; lookup: Lookup })
       <p className="meta" aria-live="polite">
         {troops.length} of {inFaction.length} troop profiles
       </p>
+      {valueError && <p className="error" role="alert">Troop Values unavailable: {valueError}</p>}
       <div className="cards">
         {troops.map((t) => (
-          <UnitCard key={t.id} troop={t} content={content} lookup={lookup} />
+          <UnitCard key={t.id} troop={t} content={content} lookup={lookup} value={values.get(t.id)} />
         ))}
       </div>
 
