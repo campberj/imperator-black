@@ -56,7 +56,7 @@ def grid(head, rows, widths, blank=0, row_h=None, font=B):
 
 
 class ArcMap(Flowable):
-    """The arc map template: the ship, three columns of node boxes (3, 2, target) and two spare boxes."""
+    """The arc map template: the base, three columns of node boxes (3, 2, target) and two spare boxes."""
 
     def __init__(self, width, height=2.9 * inch):
         super().__init__()
@@ -105,7 +105,7 @@ class ArcMap(Flowable):
         c.roundRect(*ship, 6, fill=1, stroke=0)
         c.setFillColor(colors.white)
         c.setFont("Body-Bold", 9)
-        c.drawCentredString(ship[0] + ship[2] / 2, ship[1] + ship[3] / 2 - 3, "SHIP")
+        c.drawCentredString(ship[0] + ship[2] / 2, ship[1] + ship[3] / 2 - 3, "BASE")
         n = 1
         for ci, (x, ys) in enumerate(zip(xs, cols)):
             tier = CP["arc"]["columns"][ci]["tier"]
@@ -143,12 +143,15 @@ def status_page():
     story += [ri, Paragraph("Evidence at 6: the Directorate is exposed (next arc against it).", S), Spacer(1, 6)]
     story += [Paragraph("Arc map", H2), ArcMap(W), Spacer(1, 6)]
     rows = []
-    for sh in CP["ship"]:
-        rows.append([Paragraph(f"<b>{sh['name']}</b>", B)] +
-                    [Paragraph(f"□ <b>{i}</b> ({lv['cost']}): {lv['text']}", S) for i, lv in enumerate(sh["levels"], 1)])
+    for fa in CP["bases"]["facilities"]:
+        rows.append([Paragraph(f"<b>{fa['name']}</b>", B)] +
+                    [Paragraph(f"□ <b>{i}</b> ({lv['cost']}): {lv['text']}", S) for i, lv in enumerate(fa["levels"], 1)])
     t = Table(rows, colWidths=[1.0 * inch] + [(W - 1.0 * inch) / 3] * 3)
     t.setStyle(TableStyle([("GRID", (0, 0), (-1, -1), 0.4, ps.RULE), ("VALIGN", (0, 0), (-1, -1), "TOP")]))
-    story += [Paragraph("The ship", H2), t, Spacer(1, 6)]
+    th = CP["bases"]["threat"]
+    story += [Paragraph("The base: □ outpost □ ship   ·   overrun □   ·   upkeep 1 Requisition per 3 facility levels", H2), t, Spacer(1, 4),
+              Paragraph(f"Threat track (attacked at {th['attack_at']}+; 5+ with Defences 3)", H2),
+              boxes([str(i) for i in range(th["max"] + 1)], [W / (th["max"] + 1)] * (th["max"] + 1), shade=(th["attack_at"],)), Spacer(1, 6)]
     steps = " · ".join(f'<b>{i}. {s["step"]}</b>' for i, s in enumerate(CP["turn"], 1))
     story += [Paragraph("Each turn: " + steps, B)]
     return story

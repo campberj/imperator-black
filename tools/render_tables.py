@@ -209,12 +209,33 @@ def render_campaign(section):
     if section == "honours":
         return table(["Honour", "How"], [(f'**{h["name"]}**', h["text"]) for h in Cp["honours"]]) + "\n\n" + \
             table(["Unit honour", "Effect"], [(f'**{h["name"]}**', h["text"]) for h in Cp["honour_list"]])
-    if section == "ship":
+    B = Cp["bases"]
+    if section == "base_kinds":
+        return table(["Base", "What it is"], [(f'**{k["name"]}**', k["text"]) for k in B["kinds"]])
+    if section == "base_rules":
+        return "\n".join(f"- {x}" for x in B["rules"])
+    if section == "facilities":
         rows = []
-        for sh in Cp["ship"]:
-            for i, lv in enumerate(sh["levels"], 1):
-                rows.append((f'**{sh["name"]}**' if i == 1 else "", i, lv["cost"], lv["text"]))
-        return table(["Upgrade", "Level", "Requisition", "Effect"], rows)
+        for fa in B["facilities"]:
+            for i, lv in enumerate(fa["levels"], 1):
+                rows.append((f'**{fa["name"]}**' if i == 1 else "", i, lv["cost"], lv["text"]))
+        return table(["Facility", "Level", "Requisition", "Effect"], rows)
+    if section == "threat":
+        th = B["threat"]
+        return table(["Threat track (0–%d)" % th["max"], "Change"],
+                     [(x["source"], f'+{x["amount"]}') for x in th["raises"]] + [(x["source"], f'−{x["amount"]}') for x in th["lowers"]])
+    if section == "base_attacks":
+        return "\n".join(f"- {x}" for x in B["attacks"])
+    if section == "defence":
+        d = B["defence"]
+        out = ["**Board.**", ""] + [f"- {x}" for x in d["board"]] + ["", "**Deployment.**", ""] + [f"- {x}" for x in d["deploy"]]
+        out += ["", "**The enemy.**", ""] + [f"- {x}" for x in d["enemy"]] + ["", f'**Losing an objective.** {d["losing"]}', ""]
+        out += [table(["Grade", "Result"], [("**Decisive**", d["grades"]["decisive"]), ("**Marginal**", d["grades"]["marginal"]), ("**Failure**", d["grades"]["failure"])])]
+        return "\n".join(out)
+    if section == "base_outcomes":
+        return table(["Defence", "Afterwards"], [(f'**{o["result"]}**', o["text"]) for o in B["outcomes"]])
+    if section == "recapture":
+        return "\n".join(f"- {x}" for x in B["recapture"])
     if section == "costs":
         return table(["Item", "Requisition"], [(c["item"], c["cost"]) for c in Cp["costs"]])
     if section == "events":

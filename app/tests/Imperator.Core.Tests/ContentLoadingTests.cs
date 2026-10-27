@@ -122,6 +122,9 @@ public class ContentLoadingTests
         Assert.Equal(3, Set.Campaign.ShortArc.Missions);
         Assert.Equal(["fireteam", "soldier"], Set.Campaign.ForceSelection.Select(x => x.Id));
         Assert.Equal(11, Set.Campaign.Events.Count);
+        Assert.Equal(["outpost", "ship"], Set.Campaign.Bases.Kinds.Select(x => x.Id));
+        Assert.Equal(["medical", "armoury", "intelligence", "workshop", "barracks", "defences"], Set.Campaign.Bases.Facilities.Select(x => x.Id));
+        Assert.Equal(4, Set.Campaign.Bases.Threat.AttackAt);
         Assert.Equal(["patrol", "strike"], Set.Versus.Sizes.Select(x => x.Id));
         Assert.Equal(350, Set.Versus.Sizes.Single(x => x.Id == "patrol").Tv);
         Assert.Equal(6, Set.Versus.Missions.Count);
@@ -139,7 +142,8 @@ public class ContentLoadingTests
     [InlineData("campaign.advances.skills[0]", "\"bad_skill\"", "campaign.advances.skills: unknown id 'bad_skill'")]
     [InlineData("campaign.standing[0].level", "1", "campaign.standing: levels must run 0 to 6")]
     [InlineData("campaign.arc.columns[0].nodes", "1", "campaign.arc: six nodes in all, one of them the target")]
-    [InlineData("campaign.ship[0].levels", "[]", "campaign ship medbay: three levels")]
+    [InlineData("campaign.bases.facilities[0].levels", "[]", "campaign facility medical: three levels")]
+    [InlineData("campaign.bases.threat.attack_at", "9", "campaign.bases.threat: attack_at must be 1 to max")]
     [InlineData("campaign.events[0].text", "\"\"", "campaign event 2: needs text")]
     [InlineData("versus.mission_roll[0].roll", "\"2\"", "versus.mission_roll: d6 rows must cover 1-6 exactly once")]
     [InlineData("versus.mission_roll[0].mission", "\"bad_mission\"", "versus.mission_roll mission: unknown id 'bad_mission'")]

@@ -334,9 +334,17 @@ public static class ContentValidator
         if (cp.Arc.Columns.Sum(x => x.Nodes) != 6 || cp.Arc.Columns.Count(x => x.Target) != 1)
             errors.Add("campaign.arc: six nodes in all, one of them the target");
         Ids(cp.Support, x => x.Id, "campaign.support");
-        Ids(cp.Ship, x => x.Id, "campaign.ship");
-        foreach (var sh in cp.Ship)
-            if (sh.Levels.Count != 3) errors.Add($"campaign ship {sh.Id}: three levels");
+        Ids(cp.Bases.Kinds, x => x.Id, "campaign.bases.kinds");
+        Ids(cp.Bases.Facilities, x => x.Id, "campaign.bases.facilities");
+        foreach (var fa in cp.Bases.Facilities)
+            if (fa.Levels.Count != 3) errors.Add($"campaign facility {fa.Id}: three levels");
+        if (cp.Bases.Threat.AttackAt < 1 || cp.Bases.Threat.AttackAt > cp.Bases.Threat.Max)
+            errors.Add("campaign.bases.threat: attack_at must be 1 to max");
+        foreach (var (k, text) in new[] { ("decisive", cp.Bases.Defence.Grades.Decisive), ("marginal", cp.Bases.Defence.Grades.Marginal),
+                     ("failure", cp.Bases.Defence.Grades.Failure) })
+            if (string.IsNullOrEmpty(text)) errors.Add($"campaign.bases.defence: needs a {k} grade");
+        if (!cp.Bases.Outcomes.Select(o => o.Result).SequenceEqual(["Decisive", "Marginal", "Failure"]))
+            errors.Add("campaign.bases.outcomes: Decisive, Marginal and Failure, in order");
         foreach (var ev in cp.Events)
             if (string.IsNullOrEmpty(ev.Text)) errors.Add($"campaign event {ev.Roll}: needs text");
 

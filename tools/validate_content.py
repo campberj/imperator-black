@@ -375,10 +375,20 @@ if [x["level"] for x in Cp["standing"]] != list(range(0, 7)):
 if sum(c["nodes"] for c in Cp["arc"]["columns"]) != 6 or sum(1 for c in Cp["arc"]["columns"] if c.get("target")) != 1:
     errors.append("campaign.arc: six nodes in all, one of them the target")
 ids(Cp["support"], "campaign.support")
-ids(Cp["ship"], "campaign.ship")
-for sh in Cp["ship"]:
-    if len(sh["levels"]) != 3:
-        errors.append(f"campaign ship {sh['id']}: three levels")
+B = Cp["bases"]
+ids(B["kinds"], "campaign.bases.kinds")
+ids(B["facilities"], "campaign.bases.facilities")
+for fa in B["facilities"]:
+    if len(fa["levels"]) != 3:
+        errors.append(f"campaign facility {fa['id']}: three levels")
+th = B["threat"]
+if not 1 <= th["attack_at"] <= th["max"]:
+    errors.append("campaign.bases.threat: attack_at must be 1 to max")
+for k in ("decisive", "marginal", "failure"):
+    if not B["defence"]["grades"].get(k):
+        errors.append(f"campaign.bases.defence: needs a {k} grade")
+if [o["result"] for o in B["outcomes"]] != ["Decisive", "Marginal", "Failure"]:
+    errors.append("campaign.bases.outcomes: Decisive, Marginal and Failure, in order")
 for ev in Cp["events"]:
     if not ev.get("text"):
         errors.append(f"campaign event {ev['roll']}: needs text")

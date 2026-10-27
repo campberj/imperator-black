@@ -25,8 +25,19 @@ public sealed record CampaignAdvancesDef(int Every, List<string> Text, List<Camp
     List<string> Skills);
 public sealed record CampaignHonourDef(string Name, string Text);
 public sealed record CampaignHonourListDef(string Id, string Name, string Text);
-public sealed record CampaignShipLevelDef(int Cost, string Text);
-public sealed record CampaignShipDef(string Id, string Name, List<CampaignShipLevelDef> Levels);
+// The base (decision 7.14): an outpost or a ship, its facilities, the threat track, attacks, defence and recapture.
+public sealed record CampaignBaseKindDef(string Id, string Name, string Text);
+public sealed record CampaignFacilityLevelDef(int Cost, string Text);
+public sealed record CampaignFacilityDef(string Id, string Name, List<CampaignFacilityLevelDef> Levels);
+public sealed record CampaignThreatChangeDef(string Source, int Amount);
+public sealed record CampaignThreatDef(int Max, int AttackAt, List<CampaignThreatChangeDef> Raises, List<CampaignThreatChangeDef> Lowers);
+public sealed record CampaignDefenceGradesDef(string Decisive, string Marginal, string Failure);
+public sealed record CampaignDefenceDef(List<string> Board, List<string> Deploy, List<string> Enemy, string Losing,
+    CampaignDefenceGradesDef Grades);
+public sealed record CampaignBaseOutcomeDef(string Result, string Text);
+public sealed record CampaignBasesDef(List<CampaignBaseKindDef> Kinds, List<string> Rules, List<CampaignFacilityDef> Facilities,
+    CampaignThreatDef Threat, List<string> Attacks, CampaignDefenceDef Defence, List<CampaignBaseOutcomeDef> Outcomes,
+    List<string> Recapture);
 // Costs are authored as either an integer or explanatory text (e.g. Requisition by troop TV).
 public sealed record CampaignCostDef(string Item, JsonElement Cost);
 public sealed record CampaignEventDef(D6Range Roll, string Name, string Text);
@@ -52,7 +63,7 @@ public sealed record CampaignContent(
     CampaignAdvancesDef Advances,
     List<CampaignHonourDef> Honours,
     List<CampaignHonourListDef> HonourList,
-    List<CampaignShipDef> Ship,
+    CampaignBasesDef Bases,
     List<CampaignCostDef> Costs,
     List<CampaignEventDef> Events,
     List<string> Evidence,
