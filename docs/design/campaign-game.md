@@ -1,6 +1,6 @@
 # The campaign game: design note
 
-Status: **Proposed, for RJ's review** (2026-10-23). Decisions 1.11, 7.14 and 7.15. Nothing here is built yet.
+Status: **Proposed** (2026-10-23; RJ's answers 2026-10-27). Decisions 1.11, 7.14 and 7.15. Nothing here is built yet.
 
 ## The vision (RJ)
 
@@ -47,9 +47,16 @@ RJ's calls (2026-10-23):
 4. **App S3:** a procedural adventure campaign (chapter 14 arcs) with generated story text, the outpost hub, events with choices.
 5. **Later:** multiplayer (decision 1.10), a larger sector layer, the live mission dashboard.
 
-## Questions for RJ
+## RJ's answers (2026-10-27)
 
-1. **Outpost vs ship:** does a campaign always have both (the ship travels, the outpost is home), or does a campaign start with one and gain the other?
-2. **Where outposts live:** on the arc or sector map as a node that can be attacked (defence missions on the tabletop), or off the map?
-3. **Command in solo:** how much latitude should the app's commander give? Chapter 14's Black Ops latitude (you choose targets while Standing holds), or tighter orders in some campaigns?
-4. **Tone of procedural text:** short, military-report style (briefing and sitrep), or longer narrative prose?
+1. **The base is a land outpost or a ship, by campaign.** Each campaign gives the force one home base: an outpost on the ground or a ship that travels. Chapter 14's ship upgrade tracks become the ship kind of base; a land outpost gets its own facilities.
+2. **The base is on the map and can be attacked.** It is a place on the arc or sector map, and an attack on it is a tabletop mission (a defence mission type, still to write).
+3. **The commander's latitude varies by campaign.** A campaign definition sets it, from chapter 14's Black Ops latitude (choose targets while Standing holds) to tight orders.
+4. **Procedural story text is short military reports for now:** taskings, briefings, sitreps and after-action summaries.
+
+## Still to design
+
+- **Base rules:** facilities for each kind of base, costs, upkeep, founding or assignment, what an attack threatens, losing and rebuilding.
+- **A defence mission** (chapter 13): the enemy attacks the base; the player holds it.
+- **The campaign definition schema:** start, base kind, command latitude, map or arc structure, story nodes and text, end conditions.
+- **Report templates** for procedural text: taskings, briefings, sitreps, after-action summaries, with slots filled from the campaign state.
