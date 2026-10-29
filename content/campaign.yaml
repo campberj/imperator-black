@@ -299,3 +299,22 @@ short_arc:
     - "Grades lead on: the arc sheet says which mission comes next and any edge or setback it carries (a bigger or smaller force, the alert track's start, contacts removed or added)."
     - "The arc's result is the finale's grade, one step better if the first two missions were both Decisive, one step worse if either was a Failure (Decisive, Marginal, Failure; never past either end)."
 
+
+# --------------------------------------------------------------- campaign definitions (decision 7.15)
+# Command latitude: who chooses the next tasking. A campaign definition names one (docs/design/campaign-format.md).
+latitudes:
+  - { id: black_ops, name: Black Ops, text: "Chapter 14: the force chooses its taskings at Standing 3 or more; at 2 or less command chooses (the highest-tier available node)." }
+  - { id: orders,    name: Orders,    text: "Command chooses every tasking: the campaign names the next node, or the highest-tier available node." }
+  - { id: free_hand, name: Free hand, text: "The force always chooses its taskings, whatever its Standing." }
+
+# Report templates: short military reports for procedural campaigns (RJ, 2026-10-27). {slots} are filled from the
+# campaign state; a bespoke campaign may write its own text instead.
+reports:
+  - { id: tasking,   name: Tasking,   text: "TASKING. {force} to {mission_name} at {node}. Threat tier {tier}. Expected opposition: {opposition}. Out by {exit}." }
+  - { id: briefing,  name: Briefing,  text: "BRIEFING. {node}: {situation} Objective: {objective}. Clock: {limit} minutes. Command intent: {intent}" }
+  - { id: sitrep_decisive, name: Sitrep (Decisive), text: "SITREP. {node} taken. Objective complete. Friendly losses: {losses}. Enemy losses: {enemy_losses}. Standing {standing}." }
+  - { id: sitrep_marginal, name: Sitrep (Marginal), text: "SITREP. {node} taken at cost. Objective partly complete. Friendly losses: {losses}. Command notes the price." }
+  - { id: sitrep_failure,  name: Sitrep (Failure),  text: "SITREP. {node} not taken. Force withdrawn. Friendly losses: {losses}. Enemy alert raised; expect a stronger defence." }
+  - { id: aar,       name: After-action summary, text: "AFTER-ACTION. {mission_name}, {grade}. Casualties: {casualties}. Citation: {citation}. Requisition {requisition}, Intel {intel}, Threat {threat}." }
+  - { id: threat,    name: Threat warning, text: "WARNING. Signals traffic around {base} is rising (threat {threat}). Expect enemy action against the base." }
+  - { id: base_attack, name: Base attack, text: "FLASH. {base} under attack. Enemy force estimated tier {tier}. All personnel to defensive positions." }

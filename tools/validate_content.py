@@ -389,6 +389,8 @@ for k in ("decisive", "marginal", "failure"):
         errors.append(f"campaign.bases.defence: needs a {k} grade")
 if [o["result"] for o in B["outcomes"]] != ["Decisive", "Marginal", "Failure"]:
     errors.append("campaign.bases.outcomes: Decisive, Marginal and Failure, in order")
+ids(Cp.get("latitudes", []), "campaign.latitudes")
+ids(Cp.get("reports", []), "campaign.reports")
 for ev in Cp["events"]:
     if not ev.get("text"):
         errors.append(f"campaign event {ev['roll']}: needs text")
@@ -429,6 +431,55 @@ for m in Vs["missions"]:
         errors.append(f"versus mission {m['id']}: kind even/raid and hidden none/blinds/defender")
     if m["kind"] == "raid" and m["raid_type"] not in mission_ids | {"recover_or_capture"}:
         errors.append(f"versus mission {m['id']}: unknown raid_type")
+
+# Campaign definitions (decision 7.15; docs/design/campaign-format.md): bespoke arcs and procedural campaigns.
+EFFECTS = {"initiative", "alert_start", "force_tv", "remove_contacts", "requisition", "intel", "standing", "evidence", "threat", "flag"}
+latitude_ids = {x["id"] for x in Cp.get("latitudes", [])}
+opposition_ids = {o["id"] for o in M.get("oppositions", [])}
+start_forces = {f["id"] for f in C["rosters"]["starting_forces"]}
+base_kinds = {k["id"] for k in Cp["bases"]["kinds"]}
+facility_ids = {f["id"] for f in Cp["bases"]["facilities"]}
+campaign_files = sorted((ROOT / "docs/scenarios/arcs").glob("*/arc.yaml")) + sorted((ROOT / "docs/scenarios/campaigns").glob("*.yaml"))
+for cf in campaign_files:
+    cd = yaml.safe_load(cf.read_text())
+    if cd.get("kind") != "campaign":
+        continue
+    w = f"campaign {cd.get('id')}"
+    need(cd["faction"], factions, f"{w} faction")
+    if cd.get("opposition") is not None:
+        need(cd["opposition"], opposition_ids, f"{w} opposition")
+    need(cd["command"], latitude_ids, f"{w} command")
+    if cd.get("force_selection") not in ("fireteam", "soldier"):
+        errors.append(f"{w}: force_selection must be fireteam or soldier")
+    if cd.get("format") not in ("short_arc", "arcs", "story") or cd.get("source") not in ("bespoke", "procedural"):
+        errors.append(f"{w}: format short_arc/arcs/story and source bespoke/procedural")
+    if cd.get("base"):
+        need(cd["base"]["kind"], base_kinds, f"{w} base kind")
+        for fa, lvl in (cd["base"].get("facilities") or {}).items():
+            need(fa, facility_ids, f"{w} base facility")
+            if not 0 <= lvl <= 3:
+                errors.append(f"{w}: facility {fa} level 0-3")
+    if cd["source"] == "procedural":
+        need(cd["start_force"], start_forces, f"{w} start force")
+        continue
+    labels = {m["label"] for m in cd["missions"]}
+    if cd.get("start") not in labels:
+        errors.append(f"{w}: start must be a mission label")
+    for m in cd["missions"]:
+        mf = cf.parent / m["file"]
+        if not mf.exists():
+            errors.append(f"{w}: mission file {m['file']} missing")
+            continue
+        md = yaml.safe_load(mf.read_text())
+        if sorted(n["grade"] for n in md.get("next", [])) != ["Decisive", "Failure", "Marginal"]:
+            errors.append(f"{w} mission {m['label']}: next must cover Decisive, Marginal and Failure")
+        for n in md.get("next", []):
+            if n.get("to") not in labels | {"end"}:
+                errors.append(f"{w} mission {m['label']} {n.get('grade')}: to must be a mission label or end")
+            for k in (n.get("effects") or {}):
+                if k not in EFFECTS:
+                    errors.append(f"{w} mission {m['label']} {n.get('grade')}: unknown effect '{k}'")
+
 
 if errors:
     print("\n".join(errors))

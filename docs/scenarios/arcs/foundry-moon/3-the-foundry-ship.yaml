@@ -12,7 +12,9 @@ mission: sabotage
 tier: 3
 opposition: separatist
 size: small
-force_limit: { tv: 350, models: 8 }   # the Force briefing heading in numbers (chapter 14, short arcs)
+force_limit:
+  tv: 350
+  models: 8
 clock:
   die: d4
   limit: 20
@@ -323,8 +325,14 @@ special_rules:
     places one B1 battle droid section at the enemy entry, Alerted.'
 next:
 - grade: Decisive
+  to: end
+  report: SITREP. Iron Covenant crippled on the pad. Battalion shipment destroyed in its racks.
   text: The frigate never lifts, and the foundry's next battalion with it. Work out the arc's result (chapter 14, short arcs).
 - grade: Marginal
+  to: end
+  report: SITREP. Iron Covenant damaged. Lift delayed by weeks.
   text: 'The frigate is crippled but repairable: the shipment is weeks late. Work out the arc''s result.'
 - grade: Failure
+  to: end
+  report: FLASH. Iron Covenant has lifted. Battalion shipment en route to the front.
   text: The Iron Covenant lifts with its battalion. Work out the arc's result.

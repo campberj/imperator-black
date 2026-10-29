@@ -12,7 +12,9 @@ mission: sabotage
 tier: 1
 opposition: separatist
 size: small
-force_limit: { tv: 250, models: 6 }   # the Force briefing heading in numbers (chapter 14, short arcs)
+force_limit:
+  tv: 250
+  models: 6
 clock:
   die: d4
   limit: 20
@@ -296,11 +298,22 @@ map_note: 'Each grid square is 6"; heavier lines mark the 12" sectors (A1 bottom
   Put a tall piece (a mast, pylon or antenna) at each objective. Contact chips (?n) are hidden contacts.'
 next:
 - grade: Decisive
+  to: 2A
+  effects:
+    initiative: player
+  report: SITREP. Both uplink masts down. Defence grid blind over the landing fields. No friendly losses reported to command.
+    Second wave inbound on schedule.
   text: 'Mission 2A, Kraken''s Convoy. The grid is down and the landing is clean: the Republic wins initiative in round 1
     of 2A.'
 - grade: Marginal
+  to: 2A
+  effects:
+    alert_start: 1
+  report: SITREP. Grid down. Refinery Nine garrison alerted before withdrawal; expect droid patrols on the approaches.
   text: 'Mission 2A, Kraken''s Convoy. The grid is down, but the droids know a raid came: 2A''s alert track starts at 1.'
 - grade: Failure
+  to: 2B
+  report: FLASH. Grid still up. Gunship Two-Seven down in the spire flats. Crew status unknown.
   text: Mission 2B, Bring Them Home. The grid stays up and shoots down the gunship bringing the second wave.
 special_rules:
 - title: Droids at night

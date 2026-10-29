@@ -15,7 +15,9 @@ mission: recover
 tier: 2
 opposition: separatist
 size: small
-force_limit: { tv: 300, models: 7 }   # the Force briefing heading in numbers (chapter 14, short arcs)
+force_limit:
+  tv: 300
+  models: 7
 clock:
   die: d4
   limit: 20
@@ -288,11 +290,25 @@ map_note: 'Each grid square is 6". RJ''s 35" × 43" desert table, played lengthw
   beside the spire field is open ground); the rock shelf is two levels. Enemy positions are model centres.'
 next:
 - grade: Decisive
+  to: '3'
+  effects:
+    force_tv: 50
+    initiative: player
+  report: SITREP. Pilot recovered unhurt. Gunship Two-Nine available for insertion.
   text: 'Mission 3, The Foundry Ship. The pilot flies the surviving gunship: mission 3''s force limit is 50 TV higher, and
     the Republic wins initiative in round 1.'
 - grade: Marginal
+  to: '3'
+  effects:
+    force_tv: 50
+  report: SITREP. Pilot recovered. Gunship Two-Nine available for insertion.
   text: 'Mission 3, The Foundry Ship. The pilot flies the surviving gunship: mission 3''s force limit is 50 TV higher.'
 - grade: Failure
+  to: '3'
+  effects:
+    force_tv: -50
+    alert_start: 1
+  report: SITREP. Pilot lost. No gunship support. Ground approach only.
   text: 'Mission 3, The Foundry Ship. No gunship and no pilot: mission 3''s force limit is 50 TV lower, and its alert track
     starts 1 higher.'
 special_rules:

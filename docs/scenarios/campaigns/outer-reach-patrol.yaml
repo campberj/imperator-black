@@ -1,0 +1,34 @@
+# Procedural campaign: Outer Reach Patrol (rules chapter 14; format: docs/design/campaign-format.md).
+# Task Force Boone's ship hunts Freespace through generated arcs. The app (or the player, on paper) generates each arc.
+id: outer-reach-patrol
+kind: campaign
+format: arcs              # chapter 14 arcs, generated one after another
+source: procedural
+name: Outer Reach Patrol
+faction: tfb
+opposition: null          # null: chapter 13's default tiers (Freespace, contractors, patrons, UN)
+rules_version: "0.5"
+force_selection: fireteam
+command: black_ops        # chapter 14's latitude: choose while Standing holds
+start_force: poc_boarding_element
+resources: { requisition: 6, intel: 1, standing: 3, evidence: 0, threat: 0 }
+base:
+  kind: ship
+  name: TFS Lantern
+  facilities: {}          # every facility at level 0
+summary: >
+  Freespace Solutions is stripping wrecks and stations along the Outer Reach for a patron it won't name. Task Force
+  Boone's boarding element and its ship, the Lantern, are to find the network, break it node by node, and build the
+  case against whoever pays for it.
+generator:
+  arcs: 3                 # up to three arcs; each is generated with chapter 14's arc procedure
+  node_table: campaign    # content/campaign.yaml nodes
+  environments: [industrial, desert, urban]   # land nodes roll among these instead of the node's own, when given
+  vessels: []             # empty: each node's own vessel
+reports: default          # content/campaign.yaml reports
+attacks:                  # campaign triggers for base attacks, beyond the threat track
+  - { when: { arc: 2, turn: 1 }, text: "Freespace has found the Lantern's anchorage. The ship is boarded at the start of the second arc." }
+end:
+  - { result: Decisive, when: "Evidence 6 before the third arc ends", text: "The patron is exposed. Command takes the case to the Authority." }
+  - { result: Marginal, when: "Two arcs won", text: "The network is broken, but its patron walks away." }
+  - { result: Failure, when: "Standing 0, or fewer than two arcs won", text: "The Lantern is recalled. Freespace keeps working the Reach." }

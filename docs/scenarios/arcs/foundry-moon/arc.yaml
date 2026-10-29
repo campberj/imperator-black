@@ -2,12 +2,17 @@
 # Printed by: python3 tools/print_campaign.py --arc docs/scenarios/arcs/foundry-moon/arc.yaml
 # Then print each mission: python3 tools/print_scenario.py docs/scenarios/arcs/foundry-moon/<mission>.yaml
 id: foundry-moon
-kind: arc
+kind: campaign
+format: short_arc        # three missions; result by the short arc rule (chapter 14)
+source: bespoke
 name: Foundry Moon
 faction: republic
 opposition: separatist
 rules_version: "0.5"
 force_selection: fireteam   # the default; the player may switch at the start (chapter 14)
+command: orders             # the arc names every mission (latitudes in content/campaign.yaml)
+start: "1"                  # the opening mission's label; each mission's `next` says where each grade leads
+base: null                  # a short arc has no base (chapter 14, short arcs)
 summary: >
   The Separatists have restarted the droid foundry on Ordo Kessa, a mining moon the Republic thought was worked out.
   Every few weeks a frigate lifts from its landing field with a battalion of new battle droids. A clone company and

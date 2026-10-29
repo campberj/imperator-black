@@ -15,7 +15,9 @@ mission: capture
 tier: 2
 opposition: separatist
 size: small
-force_limit: { tv: 300, models: 7 }   # the Force briefing heading in numbers (chapter 14, short arcs)
+force_limit:
+  tv: 300
+  models: 7
 clock:
   die: d4
   limit: 20
@@ -301,11 +303,23 @@ grades:
   text: Kraken escaped, or still active when time runs out.
 next:
 - grade: Decisive
+  to: '3'
+  effects:
+    remove_contacts: 2
+  report: 'SITREP. Kraken destroyed. Memory core recovered intact: frigate access codes and deck plan. Intelligence cell decrypting.'
   text: 'Mission 3, The Foundry Ship. The core holds the frigate''s codes: before setting up, remove two contact chips of
     your choice.'
 - grade: Marginal
+  to: '3'
+  effects:
+    remove_contacts: 1
+  report: SITREP. Kraken destroyed. Core damaged; partial codes recovered.
   text: 'Mission 3, The Foundry Ship. Some codes survived: before setting up, remove one contact chip of your choice.'
 - grade: Failure
+  to: '3'
+  effects:
+    alert_start: 1
+  report: SITREP. Kraken escaped north-west. Assume the frigate is warned.
   text: 'Mission 3, The Foundry Ship. Kraken reaches the frigate and warns it: mission 3''s alert track starts 1 higher.'
 special_rules:
 - title: From Refinery Nine

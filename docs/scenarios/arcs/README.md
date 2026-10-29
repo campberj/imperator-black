@@ -17,6 +17,9 @@ PDFs go to `docs/print/arcs/`.
 
 ## Writing a short arc
 
+The full format (bespoke and procedural campaigns, effects, reports) is [`docs/design/campaign-format.md`](../../design/campaign-format.md).
+
+
 - A mission file is a chapter 13 mission (`kind: mission`) with an `arc: { id, name, label }` block. Start from a generated mission (`tools/generate_mission.py ... --opposition <faction>`) or an existing table (the Gym 2 desert map), then write the story into it.
 - Fields an authored mission may add: `task`, `lockdown` and `grades` (to replace the mission type's text), `reinforcement` (the element that answers alert 4), `special_rules` (title and text), `next` (what each grade leads to), `map_note`, and extra `briefing` headings such as `Force`.
 - Every mission names its force limit (TV and models) in a `Force` briefing heading.

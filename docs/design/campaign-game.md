@@ -57,5 +57,4 @@ RJ's calls (2026-10-23):
 ## Still to design
 
 - ~~**Base rules** and **a defence mission**~~: drafted 2026-10-27 in chapter 14 *The base* (decision 7.14): facilities, upkeep, the threat track, attacks, the defence mission, recapture.
-- **The campaign definition schema:** start, base kind, command latitude, map or arc structure, story nodes and text, end conditions.
-- **Report templates** for procedural text: taskings, briefings, sitreps, after-action summaries, with slots filled from the campaign state.
+- ~~**The campaign definition schema**~~ and ~~**report templates**~~: drafted 2026-10-29 in [campaign-format.md](campaign-format.md) (decision 7.16).
