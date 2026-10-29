@@ -396,7 +396,8 @@ def enemy_elements(s):
     out = {}
     for e in s["enemies"]:
         out.setdefault(e["element"], []).append(e)
-    return [(ELEMENTS[k], v) for k, v in out.items()]
+    over = s.get("behavior_overrides", {})   # e.g. a base defence: Sentry attackers use Aggressive
+    return [({**ELEMENTS[k], "behavior": over.get(k, ELEMENTS[k]["behavior"])}, v) for k, v in out.items()]
 
 
 def drill_text(el, models, s):
@@ -438,11 +439,13 @@ def scenario_items(s):
     for (troop, weapon), ns in groups.items():
         label = ", ".join(str(n) for n in ns)
         items.append(("troop", troop_for({"troop": troop, "weapon": weapon}, label)))
+    extra = s.get("extra_cards", {})   # e.g. enemy waves that may arrive during the game
+    items += [("troop", troop_for({"troop": t})) for t in extra.get("troops", [])]
     items += [("ref", r) for r in ps.solo_reference_cards()]
     seen = []
-    for el, _ in enemy_elements(s):
-        if el["behavior"] not in seen:
-            seen.append(el["behavior"])
+    for b in [el["behavior"] for el, _ in enemy_elements(s)] + extra.get("behaviors", []):
+        if b not in seen:
+            seen.append(b)
     items += [("behavior", ps.BEHAVIORS[b]) for b in seen]
     return items
 
