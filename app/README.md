@@ -34,7 +34,7 @@ Last updated: 2026-10-23, rules v0.5 (chapters 10–16: solo opponent, ship layo
 
 These are foundations that don't depend on unfinished rules. Each should leave CI green.
 
-**Open tasks, suggested order: 15 (in PR #14), 17, 16, 18, 19, 20, 21, then 22.** Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
+**Open tasks, suggested order: 24, 25, 26, then 27 (gated on RJ's paper playthrough of Foundry Moon), then 22.** Tasks 1–21 and 23 are done. Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
 
 ### 1. Move tests to xUnit ✅ done (2026-10-20)
 
@@ -281,6 +281,44 @@ Needs tasks 16 (TV in Core) and 18 (fireteam check in Core) merged first. RJ's b
 
 ---
 
+### 24. S1 follow-ups — *chatgpt authorized*
+
+From the architecture review of PR #23. Small, independent fixes; one PR.
+
+- **A skipped test reports as skipped:** `SoloCampaignIntegrationTests` calls xUnit v3's `Assert.Skip(...)` when `IMPERATOR_TEST_CONNECTION` is unset, instead of `return`.
+- **Event schema version:** a `schema_version` column on `campaign_events` (int, not null, default 1), with an EF migration; `SoloCampaignEvent` carries it and `Apply` rejects versions it doesn't know. Every later event type starts at 1 and bumps the version when its payload changes, with an upgrade function in Core.
+- **CI test database:** the integration test runs against its own database (`imperator_test`, created in the CI job before the tests), so the later migration-apply step still proves a clean apply on `imperator`.
+- **Done when:** a local run without the variable shows the test as *skipped*; a test replays a version-1 event and rejects an unknown version; CI creates and uses `imperator_test`; lint, tests, build and migration checks pass.
+
+### 25. Campaign definitions in Core — *chatgpt authorized*
+
+Decision 7.16, format [`docs/design/campaign-format.md`](../docs/design/campaign-format.md). `tools/build_content.py` now also writes **`content/dist/campaigns.json`**: every campaign definition (`docs/scenarios/arcs/*/arc.yaml`, `docs/scenarios/campaigns/*.yaml`) with each bespoke mission's file embedded under `missions[].mission`. CI fails if it is stale.
+
+- `Imperator.Core/Campaigns/CampaignDefinitions.cs`: typed records for the format: identity, `format`, `source`, faction, opposition, force selection, command latitude, base, attacks, `start`, missions (label, board, force, the embedded mission with its `next` list: grade, `to`, `effects`, `report`, `text`), `results`; and for procedural campaigns `start_force`, `resources`, `generator`, `reports`, `end`. Load `campaign.yaml` `latitudes` and `reports` (records exist).
+- Port the checks in `tools/validate_content.py` (section *Campaign definitions*) to Core, against `ContentSet`: faction, opposition, latitude, start force, base kind and facilities exist; missions' `next` cover the three grades; every `to` is a label or `end`; every effect is known. One negative test per check.
+- `GET /campaign-definitions` (list: id, name, source, format, faction, opposition) and `GET /campaign-definitions/{id}` (the whole definition), with the content version.
+- **Done when:** tests load Foundry Moon (4 missions, start "1", 2A Decisive → 3 with `remove_contacts: 2`) and Outer Reach Patrol; the endpoints return both; CI is green.
+
+### 26. Short arc engine in Core (S2, solo) — *chatgpt authorized*
+
+Rules: chapter 14 *Short arcs*, *After-action* (casualties, injuries and their modifiers, XP, advances), *Force selection*; chapter 15 (TV). The engine runs a bespoke `short_arc` campaign from its definition; **the player still plays each mission on the tabletop**. Build it on task 23's event log and task 24's schema version.
+
+- **Events** (Core, `Decide` / `Apply`, replayable, every roll recorded in its event): `CampaignStarted` (definition id, content version, force selection), `SoldierEnlisted` (name, troop, fireteam), `MissionBriefed` (label, effects carried in), `ForceDeployed` (soldiers; checked by task 20's force check against the mission's `force_limit` and carried effects), `MissionReported` (grade; per soldier: Down at any point, Dead, captured, Bleeding or Critical, Medic treated, objective done, put an enemy Down; the citation), `InjuriesRolled` (the 2d6 per soldier, modifiers, result), `ExperienceAwarded`, `AdvanceRolled`, `SoldierReplaced`, `ArcEnded` (the result by the short arc rule).
+- **Projections:** roster (name, troop, fireteam, XP, advances, injuries, missions out, status), current mission and its carried effects (`initiative`, `alert_start`, `force_tv`, `remove_contacts`), history with each mission's `report` text.
+- **Rules come from content only:** the injury table and modifiers, XP table, advance table and its caps, short arc text. Where the rules leave a choice to the player (which advance row when capped, the citation, a replacement's troop), the event records the player's choice; Core checks it's legal.
+- **API (Development only, as task 23):** `POST /campaigns/{id}/start` (definition id, force selection), then one endpoint per command (`/brief`, `/deploy`, `/report`, `/replace`), each returning the new projection; `GET /campaigns/{id}/roster`.
+- **Done when:** a Core test plays Foundry Moon from start to `ArcEnded` along both branches (1 Decisive → 2A → 3; 1 Failure → 2B → 3) with fixed seeds, and the roster, carried effects and arc result match a worked example written into the test from chapter 14's tables; replay after an API restart gives the same projection; lint, tests and build pass.
+
+### 27. Campaign game screens for Foundry Moon (S2)
+
+**Not authorized yet.** It waits for RJ's paper playthrough of Foundry Moon (roadmap Phase 7 exit) and RJ's review of the screens. The design is [`docs/design/campaign-game.md`](../docs/design/campaign-game.md) (*The loop, as a player sees it*).
+
+- **Hub:** the roster by fireteam (XP, injuries, missions out), the arc's flow with the missions done and the one ahead, the latest report.
+- **Briefing:** the mission's situation and the carried-in effects, its sheet and cards to print (task 17's mission view), deploy with the force planner (task 20) against the mission's limits.
+- **Debrief:** enter the grade and each soldier's fate, then see the rolls (injuries, XP, advances), choose advances and replacements, read the sitrep, go on to the next mission.
+- **End:** the arc's result and its text; the roll of honour.
+- **Done when:** RJ has played Foundry Moon on paper and approved the screens from captures; Vitest covers each screen; lint, tests and build pass.
+
 ### 22. Stop and check the roadmap
 
 Beyond this, the app's real features wait on rules:
@@ -289,7 +327,7 @@ Beyond this, the app's real features wait on rules:
 |---|---|
 | Live mission dashboard (alert, clock, contacts, models during play) | Saved game state; built with the Phase 7 campaign tracker (RJ, 2026-10-22). The paper dashboard is `docs/print/ImperatorBlack_mission-dashboard.pdf`. |
 | Custom troop and unit builder | Ready after tasks 16, 18 and 20: chapter 15 limits and costs; Phase 9 (decision 6.12) |
-| Campaign tracker | Phase 7: chapter 14 is drafted (loaded by task 21); build after a paper campaign (Foundry Moon) has been played, with saved game state and the live dashboard. |
+| Campaign game (Phase 9) | Short arcs: tasks 25–27. Procedural campaigns, the base and its threat track, events with choices: S3, after Foundry Moon runs in the app (decisions 1.11, 7.14–7.16). |
 
 Planned app feature (RJ, 2026-10-20): an in-app reference that explains every gear item, keyword and special rule, read from `content/` (the list will grow). Build it from the same `text` fields the rulebook tables use.
 

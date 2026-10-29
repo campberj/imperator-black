@@ -8,7 +8,7 @@ A 28mm sci-fi narrative campaign wargame (printed rules first) plus a companion 
 
 ## Ground rules
 
-- **Content is the single source of truth.** Game numbers live in `content/*.yaml`. Never hand-edit tables in `rules/*.md` between `<!-- table:… -->` markers, or `content/dist/content.json`.
+- **Content is the single source of truth.** Game numbers live in `content/*.yaml`. Never hand-edit tables in `rules/*.md` between `<!-- table:… -->` markers, or `content/dist/content.json` and `content/dist/campaigns.json`.
 - **Rules before software.** The app automates paper procedures; it never invents its own.
 - **Rules math exists once**, in `app/src/Imperator.Core`. The simulator and app both use it.
 - Record design decisions in `docs/design/decisions.md` (Settled / Leaning / Proposed / Open).
