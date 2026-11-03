@@ -1322,7 +1322,7 @@
       "hit": "2d6",
       "test": "2d6"
     },
-    "hit_target": 8,
+    "hit_target": 7,
     "test_target": 8,
     "natural_miss": 2,
     "critical_hit": [
@@ -8199,6 +8199,14 @@
       "3": 2.5,
       "4": 3,
       "5": 3.25
+    },
+    "shoot_multiplier": {
+      "0": 1,
+      "1": 1.35,
+      "2": 1.65,
+      "3": 1.95,
+      "4": 2.15,
+      "5": 2.25
     },
     "attribute_costs": {
       "physique": 2,

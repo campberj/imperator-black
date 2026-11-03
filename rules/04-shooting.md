@@ -4,7 +4,7 @@
 
 1. **Choose a target** the shooter can see. A model cannot shoot at a model in close combat.
 2. **Throw together** the 2d6 hit dice and the weapon's damage dice. If the shot misses, ignore the damage dice.
-3. **Hit roll:** 2d6 + **Shoot** + modifiers must reach **8**.
+3. **Hit roll:** 2d6 + **Shoot** + modifiers must reach **7**.
    - A natural 2 always misses.
    - A natural double 6 is a **critical hit**: add 1 row to the wound result.
 4. **Wound:** add the damage dice and find the row on the wound table. If the hit was critical, add 1 row. Then step the row down by the target's Armour, less the weapon's AP (the step can't go below 0). A final row above 10 counts as 10; at row 0 or below there is no effect.
@@ -84,7 +84,7 @@ A weapon with **Auto N** (for example *Auto 3*) can engage several models with o
 *Auto* weapons only. Suppressive Fire saturates a position to keep heads down, rather than picking off a target.
 
 - Pick a visible target and make a hit roll, without damage dice. **Cover doesn't modify the roll**: Light and Heavy cover give no penalty. Range, Aim, Suppression and Wounded apply as normal.
-- On a hit the target gains **1 Suppression**, or **2** if the roll beats 8 by 3 or more. It also **loses its Overwatch marker and cannot react until the end of the round**.
+- On a hit the target gains **1 Suppression**, or **2** if the roll beats 7 by 3 or more. It also **loses its Overwatch marker and cannot react until the end of the round**.
 - An *Auto N* weapon may spread Suppressive Fire across up to N models within 3" of the first target, rolling for each, with −1 for every target after the first.
 
 Against a target in the open, Shoot is usually better. Against a target dug in behind cover, Suppressive Fire is the way to pin it down while friends move: the core of fire and manoeuvre.

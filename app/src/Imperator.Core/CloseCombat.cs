@@ -89,7 +89,7 @@ public static class Grenades
     {
         var (a, b) = rng.TwoD6();
         if (a + b == 2) return (false, true);
-        return (a + b + thrower.Physique + thrower.RollPenalty + situational >= core.HitTarget, false);
+        return (a + b + thrower.Physique + thrower.RollPenalty + situational >= core.TestTarget, false);  // Throw is a Physique test, 8+
     }
 
     /// <summary>Frag blast on a set of models: one damage roll, read per model.</summary>

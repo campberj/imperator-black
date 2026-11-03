@@ -15,6 +15,9 @@ baseline:
 # Attribute multiplier: success odds of 2d6 + X, 8+, averaged over open, -1 and -2, relative to X = 0
 # (29%, 43%, 57%, 71%, 82%). Each point adds about half of what a zero-rated soldier achieves.
 multiplier: { "0": 1, "1": 1.5, "2": 2, "3": 2.5, "4": 3, "5": 3.25 }
+# Shoot multiplier: the same, for the hit roll at 7+ (decision 3.20): 43%, 57%, 71%, 82%, 91%, 95%
+# relative to Shoot 0. Ranged weapons and anything priced per Shoot use it; tests keep the multiplier above.
+shoot_multiplier: { "0": 1, "1": 1.35, "2": 1.65, "3": 1.95, "4": 2.15, "5": 2.25 }
 
 # Attributes not tied to kit: cost per point above 0. Shoot and Fight are paid through weapons; Tech also through kit.
 attribute_costs:

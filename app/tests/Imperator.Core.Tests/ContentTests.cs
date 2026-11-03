@@ -9,7 +9,7 @@ public class ContentTests
     public void ContentVersion() => Assert.Equal("0.5.0", Rules.Version);
 
     [Fact]
-    public void HitTargetIs8() => Assert.Equal(8, Rules.HitTarget);
+    public void HitTargetIs7() => Assert.Equal(7, Rules.HitTarget);
 
     [Fact]
     public void TenWoundRows() => Assert.Equal(10, Rules.WoundTable.Count);

@@ -81,7 +81,8 @@ def main():
                   colWidths=[W / (len(ps.C["core"]["attributes"]) + 1)] * (len(ps.C["core"]["attributes"]) + 1), rowHeights=[None, 0.32 * inch])
     stats.setStyle(TableStyle([("GRID", (0, 0), (-1, -1), 0.6, ps.INK), ("BACKGROUND", (0, 0), (-1, 0), SHADE)]))
     story += [stats, Spacer(1, 6), worksheet(), Spacer(1, 8)]
-    mult_t = grid([["Attribute value", "0", "1", "2", "3", "4"], ["Multiplier"] + [fmt(m(i)) for i in range(5)]],
+    mult_t = grid([["Attribute value", "0", "1", "2", "3", "4"], ["Multiplier"] + [f"{m(i):g}" for i in range(5)],
+                   ["Shoot multiplier"] + [f"{m(i, 'shoot'):g}" for i in range(5)]],
                   [1.2 * inch] + [(HALF - 1.2 * inch) / 5] * 5)
     surv = grid([["", "Wounds 1", "Wounds 2", "Wounds 3"]] + [[f"Armour {a}"] + [f"{tvm.survival(a, w):.2f}" for w in (1, 2, 3)] for a in range(4)],
                 [0.9 * inch] + [(HALF - 0.9 * inch) / 3] * 3)
@@ -98,7 +99,7 @@ def main():
         rows = [[title, "S0", "S1", "S2", "S3", "S4"]]
         for w in sel:
             b = tvm.weapon_base(w["id"])
-            rows.append([w["name"]] + [fmt(round(b * m(i), 1)) for i in range(5)])
+            rows.append([w["name"]] + [fmt(round(b * m(i, "shoot"), 1)) for i in range(5)])
         return grid(rows, [HALF - 5 * 0.42 * inch] + [0.42 * inch] * 5)
 
     ranged = ps.C["weapons"]["ranged"]

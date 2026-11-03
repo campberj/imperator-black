@@ -6,7 +6,7 @@ dice:
   hit: 2d6
   test: 2d6
 
-hit_target: 8          # 2d6 + Shoot + modifiers must reach this
+hit_target: 7          # 2d6 + Shoot + modifiers must reach this (decision 3.20: 7+ since 2026-11-02)
 test_target: 8         # default target for tests unless a rule says otherwise
 natural_miss: 2        # a natural 2 always misses / fails
 critical_hit: [6, 6]   # natural double 6: +1 wound row
