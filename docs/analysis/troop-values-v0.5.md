@@ -8,22 +8,21 @@ Every troop profile in `content/troops.yaml`, with its default loadout (armour, 
 - **Duel 24" cover**: the same at 24", both models in Light cover; end-of-round recovery applies.
 - **Close combat**: the exchange rules of chapter 5, a coin deciding who charges, both using the default break rule (break only after losing while Wounded or at 3+ Suppression; it ends only if both break).
 - **Score**: the mean of the three win rates. A draw (both broke away, or no result after 30 rounds) counts as half a win. The reference scores 50% against itself.
-- **Rows A0 / A2 / A3**: expected total wound rows from one aimed Shoot at 12" against fresh targets in the open with Armour 0, 2 and 3 (a miss or no effect counts 0, rows cap at 10). An *Auto N* weapon engages N targets, −1 after the first. *Suppressing* adds Suppression, not rows, so it does not show here.
+- **Rows A0 / A2 / A3**: expected total wound rows from one aimed Shoot at 12" against fresh targets in the open with Armour 0, 2 and 3 (a miss or no effect counts 0, rows cap at 10). An *Auto N* weapon engages N targets, −1 after the first. Launchers choose the round with the higher expected wound row against each target (anti-armour or high explosive); explosion splash damage to nearby models is not modelled. *Suppressing* adds Suppression, not rows, so it does not show here.
 - No grenades, Moves or reactions. † Automated. \* has a Proposed skill. N/A: no ranged weapon (its score is close combat alone).
 
 ## Task Force Boone
 
 | Troop | Weapon | Score | Duel 12" | Duel 24" cover | Close combat | Rows A0 | Rows A2 | Rows A3 | Move | Shoot | Fight | Wounds | Armour |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| VAT Team Leader | Carbine | 54% | 56% | 55% | 50% | 4.32 | 2.70 | 1.94 | 6" | 2 | 2 | 1 | 2 |
-| VAT Gunner | Compact LMG | 51% | 62% | 57% | 33% | 11.83 | 7.38 | 5.31 | 6" | 2 | 1 | 1 | 2 |
-| VAT Assaulter | Carbine | 50% | 50% | 50% | 50% | 4.32 | 2.70 | 1.94 | 6" | 2 | 2 | 1 | 2 |
-| Pathfinder Team Leader | Heavy rifle | 50% | 56% | 65% | 28% | 4.32 | 3.49 | 2.70 | 7" | 2 | 1 | 1 | 1 |
-| Control Team Marksman \* | DMR | 49% | 59% | 73% | 15% | 6.01 | 4.09 | 3.18 | 6" | 3 | 0 | 1 | 1 |
-| Pathfinder | Heavy rifle | 46% | 50% | 61% | 28% | 4.32 | 3.49 | 2.70 | 7" | 2 | 1 | 1 | 1 |
-| Data Specialist | Carbine | 44% | 50% | 50% | 32% | 4.32 | 2.70 | 1.94 | 6" | 2 | 1 | 1 | 2 |
-| Pathfinder SAW Gunner | LMG | 42% | 43% | 55% | 28% | 11.83 | 7.38 | 5.31 | 6" | 2 | 1 | 1 | 1 |
-| Hostage | — | 7% | N/A | N/A | 7% | N/A | N/A | N/A | 5" | 0 | 0 | 1 | 0 |
+| VAT Team Leader | Carbine | 54% | 56% | 56% | 50% | 4.75 | 2.96 | 2.13 | 6" | 2 | 2 | 1 | 2 |
+| VAT Gunner | Compact LMG | 52% | 63% | 59% | 33% | 13.40 | 8.35 | 6.01 | 6" | 2 | 1 | 1 | 2 |
+| VAT Assaulter | Carbine | 50% | 50% | 51% | 50% | 4.75 | 2.96 | 2.13 | 6" | 2 | 2 | 1 | 2 |
+| Pathfinder Team Leader | Heavy rifle | 49% | 56% | 64% | 28% | 4.75 | 3.84 | 2.96 | 7" | 2 | 1 | 1 | 1 |
+| Control Team Marksman \* | DMR | 46% | 56% | 67% | 15% | 6.01 | 4.09 | 3.18 | 6" | 3 | 0 | 1 | 1 |
+| Pathfinder | Heavy rifle | 45% | 50% | 59% | 28% | 4.75 | 3.84 | 2.96 | 7" | 2 | 1 | 1 | 1 |
+| Data Specialist | Carbine | 44% | 50% | 51% | 32% | 4.75 | 2.96 | 2.13 | 6" | 2 | 1 | 1 | 2 |
+| Pathfinder SAW Gunner | LMG | 41% | 42% | 53% | 28% | 13.40 | 8.35 | 6.01 | 6" | 2 | 1 | 1 | 1 |
 
 ## Galactic Republic
 
@@ -31,29 +30,29 @@ Every troop profile in `content/troops.yaml`, with its default loadout (armour, 
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Ahsoka Tano \* | — | 81% | N/A | N/A | 81% | N/A | N/A | N/A | 8" | 1 | 3 | 2 | 0 |
 | Obi-Wan Kenobi \* | — | 81% | N/A | N/A | 81% | N/A | N/A | N/A | 7" | 1 | 4 | 3 | 0 |
-| Clone Commando Leader | DC-17m (blaster) | 70% | 74% | 82% | 53% | 4.75 | 2.96 | 2.13 | 6" | 3 | 2 | 2 | 2 |
 | Jedi Guardian \* | — | 69% | N/A | N/A | 69% | N/A | N/A | N/A | 7" | 1 | 3 | 2 | 0 |
-| Clone Commando | DC-17m (blaster) | 67% | 69% | 79% | 53% | 4.75 | 2.96 | 2.13 | 6" | 3 | 2 | 2 | 2 |
-| Clone Trooper Marksman \* | DC-15x sniper rifle | 53% | 58% | 73% | 28% | 6.01 | 4.09 | 3.18 | 6" | 3 | 1 | 1 | 1 |
-| Commander Cody | DC-15S blaster carbine | 52% | 53% | 57% | 47% | 4.75 | 2.96 | 2.13 | 6" | 3 | 2 | 2 | 1 |
-| Clone Sergeant | DC-15A blaster rifle | 43% | 37% | 48% | 44% | 4.32 | 2.70 | 1.94 | 6" | 2 | 2 | 1 | 1 |
-| Clone Heavy Trooper | Z-6 rotary blaster | 38% | 43% | 41% | 28% | 11.83 | 7.38 | 5.31 | 5" | 2 | 1 | 1 | 1 |
-| Clone Trooper | DC-15A blaster rifle | 35% | 32% | 45% | 27% | 4.32 | 2.70 | 1.94 | 6" | 2 | 1 | 1 | 1 |
-| ARF Trooper \* | DC-15S blaster carbine | 31% | 32% | 34% | 28% | 4.32 | 2.70 | 1.94 | 7" | 2 | 1 | 1 | 1 |
-| ARC Trooper Leader | Twin DC-17s | 25% | 14% | 14% | 47% | 6.41 | 3.42 | 2.12 | 6" | 3 | 2 | 2 | 1 |
-| ARC Trooper | Twin DC-17s | 20% | 7% | 9% | 44% | 6.41 | 3.42 | 2.12 | 6" | 3 | 2 | 1 | 1 |
+| Clone Commando Leader | DC-17m (blaster) | 68% | 73% | 79% | 53% | 5.04 | 3.14 | 2.26 | 6" | 3 | 2 | 2 | 2 |
+| Clone Commando | DC-17m (blaster) | 65% | 67% | 76% | 53% | 5.04 | 3.14 | 2.26 | 6" | 3 | 2 | 2 | 2 |
+| Commander Cody | DC-15S blaster carbine | 51% | 50% | 56% | 47% | 5.04 | 3.14 | 2.26 | 6" | 3 | 2 | 2 | 1 |
+| Clone Trooper Marksman \* | DC-15x sniper rifle | 50% | 55% | 67% | 28% | 6.01 | 4.09 | 3.18 | 6" | 3 | 1 | 1 | 1 |
+| Clone Sergeant | DC-15A blaster rifle | 42% | 36% | 45% | 44% | 4.75 | 2.96 | 2.13 | 6" | 2 | 2 | 1 | 1 |
+| Clone Heavy Trooper | Z-6 rotary blaster | 38% | 42% | 43% | 28% | 13.40 | 8.35 | 6.01 | 5" | 2 | 1 | 1 | 1 |
+| Clone Trooper | DC-15A blaster rifle | 33% | 31% | 41% | 27% | 4.75 | 2.96 | 2.13 | 6" | 2 | 1 | 1 | 1 |
+| ARF Trooper \* | DC-15S blaster carbine | 30% | 31% | 33% | 28% | 4.75 | 2.96 | 2.13 | 7" | 2 | 1 | 1 | 1 |
+| ARC Trooper Leader | Twin DC-17s | 25% | 12% | 14% | 47% | 7.20 | 3.84 | 2.38 | 6" | 3 | 2 | 2 | 1 |
+| ARC Trooper | Twin DC-17s | 19% | 6% | 8% | 44% | 7.20 | 3.84 | 2.38 | 6" | 3 | 2 | 1 | 1 |
 
-Not modelled: Deflect (its holders have no ranged weapon, so they fight no ranged duel).
+Not modelled: Deflect (deflection tests are not simulated).
 
 ## Anchorage
 
 | Troop | Weapon | Score | Duel 12" | Duel 24" cover | Close combat | Rows A0 | Rows A2 | Rows A3 | Move | Shoot | Fight | Wounds | Armour |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Hound CCT † | M134 minigun | 92% | 96% | 96% | 85% | 15.58 | 9.72 | 6.99 | 6" | 2 | 1 | 3 | 3 |
-| Prime | Auto rifle | 63% | 63% | 75% | 50% | 9.08 | 5.66 | 4.07 | 6" | 3 | 2 | 1 | 2 |
-| Scout \* | Auto rifle | 54% | 50% | 62% | 50% | 8.08 | 5.04 | 3.62 | 6" | 2 | 2 | 1 | 2 |
-| Grenadier | Auto rifle | 48% | 50% | 62% | 33% | 8.08 | 5.04 | 3.62 | 5" | 2 | 1 | 1 | 2 |
-| Systems Operator | Carbine | 44% | 50% | 50% | 33% | 4.32 | 2.70 | 1.94 | 5" | 2 | 1 | 1 | 2 |
+| Hound CCT † | M134 minigun | 92% | 96% | 96% | 85% | 17.73 | 11.05 | 7.95 | 6" | 2 | 1 | 3 | 3 |
+| Prime | Auto rifle | 61% | 61% | 71% | 50% | 9.80 | 6.10 | 4.39 | 6" | 3 | 2 | 1 | 2 |
+| Scout \* | Auto rifle | 53% | 50% | 59% | 50% | 9.08 | 5.66 | 4.07 | 6" | 2 | 2 | 1 | 2 |
+| Grenadier | Auto rifle | 47% | 50% | 59% | 33% | 9.08 | 5.66 | 4.07 | 5" | 2 | 1 | 1 | 2 |
+| Systems Operator | Carbine | 44% | 50% | 51% | 33% | 4.75 | 2.96 | 2.13 | 5" | 2 | 1 | 1 | 2 |
 
 Not modelled: grenade launcher (Throws are not simulated).
 
@@ -61,50 +60,65 @@ Not modelled: grenade launcher (Throws are not simulated).
 
 | Troop | Weapon | Score | Duel 12" | Duel 24" cover | Close combat | Rows A0 | Rows A2 | Rows A3 | Move | Shoot | Fight | Wounds | Armour |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| ZQ44 CCT † | CS/LM5 rotary gun | 72% | 76% | 81% | 58% | 11.83 | 7.38 | 5.31 | 7" | 2 | 1 | 2 | 2 |
-| Pioneer \* | DMR | 65% | 77% | 85% | 33% | 6.01 | 4.09 | 3.18 | 7" | 3 | 1 | 1 | 2 |
-| Team Leader \* | Auto rifle | 58% | 58% | 67% | 49% | 8.08 | 5.04 | 3.62 | 6" | 2 | 2 | 1 | 2 |
-| Automatic Rifleman \* | LMG | 56% | 63% | 71% | 33% | 11.83 | 7.38 | 5.31 | 5" | 2 | 1 | 1 | 2 |
-| Rifleman \* | Rifle | 54% | 50% | 62% | 50% | 4.32 | 2.70 | 1.94 | 6" | 2 | 2 | 1 | 2 |
+| ZQ44 CCT † | CS/LM5 rotary gun | 72% | 76% | 81% | 58% | 13.40 | 8.35 | 6.01 | 7" | 2 | 1 | 2 | 2 |
+| Pioneer \* | DMR | 63% | 75% | 82% | 33% | 6.01 | 4.09 | 3.18 | 7" | 3 | 1 | 1 | 2 |
+| Team Leader \* | Auto rifle | 57% | 57% | 65% | 49% | 9.08 | 5.66 | 4.07 | 6" | 2 | 2 | 1 | 2 |
+| Automatic Rifleman \* | LMG | 55% | 63% | 71% | 33% | 13.40 | 8.35 | 6.01 | 5" | 2 | 1 | 1 | 2 |
+| Rifleman \* | Rifle | 53% | 50% | 59% | 50% | 4.75 | 2.96 | 2.13 | 6" | 2 | 2 | 1 | 2 |
 
 Not modelled: Laser detector (reactions are not simulated).
+
+## Generic forces
+
+| Troop | Weapon | Score | Duel 12" | Duel 24" cover | Close combat | Rows A0 | Rows A2 | Rows A3 | Move | Shoot | Fight | Wounds | Armour |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Heavy Infantry Sergeant \* | Heavy rifle | 95% | 97% | 98% | 90% | 5.04 | 4.07 | 3.14 | 6" | 3 | 3 | 2 | 3 |
+| Heavy Infantry \* | Heavy rifle | 95% | 97% | 97% | 90% | 5.04 | 4.07 | 3.14 | 6" | 3 | 3 | 2 | 3 |
+| Anti-armour Trooper | AT launcher | 54% | 66% | 69% | 28% | 5.86 | 5.03 | 4.22 | 5" | 1 | 1 | 1 | 1 |
+| Assault Trooper | SMG | 54% | 50% | 50% | 61% | 9.08 | 5.66 | 4.07 | 6" | 2 | 2 | 1 | 2 |
+| Marksman \* | DMR | 44% | 54% | 63% | 15% | 6.01 | 4.09 | 3.18 | 6" | 2 | 0 | 1 | 1 |
+| Support Gunner | LMG | 35% | 34% | 43% | 28% | 11.83 | 7.38 | 5.31 | 5" | 1 | 1 | 1 | 1 |
+| Officer | Carbine | 34% | 35% | 38% | 28% | 4.75 | 2.96 | 2.13 | 6" | 2 | 1 | 1 | 1 |
+| Line Trooper | Rifle | 29% | 26% | 33% | 28% | 4.32 | 2.70 | 1.94 | 6" | 1 | 1 | 1 | 1 |
+| Specialist | Carbine | 22% | 26% | 24% | 15% | 4.32 | 2.70 | 1.94 | 6" | 1 | 0 | 1 | 1 |
+| Hostage | — | 7% | N/A | N/A | 7% | N/A | N/A | N/A | 5" | 0 | 0 | 1 | 0 |
 
 ## Freespace Solutions
 
 | Troop | Weapon | Score | Duel 12" | Duel 24" cover | Close combat | Rows A0 | Rows A2 | Rows A3 | Move | Shoot | Fight | Wounds | Armour |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Liquidator | SMG | 50% | 50% | 50% | 50% | 8.08 | 5.04 | 3.62 | 6" | 2 | 2 | 1 | 2 |
-| Repossession Breacher | Shotgun | 49% | 52% | 34% | 61% | 2.94 | 2.12 | 1.72 | 6" | 1 | 2 | 2 | 2 |
-| Recovery Captain | SMG | 47% | 55% | 54% | 33% | 8.08 | 5.04 | 3.62 | 6" | 2 | 1 | 1 | 2 |
-| Sentry Turret † | LMG | 40% | 57% | 62% | 0% | 9.82 | 6.13 | 4.41 | 0" | 1 | — | 1 | 2 |
-| Collections Enforcer | Rifle | 34% | 25% | 34% | 44% | 3.75 | 2.34 | 1.68 | 6" | 1 | 2 | 1 | 1 |
-| Asset Security Gunner | LMG | 30% | 32% | 42% | 15% | 9.82 | 6.13 | 4.41 | 5" | 1 | 0 | 1 | 1 |
-| Asset Security Officer | Carbine | 25% | 26% | 23% | 27% | 3.75 | 2.34 | 1.68 | 6" | 1 | 1 | 1 | 1 |
-| Security Drone † | SMG | 18% | 28% | 24% | 0% | 6.79 | 4.23 | 3.05 | 7" | 1 | — | 1 | 1 |
-| Salvage Tech | Sidearm | 6% | 2% | 1% | 16% | 1.73 | 0.93 | 0.58 | 6" | 0 | 0 | 1 | 1 |
-| Salvage Hand | Sidearm | 3% | 1% | 1% | 7% | 1.73 | 0.93 | 0.58 | 6" | 0 | 0 | 1 | 0 |
+| Repossession Breacher | Shotgun | 55% | 62% | 42% | 61% | 4.11 | 2.96 | 2.40 | 6" | 1 | 2 | 2 | 2 |
+| Liquidator | SMG | 50% | 50% | 50% | 50% | 9.08 | 5.66 | 4.07 | 6" | 2 | 2 | 1 | 2 |
+| Recovery Captain | SMG | 48% | 56% | 55% | 33% | 9.08 | 5.66 | 4.07 | 6" | 2 | 1 | 1 | 2 |
+| Sentry Turret † | LMG | 41% | 60% | 65% | 0% | 11.83 | 7.38 | 5.31 | 0" | 1 | — | 1 | 2 |
+| Collections Enforcer | Rifle | 34% | 26% | 33% | 44% | 4.32 | 2.70 | 1.94 | 6" | 1 | 2 | 1 | 1 |
+| Asset Security Gunner | LMG | 31% | 34% | 43% | 15% | 11.83 | 7.38 | 5.31 | 5" | 1 | 0 | 1 | 1 |
+| Asset Security Officer | Carbine | 26% | 26% | 24% | 27% | 4.32 | 2.70 | 1.94 | 6" | 1 | 1 | 1 | 1 |
+| Security Drone † | SMG | 18% | 29% | 26% | 0% | 8.08 | 5.04 | 3.62 | 7" | 1 | — | 1 | 1 |
+| Salvage Tech | Sidearm | 6% | 2% | 1% | 16% | 2.41 | 1.29 | 0.80 | 6" | 0 | 0 | 1 | 1 |
+| Salvage Hand | Sidearm | 3% | 1% | 1% | 7% | 2.41 | 1.29 | 0.80 | 6" | 0 | 0 | 1 | 0 |
 
 ## Contractors
 
 | Troop | Weapon | Score | Duel 12" | Duel 24" cover | Close combat | Rows A0 | Rows A2 | Rows A3 | Move | Shoot | Fight | Wounds | Armour |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Borz Cyka Powered Trooper \* | LMG | 81% | 92% | 94% | 57% | 11.83 | 7.38 | 5.31 | 6" | 2 | 2 | 2 | 3 |
-| Borz Cyka Bravo Breacher \* | SMG | 80% | 86% | 84% | 69% | 8.08 | 5.04 | 3.62 | 6" | 2 | 2 | 2 | 3 |
-| Contract Heavy \* | LMG | 74% | 92% | 94% | 38% | 11.83 | 7.38 | 5.31 | 5" | 2 | 1 | 2 | 3 |
-| Springbok AI † | Auto rifle | 70% | 72% | 80% | 58% | 9.08 | 5.66 | 4.07 | 6" | 3 | 1 | 2 | 2 |
-| Borz Bratva HMG Gunner \* | HMG | 66% | 81% | 85% | 32% | 14.09 | 11.81 | 9.60 | 5" | 2 | 1 | 1 | 2 |
-| Hired Heavy Gunner | LMG | 62% | 72% | 79% | 35% | 11.83 | 7.38 | 5.31 | 5" | 2 | 1 | 2 | 2 |
-| Hired Marksman \* | DMR | 60% | 77% | 85% | 18% | 6.01 | 4.09 | 3.18 | 6" | 3 | 0 | 1 | 2 |
-| Borz Bratva Trooper \* | Rifle | 57% | 59% | 62% | 49% | 4.32 | 2.70 | 1.94 | 6" | 2 | 2 | 1 | 2 |
-| Reaction Force Gunner | LMG | 55% | 62% | 71% | 33% | 11.83 | 7.38 | 5.31 | 6" | 2 | 1 | 1 | 2 |
-| Contract Boarder \* | Carbine | 50% | 50% | 50% | 50% | 4.32 | 2.70 | 1.94 | 6" | 2 | 2 | 1 | 2 |
-| Ubiytsa Shock Trooper \* | Shotgun | 49% | 44% | 32% | 70% | 4.11 | 2.96 | 2.40 | 6" | 2 | 3 | 1 | 1 |
-| Reaction Force Controller | Carbine | 49% | 58% | 56% | 32% | 4.32 | 2.70 | 1.94 | 7" | 2 | 1 | 1 | 2 |
-| Reaction Force Operator | Rifle | 48% | 50% | 62% | 32% | 4.32 | 2.70 | 1.94 | 7" | 2 | 1 | 1 | 2 |
-| Ubiytsa Controller \* | Shotgun | 48% | 51% | 36% | 56% | 4.11 | 2.96 | 2.40 | 6" | 2 | 2 | 1 | 1 |
-| Harlow Veteran | Carbine | 46% | 32% | 34% | 70% | 4.32 | 2.70 | 1.94 | 6" | 2 | 3 | 1 | 1 |
-| Reaction Force Grenadier | Carbine | 44% | 50% | 50% | 32% | 4.32 | 2.70 | 1.94 | 7" | 2 | 1 | 1 | 2 |
-| Reaction Force Engineer | Carbine | 44% | 50% | 49% | 32% | 4.32 | 2.70 | 1.94 | 6" | 2 | 1 | 1 | 2 |
+| Borz Cyka Powered Trooper \* | LMG | 81% | 93% | 94% | 57% | 13.40 | 8.35 | 6.01 | 6" | 2 | 2 | 2 | 3 |
+| Borz Cyka Bravo Breacher \* | SMG | 80% | 87% | 85% | 69% | 9.08 | 5.66 | 4.07 | 6" | 2 | 2 | 2 | 3 |
+| Contract Heavy \* | LMG | 75% | 92% | 94% | 38% | 13.40 | 8.35 | 6.01 | 5" | 2 | 1 | 2 | 3 |
+| Springbok AI † | Auto rifle | 69% | 70% | 78% | 58% | 9.80 | 6.10 | 4.39 | 6" | 3 | 1 | 2 | 2 |
+| Borz Bratva HMG Gunner \* | HMG | 67% | 82% | 85% | 32% | 15.97 | 13.39 | 10.88 | 5" | 2 | 1 | 1 | 2 |
+| Hired Heavy Gunner | LMG | 62% | 73% | 79% | 35% | 13.40 | 8.35 | 6.01 | 5" | 2 | 1 | 2 | 2 |
+| Hired Marksman \* | DMR | 58% | 74% | 82% | 18% | 6.01 | 4.09 | 3.18 | 6" | 3 | 0 | 1 | 2 |
+| Borz Bratva Trooper \* | Rifle | 56% | 57% | 60% | 49% | 4.75 | 2.96 | 2.13 | 6" | 2 | 2 | 1 | 2 |
+| Reaction Force Gunner | LMG | 55% | 62% | 71% | 33% | 13.40 | 8.35 | 6.01 | 6" | 2 | 1 | 1 | 2 |
+| Ubiytsa Controller \* | Shotgun | 52% | 58% | 43% | 56% | 5.08 | 3.66 | 2.97 | 6" | 2 | 2 | 1 | 1 |
+| Ubiytsa Shock Trooper \* | Shotgun | 52% | 49% | 37% | 70% | 5.08 | 3.66 | 2.97 | 6" | 2 | 3 | 1 | 1 |
+| Contract Boarder \* | Carbine | 50% | 49% | 50% | 50% | 4.75 | 2.96 | 2.13 | 6" | 2 | 2 | 1 | 2 |
+| Reaction Force Controller | Carbine | 49% | 57% | 57% | 32% | 4.75 | 2.96 | 2.13 | 7" | 2 | 1 | 1 | 2 |
+| Reaction Force Operator | Rifle | 47% | 50% | 59% | 32% | 4.75 | 2.96 | 2.13 | 7" | 2 | 1 | 1 | 2 |
+| Harlow Veteran | Carbine | 45% | 31% | 34% | 70% | 4.75 | 2.96 | 2.13 | 6" | 2 | 3 | 1 | 1 |
+| Reaction Force Grenadier | Carbine | 44% | 50% | 50% | 32% | 4.75 | 2.96 | 2.13 | 7" | 2 | 1 | 1 | 2 |
+| Reaction Force Engineer | Carbine | 44% | 50% | 50% | 32% | 4.75 | 2.96 | 2.13 | 6" | 2 | 1 | 1 | 2 |
 | Cricket Drone † \* | — | 12% | N/A | N/A | 12% | N/A | N/A | N/A | 7" | 0 | — | 1 | 0 |
 
 Not modelled: Self-destruct (blasts are not simulated); grenade launcher (Throws are not simulated).
@@ -113,17 +127,17 @@ Not modelled: Self-destruct (blasts are not simulated); grenade launcher (Throws
 
 | Troop | Weapon | Score | Duel 12" | Duel 24" cover | Close combat | Rows A0 | Rows A2 | Rows A3 | Move | Shoot | Fight | Wounds | Armour |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| UTG Marksman \* | Anti-materiel rifle | 82% | 92% | 95% | 60% | 6.84 | 6.84 | 5.87 | 7" | 3 | 2 | 1 | 2 |
-| UTG Mother \* | SMG | 81% | 75% | 77% | 92% | 9.08 | 5.66 | 4.07 | 8" | 3 | 4 | 2 | 2 |
-| Pointman SAW † \* | LMG | 74% | 82% | 81% | 58% | 11.83 | 7.38 | 5.31 | 6" | 2 | 1 | 2 | 2 |
-| Golem † | Auto rifle | 72% | 67% | 75% | 73% | 8.08 | 5.04 | 3.62 | 5" | 2 | 2 | 2 | 2 |
-| Pointman † \* | Rifle | 69% | 73% | 75% | 58% | 4.32 | 2.70 | 1.94 | 6" | 2 | 1 | 2 | 2 |
-| 3rd Battalion AT Specialist | AT launcher | 67% | 83% | 86% | 32% | 5.86 | 5.03 | 4.22 | 6" | 2 | 1 | 1 | 2 |
-| UTG Assaulter \* | Carbine | 67% | 60% | 65% | 76% | 4.75 | 2.96 | 2.13 | 8" | 3 | 3 | 1 | 2 |
-| UTG Grenadier \* | Carbine | 67% | 60% | 65% | 76% | 4.75 | 2.96 | 2.13 | 8" | 3 | 3 | 1 | 2 |
-| 3rd Battalion Rifleman | Rifle | 54% | 49% | 62% | 51% | 4.32 | 2.70 | 1.94 | 7" | 2 | 2 | 1 | 2 |
-| Battalion Controller | Rifle | 52% | 57% | 67% | 32% | 4.32 | 2.70 | 1.94 | 5" | 2 | 1 | 1 | 2 |
-| 3rd Battalion Data Specialist | Rifle | 48% | 50% | 62% | 32% | 4.32 | 2.70 | 1.94 | 7" | 2 | 1 | 1 | 2 |
+| UTG Marksman \* | Anti-materiel rifle | 82% | 91% | 94% | 60% | 6.84 | 6.84 | 5.87 | 7" | 3 | 2 | 1 | 2 |
+| UTG Mother \* | SMG | 81% | 74% | 76% | 92% | 9.80 | 6.10 | 4.39 | 8" | 3 | 4 | 2 | 2 |
+| Pointman SAW † \* | LMG | 74% | 81% | 82% | 58% | 13.40 | 8.35 | 6.01 | 6" | 2 | 1 | 2 | 2 |
+| Golem † | Auto rifle | 71% | 67% | 73% | 73% | 9.08 | 5.66 | 4.07 | 5" | 2 | 2 | 2 | 2 |
+| 3rd Battalion AT Specialist | AT launcher | 68% | 85% | 86% | 32% | 6.45 | 5.53 | 4.64 | 6" | 2 | 1 | 1 | 2 |
+| Pointman † \* | Rifle | 68% | 72% | 73% | 58% | 4.75 | 2.96 | 2.13 | 6" | 2 | 1 | 2 | 2 |
+| UTG Assaulter \* | Carbine | 65% | 58% | 63% | 76% | 5.04 | 3.14 | 2.26 | 8" | 3 | 3 | 1 | 2 |
+| UTG Grenadier \* | Carbine | 65% | 58% | 62% | 76% | 5.04 | 3.14 | 2.26 | 8" | 3 | 3 | 1 | 2 |
+| 3rd Battalion Rifleman | Rifle | 53% | 50% | 60% | 51% | 4.75 | 2.96 | 2.13 | 7" | 2 | 2 | 1 | 2 |
+| Battalion Controller | Rifle | 51% | 57% | 65% | 32% | 4.75 | 2.96 | 2.13 | 5" | 2 | 1 | 1 | 2 |
+| 3rd Battalion Data Specialist | Rifle | 47% | 50% | 59% | 32% | 4.75 | 2.96 | 2.13 | 7" | 2 | 1 | 1 | 2 |
 
 Not modelled: grenade launcher (Throws are not simulated).
 
@@ -131,7 +145,25 @@ Not modelled: grenade launcher (Throws are not simulated).
 
 | Troop | Weapon | Score | Duel 12" | Duel 24" cover | Close combat | Rows A0 | Rows A2 | Rows A3 | Move | Shoot | Fight | Wounds | Armour |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Directorate Handler \* | Carbine | 76% | 76% | 81% | 71% | 5.04 | 3.14 | 2.26 | 6" | 3 | 3 | 2 | 2 |
-| Directorate Deniable Operator | SMG | 58% | 50% | 51% | 73% | 8.08 | 5.04 | 3.62 | 6" | 2 | 3 | 1 | 2 |
+| Directorate Handler \* | Carbine | 74% | 73% | 78% | 71% | 5.04 | 3.14 | 2.26 | 6" | 3 | 3 | 2 | 2 |
+| Directorate Deniable Operator | SMG | 58% | 50% | 51% | 73% | 9.08 | 5.66 | 4.07 | 6" | 2 | 3 | 1 | 2 |
+
+## Separatist Alliance
+
+| Troop | Weapon | Score | Duel 12" | Duel 24" cover | Close combat | Rows A0 | Rows A2 | Rows A3 | Move | Shoot | Fight | Wounds | Armour |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| IG-100 MagnaGuard † | — | 90% | N/A | N/A | 90% | N/A | N/A | N/A | 7" | 2 | 3 | 2 | 2 |
+| General Grievous \* | DT-12 heavy blaster pistol | 78% | 69% | 69% | 97% | 4.75 | 2.96 | 2.13 | 8" | 2 | 4 | 2 | 2 |
+| DSD1 Dwarf Spider Droid † \* | Heavy blaster cannon | 65% | 98% | 98% | 0% | 5.86 | 5.03 | 4.22 | 5" | 1 | — | 3 | 3 |
+| B2 Heavy Weapons Droid † | ACM heavy blaster | 58% | 60% | 65% | 50% | 11.83 | 7.38 | 5.31 | 5" | 1 | 1 | 1 | 2 |
+| Droideka † \* | Twin blaster cannons | 55% | 82% | 83% | 0% | 9.62 | 6.56 | 5.09 | 4" | 1 | — | 2 | 2 |
+| B2 Super Battle Droid † | Wrist blasters | 48% | 49% | 44% | 50% | 8.08 | 5.04 | 3.62 | 5" | 1 | 1 | 1 | 2 |
+| BX Commando Droid † \* | E-5 blaster rifle | 48% | 33% | 44% | 66% | 4.75 | 2.96 | 2.13 | 7" | 2 | 2 | 1 | 1 |
+| Kraken † \* | Sidearm | 29% | 18% | 12% | 58% | 2.98 | 1.59 | 0.99 | 6" | 1 | 1 | 2 | 2 |
+| B1 Heavy Weapons Droid † | E-5C heavy blaster rifle | 14% | 14% | 17% | 11% | 6.79 | 4.23 | 3.05 | 5" | 0 | 0 | 1 | 0 |
+| B1 Battle Droid † | E-5 blaster rifle | 14% | 14% | 17% | 12% | 3.75 | 2.34 | 1.68 | 5" | 0 | 0 | 1 | 0 |
+| T-series Tactical Droid † \* | Sidearm | 8% | 4% | 3% | 18% | 2.98 | 1.59 | 0.99 | 6" | 1 | 0 | 1 | 1 |
+
+Not modelled: Deflect (deflection tests are not simulated); Self-destruct (blasts are not simulated); Rolling (duels do not move); Battle computer (commands other droids, not itself); deflector shield (cover is not simulated).
 
 Modelled skills: Automated, Marksman, Augmented, Shield, Jedi discipline, Twin blades, Leader. Augmented's +1 to Physique tests does not arise (a Down model has lost the duel). Skills not listed under a table have no effect on these measures.
