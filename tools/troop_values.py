@@ -31,10 +31,8 @@ TROOPS = C["troops"]["troops"]
 FACTIONS = {f["id"]: f["name"] for f in C["factions"]["factions"]}
 
 
-def mult(x, attr=None):
-    """Attribute multiplier; Shoot has its own table because the hit roll is 7+ and tests are 8+."""
-    table = V["shoot_multiplier"] if attr == "shoot" else V["multiplier"]
-    return float(table[str(max(0, min(5, x or 0)))])
+def mult(x):
+    return float(V["multiplier"][str(max(0, min(5, x or 0)))])
 
 
 def dice_pmf(spec):
@@ -141,7 +139,7 @@ def tv_parts(t, weapon=None, melee=None, gear=None):
     parts["move"] = (s["move"] - b["move"]) * V["move_per_inch"]
     weapon = t["weapon"] if weapon is None else weapon
     if weapon:
-        parts["weapon"] = round(weapon_base(weapon) * mult(s["shoot"], "shoot"), 1)
+        parts["weapon"] = round(weapon_base(weapon) * mult(s["shoot"]), 1)
     gear = t["gear"] if gear is None else gear
     melee_id = melee or t["melee"]
     for g in gear:
@@ -152,16 +150,16 @@ def tv_parts(t, weapon=None, melee=None, gear=None):
     kit = 0.0
     for g in gear:
         c = V["gear"][g]
-        kit += c["cost"] * (mult(s.get(c["per"]), c["per"]) if c.get("per") else 1)
+        kit += c["cost"] * (mult(s.get(c["per"])) if c.get("per") else 1)
     for g in t["grenades"]:
         c = V["grenades"][g]
-        kit += c["cost"] * (mult(s.get(c["per"]), c["per"]) if c.get("per") else 1)
+        kit += c["cost"] * (mult(s.get(c["per"])) if c.get("per") else 1)
     granted = {k for g in gear for k in GEAR[g].get("grants_skills", {})}
     for sk, lvl in t["skills"].items():
         if sk in granted:
             continue
         c = V["skills"][sk]
-        kit += c["cost"] * lvl * (mult(s.get(c["per"]), c["per"]) if c.get("per") else 1)
+        kit += c["cost"] * lvl * (mult(s.get(c["per"])) if c.get("per") else 1)
     parts["kit and skills"] = kit
     subtotal = sum(parts.values())
     surv = survival(ARMOUR[t["armour"]]["value"], s["wounds"])

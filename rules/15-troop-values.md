@@ -13,16 +13,15 @@ This chapter works out TV from a troop's profile and lets players build troops o
 
 The baseline is a human with every attribute at 0, Move 5", Wounds 1, Size 2, no armour and no weapon: **TV 10**. Everything else costs according to how much more likely it makes success.
 
-A test is 2d6 + an attribute, 8+. Averaged over the open, −1 and −2, a 0 succeeds 29% of the time, a 1 43%, a 2 57%, a 3 71% and a 4 82%. Each point adds about half of what a zero-rated soldier achieves, so each attribute value has a **multiplier**. The hit roll is 7+, so Shoot has its own, flatter row: a Shoot 0 shooter hits 43% of the time over the same modifiers, a 1 57%, a 2 71%, a 3 82% and a 4 91%.
+A test is 2d6 + an attribute, 8+. Averaged over the open, −1 and −2, a 0 succeeds 29% of the time, a 1 43%, a 2 57%, a 3 71% and a 4 82%. Each point adds about half of what a zero-rated soldier achieves, so each attribute value has a **multiplier**. Shoot uses the same row, although the hit roll is 7+: a better shot keeps hitting through cover, Suppression and wounds, and the simulator's duels price it best on this row.
 
 <!-- table:values.multiplier -->
 | Attribute value | 0 | 1 | 2 | 3 | 4 |
 |---|---|---|---|---|---|
 | Multiplier | 1 | 1.5 | 2 | 2.5 | 3 |
-| Shoot multiplier | 1 | 1.35 | 1.65 | 1.95 | 2.15 |
 <!-- /table -->
 
-A weapon's cost is its base value times the multiplier of the attribute that uses it: the Shoot multiplier for ranged weapons, Fight for melee weapons. A carbine in the hands of a Shoot 3 elite costs about twice what it costs a Shoot 0 conscript, because it hits about twice as often. Gear that rolls an attribute (a hacking rig, a trauma kit, grenades, a grenade launcher) scales the same way.
+A weapon's cost is its base value times the multiplier of the attribute that uses it: Shoot for ranged weapons, Fight for melee weapons. A carbine in the hands of a Shoot 3 elite costs two and a half times what it costs a Shoot 0 conscript, because it hits two and a half times as often. Gear that rolls an attribute (a hacking rig, a trauma kit, grenades, a grenade launcher) scales the same way.
 
 Armour and Wounds multiply the whole total. A model that survives twice as many hits keeps fighting twice as long, and that is worth more than any one piece of kit.
 
@@ -52,50 +51,50 @@ Armour and Wounds multiply the whole total. A model that survives twice as many 
 <!-- table:values.weapons_core -->
 | Weapon | Shoot 0 | 1 | 2 | 3 | 4 |
 |---|---|---|---|---|---|
-| Sidearm | 2.2 | 3 | 3.6 | 4.3 | 4.7 |
-| SMG | 5.9 | 8 | 9.7 | 11.5 | 12.7 |
-| Carbine | 4.1 | 5.5 | 6.8 | 8 | 8.8 |
-| Shotgun | 5.3 | 7.2 | 8.7 | 10.3 | 11.4 |
-| Rifle | 4.2 | 5.7 | 6.9 | 8.2 | 9 |
-| Heavy rifle | 4.8 | 6.5 | 7.9 | 9.4 | 10.3 |
-| LMG | 10.6 | 14.3 | 17.5 | 20.7 | 22.8 |
-| Compact LMG | 10.4 | 14 | 17.2 | 20.3 | 22.4 |
-| DMR | 5.7 | 7.7 | 9.4 | 11.1 | 12.3 |
-| AT launcher | 8.2 | 11.1 | 13.5 | 16 | 17.6 |
-| Auto rifle | 6.7 | 9 | 11.1 | 13.1 | 14.4 |
-| HMG | 12.5 | 16.9 | 20.6 | 24.4 | 26.9 |
-| Anti-materiel rifle | 6.6 | 8.9 | 10.9 | 12.9 | 14.2 |
+| Sidearm | 2.2 | 3.3 | 4.4 | 5.5 | 6.6 |
+| SMG | 5.9 | 8.9 | 11.8 | 14.8 | 17.7 |
+| Carbine | 4.1 | 6.1 | 8.2 | 10.2 | 12.3 |
+| Shotgun | 5.3 | 7.9 | 10.6 | 13.2 | 15.9 |
+| Rifle | 4.2 | 6.3 | 8.4 | 10.5 | 12.6 |
+| Heavy rifle | 4.8 | 7.2 | 9.6 | 12 | 14.4 |
+| LMG | 10.6 | 15.9 | 21.2 | 26.5 | 31.8 |
+| Compact LMG | 10.4 | 15.6 | 20.8 | 26 | 31.2 |
+| DMR | 5.7 | 8.6 | 11.4 | 14.2 | 17.1 |
+| AT launcher | 8.2 | 12.3 | 16.4 | 20.5 | 24.6 |
+| Auto rifle | 6.7 | 10.1 | 13.4 | 16.8 | 20.1 |
+| HMG | 12.5 | 18.8 | 25 | 31.2 | 37.5 |
+| Anti-materiel rifle | 6.6 | 9.9 | 13.2 | 16.5 | 19.8 |
 <!-- /table -->
 
 <!-- table:values.weapons_faction -->
 | Weapon | Shoot 0 | 1 | 2 | 3 | 4 |
 |---|---|---|---|---|---|
-| DC-17 hand blaster (Galactic Republic) | 2.2 | 3 | 3.6 | 4.3 | 4.7 |
-| Twin DC-17s (Galactic Republic) | 3.6 | 4.9 | 5.9 | 7 | 7.7 |
-| DC-15S blaster carbine (Galactic Republic) | 4.1 | 5.5 | 6.8 | 8 | 8.8 |
-| DC-15A blaster rifle (Galactic Republic) | 4.2 | 5.7 | 6.9 | 8.2 | 9 |
-| DC-15x sniper rifle (Galactic Republic) | 5.7 | 7.7 | 9.4 | 11.1 | 12.3 |
-| DC-17m (blaster) (Galactic Republic) | 4.6 | 6.2 | 7.6 | 9 | 9.9 |
-| DC-17m (sniper) (Galactic Republic) | 5.7 | 7.7 | 9.4 | 11.1 | 12.3 |
-| DC-17m (anti-armour) (Galactic Republic) | 5.7 | 7.7 | 9.4 | 11.1 | 12.3 |
-| DP-23 phase-pulse blaster (Galactic Republic) | 5.3 | 7.2 | 8.7 | 10.3 | 11.4 |
-| Z-6 rotary blaster (Galactic Republic) | 9.5 | 12.8 | 15.7 | 18.5 | 20.4 |
-| RPS-6 rocket launcher (Galactic Republic) | 8.2 | 11.1 | 13.5 | 16 | 17.6 |
-| M134 minigun (Anchorage) | 13.4 | 18.1 | 22.1 | 26.1 | 28.8 |
-| 20mm autocannon (Anchorage) | 12.9 | 17.4 | 21.3 | 25.2 | 27.7 |
-| MAAWS recoilless rifle (Anchorage) | 11.5 | 15.5 | 19 | 22.4 | 24.7 |
-| CS/LM5 rotary gun (Hankou) | 10.6 | 14.3 | 17.5 | 20.7 | 22.8 |
-| Dual DZJ-08 recoilless (Hankou) | 9.2 | 12.4 | 15.2 | 17.9 | 19.8 |
-| E-5 blaster rifle (Separatist Alliance) | 4.2 | 5.7 | 6.9 | 8.2 | 9 |
-| E-5C heavy blaster rifle (Separatist Alliance) | 6.7 | 9 | 11.1 | 13.1 | 14.4 |
-| E-5s sniper rifle (Separatist Alliance) | 5.7 | 7.7 | 9.4 | 11.1 | 12.3 |
-| E-60R missile launcher (Separatist Alliance) | 8.2 | 11.1 | 13.5 | 16 | 17.6 |
-| Wrist blasters (Separatist Alliance) | 6.6 | 8.9 | 10.9 | 12.9 | 14.2 |
-| ACM heavy blaster (Separatist Alliance) | 10.6 | 14.3 | 17.5 | 20.7 | 22.8 |
-| Wrist rocket launcher (Separatist Alliance) | 7.9 | 10.7 | 13 | 15.4 | 17 |
-| Twin blaster cannons (Separatist Alliance) | 9.5 | 12.8 | 15.7 | 18.5 | 20.4 |
-| Heavy blaster cannon (Separatist Alliance) | 6.7 | 9 | 11.1 | 13.1 | 14.4 |
-| DT-12 heavy blaster pistol (Separatist Alliance) | 3.7 | 5 | 6.1 | 7.2 | 8 |
+| DC-17 hand blaster (Galactic Republic) | 2.2 | 3.3 | 4.4 | 5.5 | 6.6 |
+| Twin DC-17s (Galactic Republic) | 3.6 | 5.4 | 7.2 | 9 | 10.8 |
+| DC-15S blaster carbine (Galactic Republic) | 4.1 | 6.1 | 8.2 | 10.2 | 12.3 |
+| DC-15A blaster rifle (Galactic Republic) | 4.2 | 6.3 | 8.4 | 10.5 | 12.6 |
+| DC-15x sniper rifle (Galactic Republic) | 5.7 | 8.6 | 11.4 | 14.2 | 17.1 |
+| DC-17m (blaster) (Galactic Republic) | 4.6 | 6.9 | 9.2 | 11.5 | 13.8 |
+| DC-17m (sniper) (Galactic Republic) | 5.7 | 8.6 | 11.4 | 14.2 | 17.1 |
+| DC-17m (anti-armour) (Galactic Republic) | 5.7 | 8.6 | 11.4 | 14.2 | 17.1 |
+| DP-23 phase-pulse blaster (Galactic Republic) | 5.3 | 7.9 | 10.6 | 13.2 | 15.9 |
+| Z-6 rotary blaster (Galactic Republic) | 9.5 | 14.2 | 19 | 23.8 | 28.5 |
+| RPS-6 rocket launcher (Galactic Republic) | 8.2 | 12.3 | 16.4 | 20.5 | 24.6 |
+| M134 minigun (Anchorage) | 13.4 | 20.1 | 26.8 | 33.5 | 40.2 |
+| 20mm autocannon (Anchorage) | 12.9 | 19.4 | 25.8 | 32.2 | 38.7 |
+| MAAWS recoilless rifle (Anchorage) | 11.5 | 17.2 | 23 | 28.8 | 34.5 |
+| CS/LM5 rotary gun (Hankou) | 10.6 | 15.9 | 21.2 | 26.5 | 31.8 |
+| Dual DZJ-08 recoilless (Hankou) | 9.2 | 13.8 | 18.4 | 23 | 27.6 |
+| E-5 blaster rifle (Separatist Alliance) | 4.2 | 6.3 | 8.4 | 10.5 | 12.6 |
+| E-5C heavy blaster rifle (Separatist Alliance) | 6.7 | 10.1 | 13.4 | 16.8 | 20.1 |
+| E-5s sniper rifle (Separatist Alliance) | 5.7 | 8.6 | 11.4 | 14.2 | 17.1 |
+| E-60R missile launcher (Separatist Alliance) | 8.2 | 12.3 | 16.4 | 20.5 | 24.6 |
+| Wrist blasters (Separatist Alliance) | 6.6 | 9.9 | 13.2 | 16.5 | 19.8 |
+| ACM heavy blaster (Separatist Alliance) | 10.6 | 15.9 | 21.2 | 26.5 | 31.8 |
+| Wrist rocket launcher (Separatist Alliance) | 7.9 | 11.9 | 15.8 | 19.8 | 23.7 |
+| Twin blaster cannons (Separatist Alliance) | 9.5 | 14.2 | 19 | 23.8 | 28.5 |
+| Heavy blaster cannon (Separatist Alliance) | 6.7 | 10.1 | 13.4 | 16.8 | 20.1 |
+| DT-12 heavy blaster pistol (Separatist Alliance) | 3.7 | 5.6 | 7.4 | 9.2 | 11.1 |
 <!-- /table -->
 
 A weapon's base value is the average wound row it deals on a hit against Armour 0, 1 and 2. That is then adjusted for range, Auto N (each target after the first counts 0.6), Explosion (X), and keywords: Handy and Suppressing add to it, while Cumbersome and One per round take away. A launcher with a choice of rounds uses its best round, plus 10% for the choice.
@@ -215,15 +214,15 @@ Every profile in chapter 9, with its default loadout.
 | Troop | TV | Requisition |
 |---|---|---|
 | **Hostage** | 11 | 2 |
-| **Officer** | 46 | 5 |
-| **Line Trooper** | 32 | 4 |
-| **Support Gunner** | 43 | 5 |
-| **Anti-armour Trooper** | 39 | 4 |
-| **Specialist** | 31 | 4 |
-| **Marksman** | 42 | 5 |
-| **Assault Trooper** | 56 | 6 |
-| **Heavy Infantry Sergeant** | 125 | 13 |
-| **Heavy Infantry** | 110 | 11 |
+| **Officer** | 47 | 5 |
+| **Line Trooper** | 33 | 4 |
+| **Support Gunner** | 45 | 5 |
+| **Anti-armour Trooper** | 40 | 4 |
+| **Specialist** | 32 | 4 |
+| **Marksman** | 45 | 5 |
+| **Assault Trooper** | 59 | 6 |
+| **Heavy Infantry Sergeant** | 131 | 14 |
+| **Heavy Infantry** | 116 | 12 |
 <!-- /table -->
 
 ### Task Force Boone
@@ -231,14 +230,14 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_tfb -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **VAT Team Leader** | 66 | 7 |
-| **VAT Assaulter** | 52 | 6 |
-| **VAT Gunner** | 68 | 7 |
-| **Data Specialist** | 59 | 6 |
-| **Pathfinder Team Leader** | 52 | 6 |
-| **Pathfinder** | 41 | 5 |
-| **Pathfinder SAW Gunner** | 52 | 6 |
-| **Control Team Marksman** | 45 | 5 |
+| **VAT Team Leader** | 68 | 7 |
+| **VAT Assaulter** | 54 | 6 |
+| **VAT Gunner** | 73 | 8 |
+| **Data Specialist** | 61 | 7 |
+| **Pathfinder Team Leader** | 54 | 6 |
+| **Pathfinder** | 43 | 5 |
+| **Pathfinder SAW Gunner** | 56 | 6 |
+| **Control Team Marksman** | 50 | 5 |
 <!-- /table -->
 
 ### Galactic Republic
@@ -246,16 +245,16 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_republic -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Clone Sergeant** | 49 | 5 |
-| **Clone Trooper** | 39 | 4 |
-| **Clone Heavy Trooper** | 44 | 5 |
-| **Clone Trooper Marksman** | 45 | 5 |
-| **ARC Trooper Leader** | 65 | 7 |
-| **ARC Trooper** | 53 | 6 |
-| **ARF Trooper** | 43 | 5 |
-| **Clone Commando Leader** | 89 | 9 |
-| **Clone Commando** | 79 | 8 |
-| **Commander Cody** | 63 | 7 |
+| **Clone Sergeant** | 50 | 5 |
+| **Clone Trooper** | 41 | 5 |
+| **Clone Heavy Trooper** | 48 | 5 |
+| **Clone Trooper Marksman** | 49 | 5 |
+| **ARC Trooper Leader** | 68 | 7 |
+| **ARC Trooper** | 55 | 6 |
+| **ARF Trooper** | 45 | 5 |
+| **Clone Commando Leader** | 93 | 10 |
+| **Clone Commando** | 83 | 9 |
+| **Commander Cody** | 66 | 7 |
 | **Obi-Wan Kenobi** | 114 | 12 |
 | **Ahsoka Tano** | 84 | 9 |
 | **Jedi Guardian** | 70 | 7 |
@@ -266,11 +265,11 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_anchorage -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Prime** | 78 | 8 |
-| **Scout** | 65 | 7 |
-| **Grenadier** | 58 | 6 |
-| **Systems Operator** | 55 | 6 |
-| **Hound CCT** | 129 | 13 |
+| **Prime** | 83 | 9 |
+| **Scout** | 68 | 7 |
+| **Grenadier** | 63 | 7 |
+| **Systems Operator** | 57 | 6 |
+| **Hound CCT** | 144 | 15 |
 <!-- /table -->
 
 ### Hankou
@@ -278,11 +277,11 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_hankou -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Team Leader** | 77 | 8 |
-| **Rifleman** | 62 | 7 |
-| **Automatic Rifleman** | 67 | 7 |
-| **Pioneer** | 66 | 7 |
-| **ZQ44 CCT** | 76 | 8 |
+| **Team Leader** | 81 | 9 |
+| **Rifleman** | 64 | 7 |
+| **Automatic Rifleman** | 72 | 8 |
+| **Pioneer** | 72 | 8 |
+| **ZQ44 CCT** | 84 | 9 |
 <!-- /table -->
 
 ### Freespace Solutions
@@ -291,15 +290,15 @@ Every profile in chapter 9, with its default loadout.
 | Troop | TV | Requisition |
 |---|---|---|
 | **Salvage Hand** | 19 | 2 |
-| **Asset Security Officer** | 32 | 4 |
-| **Asset Security Gunner** | 38 | 4 |
-| **Collections Enforcer** | 36 | 4 |
-| **Repossession Breacher** | 64 | 7 |
-| **Liquidator** | 59 | 6 |
+| **Asset Security Officer** | 33 | 4 |
+| **Asset Security Gunner** | 40 | 4 |
+| **Collections Enforcer** | 37 | 4 |
+| **Repossession Breacher** | 65 | 7 |
+| **Liquidator** | 62 | 7 |
 | **Salvage Tech** | 30 | 3 |
-| **Recovery Captain** | 60 | 6 |
-| **Sentry Turret** | 26 | 3 |
-| **Security Drone** | 36 | 4 |
+| **Recovery Captain** | 63 | 7 |
+| **Sentry Turret** | 29 | 3 |
+| **Security Drone** | 37 | 4 |
 <!-- /table -->
 
 ### Contractors
@@ -307,23 +306,23 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_contractor -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Contract Boarder** | 64 | 7 |
-| **Contract Heavy** | 108 | 11 |
-| **Reaction Force Operator** | 49 | 5 |
-| **Reaction Force Gunner** | 64 | 7 |
-| **Hired Marksman** | 52 | 6 |
-| **Hired Heavy Gunner** | 73 | 8 |
-| **Borz Bratva Trooper** | 60 | 6 |
-| **Borz Bratva HMG Gunner** | 68 | 7 |
-| **Borz Cyka Powered Trooper** | 113 | 12 |
-| **Borz Cyka Bravo Breacher** | 116 | 12 |
-| **Ubiytsa Controller** | 60 | 6 |
-| **Ubiytsa Shock Trooper** | 57 | 6 |
-| **Reaction Force Controller** | 70 | 7 |
-| **Reaction Force Grenadier** | 56 | 6 |
-| **Reaction Force Engineer** | 56 | 6 |
-| **Harlow Veteran** | 55 | 6 |
-| **Springbok AI** | 63 | 7 |
+| **Contract Boarder** | 66 | 7 |
+| **Contract Heavy** | 116 | 12 |
+| **Reaction Force Operator** | 52 | 6 |
+| **Reaction Force Gunner** | 69 | 7 |
+| **Hired Marksman** | 58 | 6 |
+| **Hired Heavy Gunner** | 79 | 8 |
+| **Borz Bratva Trooper** | 62 | 7 |
+| **Borz Bratva HMG Gunner** | 74 | 8 |
+| **Borz Cyka Powered Trooper** | 121 | 13 |
+| **Borz Cyka Bravo Breacher** | 121 | 13 |
+| **Ubiytsa Controller** | 62 | 7 |
+| **Ubiytsa Shock Trooper** | 59 | 6 |
+| **Reaction Force Controller** | 72 | 8 |
+| **Reaction Force Grenadier** | 60 | 6 |
+| **Reaction Force Engineer** | 58 | 6 |
+| **Harlow Veteran** | 56 | 6 |
+| **Springbok AI** | 70 | 7 |
 | **Cricket Drone** | 23 | 3 |
 <!-- /table -->
 
@@ -332,17 +331,17 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_un -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Battalion Controller** | 63 | 7 |
-| **3rd Battalion Rifleman** | 49 | 5 |
-| **3rd Battalion Data Specialist** | 62 | 7 |
-| **3rd Battalion AT Specialist** | 58 | 6 |
-| **Pointman** | 58 | 6 |
-| **Pointman SAW** | 80 | 8 |
-| **UTG Mother** | 115 | 12 |
-| **UTG Assaulter** | 84 | 9 |
-| **UTG Grenadier** | 92 | 10 |
-| **UTG Marksman** | 89 | 9 |
-| **Golem** | 60 | 6 |
+| **Battalion Controller** | 66 | 7 |
+| **3rd Battalion Rifleman** | 52 | 6 |
+| **3rd Battalion Data Specialist** | 64 | 7 |
+| **3rd Battalion AT Specialist** | 62 | 7 |
+| **Pointman** | 61 | 7 |
+| **Pointman SAW** | 88 | 9 |
+| **UTG Mother** | 120 | 12 |
+| **UTG Assaulter** | 87 | 9 |
+| **UTG Grenadier** | 97 | 10 |
+| **UTG Marksman** | 98 | 10 |
+| **Golem** | 64 | 7 |
 <!-- /table -->
 
 ### Meridian Directorate
@@ -350,8 +349,8 @@ Every profile in chapter 9, with its default loadout.
 <!-- table:values.tv_directorate -->
 | Troop | TV | Requisition |
 |---|---|---|
-| **Directorate Handler** | 101 | 11 |
-| **Directorate Deniable Operator** | 67 | 7 |
+| **Directorate Handler** | 106 | 11 |
+| **Directorate Deniable Operator** | 70 | 7 |
 <!-- /table -->
 
 ### Separatist Alliance
@@ -361,15 +360,15 @@ Every profile in chapter 9, with its default loadout.
 |---|---|---|
 | **B1 Battle Droid** | 22 | 3 |
 | **B1 Heavy Weapons Droid** | 26 | 3 |
-| **B2 Super Battle Droid** | 44 | 5 |
-| **B2 Heavy Weapons Droid** | 54 | 6 |
-| **Droideka** | 65 | 7 |
-| **BX Commando Droid** | 54 | 6 |
+| **B2 Super Battle Droid** | 46 | 5 |
+| **B2 Heavy Weapons Droid** | 57 | 6 |
+| **Droideka** | 68 | 7 |
+| **BX Commando Droid** | 57 | 6 |
 | **IG-100 MagnaGuard** | 52 | 6 |
-| **T-series Tactical Droid** | 34 | 4 |
+| **T-series Tactical Droid** | 35 | 4 |
 | **Kraken** | 63 | 7 |
-| **General Grievous** | 145 | 15 |
-| **DSD1 Dwarf Spider Droid** | 87 | 9 |
+| **General Grievous** | 147 | 15 |
+| **DSD1 Dwarf Spider Droid** | 90 | 9 |
 <!-- /table -->
 
 The ranking was checked against the simulator's duel scores (`docs/analysis/troop-value-calibration.md`): rank correlation 0.87 across the 73 profiles in the simulator report. The largest differences are where the duel can't see a troop's worth: Leaders (command), gunners and launchers (several targets), and pistol-armed troops, who are weak at duel range by design.

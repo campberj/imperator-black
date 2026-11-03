@@ -1,5 +1,7 @@
 # Hit target and range bands
 
+**Decided 2026-11-02 (RJ): the hit target is 7+ (decision 3.20); the range bands stay 0 / −1 / −2 (3.19 closed).** See [the final run](#final-run-7-against-8-with-task-force-boone-at-shoot-2) at the end. The sections below are the earlier analysis, at 8+.
+
 From the Gym 1 replay (2026-10-21), RJ: "8+ as the target hit number may be one too high; a lot of shots start missing as soon as cover, injury, or any suppression matter. That said, I could see the argument that it is realistic."
 
 Held as an observation (decisions 3.19 and 3.20): rules change when a finding repeats, not after one game. These are the numbers for when it comes up again.
@@ -105,3 +107,50 @@ RJ asked to test his range bands (A) and 7+ (B) together. Four variants, 20,000 
 - **A+B is +2 to every shot.** Close-range firefights resolve in 3.2 rounds instead of 4.4; flash-and-clear against Overwatch rises from 38% to 65%. But the quality edge falls (72% → 68%) and Pillar 1 (training and cover beat numbers) drops from 75% to 68%. Too much.
 - **One step of +1 is the sweet spot.** Fights resolve about a round sooner (4.4 → 3.7 at 2–8"), stalemates disappear, and Pillar 1 and the quality edge hold (73%, 71%).
 - **Recommendation: test A as a playtest variant**, keeping 8+ as the one target number for every test in the game. It presents the change where RJ felt it (point-blank shots), and long shots get +1 too, which the simulator says is harmless.
+
+
+## Final run: 7+ against 8+ with Task Force Boone at Shoot 2
+
+Run on 2026-11-03 after RJ settled 3.20, with the current content (Task Force Boone line troopers at Shoot 2, decision 3.21). The 8+ variant is [`variants/hit-8.json`](variants/hit-8.json), the same content with `core.hit_target: 8`. 20,000 games a row, seed 1.
+
+| Metric | Hit 8+ | Hit 7+ |
+|---|---|---|
+| Rifle vs Flak, one hit: out | 25% | 24% |
+| Carbine vs Flak, one hit: out | 25% | 24% |
+| Carbine vs Void plate (2), one hit: out | 10% | 10% |
+| Shotgun vs Flak, one hit: out | 63% | 62% |
+| Sidearm vs no armour, one hit: out | 18% | 18% |
+| Room clear, dynamic entry: cleared by R3 | 25% | 28% |
+| Room clear, dynamic entry: attackers out / dead | 1.54 / 0.35 | 2.04 / 0.35 |
+| Room clear, flashbang first: cleared by R3 | 42% | 51% |
+| Room clear, flashbang first: attackers out / dead | 0.77 / 0.21 | 1.03 / 0.22 |
+| Room clear, breach + flash: cleared by R3 | 37% | 47% |
+| 4 Q1 vs 4 Q1 rifles: draws | 2% | 0% |
+| 4 Q2 vs 4 Q1 rifles: Q2 side wins | 73% | 71% |
+| 4 Q1 vs 5 Q1 rifles: 4-side wins | 19% | 21% |
+| Firefight 4v4 Q1: models dead per game | 0.49 | 0.38 |
+| Pillar 1: 4 Q2 in cover vs 6 Q0 in the open, Q2 wins | 75% | 74% |
+| Real VAT team vs asset security on Overwatch, flash: cleared by R3 | 62% | 72% |
+| Real VAT team vs asset security on Overwatch, flash: VAT out / dead | 0.79 / 0.27 | 1.05 / 0.26 |
+| Real VAT team vs asset security on Overwatch, flash: defenders out | 2.08 | 2.32 |
+| Real VAT team vs unready asset security, flash: cleared by R3 | 75% | 85% |
+| Patrol Contact (both sides have LMG + SMG): fireteam / patrol wins | 40% / 54% | 41% / 58% |
+| 3 rifles + LMG vs 4 rifles (all Q1): LMG side wins | 54% | 57% |
+| Pinning: 4v4 Q1 (Nerve 1): activations spent Pinned | 9% | 11% |
+| Pinning: 4v4 Q2 (Nerve 2): activations spent Pinned | 2% | 3% |
+| Pinning: 4 Q2 vs 4 Q1: Q2 side wins | 73% | 71% |
+| Real: clone squad vs UN reserve fireteam: clones win / draw | 46% / 5% | 50% / 2% |
+| Real: clone squad vs UN reserve fireteam: clone / UN activations Pinned | 1% / 15% | 2% / 19% |
+| Real: VAT fireteam vs asset security + captain: VAT win / draw | 95% / 2% | 95% / 1% |
+| Real: VAT fireteam vs asset security + captain: VAT / security activations Pinned | 9% / 20% | 14% / 24% |
+| Real: VAT fireteam vs UN reserve fireteam: VAT win / draw | 68% / 7% | 74% / 3% |
+| Real: generic squad (Nerve 1) vs clone squad (Nerve 2): generic win / draw | 32% / 5% | 36% / 2% |
+| Real: Harlow veterans (Nerve 3) vs clone squad: Harlow win / draw | 24% / 4% | 25% / 2% |
+| Real: Ahsoka + clone squad vs UN reserve fireteam: Republic win | 52% / 3% | 54% / 1% |
+| Close combat Q1 vs Q1: avg exchanges | 2.8 | 2.8 |
+| Close combat Q1 vs Q1: loser dead | 0% | 0% |
+
+- **Pillar 1 holds:** 4 Shoot 2 in cover still beat 6 Shoot 0 in the open 74% of the time (75% at 8+).
+- **Tempo:** draws vanish and room clears gain about ten points by round 3. Deaths per 4v4 firefight fall, because fights end sooner.
+- **Balance between sides** barely moves: the better side gains a few points where it already won.
+- **Troop values** stay as they are. Rebuilding the Shoot multiplier from 7+ odds (1, 1.35, 1.65, 1.95, 2.15) ranks troops slightly worse against the 7+ duel scores (Spearman 0.83) than the shared row (0.84), so Shoot keeps it. [Calibration](troop-value-calibration.md).

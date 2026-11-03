@@ -5,7 +5,7 @@ Regenerate with `dotnet run -c Release --project app/src/Imperator.Sim -- docs/a
 
 ## 1. One shot against a fresh target (exact)
 
-Shooter Q1, no other modifiers; target in Light cover (net modifier 0, so 15/36 ≈ 42% to hit). "Out" = Down, Bleeding, Critical or Dead.
+Shooter Q1, no other modifiers; target in Light cover (net modifier 0, so 21/36 ≈ 58% to hit at 7+). "Out" = Down, Bleeding, Critical or Dead.
 
 | Weapon | Armour | Hit | Suppression only | Wounded | Out | Dead |
 |---|---|---|---|---|---|---|

@@ -38,7 +38,7 @@ public class AutoFireTests
     [Fact]
     public void ExtraTargetsAreHitLessOften()
     {
-        // LMG gunner Shoot 1 vs armour 3: first target at net +1 = 21/36; extra targets at net 0 = 15/36.
+        // LMG gunner Shoot 1, hit 7+: first target at net +1 = 26/36; extra targets at net 0 = 21/36.
         var gunner = Soldier.Generic("g", 1, 1, Set.Ranged("lmg"), Set.Melee("knife"));
         var rng = new Rng(21); int firstHits = 0, thirdHits = 0, trials = 40_000;
         for (int i = 0; i < trials; i++)
@@ -48,7 +48,7 @@ public class AutoFireTests
             if (r[0].Hit) firstHits++;
             if (r[2].Hit) thirdHits++;
         }
-        Assert.Equal(21.0 / 36, firstHits / (double)trials, 0.01);
-        Assert.Equal(15.0 / 36, thirdHits / (double)trials, 0.01);
+        Assert.Equal(26.0 / 36, firstHits / (double)trials, 0.01);
+        Assert.Equal(21.0 / 36, thirdHits / (double)trials, 0.01);
     }
 }

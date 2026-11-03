@@ -254,8 +254,7 @@ def render_values(section):
     names = {a["id"]: a["name"] for a in load("core")["attributes"]}
     fmt = lambda x: f"{x:g}" if x == int(x) else f"{x:.1f}"
     if section == "multiplier":
-        return table(["Attribute value"] + [str(i) for i in shoots],
-                     [["Multiplier"] + [f"{m(i):g}" for i in shoots], ["Shoot multiplier"] + [f"{m(i, 'shoot'):g}" for i in shoots]])
+        return table(["Attribute value"] + [str(i) for i in shoots], [["Multiplier"] + [fmt(m(i)) for i in shoots]])
     if section == "attribute_costs":
         rows = [(names[k], f"{v} per point") for k, v in Va["attribute_costs"].items()]
         rows.append(("Move", f'{Va["move_per_inch"]} per inch above {Va["baseline"]["move"]}" (minus below it)'))
@@ -268,7 +267,7 @@ def render_values(section):
             b = tvm.weapon_base(w["id"])
             facs = {f["id"]: f["name"] for f in load("factions")["factions"]}
             label = w["name"] + (f' ({facs[w["faction"]]})' if w.get("faction") else "")
-            rows.append([label] + [fmt(round(b * m(i, "shoot"), 1)) for i in shoots])
+            rows.append([label] + [fmt(round(b * m(i), 1)) for i in shoots])
         return table(["Weapon", "Shoot 0", "1", "2", "3", "4"], rows)
     if section == "melee":
         rows = [[w["name"]] + [fmt(round(tvm.melee_base(w["id"]) * m(i), 1)) for i in shoots] for w in load("weapons")["melee"]]

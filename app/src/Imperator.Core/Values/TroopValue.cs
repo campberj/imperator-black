@@ -10,7 +10,7 @@ public sealed record ValueWeaponFormula(
     double Scale, List<int> ArmourMix, List<ValueRangeBand> Range, double AutoExtraTarget,
     Dictionary<string, double> KeywordFactors, double ExplosionPerInch, double RoundsFlexibility);
 public sealed record ValuesContent(
-    string Version, ValueBaseline Baseline, Dictionary<string, double> Multiplier, Dictionary<string, double> ShootMultiplier,
+    string Version, ValueBaseline Baseline, Dictionary<string, double> Multiplier,
     Dictionary<string, double> AttributeCosts, double MovePerInch, ValueWeaponFormula WeaponFormula,
     double MeleeScale, Dictionary<string, ValueCost> Gear, Dictionary<string, ValueCost> Grenades,
     Dictionary<string, ValueCost> Skills, double SurvivalExponent, double AutomatedFactor, int RequisitionPer);
@@ -31,12 +31,10 @@ public sealed class TroopValueCalculator(ContentSet content)
 
     private static double Rounded(double value, int decimals) => Math.Round(value, decimals, MidpointRounding.ToEven);
 
-    /// <summary>Attribute multiplier. Shoot has its own table: the hit roll is 7+, tests are 8+ (decision 3.20).</summary>
-    public double Multiplier(int? value, string? attribute = null)
+    public double Multiplier(int? value)
     {
         int key = Math.Clamp(value ?? 0, 0, 5);
-        var table = attribute == "shoot" ? _values.ShootMultiplier : _values.Multiplier;
-        return table[key.ToString(System.Globalization.CultureInfo.InvariantCulture)];
+        return _values.Multiplier[key.ToString(System.Globalization.CultureInfo.InvariantCulture)];
     }
 
     private int WoundRow(int total)
@@ -140,7 +138,7 @@ public sealed class TroopValueCalculator(ContentSet content)
         subtotal += (stats.Move - _values.Baseline.Move) * _values.MovePerInch;
 
         string? equipped = weapon ?? troop.Weapon;
-        if (equipped is not null) subtotal += Rounded(WeaponBase(equipped) * Multiplier(stats.Shoot, "shoot"), 1);
+        if (equipped is not null) subtotal += Rounded(WeaponBase(equipped) * Multiplier(stats.Shoot), 1);
 
         var chosenGear = gear ?? troop.Gear;
         string? chosenMelee = melee ?? troop.Melee;
@@ -152,7 +150,7 @@ public sealed class TroopValueCalculator(ContentSet content)
         double Price(string id, IReadOnlyDictionary<string, ValueCost> prices)
         {
             var cost = prices[id];
-            return cost.Cost * (cost.Per is null ? 1.0 : Multiplier(Attribute(stats, cost.Per), cost.Per));
+            return cost.Cost * (cost.Per is null ? 1.0 : Multiplier(Attribute(stats, cost.Per)));
         }
         foreach (string item in chosenGear) kit += Price(item, _values.Gear);
         foreach (string item in grenades ?? troop.Grenades) kit += Price(item, _values.Grenades);
@@ -162,7 +160,7 @@ public sealed class TroopValueCalculator(ContentSet content)
             if (!grantedSkills.Contains(skill))
             {
                 var cost = _values.Skills[skill];
-                kit += cost.Cost * level * (cost.Per is null ? 1.0 : Multiplier(Attribute(stats, cost.Per), cost.Per));
+                kit += cost.Cost * level * (cost.Per is null ? 1.0 : Multiplier(Attribute(stats, cost.Per)));
             }
         subtotal += kit;
         int armourRating = content.ArmourById(armour ?? troop.Armour).Value;

@@ -6,8 +6,8 @@ namespace Imperator.Core.Tests;
 public class ShootingTests
 {
     [Fact]
-    public void Plain2d6HitsAt8() =>
-        Assert.Equal(15.0 / 36, 1 - Shooting.Odds(Rules, 0, new DiceSpec(1, 2), 0, 0)[Outcome.Miss], 1e-9);
+    public void Plain2d6HitsAt7() =>
+        Assert.Equal(21.0 / 36, 1 - Shooting.Odds(Rules, 0, new DiceSpec(1, 2), 0, 0)[Outcome.Miss], 1e-9);
 
     [Fact]
     public void NaturalTwoAlwaysMisses() =>
@@ -88,7 +88,7 @@ public class ShootingTests
                 Assert.True(target.Suppression >= 1);
             }
         }
-        // 2d6 + 2 vs 8 with no cover penalty: 26/36 (natural 2 misses, double 6 hits).
-        Assert.Equal(26.0 / 36, hits / (double)n, 0.015);
+        // 2d6 + 2 vs 7 with no cover penalty: 30/36 (natural 2 misses).
+        Assert.Equal(30.0 / 36, hits / (double)n, 0.015);
     }
 }

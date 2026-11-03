@@ -72,7 +72,9 @@ void ShotTables()
 {
     md.AppendLine("## 1. One shot against a fresh target (exact)");
     md.AppendLine();
-    md.AppendLine("Shooter Q1, no other modifiers; target in Light cover (net modifier 0, so 15/36 ≈ 42% to hit). \"Out\" = Down, Bleeding, Critical or Dead.");
+    int hitWays = (from a in Enumerable.Range(1, 6) from b in Enumerable.Range(1, 6)
+                   where a + b != content.Core.NaturalMiss && (a == 6 && b == 6 || a + b >= content.Core.HitTarget) select 1).Count();
+    md.AppendLine($"Shooter Q1, no other modifiers; target in Light cover (net modifier 0, so {hitWays}/36 ≈ {100.0 * hitWays / 36:0}% to hit at {content.Core.HitTarget}+). \"Out\" = Down, Bleeding, Critical or Dead.");
     md.AppendLine();
     md.AppendLine("| Weapon | Armour | Hit | Suppression only | Wounded | Out | Dead |");
     md.AppendLine("|---|---|---|---|---|---|---|");

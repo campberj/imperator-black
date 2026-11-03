@@ -42,6 +42,7 @@ From the first gym playtest ([log](../docs/playtests/2026-10-20-gym-01-first-bre
 - **Suppressive Fire** (chapter 4): ignores cover, and a hit stops the target reacting until the end of the round (from Gym 2).
 - **Overwatch** (chapter 2): one reaction, not two, and at most one reaction between a model's activations (from Gym 2).
 - **Explosion (X)** (chapter 6): replaces Blast. Launchers fire explosives with Shoot (a miss lands short; a natural 2 is a dud) and choose a round before each Shoot (anti-armour or high explosive). **Half-step damage dice** (chapter 1): d6+d8, d8+d10, d10+d12.
+- **Hit target 7+** (chapter 4): the hit roll is 2d6 + Shoot + modifiers, 7+ (was 8+), after three playtests found too many misses once cover or Suppression applied. Tests, including Throw, stay 8+. Results: [sim-v0.5-results.md](../docs/analysis/sim-v0.5-results.md).
 - **Missions** (chapter 13): four mission types, threat tiers 1–4, an open guard and hidden contact chips, the alert track, and a mission clock (a time limit and a clock die instead of a round limit). A one-page mission dashboard tracks it all.
 
 ## Changes in v0.4

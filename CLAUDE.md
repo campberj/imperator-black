@@ -40,7 +40,7 @@ dotnet ef database update --project app/src/Imperator.Api             # apply mi
 dotnet run --project app/src/Imperator.Api                            # API on http://localhost:5080
 npm --prefix app/web run dev                                          # web on http://localhost:5173 (proxies to the API)
 npm --prefix app/web run lint && npm --prefix app/web test && npm --prefix app/web run build
-dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.4-results.md
+dotnet run -c Release --project app/src/Imperator.Sim -- docs/analysis/sim-v0.5-results.md
 dotnet run -c Release --project app/src/Imperator.Sim -- --compare Label=a.json Label2=b.json   # compare content variants
 dotnet run -c Release --project app/src/Imperator.Sim -- --values docs/analysis/troop-values-v0.5.md   # troop value harness
 ```
