@@ -124,7 +124,7 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 - [x] Solo opponent lists reworded for land (area, approach, exit)
 - [x] Printable [land battles reference](print/ImperatorBlack_land-battles.pdf)
 - [x] Land gym written: [Gym 2: Silence the Relay](scenarios/gym-02-silence-the-relay.yaml), from RJ's desert table
-- [ ] Play Gym 2
+- [x] Play Gym 2 ([log](playtests/2026-10-22-gym-02-silence-the-relay.md), 2026-10-22)
 - [ ] Land missions (with Phase 5) and vehicles (after the PoC)
 
 **Exit:** A land gym plays without terrain or enemy-behavior questions that the rules don't answer.
