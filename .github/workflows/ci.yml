@@ -50,10 +50,17 @@ jobs:
       - name: Build
         run: dotnet build app/Imperator.slnx -c Release
 
+      # The integration test gets its own database, so the migration step below still
+      # proves a clean apply on an untouched `imperator`.
+      - name: Create test database
+        run: psql -h localhost -U imperator -d imperator -c "CREATE DATABASE imperator_test"
+        env:
+          PGPASSWORD: imperator
+
       - name: Tests (including real PostgreSQL solo campaign lifecycle)
         run: dotnet test app/Imperator.slnx -c Release --no-build
         env:
-          IMPERATOR_TEST_CONNECTION: Host=localhost;Port=5432;Database=imperator;Username=imperator;Password=imperator
+          IMPERATOR_TEST_CONNECTION: Host=localhost;Port=5432;Database=imperator_test;Username=imperator;Password=imperator
 
       - name: Restore .NET tools
         run: dotnet tool restore

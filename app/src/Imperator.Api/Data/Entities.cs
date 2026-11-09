@@ -48,6 +48,8 @@ public sealed class CampaignEvent
     public required string Type { get; set; }
     /// <summary>Event body as JSON (stored as jsonb).</summary>
     public required string Payload { get; set; }
+    /// <summary>Version of this event type's payload schema; Core upgrades older versions on replay.</summary>
+    public int SchemaVersion { get; set; } = 1;
     public DateTimeOffset CreatedAt { get; set; }
     public Guid CreatedBy { get; set; }
 

@@ -34,6 +34,7 @@ public sealed class ImperatorDb(DbContextOptions<ImperatorDb> options) : DbConte
             e.HasIndex(x => new { x.CampaignId, x.Sequence }).IsUnique();
             e.Property(x => x.Type).HasMaxLength(100);
             e.Property(x => x.Payload).HasColumnType("jsonb");
+            e.Property(x => x.SchemaVersion).HasDefaultValue(1);
             e.HasOne(x => x.Campaign).WithMany(c => c.Events).HasForeignKey(x => x.CampaignId);
             e.HasOne(x => x.Creator).WithMany().HasForeignKey(x => x.CreatedBy).OnDelete(DeleteBehavior.Restrict);
         });
