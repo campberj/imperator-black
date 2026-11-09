@@ -42,7 +42,7 @@ public sealed record CampaignBasesDef(List<CampaignBaseKindDef> Kinds, List<stri
 public sealed record CampaignCostDef(string Item, JsonElement Cost);
 public sealed record CampaignEventDef(D6Range Roll, string Name, string Text);
 public sealed record CampaignShortArcDef(int Missions, List<string> Text);
-// Campaign definitions (decision 7.15): command latitudes and report templates for procedural campaigns.
+// Campaign definitions (decision 7.16): command latitudes and report templates for procedural campaigns.
 public sealed record CampaignLatitudeDef(string Id, string Name, string Text);
 public sealed record CampaignReportDef(string Id, string Name, string Text);
 
@@ -71,8 +71,8 @@ public sealed record CampaignContent(
     List<CampaignEventDef> Events,
     List<string> Evidence,
     CampaignShortArcDef ShortArc,
-    List<CampaignLatitudeDef>? Latitudes = null,
-    List<CampaignReportDef>? Reports = null);
+    List<CampaignLatitudeDef> Latitudes,
+    List<CampaignReportDef> Reports);
 
 // Chapter 16: every part of content/versus.yaml. Text stays content, not logic in the app.
 public sealed record VersusSizeDef(string Id, string Name, int Tv, string Models, string Board, string Clock);
