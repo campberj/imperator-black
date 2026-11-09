@@ -36,11 +36,9 @@ public class SoloCampaignIntegrationTests
     public async Task SoloCampaignSurvivesRestartAndReplaysSameEvents()
     {
         var connection = Environment.GetEnvironmentVariable("IMPERATOR_TEST_CONNECTION");
+        // The default unit test suite needs no Postgres; CI always supplies an ephemeral connection.
         if (string.IsNullOrEmpty(connection))
-        {
-            // The default unit test suite needs no Postgres; CI always supplies an ephemeral connection.
-            return;
-        }
+            Assert.Skip("Set IMPERATOR_TEST_CONNECTION to a disposable PostgreSQL database to run this test.");
 
         var player = Guid.NewGuid();
         var otherPlayer = Guid.NewGuid();
@@ -83,9 +81,11 @@ public class SoloCampaignIntegrationTests
 
             var history = await restarted.GetFromJsonAsync<JsonElement>($"/campaigns/{id}/events", ct);
             Assert.Equal(2, history.GetArrayLength());
+            Assert.All(history.EnumerateArray(), e => Assert.Equal(1, e.GetProperty("schemaVersion").GetInt32()));
             var replay = SoloCampaignLifecycle.Replay(history.EnumerateArray().Select(e =>
                 new SoloCampaignEvent(e.GetProperty("sequence").GetInt64(),
-                    e.GetProperty("type").GetString()!, e.GetProperty("payload").GetString()!)));
+                    e.GetProperty("type").GetString()!, e.GetProperty("payload").GetString()!,
+                    e.GetProperty("schemaVersion").GetInt32())));
             using var body = JsonDocument.Parse(before);
             Assert.Equal(body.RootElement.GetProperty("id").GetGuid(), replay.Id);
             Assert.Equal(body.RootElement.GetProperty("name").GetString(), replay.Name);

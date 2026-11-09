@@ -69,6 +69,12 @@ namespace Imperator.Api.Data.Migrations
                         .HasColumnType("jsonb")
                         .HasColumnName("payload");
 
+                    b.Property<int>("SchemaVersion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1)
+                        .HasColumnName("schema_version");
+
                     b.Property<long>("Sequence")
                         .HasColumnType("bigint")
                         .HasColumnName("sequence");

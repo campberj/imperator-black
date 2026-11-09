@@ -2,7 +2,7 @@
 
 Handoff for Claude Code (or anyone) working on the application. Read this, then [`../CLAUDE.md`](../CLAUDE.md), then [ADR-001](../docs/architecture/adr-001-architecture.md).
 
-Last updated: 2026-10-23, rules v0.5 (chapters 10–16: solo opponent, ship layouts, land battles, missions, campaign and short arcs, troop values, two players; fireteams and Pinned at Nerve + 2).
+Last updated: 2026-11-09, rules v0.5 (chapters 10–16: solo opponent, ship layouts, land battles, missions, campaign and short arcs, troop values, two players; fireteams and Pinned at Nerve + 2).
 
 ## How the work is split
 
@@ -34,7 +34,7 @@ Last updated: 2026-10-23, rules v0.5 (chapters 10–16: solo opponent, ship layo
 
 These are foundations that don't depend on unfinished rules. Each should leave CI green.
 
-**Open tasks, suggested order: 24, 25, 26, 27, then 22.** Tasks 1–21 and 23 are done. Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
+**Open tasks, suggested order: 25, 26, 27, then 22.** Tasks 1–21, 23 and 24 are done. Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
 
 ### 1. Move tests to xUnit ✅ done (2026-10-20)
 
@@ -281,7 +281,7 @@ Needs tasks 16 (TV in Core) and 18 (fireteam check in Core) merged first. RJ's b
 
 ---
 
-### 24. S1 follow-ups — *chatgpt authorized*
+### 24. S1 follow-ups ✅ done (2026-11-09)
 
 From the architecture review of PR #23. Small, independent fixes; one PR.
 

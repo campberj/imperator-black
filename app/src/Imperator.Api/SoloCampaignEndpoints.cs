@@ -15,7 +15,8 @@ public static class SoloCampaignEndpoints
     public sealed record CreateCampaignRequest(string? Name);
     public sealed record RenameCampaignRequest(string? Name);
     public sealed record CampaignSummary(Guid Id, string Name, long Version, string ContentVersion, DateTimeOffset CreatedAt);
-    public sealed record CampaignEventResponse(long Sequence, string Type, string Payload, DateTimeOffset CreatedAt);
+    public sealed record CampaignEventResponse(long Sequence, string Type, string Payload, int SchemaVersion,
+        DateTimeOffset CreatedAt);
 
     public static void MapSoloCampaigns(this WebApplication app)
     {
@@ -53,7 +54,7 @@ public static class SoloCampaignEndpoints
     }
 
     private static SoloCampaignState Project(IEnumerable<CampaignEvent> events) =>
-        SoloCampaignLifecycle.Replay(events.Select(e => new SoloCampaignEvent(e.Sequence, e.Type, e.Payload)));
+        SoloCampaignLifecycle.Replay(events.Select(e => new SoloCampaignEvent(e.Sequence, e.Type, e.Payload, e.SchemaVersion)));
 
     private static async Task<List<CampaignEvent>> Events(ImperatorDb db, Guid campaignId, CancellationToken ct) =>
         await db.CampaignEvents.AsNoTracking()
@@ -86,7 +87,7 @@ public static class SoloCampaignEndpoints
         db.CampaignEvents.Add(new CampaignEvent
         {
             Id = Guid.NewGuid(), CampaignId = id, Sequence = change.Sequence,
-            Type = change.Type, Payload = change.Payload, CreatedAt = now, CreatedBy = player.Id
+            Type = change.Type, Payload = change.Payload, SchemaVersion = change.SchemaVersion, CreatedAt = now, CreatedBy = player.Id
         });
         // EF inserts the player, campaign, membership and first event atomically in one SaveChanges.
         await db.SaveChangesAsync(ct);
@@ -125,7 +126,7 @@ public static class SoloCampaignEndpoints
     {
         if (await Owned(db, config, id, ct) is null) return Results.NotFound();
         var events = await Events(db, id, ct);
-        return Results.Ok(events.Select(e => new CampaignEventResponse(e.Sequence, e.Type, e.Payload, e.CreatedAt)));
+        return Results.Ok(events.Select(e => new CampaignEventResponse(e.Sequence, e.Type, e.Payload, e.SchemaVersion, e.CreatedAt)));
     }
 
     private static async Task<IResult> Rename(Guid id, RenameCampaignRequest request,
@@ -145,7 +146,7 @@ public static class SoloCampaignEndpoints
         db.CampaignEvents.Add(new CampaignEvent
         {
             Id = Guid.NewGuid(), CampaignId = id, Sequence = change.Sequence,
-            Type = change.Type, Payload = change.Payload, CreatedAt = DateTimeOffset.UtcNow,
+            Type = change.Type, Payload = change.Payload, SchemaVersion = change.SchemaVersion, CreatedAt = DateTimeOffset.UtcNow,
             CreatedBy = LocalPlayerId(config)
         });
         try

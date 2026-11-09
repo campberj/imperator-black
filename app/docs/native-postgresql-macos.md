@@ -124,7 +124,11 @@ Delete the **test** database only when no longer needed:
 - The Core suite runs without a database. To run the real PostgreSQL integration
   test locally, set `IMPERATOR_TEST_CONNECTION` to an **isolated disposable test database**
   connection string, then run `dotnet test app/Imperator.slnx`. The test runs EF
-  migrations and writes test records. CI always runs it against its ephemeral service.
+  migrations and writes test records. Without the variable it reports as *skipped*.
+  For example, `createdb imperator_test`, then
+  `IMPERATOR_TEST_CONNECTION="Host=localhost;Port=5432;Database=imperator_test;Username=imperator;Password=imperator"`.
+  CI does the same: it creates `imperator_test` on its ephemeral service, so `imperator`
+  stays clean for the migration-apply check.
 - The eventual hosted and multiplayer APIs need proper authentication and
   per-player authorisation before these routes can be exposed outside Development.
 

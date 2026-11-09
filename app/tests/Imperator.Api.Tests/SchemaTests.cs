@@ -29,6 +29,17 @@ public class SchemaTests
     }
 
     [Fact]
+    public void EventSchemaVersionDefaultsToOne()
+    {
+        using var db = NewDb();
+        var version = db.Model.FindEntityType(typeof(CampaignEvent))!.FindProperty(nameof(CampaignEvent.SchemaVersion))!;
+        Assert.Equal("schema_version", version.GetColumnName());
+        Assert.False(version.IsNullable);
+        Assert.Equal(1, version.GetDefaultValue());
+        Assert.Equal(1, AnEvent().SchemaVersion);
+    }
+
+    [Fact]
     public void MembershipRoleIsStoredByName()
     {
         using var db = NewDb();
