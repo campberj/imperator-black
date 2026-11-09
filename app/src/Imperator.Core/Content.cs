@@ -270,7 +270,7 @@ public sealed class ContentSet
     private static T Find<T>(List<T> items, Func<T, string> key, string id, string kind) =>
         items.FirstOrDefault(x => key(x) == id) ?? throw new KeyNotFoundException($"Unknown {kind} '{id}'");
 
-    private static readonly JsonSerializerOptions Options = new()
+    internal static readonly JsonSerializerOptions Options = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
         PropertyNameCaseInsensitive = true,

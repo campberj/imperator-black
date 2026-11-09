@@ -2,7 +2,7 @@
 
 Handoff for Claude Code (or anyone) working on the application. Read this, then [`../CLAUDE.md`](../CLAUDE.md), then [ADR-001](../docs/architecture/adr-001-architecture.md).
 
-Last updated: 2026-10-23, rules v0.5 (chapters 10–16: solo opponent, ship layouts, land battles, missions, campaign and short arcs, troop values, two players; fireteams and Pinned at Nerve + 2).
+Last updated: 2026-11-09, rules v0.5 (chapters 10–16: solo opponent, ship layouts, land battles, missions, campaign and short arcs, troop values, two players; fireteams and Pinned at Nerve + 2).
 
 ## How the work is split
 
@@ -16,7 +16,7 @@ Last updated: 2026-10-23, rules v0.5 (chapters 10–16: solo opponent, ship layo
 |---|---|---|
 | `app/Imperator.slnx` | Solution (.NET 10, new `.slnx` format) | Builds clean, 0 warnings |
 | `app/src/Imperator.Core` | Game logic: dice and seeded `Rng`, content loading (`ContentSet`), wound table, shooting (exact odds and sampled), close combat, grenades, `Soldier` state, chapter 11 deck generator (`Layouts/DeckGenerator`, a port of `tools/generate_layout.py`; the deck keeps its graph: links, spine, heart, with `RouteFrom` for route distances), chapter 12 land table generator (`Land/LandTableGenerator`, a port of `build_land` in `tools/generate_mission.py`), chapter 13 mission generator (`Missions/MissionGenerator`, a port of `tools/generate_mission.py`) | Covers rules v0.4 chapters 4–7 math with attribute-based `Soldier` (`FromTroop` builds one from a troop profile; `Generic` makes abstract test soldiers). No movement, board, or mission logic yet |
-| `app/src/Imperator.Api` | ASP.NET Core minimal API, EF Core + Npgsql (snake_case tables). Schema: `Player`, `Campaign`, `CampaignMembership`, append-only `CampaignEvent`. Endpoints: `GET /health` (database check + content version), `GET /content` (validated `content.json`, `Imperator-Content-Version` header, ETag), `GET /decks/{vessel}?seed=N` (a generated deck in the scenario format, with seed and content version), `GET /land/{environment}?size=small|large&seed=N` (a generated land table), `GET /missions?setting=ship|land&seed=N` (a generated mission; optional `mission`, `tier`, `vessel`, `environment`, `size`) | Schema only, no auth. Migration `InitialSchema` |
+| `app/src/Imperator.Api` | ASP.NET Core minimal API, EF Core + Npgsql (snake_case tables). Schema: `Player`, `Campaign`, `CampaignMembership`, append-only `CampaignEvent`. Endpoints: `GET /health` (database check + content version), `GET /content` (validated `content.json`, `Imperator-Content-Version` header, ETag), `GET /decks/{vessel}?seed=N` (a generated deck in the scenario format, with seed and content version), `GET /land/{environment}?size=small|large&seed=N` (a generated land table), `GET /missions?setting=ship|land&seed=N` (a generated mission; optional `mission`, `tier`, `vessel`, `environment`, `size`), `GET /campaign-definitions` and `GET /campaign-definitions/{id}` (campaign definitions from `content/dist/campaigns.json`, loaded and checked at startup beside `content.json`) | Schema only, no auth. Migration `InitialSchema` |
 | `app/src/Imperator.Sim` | Combat simulator: shot odds, duels, frag, open-ground firefights, room clearing, `--compare` for content variants, `--values` for the troop value harness (`Values.cs`) | Working. Output in `docs/analysis/` |
 | `app/tests/Imperator.Core.Tests` | xUnit v3 tests (399 cases: the former runner's 72 checks, content loading and validation, and the deck generator held to the Python reference statistics in `Fixtures/layout-reference.json`, written by `tools/layout_reference.py`); run with `dotnet test app/Imperator.slnx` | Passing |
 | `app/tests/Imperator.Api.Tests` | xUnit v3 + `WebApplicationFactory` (40 cases): endpoints (including `/decks`) and schema, no database needed | Passing |
@@ -34,7 +34,7 @@ Last updated: 2026-10-23, rules v0.5 (chapters 10–16: solo opponent, ship layo
 
 These are foundations that don't depend on unfinished rules. Each should leave CI green.
 
-**Open tasks, suggested order: 24, 25, 26, 27, then 22.** Tasks 1–21 and 23 are done. Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
+**Open tasks, suggested order: 24, 26, 27, then 22.** Tasks 1–21, 23 and 25 are done. Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
 
 ### 1. Move tests to xUnit ✅ done (2026-10-20)
 
@@ -290,7 +290,7 @@ From the architecture review of PR #23. Small, independent fixes; one PR.
 - **CI test database:** the integration test runs against its own database (`imperator_test`, created in the CI job before the tests), so the later migration-apply step still proves a clean apply on `imperator`.
 - **Done when:** a local run without the variable shows the test as *skipped*; a test replays a version-1 event and rejects an unknown version; CI creates and uses `imperator_test`; lint, tests, build and migration checks pass.
 
-### 25. Campaign definitions in Core — *chatgpt authorized*
+### 25. Campaign definitions in Core ✅ done (2026-11-09)
 
 Decision 7.16, format [`docs/design/campaign-format.md`](../docs/design/campaign-format.md). `tools/build_content.py` now also writes **`content/dist/campaigns.json`**: every campaign definition (`docs/scenarios/arcs/*/arc.yaml`, `docs/scenarios/campaigns/*.yaml`) with each bespoke mission's file embedded under `missions[].mission`. CI fails if it is stale.
 

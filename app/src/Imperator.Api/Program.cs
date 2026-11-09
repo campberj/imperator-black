@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Content is validated at startup so the API never serves a broken content.json.
 var contentPath = builder.Configuration["Content:Path"] ?? ContentSet.FindDefaultPath(builder.Environment.ContentRootPath);
-var content = ContentFile.Load(contentPath);
+var content = ContentFile.Load(contentPath, builder.Configuration["Content:CampaignsPath"]);
 builder.Services.AddSingleton(content);
 
 builder.Services.AddDbContext<ImperatorDb>(o => o
@@ -120,6 +120,25 @@ app.MapGet("/missions", (HttpContext ctx, string? setting, int? seed, string? mi
     return Results.Json(MissionGenerator.Generate(c, new MissionRequest(setting, seed.Value, mission, tier, vessel, environment, size, opposition)), deckJson);
 });
 
+// Campaign definitions (decision 7.16): bespoke and procedural campaigns, as compiled into campaigns.json.
+app.MapGet("/campaign-definitions", (HttpContext ctx) =>
+{
+    ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
+    return Results.Json(content.Campaigns.All.Select(d =>
+        new CampaignDefinitionSummary(d.Id, d.Name, d.Source, d.Format, d.Faction, d.Opposition)), deckJson);
+});
+
+app.MapGet("/campaign-definitions/{id}", (HttpContext ctx, string id) =>
+{
+    if (!content.Campaigns.TryGet(id, out _))
+        return Results.Problem($"Unknown campaign definition '{id}'. Definitions: {string.Join(", ", content.Campaigns.All.Select(d => d.Id))}.",
+            statusCode: StatusCodes.Status404NotFound);
+    ctx.Response.Headers["Imperator-Content-Version"] = content.Version;
+    var body = System.Text.Json.Nodes.JsonObject.Create(content.Campaigns.Json(id))!.DeepClone().AsObject();
+    body["content_version"] = content.Version;
+    return Results.Json(body, deckJson);
+});
+
 // No authentication exists yet: S1 campaign saves are deliberately available only in Development.
 if (app.Environment.IsDevelopment()) app.MapSoloCampaigns();
 
@@ -127,3 +146,8 @@ app.Run();
 
 // Exposed for WebApplicationFactory in Imperator.Api.Tests.
 public partial class Program;
+
+// Opposition null means the default tiers, so it is written even when null.
+internal sealed record CampaignDefinitionSummary(string Id, string Name, string Source, string Format, string Faction,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.Never)]
+    string? Opposition);

@@ -453,6 +453,15 @@ public class ContentLoadingTests
     }
 
     [Theory]
+    [InlineData("latitudes")]
+    [InlineData("reports")]
+    public void CampaignDefinitionListsAreRequired(string key)
+    {
+        var e = Assert.Throws<ContentException>(() => LoadMutated(root => Node(root, "campaign").AsObject().Remove(key)));
+        Assert.Contains(e.Errors, x => x.StartsWith("campaign: ") && x.Contains(key));
+    }
+
+    [Theory]
     [InlineData("surrenders")]
     [InlineData("investigate")]
     [InlineData("close_combat")]
