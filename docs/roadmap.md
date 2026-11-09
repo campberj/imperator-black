@@ -171,9 +171,11 @@ RJ intends to move the 78th campaign onto these rules, so land play came forward
 - [x] Troop values (item 6): simulator data (app task 13); rules chapter 15 draft: [troop values and building troops](../rules/15-troop-values.md), `content/values.yaml`, reference `tools/troop_values.py`, printable [troop builder](print/ImperatorBlack_troop-builder.pdf); campaign replacements now cost Requisition = TV ÷ 10
 - [ ] Troop builder in the app (Phase 9; app task 16 ports the formula first)
 - [x] Short arcs (decision 7.13): chapter 14 *Short arcs*; the first, [Foundry Moon](scenarios/arcs/README.md) (Republic against the new Separatist opposition, solo), with its [arc sheet](print/arcs/ImperatorBlack_arc-foundry-moon.pdf) and four mission sheets
-- [ ] Play a 3-mission campaign on paper (Foundry Moon first)
+- [ ] Play a 3-mission campaign on paper (Foundry Moon first): **not played; gate waived**, see below
 
 **Exit:** A 3-mission paper campaign plays through without rule gaps.
+
+**Gate waived (RJ, 2026-11-09, decision 7.17):** Phase 7 counts as closed without the paper playthrough, so the campaign game can be built in the app (Phase 9; app task 27). No campaign has been played: chapter 14's tables stay Proposed, and the first Foundry Moon run, on paper or in the app, is their first test. Log it with the playtest template and settle chapter 14 from it.
 
 ## Phase 8 — App MVP, part 1: generators
 

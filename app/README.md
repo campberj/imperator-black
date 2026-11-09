@@ -34,7 +34,7 @@ Last updated: 2026-10-23, rules v0.5 (chapters 10–16: solo opponent, ship layo
 
 These are foundations that don't depend on unfinished rules. Each should leave CI green.
 
-**Open tasks, suggested order: 24, 25, 26, then 27 (gated on RJ's paper playthrough of Foundry Moon), then 22.** Tasks 1–21 and 23 are done. Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
+**Open tasks, suggested order: 24, 25, 26, 27, then 22.** Tasks 1–21 and 23 are done. Tasks marked *chatgpt authorized* may be picked up by another agent without asking RJ first: they have a reference implementation or a fixed spec, and tests decide when they are done. Unmarked tasks need RJ's say-so (or a design pass in the claude.ai Project) before starting.
 
 ### 1. Move tests to xUnit ✅ done (2026-10-20)
 
@@ -309,15 +309,17 @@ Rules: chapter 14 *Short arcs*, *After-action* (casualties, injuries and their m
 - **API (Development only, as task 23):** `POST /campaigns/{id}/start` (definition id, force selection), then one endpoint per command (`/brief`, `/deploy`, `/report`, `/replace`), each returning the new projection; `GET /campaigns/{id}/roster`.
 - **Done when:** a Core test plays Foundry Moon from start to `ArcEnded` along both branches (1 Decisive → 2A → 3; 1 Failure → 2B → 3) with fixed seeds, and the roster, carried effects and arc result match a worked example written into the test from chapter 14's tables; replay after an API restart gives the same projection; lint, tests and build pass.
 
-### 27. Campaign game screens for Foundry Moon (S2)
+### 27. Campaign game screens for Foundry Moon (S2) — *chatgpt authorized*
 
-**Not authorized yet.** It waits for RJ's paper playthrough of Foundry Moon (roadmap Phase 7 exit) and RJ's review of the screens. The design is [`docs/design/campaign-game.md`](../docs/design/campaign-game.md) (*The loop, as a player sees it*).
+Authorized 2026-11-09 (RJ, decision 7.17): the paper playthrough gate is waived, and RJ reviews the screens in the pull request instead of beforehand. Build it after task 26, on its endpoints and projections. The design is [`docs/design/campaign-game.md`](../docs/design/campaign-game.md) (*The loop, as a player sees it*). Chapter 14 has not been played yet, so **read every table, limit and text from the API**: nothing from chapter 14 is typed into the web app.
 
 - **Hub:** the roster by fireteam (XP, injuries, missions out), the arc's flow with the missions done and the one ahead, the latest report.
 - **Briefing:** the mission's situation and the carried-in effects, its sheet and cards to print (task 17's mission view), deploy with the force planner (task 20) against the mission's limits.
 - **Debrief:** enter the grade and each soldier's fate, then see the rolls (injuries, XP, advances), choose advances and replacements, read the sitrep, go on to the next mission.
 - **End:** the arc's result and its text; the roll of honour.
-- **Done when:** RJ has played Foundry Moon on paper and approved the screens from captures; Vitest covers each screen; lint, tests and build pass.
+- **Route:** `/campaigns/:id`, reached from the campaign list task 23 added. Each screen is a state of the campaign's projection (no mission briefed, briefed, deployed, reported, ended), so a reload or a restart returns to the same place.
+- **Out of scope:** procedural campaigns, the base and its threat track, events with choices, accounts, and anything during the tabletop game (the paper dashboard covers that).
+- **Done when:** a Vitest run plays Foundry Moon through the screens against mocked task 26 responses along one branch (1 Decisive → 2A → 3) to the end screen; each screen has its own test; the PR description carries a screen capture of each of the four screens (hub, briefing, debrief, end) for RJ's review; lint, tests and build pass.
 
 ### 22. Stop and check the roadmap
 
@@ -327,7 +329,7 @@ Beyond this, the app's real features wait on rules:
 |---|---|
 | Live mission dashboard (alert, clock, contacts, models during play) | Saved game state; built with the Phase 7 campaign tracker (RJ, 2026-10-22). The paper dashboard is `docs/print/ImperatorBlack_mission-dashboard.pdf`. |
 | Custom troop and unit builder | Ready after tasks 16, 18 and 20: chapter 15 limits and costs; Phase 9 (decision 6.12) |
-| Campaign game (Phase 9) | Short arcs: tasks 25–27. Procedural campaigns, the base and its threat track, events with choices: S3, after Foundry Moon runs in the app (decisions 1.11, 7.14–7.16). |
+| Campaign game (Phase 9) | Short arcs: tasks 25–27. Procedural campaigns, the base and its threat track, events with choices: S3, after Foundry Moon runs in the app (decisions 1.11, 7.14–7.17). |
 
 Planned app feature (RJ, 2026-10-20): an in-app reference that explains every gear item, keyword and special rule, read from `content/` (the list will grow). Build it from the same `text` fields the rulebook tables use.
 
